@@ -76,7 +76,7 @@ export function BlogSection() {
   ]
 
   return (
-    <section id="blog" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-20">
+    <section id="blog" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-16">
       <div className="max-w-6xl mx-auto w-full space-y-16">
         <SectionTitle title="RECENTLY PUBLISHED" />
         <div className="grid md:grid-cols-3 gap-8">

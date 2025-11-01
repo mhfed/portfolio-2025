@@ -2,18 +2,23 @@ import { SectionTitle } from "./section-title"
 
 export function AboutSection() {
   return (
-    <section id="about" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-20">
+    <section id="about" className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0">
       <div className="max-w-6xl mx-auto w-full">
-        <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
-          {/* Left Column - Title */}
-          <div className="scroll-animate sticky top-[var(--header-height)] self-start">
+        {/* Mobile: Full width sticky title */}
+        <div className="md:hidden scroll-animate sticky top-[var(--header-height)] z-40 -mx-4 px-4 py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/10 mb-6">
+          <SectionTitle title="ABOUT ME" />
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+          {/* Desktop: Left Column - Title */}
+          <div className="hidden md:block scroll-animate sticky top-[var(--header-height)] self-start">
             <SectionTitle title="ABOUT ME" />
           </div>
 
           {/* Right Column - Content */}
           <div className="md:col-span-2">
             <div className="scroll-animate">
-              <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
                 {/* Left Content */}
                 <div className="space-y-6">
                   <p className="text-lg text-foreground leading-relaxed">
