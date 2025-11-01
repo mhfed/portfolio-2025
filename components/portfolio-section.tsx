@@ -41,38 +41,55 @@ function ProjectCard({
 export function PortfolioSection() {
   const projects: ProjectProps[] = [
     {
-      image: "/luxury-jewelry-store.jpg",
-      title: "SVETLILY",
-      year: "[2018]",
-      description: "Online jewelry store",
+      image: "/ecommerce-website.jpg",
+      title: "Mobile App Iress Trading",
+      year: "[2023]",
+      description: "React Native Trading Mobile Application",
       details:
-        "To implement the online store functionality, I used the OpenCart platform, because it has many necessary features from the box.",
+        "Developed responsive UI components and navigational flows using React native navigation. Implemented state management using Redux. Developed features for viewing, adding, editing, and deleting watchlists. Drew portfolio distribution charts based on backend data. Integrated API for real-time data updates and smooth trading experience. Tech: React Native, Redux, RN Reanimated, TypeScript, SSE, Restful APIs, Git, i18n, Firebase.",
+    },
+    {
+      image: "/luxury-jewelry-store.jpg",
+      title: "CMS Website Projects",
+      year: "[2022-2023]",
+      description: "CGSI, Iress Wealth, Admin Portal Equix",
+      details:
+        "Implemented login flow and user authentication with third party. Performed functions such as adding, editing, deleting, and updating data using Formik to handle form data validation with Yup for reports, notification, users, and article screens. Created advanced filtering functionalities for list screens. Developed theme builder feature on CMS to customize color scheme of trading application on mobile devices. Tech: TypeScript, ReactJS, Redux, RestAPI, Formik, Yup, Material UI, Golden layout, i18n, Axios.",
     },
     {
       image: "/ecommerce-website.jpg",
-      title: "E-COMMERCE",
-      year: "[2020]",
-      description: "Premium shopping experience",
+      title: "Trading Website",
+      year: "[2022-2023]",
+      description: "EQUIX, MAGPIE, CGSI Trading Platforms",
       details:
-        "Built a modern e-commerce platform with React and Node.js, featuring real-time inventory management and secure payment integration.",
+        "Developed login, registration, and forgot password features with reCAPTCHA. Implemented two-factor authentication using PIN. Collaborated with designers, product managers, and back-end developers to translate requirements into functional front-end code. Implemented trading functionalities such as order placement, trade execution, and portfolio management features with real-time updates using Server-Sent Events (SSE). Utilized Next.js to create Fundamental embedded Website for tracking stock information. Tech: JavaScript, TypeScript, ReactJS, SSE, Restful API, Git, Golden layout, Chart.js, i18n, Axios, Firebase.",
     },
     {
       image: "/luxury-jewelry-store.jpg",
-      title: "BRAND PLATFORM",
-      year: "[2023]",
-      description: "Corporate brand website",
+      title: "Metacity System & Landing Page",
+      year: "[2021-2022]",
+      description: "Game Interface & Landing Page",
       details:
-        "Designed and developed a comprehensive brand platform with custom animations, CMS integration, and multi-language support.",
+        "Made interface, effect animation, and customized game interface. Translated designs from Figma to HTML and CSS while ensuring UX and UI design are maintained. Refactored code, investigated code and fixed bugs. Ensured cross-browser compatibility and responsiveness across various devices and screen sizes. Tech: NextJS, ReactJS, Redux, Sass, Ant Design, PHP, Git, Axios.",
     },
   ]
 
   return (
     <section id="projects" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-20">
-      <div className="max-w-6xl mx-auto w-full space-y-20">
-        <SectionTitle title="PROJECTS" />
-        {projects.map((project, idx) => (
-          <ProjectCard key={idx} {...project} isAlternate={idx % 2 === 1} />
-        ))}
+      <div className="max-w-6xl mx-auto w-full">
+        <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
+          {/* Left Column - Title */}
+          <div className="scroll-animate md:sticky md:top-24 md:self-start">
+            <SectionTitle title="PROJECTS" />
+          </div>
+
+          {/* Right Column - Projects */}
+          <div className="md:col-span-2 space-y-20">
+            {projects.map((project, idx) => (
+              <ProjectCard key={idx} {...project} isAlternate={idx % 2 === 1} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )

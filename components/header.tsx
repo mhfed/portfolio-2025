@@ -30,7 +30,6 @@ export function Header() {
     { name: "About", href: "#about" },
     { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
-    { name: "Blog", href: "#blog" },
     { name: "Collaborate", href: "#collaborate" },
   ]
 
@@ -53,7 +52,7 @@ export function Header() {
         {/* Logo */}
         <div className="text-xl font-bold tracking-wider">
           <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            ILLIA BUKATYCH
+            NGUYEN MINH HIEU
           </span>
         </div>
 

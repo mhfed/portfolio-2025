@@ -24,8 +24,8 @@ export function ContactSection() {
   }
 
   const socialLinks = [
-    { name: "GitHub", url: "#", icon: "github" },
-    { name: "LinkedIn", url: "#", icon: "linkedin" },
+    { name: "GitHub", url: "https://github.com/mhfed", icon: "github" },
+    { name: "LinkedIn", url: "https://linkedin.com/in/mhfed", icon: "linkedin" },
     { name: "Twitter", url: "#", icon: "twitter" },
     { name: "Dribbble", url: "#", icon: "dribbble" },
     { name: "Behance", url: "#", icon: "behance" },
@@ -124,13 +124,13 @@ export function ContactSection() {
               <h3 className="text-lg font-bold text-foreground">Other Ways To Reach Me</h3>
               <div className="space-y-3 text-foreground/70">
                 <p>
-                  <span className="font-semibold text-foreground">Email:</span> hello@example.com
+                  <span className="font-semibold text-foreground">Email:</span> nmhieu04091999@gmail.com
                 </p>
                 <p>
-                  <span className="font-semibold text-foreground">Phone:</span> +1 (555) 123-4567
+                  <span className="font-semibold text-foreground">Phone:</span> 0982084197
                 </p>
                 <p>
-                  <span className="font-semibold text-foreground">Location:</span> San Francisco, CA
+                  <span className="font-semibold text-foreground">Location:</span> Ha Noi, Vietnam
                 </p>
               </div>
             </div>

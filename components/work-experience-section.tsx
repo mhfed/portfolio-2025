@@ -40,28 +40,36 @@ function TimelineItem({ company, position, period, description, skills }: Timeli
 export function WorkExperienceSection() {
   const experiences: TimelineItemProps[] = [
     {
-      company: "Tech Startup Co",
-      position: "Senior Frontend Developer",
-      period: "2022 - Present",
-      description:
-        "Leading frontend development team, architecting scalable React applications, and mentoring junior developers in modern web technologies.",
-      skills: ["React", "TypeScript", "Next.js", "Team Leadership"],
-    },
-    {
-      company: "Digital Agency",
+      company: "COOLmate",
       position: "Frontend Developer",
-      period: "2020 - 2022",
+      period: "2025 - Present",
       description:
-        "Developed responsive web applications for high-profile clients, focusing on performance optimization and user experience enhancement.",
-      skills: ["React", "Vue.js", "Tailwind CSS", "JavaScript"],
+        "Working on frontend development projects using modern web technologies.",
+      skills: ["React.js", "Next.js", "TypeScript", "JavaScript"],
     },
     {
-      company: "Web Solutions Inc",
-      position: "Junior Developer",
-      period: "2018 - 2020",
+      company: "NOVUS FINTECH",
+      position: "Frontend Developer",
+      period: "8/2022 - 11/2023",
+      description:
+        "Developed CMS Website (CGSI, Iress Wealth, Admin Portal Equix) implementing login flow, user authentication, form management with Formik and Yup validation. Created theme builder feature for customizing trading application color schemes. Developed Trading Website (EQUIX, MAGPIE, CGSI) with login, registration, forgot password features with reCAPTCHA, two-factor authentication using PIN. Implemented trading functionalities with real-time updates using Server-Sent Events (SSE). Utilized Next.js to create Fundamental embedded Website for tracking stock information.",
+      skills: ["TypeScript", "ReactJS", "Redux", "RestAPI", "Formik", "Yup", "Material UI", "SSE", "Next.js", "Chart.js"],
+    },
+    {
+      company: "METACITY",
+      position: "Frontend Developer",
+      period: "7/2021 - 8/2022",
+      description:
+        "Developed Metacity System and Landing Page. Created interface, effect animation, and customized game interface. Translated designs from Figma to HTML and CSS while ensuring UX and UI design are maintained. Refactored code, investigated and fixed bugs. Ensured cross-browser compatibility and responsiveness across various devices and screen sizes.",
+      skills: ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"],
+    },
+    {
+      company: "IT Lab FPOLY",
+      position: "Intern Frontend Developer",
+      period: "2/2021 - 7/2021",
       description:
         "Contributed to multiple web projects, learned best practices in front-end development, and built a strong foundation in web technologies.",
-      skills: ["HTML/CSS", "JavaScript", "jQuery", "Bootstrap"],
+      skills: ["HTML", "CSS", "JavaScript", "React"],
     },
   ]
 
@@ -73,7 +81,7 @@ export function WorkExperienceSection() {
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
           {/* Left Column - Title */}
-          <div className="scroll-animate">
+          <div className="scroll-animate md:sticky md:top-24 md:self-start">
             <SectionTitle title="WORK EXPERIENCE" />
           </div>
 
