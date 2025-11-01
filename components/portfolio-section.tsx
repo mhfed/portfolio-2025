@@ -79,7 +79,7 @@ export function PortfolioSection() {
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
           {/* Left Column - Title */}
-          <div className="scroll-animate md:sticky md:top-24 md:self-start">
+          <div className="scroll-animate sticky top-20 md:top-24 self-start">
             <SectionTitle title="PROJECTS" />
           </div>
 
