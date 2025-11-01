@@ -1,4 +1,14 @@
+"use client"
+
+import { useState, useRef, useEffect } from "react"
 import { SectionTitle } from "./section-title"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "./ui/drawer"
 
 interface ProjectProps {
   image: string
@@ -16,6 +26,26 @@ function ProjectCard({
   details,
   isAlternate,
 }: ProjectProps & { isAlternate: boolean }) {
+  const [isTruncated, setIsTruncated] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const textRef = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    const checkTruncation = () => {
+      if (textRef.current) {
+        const element = textRef.current
+        // Check if text is truncated by comparing scrollHeight with clientHeight
+        const isOverflowing = element.scrollHeight > element.clientHeight
+        setIsTruncated(isOverflowing)
+      }
+    }
+
+    checkTruncation()
+    // Re-check on window resize
+    window.addEventListener("resize", checkTruncation)
+    return () => window.removeEventListener("resize", checkTruncation)
+  }, [details])
+
   return (
     <div
       className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${isAlternate ? "md:[&>*:first-child]:order-2" : ""}`}
@@ -29,7 +59,36 @@ function ProjectCard({
           <p className="text-sm text-muted-foreground">{year}</p>
         </div>
         <p className="text-foreground text-lg font-semibold">{description}</p>
-        <p className="text-base text-foreground leading-relaxed">{details}</p>
+        <div className="space-y-2">
+          <p
+            ref={textRef}
+            className="text-base text-foreground leading-relaxed line-clamp-2"
+          >
+            {details}
+          </p>
+          {isTruncated && (
+            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+              <DrawerTrigger asChild>
+                <button className="text-accent font-bold text-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1">
+                  Xem thêm...
+                </button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className="overflow-y-auto">
+                  <DrawerHeader className="text-left pb-4">
+                    <DrawerTitle>{title}</DrawerTitle>
+                    <p className="text-sm text-muted-foreground mt-1">{year}</p>
+                  </DrawerHeader>
+                  <div className="px-6 pb-8">
+                    <p className="text-base text-foreground leading-relaxed">
+                      {details}
+                    </p>
+                  </div>
+                </div>
+              </DrawerContent>
+            </Drawer>
+          )}
+        </div>
         <button className="text-accent font-bold text-lg hover:opacity-80 transition-opacity mt-4">
           VIEW PROJECT →
         </button>
