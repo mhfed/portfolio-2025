@@ -1,19 +1,12 @@
-import { SectionTitle } from "./section-title"
+import { SectionTitleWrapper } from "./section-title-wrapper"
 
 export function AboutSection() {
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0">
       <div className="max-w-6xl mx-auto w-full">
-        {/* Mobile: Full width sticky title */}
-        <div className="md:hidden scroll-animate sticky top-[var(--header-height)] z-40 -mx-4 px-4 py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/10 mb-6">
-          <SectionTitle title="ABOUT ME" />
-        </div>
-
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
-          {/* Desktop: Left Column - Title */}
-          <div className="hidden md:block scroll-animate sticky top-[var(--header-height)] self-start">
-            <SectionTitle title="ABOUT ME" />
-          </div>
+          {/* Title */}
+          <SectionTitleWrapper title="ABOUT ME" />
 
           {/* Right Column - Content */}
           <div className="md:col-span-2">

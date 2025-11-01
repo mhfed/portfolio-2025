@@ -1,4 +1,14 @@
-import { SectionTitle } from "./section-title"
+"use client"
+
+import { useState, useRef, useEffect } from "react"
+import { SectionTitleWrapper } from "./section-title-wrapper"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "./ui/drawer"
 
 interface TimelineItemProps {
   company: string
@@ -9,6 +19,26 @@ interface TimelineItemProps {
 }
 
 function TimelineItem({ company, position, period, description, skills }: TimelineItemProps) {
+  const [isTruncated, setIsTruncated] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const textRef = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    const checkTruncation = () => {
+      if (textRef.current) {
+        const element = textRef.current
+        // Check if text is truncated by comparing scrollHeight with clientHeight
+        const isOverflowing = element.scrollHeight > element.clientHeight
+        setIsTruncated(isOverflowing)
+      }
+    }
+
+    checkTruncation()
+    // Re-check on window resize
+    window.addEventListener("resize", checkTruncation)
+    return () => window.removeEventListener("resize", checkTruncation)
+  }, [description])
+
   return (
     <div className="scroll-animate relative pl-8 pb-8 border-l-2 border-primary/30 last:pb-0">
       <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full transform -translate-x-1.5"></div>
@@ -20,7 +50,47 @@ function TimelineItem({ company, position, period, description, skills }: Timeli
           <p className="text-sm text-muted-foreground">{period}</p>
         </div>
 
-        <p className="text-foreground text-base leading-relaxed">{description}</p>
+        <div className="space-y-2">
+          <p
+            ref={textRef}
+            className="text-foreground text-base leading-relaxed line-clamp-2"
+          >
+            {description}
+          </p>
+          {isTruncated && (
+            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+              <DrawerTrigger asChild>
+                <button className="text-accent font-bold text-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1">
+                  Xem thêm...
+                </button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className="overflow-y-auto">
+                  <DrawerHeader className="text-left pb-4">
+                    <DrawerTitle>{position}</DrawerTitle>
+                    <p className="text-primary font-semibold mt-1">{company}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{period}</p>
+                  </DrawerHeader>
+                  <div className="px-6 pb-8">
+                    <p className="text-base text-foreground leading-relaxed">
+                      {description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-6">
+                      {skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </DrawerContent>
+            </Drawer>
+          )}
+        </div>
 
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
@@ -79,16 +149,9 @@ export function WorkExperienceSection() {
       className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0"
     >
       <div className="max-w-6xl mx-auto w-full">
-        {/* Mobile: Full width sticky title */}
-        <div className="md:hidden scroll-animate sticky top-[var(--header-height)] z-40 -mx-4 px-4 py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/10 mb-6">
-          <SectionTitle title="WORK EXPERIENCE" />
-        </div>
-
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
-          {/* Desktop: Left Column - Title */}
-          <div className="hidden md:block scroll-animate sticky top-[var(--header-height)] self-start">
-            <SectionTitle title="WORK EXPERIENCE" />
-          </div>
+          {/* Title */}
+          <SectionTitleWrapper title="WORK EXPERIENCE" />
 
           {/* Right Column - Timeline */}
           <div className="md:col-span-2">
