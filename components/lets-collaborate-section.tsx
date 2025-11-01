@@ -34,7 +34,7 @@ export function LetsCollaborateSection() {
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-3 gap-12 lg:gap-16">
           {/* Left Column - Title */}
-          <div className="scroll-animate sticky top-20 md:top-24 self-start">
+          <div className="scroll-animate sticky top-[var(--header-height)] self-start">
             <SectionTitle title="LET'S COLLABORATE" />
             <p className="text-lg text-foreground/70 mt-6">
               Have an exciting project in mind? I'd love to hear about it. Let's create something amazing together.

@@ -5,6 +5,7 @@
 
 :root {
   /* Updated light mode colors to match design: light background, dark text, blue primary, red accent */
+  --header-height: 60px;
   --background: oklch(0.98 0 0);
   --foreground: oklch(0.1 0 0);
   --card: oklch(0.98 0 0);
@@ -122,6 +123,12 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-height: 80px;
   }
 }
 

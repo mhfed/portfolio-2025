@@ -7,6 +7,7 @@ import { useState, useEffect } from "react"
 export function Header() {
   const [isDark, setIsDark] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -42,47 +43,106 @@ export function Header() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
+    setIsMobileMenuOpen(false)
   }
 
   if (!mounted) return null
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10">
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <div className="text-xl font-bold tracking-wider">
-          <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            NGUYEN MINH HIEU
-          </span>
-        </div>
+    <>
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10" style={{ height: 'var(--header-height)' }}>
+        <nav className="max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4">
+          {/* Logo */}
+          <div className="text-base md:text-xl font-bold tracking-wider flex-shrink-0 min-w-0">
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent block truncate md:normal-case">
+              <span className="hidden sm:inline">NGUYEN MINH HIEU</span>
+              <span className="sm:hidden">N.M. HIEU</span>
+            </span>
+          </div>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex gap-8 items-center">
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex gap-8 items-center">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={handleNavClick}
+                className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium uppercase"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="relative inline-flex h-7 w-12 md:h-6 md:w-11 items-center rounded-full bg-gray-300 dark:bg-gray-600 transition-colors touch-manipulation"
+              aria-label="Toggle theme"
+            >
+              <span
+                className={`inline-block h-5 w-5 md:h-4 md:w-4 transform rounded-full bg-white transition-transform shadow-sm ${
+                  isDark ? "translate-x-6 md:translate-x-6" : "translate-x-0.5 md:translate-x-1"
+                }`}
+              />
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden flex flex-col gap-1.5 w-7 h-7 justify-center items-center touch-manipulation p-1"
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span
+                className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                  isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                  isMobileMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                  isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden fixed top-[var(--header-height)] right-0 z-40 h-[calc(100vh-var(--header-height))] w-[280px] sm:w-80 bg-background border-l border-border/30 shadow-2xl transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <nav className="flex flex-col p-6 pt-8 gap-1">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={handleNavClick}
-              className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium"
+              className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-lg hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
             >
               {link.name}
             </a>
           ))}
-        </div>
-
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 dark:bg-gray-600 transition-colors"
-          aria-label="Toggle theme"
-        >
-          <span
-            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-              isDark ? "translate-x-6" : "translate-x-1"
-            }`}
-          />
-        </button>
-      </nav>
-    </header>
+        </nav>
+      </div>
+    </>
   )
 }
