@@ -9,14 +9,14 @@ export async function HeroSection() {
   const t = await getTranslations('hero')
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center pt-20 px-6 relative overflow-hidden">
+    <section className="min-h-[70vh] flex flex-col items-center justify-center pt-12 md:pt-16  px-6 relative overflow-hidden">
       {/* Parallax Background Elements */}
       <HeroBackground />
 
       {/* Main Content */}
-      <div className="max-w-5xl w-full flex flex-col items-center gap-8 md:gap-12 relative z-10">
+      <div className="max-w-5xl w-full flex flex-col items-center gap-4 md:gap-6 relative z-10 ">
         {/* Main Heading */}
-        <div className="flex flex-col items-center gap-4 md:gap-6">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
           <HeroTypingText 
             frontText={t('front')} 
             endText={t('end')}
@@ -27,15 +27,15 @@ export async function HeroSection() {
         </div>
 
         {/* Tech Stack & Developer Text */}
-        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
           <TechStack />
           <HeroDeveloperText developerText={t('developer')} />
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0">
-        <TechMarquee />
-      </div>
+        <div className="mt-8 md:mt-12">
+          <TechMarquee />
+        </div>
     </section>
   )
 }
