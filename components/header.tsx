@@ -35,7 +35,7 @@ export function Header() {
     }
   }
 
-  const handleLanguageChange = (newLocale: string) => {
+  const handleLanguageChange = (newLocale: 'en' | 'vi') => {
     setLocale(newLocale)
     setIsLanguageMenuOpen(false)
   }
@@ -59,7 +59,8 @@ export function Header() {
     setIsMobileMenuOpen(false)
   }
 
-  if (!mounted) return null
+  // Render header immediately to prevent layout shift, use default values until mounted
+  const displayIsDark = mounted ? isDark : false
 
   return (
     <>
@@ -129,7 +130,7 @@ export function Header() {
               className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation"
               aria-label="Toggle theme"
             >
-              {isDark ? (
+              {displayIsDark ? (
                 <Sun className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
               ) : (
                 <Moon className="w-5 h-5 md:w-4 md:h-4 text-foreground" />

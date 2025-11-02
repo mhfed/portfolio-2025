@@ -1,5 +1,3 @@
-"use client"
-
 const technologies = ["React", "Next.js", "TypeScript", "Tailwind CSS", "JavaScript", "HTML5", "CSS3", "jQuery"]
 
 export function TechMarquee() {

@@ -1,10 +1,8 @@
-"use client"
-
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { SectionTitleWrapper } from "./section-title-wrapper"
 
-export function AboutSection() {
-  const t = useTranslations('about')
+export async function AboutSection() {
+  const t = await getTranslations('about')
 
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0">
