@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist } from "next/font/google"
+import { Inter } from "next/font/google"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
@@ -10,9 +10,10 @@ import "../globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/react"
 
-const geist = Geist({ 
-  subsets: ["latin"],
+const inter = Inter({ 
+  subsets: ["latin", "vietnamese"],
   display: "swap",
+  variable: "--font-inter",
 })
 
 
@@ -145,7 +146,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={`${geist.className} bg-background text-foreground`}>
+      <body className={`${inter.className} bg-background text-foreground`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
           <Analytics />
