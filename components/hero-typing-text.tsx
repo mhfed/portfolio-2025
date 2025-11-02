@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useLayoutEffect, useState } from "react"
+import { useRef, useLayoutEffect } from "react"
 import { gsap } from "gsap"
 
 interface HeroTypingTextProps {
@@ -28,51 +28,104 @@ export function HeroTypingText({ frontText, middleText, endText }: HeroTypingTex
 
     // Split text into characters for line 1 (frontText + middleText)
     const line1Text = `${frontText} ${middleText}`
-    const line1Chars: HTMLSpanElement[] = []
+    const line1Wrappers: HTMLSpanElement[] = []
+    const line1Fills: HTMLSpanElement[] = []
     
     line1Text.split("").forEach((char) => {
-      const span = document.createElement("span")
-      span.textContent = char === " " ? "\u00A0" : char
-      span.style.display = "inline-block"
-      span.style.color = "transparent"
-      span.style.webkitTextStroke = `2px ${textColor}`
-      gsap.set(span, { clipPath: "inset(0 100% 0 0)" })
-      line1.appendChild(span)
-      line1Chars.push(span)
+      // Create wrapper
+      const wrapper = document.createElement("span")
+      wrapper.style.display = "inline-block"
+      wrapper.style.position = "relative"
+      
+      // Create stroke layer (always visible)
+      const stroke = document.createElement("span")
+      stroke.textContent = char === " " ? "\u00A0" : char
+      stroke.style.position = "absolute"
+      stroke.style.left = "0"
+      stroke.style.top = "0"
+      stroke.style.color = "transparent"
+      stroke.style.webkitTextStroke = `2px ${textColor}`
+      
+      // Create fill layer (fade in)
+      const fill = document.createElement("span")
+      fill.textContent = char === " " ? "\u00A0" : char
+      fill.style.position = "relative"
+      fill.style.color = textColor
+      fill.style.opacity = "0"
+      
+      wrapper.appendChild(stroke)
+      wrapper.appendChild(fill)
+      
+      gsap.set(wrapper, { clipPath: "inset(0 100% 0 0)" })
+      
+      line1.appendChild(wrapper)
+      line1Wrappers.push(wrapper)
+      line1Fills.push(fill)
     })
 
     // Split text into characters for line 2 (endText)
-    const line2Chars: HTMLSpanElement[] = []
+    const line2Wrappers: HTMLSpanElement[] = []
+    const line2Fills: HTMLSpanElement[] = []
     
     endText.split("").forEach((char) => {
-      const span = document.createElement("span")
-      span.textContent = char === " " ? "\u00A0" : char
-      span.style.display = "inline-block"
-      span.style.color = "transparent"
-      span.style.webkitTextStroke = `2px ${textColor}`
-      gsap.set(span, { clipPath: "inset(0 100% 0 0)" })
-      line2.appendChild(span)
-      line2Chars.push(span)
+      // Create wrapper
+      const wrapper = document.createElement("span")
+      wrapper.style.display = "inline-block"
+      wrapper.style.position = "relative"
+      
+      // Create stroke layer
+      const stroke = document.createElement("span")
+      stroke.textContent = char === " " ? "\u00A0" : char
+      stroke.style.position = "absolute"
+      stroke.style.left = "0"
+      stroke.style.top = "0"
+      stroke.style.color = "transparent"
+      stroke.style.webkitTextStroke = `2px ${textColor}`
+      
+      // Create fill layer
+      const fill = document.createElement("span")
+      fill.textContent = char === " " ? "\u00A0" : char
+      fill.style.position = "relative"
+      fill.style.color = textColor
+      fill.style.opacity = "0"
+      
+      wrapper.appendChild(stroke)
+      wrapper.appendChild(fill)
+      
+      gsap.set(wrapper, { clipPath: "inset(0 100% 0 0)" })
+      
+      line2.appendChild(wrapper)
+      line2Wrappers.push(wrapper)
+      line2Fills.push(fill)
     })
+
+    const allFills = [...line1Fills, ...line2Fills]
 
     // Create animation timeline
     const tl = gsap.timeline()
 
-    // Animate line 1 characters
-    tl.to(line1Chars, {
+    // Animate line 1 characters (writing effect)
+    tl.to(line1Wrappers, {
       clipPath: "inset(0 0% 0 0)",
       duration: 0.3,
       ease: "none",
       stagger: 0.08,
     })
 
-    // Animate line 2 characters
-    tl.to(line2Chars, {
+    // Animate line 2 characters (writing effect)
+    tl.to(line2Wrappers, {
       clipPath: "inset(0 0% 0 0)",
       duration: 0.3,
       ease: "none",
       stagger: 0.08,
-    }, "-=0.2") // Overlap slightly
+    }, "-=0.2")
+
+    // Fill color by fading in the fill layer
+    tl.to(allFills, {
+      opacity: 1,
+      duration: 0.8,
+      ease: "power2.inOut",
+    }, "+=0.2")
 
     return () => {
       tl.kill()
@@ -105,26 +158,58 @@ export function HeroDeveloperText({ developerText }: { developerText: string }) 
     const textColor = window.getComputedStyle(container).color
 
     // Split into characters
-    const chars: HTMLSpanElement[] = []
+    const wrappers: HTMLSpanElement[] = []
+    const fills: HTMLSpanElement[] = []
+    
     developerText.split("").forEach((char) => {
-      const span = document.createElement("span")
-      span.textContent = char === " " ? "\u00A0" : char
-      span.style.display = "inline-block"
-      span.style.color = "transparent"
-      span.style.webkitTextStroke = `2px ${textColor}`
-      gsap.set(span, { clipPath: "inset(0 100% 0 0)" })
-      container.appendChild(span)
-      chars.push(span)
+      // Create wrapper
+      const wrapper = document.createElement("span")
+      wrapper.style.display = "inline-block"
+      wrapper.style.position = "relative"
+      
+      // Create stroke layer
+      const stroke = document.createElement("span")
+      stroke.textContent = char === " " ? "\u00A0" : char
+      stroke.style.position = "absolute"
+      stroke.style.left = "0"
+      stroke.style.top = "0"
+      stroke.style.color = "transparent"
+      stroke.style.webkitTextStroke = `2px ${textColor}`
+      
+      // Create fill layer
+      const fill = document.createElement("span")
+      fill.textContent = char === " " ? "\u00A0" : char
+      fill.style.position = "relative"
+      fill.style.color = textColor
+      fill.style.opacity = "0"
+      
+      wrapper.appendChild(stroke)
+      wrapper.appendChild(fill)
+      
+      gsap.set(wrapper, { clipPath: "inset(0 100% 0 0)" })
+      
+      container.appendChild(wrapper)
+      wrappers.push(wrapper)
+      fills.push(fill)
     })
 
     // Animate
     const tl = gsap.timeline()
-    tl.to(chars, {
+    
+    // Writing effect
+    tl.to(wrappers, {
       clipPath: "inset(0 0% 0 0)",
       duration: 0.3,
       ease: "none",
       stagger: 0.1,
     })
+
+    // Fill color by fading in
+    tl.to(fills, {
+      opacity: 1,
+      duration: 0.8,
+      ease: "power2.inOut",
+    }, "+=0.2")
 
     return () => {
       tl.kill()
