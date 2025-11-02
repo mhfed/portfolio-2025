@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 import { useTranslations } from "next-intl"
 import { SectionTitleWrapper } from "./section-title-wrapper"
 import {
@@ -53,7 +54,13 @@ function ProjectCard({
       className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${isAlternate ? "md:[&>*:first-child]:order-2" : ""}`}
     >
       <div className="relative h-80 md:h-96 bg-muted rounded-xl overflow-hidden border border-border/20">
-        <img src={image || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
       <div className="space-y-4">
         <div>

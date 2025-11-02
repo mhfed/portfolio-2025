@@ -1,29 +1,49 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
 import { SectionTitle } from "./section-title"
+import { blogPosts, type BlogPost } from "@/data/blog-posts"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
-interface BlogPostProps {
-  title: string
-  date: string
-  readTime: string
-  excerpt: string
-  icon: string
+interface BlogCardProps {
+  post: BlogPost
+  locale: "en" | "vi"
+  readMoreText: string
 }
 
-function BlogCard({ title, date, readTime, excerpt, icon, readMoreText }: BlogPostProps & { readMoreText: string }) {
+function BlogCard({ post, locale, readMoreText }: BlogCardProps) {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 })
+
   return (
-    <div className="border-2 border-primary rounded-lg p-6 md:p-8 space-y-4 hover:border-accent transition-colors scroll-animate">
+    <div
+      ref={ref}
+      className={`border-2 border-primary rounded-lg p-6 md:p-8 space-y-4 hover:border-accent transition-all duration-700 ${
+        isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-8"
+      }`}
+    >
       <div className="flex items-start gap-3">
-        <span className="text-2xl">{icon}</span>
+        <span className="text-2xl">{post.icon}</span>
         <div className="flex-1">
-          <h3 className="text-xl md:text-2xl font-black text-foreground">{title}</h3>
+          <h3 className="text-xl md:text-2xl font-black text-foreground">{post.title[locale]}</h3>
           <p className="text-xs md:text-sm text-accent">
-            {date} • {readTime}
+            {post.date} • {post.readTime}
           </p>
         </div>
       </div>
-      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{excerpt}</p>
+      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{post.excerpt[locale]}</p>
+      <div className="flex flex-wrap gap-2 mt-3">
+        {post.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
       <button className="text-accent font-bold text-sm md:text-base hover:opacity-80 transition-opacity">
         {readMoreText}
       </button>
@@ -51,33 +71,15 @@ function CategoryTag({ name, icon, color = "blue" }: CategoryProps) {
 
 export function BlogSection() {
   const t = useTranslations('blog')
-  const posts: BlogPostProps[] = [
-    {
-      title: "Building a Magical 3D Button",
-      date: "12 March 2021",
-      readTime: "5 min read",
-      excerpt:
-        "Every action we take on the web starts with a button click, and yet most buttons are ho-hum and uninspired. In this tutorial, we'll build an animated 3D button with HTML and CSS that sparks joy.",
-      icon: "⚛️",
-    },
-    {
-      title: "Advanced React Patterns",
-      date: "20 April 2021",
-      readTime: "8 min read",
-      excerpt:
-        "Explore advanced patterns in React including render props, compound components, and custom hooks to make your code more flexible and reusable.",
-      icon: "⚛️",
-    },
-  ]
+  const params = useParams()
+  const locale = (params?.locale as "en" | "vi") || "en"
 
-  const categories: CategoryProps[] = [
-    { name: "REACT", icon: "⚛️", color: "blue" },
-    { name: "WORDPRESS", icon: "W", color: "red" },
-    { name: "CSS", icon: "C", color: "blue" },
-    { name: "ANIMATION", icon: "A", color: "blue" },
-    { name: "JAVASCRIPT", icon: "J", color: "blue" },
-    { name: "OTHER", icon: "•••", color: "blue" },
-  ]
+  // Get unique categories from blog posts
+  const categories = Array.from(new Set(blogPosts.map((post) => post.category))).map((cat) => ({
+    name: cat,
+    icon: blogPosts.find((p) => p.category === cat)?.icon || "📝",
+    color: cat === "REACT" || cat === "NEXT.JS" ? ("blue" as const) : ("red" as const),
+  }))
 
   return (
     <section id="blog" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-16">
@@ -85,8 +87,8 @@ export function BlogSection() {
         <SectionTitle title={t('title')} />
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-6">
-            {posts.map((post, idx) => (
-              <BlogCard key={idx} {...post} readMoreText={t('readMore')} />
+            {blogPosts.map((post) => (
+              <BlogCard key={post.id} post={post} locale={locale} readMoreText={t('readMore')} />
             ))}
           </div>
           <div className="space-y-6 scroll-animate">

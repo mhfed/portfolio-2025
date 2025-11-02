@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl"
 import { Sun, Moon, Languages } from "lucide-react"
 import { useLocale } from "@/hooks/use-locale"
 import { routing } from "@/i18n/routing"
+import { ResumeDownloadButton } from "./resume-download-button"
 
 export function Header() {
   const [isDark, setIsDark] = useState(false)
@@ -14,7 +15,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const t = useTranslations('header.nav')
-  const { locale, setLocale } = useLocale()
+  const { locale, setLocale, isLoading } = useLocale()
 
   useEffect(() => {
     setMounted(true)
@@ -84,6 +85,7 @@ export function Header() {
                 {link.name}
               </a>
             ))}
+            <ResumeDownloadButton />
           </div>
 
           {/* Right Side Actions */}
