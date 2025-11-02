@@ -9,9 +9,18 @@
     "downloadResume": "Tải CV"
   },
   "hero": {
-    "front": "FRONT",
-    "end": "END",
-    "developer": "LẬP TRÌNH VIÊN"
+    "front": "NGUYEN",
+    "middle": "MINH",
+    "end": "HIEU",
+    "developer": "Frontend Developer",
+    "contact": {
+      "basedIn": "Based in",
+      "location": "Ha Noi, Viet Nam",
+      "sayHello": "Say hello",
+      "email": "nmhieu04091999@gmail.com"
+    },
+    "textBlockLeft": "Continuous learning and staying updated with the latest trends will be key to achieving these goals.",
+    "textBlockRight": "In the long term, I aspire to specialize in building innovative and popular applications for web, mobile, and potentially desktop platforms."
   },
   "about": {
     "title": "VỀ TÔI",

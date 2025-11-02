@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl"
 import { Sun, Moon, Languages } from "lucide-react"
 import { useLocale } from "@/hooks/use-locale"
 import { routing } from "@/i18n/routing"
-import { ResumeDownloadButton } from "./resume-download-button"
 
 export function Header() {
   const [isDark, setIsDark] = useState(false)
@@ -15,6 +14,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const t = useTranslations('header.nav')
+  const tContact = useTranslations('hero.contact')
   const { locale, setLocale, isLoading } = useLocale()
 
   useEffect(() => {
@@ -66,12 +66,30 @@ export function Header() {
     <>
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10" style={{ height: 'var(--header-height)' }}>
         <nav className="max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4">
-          {/* Logo */}
-          <div className="text-base md:text-xl font-bold tracking-wider flex-shrink-0 min-w-0">
-            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent block truncate md:normal-case">
-              <span className="hidden sm:inline">NGUYEN MINH HIEU</span>
-              <span className="sm:hidden">N.M. HIEU</span>
-            </span>
+          {/* Contact Info - Left Side (2 columns) */}
+          <div className="flex flex-row gap-6 md:gap-8 flex-shrink-0 min-w-0">
+            {/* Based in */}
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider">
+                {tContact('basedIn')}
+              </span>
+              <span className="text-xs md:text-sm text-foreground/80 font-semibold truncate">
+                {tContact('location')}
+              </span>
+            </div>
+
+            {/* Say hello */}
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider">
+                {tContact('sayHello')}
+              </span>
+              <a
+                href={`mailto:${tContact('email')}`}
+                className="text-xs md:text-sm text-foreground/80 font-semibold underline hover:text-primary transition-colors truncate"
+              >
+                {tContact('email')}
+              </a>
+            </div>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -86,7 +104,6 @@ export function Header() {
                 {link.name}
               </a>
             ))}
-            <ResumeDownloadButton />
           </div>
 
           {/* Right Side Actions */}
