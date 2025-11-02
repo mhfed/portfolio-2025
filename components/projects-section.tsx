@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import { useTranslations } from "next-intl"
 import { SectionTitleWrapper } from "./section-title-wrapper"
 import {
   Drawer,
@@ -29,6 +30,7 @@ function ProjectCard({
   const [isTruncated, setIsTruncated] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const textRef = useRef<HTMLParagraphElement>(null)
+  const t = useTranslations('projects')
 
   useEffect(() => {
     const checkTruncation = () => {
@@ -70,7 +72,7 @@ function ProjectCard({
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
                 <button className="text-accent font-bold text-lg hover:opacity-80 transition-opacity mt-4">
-                  VIEW PROJECT →
+                  {t('viewProject')}
                 </button>
               </DrawerTrigger>
               <DrawerContent>
@@ -95,6 +97,7 @@ function ProjectCard({
 }
 
 export function ProjectsSection() {
+  const t = useTranslations('projects')
   const projects: ProjectProps[] = [
     {
       image: "/ecommerce-website.jpg",
@@ -135,7 +138,7 @@ export function ProjectsSection() {
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
           {/* Title */}
-          <SectionTitleWrapper title="PROJECTS" />
+          <SectionTitleWrapper title={t('title')} />
 
           {/* Right Column - Projects */}
           <div className="md:col-span-2 space-y-12 md:space-y-16 lg:space-y-20">

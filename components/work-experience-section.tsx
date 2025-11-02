@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import { useTranslations } from "next-intl"
 import { SectionTitleWrapper } from "./section-title-wrapper"
 import {
   Drawer,
@@ -22,6 +23,7 @@ function TimelineItem({ company, position, period, description, skills }: Timeli
   const [isTruncated, setIsTruncated] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const textRef = useRef<HTMLParagraphElement>(null)
+  const t = useTranslations('experience')
 
   useEffect(() => {
     const checkTruncation = () => {
@@ -61,7 +63,7 @@ function TimelineItem({ company, position, period, description, skills }: Timeli
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
                 <button className="text-accent font-bold text-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1">
-                  Xem thêm...
+                  {t('readMore')}
                 </button>
               </DrawerTrigger>
               <DrawerContent>
@@ -108,6 +110,7 @@ function TimelineItem({ company, position, period, description, skills }: Timeli
 }
 
 export function WorkExperienceSection() {
+  const t = useTranslations('experience')
   const experiences: TimelineItemProps[] = [
     {
       company: "COOLmate",
@@ -151,7 +154,7 @@ export function WorkExperienceSection() {
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
           {/* Title */}
-          <SectionTitleWrapper title="WORK EXPERIENCE" />
+          <SectionTitleWrapper title={t('title')} />
 
           {/* Right Column - Timeline */}
           <div className="md:col-span-2">

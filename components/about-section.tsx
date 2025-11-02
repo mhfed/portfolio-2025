@@ -1,12 +1,17 @@
+"use client"
+
+import { useTranslations } from "next-intl"
 import { SectionTitleWrapper } from "./section-title-wrapper"
 
 export function AboutSection() {
+  const t = useTranslations('about')
+
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0">
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
           {/* Title */}
-          <SectionTitleWrapper title="ABOUT ME" />
+          <SectionTitleWrapper title={t('title')} />
 
           {/* Right Column - Content */}
           <div className="md:col-span-2">
@@ -15,17 +20,13 @@ export function AboutSection() {
                 {/* Left Content */}
                 <div className="space-y-6">
                   <p className="text-lg text-foreground leading-relaxed">
-                    Skilled Front-end Developer with 5 years of experience in developing and maintaining front-end
-                    web applications. Proficient in JavaScript, TypeScript, HTML, CSS, ES6, React.js, and Next.js.
-                    Experienced in code testing and debugging.
+                    {t('description1')}
                   </p>
                   <p className="text-lg text-foreground leading-relaxed">
-                    Proficient in HTML, CSS, JavaScript, React.js & Next.js, experience in responsive design.
-                    Skilled in Redux, RESTful APIs, Websockets, and SSE for real-time features.
-                    Experienced with Material-UI, Ant Design, Tailwind CSS and more for UI development.
+                    {t('description2')}
                   </p>
                   <div className="pt-6">
-                    <h3 className="text-xl font-bold text-primary mb-4">Core Skills</h3>
+                    <h3 className="text-xl font-bold text-primary mb-4">{t('coreSkills')}</h3>
                     <div className="grid grid-cols-2 gap-3">
                       {["JavaScript", "TypeScript", "React.js", "Next.js", "Redux", "React Native"].map((skill) => (
                         <div
@@ -43,14 +44,14 @@ export function AboutSection() {
                 <div className="space-y-8">
                   <div className="bg-background border border-border/30 rounded-2xl p-8">
                     <div className="text-5xl font-black text-primary mb-2">5+</div>
-                    <p className="text-lg text-foreground font-semibold">Years of Experience</p>
-                    <p className="text-sm text-muted-foreground mt-2">Building web experiences with modern technologies</p>
+                    <p className="text-lg text-foreground font-semibold">{t('yearsExperience')}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{t('yearsDescription')}</p>
                   </div>
 
                   <div className="bg-background border border-border/30 rounded-2xl p-8">
                     <div className="text-5xl font-black text-primary mb-2">100%</div>
-                    <p className="text-lg text-foreground font-semibold">Client Satisfaction</p>
-                    <p className="text-sm text-muted-foreground mt-2">Dedicated to exceeding expectations</p>
+                    <p className="text-lg text-foreground font-semibold">{t('clientSatisfaction')}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{t('satisfactionDescription')}</p>
                   </div>
                 </div>
               </div>

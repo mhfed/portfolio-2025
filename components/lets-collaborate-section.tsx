@@ -2,9 +2,11 @@
 
 import type React from "react"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { SectionTitleWrapper } from "./section-title-wrapper"
 
 export function LetsCollaborateSection() {
+  const t = useTranslations('collaborate')
   const [formData, setFormData] = useState({ name: "", email: "", message: "" })
   const [submitted, setSubmitted] = useState(false)
 
@@ -35,10 +37,10 @@ export function LetsCollaborateSection() {
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
           {/* Title */}
           <SectionTitleWrapper 
-            title="LET'S COLLABORATE"
+            title={t('title')}
             desktopContent={
               <p className="text-lg text-foreground/70 mt-6">
-                Have an exciting project in mind? I'd love to hear about it. Let's create something amazing together.
+                {t('description')}
               </p>
             }
           />
@@ -46,7 +48,7 @@ export function LetsCollaborateSection() {
           {/* Mobile: Description below title */}
           <div className="md:hidden mb-6">
             <p className="text-base md:text-lg text-foreground/70">
-              Have an exciting project in mind? I'd love to hear about it. Let's create something amazing together.
+              {t('description')}
             </p>
           </div>
 
@@ -60,7 +62,7 @@ export function LetsCollaborateSection() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-3">
-                        Your Name
+                        {t('form.yourName')}
                       </label>
                       <input
                         type="text"
@@ -70,13 +72,13 @@ export function LetsCollaborateSection() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 bg-background border border-border/30 rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                        placeholder="John Doe"
+                        placeholder={t('form.namePlaceholder')}
                       />
                     </div>
 
                     <div>
                       <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-3">
-                        Email Address
+                        {t('form.emailAddress')}
                       </label>
                       <input
                         type="email"
@@ -86,14 +88,14 @@ export function LetsCollaborateSection() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 bg-background border border-border/30 rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                        placeholder="john@example.com"
+                        placeholder={t('form.emailPlaceholder')}
                       />
                     </div>
                   </div>
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-3">
-                      Message
+                      {t('form.message')}
                     </label>
                     <textarea
                       id="message"
@@ -103,7 +105,7 @@ export function LetsCollaborateSection() {
                       required
                       rows={5}
                       className="w-full px-4 py-3 bg-background border border-border/30 rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
-                      placeholder="Tell me about your project..."
+                      placeholder={t('form.messagePlaceholder')}
                     />
                   </div>
 
@@ -112,14 +114,14 @@ export function LetsCollaborateSection() {
                     disabled={submitted}
                     className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-lg transition-colors disabled:opacity-50"
                   >
-                    {submitted ? "Message Sent! 🎉" : "Send Message"}
+                    {submitted ? t('form.messageSent') : t('form.sendMessage')}
                   </button>
                 </form>
 
                 {/* Divider */}
                 <div className="flex items-center gap-4">
                   <div className="flex-1 h-px bg-border/30"></div>
-                  <span className="text-sm text-muted-foreground">OR CONNECT ON</span>
+                  <span className="text-sm text-muted-foreground">{t('orConnect')}</span>
                   <div className="flex-1 h-px bg-border/30"></div>
                 </div>
 
@@ -139,10 +141,10 @@ export function LetsCollaborateSection() {
                 {/* Direct Contact */}
                 <div className="pt-6 border-t border-border/20 space-y-3 text-center">
                   <p className="text-foreground/70">
-                    Or reach me directly at <span className="font-semibold text-primary">nmhieu04091999@gmail.com</span>
+                    {t('reachDirectly')} <span className="font-semibold text-primary">nmhieu04091999@gmail.com</span>
                   </p>
                   <p className="text-foreground/70">
-                    Phone: <span className="font-semibold text-primary">0982084197</span>
+                    {t('phone')} <span className="font-semibold text-primary">0982084197</span>
                   </p>
                 </div>
               </div>

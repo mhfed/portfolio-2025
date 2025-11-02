@@ -1,3 +1,6 @@
+"use client"
+
+import { useTranslations } from "next-intl"
 import { SectionTitle } from "./section-title"
 
 interface TechCardProps {
@@ -25,41 +28,42 @@ function TechCard({ icon, title, description, isBlue = true }: TechCardProps) {
 }
 
 export function TechnologiesSection() {
+  const t = useTranslations('technologies')
   const technologies: TechCardProps[] = [
     {
       icon: "💻",
-      title: "FRONT END",
-      description: "HTML, CSS, JavaScript, TypeScript, React.js, Next.js",
+      title: t('frontend.title'),
+      description: t('frontend.description'),
       isBlue: true,
     },
     {
       icon: "🔄",
-      title: "STATE MANAGEMENT",
-      description: "Redux for efficient application state management",
+      title: t('stateManagement.title'),
+      description: t('stateManagement.description'),
       isBlue: false,
     },
     {
       icon: "🎨",
-      title: "UI LIBRARIES",
-      description: "Material-UI, Ant Design, Tailwind CSS, Bootstrap, Sass",
+      title: t('uiLibraries.title'),
+      description: t('uiLibraries.description'),
       isBlue: true,
     },
     {
       icon: "📱",
-      title: "MOBILE",
-      description: "React Native, RN Reanimated for mobile app development",
+      title: t('mobile.title'),
+      description: t('mobile.description'),
       isBlue: false,
     },
     {
       icon: "🔌",
-      title: "APIS & PROTOCOLS",
-      description: "RESTful APIs, WebSockets, SSE for real-time features",
+      title: t('apis.title'),
+      description: t('apis.description'),
       isBlue: true,
     },
     {
       icon: "🛠️",
-      title: "TOOLS & UTILITIES",
-      description: "Git, Webpack, Babel, Firebase, Axios, i18n",
+      title: t('tools.title'),
+      description: t('tools.description'),
       isBlue: false,
     },
   ]
@@ -70,7 +74,7 @@ export function TechnologiesSection() {
       className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-16"
     >
       <div className="max-w-6xl mx-auto w-full space-y-16">
-        <SectionTitle title="MY TECHNOLOGIES" />
+        <SectionTitle title={t('title')} />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {technologies.map((tech, idx) => (
             <TechCard key={idx} {...tech} />

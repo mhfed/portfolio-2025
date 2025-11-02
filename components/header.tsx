@@ -3,11 +3,18 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
+import { useTranslations } from "next-intl"
+import { Sun, Moon, Languages } from "lucide-react"
+import { useLocale } from "@/hooks/use-locale"
+import { routing } from "@/i18n/routing"
 
 export function Header() {
   const [isDark, setIsDark] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
+  const t = useTranslations('header.nav')
+  const { locale, setLocale } = useLocale()
 
   useEffect(() => {
     setMounted(true)
@@ -27,11 +34,16 @@ export function Header() {
     }
   }
 
+  const handleLanguageChange = (newLocale: string) => {
+    setLocale(newLocale)
+    setIsLanguageMenuOpen(false)
+  }
+
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Collaborate", href: "#collaborate" },
+    { name: t('about'), href: "#about", key: 'about' },
+    { name: t('experience'), href: "#experience", key: 'experience' },
+    { name: t('projects'), href: "#projects", key: 'projects' },
+    { name: t('collaborate'), href: "#collaborate", key: 'collaborate' },
   ]
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -64,7 +76,7 @@ export function Header() {
           <div className="hidden md:flex gap-8 items-center">
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={link.key}
                 href={link.href}
                 onClick={handleNavClick}
                 className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium uppercase"
@@ -76,17 +88,50 @@ export function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation"
+                aria-label="Change language"
+              >
+                <Languages className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
+              </button>
+              
+              {isLanguageMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setIsLanguageMenuOpen(false)}
+                  />
+                  <div className="absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50 min-w-[120px]">
+                    {routing.locales.map((loc) => (
+                      <button
+                        key={loc}
+                        onClick={() => handleLanguageChange(loc)}
+                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg ${
+                          locale === loc ? 'bg-primary/20 font-semibold' : ''
+                        }`}
+                      >
+                        {loc.toUpperCase()}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="relative inline-flex h-7 w-12 md:h-6 md:w-11 items-center rounded-full bg-gray-300 dark:bg-gray-600 transition-colors touch-manipulation"
+              className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation"
               aria-label="Toggle theme"
             >
-              <span
-                className={`inline-block h-5 w-5 md:h-4 md:w-4 transform rounded-full bg-white transition-transform shadow-sm ${
-                  isDark ? "translate-x-6 md:translate-x-6" : "translate-x-0.5 md:translate-x-1"
-                }`}
-              />
+              {isDark ? (
+                <Sun className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
+              ) : (
+                <Moon className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
+              )}
             </button>
 
             {/* Mobile Menu Button */}
@@ -133,7 +178,7 @@ export function Header() {
         <nav className="flex flex-col p-6 pt-8 gap-1">
           {navLinks.map((link) => (
             <a
-              key={link.name}
+              key={link.key}
               href={link.href}
               onClick={handleNavClick}
               className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-lg hover:bg-primary/10 active:bg-primary/20 touch-manipulation"

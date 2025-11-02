@@ -1,0 +1,82 @@
+{
+  "header": {
+    "nav": {
+      "about": "Về tôi",
+      "experience": "Kinh nghiệm",
+      "projects": "Dự án",
+      "collaborate": "Hợp tác"
+    }
+  },
+  "hero": {
+    "front": "FRONT",
+    "end": "END",
+    "developer": "LẬP TRÌNH VIÊN"
+  },
+  "about": {
+    "title": "VỀ TÔI",
+    "description1": "Lập trình viên Front-end có kỹ năng với 5 năm kinh nghiệm trong việc phát triển và duy trì các ứng dụng web front-end. Thành thạo JavaScript, TypeScript, HTML, CSS, ES6, React.js và Next.js. Có kinh nghiệm trong kiểm tra và gỡ lỗi mã.",
+    "description2": "Thành thạo HTML, CSS, JavaScript, React.js & Next.js, có kinh nghiệm trong thiết kế responsive. Giỏi Redux, RESTful APIs, Websockets và SSE cho các tính năng real-time. Có kinh nghiệm với Material-UI, Ant Design, Tailwind CSS và nhiều hơn nữa cho phát triển UI.",
+    "coreSkills": "Kỹ năng cốt lõi",
+    "yearsExperience": "Năm kinh nghiệm",
+    "yearsDescription": "Xây dựng trải nghiệm web với công nghệ hiện đại",
+    "clientSatisfaction": "Hài lòng khách hàng",
+    "satisfactionDescription": "Cam kết vượt quá mong đợi"
+  },
+  "experience": {
+    "title": "KINH NGHIỆM LÀM VIỆC",
+    "readMore": "Xem thêm..."
+  },
+  "projects": {
+    "title": "DỰ ÁN",
+    "viewProject": "XEM DỰ ÁN →"
+  },
+  "technologies": {
+    "title": "CÔNG NGHỆ CỦA TÔI",
+    "frontend": {
+      "title": "FRONT END",
+      "description": "HTML, CSS, JavaScript, TypeScript, React.js, Next.js"
+    },
+    "stateManagement": {
+      "title": "QUẢN LÝ TRẠNG THÁI",
+      "description": "Redux để quản lý trạng thái ứng dụng hiệu quả"
+    },
+    "uiLibraries": {
+      "title": "THƯ VIỆN UI",
+      "description": "Material-UI, Ant Design, Tailwind CSS, Bootstrap, Sass"
+    },
+    "mobile": {
+      "title": "DI ĐỘNG",
+      "description": "React Native, RN Reanimated cho phát triển ứng dụng di động"
+    },
+    "apis": {
+      "title": "APIS & GIAO THỨC",
+      "description": "RESTful APIs, WebSockets, SSE cho tính năng real-time"
+    },
+    "tools": {
+      "title": "CÔNG CỤ & TIỆN ÍCH",
+      "description": "Git, Webpack, Babel, Firebase, Axios, i18n"
+    }
+  },
+  "blog": {
+    "title": "BÀI VIẾT GẦN ĐÂY",
+    "readMore": "ĐỌC THÊM →",
+    "allCategories": "TẤT CẢ DANH MỤC"
+  },
+  "collaborate": {
+    "title": "HÃY HỢP TÁC",
+    "description": "Bạn có dự án thú vị? Tôi rất muốn nghe về nó. Hãy cùng tạo ra điều gì đó tuyệt vời.",
+    "form": {
+      "yourName": "Tên của bạn",
+      "emailAddress": "Địa chỉ email",
+      "message": "Tin nhắn",
+      "namePlaceholder": "Nguyễn Văn A",
+      "emailPlaceholder": "nguyenvana@example.com",
+      "messagePlaceholder": "Hãy kể cho tôi về dự án của bạn...",
+      "sendMessage": "Gửi tin nhắn",
+      "messageSent": "Đã gửi tin nhắn! 🎉"
+    },
+    "orConnect": "HOẶC KẾT NỐI TRÊN",
+    "reachDirectly": "Hoặc liên hệ trực tiếp tại",
+    "phone": "Số điện thoại:"
+  }
+}

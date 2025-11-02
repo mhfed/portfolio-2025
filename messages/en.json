@@ -1,0 +1,82 @@
+{
+  "header": {
+    "nav": {
+      "about": "About",
+      "experience": "Experience",
+      "projects": "Projects",
+      "collaborate": "Collaborate"
+    }
+  },
+  "hero": {
+    "front": "FRONT",
+    "end": "END",
+    "developer": "DEVELOPER"
+  },
+  "about": {
+    "title": "ABOUT ME",
+    "description1": "Skilled Front-end Developer with 5 years of experience in developing and maintaining front-end web applications. Proficient in JavaScript, TypeScript, HTML, CSS, ES6, React.js, and Next.js. Experienced in code testing and debugging.",
+    "description2": "Proficient in HTML, CSS, JavaScript, React.js & Next.js, experience in responsive design. Skilled in Redux, RESTful APIs, Websockets, and SSE for real-time features. Experienced with Material-UI, Ant Design, Tailwind CSS and more for UI development.",
+    "coreSkills": "Core Skills",
+    "yearsExperience": "Years of Experience",
+    "yearsDescription": "Building web experiences with modern technologies",
+    "clientSatisfaction": "Client Satisfaction",
+    "satisfactionDescription": "Dedicated to exceeding expectations"
+  },
+  "experience": {
+    "title": "WORK EXPERIENCE",
+    "readMore": "Read more..."
+  },
+  "projects": {
+    "title": "PROJECTS",
+    "viewProject": "VIEW PROJECT →"
+  },
+  "technologies": {
+    "title": "MY TECHNOLOGIES",
+    "frontend": {
+      "title": "FRONT END",
+      "description": "HTML, CSS, JavaScript, TypeScript, React.js, Next.js"
+    },
+    "stateManagement": {
+      "title": "STATE MANAGEMENT",
+      "description": "Redux for efficient application state management"
+    },
+    "uiLibraries": {
+      "title": "UI LIBRARIES",
+      "description": "Material-UI, Ant Design, Tailwind CSS, Bootstrap, Sass"
+    },
+    "mobile": {
+      "title": "MOBILE",
+      "description": "React Native, RN Reanimated for mobile app development"
+    },
+    "apis": {
+      "title": "APIS & PROTOCOLS",
+      "description": "RESTful APIs, WebSockets, SSE for real-time features"
+    },
+    "tools": {
+      "title": "TOOLS & UTILITIES",
+      "description": "Git, Webpack, Babel, Firebase, Axios, i18n"
+    }
+  },
+  "blog": {
+    "title": "RECENTLY PUBLISHED",
+    "readMore": "READ MORE →",
+    "allCategories": "ALL CATEGORIES"
+  },
+  "collaborate": {
+    "title": "LET'S COLLABORATE",
+    "description": "Have an exciting project in mind? I'd love to hear about it. Let's create something amazing together.",
+    "form": {
+      "yourName": "Your Name",
+      "emailAddress": "Email Address",
+      "message": "Message",
+      "namePlaceholder": "John Doe",
+      "emailPlaceholder": "john@example.com",
+      "messagePlaceholder": "Tell me about your project...",
+      "sendMessage": "Send Message",
+      "messageSent": "Message Sent! 🎉"
+    },
+    "orConnect": "OR CONNECT ON",
+    "reachDirectly": "Or reach me directly at",
+    "phone": "Phone:"
+  }
+}

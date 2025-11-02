@@ -1,3 +1,6 @@
+"use client"
+
+import { useTranslations } from "next-intl"
 import { SectionTitle } from "./section-title"
 
 interface BlogPostProps {
@@ -8,7 +11,7 @@ interface BlogPostProps {
   icon: string
 }
 
-function BlogCard({ title, date, readTime, excerpt, icon }: BlogPostProps) {
+function BlogCard({ title, date, readTime, excerpt, icon, readMoreText }: BlogPostProps & { readMoreText: string }) {
   return (
     <div className="border-2 border-primary rounded-lg p-6 md:p-8 space-y-4 hover:border-accent transition-colors scroll-animate">
       <div className="flex items-start gap-3">
@@ -22,7 +25,7 @@ function BlogCard({ title, date, readTime, excerpt, icon }: BlogPostProps) {
       </div>
       <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{excerpt}</p>
       <button className="text-accent font-bold text-sm md:text-base hover:opacity-80 transition-opacity">
-        READ MORE →
+        {readMoreText}
       </button>
     </div>
   )
@@ -47,6 +50,7 @@ function CategoryTag({ name, icon, color = "blue" }: CategoryProps) {
 }
 
 export function BlogSection() {
+  const t = useTranslations('blog')
   const posts: BlogPostProps[] = [
     {
       title: "Building a Magical 3D Button",
@@ -78,17 +82,17 @@ export function BlogSection() {
   return (
     <section id="blog" className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-16">
       <div className="max-w-6xl mx-auto w-full space-y-16">
-        <SectionTitle title="RECENTLY PUBLISHED" />
+        <SectionTitle title={t('title')} />
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-6">
             {posts.map((post, idx) => (
-              <BlogCard key={idx} {...post} />
+              <BlogCard key={idx} {...post} readMoreText={t('readMore')} />
             ))}
           </div>
           <div className="space-y-6 scroll-animate">
             <div>
               <h3 className="text-xl font-black text-accent mb-4 flex items-center gap-2">
-                <span>❖</span> ALL CATEGORIES
+                <span>❖</span> {t('allCategories')}
               </h3>
             </div>
             <div className="space-y-3">
