@@ -17,7 +17,7 @@ export async function HeroSection() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center justify-center max-w-7xl w-full mx-auto relative z-10 px-4">
         {/* Name Section with Title Badge */}
-        <div className="relative w-full flex flex-col md:flex-row items-center justify-center mb-8 md:mb-12 gap-4 md:gap-20">
+        <div className="relative w-full flex flex-col md:flex-row items-top justify-between mb-8 md:mb-12 gap-4 md:gap-20">
           {/* Name - Center */}
           <div className="flex flex-col items-center">
             <HeroTypingText 
