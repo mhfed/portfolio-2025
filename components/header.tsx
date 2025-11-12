@@ -154,14 +154,14 @@ export function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
-            {/* Language Switcher */}
-            <div className="relative">
+            {/* Language Switcher - Desktop only */}
+            <div className="hidden md:block relative">
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
                 className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
                 aria-label="Change language"
               >
-                <Languages className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
+                <Languages className="w-4 h-4 text-foreground" />
               </button>
               
               {isLanguageMenuOpen && (
@@ -187,16 +187,16 @@ export function Header() {
               )}
             </div>
 
-            {/* Theme Toggle */}
+            {/* Theme Toggle - Desktop only */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+              className="hidden md:flex p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
               aria-label="Toggle theme"
             >
               {displayIsDark ? (
-                <Sun className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
+                <Sun className="w-4 h-4 text-foreground" />
               ) : (
-                <Moon className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
+                <Moon className="w-4 h-4 text-foreground" />
               )}
             </button>
 
@@ -241,17 +241,71 @@ export function Header() {
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <nav className="flex flex-col p-6 pt-8 gap-1">
-          {navLinks.map((link) => (
-            <a
-              key={link.key}
-              href={link.href}
-              onClick={handleNavClick}
-              className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-lg hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
+        <nav className="flex flex-col h-full">
+          {/* Navigation Links */}
+          <div className="flex flex-col p-6 pt-8 gap-1 flex-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.key}
+                href={link.href}
+                onClick={handleNavClick}
+                className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-lg hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Actions - Language & Theme */}
+          <div className="border-t border-border/30 p-4 space-y-3">
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+                aria-label="Change language"
+              >
+                <span className="text-sm font-medium text-foreground">Language</span>
+                <Languages className="w-5 h-5 text-foreground" />
+              </button>
+              
+              {isLanguageMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setIsLanguageMenuOpen(false)}
+                  />
+                  <div className="absolute left-0 right-0 bottom-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50">
+                    {routing.locales.map((loc) => (
+                      <button
+                        key={loc}
+                        onClick={() => handleLanguageChange(loc)}
+                        className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg cursor-pointer ${
+                          locale === loc ? 'bg-primary/20 font-semibold' : ''
+                        }`}
+                      >
+                        {loc.toUpperCase()}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+              aria-label="Toggle theme"
             >
-              {link.name}
-            </a>
-          ))}
+              <span className="text-sm font-medium text-foreground">Theme</span>
+              {displayIsDark ? (
+                <Sun className="w-5 h-5 text-foreground" />
+              ) : (
+                <Moon className="w-5 h-5 text-foreground" />
+              )}
+            </button>
+          </div>
         </nav>
       </div>
     </>

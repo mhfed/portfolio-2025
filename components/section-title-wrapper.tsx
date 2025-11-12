@@ -10,8 +10,8 @@ interface SectionTitleWrapperProps {
 export function SectionTitleWrapper({ title, desktopContent, className = "" }: SectionTitleWrapperProps) {
   return (
     <>
-      {/* Mobile: Full width sticky title */}
-      <div className={`md:hidden scroll-animate sticky top-[var(--header-height)] z-40 -mx-4 px-4 py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/10 mb-6 ${className}`}>
+      {/* Mobile: Full width sticky title - positioned to stick right below header */}
+      <div className={`md:hidden scroll-animate sticky z-40 -mx-4 px-4 py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border/10 mb-6 ${className}`} style={{ top: 'var(--header-height)', marginTop: '-3rem' }}>
         <SectionTitle title={title} />
       </div>
 
