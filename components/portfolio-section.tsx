@@ -69,7 +69,7 @@ function ProjectCard({
           {isTruncated && (
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
-                <button className="text-accent font-bold text-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1">
+                <button className="text-accent font-bold text-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1 cursor-pointer">
                   Xem thêm...
                 </button>
               </DrawerTrigger>
@@ -89,7 +89,7 @@ function ProjectCard({
             </Drawer>
           )}
         </div>
-        <button className="text-accent font-bold text-lg hover:opacity-80 transition-opacity mt-4">
+        <button className="text-accent font-bold text-lg hover:opacity-80 transition-opacity mt-4 cursor-pointer">
           VIEW PROJECT →
         </button>
       </div>

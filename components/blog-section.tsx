@@ -44,7 +44,7 @@ function BlogCard({ post, locale, readMoreText }: BlogCardProps) {
           </span>
         ))}
       </div>
-      <button className="text-accent font-semibold text-body hover:opacity-80 transition-opacity">
+      <button className="text-accent font-semibold text-body hover:opacity-80 transition-opacity cursor-pointer">
         {readMoreText}
       </button>
     </div>

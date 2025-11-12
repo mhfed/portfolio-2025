@@ -61,7 +61,7 @@ export function TimelineItem({ company, position, period, description, skills }:
           {isTruncated && (
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
-                <button className="text-accent font-semibold text-body-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1">
+                <button className="text-accent font-semibold text-body-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1 cursor-pointer">
                   {t('readMore')}
                 </button>
               </DrawerTrigger>

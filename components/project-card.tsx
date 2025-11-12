@@ -78,7 +78,7 @@ export function ProjectCard({
           {isTruncated && (
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
-                <button className="text-accent font-semibold text-body-lg hover:opacity-80 transition-opacity mt-4">
+                <button className="text-accent font-semibold text-body-lg hover:opacity-80 transition-opacity mt-4 cursor-pointer">
                   {t('viewProject')}
                 </button>
               </DrawerTrigger>

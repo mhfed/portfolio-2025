@@ -96,7 +96,7 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={submitted}
-                className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg transition-colors disabled:opacity-50"
+                className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {submitted ? "Message Sent!" : "Send Message"}
               </button>

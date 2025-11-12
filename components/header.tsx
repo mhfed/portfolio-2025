@@ -112,7 +112,7 @@ export function Header() {
             <div className="relative">
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation"
+                className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
                 aria-label="Change language"
               >
                 <Languages className="w-5 h-5 md:w-4 md:h-4 text-foreground" />
@@ -129,7 +129,7 @@ export function Header() {
                       <button
                         key={loc}
                         onClick={() => handleLanguageChange(loc)}
-                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg ${
+                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg cursor-pointer ${
                           locale === loc ? 'bg-primary/20 font-semibold' : ''
                         }`}
                       >
@@ -144,7 +144,7 @@ export function Header() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation"
+              className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
               aria-label="Toggle theme"
             >
               {displayIsDark ? (
@@ -157,7 +157,7 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden flex flex-col gap-1.5 w-7 h-7 justify-center items-center touch-manipulation p-1"
+              className="md:hidden flex flex-col gap-1.5 w-7 h-7 justify-center items-center touch-manipulation p-1 cursor-pointer"
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
             >
