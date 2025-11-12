@@ -21,7 +21,7 @@ export async function LetsCollaborateSection() {
           <SectionTitleWrapper 
             title={t('title')}
             desktopContent={
-              <p className="text-lg text-foreground/70 mt-6">
+              <p className="text-body-lg text-foreground/70 mt-6">
                 {t('description')}
               </p>
             }
@@ -29,7 +29,7 @@ export async function LetsCollaborateSection() {
 
           {/* Mobile: Description below title */}
           <div className="md:hidden mb-6">
-            <p className="text-base md:text-lg text-foreground/70">
+            <p className="text-body-lg text-foreground/70">
               {t('description')}
             </p>
           </div>

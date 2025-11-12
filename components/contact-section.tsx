@@ -36,9 +36,9 @@ export function ContactSection() {
       <div className="max-w-6xl mx-auto">
         {/* Section Title */}
         <div className="flex items-center justify-center gap-6 mb-16">
-          <span className="text-accent text-4xl md:text-5xl font-black">&lt;</span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-foreground text-balance">GET IN TOUCH</h2>
-          <span className="text-accent text-4xl md:text-5xl font-black">/&gt;</span>
+          <span className="text-accent text-h2 font-bold">&lt;</span>
+          <h2 className="text-h2 text-foreground text-balance">GET IN TOUCH</h2>
+          <span className="text-accent text-h2 font-bold">/&gt;</span>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">

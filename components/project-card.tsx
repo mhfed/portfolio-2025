@@ -64,21 +64,21 @@ export function ProjectCard({
       </div>
       <div className="space-y-4">
         <div>
-          <h3 className="text-3xl md:text-4xl font-black text-primary">{title}</h3>
-          <p className="text-sm text-muted-foreground">{year}</p>
+          <h3 className="text-h3 text-primary">{title}</h3>
+          <p className="text-body-sm text-muted-foreground">{year}</p>
         </div>
-        <p className="text-foreground text-lg font-semibold">{description}</p>
+        <p className="text-foreground text-body-lg font-semibold">{description}</p>
         <div className="space-y-2">
           <p
             ref={textRef}
-            className="text-base text-foreground leading-relaxed line-clamp-2"
+            className="text-body text-foreground line-clamp-2"
           >
             {details}
           </p>
           {isTruncated && (
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
-                <button className="text-accent font-bold text-lg hover:opacity-80 transition-opacity mt-4">
+                <button className="text-accent font-semibold text-body-lg hover:opacity-80 transition-opacity mt-4">
                   {t('viewProject')}
                 </button>
               </DrawerTrigger>
@@ -86,10 +86,10 @@ export function ProjectCard({
                 <div className="overflow-y-auto">
                   <DrawerHeader className="text-left pb-4">
                     <DrawerTitle>{title}</DrawerTitle>
-                    <p className="text-sm text-muted-foreground mt-1">{year}</p>
+                    <p className="text-body-sm text-muted-foreground mt-1">{year}</p>
                   </DrawerHeader>
                   <div className="px-6 pb-8">
-                    <p className="text-base text-foreground leading-relaxed">
+                    <p className="text-body text-foreground">
                       {details}
                     </p>
                   </div>

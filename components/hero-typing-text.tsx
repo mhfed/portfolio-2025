@@ -136,11 +136,11 @@ export function HeroTypingText({ frontText, middleText, endText }: HeroTypingTex
     <div className="flex flex-col items-start gap-2 md:gap-3">
       <h1 
         ref={line1Ref}
-        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-primary text-center min-h-[1.2em]"
+        className="text-display text-primary text-center min-h-[1.2em]"
       />
       <h1 
         ref={line2Ref}
-        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-primary text-center min-h-[1.2em]"
+        className="text-display text-primary text-center min-h-[1.2em]"
       />
     </div>
   )
@@ -219,7 +219,7 @@ export function HeroDeveloperText({ developerText }: { developerText: string }) 
   return (
     <h2 
       ref={textRef}
-      className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-primary min-h-[1.2em]"
+      className="text-h1 text-primary min-h-[1.2em]"
     />
   )
 }

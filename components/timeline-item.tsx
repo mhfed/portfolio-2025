@@ -46,22 +46,22 @@ export function TimelineItem({ company, position, period, description, skills }:
 
       <div className="space-y-3">
         <div>
-          <h3 className="text-xl font-bold text-foreground">{position}</h3>
-          <p className="text-primary font-semibold">{company}</p>
-          <p className="text-sm text-muted-foreground">{period}</p>
+          <h3 className="text-h3 text-foreground">{position}</h3>
+          <p className="text-body-lg text-primary font-semibold">{company}</p>
+          <p className="text-body-sm text-muted-foreground">{period}</p>
         </div>
 
         <div className="space-y-2">
           <p
             ref={textRef}
-            className="text-foreground text-base leading-relaxed line-clamp-2"
+            className="text-foreground text-body line-clamp-2"
           >
             {description}
           </p>
           {isTruncated && (
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
-                <button className="text-accent font-bold text-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1">
+                <button className="text-accent font-semibold text-body-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1">
                   {t('readMore')}
                 </button>
               </DrawerTrigger>
@@ -69,11 +69,11 @@ export function TimelineItem({ company, position, period, description, skills }:
                 <div className="overflow-y-auto">
                   <DrawerHeader className="text-left pb-4">
                     <DrawerTitle>{position}</DrawerTitle>
-                    <p className="text-primary font-semibold mt-1">{company}</p>
-                    <p className="text-sm text-muted-foreground mt-1">{period}</p>
+                    <p className="text-body-lg text-primary font-semibold mt-1">{company}</p>
+                    <p className="text-body-sm text-muted-foreground mt-1">{period}</p>
                   </DrawerHeader>
                   <div className="px-6 pb-8">
-                    <p className="text-base text-foreground leading-relaxed">
+                    <p className="text-body text-foreground">
                       {description}
                     </p>
                     <div className="flex flex-wrap gap-2 mt-6">

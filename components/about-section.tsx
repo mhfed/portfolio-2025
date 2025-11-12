@@ -17,14 +17,14 @@ export async function AboutSection() {
               <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
                 {/* Left Content */}
                 <div className="space-y-6">
-                  <p className="text-lg text-foreground leading-relaxed">
+                  <p className="text-body-lg text-foreground">
                     {t('description1')}
                   </p>
-                  <p className="text-lg text-foreground leading-relaxed">
+                  <p className="text-body-lg text-foreground">
                     {t('description2')}
                   </p>
                   <div className="pt-6">
-                    <h3 className="text-xl font-bold text-primary mb-4">{t('coreSkills')}</h3>
+                    <h3 className="text-h3 text-primary mb-4">{t('coreSkills')}</h3>
                     <div className="grid grid-cols-2 gap-3">
                       {["JavaScript", "TypeScript", "React.js", "Next.js", "Redux", "React Native"].map((skill) => (
                         <div
@@ -41,15 +41,15 @@ export async function AboutSection() {
                 {/* Right Content - Stats */}
                 <div className="space-y-8">
                   <div className="bg-background border border-border/30 rounded-2xl p-8">
-                    <div className="text-5xl font-black text-primary mb-2">5+</div>
-                    <p className="text-lg text-foreground font-semibold">{t('yearsExperience')}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{t('yearsDescription')}</p>
+                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">5+</div>
+                    <p className="text-body-lg text-foreground font-semibold">{t('yearsExperience')}</p>
+                    <p className="text-body-sm text-muted-foreground mt-2">{t('yearsDescription')}</p>
                   </div>
 
                   <div className="bg-background border border-border/30 rounded-2xl p-8">
-                    <div className="text-5xl font-black text-primary mb-2">100%</div>
-                    <p className="text-lg text-foreground font-semibold">{t('clientSatisfaction')}</p>
-                    <p className="text-sm text-muted-foreground mt-2">{t('satisfactionDescription')}</p>
+                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">100%</div>
+                    <p className="text-body-lg text-foreground font-semibold">{t('clientSatisfaction')}</p>
+                    <p className="text-body-sm text-muted-foreground mt-2">{t('satisfactionDescription')}</p>
                   </div>
                 </div>
               </div>

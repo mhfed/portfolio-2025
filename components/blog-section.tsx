@@ -27,24 +27,24 @@ function BlogCard({ post, locale, readMoreText }: BlogCardProps) {
       <div className="flex items-start gap-3">
         <span className="text-2xl">{post.icon}</span>
         <div className="flex-1">
-          <h3 className="text-xl md:text-2xl font-black text-foreground">{post.title[locale]}</h3>
-          <p className="text-xs md:text-sm text-accent">
+          <h3 className="text-h3 text-foreground">{post.title[locale]}</h3>
+          <p className="text-body-sm text-accent">
             {post.date} • {post.readTime}
           </p>
         </div>
       </div>
-      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{post.excerpt[locale]}</p>
+      <p className="text-body text-muted-foreground">{post.excerpt[locale]}</p>
       <div className="flex flex-wrap gap-2 mt-3">
         {post.tags.map((tag) => (
           <span
             key={tag}
-            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary"
+            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-body-sm font-medium text-primary"
           >
             {tag}
           </span>
         ))}
       </div>
-      <button className="text-accent font-bold text-sm md:text-base hover:opacity-80 transition-opacity">
+      <button className="text-accent font-semibold text-body hover:opacity-80 transition-opacity">
         {readMoreText}
       </button>
     </div>

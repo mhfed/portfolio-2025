@@ -16,7 +16,7 @@ export function SectionTitleWrapper({ title, desktopContent, className = "" }: S
       </div>
 
       {/* Desktop: Left Column - Title */}
-      <div className={`hidden md:block scroll-animate sticky top-[var(--header-height)] self-start ${className}`}>
+      <div className={`hidden md:block scroll-animate sticky top-[var(--header-height)] self-start min-w-0 max-w-full ${className}`}>
         <SectionTitle title={title} />
         {desktopContent}
       </div>

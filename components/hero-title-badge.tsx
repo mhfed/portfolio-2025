@@ -23,7 +23,7 @@ export async function HeroTitleBadge() {
       </div>
       
       {/* Title */}
-      <span className="text-sm md:text-base lg:text-lg font-medium text-foreground/80">
+      <span className="text-body-lg font-medium text-foreground/80">
         {t('developer')}
       </span>
     </div>

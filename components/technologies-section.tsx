@@ -20,8 +20,8 @@ function TechCard({ icon, title, description, isBlue = true }: TechCardProps) {
         {icon}
       </div>
       <div className="text-center">
-        <h3 className="text-xl md:text-2xl font-black text-foreground mb-2">{title}</h3>
-        <p className="text-sm md:text-base text-muted-foreground">{description}</p>
+        <h3 className="text-h3 text-foreground mb-2">{title}</h3>
+        <p className="text-body-sm text-muted-foreground">{description}</p>
       </div>
     </div>
   )
