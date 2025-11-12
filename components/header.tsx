@@ -13,6 +13,7 @@ export function Header() {
   const [mounted, setMounted] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const t = useTranslations('header.nav')
   const tContact = useTranslations('hero.contact')
   const { locale, setLocale, isLoading } = useLocale()
@@ -20,6 +21,45 @@ export function Header() {
   useEffect(() => {
     setMounted(true)
     setIsDark(document.documentElement.classList.contains("dark"))
+  }, [])
+
+  // Track scroll progress
+  useEffect(() => {
+    const calculateScrollProgress = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
+      
+      if (scrollHeight <= 0) {
+        setScrollProgress(0)
+        return
+      }
+      
+      const progress = (scrollTop / scrollHeight) * 100
+      setScrollProgress(Math.min(100, Math.max(0, progress)))
+    }
+
+    // Throttle scroll events for performance
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          calculateScrollProgress()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    // Initial calculation
+    calculateScrollProgress()
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("resize", calculateScrollProgress, { passive: true })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", calculateScrollProgress)
+    }
   }, [])
 
   const toggleTheme = () => {
@@ -64,7 +104,13 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10" style={{ height: 'var(--header-height)' }}>
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10 relative" style={{ height: 'var(--header-height)' }}>
+        {/* Scroll Progress Indicator */}
+        <div 
+          className="absolute top-0 left-0 h-0.5 bg-primary transition-all duration-150 ease-out rounded-b z-[60]"
+          style={{ width: `${scrollProgress}%` }}
+          aria-hidden="true"
+        />
         <nav className="max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4">
           {/* Contact Info - Left Side (2 columns) */}
           <div className="flex flex-row gap-6 md:gap-8 flex-shrink-0 min-w-0">

@@ -5,6 +5,7 @@ import { WorkExperienceSection } from "@/components/work-experience-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { LetsCollaborateSection } from "@/components/lets-collaborate-section"
 import { ScrollObserver } from "@/components/scroll-observer"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <div className="scroll-animate">
         <LetsCollaborateSection />
       </div>
+      <ScrollToTop />
     </main>
   )
 }
