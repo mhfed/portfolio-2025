@@ -136,11 +136,11 @@ export function HeroTypingText({ frontText, middleText, endText }: HeroTypingTex
     <div className="flex flex-col items-start gap-2 md:gap-3">
       <h1 
         ref={line1Ref}
-        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-foreground text-center min-h-[1.2em]"
+        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-primary text-center min-h-[1.2em]"
       />
       <h1 
         ref={line2Ref}
-        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-foreground text-center min-h-[1.2em]"
+        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-primary text-center min-h-[1.2em]"
       />
     </div>
   )
