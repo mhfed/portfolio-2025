@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing"
 import "../globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/react"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ 
   subsets: ["latin", "vietnamese"],
@@ -150,6 +151,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
           <Analytics />
+          <Toaster />
         </NextIntlClientProvider>
       </body>
     </html>

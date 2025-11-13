@@ -1,14 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { useTranslations } from "next-intl"
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "./ui/drawer"
+import { useState } from "react"
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 interface TimelineItemProps {
   company: string
@@ -19,26 +12,8 @@ interface TimelineItemProps {
 }
 
 export function TimelineItem({ company, position, period, description, skills }: TimelineItemProps) {
-  const [isTruncated, setIsTruncated] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const textRef = useRef<HTMLParagraphElement>(null)
-  const t = useTranslations('experience')
-
-  useEffect(() => {
-    const checkTruncation = () => {
-      if (textRef.current) {
-        const element = textRef.current
-        // Check if text is truncated by comparing scrollHeight with clientHeight
-        const isOverflowing = element.scrollHeight > element.clientHeight
-        setIsTruncated(isOverflowing)
-      }
-    }
-
-    checkTruncation()
-    // Re-check on window resize
-    window.addEventListener("resize", checkTruncation)
-    return () => window.removeEventListener("resize", checkTruncation)
-  }, [description])
+  const [isExpanded, setIsExpanded] = useState(false)
+  const descriptionLines = description.split('. ').filter(line => line.trim().length > 0)
 
   return (
     <div className="scroll-animate relative pl-8 pb-8 border-l-2 border-primary/30 last:pb-0">
@@ -52,44 +27,34 @@ export function TimelineItem({ company, position, period, description, skills }:
         </div>
 
         <div className="space-y-2">
-          <p
-            ref={textRef}
-            className="text-foreground text-body line-clamp-2"
-          >
-            {description}
-          </p>
-          {isTruncated && (
-            <Drawer open={isOpen} onOpenChange={setIsOpen}>
-              <DrawerTrigger asChild>
-                <button className="text-accent font-semibold text-body-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1 cursor-pointer">
-                  {t('readMore')}
-                </button>
-              </DrawerTrigger>
-              <DrawerContent>
-                <div className="overflow-y-auto">
-                  <DrawerHeader className="text-left pb-4">
-                    <DrawerTitle>{position}</DrawerTitle>
-                    <p className="text-body-lg text-primary font-semibold mt-1">{company}</p>
-                    <p className="text-body-sm text-muted-foreground mt-1">{period}</p>
-                  </DrawerHeader>
-                  <div className="px-6 pb-8">
-                    <p className="text-body text-foreground">
-                      {description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mt-6">
-                      {skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </DrawerContent>
-            </Drawer>
+          <div className={`text-foreground text-body ${isExpanded ? '' : 'line-clamp-2'}`}>
+            {isExpanded ? (
+              <ul className="list-disc list-inside space-y-1">
+                {descriptionLines.map((line, idx) => (
+                  <li key={idx}>{line.trim()}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>{description}</p>
+            )}
+          </div>
+          {descriptionLines.length > 1 && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-accent font-semibold text-body-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1 cursor-pointer"
+            >
+              {isExpanded ? (
+                <>
+                  <span>Show less</span>
+                  <ChevronUp className="w-4 h-4" />
+                </>
+              ) : (
+                <>
+                  <span>Read more</span>
+                  <ChevronDown className="w-4 h-4" />
+                </>
+              )}
+            </button>
           )}
         </div>
 

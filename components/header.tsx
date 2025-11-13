@@ -7,6 +7,10 @@ import { useTranslations } from "next-intl"
 import { Sun, Moon, Languages } from "lucide-react"
 import { useLocale } from "@/hooks/use-locale"
 import { routing } from "@/i18n/routing"
+import {
+  Drawer,
+  DrawerContent,
+} from "@/components/ui/drawer"
 
 export function Header() {
   const [isDark, setIsDark] = useState(false)
@@ -202,7 +206,7 @@ export function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen(true)}
               className="md:hidden flex flex-col gap-1.5 w-7 h-7 justify-center items-center touch-manipulation p-1 cursor-pointer"
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
@@ -227,87 +231,77 @@ export function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden fixed top-[var(--header-height)] right-0 z-40 h-[calc(100vh-var(--header-height))] w-[280px] sm:w-80 bg-background border-l border-border/30 shadow-2xl transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <nav className="flex flex-col h-full">
-          {/* Navigation Links */}
-          <div className="flex flex-col p-6 pt-8 gap-1 flex-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.key}
-                href={link.href}
-                onClick={handleNavClick}
-                className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-lg hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Actions - Language & Theme */}
-          <div className="border-t border-border/30 p-4 space-y-3">
-            {/* Language Switcher */}
-            <div className="relative">
-              <button
-                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
-                aria-label="Change language"
-              >
-                <span className="text-sm font-medium text-foreground">Language</span>
-                <Languages className="w-5 h-5 text-foreground" />
-              </button>
-              
-              {isLanguageMenuOpen && (
-                <>
-                  <div
-                    className="fixed inset-0 z-40"
-                    onClick={() => setIsLanguageMenuOpen(false)}
-                  />
-                  <div className="absolute left-0 right-0 bottom-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50">
-                    {routing.locales.map((loc) => (
-                      <button
-                        key={loc}
-                        onClick={() => handleLanguageChange(loc)}
-                        className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg cursor-pointer ${
-                          locale === loc ? 'bg-primary/20 font-semibold' : ''
-                        }`}
-                      >
-                        {loc.toUpperCase()}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+      {/* Mobile Menu - Bottom Sheet */}
+      <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        <DrawerContent className="max-h-[85vh]">
+          <nav className="flex flex-col h-full">
+            {/* Navigation Links */}
+            <div className="flex flex-col p-6 gap-1 flex-1 overflow-y-auto">
+              {navLinks.map((link) => (
+                <a
+                  key={link.key}
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-lg hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
+                >
+                  {link.name}
+                </a>
+              ))}
             </div>
 
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
-              aria-label="Toggle theme"
-            >
-              <span className="text-sm font-medium text-foreground">Theme</span>
-              {displayIsDark ? (
-                <Sun className="w-5 h-5 text-foreground" />
-              ) : (
-                <Moon className="w-5 h-5 text-foreground" />
-              )}
-            </button>
-          </div>
-        </nav>
-      </div>
+            {/* Mobile Actions - Language & Theme */}
+            <div className="border-t border-border/30 p-4 space-y-3">
+              {/* Language Switcher */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+                  aria-label="Change language"
+                >
+                  <span className="text-sm font-medium text-foreground">Language</span>
+                  <Languages className="w-5 h-5 text-foreground" />
+                </button>
+                
+                {isLanguageMenuOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setIsLanguageMenuOpen(false)}
+                    />
+                    <div className="absolute left-0 right-0 bottom-full mb-2 bg-background border border-border/30 rounded-lg shadow-lg z-50">
+                      {routing.locales.map((loc) => (
+                        <button
+                          key={loc}
+                          onClick={() => handleLanguageChange(loc)}
+                          className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg cursor-pointer ${
+                            locale === loc ? 'bg-primary/20 font-semibold' : ''
+                          }`}
+                        >
+                          {loc.toUpperCase()}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+                aria-label="Toggle theme"
+              >
+                <span className="text-sm font-medium text-foreground">Theme</span>
+                {displayIsDark ? (
+                  <Sun className="w-5 h-5 text-foreground" />
+                ) : (
+                  <Moon className="w-5 h-5 text-foreground" />
+                )}
+              </button>
+            </div>
+          </nav>
+        </DrawerContent>
+      </Drawer>
     </>
   )
 }

@@ -19,11 +19,11 @@ export function ResumeDownloadButton() {
   return (
     <button
       onClick={handleDownload}
-      className="hidden md:flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-colors cursor-pointer"
+      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
       aria-label={t('downloadResume')}
     >
-      <Download className="w-4 h-4" />
-      <span className="text-sm">{t('downloadResume')}</span>
+      <Download className="w-5 h-5" />
+      <span>{t('downloadResume')}</span>
     </button>
   )
 }

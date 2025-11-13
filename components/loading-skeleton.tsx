@@ -1,12 +1,93 @@
 "use client"
 
+import { cn } from "@/lib/utils"
+
 interface LoadingSkeletonProps {
   className?: string
+  variant?: "default" | "hero" | "project" | "timeline" | "text"
 }
 
-export function LoadingSkeleton({ className = "" }: LoadingSkeletonProps) {
+export function LoadingSkeleton({ className = "", variant = "default" }: LoadingSkeletonProps) {
+  if (variant === "hero") {
+    return (
+      <div className={cn("animate-pulse", className)}>
+        <div className="space-y-8">
+          <div className="h-16 bg-muted rounded w-3/4 mx-auto" />
+          <div className="h-16 bg-muted rounded w-2/3 mx-auto" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <div className="space-y-4">
+              <div className="h-4 bg-muted rounded w-full" />
+              <div className="h-4 bg-muted rounded w-5/6" />
+            </div>
+            <div className="space-y-4">
+              <div className="h-4 bg-muted rounded w-full" />
+              <div className="h-4 bg-muted rounded w-4/5" />
+            </div>
+          </div>
+          <div className="h-12 bg-muted rounded w-48 mx-auto" />
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === "project") {
+    return (
+      <div className={cn("animate-pulse", className)}>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="h-80 md:h-96 bg-muted rounded-xl" />
+          <div className="space-y-4">
+            <div className="h-8 bg-muted rounded w-3/4" />
+            <div className="h-4 bg-muted rounded w-1/4" />
+            <div className="h-6 bg-muted rounded w-full" />
+            <div className="space-y-2">
+              <div className="h-4 bg-muted rounded w-full" />
+              <div className="h-4 bg-muted rounded w-5/6" />
+            </div>
+            <div className="h-6 bg-muted rounded w-32" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === "timeline") {
+    return (
+      <div className={cn("animate-pulse", className)}>
+        <div className="relative pl-8 pb-8 border-l-2 border-muted">
+          <div className="absolute left-0 top-0 w-4 h-4 bg-muted rounded-full transform -translate-x-1.5" />
+          <div className="space-y-3">
+            <div className="h-6 bg-muted rounded w-1/3" />
+            <div className="h-5 bg-muted rounded w-1/4" />
+            <div className="h-4 bg-muted rounded w-1/5" />
+            <div className="space-y-2 mt-4">
+              <div className="h-4 bg-muted rounded w-full" />
+              <div className="h-4 bg-muted rounded w-5/6" />
+            </div>
+            <div className="flex flex-wrap gap-2 mt-4">
+              <div className="h-6 bg-muted rounded-full w-20" />
+              <div className="h-6 bg-muted rounded-full w-24" />
+              <div className="h-6 bg-muted rounded-full w-16" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (variant === "text") {
+    return (
+      <div className={cn("animate-pulse", className)}>
+        <div className="space-y-2">
+          <div className="h-4 bg-muted rounded w-full" />
+          <div className="h-4 bg-muted rounded w-5/6" />
+          <div className="h-4 bg-muted rounded w-4/5" />
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className={`animate-pulse ${className}`}>
+    <div className={cn("animate-pulse", className)}>
       <div className="space-y-4">
         <div className="h-4 bg-muted rounded w-3/4" />
         <div className="h-4 bg-muted rounded w-1/2" />

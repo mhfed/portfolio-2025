@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef, useLayoutEffect } from "react"
-import { gsap } from "gsap"
 
 interface HeroTypingTextProps {
   frontText: string
@@ -16,120 +15,124 @@ export function HeroTypingText({ frontText, middleText, endText }: HeroTypingTex
   useLayoutEffect(() => {
     if (!line1Ref.current || !line2Ref.current) return
 
-    const line1 = line1Ref.current
-    const line2 = line2Ref.current
+    // Dynamically import GSAP only when needed
+    import("gsap").then(({ gsap }) => {
+      const line1 = line1Ref.current
+      const line2 = line2Ref.current
+      if (!line1 || !line2) return
 
-    // Clear previous content
-    line1.innerHTML = ""
-    line2.innerHTML = ""
+      // Clear previous content
+      line1.innerHTML = ""
+      line2.innerHTML = ""
 
-    // Get text color
-    const textColor = window.getComputedStyle(line1).color
+      // Get text color
+      const textColor = window.getComputedStyle(line1).color
 
-    // Split text into characters for line 1 (frontText + middleText)
-    const line1Text = `${frontText} ${middleText}`
-    const line1Wrappers: HTMLSpanElement[] = []
-    const line1Fills: HTMLSpanElement[] = []
-    
-    line1Text.split("").forEach((char) => {
-      // Create wrapper
-      const wrapper = document.createElement("span")
-      wrapper.style.display = "inline-block"
-      wrapper.style.position = "relative"
+      // Split text into characters for line 1 (frontText + middleText)
+      const line1Text = `${frontText} ${middleText}`
+      const line1Wrappers: HTMLSpanElement[] = []
+      const line1Fills: HTMLSpanElement[] = []
       
-      // Create stroke layer (always visible)
-      const stroke = document.createElement("span")
-      stroke.textContent = char === " " ? "\u00A0" : char
-      stroke.style.position = "absolute"
-      stroke.style.left = "0"
-      stroke.style.top = "0"
-      stroke.style.color = "transparent"
-      stroke.style.webkitTextStroke = `2px ${textColor}`
+      line1Text.split("").forEach((char) => {
+        // Create wrapper
+        const wrapper = document.createElement("span")
+        wrapper.style.display = "inline-block"
+        wrapper.style.position = "relative"
+        
+        // Create stroke layer (always visible)
+        const stroke = document.createElement("span")
+        stroke.textContent = char === " " ? "\u00A0" : char
+        stroke.style.position = "absolute"
+        stroke.style.left = "0"
+        stroke.style.top = "0"
+        stroke.style.color = "transparent"
+        stroke.style.webkitTextStroke = `2px ${textColor}`
+        
+        // Create fill layer (fade in)
+        const fill = document.createElement("span")
+        fill.textContent = char === " " ? "\u00A0" : char
+        fill.style.position = "relative"
+        fill.style.color = textColor
+        fill.style.opacity = "0"
+        
+        wrapper.appendChild(stroke)
+        wrapper.appendChild(fill)
+        
+        gsap.set(wrapper, { clipPath: "inset(0 100% 0 0)" })
+        
+        line1.appendChild(wrapper)
+        line1Wrappers.push(wrapper)
+        line1Fills.push(fill)
+      })
+
+      // Split text into characters for line 2 (endText)
+      const line2Wrappers: HTMLSpanElement[] = []
+      const line2Fills: HTMLSpanElement[] = []
       
-      // Create fill layer (fade in)
-      const fill = document.createElement("span")
-      fill.textContent = char === " " ? "\u00A0" : char
-      fill.style.position = "relative"
-      fill.style.color = textColor
-      fill.style.opacity = "0"
-      
-      wrapper.appendChild(stroke)
-      wrapper.appendChild(fill)
-      
-      gsap.set(wrapper, { clipPath: "inset(0 100% 0 0)" })
-      
-      line1.appendChild(wrapper)
-      line1Wrappers.push(wrapper)
-      line1Fills.push(fill)
+      endText.split("").forEach((char) => {
+        // Create wrapper
+        const wrapper = document.createElement("span")
+        wrapper.style.display = "inline-block"
+        wrapper.style.position = "relative"
+        
+        // Create stroke layer
+        const stroke = document.createElement("span")
+        stroke.textContent = char === " " ? "\u00A0" : char
+        stroke.style.position = "absolute"
+        stroke.style.left = "0"
+        stroke.style.top = "0"
+        stroke.style.color = "transparent"
+        stroke.style.webkitTextStroke = `2px ${textColor}`
+        
+        // Create fill layer
+        const fill = document.createElement("span")
+        fill.textContent = char === " " ? "\u00A0" : char
+        fill.style.position = "relative"
+        fill.style.color = textColor
+        fill.style.opacity = "0"
+        
+        wrapper.appendChild(stroke)
+        wrapper.appendChild(fill)
+        
+        gsap.set(wrapper, { clipPath: "inset(0 100% 0 0)" })
+        
+        line2.appendChild(wrapper)
+        line2Wrappers.push(wrapper)
+        line2Fills.push(fill)
+      })
+
+      const allFills = [...line1Fills, ...line2Fills]
+
+      // Create animation timeline
+      const tl = gsap.timeline()
+
+      // Animate line 1 characters (writing effect)
+      tl.to(line1Wrappers, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.3,
+        ease: "none",
+        stagger: 0.08,
+      })
+
+      // Animate line 2 characters (writing effect)
+      tl.to(line2Wrappers, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.3,
+        ease: "none",
+        stagger: 0.08,
+      }, "-=0.2")
+
+      // Fill color by fading in the fill layer
+      tl.to(allFills, {
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.inOut",
+      }, "+=0.2")
+
+      return () => {
+        tl.kill()
+      }
     })
-
-    // Split text into characters for line 2 (endText)
-    const line2Wrappers: HTMLSpanElement[] = []
-    const line2Fills: HTMLSpanElement[] = []
-    
-    endText.split("").forEach((char) => {
-      // Create wrapper
-      const wrapper = document.createElement("span")
-      wrapper.style.display = "inline-block"
-      wrapper.style.position = "relative"
-      
-      // Create stroke layer
-      const stroke = document.createElement("span")
-      stroke.textContent = char === " " ? "\u00A0" : char
-      stroke.style.position = "absolute"
-      stroke.style.left = "0"
-      stroke.style.top = "0"
-      stroke.style.color = "transparent"
-      stroke.style.webkitTextStroke = `2px ${textColor}`
-      
-      // Create fill layer
-      const fill = document.createElement("span")
-      fill.textContent = char === " " ? "\u00A0" : char
-      fill.style.position = "relative"
-      fill.style.color = textColor
-      fill.style.opacity = "0"
-      
-      wrapper.appendChild(stroke)
-      wrapper.appendChild(fill)
-      
-      gsap.set(wrapper, { clipPath: "inset(0 100% 0 0)" })
-      
-      line2.appendChild(wrapper)
-      line2Wrappers.push(wrapper)
-      line2Fills.push(fill)
-    })
-
-    const allFills = [...line1Fills, ...line2Fills]
-
-    // Create animation timeline
-    const tl = gsap.timeline()
-
-    // Animate line 1 characters (writing effect)
-    tl.to(line1Wrappers, {
-      clipPath: "inset(0 0% 0 0)",
-      duration: 0.3,
-      ease: "none",
-      stagger: 0.08,
-    })
-
-    // Animate line 2 characters (writing effect)
-    tl.to(line2Wrappers, {
-      clipPath: "inset(0 0% 0 0)",
-      duration: 0.3,
-      ease: "none",
-      stagger: 0.08,
-    }, "-=0.2")
-
-    // Fill color by fading in the fill layer
-    tl.to(allFills, {
-      opacity: 1,
-      duration: 0.8,
-      ease: "power2.inOut",
-    }, "+=0.2")
-
-    return () => {
-      tl.kill()
-    }
   }, [frontText, middleText, endText])
 
   return (
