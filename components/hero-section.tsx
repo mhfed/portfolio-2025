@@ -10,7 +10,7 @@ export async function HeroSection() {
   const t = await getTranslations('hero')
 
   return (
-    <section className="min-h-screen flex flex-col justify-between pt-20 md:pt-24 pb-8 px-6 relative overflow-hidden">
+    <section className="min-h-screen flex flex-col justify-between pt-20 md:pt-10 pb-8 px-6 relative overflow-hidden">
       {/* Parallax Background Elements */}
       <HeroBackground />
 
@@ -19,7 +19,7 @@ export async function HeroSection() {
         {/* Name Section with Title Badge */}
         <div className="relative w-full flex flex-col md:flex-row items-top justify-between mb-8 md:mb-12 gap-4 md:gap-20">
           {/* Name - Center */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col">
             <HeroTypingText 
               frontText={t('front')} 
               middleText={t('middle')}
