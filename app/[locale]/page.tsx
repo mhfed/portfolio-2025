@@ -43,6 +43,7 @@ export default function Home() {
         </Suspense>
       </div>
       <FloatingCTA />
+      <ScrollToTop />
     </main>
   )
 }
