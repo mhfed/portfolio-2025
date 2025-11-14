@@ -43,13 +43,13 @@ export async function AboutSection() {
 
                 {/* Right Content - Stats */}
                 <div className="space-y-8">
-                  <div className="bg-background border border-border/30 rounded-none p-8">
+                  <div className="bg-background border border-primary/50 rounded-none p-8">
                     <div className="text-4xl md:text-5xl font-bold text-primary mb-2">5+</div>
                     <p className="text-body-lg text-foreground font-semibold">{t('yearsExperience')}</p>
                     <p className="text-body-sm text-muted-foreground mt-2">{t('yearsDescription')}</p>
                   </div>
 
-                  <div className="bg-background border border-border/30 rounded-none p-8">
+                  <div className="bg-background border border-primary/50 rounded-none p-8">
                     <div className="text-4xl md:text-5xl font-bold text-primary mb-2">100%</div>
                     <p className="text-body-lg text-foreground font-semibold">{t('clientSatisfaction')}</p>
                     <p className="text-body-sm text-muted-foreground mt-2">{t('satisfactionDescription')}</p>

@@ -43,7 +43,7 @@ export function ContactSection() {
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Contact Form */}
-          <div className="bg-background-secondary dark:bg-background/50 border border-border/20 rounded-none p-8 md:p-10">
+          <div className="bg-background-secondary dark:bg-background/50 border border-primary/50 rounded-none p-8 md:p-10">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
