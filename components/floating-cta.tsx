@@ -36,7 +36,7 @@ export function FloatingCTA() {
     <div className="fixed bottom-6 left-6 z-50">
       <button
         onClick={handleDownload}
-        className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
+        className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold rounded-none transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
         aria-label={t('downloadResume')}
       >
         <Download className="w-5 h-5" />

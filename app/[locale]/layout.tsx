@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Space_Grotesk } from "next/font/google"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
@@ -15,6 +15,13 @@ const inter = Inter({
   subsets: ["latin", "vietnamese"],
   display: "swap",
   variable: "--font-inter",
+})
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600", "700"],
 })
 
 
@@ -147,7 +154,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={`${inter.className} bg-background text-foreground`}>
+      <body className={`${inter.className} ${spaceGrotesk.variable} bg-background text-foreground`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
           <Analytics />

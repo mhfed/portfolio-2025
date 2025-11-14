@@ -45,7 +45,7 @@ export async function HeroSection() {
               href="https://github.com/mhfed"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-primary/10 transition-colors"
+              className="p-2 rounded-none hover:bg-primary/10 transition-colors"
               aria-label="GitHub"
             >
               <svg className="w-6 h-6 text-foreground" fill="currentColor" viewBox="0 0 24 24">
@@ -56,7 +56,7 @@ export async function HeroSection() {
               href="https://linkedin.com/in/mhfed"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-primary/10 transition-colors"
+              className="p-2 rounded-none hover:bg-primary/10 transition-colors"
               aria-label="LinkedIn"
             >
               <svg className="w-6 h-6 text-foreground" fill="currentColor" viewBox="0 0 24 24">

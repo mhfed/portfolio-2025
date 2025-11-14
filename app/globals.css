@@ -77,7 +77,7 @@
   --card-foreground: oklch(0.15 0.01 145);
   --popover: oklch(0.98 0.01 145);
   --popover-foreground: oklch(0.15 0.01 145);
-  --primary: oklch(0.55 0.2 145);
+  --primary: oklch(0.5 0.22 145);
   --primary-foreground: oklch(0.98 0.01 145);
   --secondary: oklch(0.92 0.02 145);
   --secondary-foreground: oklch(0.5 0.15 145);
@@ -89,21 +89,21 @@
   --destructive-foreground: oklch(0.98 0.01 145);
   --border: oklch(0.85 0.01 145);
   --input: oklch(0.92 0.01 145);
-  --ring: oklch(0.55 0.2 145);
-  --chart-1: oklch(0.55 0.2 145);
+  --ring: oklch(0.5 0.22 145);
+  --chart-1: oklch(0.5 0.22 145);
   --chart-2: oklch(0.65 0.18 180);
   --chart-3: oklch(0.6 0.18 160);
   --chart-4: oklch(0.65 0.15 120);
   --chart-5: oklch(0.7 0.15 100);
-  --radius: 0.625rem;
+  --radius: 0;
   --sidebar: oklch(0.97 0.015 145);
   --sidebar-foreground: oklch(0.15 0.01 145);
-  --sidebar-primary: oklch(0.55 0.2 145);
+  --sidebar-primary: oklch(0.5 0.22 145);
   --sidebar-primary-foreground: oklch(0.98 0.01 145);
   --sidebar-accent: oklch(0.65 0.18 180);
   --sidebar-accent-foreground: oklch(0.98 0.01 145);
   --sidebar-border: oklch(0.85 0.01 145);
-  --sidebar-ring: oklch(0.55 0.2 145);
+  --sidebar-ring: oklch(0.5 0.22 145);
 }
 
 .dark {
@@ -114,7 +114,7 @@
   --card-foreground: oklch(0.98 0.005 90);
   --popover: oklch(0.12 0.005 250);
   --popover-foreground: oklch(0.98 0.005 90);
-  --primary: oklch(0.7 0.25 145);
+  --primary: oklch(0.92 0.24 126.52);
   --primary-foreground: oklch(0.1 0.005 250);
   --secondary: oklch(0.22 0.01 145);
   --secondary-foreground: oklch(0.7 0.2 145);
@@ -126,23 +126,27 @@
   --destructive-foreground: oklch(0.98 0.005 90);
   --border: oklch(0.25 0.005 250);
   --input: oklch(0.15 0.005 250);
-  --ring: oklch(0.7 0.25 145);
-  --chart-1: oklch(0.7 0.25 145);
+  --ring: oklch(0.92 0.24 126.52);
+  --chart-1: oklch(0.92 0.24 126.52);
   --chart-2: oklch(0.75 0.2 180);
   --chart-3: oklch(0.7 0.2 160);
   --chart-4: oklch(0.75 0.18 120);
   --chart-5: oklch(0.8 0.15 100);
   --sidebar: oklch(0.1 0.005 250);
   --sidebar-foreground: oklch(0.98 0.005 90);
-  --sidebar-primary: oklch(0.7 0.25 145);
+  --sidebar-primary: oklch(0.92 0.24 126.52);
   --sidebar-primary-foreground: oklch(0.98 0.005 90);
   --sidebar-accent: oklch(0.75 0.2 180);
   --sidebar-accent-foreground: oklch(0.98 0.005 90);
   --sidebar-border: oklch(0.25 0.005 250);
-  --sidebar-ring: oklch(0.7 0.25 145);
+  --sidebar-ring: oklch(0.92 0.24 126.52);
 }
 
 @theme inline {
+  /* Font families */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-space-grotesk), "Space Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Monaco, monospace;
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -168,10 +172,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -203,10 +207,15 @@
 @layer utilities {
   /* Typography Utilities */
   .text-display {
+    font-family: var(--font-display);
     font-size: var(--font-size-display);
     line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tighter);
-    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.08em;
+    font-weight: var(--font-weight-black);
+    font-feature-settings: "liga" 0, "kern" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   
   @media (min-width: 768px) {

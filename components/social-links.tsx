@@ -35,7 +35,7 @@ export function SocialLinks({
           <a
             key={link.name}
             href={link.url}
-            className="px-4 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-lg text-primary font-semibold transition-all hover:scale-105 text-center text-sm md:text-base"
+            className="px-4 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-none text-primary font-semibold transition-all hover:scale-105 text-center text-sm md:text-base"
           >
             {link.name}
           </a>

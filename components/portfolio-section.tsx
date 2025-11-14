@@ -50,7 +50,7 @@ function ProjectCard({
     <div
       className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${isAlternate ? "md:[&>*:first-child]:order-2" : ""}`}
     >
-      <div className="relative h-80 md:h-96 bg-muted rounded-xl overflow-hidden border border-border/20">
+      <div className="relative h-80 md:h-96 bg-muted rounded-none overflow-hidden border border-border/20">
         <img src={image || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
       </div>
       <div className="space-y-4">

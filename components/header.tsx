@@ -162,7 +162,7 @@ export function Header() {
             <div className="hidden md:block relative">
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className="p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+                className="p-2 rounded-none hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
                 aria-label="Change language"
               >
                 <Languages className="w-4 h-4 text-foreground" />
@@ -174,12 +174,12 @@ export function Header() {
                     className="fixed inset-0 z-40"
                     onClick={() => setIsLanguageMenuOpen(false)}
                   />
-                  <div className="absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50 min-w-[120px]">
+                  <div className="absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-none shadow-lg z-50 min-w-[120px]">
                     {routing.locales.map((loc) => (
                       <button
                         key={loc}
                         onClick={() => handleLanguageChange(loc)}
-                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg cursor-pointer ${
+                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-colors rounded-none cursor-pointer ${
                           locale === loc ? 'bg-primary/20 font-semibold' : ''
                         }`}
                       >
@@ -242,7 +242,7 @@ export function Header() {
                   key={link.key}
                   href={link.href}
                   onClick={handleNavClick}
-                  className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-lg hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
+                  className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-none hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
                 >
                   {link.name}
                 </a>
@@ -255,7 +255,7 @@ export function Header() {
               <div className="relative">
                 <button
                   onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-none hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
                   aria-label="Change language"
                 >
                   <span className="text-sm font-medium text-foreground">Language</span>
@@ -268,12 +268,12 @@ export function Header() {
                       className="fixed inset-0 z-40"
                       onClick={() => setIsLanguageMenuOpen(false)}
                     />
-                    <div className="absolute left-0 right-0 bottom-full mb-2 bg-background border border-border/30 rounded-lg shadow-lg z-50">
+                    <div className="absolute left-0 right-0 bottom-full mb-2 bg-background border border-border/30 rounded-none shadow-lg z-50">
                       {routing.locales.map((loc) => (
                         <button
                           key={loc}
                           onClick={() => handleLanguageChange(loc)}
-                          className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors first:rounded-t-lg last:rounded-b-lg cursor-pointer ${
+                          className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors rounded-none cursor-pointer ${
                             locale === loc ? 'bg-primary/20 font-semibold' : ''
                           }`}
                         >

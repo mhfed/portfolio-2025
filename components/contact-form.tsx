@@ -70,7 +70,7 @@ export function ContactForm() {
             type="text"
             id="name"
             {...register('name')}
-            className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors ${
+            className={`w-full px-4 py-3 bg-background border rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors ${
               errors.name ? 'border-destructive' : 'border-border/30'
             }`}
             placeholder={t('form.namePlaceholder')}
@@ -88,7 +88,7 @@ export function ContactForm() {
             type="email"
             id="email"
             {...register('email')}
-            className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors ${
+            className={`w-full px-4 py-3 bg-background border rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors ${
               errors.email ? 'border-destructive' : 'border-border/30'
             }`}
             placeholder={t('form.emailPlaceholder')}
@@ -107,7 +107,7 @@ export function ContactForm() {
           id="message"
           {...register('message')}
           rows={5}
-          className={`w-full px-4 py-3 bg-background border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none ${
+          className={`w-full px-4 py-3 bg-background border rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none ${
             errors.message ? 'border-destructive' : 'border-border/30'
           }`}
           placeholder={t('form.messagePlaceholder')}
@@ -120,7 +120,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
+        className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
       >
         {isSubmitting ? (
           <>

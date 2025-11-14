@@ -15,7 +15,7 @@ function TechCard({ icon, title, description, isBlue = true }: TechCardProps) {
   return (
     <div className="flex flex-col items-center gap-4 md:gap-6 scroll-animate">
       <div
-        className={`${bgColor} rounded-xl w-24 h-24 md:w-28 md:h-28 flex items-center justify-center text-white text-4xl md:text-5xl`}
+        className={`${bgColor} rounded-none w-24 h-24 md:w-28 md:h-28 flex items-center justify-center text-white text-4xl md:text-5xl`}
       >
         {icon}
       </div>

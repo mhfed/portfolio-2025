@@ -17,7 +17,7 @@ export function TimelineItem({ company, position, period, description, skills }:
 
   return (
     <div className="scroll-animate relative pl-8 pb-8 border-l-2 border-primary/30 last:pb-0">
-      <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full transform -translate-x-1.5"></div>
+      <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-none transform -translate-x-1.5"></div>
 
       <div className="space-y-3">
         <div>
@@ -62,7 +62,7 @@ export function TimelineItem({ company, position, period, description, skills }:
           {skills.map((skill) => (
             <span
               key={skill}
-              className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-xs font-medium text-primary"
+              className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-none text-xs font-medium text-primary"
             >
               {skill}
             </span>

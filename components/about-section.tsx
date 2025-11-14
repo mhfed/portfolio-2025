@@ -32,7 +32,7 @@ export async function AboutSection() {
                       {["JavaScript", "TypeScript", "React.js", "Next.js", "Redux", "React Native"].map((skill) => (
                         <div
                           key={skill}
-                          className="px-4 py-2 bg-primary/10 border border-primary/30 rounded-lg text-primary font-semibold"
+                          className="px-4 py-2 bg-primary/10 border border-primary/30 rounded-none text-primary font-semibold"
                         >
                           {skill}
                         </div>
@@ -43,13 +43,13 @@ export async function AboutSection() {
 
                 {/* Right Content - Stats */}
                 <div className="space-y-8">
-                  <div className="bg-background border border-border/30 rounded-2xl p-8">
+                  <div className="bg-background border border-border/30 rounded-none p-8">
                     <div className="text-4xl md:text-5xl font-bold text-primary mb-2">5+</div>
                     <p className="text-body-lg text-foreground font-semibold">{t('yearsExperience')}</p>
                     <p className="text-body-sm text-muted-foreground mt-2">{t('yearsDescription')}</p>
                   </div>
 
-                  <div className="bg-background border border-border/30 rounded-2xl p-8">
+                  <div className="bg-background border border-border/30 rounded-none p-8">
                     <div className="text-4xl md:text-5xl font-bold text-primary mb-2">100%</div>
                     <p className="text-body-lg text-foreground font-semibold">{t('clientSatisfaction')}</p>
                     <p className="text-body-sm text-muted-foreground mt-2">{t('satisfactionDescription')}</p>

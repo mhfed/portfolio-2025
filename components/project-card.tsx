@@ -55,7 +55,7 @@ export function ProjectCard({
     <div
       className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${isAlternate ? "md:[&>*:first-child]:order-2" : ""}`}
     >
-      <div className="relative h-80 md:h-96 bg-muted rounded-xl overflow-hidden border border-border/20 group cursor-pointer">
+      <div className="relative h-80 md:h-96 bg-muted rounded-none overflow-hidden border border-border/20 group cursor-pointer">
         <Image
           src={image || "/placeholder.svg"}
           alt={title}
@@ -81,7 +81,7 @@ export function ProjectCard({
             {techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 bg-primary/10 border border-primary/30 rounded-full text-xs font-medium text-primary"
+                className="px-3 py-1 bg-primary/10 border border-primary/30 rounded-none text-xs font-medium text-primary"
               >
                 {tech}
               </span>
@@ -127,7 +127,7 @@ export function ProjectCard({
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-lg text-primary font-semibold transition-all hover:scale-105"
+              className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-none text-primary font-semibold transition-all hover:scale-105"
             >
               <ExternalLink className="w-4 h-4" />
               <span className="text-sm">Live Demo</span>
@@ -138,7 +138,7 @@ export function ProjectCard({
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-lg text-foreground font-semibold transition-all hover:scale-105"
+              className="flex items-center gap-2 px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-none text-foreground font-semibold transition-all hover:scale-105"
             >
               <Github className="w-4 h-4" />
               <span className="text-sm">GitHub</span>
