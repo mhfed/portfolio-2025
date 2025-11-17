@@ -146,7 +146,7 @@ export function HeroTypingText({
           ease: "none",
           stagger: 0.08,
         },
-        "-=0.2"
+        "-=0.2",
       );
 
       // Fill color by fading in the fill layer
@@ -157,7 +157,7 @@ export function HeroTypingText({
           duration: 0.8,
           ease: "power2.inOut",
         },
-        "+=0.2"
+        "+=0.2",
       );
 
       // Watch for theme changes
@@ -282,7 +282,7 @@ export function HeroDeveloperText({
           duration: 0.8,
           ease: "power2.inOut",
         },
-        "+=0.2"
+        "+=0.2",
       );
 
       // Watch for theme changes

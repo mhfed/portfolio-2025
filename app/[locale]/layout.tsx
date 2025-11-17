@@ -1,50 +1,49 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter, Space_Grotesk } from "next/font/google"
-import { NextIntlClientProvider } from "next-intl"
-import { getMessages, setRequestLocale } from "next-intl/server"
-import { notFound } from "next/navigation"
-import { hasLocale } from "next-intl"
-import { routing } from "@/i18n/routing"
-import "../globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Analytics } from "@vercel/analytics/react"
-import { Toaster } from "@/components/ui/toaster"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
+import { routing } from "@/i18n/routing";
+import "../globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin", "vietnamese"],
   display: "swap",
   variable: "--font-inter",
-})
+});
 
-const spaceGrotesk = Space_Grotesk({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-space-grotesk",
   weight: ["400", "500", "600", "700"],
-})
-
-
+});
 
 type Props = {
-  children: React.ReactNode
-  params: Promise<{ locale: string }>
-}
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params
+  const { locale } = await params;
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://your-domain.com"
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://your-domain.com";
   const titles = {
     en: "Nguyen Minh Hieu - Frontend Developer Portfolio",
     vi: "Nguyen Minh Hieu - Portfolio Lập Trình Viên Frontend",
-  }
+  };
   const descriptions = {
     en: "Frontend Developer with 5+ years of experience in React.js, Next.js, TypeScript. Specialized in building modern web applications with clean code and exceptional user experiences.",
     vi: "Lập trình viên Frontend với 5+ năm kinh nghiệm về React.js, Next.js, TypeScript. Chuyên xây dựng ứng dụng web hiện đại với code sạch và trải nghiệm người dùng tuyệt vời.",
-  }
+  };
 
-  const title = titles[locale as keyof typeof titles] || titles.en
-  const description = descriptions[locale as keyof typeof descriptions] || descriptions.en
+  const title = titles[locale as keyof typeof titles] || titles.en;
+  const description =
+    descriptions[locale as keyof typeof descriptions] || descriptions.en;
 
   return {
     title,
@@ -68,8 +67,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: `/${locale}`,
       languages: {
-        "en": "/en",
-        "vi": "/vi",
+        en: "/en",
+        vi: "/vi",
         "x-default": "/en",
       },
     },
@@ -98,27 +97,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "max-snippet": -1,
       },
     },
-  }
+  };
 }
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }))
+  return routing.locales.map((locale) => ({ locale }));
 }
 
-
 export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = await params
+  const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
   if (!hasLocale(routing.locales, locale)) {
-    notFound()
+    notFound();
   }
 
   // Enable static rendering
-  setRequestLocale(locale)
+  setRequestLocale(locale);
 
   // Get messages from server-side configuration
-  const messages = await getMessages()
+  const messages = await getMessages();
 
   // Structured data (JSON-LD) for SEO
   const structuredData = {
@@ -126,14 +124,12 @@ export default async function LocaleLayout({ children, params }: Props) {
     "@type": "Person",
     name: "Nguyen Minh Hieu",
     jobTitle: "Frontend Developer",
-    description: locale === "vi" 
-      ? "Lập trình viên Frontend với 5+ năm kinh nghiệm"
-      : "Frontend Developer with 5+ years of experience",
+    description:
+      locale === "vi"
+        ? "Lập trình viên Frontend với 5+ năm kinh nghiệm"
+        : "Frontend Developer with 5+ years of experience",
     url: process.env.NEXT_PUBLIC_BASE_URL || "https://your-domain.com",
-    sameAs: [
-      "https://github.com/mhfed",
-      "https://linkedin.com/in/mhfed",
-    ],
+    sameAs: ["https://github.com/mhfed", "https://linkedin.com/in/mhfed"],
     knowsAbout: [
       "React.js",
       "Next.js",
@@ -141,7 +137,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       "JavaScript",
       "Frontend Development",
     ],
-  }
+  };
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -154,7 +150,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={`${inter.className} ${spaceGrotesk.variable} bg-background text-foreground`}>
+      <body
+        className={`${inter.className} ${spaceGrotesk.variable} bg-background text-foreground`}
+      >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>{children}</ThemeProvider>
           <Analytics />
@@ -162,5 +160,5 @@ export default async function LocaleLayout({ children, params }: Props) {
         </NextIntlClientProvider>
       </body>
     </html>
-  )
+  );
 }

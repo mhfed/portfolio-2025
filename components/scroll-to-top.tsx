@@ -1,47 +1,47 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { ArrowUp } from "lucide-react"
+import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 
 export function ScrollToTop() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
       // Show button when page is scrolled down 300px
       if (window.scrollY > 300) {
-        setIsVisible(true)
+        setIsVisible(true);
       } else {
-        setIsVisible(false)
+        setIsVisible(false);
       }
-    }
+    };
 
     // Throttle scroll events for performance
-    let ticking = false
+    let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          toggleVisibility()
-          ticking = false
-        })
-        ticking = true
+          toggleVisibility();
+          ticking = false;
+        });
+        ticking = true;
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    toggleVisibility() // Check initial state
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    toggleVisibility(); // Check initial state
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    })
-  }
+    });
+  };
 
   return (
     <button
@@ -55,6 +55,5 @@ export function ScrollToTop() {
     >
       <ArrowUp className="w-5 h-5 md:w-6 md:h-6" />
     </button>
-  )
+  );
 }
-

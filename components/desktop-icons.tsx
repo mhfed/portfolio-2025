@@ -31,5 +31,5 @@ export function DesktopIcons() {
         </svg>
       </div>
     </div>
-  )
+  );
 }

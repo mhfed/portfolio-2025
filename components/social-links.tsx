@@ -1,24 +1,24 @@
 interface SocialLink {
-  name: string
-  url: string
+  name: string;
+  url: string;
 }
 
 interface SocialLinksProps {
-  links: SocialLink[]
-  orConnectText: string
-  reachDirectlyText: string
-  email: string
-  phoneText: string
-  phone: string
+  links: SocialLink[];
+  orConnectText: string;
+  reachDirectlyText: string;
+  email: string;
+  phoneText: string;
+  phone: string;
 }
 
-export function SocialLinks({ 
-  links, 
-  orConnectText, 
-  reachDirectlyText, 
-  email, 
-  phoneText, 
-  phone 
+export function SocialLinks({
+  links,
+  orConnectText,
+  reachDirectlyText,
+  email,
+  phoneText,
+  phone,
 }: SocialLinksProps) {
   return (
     <>
@@ -45,13 +45,14 @@ export function SocialLinks({
       {/* Direct Contact */}
       <div className="pt-6 border-t border-border/20 space-y-3 text-center">
         <p className="text-foreground/70">
-          {reachDirectlyText} <span className="font-semibold text-primary">{email}</span>
+          {reachDirectlyText}{" "}
+          <span className="font-semibold text-primary">{email}</span>
         </p>
         <p className="text-foreground/70">
-          {phoneText} <span className="font-semibold text-primary">{phone}</span>
+          {phoneText}{" "}
+          <span className="font-semibold text-primary">{phone}</span>
         </p>
       </div>
     </>
-  )
+  );
 }
-

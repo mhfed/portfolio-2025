@@ -1,7 +1,7 @@
-import { getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server";
 
 export async function HeroTitleBadge() {
-  const t = await getTranslations('hero')
+  const t = await getTranslations("hero");
 
   return (
     <div className="flex items-center gap-2 md:gap-3">
@@ -21,12 +21,11 @@ export async function HeroTitleBadge() {
           <rect y="10.67" width="24" height="5.33" fill="#DA020E" />
         </svg>
       </div>
-      
+
       {/* Title */}
       <span className="text-body-lg font-medium text-foreground/80">
-        {t('developer')}
+        {t("developer")}
       </span>
     </div>
-  )
+  );
 }
-

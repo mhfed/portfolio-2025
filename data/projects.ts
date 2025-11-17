@@ -1,12 +1,12 @@
 export interface Project {
-  image: string
-  title: string
-  year: string
-  description: string
-  details: string
-  liveUrl?: string
-  githubUrl?: string
-  techStack: string[]
+  image: string;
+  title: string;
+  year: string;
+  description: string;
+  details: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  techStack: string[];
 }
 
 export const projects: Project[] = [
@@ -46,5 +46,4 @@ export const projects: Project[] = [
       "Made interface, effect animation, and customized game interface. Translated designs from Figma to HTML and CSS while ensuring UX and UI design are maintained. Refactored code, investigated code and fixed bugs. Ensured cross-browser compatibility and responsiveness across various devices and screen sizes. Tech: NextJS, ReactJS, Redux, Sass, Ant Design, PHP, Git, Axios.",
     techStack: ["Next.js", "React", "Redux", "Sass", "Ant Design"],
   },
-]
-
+];

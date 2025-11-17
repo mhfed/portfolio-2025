@@ -1,116 +1,119 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useTranslations } from "next-intl"
-import { Sun, Moon, Languages } from "lucide-react"
-import { useLocale } from "@/hooks/use-locale"
-import { routing } from "@/i18n/routing"
-import {
-  Drawer,
-  DrawerContent,
-} from "@/components/ui/drawer"
+import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { Sun, Moon, Languages } from "lucide-react";
+import { useLocale } from "@/hooks/use-locale";
+import { routing } from "@/i18n/routing";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 
 export function Header() {
-  const [isDark, setIsDark] = useState(false)
-  const [mounted, setMounted] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const t = useTranslations('header.nav')
-  const tContact = useTranslations('hero.contact')
-  const { locale, setLocale, isLoading } = useLocale()
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const t = useTranslations("header.nav");
+  const tContact = useTranslations("hero.contact");
+  const { locale, setLocale, isLoading } = useLocale();
 
   useEffect(() => {
-    setMounted(true)
-    setIsDark(document.documentElement.classList.contains("dark"))
-  }, [])
+    setMounted(true);
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   // Track scroll progress
   useEffect(() => {
     const calculateScrollProgress = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
-      
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+
       if (scrollHeight <= 0) {
-        setScrollProgress(0)
-        return
+        setScrollProgress(0);
+        return;
       }
-      
-      const progress = (scrollTop / scrollHeight) * 100
-      setScrollProgress(Math.min(100, Math.max(0, progress)))
-    }
+
+      const progress = (scrollTop / scrollHeight) * 100;
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
+    };
 
     // Throttle scroll events for performance
-    let ticking = false
+    let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          calculateScrollProgress()
-          ticking = false
-        })
-        ticking = true
+          calculateScrollProgress();
+          ticking = false;
+        });
+        ticking = true;
       }
-    }
+    };
 
     // Initial calculation
-    calculateScrollProgress()
+    calculateScrollProgress();
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", calculateScrollProgress, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", calculateScrollProgress, {
+      passive: true,
+    });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", calculateScrollProgress)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", calculateScrollProgress);
+    };
+  }, []);
 
   const toggleTheme = () => {
-    const newIsDark = !isDark
-    setIsDark(newIsDark)
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
 
     if (newIsDark) {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-  }
+  };
 
-  const handleLanguageChange = (newLocale: 'en' | 'vi') => {
-    setLocale(newLocale)
-    setIsLanguageMenuOpen(false)
-  }
+  const handleLanguageChange = (newLocale: "en" | "vi") => {
+    setLocale(newLocale);
+    setIsLanguageMenuOpen(false);
+  };
 
   const navLinks = [
-    { name: t('about'), href: "#about", key: 'about' },
-    { name: t('experience'), href: "#experience", key: 'experience' },
-    { name: t('projects'), href: "#projects", key: 'projects' },
-    { name: t('collaborate'), href: "#collaborate", key: 'collaborate' },
-  ]
+    { name: t("about"), href: "#about", key: "about" },
+    { name: t("experience"), href: "#experience", key: "experience" },
+    { name: t("projects"), href: "#projects", key: "projects" },
+    { name: t("collaborate"), href: "#collaborate", key: "collaborate" },
+  ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const href = e.currentTarget.getAttribute("href")
-    if (!href) return
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    if (!href) return;
 
-    const element = document.querySelector(href)
+    const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMobileMenuOpen(false)
-  }
+    setIsMobileMenuOpen(false);
+  };
 
   // Render header immediately to prevent layout shift, use default values until mounted
-  const displayIsDark = mounted ? isDark : false
+  const displayIsDark = mounted ? isDark : false;
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10 relative" style={{ height: 'var(--header-height)' }}>
+      <header
+        className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10 relative"
+        style={{ height: "var(--header-height)" }}
+      >
         {/* Scroll Progress Indicator */}
-        <div 
+        <div
           className="absolute top-0 left-0 h-0.5 bg-primary transition-all duration-150 ease-out rounded-b z-[60]"
           style={{ width: `${scrollProgress}%` }}
           aria-hidden="true"
@@ -121,23 +124,23 @@ export function Header() {
             {/* Based in */}
             <div className="flex flex-col gap-0.5">
               <span className="text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider">
-                {tContact('basedIn')}
+                {tContact("basedIn")}
               </span>
               <span className="text-xs md:text-sm text-foreground/80 font-semibold truncate">
-                {tContact('location')}
+                {tContact("location")}
               </span>
             </div>
 
             {/* Say hello */}
             <div className="flex flex-col gap-0.5">
               <span className="text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider">
-                {tContact('sayHello')}
+                {tContact("sayHello")}
               </span>
               <a
-                href={`mailto:${tContact('email')}`}
+                href={`mailto:${tContact("email")}`}
                 className="text-xs md:text-sm text-foreground/80 font-semibold underline hover:text-primary transition-colors truncate"
               >
-                {tContact('email')}
+                {tContact("email")}
               </a>
             </div>
           </div>
@@ -167,7 +170,7 @@ export function Header() {
               >
                 <Languages className="w-4 h-4 text-foreground" />
               </button>
-              
+
               {isLanguageMenuOpen && (
                 <>
                   <div
@@ -180,7 +183,7 @@ export function Header() {
                         key={loc}
                         onClick={() => handleLanguageChange(loc)}
                         className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-colors rounded-none cursor-pointer ${
-                          locale === loc ? 'bg-primary/20 font-semibold' : ''
+                          locale === loc ? "bg-primary/20 font-semibold" : ""
                         }`}
                       >
                         {loc.toUpperCase()}
@@ -258,10 +261,12 @@ export function Header() {
                   className="w-full flex items-center justify-between px-4 py-3 rounded-none hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
                   aria-label="Change language"
                 >
-                  <span className="text-sm font-medium text-foreground">Language</span>
+                  <span className="text-sm font-medium text-foreground">
+                    Language
+                  </span>
                   <Languages className="w-5 h-5 text-foreground" />
                 </button>
-                
+
                 {isLanguageMenuOpen && (
                   <>
                     <div
@@ -274,7 +279,7 @@ export function Header() {
                           key={loc}
                           onClick={() => handleLanguageChange(loc)}
                           className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors rounded-none cursor-pointer ${
-                            locale === loc ? 'bg-primary/20 font-semibold' : ''
+                            locale === loc ? "bg-primary/20 font-semibold" : ""
                           }`}
                         >
                           {loc.toUpperCase()}
@@ -291,7 +296,9 @@ export function Header() {
                 className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
                 aria-label="Toggle theme"
               >
-                <span className="text-sm font-medium text-foreground">Theme</span>
+                <span className="text-sm font-medium text-foreground">
+                  Theme
+                </span>
                 {displayIsDark ? (
                   <Sun className="w-5 h-5 text-foreground" />
                 ) : (
@@ -303,5 +310,5 @@ export function Header() {
         </DrawerContent>
       </Drawer>
     </>
-  )
+  );
 }

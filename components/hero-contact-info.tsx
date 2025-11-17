@@ -1,7 +1,7 @@
-import { getTranslations } from "next-intl/server"
+import { getTranslations } from "next-intl/server";
 
 export async function HeroContactInfo() {
-  const t = await getTranslations('hero.contact')
+  const t = await getTranslations("hero.contact");
 
   return (
     <div className="absolute top-0 left-0 p-6 md:p-8 z-20">
@@ -9,27 +9,26 @@ export async function HeroContactInfo() {
         {/* Based in */}
         <div className="flex flex-col gap-1">
           <span className="text-xs md:text-sm text-foreground/60 font-medium uppercase tracking-wider">
-            {t('basedIn')}
+            {t("basedIn")}
           </span>
           <span className="text-sm md:text-base text-foreground/80 font-semibold">
-            {t('location')}
+            {t("location")}
           </span>
         </div>
 
         {/* Say hello */}
         <div className="flex flex-col gap-1">
           <span className="text-xs md:text-sm text-foreground/60 font-medium uppercase tracking-wider">
-            {t('sayHello')}
+            {t("sayHello")}
           </span>
           <a
-            href={`mailto:${t('email')}`}
+            href={`mailto:${t("email")}`}
             className="text-sm md:text-base text-foreground/80 font-semibold underline hover:text-primary transition-colors"
           >
-            {t('email')}
+            {t("email")}
           </a>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -1,22 +1,22 @@
 export interface BlogPost {
-  id: string
+  id: string;
   title: {
-    en: string
-    vi: string
-  }
+    en: string;
+    vi: string;
+  };
   excerpt: {
-    en: string
-    vi: string
-  }
-  date: string
-  readTime: string
-  category: string
-  icon: string
-  tags: string[]
+    en: string;
+    vi: string;
+  };
+  date: string;
+  readTime: string;
+  category: string;
+  icon: string;
+  tags: string[];
   slug: {
-    en: string
-    vi: string
-  }
+    en: string;
+    vi: string;
+  };
 }
 
 export const blogPosts: BlogPost[] = [
@@ -100,8 +100,8 @@ export const blogPosts: BlogPost[] = [
       vi: "react-state-management-patterns",
     },
   },
-]
+];
 
 export function getBlogPosts(locale: "en" | "vi" = "en"): BlogPost[] {
-  return blogPosts
+  return blogPosts;
 }

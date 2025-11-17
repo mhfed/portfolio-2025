@@ -1,13 +1,16 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 interface LoadingSkeletonProps {
-  className?: string
-  variant?: "default" | "hero" | "project" | "timeline" | "text"
+  className?: string;
+  variant?: "default" | "hero" | "project" | "timeline" | "text";
 }
 
-export function LoadingSkeleton({ className = "", variant = "default" }: LoadingSkeletonProps) {
+export function LoadingSkeleton({
+  className = "",
+  variant = "default",
+}: LoadingSkeletonProps) {
   if (variant === "hero") {
     return (
       <div className={cn("animate-pulse", className)}>
@@ -27,7 +30,7 @@ export function LoadingSkeleton({ className = "", variant = "default" }: Loading
           <div className="h-12 bg-muted rounded-none w-48 mx-auto" />
         </div>
       </div>
-    )
+    );
   }
 
   if (variant === "project") {
@@ -47,7 +50,7 @@ export function LoadingSkeleton({ className = "", variant = "default" }: Loading
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (variant === "timeline") {
@@ -71,19 +74,19 @@ export function LoadingSkeleton({ className = "", variant = "default" }: Loading
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (variant === "text") {
     return (
       <div className={cn("animate-pulse", className)}>
         <div className="space-y-2">
-        <div className="h-4 bg-muted rounded-none w-full" />
-        <div className="h-4 bg-muted rounded-none w-5/6" />
-        <div className="h-4 bg-muted rounded-none w-4/5" />
+          <div className="h-4 bg-muted rounded-none w-full" />
+          <div className="h-4 bg-muted rounded-none w-5/6" />
+          <div className="h-4 bg-muted rounded-none w-4/5" />
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -94,7 +97,7 @@ export function LoadingSkeleton({ className = "", variant = "default" }: Loading
         <div className="h-4 bg-muted rounded-none w-5/6" />
       </div>
     </div>
-  )
+  );
 }
 
 export function PageLoadingSkeleton() {
@@ -121,10 +124,13 @@ export function PageLoadingSkeleton() {
         {/* Progress indicator */}
         <div className="mt-8">
           <div className="h-1 bg-muted rounded-none overflow-hidden">
-            <div className="h-full bg-primary rounded-none animate-[loading_1.5s_ease-in-out_infinite] origin-left" style={{ width: "30%" }} />
+            <div
+              className="h-full bg-primary rounded-none animate-[loading_1.5s_ease-in-out_infinite] origin-left"
+              style={{ width: "30%" }}
+            />
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
