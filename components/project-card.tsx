@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import Image from "next/image"
-import { useTranslations } from "next-intl"
-import { ExternalLink, Github } from "lucide-react"
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { ExternalLink, Github } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "./ui/drawer"
-import type { Project } from "@/data/projects"
+} from "./ui/drawer";
+import type { Project } from "@/data/projects";
 
 interface ProjectCardProps extends Project {
-  isAlternate: boolean
-  index?: number
+  isAlternate: boolean;
+  index?: number;
 }
 
 export function ProjectCard({
@@ -30,30 +30,32 @@ export function ProjectCard({
   githubUrl,
   techStack,
 }: ProjectCardProps) {
-  const [isTruncated, setIsTruncated] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const textRef = useRef<HTMLParagraphElement>(null)
-  const t = useTranslations('projects')
+  const [isTruncated, setIsTruncated] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const t = useTranslations("projects");
 
   useEffect(() => {
     const checkTruncation = () => {
       if (textRef.current) {
-        const element = textRef.current
+        const element = textRef.current;
         // Check if text is truncated by comparing scrollHeight with clientHeight
-        const isOverflowing = element.scrollHeight > element.clientHeight
-        setIsTruncated(isOverflowing)
+        const isOverflowing = element.scrollHeight > element.clientHeight;
+        setIsTruncated(isOverflowing);
       }
-    }
+    };
 
-    checkTruncation()
+    checkTruncation();
     // Re-check on window resize
-    window.addEventListener("resize", checkTruncation)
-    return () => window.removeEventListener("resize", checkTruncation)
-  }, [details])
+    window.addEventListener("resize", checkTruncation);
+    return () => window.removeEventListener("resize", checkTruncation);
+  }, [details]);
 
   return (
     <div
-      className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${isAlternate ? "md:[&>*:first-child]:order-2" : ""}`}
+      className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${
+        isAlternate ? "md:[&>*:first-child]:order-2" : ""
+      }`}
     >
       <div className="relative h-80 md:h-96 bg-muted rounded-none overflow-hidden border border-border/20 group cursor-pointer">
         <Image
@@ -73,8 +75,10 @@ export function ProjectCard({
           <h3 className="text-h3 text-primary">{title}</h3>
           <p className="text-body-sm text-muted-foreground">{year}</p>
         </div>
-        <p className="text-foreground text-body-lg font-semibold">{description}</p>
-        
+        <p className="text-foreground text-body-lg font-semibold">
+          {description}
+        </p>
+
         {/* Tech Stack Badges */}
         {techStack && techStack.length > 0 && (
           <div className="flex flex-wrap gap-2">
@@ -88,38 +92,35 @@ export function ProjectCard({
             ))}
           </div>
         )}
-        
+
         <div className="space-y-2">
-          <p
-            ref={textRef}
-            className="text-body text-foreground line-clamp-2"
-          >
+          <p ref={textRef} className="text-body text-foreground line-clamp-2">
             {details}
           </p>
           {isTruncated && (
             <Drawer open={isOpen} onOpenChange={setIsOpen}>
               <DrawerTrigger asChild>
                 <button className="text-accent font-semibold text-body-lg hover:opacity-80 transition-opacity mt-4 cursor-pointer">
-                  {t('viewProject')}
+                  {t("viewProject")}
                 </button>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="overflow-y-auto">
                   <DrawerHeader className="text-left pb-4">
                     <DrawerTitle>{title}</DrawerTitle>
-                    <p className="text-body-sm text-muted-foreground mt-1">{year}</p>
+                    <p className="text-body-sm text-muted-foreground mt-1">
+                      {year}
+                    </p>
                   </DrawerHeader>
                   <div className="px-6 pb-8">
-                    <p className="text-body text-foreground">
-                      {details}
-                    </p>
+                    <p className="text-body text-foreground">{details}</p>
                   </div>
                 </div>
               </DrawerContent>
             </Drawer>
           )}
         </div>
-        
+
         {/* Project Links */}
         <div className="flex items-center gap-4 pt-2">
           {liveUrl && (
@@ -147,6 +148,5 @@ export function ProjectCard({
         </div>
       </div>
     </div>
-  )
+  );
 }
-
