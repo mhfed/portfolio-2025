@@ -3,13 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ChevronLeft, X } from "lucide-react";
 import {
   Drawer,
-  DrawerContent,
+  DrawerContentSide,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
+  DrawerClose,
 } from "./ui/drawer";
 import type { Project } from "@/data/projects";
 
@@ -98,25 +99,95 @@ export function ProjectCard({
             {details}
           </p>
           {isTruncated && (
-            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+            <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
               <DrawerTrigger asChild>
-                <button className="text-accent font-semibold text-body-lg hover:opacity-80 transition-opacity mt-4 cursor-pointer">
-                  {t("viewProject")}
+                <button className="text-accent font-semibold text-body-lg hover:opacity-80 transition-opacity mt-4 cursor-pointer inline-flex items-center gap-2">
+                  <span>{t("viewProject")}</span>
+                  <ChevronLeft className="w-4 h-4" />
                 </button>
               </DrawerTrigger>
-              <DrawerContent>
-                <div className="overflow-y-auto">
-                  <DrawerHeader className="text-left pb-4">
-                    <DrawerTitle>{title}</DrawerTitle>
-                    <p className="text-body-sm text-muted-foreground mt-1">
-                      {year}
-                    </p>
+              <DrawerContentSide>
+                <div className="overflow-y-auto h-full">
+                  <DrawerHeader className="text-left pb-4 border-b border-border/20">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <DrawerTitle>{title}</DrawerTitle>
+                        <p className="text-body-lg text-primary font-semibold mt-1">
+                          {description}
+                        </p>
+                        <p className="text-body-sm text-muted-foreground mt-1">
+                          {year}
+                        </p>
+                      </div>
+                      <DrawerClose asChild>
+                        <button className="p-2 hover:bg-muted rounded-none transition-colors">
+                          <X className="w-5 h-5" />
+                        </button>
+                      </DrawerClose>
+                    </div>
                   </DrawerHeader>
-                  <div className="px-6 pb-8">
-                    <p className="text-body text-foreground">{details}</p>
+                  <div className="p-6 space-y-6">
+                    <div>
+                      <div className="relative h-64 bg-muted rounded-none overflow-hidden border border-border/20 mb-4">
+                        <Image
+                          src={image || "/placeholder.svg"}
+                          alt={title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 100vw"
+                        />
+                      </div>
+                      <h4 className="text-body-lg font-semibold text-foreground mb-3">
+                        Project Details
+                      </h4>
+                      <p className="text-body text-foreground leading-relaxed">
+                        {details}
+                      </p>
+                    </div>
+                    {techStack && techStack.length > 0 && (
+                      <div>
+                        <h4 className="text-body-lg font-semibold text-foreground mb-3">
+                          Tech Stack
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {techStack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-none text-xs font-medium text-primary"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-4 pt-4 border-t border-border/20">
+                      {liveUrl && (
+                        <a
+                          href={liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-none text-primary font-semibold transition-all hover:scale-105"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          <span className="text-sm">Live Demo</span>
+                        </a>
+                      )}
+                      {githubUrl && (
+                        <a
+                          href={githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-none text-foreground font-semibold transition-all hover:scale-105"
+                        >
+                          <Github className="w-4 h-4" />
+                          <span className="text-sm">GitHub</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </DrawerContent>
+              </DrawerContentSide>
             </Drawer>
           )}
         </div>
