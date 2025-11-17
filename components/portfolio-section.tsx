@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import { SectionTitleWrapper } from "./section-title-wrapper"
+import { useState, useRef, useEffect } from "react";
+import { SectionTitleWrapper } from "./section-title-wrapper";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "./ui/drawer"
+} from "./ui/drawer";
 
 interface ProjectProps {
-  image: string
-  title: string
-  year: string
-  description: string
-  details: string
+  image: string;
+  title: string;
+  year: string;
+  description: string;
+  details: string;
 }
 
 function ProjectCard({
@@ -26,36 +26,44 @@ function ProjectCard({
   details,
   isAlternate,
 }: ProjectProps & { isAlternate: boolean }) {
-  const [isTruncated, setIsTruncated] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const textRef = useRef<HTMLParagraphElement>(null)
+  const [isTruncated, setIsTruncated] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const checkTruncation = () => {
       if (textRef.current) {
-        const element = textRef.current
+        const element = textRef.current;
         // Check if text is truncated by comparing scrollHeight with clientHeight
-        const isOverflowing = element.scrollHeight > element.clientHeight
-        setIsTruncated(isOverflowing)
+        const isOverflowing = element.scrollHeight > element.clientHeight;
+        setIsTruncated(isOverflowing);
       }
-    }
+    };
 
-    checkTruncation()
+    checkTruncation();
     // Re-check on window resize
-    window.addEventListener("resize", checkTruncation)
-    return () => window.removeEventListener("resize", checkTruncation)
-  }, [details])
+    window.addEventListener("resize", checkTruncation);
+    return () => window.removeEventListener("resize", checkTruncation);
+  }, [details]);
 
   return (
     <div
-      className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${isAlternate ? "md:[&>*:first-child]:order-2" : ""}`}
+      className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${
+        isAlternate ? "md:[&>*:first-child]:order-2" : ""
+      }`}
     >
       <div className="relative h-80 md:h-96 bg-muted rounded-none overflow-hidden border border-border/20">
-        <img src={image || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
+        <img
+          src={image || "/placeholder.svg"}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="space-y-4">
         <div>
-          <h3 className="text-3xl md:text-4xl font-black text-primary">{title}</h3>
+          <h3 className="text-3xl md:text-4xl font-black text-primary">
+            {title}
+          </h3>
           <p className="text-sm text-muted-foreground">{year}</p>
         </div>
         <p className="text-foreground text-lg font-semibold">{description}</p>
@@ -94,7 +102,7 @@ function ProjectCard({
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 export function PortfolioSection() {
@@ -131,17 +139,20 @@ export function PortfolioSection() {
       details:
         "Made interface, effect animation, and customized game interface. Translated designs from Figma to HTML and CSS while ensuring UX and UI design are maintained. Refactored code, investigated code and fixed bugs. Ensured cross-browser compatibility and responsiveness across various devices and screen sizes. Tech: NextJS, ReactJS, Redux, Sass, Ant Design, PHP, Git, Axios.",
     },
-  ]
+  ];
 
   return (
-    <section id="projects" className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0">
+    <section
+      id="projects"
+      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0"
+    >
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
           {/* Title */}
           <SectionTitleWrapper title="PROJECTS" />
 
           {/* Right Column - Projects */}
-          <div className="md:col-span-2 space-y-12 md:space-y-16 lg:space-y-20">
+          <div className="md:col-span-3 space-y-12 md:space-y-16 lg:space-y-20">
             {projects.map((project, idx) => (
               <ProjectCard key={idx} {...project} isAlternate={idx % 2 === 1} />
             ))}
@@ -149,5 +160,5 @@ export function PortfolioSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

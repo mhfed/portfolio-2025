@@ -1,17 +1,17 @@
-import { getTranslations } from "next-intl/server"
-import { SectionTitleWrapper } from "./section-title-wrapper"
-import { TimelineItem } from "./timeline-item"
+import { getTranslations } from "next-intl/server";
+import { SectionTitleWrapper } from "./section-title-wrapper";
+import { TimelineItem } from "./timeline-item";
 
 interface TimelineItemProps {
-  company: string
-  position: string
-  period: string
-  description: string
-  skills: string[]
+  company: string;
+  position: string;
+  period: string;
+  description: string;
+  skills: string[];
 }
 
 export async function WorkExperienceSection() {
-  const t = await getTranslations('experience')
+  const t = await getTranslations("experience");
   const experiences: TimelineItemProps[] = [
     {
       company: "COOLmate",
@@ -27,7 +27,18 @@ export async function WorkExperienceSection() {
       period: "8/2022 - 11/2023",
       description:
         "Developed CMS Website (CGSI, Iress Wealth, Admin Portal Equix) implementing login flow, user authentication, form management with Formik and Yup validation. Created theme builder feature for customizing trading application color schemes. Developed Trading Website (EQUIX, MAGPIE, CGSI) with login, registration, forgot password features with reCAPTCHA, two-factor authentication using PIN. Implemented trading functionalities with real-time updates using Server-Sent Events (SSE). Utilized Next.js to create Fundamental embedded Website for tracking stock information.",
-      skills: ["TypeScript", "ReactJS", "Redux", "RestAPI", "Formik", "Yup", "Material UI", "SSE", "Next.js", "Chart.js"],
+      skills: [
+        "TypeScript",
+        "ReactJS",
+        "Redux",
+        "RestAPI",
+        "Formik",
+        "Yup",
+        "Material UI",
+        "SSE",
+        "Next.js",
+        "Chart.js",
+      ],
     },
     {
       company: "METACITY",
@@ -45,7 +56,7 @@ export async function WorkExperienceSection() {
         "Contributed to multiple web projects, learned best practices in front-end development, and built a strong foundation in web technologies.",
       skills: ["HTML", "CSS", "JavaScript", "React"],
     },
-  ]
+  ];
 
   return (
     <section
@@ -53,15 +64,19 @@ export async function WorkExperienceSection() {
       className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0"
     >
       {/* Mobile: Sticky title outside grid */}
-      <SectionTitleWrapper title={t('title')} sectionId="experience" mobileOnly />
-      
+      <SectionTitleWrapper
+        title={t("title")}
+        sectionId="experience"
+        mobileOnly
+      />
+
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
           {/* Desktop: Title in grid */}
-          <SectionTitleWrapper title={t('title')} desktopOnly />
+          <SectionTitleWrapper title={t("title")} desktopOnly />
 
           {/* Right Column - Timeline */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <div className="space-y-6">
               {experiences.map((exp, idx) => (
                 <TimelineItem key={idx} {...exp} />
@@ -71,5 +86,5 @@ export async function WorkExperienceSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

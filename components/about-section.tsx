@@ -1,35 +1,47 @@
-import { getTranslations } from "next-intl/server"
-import { SectionTitleWrapper } from "./section-title-wrapper"
+import { getTranslations } from "next-intl/server";
+import { SectionTitleWrapper } from "./section-title-wrapper";
 
 export async function AboutSection() {
-  const t = await getTranslations('about')
+  const t = await getTranslations("about");
 
   return (
-    <section id="about" className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0">
+    <section
+      id="about"
+      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0"
+    >
       {/* Mobile: Sticky title outside grid */}
-      <SectionTitleWrapper title={t('title')} sectionId="about" mobileOnly />
-      
+      <SectionTitleWrapper title={t("title")} sectionId="about" mobileOnly />
+
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
           {/* Desktop: Title in grid */}
-          <SectionTitleWrapper title={t('title')} desktopOnly />
+          <SectionTitleWrapper title={t("title")} desktopOnly />
 
           {/* Right Column - Content */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <div className="scroll-animate">
               <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
                 {/* Left Content */}
                 <div className="space-y-6">
                   <p className="text-body-lg text-foreground">
-                    {t('description1')}
+                    {t("description1")}
                   </p>
                   <p className="text-body-lg text-foreground">
-                    {t('description2')}
+                    {t("description2")}
                   </p>
                   <div className="pt-6">
-                    <h3 className="text-h3 text-primary mb-4">{t('coreSkills')}</h3>
+                    <h3 className="text-h3 text-primary mb-4">
+                      {t("coreSkills")}
+                    </h3>
                     <div className="grid grid-cols-2 gap-3">
-                      {["JavaScript", "TypeScript", "React.js", "Next.js", "Redux", "React Native"].map((skill) => (
+                      {[
+                        "JavaScript",
+                        "TypeScript",
+                        "React.js",
+                        "Next.js",
+                        "Redux",
+                        "React Native",
+                      ].map((skill) => (
                         <div
                           key={skill}
                           className="px-4 py-2 bg-primary/10 border border-primary/30 rounded-none text-primary font-semibold"
@@ -44,15 +56,27 @@ export async function AboutSection() {
                 {/* Right Content - Stats */}
                 <div className="space-y-8">
                   <div className="bg-background border border-primary/50 rounded-none p-8">
-                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">5+</div>
-                    <p className="text-body-lg text-foreground font-semibold">{t('yearsExperience')}</p>
-                    <p className="text-body-sm text-muted-foreground mt-2">{t('yearsDescription')}</p>
+                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                      5+
+                    </div>
+                    <p className="text-body-lg text-foreground font-semibold">
+                      {t("yearsExperience")}
+                    </p>
+                    <p className="text-body-sm text-muted-foreground mt-2">
+                      {t("yearsDescription")}
+                    </p>
                   </div>
 
                   <div className="bg-background border border-primary/50 rounded-none p-8">
-                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">100%</div>
-                    <p className="text-body-lg text-foreground font-semibold">{t('clientSatisfaction')}</p>
-                    <p className="text-body-sm text-muted-foreground mt-2">{t('satisfactionDescription')}</p>
+                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                      100%
+                    </div>
+                    <p className="text-body-lg text-foreground font-semibold">
+                      {t("clientSatisfaction")}
+                    </p>
+                    <p className="text-body-sm text-muted-foreground mt-2">
+                      {t("satisfactionDescription")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -61,5 +85,5 @@ export async function AboutSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
