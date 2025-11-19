@@ -1,4 +1,5 @@
 import StackIcon from "tech-stack-icons";
+import { Marquee } from "@/components/ui/marquee";
 
 const technologies = [
   { name: "React", iconName: "react" as const, color: "blue" },
@@ -37,11 +38,11 @@ export function TechMarquee() {
 
       <div className="py-10 md:py-12">
         {/* First row - left to right */}
-        <div className="flex gap-4 mb-6 animate-marquee whitespace-nowrap">
-          {[...technologies, ...technologies].map((tech, i) => (
+        <Marquee className="mb-6" reverse={false} repeat={2}>
+          {technologies.map((tech, i) => (
             <div
               key={`row1-${i}`}
-              className={`group shrink-0 px-4 md:px-6 py-2 md:py-3 rounded-none border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2  ${
+              className={`group shrink-0 px-4 md:px-6 py-2 md:py-3 rounded-none border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2 ${
                 colorClasses[tech.color as keyof typeof colorClasses]
               }`}
             >
@@ -57,33 +58,30 @@ export function TechMarquee() {
               </span>
             </div>
           ))}
-        </div>
+        </Marquee>
 
         {/* Second row - right to left */}
-        <div className="flex gap-4 animate-marquee-reverse whitespace-nowrap">
-          {[...technologies]
-            .reverse()
-            .concat([...technologies].reverse())
-            .map((tech, i) => (
-              <div
-                key={`row2-${i}`}
-                className={`group shrink-0 px-4 md:px-6 py-2 md:py-3 rounded-none border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg  flex items-center gap-2 ${
-                  colorClasses[tech.color as keyof typeof colorClasses]
-                }`}
-              >
-                <div className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0">
-                  <StackIcon
-                    name={tech.iconName}
-                    variant="dark"
-                    className="w-full h-full"
-                  />
-                </div>
-                <span className="text-sm md:text-base lg:text-lg font-semibold tracking-tight">
-                  {tech.name}
-                </span>
+        <Marquee className="" reverse={true} repeat={2}>
+          {[...technologies].reverse().map((tech, i) => (
+            <div
+              key={`row2-${i}`}
+              className={`group shrink-0 px-4 md:px-6 py-2 md:py-3 rounded-none border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2 ${
+                colorClasses[tech.color as keyof typeof colorClasses]
+              }`}
+            >
+              <div className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0">
+                <StackIcon
+                  name={tech.iconName}
+                  variant="dark"
+                  className="w-full h-full"
+                />
               </div>
-            ))}
-        </div>
+              <span className="text-sm md:text-base lg:text-lg font-semibold tracking-tight">
+                {tech.name}
+              </span>
+            </div>
+          ))}
+        </Marquee>
       </div>
     </div>
   );

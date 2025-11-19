@@ -8,6 +8,7 @@ import { ScrollObserver } from "@/components/scroll-observer";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { FloatingCTA } from "@/components/floating-cta";
 import { SectionDivider } from "@/components/section-divider";
+import { ScrollReveal } from "@/components/magicui/scroll-reveal";
 
 export default function Home() {
   return (
@@ -22,33 +23,33 @@ export default function Home() {
       <SectionDivider />
 
       {/* About Section */}
-      <div className="scroll-animate">
+      <ScrollReveal>
         <AboutSection />
-      </div>
+      </ScrollReveal>
 
       {/* Divider */}
       <SectionDivider />
 
       {/* Work Experience Section */}
-      <div className="scroll-animate">
+      <ScrollReveal>
         <WorkExperienceSection />
-      </div>
+      </ScrollReveal>
 
       {/* Divider */}
       <SectionDivider />
 
       {/* Projects Section */}
-      <div className="scroll-animate">
+      <ScrollReveal>
         <ProjectsSection />
-      </div>
+      </ScrollReveal>
 
       {/* Divider */}
       <SectionDivider />
 
       {/* Collaborate Section */}
-      <div className="scroll-animate">
+      <ScrollReveal>
         <LetsCollaborateSection />
-      </div>
+      </ScrollReveal>
 
       {/* Floating Actions */}
       <FloatingCTA />
