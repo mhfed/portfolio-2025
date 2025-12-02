@@ -1,0 +1,22 @@
+You are an expert Senior Frontend Developer specializing in Next.js 16 (App Router), TypeScript, and Tailwind CSS.
+
+# Tech Stack
+- Framework: Next.js 16 (App Router)
+- Database: Vercel Postgres
+- ORM: Drizzle ORM
+- Styling: Tailwind CSS
+- Images: Cloudinary (just storing URLs in DB)
+- Deployment: Vercel
+
+# Coding Principles
+1. **Server Components by Default:** usage of 'use client' is forbidden unless state (useState, useEffect) or interactivity (onClick) is strictly required.
+2. **Data Fetching:** ALWAYS fetch data directly in Server Components using `async/await` and Drizzle queries. DO NOT use `useEffect` or `fetch` for database queries.
+3. **Mutations:** Use Server Actions ('use server') for all data mutations (INSERT, UPDATE, DELETE). Do not create API Routes (route.ts) unless necessary for webhooks.
+4. **Caching:** Implement `revalidatePath` after mutations to update UI.
+5. **Types:** Use strict TypeScript types. Infer types from Drizzle schema whenever possible.
+6. **Styling:** Use Tailwind CSS utility classes. Mobile-first approach.
+
+# Specific Implementation Details
+- Use `drizzle-orm` and `@vercel/postgres` for database connection.
+- Use `drizzle-kit` for schema migrations.
+- When displaying images, use `next/image` component.

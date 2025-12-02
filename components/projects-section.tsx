@@ -1,10 +1,30 @@
 import { getTranslations } from "next-intl/server";
 import { SectionTitleWrapper } from "./section-title-wrapper";
 import { ProjectCard } from "./project-card";
-import { projects } from "@/data/projects";
+import { db } from "@/lib/db";
+import { projects } from "@/db/schema";
+import { desc } from "drizzle-orm";
 
 export async function ProjectsSection() {
   const t = await getTranslations("projects");
+
+  // Fetch projects from database, ordered by createdAt descending
+  const dbProjects = await db
+    .select()
+    .from(projects)
+    .orderBy(desc(projects.createdAt));
+
+  // Map database results to match ProjectCard interface
+  const mappedProjects = dbProjects.map((project) => ({
+    image: project.imageUrl,
+    title: project.title,
+    year: project.year || "",
+    description: project.description,
+    details: project.details || "",
+    liveUrl: project.liveUrl || undefined,
+    githubUrl: project.githubUrl || undefined,
+    techStack: project.techStack || [],
+  }));
 
   return (
     <section
@@ -21,14 +41,20 @@ export async function ProjectsSection() {
 
           {/* Right Column - Projects */}
           <div className="md:col-span-3 space-y-12 md:space-y-16 lg:space-y-20">
-            {projects.map((project, idx) => (
-              <ProjectCard
-                key={idx}
-                {...project}
-                isAlternate={idx % 2 === 1}
-                index={idx}
-              />
-            ))}
+            {mappedProjects.length === 0 ? (
+              <p className="text-muted-foreground text-center py-12">
+                {t("noProjects") || "No projects available yet."}
+              </p>
+            ) : (
+              mappedProjects.map((project, idx) => (
+                <ProjectCard
+                  key={project.title + idx}
+                  {...project}
+                  isAlternate={idx % 2 === 1}
+                  index={idx}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>
