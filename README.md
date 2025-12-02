@@ -28,3 +28,24 @@ Continue building your app on:
 2. Deploy your chats from the v0 interface
 3. Changes are automatically pushed to this repository
 4. Vercel deploys the latest version from this repository
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+### Database
+- `POSTGRES_URL` - Vercel Postgres connection string
+  - Get this from: Vercel Dashboard > Your Project > Storage > Postgres > .env.local tab
+
+### Admin Authentication
+- `ADMIN_USER` - Username for HTTP Basic Auth on `/admin/*` routes
+- `ADMIN_PASSWORD` - Password for HTTP Basic Auth on `/admin/*` routes
+
+**Example `.env.local`:**
+```env
+POSTGRES_URL=postgresql://user:password@host:port/database?sslmode=require
+ADMIN_USER=admin
+ADMIN_PASSWORD=your-secure-password-here
+```
+
+**Important:** Never commit `.env.local` to version control. It's already in `.gitignore`.
