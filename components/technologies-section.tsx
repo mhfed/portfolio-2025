@@ -11,11 +11,19 @@ interface TechCardProps {
 }
 
 function TechCard({ icon, title, description, isBlue = true }: TechCardProps) {
-  const bgColor = isBlue ? "bg-primary" : "bg-accent";
+  const colors = [
+    "bg-primary text-primary-foreground",
+    "bg-[var(--cyan)] text-[var(--cyan-foreground)]",
+    "bg-[var(--green)] text-[var(--green-foreground)]",
+    "bg-[var(--pink)] text-[var(--pink-foreground)]",
+    "bg-[var(--orange)] text-[var(--orange-foreground)]",
+    "bg-[var(--yellow)] text-[var(--yellow-foreground)]",
+  ];
+  const bgColor = isBlue ? colors[0] : colors[1];
   return (
     <div className="flex flex-col items-center gap-4 md:gap-6 scroll-animate">
       <div
-        className={`${bgColor} rounded-lg w-24 h-24 md:w-28 md:h-28 flex items-center justify-center text-white text-4xl md:text-5xl`}
+        className={`${bgColor} rounded-lg w-24 h-24 md:w-28 md:h-28 flex items-center justify-center text-4xl md:text-5xl`}
       >
         {icon}
       </div>
@@ -71,14 +79,33 @@ export function TechnologiesSection() {
   return (
     <section
       id="technologies"
-      className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-16"
+      className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-16 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto w-full space-y-16">
+      {/* Background gradient */}
+      <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-[var(--green)]/5 via-transparent to-[var(--yellow)]/5" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-[var(--cyan)]/5 to-transparent" />
+      </div>
+      <div className="max-w-7xl mx-auto w-full space-y-16 relative z-10">
         <SectionTitle title={t("title")} />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          {technologies.map((tech, idx) => (
-            <TechCard key={idx} {...tech} />
-          ))}
+          {technologies.map((tech, idx) => {
+            const colors = [
+              { isBlue: true },
+              { isBlue: false },
+              { isBlue: true },
+              { isBlue: false },
+              { isBlue: true },
+              { isBlue: false },
+            ];
+            return (
+              <TechCard
+                key={idx}
+                {...tech}
+                isBlue={colors[idx % colors.length].isBlue}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

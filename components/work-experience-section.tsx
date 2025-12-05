@@ -38,8 +38,13 @@ export async function WorkExperienceSection() {
   return (
     <section
       id="experience"
-      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0"
+      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0 relative overflow-hidden"
     >
+      {/* Background gradient */}
+      <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-[var(--green)]/5 via-transparent to-[var(--cyan)]/5" />
+        <div className="absolute top-1/2 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
+      </div>
       {/* Mobile: Sticky title outside grid */}
       <SectionTitleWrapper
         title={t("title")}
@@ -47,7 +52,7 @@ export async function WorkExperienceSection() {
         mobileOnly
       />
 
-      <div className="max-w-7xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
           {/* Desktop: Title in grid */}
           <SectionTitleWrapper title={t("title")} desktopOnly />

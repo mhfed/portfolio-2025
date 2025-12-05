@@ -16,6 +16,11 @@ const badgeVariants = cva(
         outline: "text-foreground border-border/30",
         primary:
           "bg-primary/10 border-primary/20 text-primary hover:bg-primary/20",
+        cyan: "bg-[var(--cyan)]/10 border-[var(--cyan)]/20 text-[var(--cyan)] hover:bg-[var(--cyan)]/20",
+        green: "bg-[var(--green)]/10 border-[var(--green)]/20 text-[var(--green)] hover:bg-[var(--green)]/20",
+        pink: "bg-[var(--pink)]/10 border-[var(--pink)]/20 text-[var(--pink)] hover:bg-[var(--pink)]/20",
+        orange: "bg-[var(--orange)]/10 border-[var(--orange)]/20 text-[var(--orange)] hover:bg-[var(--orange)]/20",
+        yellow: "bg-[var(--yellow)]/10 border-[var(--yellow)]/20 text-[var(--yellow)] hover:bg-[var(--yellow)]/20",
       },
       size: {
         default: "px-3 py-1 text-xs",

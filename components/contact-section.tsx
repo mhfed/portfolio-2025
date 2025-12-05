@@ -42,18 +42,23 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 px-6 scroll-mt-20">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-20 px-6 scroll-mt-20 relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[var(--cyan)]/5 via-transparent to-[var(--green)]/5" />
+        <div className="absolute bottom-0 right-0 w-1/2 h-full bg-gradient-to-tl from-[var(--pink)]/5 to-transparent" />
+      </div>
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <div className="flex items-center justify-center gap-6 mb-16">
-          <span className="text-accent text-h2 font-bold">&lt;</span>
+          <span className="text-[var(--cyan)] text-h2 font-bold">&lt;</span>
           <h2 className="text-h2 text-foreground text-balance">GET IN TOUCH</h2>
-          <span className="text-accent text-h2 font-bold">/&gt;</span>
+          <span className="text-[var(--cyan)] text-h2 font-bold">/&gt;</span>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Contact Form */}
-          <div className="bg-background-secondary dark:bg-background/50 border border-primary/50 rounded-lg p-8 md:p-10">
+          <div className="bg-background-secondary dark:bg-background/50 border border-[var(--cyan)]/50 rounded-lg p-8 md:p-10 hover:border-[var(--green)]/50 transition-colors">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
@@ -129,15 +134,24 @@ export function ContactSection() {
                 Connect With Me
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    className="px-6 py-4 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary font-semibold transition-all hover:scale-105 text-center"
-                  >
-                    {link.name}
-                  </a>
-                ))}
+                {socialLinks.map((link, idx) => {
+                  const colors = [
+                    "bg-primary/10 hover:bg-primary/20 border-primary/30 text-primary",
+                    "bg-[var(--cyan)]/10 hover:bg-[var(--cyan)]/20 border-[var(--cyan)]/30 text-[var(--cyan)]",
+                    "bg-[var(--green)]/10 hover:bg-[var(--green)]/20 border-[var(--green)]/30 text-[var(--green)]",
+                    "bg-[var(--pink)]/10 hover:bg-[var(--pink)]/20 border-[var(--pink)]/30 text-[var(--pink)]",
+                    "bg-[var(--orange)]/10 hover:bg-[var(--orange)]/20 border-[var(--orange)]/30 text-[var(--orange)]",
+                  ];
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.url}
+                      className={`px-6 py-4 border rounded-md font-semibold transition-all hover:scale-105 text-center ${colors[idx % colors.length]}`}
+                    >
+                      {link.name}
+                    </a>
+                  );
+                })}
               </div>
             </div>
 

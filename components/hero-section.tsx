@@ -11,7 +11,7 @@ export async function HeroSection() {
   const t = await getTranslations("hero");
 
   return (
-    <section className="min-h-screen flex flex-col justify-between pt-28 md:pt-32 pb-10 px-6 relative overflow-hidden">
+    <section className="min-h-screen flex flex-col justify-between pt-28 md:pt-32 pb-10 px-6 relative overflow-hidden bg-gradient-to-b from-background via-background to-background/95">
       {/* Parallax Background Elements */}
       <HeroBackground />
 
