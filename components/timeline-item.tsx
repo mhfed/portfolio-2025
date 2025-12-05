@@ -38,9 +38,12 @@ export function TimelineItem({
 
       <div className="space-y-3">
         <div>
+          <div className="flex items-center gap-2 justify-between">
           <h3 className="text-h3 text-foreground">{position}</h3>
+          <span className="text-body-sm text-primary font-semibold bg-primary/10 px-3 py-1.5 rounded-full">{period}</span>
+          </div>
+
           <p className="text-body-lg text-primary font-semibold">{company}</p>
-          <p className="text-body-sm text-muted-foreground">{period}</p>
         </div>
 
         <div className="space-y-2">

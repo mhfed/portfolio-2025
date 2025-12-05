@@ -16,12 +16,12 @@ export async function HeroSection() {
       <HeroBackground />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col justify-center max-w-7xl w-full mx-auto relative z-10 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-10 md:gap-16 items-start">
+      <div className="flex-1 flex flex-col justify-center max-w-7xl w-full mx-auto relative z-10 px-4 md:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-10 md:gap-16 items-start overflow-visible">
           {/* Left column: Name + Text blocks */}
-          <div className="space-y-10 md:space-y-14">
+          <div className="space-y-10 md:space-y-14 overflow-visible">
             {/* Name Section */}
-            <div className="relative w-full flex flex-col gap-4 md:gap-6">
+            <div className="relative w-full flex flex-col gap-4 md:gap-6 overflow-visible">
               <HeroTypingText
                 frontText={t("front")}
                 middleText={t("middle")}
@@ -30,7 +30,6 @@ export async function HeroSection() {
             </div>
 
             {/* Text Blocks - Below Name */}
-            <HeroTextBlocks />
           </div>
 
           {/* Right column: Title badge + actions */}
@@ -65,7 +64,10 @@ export async function HeroSection() {
               </div>
             </div>
           </div>
+
         </div>
+        <HeroTextBlocks />
+
       </div>
 
       {/* Tech Marquee - Bottom */}
