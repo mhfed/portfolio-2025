@@ -26,9 +26,6 @@ export async function AboutSection() {
                   <p className="text-body-lg text-foreground">
                     {t("description1")}
                   </p>
-                  <p className="text-body-lg text-foreground">
-                    {t("description2")}
-                  </p>
                   <div className="pt-6">
                     <h3 className="text-h3 text-primary mb-4">
                       {t("coreSkills")}

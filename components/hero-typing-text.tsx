@@ -181,11 +181,11 @@ export function HeroTypingText({
     <div className="flex flex-col items-start gap-2 md:gap-3">
       <h1
         ref={line1Ref}
-        className="text-display text-primary text-center min-h-[1.2em]"
+        className="text-display text-primary text-left min-h-[1.2em] leading-tight tracking-tight"
       />
       <h1
         ref={line2Ref}
-        className="text-display text-primary text-center min-h-[1.2em]"
+        className="text-display text-primary text-left min-h-[1.2em] leading-tight tracking-tight"
       />
     </div>
   );
