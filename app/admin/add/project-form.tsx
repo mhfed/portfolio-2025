@@ -1,15 +1,17 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { createProject } from "@/actions/project-actions";
 import type { CreateProjectResult } from "@/actions/project-actions";
 import { SubmitButton } from "./submit-button";
+import { ImageUploadDropzone } from "@/components/admin-image-upload-dropzone";
 
 export function ProjectForm() {
   const [state, formAction] = useActionState<CreateProjectResult, FormData>(
     createProject,
     { success: true }
   );
+  const [imageUrl, setImageUrl] = useState("");
 
   return (
     <>
@@ -91,22 +93,37 @@ export function ProjectForm() {
           />
         </div>
 
-        {/* Image URL */}
-        <div>
-          <label
-            htmlFor="imageUrl"
-            className="block text-sm font-semibold text-foreground mb-3"
-          >
-            Image URL (Cloudinary) <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="url"
-            id="imageUrl"
-            name="imageUrl"
-            required
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
-            placeholder="https://res.cloudinary.com/..."
+        {/* Image upload + URL */}
+        <div className="space-y-3">
+          <ImageUploadDropzone
+            onUploadSuccess={(url) => {
+              setImageUrl(url);
+            }}
+            label="Project image"
+            description="Drag and drop an image here, or click to browse. The Cloudinary URL will be filled in below."
           />
+
+          <div>
+            <label
+              htmlFor="imageUrl"
+              className="block text-sm font-semibold text-foreground mb-3"
+            >
+              Image URL (Cloudinary) <span className="text-destructive">*</span>
+            </label>
+            <input
+              type="url"
+              id="imageUrl"
+              name="imageUrl"
+              required
+              className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+              placeholder="https://res.cloudinary.com/..."
+              value={imageUrl}
+              onChange={(event) => setImageUrl(event.target.value)}
+            />
+            <p className="mt-2 text-sm text-muted-foreground">
+              Use the uploader above or paste an existing Cloudinary image URL.
+            </p>
+          </div>
         </div>
 
         {/* Live URL */}
