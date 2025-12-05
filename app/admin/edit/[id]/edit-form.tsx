@@ -1,13 +1,26 @@
 "use client";
 
 import { useActionState } from "react";
-import { createProject } from "@/actions/project-actions";
-import type { CreateProjectResult } from "@/actions/project-actions";
-import { SubmitButton } from "./submit-button";
+import { updateProjectAction } from "@/actions/project-actions";
+import type { UpdateProjectResult } from "@/actions/project-actions";
 
-export function ProjectForm() {
-  const [state, formAction] = useActionState<CreateProjectResult, FormData>(
-    createProject,
+interface EditFormProps {
+  project: {
+    id: number;
+    title: string;
+    year: string | null;
+    description: string;
+    details: string | null;
+    imageUrl: string;
+    liveUrl: string | null;
+    githubUrl: string | null;
+    techStack: string[] | null;
+  };
+}
+
+export function EditForm({ project }: EditFormProps) {
+  const [state, formAction] = useActionState<UpdateProjectResult, FormData>(
+    updateProjectAction,
     { success: true }
   );
 
@@ -21,6 +34,9 @@ export function ProjectForm() {
       )}
 
       <form action={formAction} className="space-y-6">
+        {/* Hidden ID field */}
+        <input type="hidden" name="id" value={project.id} />
+        
         {/* Title */}
         <div>
           <label
@@ -34,6 +50,7 @@ export function ProjectForm() {
             id="title"
             name="title"
             required
+            defaultValue={project.title}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="Project Title"
           />
@@ -51,6 +68,7 @@ export function ProjectForm() {
             type="text"
             id="year"
             name="year"
+            defaultValue={project.year || ""}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="[2023]"
           />
@@ -69,6 +87,7 @@ export function ProjectForm() {
             id="description"
             name="description"
             required
+            defaultValue={project.description}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="Short description of the project"
           />
@@ -86,6 +105,7 @@ export function ProjectForm() {
             id="details"
             name="details"
             rows={6}
+            defaultValue={project.details || ""}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-y"
             placeholder="Detailed description of the project..."
           />
@@ -104,6 +124,7 @@ export function ProjectForm() {
             id="imageUrl"
             name="imageUrl"
             required
+            defaultValue={project.imageUrl}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="https://res.cloudinary.com/..."
           />
@@ -121,6 +142,7 @@ export function ProjectForm() {
             type="url"
             id="liveUrl"
             name="liveUrl"
+            defaultValue={project.liveUrl || ""}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="https://example.com"
           />
@@ -138,6 +160,7 @@ export function ProjectForm() {
             type="url"
             id="githubUrl"
             name="githubUrl"
+            defaultValue={project.githubUrl || ""}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="https://github.com/username/repo"
           />
@@ -155,6 +178,11 @@ export function ProjectForm() {
             type="text"
             id="techStack"
             name="techStack"
+            defaultValue={
+              project.techStack && project.techStack.length > 0
+                ? project.techStack.join(", ")
+                : ""
+            }
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="React, TypeScript, Next.js"
           />
@@ -165,7 +193,13 @@ export function ProjectForm() {
 
         {/* Submit Button */}
         <div className="flex gap-4 pt-4">
-          <SubmitButton />
+          <button
+            type="submit"
+            disabled={state.success === false && !state.error}
+            className="px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold transition-all disabled:opacity-50"
+          >
+            Update Project
+          </button>
           <a
             href="/admin"
             className="px-6 py-3 bg-background hover:bg-primary/10 border border-border/30 rounded-none text-foreground font-semibold transition-all text-center"

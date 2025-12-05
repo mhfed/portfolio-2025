@@ -27,8 +27,18 @@ function checkBasicAuth(request: NextRequest): boolean {
 }
 
 export default function middleware(request: NextRequest) {
-  // Check if the request is for /admin routes
-  if (request.nextUrl.pathname.startsWith("/admin")) {
+  const pathname = request.nextUrl.pathname;
+  
+  // Handle /admin routes - exclude from intl middleware
+  if (pathname.startsWith("/admin")) {
+    // Redirect /vi/admin or /en/admin to /admin
+    if (pathname.match(/^\/(en|vi)\/admin/)) {
+      const newUrl = request.nextUrl.clone();
+      newUrl.pathname = pathname.replace(/^\/(en|vi)\//, "/");
+      return NextResponse.redirect(newUrl);
+    }
+    
+    // Apply basic auth for /admin routes
     if (!checkBasicAuth(request)) {
       return new NextResponse("Unauthorized", {
         status: 401,
@@ -37,6 +47,9 @@ export default function middleware(request: NextRequest) {
         },
       });
     }
+    
+    // Skip intl middleware for /admin routes
+    return NextResponse.next();
   }
 
   // Continue with next-intl middleware for other routes
@@ -47,6 +60,6 @@ export const config = {
   // Match all pathnames except for
   // - … if they start with `/api`, `/_next`, or `/_vercel`
   // - … the ones containing a dot (e.g. `favicon.ico`)
-  // Note: /admin routes are now included in matcher to apply Basic Auth
+  // - … /admin routes are handled separately above
   matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };

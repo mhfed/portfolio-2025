@@ -38,7 +38,8 @@
   },
   "projects": {
     "title": "PROJECTS",
-    "viewProject": "VIEW PROJECT →"
+    "viewProject": "VIEW PROJECT →",
+    "noProjects": "No projects available yet."
   },
   "technologies": {
     "title": "MY TECHNOLOGIES",

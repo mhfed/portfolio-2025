@@ -38,7 +38,8 @@
   },
   "projects": {
     "title": "DỰ ÁN",
-    "viewProject": "XEM DỰ ÁN →"
+    "viewProject": "XEM DỰ ÁN →",
+    "noProjects": "Chưa có dự án nào."
   },
   "technologies": {
     "title": "CÔNG NGHỆ CỦA TÔI",

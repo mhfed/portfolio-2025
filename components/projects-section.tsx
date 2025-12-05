@@ -9,10 +9,18 @@ export async function ProjectsSection() {
   const t = await getTranslations("projects");
 
   // Fetch projects from database, ordered by createdAt descending
-  const dbProjects = await db
-    .select()
-    .from(projects)
-    .orderBy(desc(projects.createdAt));
+  let dbProjects = [];
+  try {
+    dbProjects = await db
+      .select()
+      .from(projects)
+      .orderBy(desc(projects.createdAt));
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    // Return empty array if database query fails
+    // This allows the page to render with "No projects" message
+    dbProjects = [];
+  }
 
   // Map database results to match ProjectCard interface
   const mappedProjects = dbProjects.map((project) => ({
