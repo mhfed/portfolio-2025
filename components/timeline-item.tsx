@@ -34,7 +34,7 @@ export function TimelineItem({
 
   return (
     <div className="scroll-animate relative pl-8 pb-8 border-l-2 border-primary/30 last:pb-0">
-      <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-none transform -translate-x-1.5"></div>
+      <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full transform -translate-x-1.5"></div>
 
       <div className="space-y-3">
         <div>
@@ -69,7 +69,7 @@ export function TimelineItem({
                         </p>
                       </div>
                       <DrawerClose asChild>
-                        <button className="p-2 hover:bg-muted rounded-none transition-colors">
+                        <button className="p-2 hover:bg-muted rounded-md transition-colors">
                           <X className="w-5 h-5" />
                         </button>
                       </DrawerClose>
@@ -94,7 +94,7 @@ export function TimelineItem({
                         {skills.map((skill) => (
                           <span
                             key={skill}
-                            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-none text-xs font-medium text-primary"
+                            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-sm text-xs font-medium text-primary"
                           >
                             {skill}
                           </span>
@@ -112,7 +112,7 @@ export function TimelineItem({
           {skills.map((skill) => (
             <span
               key={skill}
-              className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-none text-xs font-medium text-primary"
+              className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-sm text-xs font-medium text-primary"
             >
               {skill}
             </span>

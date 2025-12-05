@@ -132,7 +132,7 @@ export function ImageUploadDropzone({
         onDrop={onDrop}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
-        className={`flex flex-col items-center justify-center gap-2 px-4 py-6 border border-dashed rounded-none cursor-pointer text-sm transition-colors ${
+        className={`flex flex-col items-center justify-center gap-2 px-4 py-6 border border-dashed rounded-lg cursor-pointer text-sm transition-colors ${
           isDragging
             ? "border-primary bg-primary/5"
             : "border-border/40 bg-background"
@@ -169,7 +169,7 @@ export function ImageUploadDropzone({
           <img
             src={uploadedUrl}
             alt="Uploaded preview"
-            className="h-16 w-16 object-cover border border-border/30 bg-background"
+            className="h-16 w-16 object-cover border border-border/30 bg-background rounded-md"
           />
           <span className="text-xs text-muted-foreground">
             Preview of uploaded image

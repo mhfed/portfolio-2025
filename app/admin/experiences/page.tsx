@@ -7,7 +7,7 @@ export default async function ExperiencesAdminPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-none border border-border/40 bg-muted/30 p-6">
+      <section className="rounded-lg border border-border/40 bg-muted/30 p-6">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="mb-1 text-sm text-muted-foreground">Total experiences</p>
@@ -17,7 +17,7 @@ export default async function ExperiencesAdminPage() {
           </div>
           <Link
             href="/admin/experiences/add"
-            className="inline-flex items-center justify-center rounded-none bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
           >
             Add experience
           </Link>
@@ -26,13 +26,13 @@ export default async function ExperiencesAdminPage() {
 
       <section className="space-y-4">
         {experiences.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-none border border-dashed border-border/60 bg-muted/40 px-6 py-12 text-center">
+          <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border/60 bg-muted/40 px-6 py-12 text-center">
             <p className="mb-3 text-sm text-muted-foreground">
               No experiences yet.
             </p>
             <Link
               href="/admin/experiences/add"
-              className="inline-flex items-center justify-center rounded-none bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+              className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
               Create your first experience
             </Link>
@@ -42,7 +42,7 @@ export default async function ExperiencesAdminPage() {
             {experiences.map((exp) => (
               <article
                 key={exp.id}
-                className="flex flex-col gap-3 rounded-none border border-border/40 bg-card p-4 transition-colors hover:border-primary/50"
+                className="flex flex-col gap-3 rounded-lg border border-border/40 bg-card p-4 transition-colors hover:border-primary/50"
               >
                 <div className="flex flex-col justify-between gap-3 md:flex-row md:items-start">
                   <div>
@@ -60,7 +60,7 @@ export default async function ExperiencesAdminPage() {
                   <div className="flex flex-wrap items-center gap-2">
                     <Link
                       href={`/admin/experiences/edit/${exp.id}`}
-                      className="inline-flex items-center justify-center rounded-none border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary/10"
+                      className="inline-flex items-center justify-center rounded-md border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary/10"
                     >
                       Edit
                     </Link>
@@ -79,7 +79,7 @@ export default async function ExperiencesAdminPage() {
                     {exp.skills.map((skill: string, idx: number) => (
                       <span
                         key={idx}
-                        className="rounded-none border border-primary/20 bg-primary/5 px-2 py-0.5 text-[11px] font-medium text-primary"
+                        className="rounded-sm border border-primary/20 bg-primary/5 px-2 py-0.5 text-[11px] font-medium text-primary"
                       >
                         {skill}
                       </span>

@@ -73,7 +73,7 @@ export function AppAdminSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-2 rounded-none px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 isActive
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"

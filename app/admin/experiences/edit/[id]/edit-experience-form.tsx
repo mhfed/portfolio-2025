@@ -28,7 +28,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
   return (
     <>
       {state.error && (
-        <div className="mb-6 rounded-none border border-destructive/30 bg-destructive/10 p-4 text-destructive">
+        <div className="mb-6 rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-destructive">
           <p className="font-semibold">Error</p>
           <p className="text-sm">{state.error}</p>
         </div>
@@ -50,7 +50,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
             name="company"
             required
             defaultValue={experience.company}
-            className="w-full rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
             placeholder="Company name"
           />
         </div>
@@ -68,7 +68,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
             name="position"
             required
             defaultValue={experience.position}
-            className="w-full rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
             placeholder="Frontend Developer"
           />
         </div>
@@ -86,7 +86,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
             name="period"
             required
             defaultValue={experience.period}
-            className="w-full rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
             placeholder="8/2022 - 11/2023"
           />
         </div>
@@ -103,7 +103,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
             id="location"
             name="location"
             defaultValue={experience.location || ""}
-            className="w-full rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
             placeholder="Ha Noi, Viet Nam"
           />
         </div>
@@ -142,7 +142,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
                 ? experience.skills.join(", ")
                 : ""
             }
-            className="w-full rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
             placeholder="React, TypeScript, Next.js"
           />
           <p className="mt-2 text-sm text-muted-foreground">
@@ -166,7 +166,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
                 ? experience.orderIndex
                 : ""
             }
-            className="w-full rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
             placeholder="Lower numbers appear higher in the list"
           />
         </div>
@@ -180,7 +180,7 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
           </button>
           <a
             href="/admin/experiences"
-            className="px-6 py-3 bg-background hover:bg-primary/10 border border-border/30 rounded-none text-foreground font-semibold transition-all text-center"
+            className="px-6 py-3 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground font-semibold transition-all text-center"
           >
             Cancel
           </a>

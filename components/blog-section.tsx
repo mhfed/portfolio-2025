@@ -18,7 +18,7 @@ function BlogCard({ post, locale, readMoreText }: BlogCardProps) {
   return (
     <div
       ref={ref}
-      className={`border-2 border-primary rounded-none p-6 md:p-8 space-y-4 hover:border-accent transition-all duration-700 ${
+      className={`border-2 border-primary rounded-lg p-6 md:p-8 space-y-4 hover:border-accent transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
@@ -36,7 +36,7 @@ function BlogCard({ post, locale, readMoreText }: BlogCardProps) {
         {post.tags.map((tag) => (
           <span
             key={tag}
-            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-none text-body-sm font-medium text-primary"
+            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-sm text-body-sm font-medium text-primary"
           >
             {tag}
           </span>
@@ -59,7 +59,7 @@ function CategoryTag({ name, icon, color = "blue" }: CategoryProps) {
   const bgColor = color === "blue" ? "bg-primary" : "bg-accent";
   return (
     <button
-      className={`${bgColor} text-white font-bold px-6 py-3 rounded-none flex items-center gap-2 hover:opacity-90 transition-opacity w-full md:w-auto`}
+      className={`${bgColor} text-white font-bold px-6 py-3 rounded-md flex items-center gap-2 hover:opacity-90 transition-opacity w-full md:w-auto`}
     >
       <span>{icon}</span>
       {name}

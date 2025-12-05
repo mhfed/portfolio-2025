@@ -91,7 +91,7 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
           {/* Mobile sidebar trigger */}
           <button
             type="button"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-none border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation"
           >
@@ -119,7 +119,7 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
           <button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-none border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label="Toggle theme"
           >
             {displayIsDark ? (
@@ -133,7 +133,7 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
             <Link
               href={primaryAction.href}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-none border border-primary/60 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground md:text-sm",
+                "inline-flex items-center gap-1.5 rounded-md border border-primary/60 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground md:text-sm",
               )}
             >
               <PlusCircle className="h-3.5 w-3.5" />

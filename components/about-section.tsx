@@ -44,7 +44,7 @@ export async function AboutSection() {
                       ].map((skill) => (
                         <div
                           key={skill}
-                          className="px-4 py-2 bg-primary/10 border border-primary/30 rounded-none text-primary font-semibold"
+                          className="px-4 py-2 bg-primary/10 border border-primary/30 rounded-sm text-primary font-semibold"
                         >
                           {skill}
                         </div>
@@ -55,7 +55,7 @@ export async function AboutSection() {
 
                 {/* Right Content - Stats */}
                 <div className="space-y-8">
-                  <div className="bg-background border border-primary/50 rounded-none p-8">
+                  <div className="bg-background border border-primary/50 rounded-lg p-8">
                     <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                       5+
                     </div>
@@ -67,7 +67,7 @@ export async function AboutSection() {
                     </p>
                   </div>
 
-                  <div className="bg-background border border-primary/50 rounded-none p-8">
+                  <div className="bg-background border border-primary/50 rounded-lg p-8">
                     <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                       100%
                     </div>

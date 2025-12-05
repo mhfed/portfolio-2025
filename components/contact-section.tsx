@@ -53,7 +53,7 @@ export function ContactSection() {
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Contact Form */}
-          <div className="bg-background-secondary dark:bg-background/50 border border-primary/50 rounded-none p-8 md:p-10">
+          <div className="bg-background-secondary dark:bg-background/50 border border-primary/50 rounded-lg p-8 md:p-10">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
@@ -69,7 +69,7 @@ export function ContactSection() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
                   placeholder="John Doe"
                 />
               </div>
@@ -88,7 +88,7 @@ export function ContactSection() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
                   placeholder="john@example.com"
                 />
               </div>
@@ -115,7 +115,7 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={submitted}
-                className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {submitted ? "Message Sent!" : "Send Message"}
               </button>
@@ -133,7 +133,7 @@ export function ContactSection() {
                   <a
                     key={link.name}
                     href={link.url}
-                    className="px-6 py-4 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-none text-primary font-semibold transition-all hover:scale-105 text-center"
+                    className="px-6 py-4 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary font-semibold transition-all hover:scale-105 text-center"
                   >
                     {link.name}
                   </a>

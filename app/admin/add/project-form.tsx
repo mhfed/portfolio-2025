@@ -16,7 +16,7 @@ export function ProjectForm() {
   return (
     <>
       {state.error && (
-        <div className="mb-6 p-4 bg-destructive/10 border border-destructive/30 rounded-none text-destructive">
+        <div className="mb-6 p-4 bg-destructive/10 border border-destructive/30 rounded-lg text-destructive">
           <p className="font-semibold">Error</p>
           <p className="text-sm">{state.error}</p>
         </div>
@@ -36,7 +36,7 @@ export function ProjectForm() {
             id="title"
             name="title"
             required
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="Project Title"
           />
         </div>
@@ -53,7 +53,7 @@ export function ProjectForm() {
             type="text"
             id="year"
             name="year"
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="[2023]"
           />
         </div>
@@ -71,7 +71,7 @@ export function ProjectForm() {
             id="description"
             name="description"
             required
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="Short description of the project"
           />
         </div>
@@ -115,7 +115,7 @@ export function ProjectForm() {
               id="imageUrl"
               name="imageUrl"
               required
-              className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+              className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
               placeholder="https://res.cloudinary.com/..."
               value={imageUrl}
               onChange={(event) => setImageUrl(event.target.value)}
@@ -138,7 +138,7 @@ export function ProjectForm() {
             type="url"
             id="liveUrl"
             name="liveUrl"
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="https://example.com"
           />
         </div>
@@ -155,7 +155,7 @@ export function ProjectForm() {
             type="url"
             id="githubUrl"
             name="githubUrl"
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="https://github.com/username/repo"
           />
         </div>
@@ -172,7 +172,7 @@ export function ProjectForm() {
             type="text"
             id="techStack"
             name="techStack"
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="React, TypeScript, Next.js"
           />
           <p className="mt-2 text-sm text-muted-foreground">
@@ -185,7 +185,7 @@ export function ProjectForm() {
           <SubmitButton />
           <a
             href="/admin"
-            className="px-6 py-3 bg-background hover:bg-primary/10 border border-border/30 rounded-none text-foreground font-semibold transition-all text-center"
+            className="px-6 py-3 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground font-semibold transition-all text-center"
           >
             Cancel
           </a>
