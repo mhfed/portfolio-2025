@@ -108,7 +108,7 @@ export function BlogSection() {
   return (
     <section
       id="blog"
-      className="min-h-screen flex flex-col justify-center py-24 px-6 bg-background scroll-mt-16 relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center py-24 px-6 scroll-mt-16 relative overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">

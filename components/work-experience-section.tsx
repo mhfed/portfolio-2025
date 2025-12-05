@@ -38,7 +38,7 @@ export async function WorkExperienceSection() {
   return (
     <section
       id="experience"
-      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 bg-background scroll-mt-0 relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">

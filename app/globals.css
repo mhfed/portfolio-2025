@@ -4,12 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light mode: green primary with light green background */
+  /* Light mode: Inverted Dracula theme */
   --header-height: 60px;
 
   /* Typography Scale - Modular Scale 1.25 (Major Third) */
   /* Display: Hero text */
-  --font-size-display: 2.56rem; /* 41px mobile */
+  --font-size-display: 2.25rem; /* 36px mobile */
   --font-size-display-md: 3.2rem; /* 51.2px tablet */
   --font-size-display-lg: 4.5rem; /* 72px desktop */
 
@@ -71,75 +71,130 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-black: 900;
-  --background: oklch(0.97 0.015 145);
-  --foreground: oklch(0.15 0.01 145);
-  --card: oklch(0.98 0.01 145);
-  --card-foreground: oklch(0.15 0.01 145);
-  --popover: oklch(0.98 0.01 145);
-  --popover-foreground: oklch(0.15 0.01 145);
-  --primary: oklch(0.5 0.22 145);
-  --primary-foreground: oklch(0.98 0.01 145);
-  --secondary: oklch(0.92 0.02 145);
-  --secondary-foreground: oklch(0.5 0.15 145);
-  --muted: oklch(0.88 0.01 145);
-  --muted-foreground: oklch(0.45 0.01 145);
-  --accent: oklch(0.65 0.18 180);
-  --accent-foreground: oklch(0.98 0.01 145);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.01 145);
-  --border: oklch(0.85 0.01 145);
-  --input: oklch(0.92 0.01 145);
-  --ring: oklch(0.5 0.22 145);
-  --chart-1: oklch(0.5 0.22 145);
-  --chart-2: oklch(0.65 0.18 180);
-  --chart-3: oklch(0.6 0.18 160);
-  --chart-4: oklch(0.65 0.15 120);
-  --chart-5: oklch(0.7 0.15 100);
+  /* Dracula Light Mode (Inverted) - OKLCH values */
+  /* Background: #f8f8f2 */
+  --background: oklch(0.97 0.005 90);
+  /* Foreground: #282a36 */
+  --foreground: oklch(0.18 0.01 250);
+  /* Card/Popover: Same as background */
+  --card: oklch(0.97 0.005 90);
+  --card-foreground: oklch(0.18 0.01 250);
+  --popover: oklch(0.97 0.005 90);
+  --popover-foreground: oklch(0.18 0.01 250);
+  /* Primary: #bd93f9 (Purple) */
+  --primary: oklch(0.75 0.15 280);
+  /* Primary foreground: #f8f8f2 */
+  --primary-foreground: oklch(0.97 0.005 90);
+  /* Secondary: #44475a (Current Line) */
+  --secondary: oklch(0.28 0.01 250);
+  /* Secondary foreground: #f8f8f2 */
+  --secondary-foreground: oklch(0.97 0.005 90);
+  /* Muted: Lighter version of Comment for light mode */
+  --muted: oklch(0.94 0.01 250);
+  /* Muted foreground: #6272a4 (Comment) */
+  --muted-foreground: oklch(0.45 0.05 250);
+  /* Accent: #8be9fd (Cyan) */
+  --accent: oklch(0.78 0.12 200);
+  /* Accent foreground: #282a36 */
+  --accent-foreground: oklch(0.18 0.01 250);
+  /* Destructive: #ff5555 (Red) */
+  --destructive: oklch(0.65 0.22 15);
+  /* Destructive foreground: #f8f8f2 */
+  --destructive-foreground: oklch(0.97 0.005 90);
+  /* Border/Input/Ring: Adjusted for better contrast */
+  --border: oklch(0.80 0.01 250);
+  --input: oklch(0.95 0.005 90);
+  --ring: oklch(0.75 0.15 280);
+  /* Chart colors using Dracula palette */
+  --chart-1: oklch(0.75 0.15 280); /* Purple */
+  --chart-2: oklch(0.78 0.12 200); /* Cyan */
+  --chart-3: oklch(0.70 0.20 330); /* Pink */
+  --chart-4: oklch(0.80 0.15 70); /* Green */
+  --chart-5: oklch(0.85 0.12 85); /* Orange */
+  /* Additional Dracula colors for variety */
+  --green: oklch(0.80 0.15 70); /* #50fa7b - Green */
+  --green-foreground: oklch(0.18 0.01 250); /* Dark text on green */
+  --orange: oklch(0.85 0.12 85); /* #ffb86c - Orange */
+  --orange-foreground: oklch(0.18 0.01 250); /* Dark text on orange */
+  --yellow: oklch(0.90 0.10 95); /* #f1fa8c - Yellow */
+  --yellow-foreground: oklch(0.18 0.01 250); /* Dark text on yellow */
+  --pink: oklch(0.70 0.20 330); /* #ff79c6 - Pink */
+  --pink-foreground: oklch(0.97 0.005 90); /* Light text on pink */
+  --cyan: oklch(0.78 0.12 200); /* #8be9fd - Cyan */
+  --cyan-foreground: oklch(0.18 0.01 250); /* Dark text on cyan */
   --radius: 0.5rem;
-  --sidebar: oklch(0.97 0.015 145);
-  --sidebar-foreground: oklch(0.15 0.01 145);
-  --sidebar-primary: oklch(0.5 0.22 145);
-  --sidebar-primary-foreground: oklch(0.98 0.01 145);
-  --sidebar-accent: oklch(0.65 0.18 180);
-  --sidebar-accent-foreground: oklch(0.98 0.01 145);
-  --sidebar-border: oklch(0.85 0.01 145);
-  --sidebar-ring: oklch(0.5 0.22 145);
+  /* Sidebar colors */
+  --sidebar: oklch(0.97 0.005 90);
+  --sidebar-foreground: oklch(0.18 0.01 250);
+  --sidebar-primary: oklch(0.75 0.15 280);
+  --sidebar-primary-foreground: oklch(0.97 0.005 90);
+  --sidebar-accent: oklch(0.78 0.12 200);
+  --sidebar-accent-foreground: oklch(0.18 0.01 250);
+  --sidebar-border: oklch(0.85 0.01 250);
+  --sidebar-ring: oklch(0.75 0.15 280);
 }
 
 .dark {
-  /* Dark mode: black background with vibrant green primary */
-  --background: oklch(0.1 0.005 250);
-  --foreground: oklch(0.98 0.005 90);
-  --card: oklch(0.12 0.005 250);
-  --card-foreground: oklch(0.98 0.005 90);
-  --popover: oklch(0.12 0.005 250);
-  --popover-foreground: oklch(0.98 0.005 90);
+  /* Dark Mode - Classic Dracula - OKLCH values */
+  /* Background: #282a36 */
+  --background: oklch(0.18 0.01 250);
+  /* Foreground: #f8f8f2 */
+  --foreground: oklch(0.97 0.005 90);
+  /* Card/Popover: Same as background */
+  --card: oklch(0.18 0.01 250);
+  --card-foreground: oklch(0.97 0.005 90);
+  --popover: oklch(0.18 0.01 250);
+  --popover-foreground: oklch(0.97 0.005 90);
+  /* Primary: #bd93f9 (Purple) */
   --primary: oklch(0.92 0.24 126.52);
-  --primary-foreground: oklch(0.1 0.005 250);
-  --secondary: oklch(0.22 0.01 145);
+  /* Primary foreground: #282a36 */
+  --primary-foreground: oklch(0.18 0.01 250);
+  /* Secondary: #44475a (Current Line) */
+  --secondary: oklch(0.28 0.01 250);
+  /* Secondary foreground: #f8f8f2 */
   --secondary-foreground: oklch(0.7 0.2 145);
-  --muted: oklch(0.25 0.005 250);
-  --muted-foreground: oklch(0.65 0.005 250);
-  --accent: oklch(0.75 0.2 180);
-  --accent-foreground: oklch(0.1 0.005 250);
-  --destructive: oklch(0.65 0.25 25);
-  --destructive-foreground: oklch(0.98 0.005 90);
-  --border: oklch(0.25 0.005 250);
-  --input: oklch(0.15 0.005 250);
+  /* Muted: #44475a (Current Line) */
+  --muted: oklch(0.28 0.01 250);
+  /* Muted foreground: #6272a4 (Comment) */
+  --muted-foreground: oklch(0.45 0.05 250);
+  /* Accent: #ff79c6 (Pink) */
+  --accent: oklch(0.70 0.20 330);
+  /* Accent foreground: #f8f8f2 */
+  --accent-foreground: oklch(0.97 0.005 90);
+  /* Destructive: #ff5555 (Red) */
+  --destructive: oklch(0.65 0.22 15);
+  /* Destructive foreground: #f8f8f2 */
+  --destructive-foreground: oklch(0.97 0.005 90);
+  /* Border/Input/Ring: #44475a (Current Line) */
+  --border: oklch(0.28 0.01 250);
+  --input: oklch(0.22 0.01 250);
   --ring: oklch(0.92 0.24 126.52);
-  --chart-1: oklch(0.92 0.24 126.52);
-  --chart-2: oklch(0.75 0.2 180);
-  --chart-3: oklch(0.7 0.2 160);
-  --chart-4: oklch(0.75 0.18 120);
-  --chart-5: oklch(0.8 0.15 100);
-  --sidebar: oklch(0.1 0.005 250);
-  --sidebar-foreground: oklch(0.98 0.005 90);
-  --sidebar-primary: oklch(0.92 0.24 126.52);
-  --sidebar-primary-foreground: oklch(0.98 0.005 90);
-  --sidebar-accent: oklch(0.75 0.2 180);
-  --sidebar-accent-foreground: oklch(0.98 0.005 90);
-  --sidebar-border: oklch(0.25 0.005 250);
-  --sidebar-ring: oklch(0.92 0.24 126.52);
+  /* Chart colors using Dracula palette */
+  --chart-1: oklch(0.75 0.15 280); /* Purple */
+  --chart-2: oklch(0.78 0.12 200); /* Cyan */
+  --chart-3: oklch(0.70 0.20 330); /* Pink */
+  --chart-4: oklch(0.80 0.15 70); /* Green */
+  --chart-5: oklch(0.85 0.12 85); /* Yellow */
+  /* Additional Dracula colors for variety */
+  --green: oklch(0.80 0.15 70); /* #50fa7b - Green */
+  --green-foreground: oklch(0.97 0.005 90); /* Light text on green */
+  --orange: oklch(0.85 0.12 85); /* #ffb86c - Orange */
+  --orange-foreground: oklch(0.18 0.01 250); /* Dark text on orange */
+  --yellow: oklch(0.90 0.10 95); /* #f1fa8c - Yellow */
+  --yellow-foreground: oklch(0.18 0.01 250); /* Dark text on yellow */
+  --pink: oklch(0.70 0.20 330); /* #ff79c6 - Pink */
+  --pink-foreground: oklch(0.97 0.005 90); /* Light text on pink */
+  --cyan: oklch(0.78 0.12 200); /* #8be9fd - Cyan */
+  --cyan-foreground: oklch(0.18 0.01 250); /* Dark text on cyan */
+  /* Sidebar colors */
+  --sidebar: oklch(0.18 0.01 250);
+  --sidebar-foreground: oklch(0.97 0.005 90);
+  --sidebar-primary: oklch(0.75 0.15 280);
+  --sidebar-primary-foreground: oklch(0.18 0.01 250);
+  --sidebar-accent: oklch(0.70 0.20 330);
+  --sidebar-accent-foreground: oklch(0.97 0.005 90);
+  --sidebar-border: oklch(0.28 0.01 250);
+  --sidebar-ring: oklch(0.75 0.15 280);
 }
 
 @theme inline {
@@ -174,6 +229,16 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-green: var(--green);
+  --color-green-foreground: var(--green-foreground);
+  --color-orange: var(--orange);
+  --color-orange-foreground: var(--orange-foreground);
+  --color-yellow: var(--yellow);
+  --color-yellow-foreground: var(--yellow-foreground);
+  --color-pink: var(--pink);
+  --color-pink-foreground: var(--pink-foreground);
+  --color-cyan: var(--cyan);
+  --color-cyan-foreground: var(--cyan-foreground);
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -194,9 +259,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    position: relative;
   }
   button {
     @apply cursor-pointer;
+  }
+  
+  /* Sections không tạo background mới che grid - chỉ dùng transparent */
+  section[class*="bg-background"] {
+    background-color: transparent !important;
   }
 }
 
@@ -442,5 +513,85 @@
 
   .duration-700 {
     transition-duration: 700ms;
+  }
+
+  /* Animated pulse with delay */
+  @keyframes pulse-delay {
+    0%, 100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-pulse.delay-500 {
+    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 0.5s;
+  }
+
+  .animate-pulse.delay-1000 {
+    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 1s;
+  }
+
+  .animate-pulse.delay-2000 {
+    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 2s;
+  }
+
+  .animate-pulse.delay-3000 {
+    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 3s;
+  }
+
+  .animate-bounce.delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .animate-bounce.delay-1000 {
+    animation-delay: 1s;
+  }
+
+  .animate-bounce.delay-1500 {
+    animation-delay: 1.5s;
+  }
+
+  .animate-bounce.delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animate-bounce.delay-2500 {
+    animation-delay: 2.5s;
+  }
+
+  .animate-bounce.delay-3000 {
+    animation-delay: 3s;
+  }
+
+  /* Radial gradient utility */
+  .bg-gradient-radial {
+    background-image: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  /* Grid pattern opacity variables */
+  :root {
+    --grid-opacity: 0.06;
+  }
+
+  .dark {
+    --grid-opacity: 0.1;
+  }
+
+  /* Sections có z-index để tạo stacking context, nhưng background không che grid */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Content bên trong sections cần z-index cao hơn grid (z-5) */
+  section > * {
+    position: relative;
+    z-index: 10;
   }
 }

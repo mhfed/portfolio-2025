@@ -11,7 +11,7 @@ import { SectionDivider } from "@/components/section-divider";
 
 export default function Home() {
   return (
-    <main className="w-full relative z-10">
+    <main className="w-full">
       <ScrollObserver />
       <Header />
 

@@ -22,7 +22,7 @@ const colorClasses = {
 
 export function TechMarquee() {
   return (
-    <div className="w-full relative overflow-hidden border-y border-border/20 bg-gradient-to-r from-background via-primary/5 via-[var(--cyan)]/3 via-[var(--green)]/3 to-background backdrop-blur-sm">
+    <div className="w-full relative overflow-hidden border-y border-border/20 backdrop-blur-sm">
       {/* Gradient overlays for fade effect */}
       <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
