@@ -23,23 +23,26 @@ export default async function EditProjectPage({
   }
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4 md:px-6">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-h1 text-foreground mb-8">Edit Project</h1>
-        <EditForm
-          project={{
-            id: project.id,
-            title: project.title,
-            year: project.year,
-            description: project.description,
-            details: project.details,
-            imageUrl: project.imageUrl,
-            liveUrl: project.liveUrl,
-            githubUrl: project.githubUrl,
-            techStack: project.techStack,
-          }}
-        />
+    <div className="mx-auto w-full max-w-2xl space-y-6">
+      <div>
+        <h2 className="text-lg font-semibold text-foreground">Edit project</h2>
+        <p className="text-sm text-muted-foreground">
+          Update the information for this portfolio project.
+        </p>
       </div>
+      <EditForm
+        project={{
+          id: project.id,
+          title: project.title,
+          year: project.year,
+          description: project.description,
+          details: project.details,
+          imageUrl: project.imageUrl,
+          liveUrl: project.liveUrl,
+          githubUrl: project.githubUrl,
+          techStack: project.techStack,
+        }}
+      />
     </div>
   );
 }

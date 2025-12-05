@@ -7,134 +7,112 @@ export default async function AdminDashboard() {
   const projects = await getAllProjects();
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4 md:px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div className="space-y-6">
+      {/* Stats */}
+      <section className="rounded-none border border-border/40 bg-muted/30 p-6">
+        <div className="flex items-center gap-8">
           <div>
-            <h1 className="text-h1 text-foreground mb-2">Admin Dashboard</h1>
-            <p className="text-muted-foreground">
-              Manage your portfolio projects
+            <p className="mb-1 text-sm text-muted-foreground">Total projects</p>
+            <p className="text-3xl font-bold text-foreground">
+              {projects.length}
             </p>
           </div>
-          <Link
-            href="/admin/add"
-            className="px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold transition-all text-center inline-block"
-          >
-            Add New Project
-          </Link>
         </div>
+      </section>
 
-        {/* Stats */}
-        <div className="mb-8 p-6 bg-muted/30 border border-border/30">
-          <div className="flex items-center gap-8">
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">
-                Total Projects
-              </p>
-              <p className="text-3xl font-bold text-foreground">
-                {projects.length}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Projects List */}
+      {/* Projects List */}
+      <section className="space-y-4">
         {projects.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground mb-4">No projects yet.</p>
+          <div className="flex flex-col items-center justify-center rounded-none border border-dashed border-border/60 bg-muted/40 px-6 py-12 text-center">
+            <p className="mb-3 text-sm text-muted-foreground">
+              No projects yet.
+            </p>
             <Link
               href="/admin/add"
-              className="px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold transition-all inline-block"
+              className="inline-flex items-center justify-center rounded-none bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
-              Create Your First Project
+              Create your first project
             </Link>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
             {projects.map((project) => (
-              <div
+              <article
                 key={project.id}
-                className="p-6 bg-muted/30 border border-border/30 hover:border-primary/50 transition-colors"
+                className="flex flex-col overflow-hidden rounded-none border border-border/40 bg-card transition-colors hover:border-primary/50"
               >
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* Image */}
-                  <div className="relative w-full md:w-48 h-48 flex-shrink-0">
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                    />
+                <div className="relative h-40 w-full border-b border-border/40 bg-muted">
+                  <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="flex flex-1 flex-col gap-3 p-4">
+                  <div>
+                    <h2 className="mb-1 text-base font-semibold text-foreground">
+                      {project.title}
+                    </h2>
+                    {project.year && (
+                      <p className="mb-1 text-xs text-muted-foreground">
+                        {project.year}
+                      </p>
+                    )}
+                    <p className="text-sm text-foreground/80">
+                      {project.description}
+                    </p>
                   </div>
 
-                  {/* Content */}
-                  <div className="flex-1">
-                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                      <div>
-                        <h2 className="text-xl font-bold text-foreground mb-1">
-                          {project.title}
-                        </h2>
-                        {project.year && (
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {project.year}
-                          </p>
-                        )}
-                        <p className="text-foreground/80 mb-2">
-                          {project.description}
-                        </p>
-                        {project.techStack && project.techStack.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mt-2">
-                            {project.techStack.map((tech, idx) => (
-                              <span
-                                key={idx}
-                                className="px-2 py-1 text-xs bg-primary/10 text-primary border border-primary/20"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+                  {project.techStack && project.techStack.length > 0 && (
+                    <div className="mt-1 flex flex-wrap gap-1.5">
+                      {project.techStack.map((tech, idx) => (
+                        <span
+                          key={idx}
+                          className="rounded-none border border-primary/20 bg-primary/5 px-2 py-0.5 text-[11px] font-medium text-primary"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
+                  )}
 
-                    {/* Actions */}
-                    <div className="flex gap-3 mt-4">
-                      <Link
-                        href={`/admin/edit/${project.id}`}
-                        className="px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 text-foreground font-semibold transition-all"
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <Link
+                      href={`/admin/edit/${project.id}`}
+                      className="inline-flex items-center justify-center rounded-none border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary/10"
+                    >
+                      Edit
+                    </Link>
+                    <DeleteButton projectId={project.id} />
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-none border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary/10"
                       >
-                        Edit
-                      </Link>
-                      <DeleteButton projectId={project.id} />
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 text-foreground font-semibold transition-all"
-                        >
-                          View Live
-                        </a>
-                      )}
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 text-foreground font-semibold transition-all"
-                        >
-                          GitHub
-                        </a>
-                      )}
-                    </div>
+                        View live
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-none border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary/10"
+                      >
+                        GitHub
+                      </a>
+                    )}
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }

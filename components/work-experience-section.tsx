@@ -1,6 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { SectionTitleWrapper } from "./section-title-wrapper";
 import { TimelineItem } from "./timeline-item";
+import { db } from "@/lib/db";
+import { experiences } from "@/db/schema";
+import { asc, desc } from "drizzle-orm";
 
 interface TimelineItemProps {
   company: string;
@@ -12,51 +15,25 @@ interface TimelineItemProps {
 
 export async function WorkExperienceSection() {
   const t = await getTranslations("experience");
-  const experiences: TimelineItemProps[] = [
-    {
-      company: "COOLmate",
-      position: "Frontend Developer",
-      period: "2025 - Present",
-      description:
-        "Working on frontend development projects using modern web technologies.",
-      skills: ["React.js", "Next.js", "TypeScript", "JavaScript"],
-    },
-    {
-      company: "NOVUS FINTECH",
-      position: "Frontend Developer",
-      period: "8/2022 - 11/2023",
-      description:
-        "Developed CMS Website (CGSI, Iress Wealth, Admin Portal Equix) implementing login flow, user authentication, form management with Formik and Yup validation. Created theme builder feature for customizing trading application color schemes. Developed Trading Website (EQUIX, MAGPIE, CGSI) with login, registration, forgot password features with reCAPTCHA, two-factor authentication using PIN. Implemented trading functionalities with real-time updates using Server-Sent Events (SSE). Utilized Next.js to create Fundamental embedded Website for tracking stock information.",
-      skills: [
-        "TypeScript",
-        "ReactJS",
-        "Redux",
-        "RestAPI",
-        "Formik",
-        "Yup",
-        "Material UI",
-        "SSE",
-        "Next.js",
-        "Chart.js",
-      ],
-    },
-    {
-      company: "METACITY",
-      position: "Frontend Developer",
-      period: "7/2021 - 8/2022",
-      description:
-        "Developed Metacity System and Landing Page. Created interface, effect animation, and customized game interface. Translated designs from Figma to HTML and CSS while ensuring UX and UI design are maintained. Refactored code, investigated and fixed bugs. Ensured cross-browser compatibility and responsiveness across various devices and screen sizes.",
-      skills: ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"],
-    },
-    {
-      company: "IT Lab FPOLY",
-      position: "Intern Frontend Developer",
-      period: "2/2021 - 7/2021",
-      description:
-        "Contributed to multiple web projects, learned best practices in front-end development, and built a strong foundation in web technologies.",
-      skills: ["HTML", "CSS", "JavaScript", "React"],
-    },
-  ];
+
+  let dbExperiences: typeof experiences.$inferSelect[] = [];
+  try {
+    dbExperiences = await db
+      .select()
+      .from(experiences)
+      .orderBy(asc(experiences.orderIndex), desc(experiences.createdAt));
+  } catch (error) {
+    console.error("Error fetching experiences:", error);
+    dbExperiences = [];
+  }
+
+  const timelineItems: TimelineItemProps[] = dbExperiences.map((exp) => ({
+    company: exp.company,
+    position: exp.position,
+    period: exp.period,
+    description: exp.description,
+    skills: exp.skills || [],
+  }));
 
   return (
     <section
@@ -78,7 +55,7 @@ export async function WorkExperienceSection() {
           {/* Right Column - Timeline */}
           <div className="md:col-span-3">
             <div className="space-y-6">
-              {experiences.map((exp, idx) => (
+              {dbExperiences.map((exp, idx) => (
                 <TimelineItem key={idx} {...exp} />
               ))}
             </div>

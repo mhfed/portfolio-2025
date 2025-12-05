@@ -8,6 +8,13 @@
       "when": 1764672207080,
       "tag": "0000_thick_lady_vermin",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1764927810874,
+      "tag": "0001_sudden_guardsmen",
+      "breakpoints": true
     }
   ]
 }

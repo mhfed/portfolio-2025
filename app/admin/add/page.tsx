@@ -2,11 +2,14 @@ import { ProjectForm } from "./project-form";
 
 export default function AddProjectPage() {
   return (
-    <div className="min-h-screen bg-background py-12 px-4 md:px-6">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-h1 text-foreground mb-8">Add New Project</h1>
-        <ProjectForm />
+    <div className="mx-auto w-full max-w-2xl space-y-6">
+      <div>
+        <h2 className="text-lg font-semibold text-foreground">Add new project</h2>
+        <p className="text-sm text-muted-foreground">
+          Fill in the details below to publish a new portfolio project.
+        </p>
       </div>
+      <ProjectForm />
     </div>
   );
 }
