@@ -12,6 +12,9 @@ import {
   DrawerTrigger,
   DrawerClose,
 } from "./ui/drawer";
+import { Badge } from "./ui/badge";
+import { UiLink } from "./ui/link";
+import { Button } from "./ui/button";
 import type { Project } from "@/data/projects";
 
 interface ProjectCardProps extends Project {
@@ -84,12 +87,9 @@ export function ProjectCard({
         {techStack && techStack.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-3 py-1 bg-primary/10 border border-primary/30 rounded-sm text-xs font-medium text-primary"
-              >
+              <Badge key={tech} variant="primary">
                 {tech}
-              </span>
+              </Badge>
             ))}
           </div>
         )}
@@ -101,10 +101,10 @@ export function ProjectCard({
           {isTruncated && (
             <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
               <DrawerTrigger asChild>
-                <button className="text-accent font-semibold text-body-lg hover:opacity-80 transition-opacity mt-4 cursor-pointer inline-flex items-center gap-2">
+                <Button variant="ghost" className="mt-4">
                   <span>{t("viewProject")}</span>
                   <ChevronLeft className="w-4 h-4" />
-                </button>
+                </Button>
               </DrawerTrigger>
               <DrawerContentSide>
                 <div className="overflow-y-auto h-full">
@@ -120,9 +120,9 @@ export function ProjectCard({
                         </p>
                       </div>
                       <DrawerClose asChild>
-                        <button className="p-2 hover:bg-muted rounded-md transition-colors">
+                        <Button variant="ghost" size="icon">
                           <X className="w-5 h-5" />
-                        </button>
+                        </Button>
                       </DrawerClose>
                     </div>
                   </DrawerHeader>
@@ -151,38 +151,25 @@ export function ProjectCard({
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {techStack.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-sm text-xs font-medium text-primary"
-                            >
+                            <Badge key={tech} variant="primary">
                               {tech}
-                            </span>
+                            </Badge>
                           ))}
                         </div>
                       </div>
                     )}
                     <div className="flex items-center gap-4 pt-4 border-t border-border/20">
                       {liveUrl && (
-                        <a
-                          href={liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary font-semibold transition-all hover:scale-105"
-                        >
+                        <UiLink href={liveUrl} variant="primary" external>
                           <ExternalLink className="w-4 h-4" />
                           <span className="text-sm">Live Demo</span>
-                        </a>
+                        </UiLink>
                       )}
                       {githubUrl && (
-                        <a
-                          href={githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground font-semibold transition-all hover:scale-105"
-                        >
+                        <UiLink href={githubUrl} variant="ghost" external>
                           <Github className="w-4 h-4" />
                           <span className="text-sm">GitHub</span>
-                        </a>
+                        </UiLink>
                       )}
                     </div>
                   </div>
@@ -195,26 +182,16 @@ export function ProjectCard({
         {/* Project Links */}
         <div className="flex items-center gap-4 pt-2">
           {liveUrl && (
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary font-semibold transition-all hover:scale-105"
-            >
+            <UiLink href={liveUrl} variant="primary" external>
               <ExternalLink className="w-4 h-4" />
               <span className="text-sm">Live Demo</span>
-            </a>
+            </UiLink>
           )}
           {githubUrl && (
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground font-semibold transition-all hover:scale-105"
-            >
+            <UiLink href={githubUrl} variant="ghost" external>
               <Github className="w-4 h-4" />
               <span className="text-sm">GitHub</span>
-            </a>
+            </UiLink>
           )}
         </div>
       </div>

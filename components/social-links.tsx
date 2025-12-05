@@ -1,3 +1,6 @@
+import { Separator } from "./ui/separator";
+import { Button } from "./ui/button";
+
 interface SocialLink {
   name: string;
   url: string;
@@ -24,21 +27,24 @@ export function SocialLinks({
     <>
       {/* Divider */}
       <div className="flex items-center gap-4">
-        <div className="flex-1 h-px bg-border/30"></div>
+        <Separator className="flex-1" />
         <span className="text-sm text-muted-foreground">{orConnectText}</span>
-        <div className="flex-1 h-px bg-border/30"></div>
+        <Separator className="flex-1" />
       </div>
 
       {/* Social Links */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {links.map((link) => (
-          <a
+          <Button
             key={link.name}
-            href={link.url}
-            className="px-4 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary font-semibold transition-all hover:scale-105 text-center text-sm md:text-base"
+            asChild
+            variant="outline"
+            className="border-primary/30 bg-primary/10 hover:bg-primary/20 text-primary hover:scale-105"
           >
-            {link.name}
-          </a>
+            <a href={link.url} target="_blank" rel="noopener noreferrer">
+              {link.name}
+            </a>
+          </Button>
         ))}
       </div>
 

@@ -10,6 +10,8 @@ import {
   DrawerTrigger,
   DrawerClose,
 } from "./ui/drawer";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 
 interface TimelineItemProps {
   company: string;
@@ -40,7 +42,7 @@ export function TimelineItem({
         <div>
           <div className="flex items-center gap-2 justify-between">
           <h3 className="text-h3 text-foreground">{position}</h3>
-          <span className="text-body-sm text-primary font-semibold bg-primary/10 px-3 py-1.5 rounded-full">{period}</span>
+          <Badge variant="primary" size="sm">{period}</Badge>
           </div>
 
           <p className="text-body-lg text-primary font-semibold">{company}</p>
@@ -53,10 +55,10 @@ export function TimelineItem({
           {hasMultipleLines && (
             <Drawer open={isOpen} onOpenChange={setIsOpen} direction="right">
               <DrawerTrigger asChild>
-                <button className="text-accent font-semibold text-body-sm hover:opacity-80 transition-opacity inline-flex items-center gap-1 cursor-pointer">
+                <Button variant="ghost" size="sm">
                   <span>Read more</span>
                   <ChevronLeft className="w-4 h-4" />
-                </button>
+                </Button>
               </DrawerTrigger>
               <DrawerContentSide>
                 <div className="overflow-y-auto h-full">
@@ -72,9 +74,9 @@ export function TimelineItem({
                         </p>
                       </div>
                       <DrawerClose asChild>
-                        <button className="p-2 hover:bg-muted rounded-md transition-colors">
+                        <Button variant="ghost" size="icon">
                           <X className="w-5 h-5" />
-                        </button>
+                        </Button>
                       </DrawerClose>
                     </div>
                   </DrawerHeader>
@@ -95,12 +97,9 @@ export function TimelineItem({
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {skills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-sm text-xs font-medium text-primary"
-                          >
+                          <Badge key={skill} variant="primary">
                             {skill}
-                          </span>
+                          </Badge>
                         ))}
                       </div>
                     </div>
@@ -113,12 +112,9 @@ export function TimelineItem({
 
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
-            <span
-              key={skill}
-              className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-sm text-xs font-medium text-primary"
-            >
+            <Badge key={skill} variant="primary">
               {skill}
-            </span>
+            </Badge>
           ))}
         </div>
       </div>

@@ -6,7 +6,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -68,90 +71,57 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-semibold text-foreground mb-3"
-          >
-            {t("form.yourName")}
-          </label>
-          <input
+        <div className="space-y-2">
+          <Label htmlFor="name">{t("form.yourName")}</Label>
+          <Input
             type="text"
             id="name"
             {...register("name")}
-            className={`w-full px-4 py-3 bg-background border rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors ${
-              errors.name ? "border-destructive" : "border-border/30"
-            }`}
+            variant={errors.name ? "error" : "default"}
             placeholder={t("form.namePlaceholder")}
           />
           {errors.name && (
-            <p className="mt-1 text-sm text-destructive">
-              {errors.name.message}
-            </p>
+            <p className="text-sm text-destructive">{errors.name.message}</p>
           )}
         </div>
 
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-semibold text-foreground mb-3"
-          >
-            {t("form.emailAddress")}
-          </label>
-          <input
+        <div className="space-y-2">
+          <Label htmlFor="email">{t("form.emailAddress")}</Label>
+          <Input
             type="email"
             id="email"
             {...register("email")}
-            className={`w-full px-4 py-3 bg-background border rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors ${
-              errors.email ? "border-destructive" : "border-border/30"
-            }`}
+            variant={errors.email ? "error" : "default"}
             placeholder={t("form.emailPlaceholder")}
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-destructive">
-              {errors.email.message}
-            </p>
+            <p className="text-sm text-destructive">{errors.email.message}</p>
           )}
         </div>
       </div>
 
-      <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-semibold text-foreground mb-3"
-        >
-          {t("form.message")}
-        </label>
-        <textarea
+      <div className="space-y-2">
+        <Label htmlFor="message">{t("form.message")}</Label>
+        <Textarea
           id="message"
           {...register("message")}
-          rows={5}
-          className={`w-full px-4 py-3 bg-background border rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none ${
-            errors.message ? "border-destructive" : "border-border/30"
-          }`}
+          variant={errors.message ? "error" : "default"}
           placeholder={t("form.messagePlaceholder")}
+          rows={5}
         />
         {errors.message && (
-          <p className="mt-1 text-sm text-destructive">
-            {errors.message.message}
-          </p>
+          <p className="text-sm text-destructive">{errors.message.message}</p>
         )}
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
+        loading={isSubmitting}
+        className="w-full"
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Sending...</span>
-          </>
-        ) : (
-          t("form.sendMessage")
-        )}
-      </button>
+        {t("form.sendMessage")}
+      </Button>
     </form>
   );
 }

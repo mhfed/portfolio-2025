@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,14 +35,15 @@ export function FloatingCTA() {
 
   return (
     <div className="fixed bottom-6 left-6 z-50">
-      <button
+      <Button
         onClick={handleDownload}
-        className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold rounded-md transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
+        variant="gradient"
+        size="lg"
         aria-label={t("downloadResume")}
       >
         <Download className="w-5 h-5" />
         <span className="hidden sm:inline">{t("downloadResume")}</span>
-      </button>
+      </Button>
     </div>
   );
 }

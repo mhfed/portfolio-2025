@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function ResumeDownloadButton() {
   const t = useTranslations("header");
@@ -17,13 +18,14 @@ export function ResumeDownloadButton() {
   };
 
   return (
-    <button
+    <Button
       onClick={handleDownload}
-      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-bold rounded-md transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
+      variant="gradient"
+      size="lg"
       aria-label={t("downloadResume")}
     >
       <Download className="w-5 h-5" />
       <span>{t("downloadResume")}</span>
-    </button>
+    </Button>
   );
 }
