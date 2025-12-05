@@ -38,6 +38,7 @@ export function HeroTypingText({
         wrapper.style.display = "inline-block";
         wrapper.style.position = "relative";
         wrapper.style.paddingRight = "2px"; // Add small padding to prevent clipping
+        wrapper.style.marginRight = "0.05em"; // Add small spacing between characters
 
         // Create stroke layer (always visible)
         const stroke = document.createElement("span");
