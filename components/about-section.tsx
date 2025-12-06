@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { SectionTitleWrapper } from "./section-title-wrapper";
+import { Badge } from "./ui/badge";
 
 export async function AboutSection() {
   const t = await getTranslations("about");
@@ -7,7 +8,7 @@ export async function AboutSection() {
   return (
     <section
       id="about"
-      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
+      className="flex flex-col justify-center py-8 md:py-12 lg:py-16 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
@@ -18,16 +19,16 @@ export async function AboutSection() {
       <SectionTitleWrapper title={t("title")} sectionId="about" mobileOnly />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
           {/* Desktop: Title in grid */}
           <SectionTitleWrapper title={t("title")} desktopOnly />
 
           {/* Right Column - Content */}
           <div className="md:col-span-3">
             <div className="scroll-animate">
-              <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+              <div className="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-center">
                 {/* Left Content */}
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                   <p className="text-body-lg text-foreground">
                     {t("description1")}
                   </p>
@@ -37,36 +38,27 @@ export async function AboutSection() {
                     </h3>
                     <div className="grid grid-cols-2 gap-3">
                       {[
-                        { name: "JavaScript", color: "yellow" },
-                        { name: "TypeScript", color: "cyan" },
-                        { name: "React.js", color: "primary" },
-                        { name: "Next.js", color: "pink" },
-                        { name: "Redux", color: "purple" },
-                        { name: "React Native", color: "green" },
-                      ].map((skill) => {
-                        const colorClasses = {
-                          primary: "bg-primary/10 border-primary/30 text-primary",
-                          cyan: "bg-[var(--cyan)]/10 border-[var(--cyan)]/30 text-[var(--cyan)]",
-                          green: "bg-[var(--green)]/10 border-[var(--green)]/30 text-[var(--green)]",
-                          yellow: "bg-[var(--yellow)]/10 border-[var(--yellow)]/30 text-[var(--yellow)]",
-                          pink: "bg-[var(--pink)]/10 border-[var(--pink)]/30 text-[var(--pink)]",
-                          purple: "bg-primary/10 border-primary/30 text-primary",
-                        };
-                        return (
-                          <div
-                            key={skill.name}
-                            className={`px-4 py-2 border rounded-sm font-semibold ${colorClasses[skill.color as keyof typeof colorClasses]}`}
-                          >
-                            {skill.name}
-                          </div>
-                        );
-                      })}
+                        { name: "JavaScript", variant: "yellow" as const },
+                        { name: "TypeScript", variant: "cyan" as const },
+                        { name: "React.js", variant: "primary" as const },
+                        { name: "Next.js", variant: "pink" as const },
+                        { name: "Redux", variant: "primary" as const },
+                        { name: "React Native", variant: "green" as const },
+                      ].map((skill) => (
+                        <Badge
+                          key={skill.name}
+                          variant={skill.variant}
+                          className="font-semibold"
+                        >
+                          {skill.name}
+                        </Badge>
+                      ))}
                     </div>
                   </div>
                 </div>
 
                 {/* Right Content - Stats */}
-                <div className="space-y-8">
+                <div className="space-y-6 md:space-y-8">
                   <div className="bg-background border border-primary/50 rounded-lg p-8 hover:border-[var(--green)]/50 transition-colors">
                     <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                       5+

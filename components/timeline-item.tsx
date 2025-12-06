@@ -38,7 +38,7 @@ export function TimelineItem({
     <div className="scroll-animate relative pl-8 pb-8 border-l-2 border-primary/30 last:pb-0">
       <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full transform -translate-x-1.5"></div>
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         <div>
           <div className="flex items-center gap-2 justify-between">
           <h3 className="text-h3 text-foreground">{position}</h3>
@@ -48,7 +48,7 @@ export function TimelineItem({
           <p className="text-body-lg text-primary font-semibold">{company}</p>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           <div className="text-foreground text-body line-clamp-2">
             <p>{description}</p>
           </div>

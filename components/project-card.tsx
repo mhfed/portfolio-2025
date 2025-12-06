@@ -57,7 +57,7 @@ export function ProjectCard({
 
   return (
     <div
-      className={`grid md:grid-cols-2 gap-8 items-center scroll-animate ${
+      className={`grid md:grid-cols-2 gap-4 md:gap-6 items-center scroll-animate ${
         isAlternate ? "md:[&>*:first-child]:order-2" : ""
       }`}
     >
@@ -74,7 +74,7 @@ export function ProjectCard({
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
       </div>
-      <div className="space-y-4">
+      <div className="space-y-3">
         <div>
           <h3 className="text-h3 text-primary">{title}</h3>
           <p className="text-body-sm text-muted-foreground">{year}</p>

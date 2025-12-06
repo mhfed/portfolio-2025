@@ -9,7 +9,7 @@ export async function ProjectsSection() {
   const t = await getTranslations("projects");
 
   // Fetch projects from database, ordered by createdAt descending
-  let dbProjects = [];
+  let dbProjects: typeof projects.$inferSelect[] = [];
   try {
     dbProjects = await db
       .select()
@@ -23,7 +23,7 @@ export async function ProjectsSection() {
   }
 
   // Map database results to match ProjectCard interface
-  const mappedProjects = dbProjects.map((project) => ({
+  const mappedProjects = dbProjects.map((project: typeof projects.$inferSelect) => ({
     image: project.imageUrl,
     title: project.title,
     year: project.year || "",
@@ -37,7 +37,7 @@ export async function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
+      className="flex flex-col justify-center py-8 md:py-12 lg:py-16 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
@@ -48,12 +48,12 @@ export async function ProjectsSection() {
       <SectionTitleWrapper title={t("title")} sectionId="projects" mobileOnly />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
           {/* Desktop: Title in grid */}
           <SectionTitleWrapper title={t("title")} desktopOnly />
 
           {/* Right Column - Projects */}
-          <div className="md:col-span-3 space-y-12 md:space-y-16 lg:space-y-20">
+          <div className="md:col-span-3 space-y-6 md:space-y-8 lg:space-y-10">
             {mappedProjects.length === 0 ? (
               <p className="text-muted-foreground text-center py-12">
                 {t("noProjects") || "No projects available yet."}

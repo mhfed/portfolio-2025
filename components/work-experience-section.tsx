@@ -38,7 +38,7 @@ export async function WorkExperienceSection() {
   return (
     <section
       id="experience"
-      className="min-h-screen flex flex-col justify-center py-12 md:py-16 lg:py-24 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
+      className="flex flex-col justify-center py-8 md:py-12 lg:py-16 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
@@ -53,7 +53,7 @@ export async function WorkExperienceSection() {
       />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
           {/* Desktop: Title in grid */}
           <SectionTitleWrapper title={t("title")} desktopOnly />
 
@@ -61,7 +61,7 @@ export async function WorkExperienceSection() {
           <div className="md:col-span-3">
             <div className="space-y-6">
               {dbExperiences.map((exp, idx) => (
-                <TimelineItem key={idx} {...exp} />
+                <TimelineItem key={idx} {...exp} skills={exp.skills || []} />
               ))}
             </div>
           </div>

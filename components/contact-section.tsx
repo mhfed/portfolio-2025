@@ -3,6 +3,10 @@
 import type React from "react";
 
 import { useState } from "react";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Label } from "./ui/label";
+import { Button } from "./ui/button";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -42,7 +46,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 px-6 scroll-mt-20 relative overflow-hidden">
+    <section id="contact" className="py-8 md:py-12 lg:py-16 px-6 scroll-mt-20 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[var(--cyan)]/5 via-transparent to-[var(--green)]/5" />
@@ -56,86 +60,68 @@ export function ContactSection() {
           <span className="text-[var(--cyan)] text-h2 font-bold">/&gt;</span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 items-center">
           {/* Contact Form */}
           <div className="bg-background-secondary dark:bg-background/50 border border-[var(--cyan)]/50 rounded-lg p-8 md:p-10 hover:border-[var(--green)]/50 transition-colors">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Your Name
-                </label>
-                <input
+              <div className="space-y-2">
+                <Label htmlFor="name">Your Name</Label>
+                <Input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
                   placeholder="John Doe"
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Email Address
-                </label>
-                <input
+              <div className="space-y-2">
+                <Label htmlFor="email">Email Address</Label>
+                <Input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
                   placeholder="john@example.com"
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Message
-                </label>
-                <textarea
+              <div className="space-y-2">
+                <Label htmlFor="message">Message</Label>
+                <Textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
                   placeholder="Your message here..."
                 />
               </div>
 
-              <button
+              <Button
                 type="submit"
                 disabled={submitted}
-                className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full"
               >
                 {submitted ? "Message Sent!" : "Send Message"}
-              </button>
+              </Button>
             </form>
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6 md:gap-8">
             <div>
               <h3 className="text-xl font-bold text-foreground mb-6">
                 Connect With Me
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((link, idx) => {
-                  const colors = [
+                  const colorClasses = [
                     "bg-primary/10 hover:bg-primary/20 border-primary/30 text-primary",
                     "bg-[var(--cyan)]/10 hover:bg-[var(--cyan)]/20 border-[var(--cyan)]/30 text-[var(--cyan)]",
                     "bg-[var(--green)]/10 hover:bg-[var(--green)]/20 border-[var(--green)]/30 text-[var(--green)]",
@@ -143,19 +129,22 @@ export function ContactSection() {
                     "bg-[var(--orange)]/10 hover:bg-[var(--orange)]/20 border-[var(--orange)]/30 text-[var(--orange)]",
                   ];
                   return (
-                    <a
+                    <Button
                       key={link.name}
-                      href={link.url}
-                      className={`px-6 py-4 border rounded-md font-semibold transition-all hover:scale-105 text-center ${colors[idx % colors.length]}`}
+                      variant="outline"
+                      asChild
+                      className={`${colorClasses[idx % colorClasses.length]} font-semibold hover:scale-105`}
                     >
-                      {link.name}
-                    </a>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                        {link.name}
+                      </a>
+                    </Button>
                   );
                 })}
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               <h3 className="text-lg font-bold text-foreground">
                 Other Ways To Reach Me
               </h3>

@@ -15,7 +15,7 @@ export async function LetsCollaborateSection() {
   return (
     <section
       id="collaborate"
-      className="py-12 md:py-16 lg:py-24 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
+      className="py-8 md:py-12 lg:py-16 px-4 md:px-6 scroll-mt-0 relative overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20">
@@ -30,7 +30,7 @@ export async function LetsCollaborateSection() {
       />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid md:grid-cols-4 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
           {/* Desktop: Title in grid */}
           <SectionTitleWrapper title={t("title")} desktopOnly />
 
@@ -49,14 +49,14 @@ export async function LetsCollaborateSection() {
         </div>
 
         {/* Footer - Copyright and Social Links */}
-        <div className="mt-16 md:mt-24 pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="mt-8 md:mt-12 pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           {/* Copyright */}
           <div className="text-body-sm text-foreground/60">
             Copyright © 2025 Nguyen Minh Hieu. All Rights Reserved
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-4">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
