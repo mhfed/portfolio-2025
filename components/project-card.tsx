@@ -46,7 +46,7 @@ export function ProjectCard({
         <div className='flex-1 space-y-2'>
           <div className='flex items-start justify-between gap-4'>
             <div>
-              <h3 className='text-h4 text-foreground font-semibold mb-1'>
+              <h3 className='text-lg md:text-xl lg:text-2xl text-foreground font-semibold mb-1'>
                 {title}
               </h3>
               {year && (
@@ -56,7 +56,7 @@ export function ProjectCard({
               )}
             </div>
           </div>
-          <p className='text-body text-foreground/80 leading-relaxed'>
+          <p className='text-sm md:text-base lg:text-base text-foreground/80 leading-relaxed'>
             {description}
           </p>
           {techStack && techStack.length > 0 && (
@@ -75,7 +75,7 @@ export function ProjectCard({
                   href={liveUrl}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-body-sm text-primary hover:underline flex items-center gap-1'
+                  className='text-xs md:text-sm lg:text-sm text-primary hover:underline flex items-center gap-1'
                 >
                   View Project
                   <ExternalLink className='w-3 h-3' />
@@ -86,7 +86,7 @@ export function ProjectCard({
                   href={githubUrl}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-body-sm text-foreground/70 hover:text-foreground hover:underline flex items-center gap-1'
+                  className='text-xs md:text-sm lg:text-sm text-foreground/70 hover:text-foreground hover:underline flex items-center gap-1'
                 >
                   GitHub
                   <ExternalLink className='w-3 h-3' />

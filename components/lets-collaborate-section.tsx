@@ -8,18 +8,18 @@ export async function LetsCollaborateSection() {
 
   return (
     <section id='collaborate' className='px-4 md:px-6'>
-      <div className='max-w-4xl mx-auto'>
+      <div className='max-w-5xl mx-auto'>
         <SectionTitle title={t('title')} />
         <div className='space-y-12'>
           {/* Email */}
           <div className='space-y-4'>
-            <p className='text-body-lg text-foreground/70'>
+            <p className='text-base md:text-lg lg:text-xl text-foreground/70'>
               {t('description') ||
                 "Have an exciting project in mind? I'd love to hear about it."}
             </p>
             <a
               href={`mailto:${tContact('email')}`}
-              className='text-body-lg md:text-h4 text-foreground hover:text-primary transition-colors inline-block'
+              className='text-base md:text-lg lg:text-xl md:lg:text-2xl text-foreground hover:text-primary transition-colors inline-block'
             >
               {tContact('email')}
             </a>
@@ -32,7 +32,7 @@ export async function LetsCollaborateSection() {
 
           {/* Footer - Copyright */}
           <div className='pt-8 border-t border-border/30'>
-            <div className='text-body-sm text-foreground/60 text-center md:text-left'>
+            <div className='text-xs md:text-sm lg:text-sm text-foreground/60 text-center md:text-left'>
               Copyright © 2025 Nguyen Minh Hieu. All Rights Reserved
             </div>
           </div>

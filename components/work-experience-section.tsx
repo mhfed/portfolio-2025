@@ -38,7 +38,7 @@ export async function WorkExperienceSection() {
 
   return (
     <section id='experience' className='px-4 md:px-6'>
-      <div className='max-w-4xl mx-auto md:flex gap-8'>
+      <div className='max-w-5xl mx-auto md:flex gap-8'>
         {/* Left: Title */}
         <div className='w-fit'>
           <SectionTitle

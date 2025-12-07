@@ -8,11 +8,13 @@ import { ScrollObserver } from '@/components/scroll-observer';
 import { ScrollToTop } from '@/components/scroll-to-top';
 import { FloatingCTA } from '@/components/floating-cta';
 import { Separator } from '@/components/ui/separator';
+import { ScrollProgress } from '@/components/ui/scroll-progress';
 
 export default function Home() {
   return (
     <main className='w-full scroll-smooth pb-20 md:pb-24 lg:pb-28'>
-      <ScrollObserver />
+      {/* <ScrollObserver /> */}
+
       <Header />
 
       {/* Hero Section */}

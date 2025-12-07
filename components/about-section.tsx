@@ -7,14 +7,14 @@ export async function AboutSection() {
 
   return (
     <section id='about' className='px-4 md:px-6'>
-      <div className='max-w-4xl mx-auto'>
+      <div className='max-w-5xl mx-auto'>
         <SectionTitle title={t('title')} />
         <div className='space-y-6'>
-          <p className='text-body-lg text-foreground/80 leading-relaxed'>
+          <p className='text-base md:text-lg lg:text-xl text-foreground/80 leading-relaxed'>
             {t('description1')}
           </p>
           <div>
-            <h3 className='text-h4 text-foreground mb-4 font-semibold'>
+            <h3 className='text-lg md:text-xl lg:text-2xl text-foreground mb-4 font-semibold'>
               {t('coreSkills')}
             </h3>
             <div className='space-y-2'>
