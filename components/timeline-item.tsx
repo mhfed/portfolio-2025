@@ -28,7 +28,9 @@ export function TimelineItem({
             {period}
           </Badge>
         </div>
-        <p className='text-body-lg text-foreground/70 mb-2'>{position}</p>
+        <p className='text-body-lg text-foreground/80 leading-relaxed italic mb-2'>
+          {position}
+        </p>
 
         <p className='text-body text-foreground/80 leading-relaxed line-clamp-2'>
           {description}

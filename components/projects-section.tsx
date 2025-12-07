@@ -37,7 +37,7 @@ export async function ProjectsSection() {
   );
 
   return (
-    <section id='projects' className=''>
+    <section id='projects' className='px-4 md:px-6'>
       <div className='max-w-4xl mx-auto'>
         <SectionTitle title={t('title')} />
         <div className='space-y-8'>

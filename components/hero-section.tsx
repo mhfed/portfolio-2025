@@ -6,7 +6,7 @@ import { HeroTextBlocks } from './hero-text-blocks';
 import { ResumeDownloadButton } from './resume-download-button';
 import { Button } from './ui/button';
 import { TechMarquee } from './tech-marquee';
-import { HeroSocialsDock } from './hero-socials-dock';
+import { SocialsDock } from './socials-dock';
 
 export async function HeroSection() {
   const t = await getTranslations('hero');
@@ -40,7 +40,7 @@ export async function HeroSection() {
             <div className='mt-4 md:mt-8 flex flex-col items-start md:items-end gap-6'>
               <ResumeDownloadButton />
               <div className='flex items-center gap-4'>
-                <HeroSocialsDock />
+                <SocialsDock />
               </div>
             </div>
           </div>
