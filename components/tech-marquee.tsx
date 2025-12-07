@@ -1,82 +1,75 @@
-import StackIcon from "tech-stack-icons";
+import { cn } from "@/lib/utils";
+import { Marquee } from "./ui/marquee";
+import StackIcon, { IconName } from "tech-stack-icons";
+import { Database, Smartphone } from "lucide-react";
+import { ComponentType } from "react";
 
-const technologies = [
-  { name: "React", iconName: "react" as const, color: "primary" },
-  { name: "Next.js", iconName: "nextjs" as const, color: "pink" },
-  { name: "TypeScript", iconName: "typescript" as const, color: "cyan" },
-  { name: "Tailwind CSS", iconName: "tailwindcss" as const, color: "green" },
-  { name: "JavaScript", iconName: "js" as const, color: "yellow" },
-  { name: "HTML5", iconName: "html5" as const, color: "orange" },
-  { name: "CSS3", iconName: "css3" as const, color: "primary" },
-  { name: "jQuery", iconName: "jquery" as const, color: "pink" },
+interface TechItem {
+  name: string;
+  iconName?: IconName;
+  IconComponent?: ComponentType<{ className?: string }>;
+}
+
+const technologies: TechItem[] = [
+  { name: "React", iconName: "react" },
+  { name: "Next.js", iconName: "nextjs" },
+  { name: "TypeScript", iconName: "typescript" },
+  { name: "JavaScript", iconName: "javascript" },
+  { name: "Tailwind CSS", iconName: "tailwindcss" },
+  { name: "Node.js", iconName: "nodejs" },
+  { name: "Redux", iconName: "redux" },
+  { name: "React Native", IconComponent: Smartphone },
+  { name: "HTML", iconName: "html5" },
+  { name: "CSS", iconName: "css3" },
+  { name: "Git", iconName: "git" },
+  { name: "Vercel", iconName: "vercel" },
+  { name: "PostgreSQL", iconName: "postgresql" },
+  { name: "Drizzle", IconComponent: Database },
 ];
 
-const colorClasses = {
-  primary: "bg-primary/10 border-primary/30 text-primary hover:bg-primary/20 hover:border-primary/50",
-  cyan: "bg-[var(--cyan)]/10 border-[var(--cyan)]/30 text-[var(--cyan)] hover:bg-[var(--cyan)]/20 hover:border-[var(--cyan)]/50",
-  green: "bg-[var(--green)]/10 border-[var(--green)]/30 text-[var(--green)] hover:bg-[var(--green)]/20 hover:border-[var(--green)]/50",
-  yellow: "bg-[var(--yellow)]/10 border-[var(--yellow)]/30 text-[var(--yellow)] hover:bg-[var(--yellow)]/20 hover:border-[var(--yellow)]/50",
-  orange: "bg-[var(--orange)]/10 border-[var(--orange)]/30 text-[var(--orange)] hover:bg-[var(--orange)]/20 hover:border-[var(--orange)]/50",
-  pink: "bg-[var(--pink)]/10 border-[var(--pink)]/30 text-[var(--pink)] hover:bg-[var(--pink)]/20 hover:border-[var(--pink)]/50",
+const firstRow = technologies.slice(0, Math.ceil(technologies.length / 2));
+const secondRow = technologies.slice(Math.ceil(technologies.length / 2));
+
+const TechCard = ({ name, iconName, IconComponent }: TechItem) => {
+  return (
+    <div
+      className={cn(
+        "relative flex flex-row items-center gap-3 px-4 py-3 cursor-pointer rounded-full border transition-all duration-300 shrink-0",
+        // light styles
+        "border-border/50 bg-background/50 hover:bg-background hover:border-primary/50",
+        // dark styles
+        "dark:border-border/50 dark:bg-background/30 dark:hover:bg-background/50 dark:hover:border-primary/50",
+      )}
+    >
+      <div className="w-6 h-6 shrink-0 flex items-center justify-center">
+        {IconComponent ? (
+          <IconComponent className="w-full h-full text-foreground/80" />
+        ) : iconName ? (
+          <StackIcon name={iconName as IconName} className="w-full h-full" />
+        ) : null}
+      </div>
+      <span className="text-sm font-medium text-foreground/80 whitespace-nowrap">
+        {name}
+      </span>
+    </div>
+  );
 };
 
 export function TechMarquee() {
   return (
-    <div className="w-full relative overflow-hidden border-y border-border/20 backdrop-blur-sm">
-      {/* Gradient overlays for fade effect */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-
-      <div className="py-10 md:py-12">
-        {/* First row - left to right */}
-        <div className="flex gap-4 mb-6 animate-marquee whitespace-nowrap">
-          {[...technologies, ...technologies].map((tech, i) => (
-            <div
-              key={`row1-${i}`}
-              className={`group shrink-0 px-4 md:px-6 py-2 md:py-3 rounded-md border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2  ${
-                colorClasses[tech.color as keyof typeof colorClasses]
-              }`}
-            >
-              <div className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0">
-                <StackIcon
-                  name={tech.iconName}
-                  variant="dark"
-                  className="w-full h-full"
-                />
-              </div>
-              <span className="text-sm md:text-base lg:text-lg font-semibold tracking-tight">
-                {tech.name}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Second row - right to left */}
-        <div className="flex gap-4 animate-marquee-reverse whitespace-nowrap">
-          {[...technologies]
-            .reverse()
-            .concat([...technologies].reverse())
-            .map((tech, i) => (
-              <div
-                key={`row2-${i}`}
-                className={`group shrink-0 px-4 md:px-6 py-2 md:py-3 rounded-md border backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg  flex items-center gap-2 ${
-                  colorClasses[tech.color as keyof typeof colorClasses]
-                }`}
-              >
-                <div className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0">
-                  <StackIcon
-                    name={tech.iconName}
-                    variant="dark"
-                    className="w-full h-full"
-                  />
-                </div>
-                <span className="text-sm md:text-base lg:text-lg font-semibold tracking-tight">
-                  {tech.name}
-                </span>
-              </div>
-            ))}
-        </div>
-      </div>
+    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden py-8 ">
+      <Marquee pauseOnHover className="[--duration:20s]">
+        {firstRow.map((tech) => (
+          <TechCard key={tech.name} {...tech} />
+        ))}
+      </Marquee>
+      <Marquee reverse pauseOnHover className="[--duration:20s]">
+        {secondRow.map((tech) => (
+          <TechCard key={tech.name} {...tech} />
+        ))}
+      </Marquee>
+      <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r"></div>
+      <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l"></div>
     </div>
   );
 }

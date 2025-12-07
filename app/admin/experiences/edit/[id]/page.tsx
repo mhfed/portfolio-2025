@@ -25,7 +25,9 @@ export default async function EditExperiencePage({
   return (
     <div className="mx-auto w-full max-w-2xl space-y-6">
       <div>
-        <h2 className="text-lg font-semibold text-foreground">Edit experience</h2>
+        <h2 className="text-lg font-semibold text-foreground">
+          Edit experience
+        </h2>
         <p className="text-sm text-muted-foreground">
           Update the information for this work experience entry.
         </p>

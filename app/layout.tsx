@@ -3,7 +3,6 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import { GlobalGridPattern } from "@/components/global-grid-pattern";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -33,11 +32,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${spaceGrotesk.variable} bg-background text-foreground`}
       >
-        <GlobalGridPattern />
         <ThemeProvider>{children}</ThemeProvider>
         <Toaster />
       </body>
     </html>
   );
 }
-

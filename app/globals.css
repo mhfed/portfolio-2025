@@ -14,19 +14,19 @@
   --font-size-display-lg: 4.5rem; /* 72px desktop */
 
   /* H1: Main headings */
-  --font-size-h1: 1.64rem; /* 26px mobile */
-  --font-size-h1-md: 2.05rem; /* 33px tablet */
-  --font-size-h1-lg: 2.56rem; /* 41px desktop */
+  --font-size-h1: 1.8rem; /* 28.8px mobile */
+  --font-size-h1-md: 2.25rem; /* 36px tablet */
+  --font-size-h1-lg: 2.8rem; /* 44.8px desktop */
 
   /* H2: Section titles */
-  --font-size-h2: 1.31rem; /* 21px mobile */
-  --font-size-h2-md: 1.64rem; /* 26px tablet */
-  --font-size-h2-lg: 2.05rem; /* 33px desktop */
+  --font-size-h2: 1.44rem; /* 23px mobile */
+  --font-size-h2-md: 1.8rem; /* 28.8px tablet */
+  --font-size-h2-lg: 2.25rem; /* 36px desktop */
 
   /* H3: Subsection titles */
-  --font-size-h3: 1.05rem; /* 17px mobile */
-  --font-size-h3-md: 1.31rem; /* 21px tablet */
-  --font-size-h3-lg: 1.64rem; /* 26px desktop */
+  --font-size-h3: 1.15rem; /* 18.4px mobile */
+  --font-size-h3-md: 1.44rem; /* 23px tablet */
+  --font-size-h3-lg: 1.8rem; /* 28.8px desktop */
 
   /* H4: Card titles */
   --font-size-h4: 1.05rem; /* 17px mobile */
@@ -54,10 +54,10 @@
   --font-size-caption-lg: 0.75rem; /* 12px desktop */
 
   /* Line Heights */
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.6;
-  --line-height-loose: 1.7;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 1.85;
 
   /* Letter Spacing */
   --letter-spacing-tighter: -0.05em;
@@ -71,130 +71,134 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-black: 900;
-  /* Dracula Light Mode (Inverted) - OKLCH values */
-  /* Background: #f8f8f2 */
-  --background: oklch(0.97 0.005 90);
-  /* Foreground: #282a36 */
-  --foreground: oklch(0.18 0.01 250);
-  /* Card/Popover: Same as background */
-  --card: oklch(0.97 0.005 90);
-  --card-foreground: oklch(0.18 0.01 250);
-  --popover: oklch(0.97 0.005 90);
-  --popover-foreground: oklch(0.18 0.01 250);
-  /* Primary: #bd93f9 (Purple) */
-  --primary: oklch(0.75 0.15 280);
-  /* Primary foreground: #f8f8f2 */
-  --primary-foreground: oklch(0.97 0.005 90);
-  /* Secondary: #44475a (Current Line) */
-  --secondary: oklch(0.28 0.01 250);
-  /* Secondary foreground: #f8f8f2 */
-  --secondary-foreground: oklch(0.97 0.005 90);
-  /* Muted: Lighter version of Comment for light mode */
-  --muted: oklch(0.94 0.01 250);
-  /* Muted foreground: #6272a4 (Comment) */
-  --muted-foreground: oklch(0.45 0.05 250);
-  /* Accent: #8be9fd (Cyan) */
-  --accent: oklch(0.78 0.12 200);
-  /* Accent foreground: #282a36 */
-  --accent-foreground: oklch(0.18 0.01 250);
-  /* Destructive: #ff5555 (Red) */
+  /* Neon High-Tech Light Mode - OKLCH values */
+  /* Background: Off-white/light gray - neutral base cho neon colors */
+  --background: oklch(0.98 0.01 0);
+  /* Foreground: Deep dark với high contrast */
+  --foreground: oklch(0.15 0.02 0);
+  /* Card/Popover: Slightly off-white */
+  --card: oklch(0.99 0.01 0);
+  --card-foreground: oklch(0.15 0.02 0);
+  --popover: oklch(0.99 0.01 0);
+  --popover-foreground: oklch(0.15 0.02 0);
+  /* Primary: Neon yellow-green/lime - vàng xanh sáng (brighter cho light mode) */
+  --primary: oklch(0.7 0.3 120);
+  /* Primary foreground: Deep dark */
+  --primary-foreground: oklch(0.15 0.02 0);
+  /* Secondary: Neon magenta/pink */
+  --secondary: oklch(0.55 0.25 330);
+  /* Secondary foreground: Deep dark */
+  --secondary-foreground: oklch(0.15 0.02 0);
+  /* Muted: Light gray */
+  --muted: oklch(0.92 0.01 0);
+  /* Muted foreground: Medium dark */
+  --muted-foreground: oklch(0.4 0.02 0);
+  /* Accent: Neon green */
+  --accent: oklch(0.6 0.25 150);
+  /* Accent foreground: Deep dark */
+  --accent-foreground: oklch(0.15 0.02 0);
+  /* Destructive: Red (kept for errors) */
   --destructive: oklch(0.65 0.22 15);
-  /* Destructive foreground: #f8f8f2 */
-  --destructive-foreground: oklch(0.97 0.005 90);
-  /* Border/Input/Ring: Adjusted for better contrast */
-  --border: oklch(0.80 0.01 250);
-  --input: oklch(0.95 0.005 90);
-  --ring: oklch(0.75 0.15 280);
-  /* Chart colors using Dracula palette */
-  --chart-1: oklch(0.75 0.15 280); /* Purple */
-  --chart-2: oklch(0.78 0.12 200); /* Cyan */
-  --chart-3: oklch(0.70 0.20 330); /* Pink */
-  --chart-4: oklch(0.80 0.15 70); /* Green */
-  --chart-5: oklch(0.85 0.12 85); /* Orange */
-  /* Additional Dracula colors for variety */
-  --green: oklch(0.80 0.15 70); /* #50fa7b - Green */
-  --green-foreground: oklch(0.18 0.01 250); /* Dark text on green */
-  --orange: oklch(0.85 0.12 85); /* #ffb86c - Orange */
-  --orange-foreground: oklch(0.18 0.01 250); /* Dark text on orange */
-  --yellow: oklch(0.90 0.10 95); /* #f1fa8c - Yellow */
-  --yellow-foreground: oklch(0.18 0.01 250); /* Dark text on yellow */
-  --pink: oklch(0.70 0.20 330); /* #ff79c6 - Pink */
-  --pink-foreground: oklch(0.97 0.005 90); /* Light text on pink */
-  --cyan: oklch(0.78 0.12 200); /* #8be9fd - Cyan */
-  --cyan-foreground: oklch(0.18 0.01 250); /* Dark text on cyan */
+  /* Destructive foreground: Cream */
+  --destructive-foreground: oklch(0.96 0.03 85);
+  /* Border/Input/Ring: Light gray with neon accents */
+  --border: oklch(0.88 0.01 0);
+  --input: oklch(0.95 0.01 0);
+  --ring: oklch(0.7 0.3 120);
+  /* Chart colors - neon palette */
+  --chart-1: oklch(0.55 0.25 220); /* Neon cyan */
+  --chart-2: oklch(0.55 0.25 330); /* Neon magenta */
+  --chart-3: oklch(0.6 0.25 150); /* Electric green */
+  --chart-4: oklch(0.55 0.25 300); /* Neon purple */
+  --chart-5: oklch(0.75 0.2 90); /* Neon yellow */
+  /* Accent colors - neon tones */
+  --green: oklch(0.6 0.25 150); /* Electric green */
+  --green-foreground: oklch(0.15 0.02 0);
+  --cyan: oklch(0.6 0.25 200); /* Bright neon cyan */
+  --cyan-foreground: oklch(0.15 0.02 0);
+  --purple: oklch(0.55 0.25 300); /* Neon purple */
+  --purple-foreground: oklch(0.15 0.02 0);
+  --blue: oklch(0.55 0.25 250); /* Electric blue */
+  --blue-foreground: oklch(0.15 0.02 0);
+  --magenta: oklch(0.55 0.25 330); /* Neon magenta */
+  --magenta-foreground: oklch(0.15 0.02 0);
+  --yellow: oklch(0.75 0.2 90); /* Neon yellow */
+  --yellow-foreground: oklch(0.15 0.02 0);
   --radius: 0.5rem;
   /* Sidebar colors */
-  --sidebar: oklch(0.97 0.005 90);
-  --sidebar-foreground: oklch(0.18 0.01 250);
-  --sidebar-primary: oklch(0.75 0.15 280);
-  --sidebar-primary-foreground: oklch(0.97 0.005 90);
-  --sidebar-accent: oklch(0.78 0.12 200);
-  --sidebar-accent-foreground: oklch(0.18 0.01 250);
-  --sidebar-border: oklch(0.85 0.01 250);
-  --sidebar-ring: oklch(0.75 0.15 280);
+  --sidebar: oklch(0.99 0.01 0);
+  --sidebar-foreground: oklch(0.15 0.02 0);
+  --sidebar-primary: oklch(0.7 0.3 120);
+  --sidebar-primary-foreground: oklch(0.15 0.02 0);
+  --sidebar-accent: oklch(0.55 0.25 330);
+  --sidebar-accent-foreground: oklch(0.15 0.02 0);
+  --sidebar-border: oklch(0.88 0.01 0);
+  --sidebar-ring: oklch(0.55 0.25 220);
 }
 
 .dark {
-  /* Dark Mode - Classic Dracula - OKLCH values */
-  /* Background: #282a36 */
-  --background: oklch(0.18 0.01 250);
-  /* Foreground: #f8f8f2 */
-  --foreground: oklch(0.97 0.005 90);
-  /* Card/Popover: Same as background */
-  --card: oklch(0.18 0.01 250);
-  --card-foreground: oklch(0.97 0.005 90);
-  --popover: oklch(0.18 0.01 250);
-  --popover-foreground: oklch(0.97 0.005 90);
-  /* Primary: #bd93f9 (Purple) */
-  --primary: oklch(0.92 0.24 126.52);
-  /* Primary foreground: #282a36 */
-  --primary-foreground: oklch(0.18 0.01 250);
-  /* Secondary: #44475a (Current Line) */
-  --secondary: oklch(0.28 0.01 250);
-  /* Secondary foreground: #f8f8f2 */
-  --secondary-foreground: oklch(0.7 0.2 145);
-  /* Muted: #44475a (Current Line) */
-  --muted: oklch(0.28 0.01 250);
-  /* Muted foreground: #6272a4 (Comment) */
-  --muted-foreground: oklch(0.45 0.05 250);
-  /* Accent: #ff79c6 (Pink) */
-  --accent: oklch(0.70 0.20 330);
-  /* Accent foreground: #f8f8f2 */
-  --accent-foreground: oklch(0.97 0.005 90);
-  /* Destructive: #ff5555 (Red) */
+  /* Dark Mode - Neon High-Tech (Primary Mode) - OKLCH values */
+  /* Background: Deep dark - almost black để neon nổi bật */
+  --background: oklch(0.1 0.02 0);
+  /* Foreground: Light gray/white - high contrast */
+  --foreground: oklch(0.95 0.01 0);
+  /* Card/Popover: Slightly lighter dark */
+  --card: oklch(0.12 0.02 0);
+  --card-foreground: oklch(0.95 0.01 0);
+  --popover: oklch(0.12 0.02 0);
+  --popover-foreground: oklch(0.95 0.01 0);
+  /* Primary: Very bright neon yellow-green/lime - vàng xanh sáng */
+  --primary: oklch(0.8 0.3 120);
+  /* Primary foreground: Dark background */
+  --primary-foreground: oklch(0.1 0.02 0);
+  /* Secondary: Bright neon magenta */
+  --secondary: oklch(0.7 0.3 330);
+  /* Secondary foreground: Dark background */
+  --secondary-foreground: oklch(0.1 0.02 0);
+  /* Muted: Medium dark */
+  --muted: oklch(0.2 0.02 0);
+  /* Muted foreground: Light gray */
+  --muted-foreground: oklch(0.8 0.01 0);
+  /* Accent: Bright neon green */
+  --accent: oklch(0.75 0.3 150);
+  /* Accent foreground: Dark background */
+  --accent-foreground: oklch(0.1 0.02 0);
+  /* Destructive: Red (kept for errors) */
   --destructive: oklch(0.65 0.22 15);
-  /* Destructive foreground: #f8f8f2 */
-  --destructive-foreground: oklch(0.97 0.005 90);
-  /* Border/Input/Ring: #44475a (Current Line) */
-  --border: oklch(0.28 0.01 250);
-  --input: oklch(0.22 0.01 250);
-  --ring: oklch(0.92 0.24 126.52);
-  /* Chart colors using Dracula palette */
-  --chart-1: oklch(0.75 0.15 280); /* Purple */
-  --chart-2: oklch(0.78 0.12 200); /* Cyan */
-  --chart-3: oklch(0.70 0.20 330); /* Pink */
-  --chart-4: oklch(0.80 0.15 70); /* Green */
-  --chart-5: oklch(0.85 0.12 85); /* Yellow */
-  /* Additional Dracula colors for variety */
-  --green: oklch(0.80 0.15 70); /* #50fa7b - Green */
-  --green-foreground: oklch(0.97 0.005 90); /* Light text on green */
-  --orange: oklch(0.85 0.12 85); /* #ffb86c - Orange */
-  --orange-foreground: oklch(0.18 0.01 250); /* Dark text on orange */
-  --yellow: oklch(0.90 0.10 95); /* #f1fa8c - Yellow */
-  --yellow-foreground: oklch(0.18 0.01 250); /* Dark text on yellow */
-  --pink: oklch(0.70 0.20 330); /* #ff79c6 - Pink */
-  --pink-foreground: oklch(0.97 0.005 90); /* Light text on pink */
-  --cyan: oklch(0.78 0.12 200); /* #8be9fd - Cyan */
-  --cyan-foreground: oklch(0.18 0.01 250); /* Dark text on cyan */
+  /* Destructive foreground: Light cream */
+  --destructive-foreground: oklch(0.95 0.02 85);
+  /* Border/Input/Ring: Dark với neon accents */
+  --border: oklch(0.25 0.02 0);
+  --input: oklch(0.15 0.02 0);
+  --ring: oklch(0.8 0.3 120);
+  /* Chart colors - neon palette */
+  --chart-1: oklch(0.7 0.3 220); /* Bright neon cyan */
+  --chart-2: oklch(0.7 0.3 330); /* Bright neon magenta */
+  --chart-3: oklch(0.75 0.3 150); /* Bright electric green */
+  --chart-4: oklch(0.7 0.3 300); /* Bright neon purple */
+  --chart-5: oklch(0.8 0.25 90); /* Bright neon yellow */
+  /* Accent colors - very bright neon cho dark mode */
+  --green: oklch(0.75 0.3 150); /* Very bright electric green */
+  --green-foreground: oklch(0.1 0.02 0);
+  --cyan: oklch(0.7 0.3 200); /* Very bright neon cyan */
+  --cyan-foreground: oklch(0.1 0.02 0);
+  --purple: oklch(0.7 0.3 300); /* Very bright neon purple */
+  --purple-foreground: oklch(0.1 0.02 0);
+  --blue: oklch(0.7 0.3 250); /* Very bright electric blue */
+  --blue-foreground: oklch(0.1 0.02 0);
+  --magenta: oklch(0.7 0.3 330); /* Very bright neon magenta */
+  --magenta-foreground: oklch(0.1 0.02 0);
+  --yellow: oklch(0.8 0.25 90); /* Very bright neon yellow */
+  --yellow-foreground: oklch(0.1 0.02 0);
   /* Sidebar colors */
-  --sidebar: oklch(0.18 0.01 250);
-  --sidebar-foreground: oklch(0.97 0.005 90);
-  --sidebar-primary: oklch(0.75 0.15 280);
-  --sidebar-primary-foreground: oklch(0.18 0.01 250);
-  --sidebar-accent: oklch(0.70 0.20 330);
-  --sidebar-accent-foreground: oklch(0.97 0.005 90);
-  --sidebar-border: oklch(0.28 0.01 250);
-  --sidebar-ring: oklch(0.75 0.15 280);
+  --sidebar: oklch(0.12 0.02 0);
+  --sidebar-foreground: oklch(0.95 0.01 0);
+  --sidebar-primary: oklch(0.8 0.3 120);
+  --sidebar-primary-foreground: oklch(0.1 0.02 0);
+  --sidebar-accent: oklch(0.7 0.3 330);
+  --sidebar-accent-foreground: oklch(0.1 0.02 0);
+  --sidebar-border: oklch(0.25 0.02 0);
+  --sidebar-ring: oklch(0.8 0.3 120);
 }
 
 @theme inline {
@@ -231,14 +235,16 @@
   --color-chart-5: var(--chart-5);
   --color-green: var(--green);
   --color-green-foreground: var(--green-foreground);
-  --color-orange: var(--orange);
-  --color-orange-foreground: var(--orange-foreground);
-  --color-yellow: var(--yellow);
-  --color-yellow-foreground: var(--yellow-foreground);
-  --color-pink: var(--pink);
-  --color-pink-foreground: var(--pink-foreground);
   --color-cyan: var(--cyan);
   --color-cyan-foreground: var(--cyan-foreground);
+  --color-purple: var(--purple);
+  --color-purple-foreground: var(--purple-foreground);
+  --color-blue: var(--blue);
+  --color-blue-foreground: var(--blue-foreground);
+  --color-magenta: var(--magenta);
+  --color-magenta-foreground: var(--magenta-foreground);
+  --color-yellow: var(--yellow);
+  --color-yellow-foreground: var(--yellow-foreground);
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -251,6 +257,26 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 @layer base {
@@ -264,7 +290,7 @@
   button {
     @apply cursor-pointer;
   }
-  
+
   /* Sections không tạo background mới che grid - chỉ dùng transparent */
   section[class*="bg-background"] {
     background-color: transparent !important;
@@ -283,14 +309,15 @@
     font-family: var(--font-display);
     font-size: var(--font-size-display);
     line-height: var(--line-height-tight);
-    letter-spacing: -0.08em;
+    letter-spacing: -0.05em;
     font-weight: var(--font-weight-black);
     font-feature-settings:
-      "liga" 0,
+      "liga" 1,
       "kern" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    text-transform: uppercase;
   }
 
   @media (min-width: 768px) {
@@ -308,8 +335,9 @@
   .text-h1 {
     font-size: var(--font-size-h1);
     line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
   }
 
   @media (min-width: 768px) {
@@ -326,9 +354,10 @@
 
   .text-h2 {
     font-size: var(--font-size-h2);
-    line-height: var(--line-height-normal);
-    letter-spacing: var(--letter-spacing-tight);
-    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.01em;
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
   }
 
   @media (min-width: 768px) {
@@ -345,9 +374,10 @@
 
   .text-h3 {
     font-size: var(--font-size-h3);
-    line-height: var(--line-height-normal);
-    letter-spacing: var(--letter-spacing-normal);
-    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    letter-spacing: 0.01em;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
   }
 
   @media (min-width: 768px) {
@@ -365,8 +395,8 @@
   .text-h4 {
     font-size: var(--font-size-h4);
     line-height: var(--line-height-normal);
-    letter-spacing: var(--letter-spacing-normal);
-    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.01em;
+    font-weight: var(--font-weight-bold);
   }
 
   @media (min-width: 768px) {
@@ -384,7 +414,7 @@
   .text-body-lg {
     font-size: var(--font-size-body-lg);
     line-height: var(--line-height-relaxed);
-    letter-spacing: var(--letter-spacing-normal);
+    letter-spacing: 0.015em;
     font-weight: var(--font-weight-normal);
   }
 
@@ -458,32 +488,7 @@
     text-wrap: pretty;
   }
 
-  /* Add marquee animations for tech stack */
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  @keyframes marquee-reverse {
-    0% {
-      transform: translateX(-50%);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
-  }
-
-  .animate-marquee-reverse {
-    animation: marquee-reverse 30s linear infinite;
-  }
+  /* Add marquee animations for tech stack - removed duplicate, using @theme inline version */
 
   /* Add scroll animation utilities */
   .scroll-animate {
@@ -517,7 +522,8 @@
 
   /* Animated pulse with delay */
   @keyframes pulse-delay {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.4;
     }
     50% {
@@ -572,6 +578,324 @@
   /* Radial gradient utility */
   .bg-gradient-radial {
     background-image: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  /* Gradient utilities for neon colors */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--magenta) 100%);
+  }
+
+  .bg-gradient-accent {
+    background: linear-gradient(
+      135deg,
+      var(--green) 0%,
+      var(--cyan) 50%,
+      var(--purple) 100%
+    );
+  }
+
+  .bg-gradient-neon {
+    background: linear-gradient(
+      135deg,
+      var(--blue) 0%,
+      var(--cyan) 50%,
+      var(--magenta) 100%
+    );
+  }
+
+  /* Color overlay utilities */
+  .overlay-primary {
+    background: linear-gradient(
+      135deg,
+      var(--primary) / 10 0%,
+      transparent 50%,
+      var(--accent) / 5 100%
+    );
+  }
+
+  .overlay-accent {
+    background: linear-gradient(
+      135deg,
+      var(--green) / 8 0%,
+      var(--cyan) / 5 50%,
+      var(--purple) / 8 100%
+    );
+  }
+
+  .overlay-neon {
+    background: linear-gradient(
+      135deg,
+      var(--cyan) / 8 0%,
+      var(--magenta) / 5 50%,
+      var(--yellow) / 8 100%
+    );
+  }
+
+  /* Scroll Animation Utilities */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .scroll-reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .scroll-reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .scroll-reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Highlight on scroll */
+  .scroll-highlight {
+    position: relative;
+  }
+
+  .scroll-highlight::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary) / 20, var(--accent) / 20);
+    transition: width 0.6s ease-out;
+    z-index: -1;
+  }
+
+  .scroll-highlight.highlighted::before {
+    width: 100%;
+  }
+
+  /* Parallax utilities */
+  .parallax-slow {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .parallax-medium {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .parallax-fast {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes highlight {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  @keyframes neonGlow {
+    0%,
+    100% {
+      text-shadow:
+        0 0 5px currentColor,
+        0 0 10px currentColor,
+        0 0 15px currentColor;
+    }
+    50% {
+      text-shadow:
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 30px currentColor,
+        0 0 40px currentColor;
+    }
+  }
+
+  @keyframes neonPulse {
+    0%,
+    100% {
+      box-shadow:
+        0 0 5px currentColor,
+        0 0 10px currentColor,
+        0 0 15px currentColor;
+    }
+    50% {
+      box-shadow:
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 30px currentColor;
+    }
+  }
+
+  /* Neon glow utilities */
+  .neon-glow-text {
+    animation: neonGlow 2s ease-in-out infinite;
+  }
+
+  .neon-glow-box {
+    animation: neonPulse 2s ease-in-out infinite;
+  }
+
+  .text-neon-cyan {
+    color: var(--cyan);
+    text-shadow:
+      0 0 5px var(--cyan),
+      0 0 10px var(--cyan),
+      0 0 15px var(--cyan);
+  }
+
+  .text-neon-magenta {
+    color: var(--magenta);
+    text-shadow:
+      0 0 5px var(--magenta),
+      0 0 10px var(--magenta),
+      0 0 15px var(--magenta);
+  }
+
+  .text-neon-green {
+    color: var(--green);
+    text-shadow:
+      0 0 5px var(--green),
+      0 0 10px var(--green),
+      0 0 15px var(--green);
+  }
+
+  .shadow-neon-primary {
+    box-shadow:
+      0 0 10px var(--primary) / 50,
+      0 0 20px var(--primary) / 30,
+      0 0 30px var(--primary) / 20;
+  }
+
+  .shadow-neon-cyan {
+    box-shadow:
+      0 0 10px var(--cyan) / 50,
+      0 0 20px var(--cyan) / 30,
+      0 0 30px var(--cyan) / 20;
+  }
+
+  .shadow-neon-magenta {
+    box-shadow:
+      0 0 10px var(--magenta) / 50,
+      0 0 20px var(--magenta) / 30,
+      0 0 30px var(--magenta) / 20;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: fadeInLeft 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in-right {
+    animation: fadeInRight 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.8s ease-out forwards;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
   }
 
   /* Grid pattern opacity variables */

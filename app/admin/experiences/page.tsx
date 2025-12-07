@@ -10,7 +10,9 @@ export default async function ExperiencesAdminPage() {
       <section className="rounded-lg border border-border/40 bg-muted/30 p-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="mb-1 text-sm text-muted-foreground">Total experiences</p>
+            <p className="mb-1 text-sm text-muted-foreground">
+              Total experiences
+            </p>
             <p className="text-3xl font-bold text-foreground">
               {experiences.length}
             </p>
@@ -49,8 +51,12 @@ export default async function ExperiencesAdminPage() {
                     <h2 className="mb-1 text-base font-semibold text-foreground">
                       {exp.position}
                     </h2>
-                    <p className="text-sm font-medium text-primary">{exp.company}</p>
-                    <p className="text-xs text-muted-foreground">{exp.period}</p>
+                    <p className="text-sm font-medium text-primary">
+                      {exp.company}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {exp.period}
+                    </p>
                     {exp.location && (
                       <p className="mt-1 text-xs text-muted-foreground">
                         {exp.location}

@@ -114,7 +114,7 @@ export function Header() {
       >
         {/* Scroll Progress Indicator */}
         <div
-          className="absolute top-0 left-0 h-0.5 bg-primary transition-all duration-150 ease-out rounded-b z-[60]"
+          className="absolute top-0 left-0 h-0.5 bg-primary transition-all duration-300 ease-out z-[60]"
           style={{ width: `${scrollProgress}%` }}
           aria-hidden="true"
         />
@@ -152,9 +152,10 @@ export function Header() {
                 key={link.key}
                 href={link.href}
                 onClick={handleNavClick}
-                className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium uppercase"
+                className="text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group"
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
               </a>
             ))}
           </div>
@@ -165,10 +166,10 @@ export function Header() {
             <div className="hidden md:block relative">
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className="p-2 rounded-md hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+                className="p-2 rounded-md hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer"
                 aria-label="Change language"
               >
-                <Languages className="w-4 h-4 text-foreground" />
+                <Languages className="w-4 h-4 text-foreground transition-transform duration-300" />
               </button>
 
               {isLanguageMenuOpen && (
@@ -177,12 +178,12 @@ export function Header() {
                     className="fixed inset-0 z-40"
                     onClick={() => setIsLanguageMenuOpen(false)}
                   />
-                  <div className="absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50 min-w-[120px]">
+                  <div className="absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50 min-w-[120px] overflow-hidden">
                     {routing.locales.map((loc) => (
                       <button
                         key={loc}
                         onClick={() => handleLanguageChange(loc)}
-                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-colors rounded-md cursor-pointer ${
+                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-all duration-300 ease-in-out rounded-md cursor-pointer hover:scale-[1.02] ${
                           locale === loc ? "bg-primary/20 font-semibold" : ""
                         }`}
                       >
@@ -197,13 +198,13 @@ export function Header() {
             {/* Theme Toggle - Desktop only */}
             <button
               onClick={toggleTheme}
-              className="hidden md:flex p-2 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer"
+              className="hidden md:flex p-2 rounded-lg hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer"
               aria-label="Toggle theme"
             >
               {displayIsDark ? (
-                <Sun className="w-4 h-4 text-foreground" />
+                <Sun className="w-4 h-4 text-foreground transition-transform duration-300" />
               ) : (
-                <Moon className="w-4 h-4 text-foreground" />
+                <Moon className="w-4 h-4 text-foreground transition-transform duration-300" />
               )}
             </button>
 
@@ -245,7 +246,7 @@ export function Header() {
                   key={link.key}
                   href={link.href}
                   onClick={handleNavClick}
-                  className="text-foreground hover:text-foreground transition-colors text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation"
+                  className="text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]"
                 >
                   {link.name}
                 </a>

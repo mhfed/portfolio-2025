@@ -8,4 +8,3 @@ export default defineConfig({
     url: process.env.POSTGRES_URL!,
   },
 });
-

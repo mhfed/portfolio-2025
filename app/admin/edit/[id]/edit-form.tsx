@@ -22,7 +22,7 @@ interface EditFormProps {
 export function EditForm({ project }: EditFormProps) {
   const [state, formAction] = useActionState<UpdateProjectResult, FormData>(
     updateProjectAction,
-    { success: true }
+    { success: true },
   );
   const [imageUrl, setImageUrl] = useState(project.imageUrl);
 
@@ -38,7 +38,7 @@ export function EditForm({ project }: EditFormProps) {
       <form action={formAction} className="space-y-6">
         {/* Hidden ID field */}
         <input type="hidden" name="id" value={project.id} />
-        
+
         {/* Title */}
         <div>
           <label
@@ -228,4 +228,3 @@ export function EditForm({ project }: EditFormProps) {
     </>
   );
 }
-

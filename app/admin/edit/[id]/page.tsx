@@ -46,7 +46,3 @@ export default async function EditProjectPage({
     </div>
   );
 }
-
-
-
-

@@ -12,14 +12,18 @@ function checkBasicAuth(request: NextRequest): boolean {
   }
 
   const base64Credentials = authHeader.split(" ")[1];
-  const credentials = Buffer.from(base64Credentials, "base64").toString("utf-8");
+  const credentials = Buffer.from(base64Credentials, "base64").toString(
+    "utf-8",
+  );
   const [username, password] = credentials.split(":");
 
   const adminUser = process.env.ADMIN_USER;
   const adminPassword = process.env.ADMIN_PASSWORD;
 
   if (!adminUser || !adminPassword) {
-    console.error("ADMIN_USER or ADMIN_PASSWORD environment variables are not set");
+    console.error(
+      "ADMIN_USER or ADMIN_PASSWORD environment variables are not set",
+    );
     return false;
   }
 
@@ -28,7 +32,7 @@ function checkBasicAuth(request: NextRequest): boolean {
 
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  
+
   // Handle /admin routes - exclude from intl middleware
   if (pathname.startsWith("/admin")) {
     // Redirect /vi/admin or /en/admin to /admin
@@ -37,7 +41,7 @@ export default function middleware(request: NextRequest) {
       newUrl.pathname = pathname.replace(/^\/(en|vi)\//, "/");
       return NextResponse.redirect(newUrl);
     }
-    
+
     // Apply basic auth for /admin routes
     if (!checkBasicAuth(request)) {
       return new NextResponse("Unauthorized", {
@@ -47,7 +51,7 @@ export default function middleware(request: NextRequest) {
         },
       });
     }
-    
+
     // Skip intl middleware for /admin routes
     return NextResponse.next();
   }

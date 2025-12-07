@@ -23,7 +23,9 @@ export function ImageUploadDropzone({
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [uploadedUrl, setUploadedUrl] = useState<string | undefined>(initialUrl);
+  const [uploadedUrl, setUploadedUrl] = useState<string | undefined>(
+    initialUrl,
+  );
 
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
@@ -40,7 +42,9 @@ export function ImageUploadDropzone({
       }
 
       if (!cloudName || !uploadPreset) {
-        setError("Cloudinary is not configured. Please set the required env variables.");
+        setError(
+          "Cloudinary is not configured. Please set the required env variables.",
+        );
         return;
       }
 
@@ -96,17 +100,23 @@ export function ImageUploadDropzone({
     [handleFiles],
   );
 
-  const onDragOver = useCallback<React.DragEventHandler<HTMLDivElement>>((event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsDragging(true);
-  }, []);
+  const onDragOver = useCallback<React.DragEventHandler<HTMLDivElement>>(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      setIsDragging(true);
+    },
+    [],
+  );
 
-  const onDragLeave = useCallback<React.DragEventHandler<HTMLDivElement>>((event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsDragging(false);
-  }, []);
+  const onDragLeave = useCallback<React.DragEventHandler<HTMLDivElement>>(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      setIsDragging(false);
+    },
+    [],
+  );
 
   const onFileChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
     (event) => {
@@ -146,9 +156,7 @@ export function ImageUploadDropzone({
         aria-label="Upload project image"
         role="button"
       >
-        <p className="text-foreground text-sm text-center">
-          {description}
-        </p>
+        <p className="text-foreground text-sm text-center">{description}</p>
         <p className="text-xs text-muted-foreground">
           {isUploading ? "Uploading..." : "PNG, JPG, or WebP"}
         </p>
@@ -177,9 +185,7 @@ export function ImageUploadDropzone({
         </div>
       )}
 
-      {error && (
-        <p className="text-xs text-destructive mt-1">{error}</p>
-      )}
+      {error && <p className="text-xs text-destructive mt-1">{error}</p>}
     </div>
   );
 }

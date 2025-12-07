@@ -88,7 +88,8 @@ export async function createProject(
     console.error("Error creating project:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to create project",
+      error:
+        error instanceof Error ? error.message : "Failed to create project",
     };
   }
 }
@@ -125,7 +126,7 @@ export async function updateProjectAction(
   formData: FormData,
 ): Promise<UpdateProjectResult> {
   const id = parseInt(formData.get("id") as string, 10);
-  
+
   if (isNaN(id)) {
     return { success: false, error: "Invalid project ID" };
   }
@@ -135,7 +136,7 @@ export async function updateProjectAction(
 
 export async function updateProject(
   id: number,
-  formData: FormData
+  formData: FormData,
 ): Promise<UpdateProjectResult> {
   try {
     // Extract form data
@@ -203,14 +204,13 @@ export async function updateProject(
     console.error("Error updating project:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to update project",
+      error:
+        error instanceof Error ? error.message : "Failed to update project",
     };
   }
 }
 
-export async function deleteProject(
-  id: number
-): Promise<DeleteProjectResult> {
+export async function deleteProject(id: number): Promise<DeleteProjectResult> {
   try {
     // Delete project from database
     await db.delete(projects).where(eq(projects.id, id));
@@ -224,8 +224,8 @@ export async function deleteProject(
     console.error("Error deleting project:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to delete project",
+      error:
+        error instanceof Error ? error.message : "Failed to delete project",
     };
   }
 }
-

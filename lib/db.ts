@@ -3,4 +3,3 @@ import { sql } from "@vercel/postgres";
 import * as schema from "@/db/schema";
 
 export const db = drizzle(sql, { schema });
-

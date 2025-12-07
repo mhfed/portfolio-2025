@@ -50,9 +50,7 @@ export function AppAdminSidebar() {
           HM
         </div>
         <div className="flex flex-col">
-          <span className="text-sm font-semibold tracking-tight">
-            Admin
-          </span>
+          <span className="text-sm font-semibold tracking-tight">Admin</span>
           <span className="text-xs text-sidebar-foreground/60">
             Portfolio CMS
           </span>

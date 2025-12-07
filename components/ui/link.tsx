@@ -5,15 +5,15 @@ import { ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const linkVariants = cva(
-  "inline-flex items-center gap-2 font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "inline-flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
-        default: "text-primary hover:text-primary/80",
+        default: "text-primary hover:text-primary/80 hover:scale-105",
         primary:
-          "px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary transition-all hover:scale-105",
+          "px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary hover:border-primary/50 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]",
         ghost:
-          "px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground transition-all hover:scale-105",
+          "px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground hover:border-primary/30 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]",
       },
       size: {
         default: "text-sm",
@@ -38,15 +38,7 @@ export interface LinkProps
 
 const UiLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (
-    {
-      className,
-      variant,
-      size,
-      href,
-      external = false,
-      children,
-      ...props
-    },
+    { className, variant, size, href, external = false, children, ...props },
     ref,
   ) => {
     const content = (

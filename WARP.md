@@ -5,9 +5,10 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 ## Project Overview & Tech Stack
 
 This is a multilingual personal portfolio built on:
+
 - **Framework**: Next.js 16 (App Router, `app/` directory)
 - **Language**: TypeScript (strict mode)
-- **Styling**: Tailwind CSS (global styles in `styles/globals.css`)
+- **Styling**: Tailwind CSS (global styles in `app/globals.css`)
 - **Database**: Vercel Postgres
 - **ORM & Migrations**: Drizzle ORM / drizzle-kit (`db/schema.ts`, `drizzle/`, `drizzle.config.ts`)
 - **i18n**: `next-intl` with locale routing and message files
@@ -33,10 +34,12 @@ pnpm dev
 ```
 
 Locales are handled via `next-intl`, with localized routes under the `[locale]` segment:
+
 - English (default, no prefix when `localePrefix = "as-needed"`): `/` or `/en`
 - Vietnamese: `/vi`
 
 The admin dashboard is available at:
+
 - `/admin` (protected by HTTP Basic Auth via `middleware.ts`)
 
 ### Build & production start
@@ -202,7 +205,7 @@ When adding new pages or components, ensure they are wired into `next-intl` (e.g
 
 ### Styles & Theming
 
-- `styles/globals.css`
+- `app/globals.css`
   - Global CSS and Tailwind layer setup.
 - Tailwind 4 and PostCSS configuration in:
   - `postcss.config.mjs`

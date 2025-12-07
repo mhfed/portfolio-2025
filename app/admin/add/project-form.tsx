@@ -9,7 +9,7 @@ import { ImageUploadDropzone } from "@/components/admin-image-upload-dropzone";
 export function ProjectForm() {
   const [state, formAction] = useActionState<CreateProjectResult, FormData>(
     createProject,
-    { success: true }
+    { success: true },
   );
   const [imageUrl, setImageUrl] = useState("");
 
@@ -194,4 +194,3 @@ export function ProjectForm() {
     </>
   );
 }
-

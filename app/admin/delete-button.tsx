@@ -57,7 +57,3 @@ export function DeleteButton({ projectId }: DeleteButtonProps) {
     </Button>
   );
 }
-
-
-
-

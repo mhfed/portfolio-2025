@@ -34,14 +34,17 @@ Continue building your app on:
 Create a `.env.local` file in the root directory with the following variables:
 
 ### Database
+
 - `POSTGRES_URL` - Vercel Postgres connection string
   - Get this from: Vercel Dashboard > Your Project > Storage > Postgres > .env.local tab
 
 ### Admin Authentication
+
 - `ADMIN_USER` - Username for HTTP Basic Auth on `/admin/*` routes
 - `ADMIN_PASSWORD` - Password for HTTP Basic Auth on `/admin/*` routes
 
 **Example `.env.local`:**
+
 ```env
 POSTGRES_URL=postgresql://user:password@host:port/database?sslmode=require
 ADMIN_USER=admin

@@ -1,4 +1,11 @@
-import { pgTable, serial, text, timestamp, pgEnum, integer } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  pgEnum,
+  integer,
+} from "drizzle-orm/pg-core";
 
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),

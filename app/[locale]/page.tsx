@@ -1,54 +1,42 @@
-import { Header } from "@/components/header";
-import { HeroSection } from "@/components/hero-section";
-import { AboutSection } from "@/components/about-section";
-import { WorkExperienceSection } from "@/components/work-experience-section";
-import { ProjectsSection } from "@/components/projects-section";
-import { LetsCollaborateSection } from "@/components/lets-collaborate-section";
-import { ScrollObserver } from "@/components/scroll-observer";
-import { ScrollToTop } from "@/components/scroll-to-top";
-import { FloatingCTA } from "@/components/floating-cta";
-import { SectionDivider } from "@/components/section-divider";
+import { Header } from '@/components/header';
+import { HeroSection } from '@/components/hero-section';
+import { AboutSection } from '@/components/about-section';
+import { WorkExperienceSection } from '@/components/work-experience-section';
+import { ProjectsSection } from '@/components/projects-section';
+import { LetsCollaborateSection } from '@/components/lets-collaborate-section';
+import { ScrollObserver } from '@/components/scroll-observer';
+import { ScrollToTop } from '@/components/scroll-to-top';
+import { FloatingCTA } from '@/components/floating-cta';
+import { Separator } from '@/components/ui/separator';
 
 export default function Home() {
   return (
-    <main className="w-full">
+    <main className='w-full scroll-smooth pb-20 md:pb-24 lg:pb-28'>
       <ScrollObserver />
       <Header />
 
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Divider */}
-      <SectionDivider />
+      <Separator className='my-12' />
 
       {/* About Section */}
-      <div className="scroll-animate">
-        <AboutSection />
-      </div>
+      <AboutSection />
 
-      {/* Divider */}
-      <SectionDivider />
+      <Separator className='my-12' />
 
       {/* Work Experience Section */}
-      <div className="scroll-animate">
-        <WorkExperienceSection />
-      </div>
+      <WorkExperienceSection />
 
-      {/* Divider */}
-      <SectionDivider />
+      <Separator className='my-12' />
 
       {/* Projects Section */}
-      <div className="scroll-animate">
-        <ProjectsSection />
-      </div>
+      <ProjectsSection />
 
-      {/* Divider */}
-      <SectionDivider />
+      <Separator className='my-12' />
 
       {/* Collaborate Section */}
-      <div className="scroll-animate">
-        <LetsCollaborateSection />
-      </div>
+      <LetsCollaborateSection />
 
       {/* Floating Actions */}
       <FloatingCTA />
