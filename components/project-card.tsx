@@ -50,7 +50,7 @@ export function ProjectCard({
                 {title}
               </h3>
               {year && (
-                <Badge variant='cyan' size='sm'>
+                <Badge variant='primary' size='sm'>
                   {year}
                 </Badge>
               )}
