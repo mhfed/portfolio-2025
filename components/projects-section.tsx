@@ -50,7 +50,7 @@ export async function ProjectsSection() {
               <ProjectCard
                 key={project.title + idx}
                 {...project}
-                isAlternate={false}
+                isAlternate={idx % 2 === 1}
                 index={idx}
               />
             ))
