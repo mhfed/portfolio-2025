@@ -4,14 +4,21 @@ import { useActionState, useState } from "react";
 import { updateProjectAction } from "@/actions/project-actions";
 import type { UpdateProjectResult } from "@/actions/project-actions";
 import { ImageUploadDropzone } from "@/components/admin-image-upload-dropzone";
+import { LocaleTabs } from "@/components/admin/locale-tabs";
 
 interface EditFormProps {
   project: {
     id: number;
     title: string;
+    titleEn: string | null;
+    titleVi: string | null;
     year: string | null;
     description: string;
+    descriptionEn: string | null;
+    descriptionVi: string | null;
     details: string | null;
+    detailsEn: string | null;
+    detailsVi: string | null;
     imageUrl: string;
     liveUrl: string | null;
     githubUrl: string | null;
@@ -39,24 +46,92 @@ export function EditForm({ project }: EditFormProps) {
         {/* Hidden ID field */}
         <input type="hidden" name="id" value={project.id} />
 
-        {/* Title */}
-        <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-semibold text-foreground mb-3"
-          >
-            Title <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            required
-            defaultValue={project.title}
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
-            placeholder="Project Title"
-          />
-        </div>
+        {/* Locale Tabs for Text Fields */}
+        <LocaleTabs>
+          {(activeTab) => (
+            <div className="space-y-6">
+              {/* Title */}
+              <div>
+                <label
+                  htmlFor={`title_${activeTab}`}
+                  className="block text-sm font-semibold text-foreground mb-3"
+                >
+                  Title ({activeTab === "en" ? "English" : "Tiếng Việt"}){" "}
+                  <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="text"
+                  id={`title_${activeTab}`}
+                  name={`title_${activeTab}`}
+                  defaultValue={
+                    activeTab === "en"
+                      ? project.titleEn || project.title || ""
+                      : project.titleVi || project.title || ""
+                  }
+                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  placeholder={
+                    activeTab === "en"
+                      ? "Project Title"
+                      : "Tên dự án"
+                  }
+                />
+              </div>
+
+              {/* Description */}
+              <div>
+                <label
+                  htmlFor={`description_${activeTab}`}
+                  className="block text-sm font-semibold text-foreground mb-3"
+                >
+                  Description ({activeTab === "en" ? "English" : "Tiếng Việt"}){" "}
+                  <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="text"
+                  id={`description_${activeTab}`}
+                  name={`description_${activeTab}`}
+                  defaultValue={
+                    activeTab === "en"
+                      ? project.descriptionEn || project.description || ""
+                      : project.descriptionVi || project.description || ""
+                  }
+                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  placeholder={
+                    activeTab === "en"
+                      ? "Short description of the project"
+                      : "Mô tả ngắn về dự án"
+                  }
+                />
+              </div>
+
+              {/* Details */}
+              <div>
+                <label
+                  htmlFor={`details_${activeTab}`}
+                  className="block text-sm font-semibold text-foreground mb-3"
+                >
+                  Details ({activeTab === "en" ? "English" : "Tiếng Việt"})
+                </label>
+                <textarea
+                  id={`details_${activeTab}`}
+                  name={`details_${activeTab}`}
+                  rows={6}
+                  defaultValue={
+                    activeTab === "en"
+                      ? project.detailsEn || project.details || ""
+                      : project.detailsVi || project.details || ""
+                  }
+                  className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-y"
+                  placeholder={
+                    activeTab === "en"
+                      ? "Detailed description of the project..."
+                      : "Mô tả chi tiết về dự án..."
+                  }
+                />
+              </div>
+            </div>
+          )}
+        </LocaleTabs>
 
         {/* Year */}
         <div>
@@ -73,43 +148,6 @@ export function EditForm({ project }: EditFormProps) {
             defaultValue={project.year || ""}
             className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
             placeholder="[2023]"
-          />
-        </div>
-
-        {/* Description */}
-        <div>
-          <label
-            htmlFor="description"
-            className="block text-sm font-semibold text-foreground mb-3"
-          >
-            Description <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            required
-            defaultValue={project.description}
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-md text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors"
-            placeholder="Short description of the project"
-          />
-        </div>
-
-        {/* Details */}
-        <div>
-          <label
-            htmlFor="details"
-            className="block text-sm font-semibold text-foreground mb-3"
-          >
-            Details
-          </label>
-          <textarea
-            id="details"
-            name="details"
-            rows={6}
-            defaultValue={project.details || ""}
-            className="w-full px-4 py-3 bg-background border border-border/30 rounded-none text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary transition-colors resize-y"
-            placeholder="Detailed description of the project..."
           />
         </div>
 

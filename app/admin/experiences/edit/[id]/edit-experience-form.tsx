@@ -5,15 +5,24 @@ import {
   updateExperienceAction,
   type UpdateExperienceResult,
 } from "@/actions/experience-actions";
+import { LocaleTabs } from "@/components/admin/locale-tabs";
 
 interface EditExperienceFormProps {
   experience: {
     id: number;
     company: string;
+    companyEn: string | null;
+    companyVi: string | null;
     position: string;
+    positionEn: string | null;
+    positionVi: string | null;
     period: string;
     location: string | null;
+    locationEn: string | null;
+    locationVi: string | null;
     description: string;
+    descriptionEn: string | null;
+    descriptionVi: string | null;
     skills: string[] | null;
     orderIndex: number | null;
   };
@@ -37,42 +46,121 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
       <form action={formAction} className="space-y-6">
         <input type="hidden" name="id" value={experience.id} />
 
-        <div>
-          <label
-            htmlFor="company"
-            className="mb-3 block text-sm font-semibold text-foreground"
-          >
-            Company <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            required
-            defaultValue={experience.company}
-            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
-            placeholder="Company name"
-          />
-        </div>
+        {/* Locale Tabs for Text Fields */}
+        <LocaleTabs>
+          {(activeTab) => (
+            <div className="space-y-6">
+              {/* Company */}
+              <div>
+                <label
+                  htmlFor={`company_${activeTab}`}
+                  className="mb-3 block text-sm font-semibold text-foreground"
+                >
+                  Company ({activeTab === "en" ? "English" : "Tiếng Việt"}){" "}
+                  <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="text"
+                  id={`company_${activeTab}`}
+                  name={`company_${activeTab}`}
+                  defaultValue={
+                    activeTab === "en"
+                      ? experience.companyEn || experience.company || ""
+                      : experience.companyVi || experience.company || ""
+                  }
+                  className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+                  placeholder={
+                    activeTab === "en"
+                      ? "Company name"
+                      : "Tên công ty"
+                  }
+                />
+              </div>
 
-        <div>
-          <label
-            htmlFor="position"
-            className="mb-3 block text-sm font-semibold text-foreground"
-          >
-            Position <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="text"
-            id="position"
-            name="position"
-            required
-            defaultValue={experience.position}
-            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
-            placeholder="Frontend Developer"
-          />
-        </div>
+              {/* Position */}
+              <div>
+                <label
+                  htmlFor={`position_${activeTab}`}
+                  className="mb-3 block text-sm font-semibold text-foreground"
+                >
+                  Position ({activeTab === "en" ? "English" : "Tiếng Việt"}){" "}
+                  <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="text"
+                  id={`position_${activeTab}`}
+                  name={`position_${activeTab}`}
+                  defaultValue={
+                    activeTab === "en"
+                      ? experience.positionEn || experience.position || ""
+                      : experience.positionVi || experience.position || ""
+                  }
+                  className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+                  placeholder={
+                    activeTab === "en"
+                      ? "Frontend Developer"
+                      : "Lập trình viên Frontend"
+                  }
+                />
+              </div>
 
+              {/* Location */}
+              <div>
+                <label
+                  htmlFor={`location_${activeTab}`}
+                  className="mb-3 block text-sm font-semibold text-foreground"
+                >
+                  Location ({activeTab === "en" ? "English" : "Tiếng Việt"})
+                </label>
+                <input
+                  type="text"
+                  id={`location_${activeTab}`}
+                  name={`location_${activeTab}`}
+                  defaultValue={
+                    activeTab === "en"
+                      ? experience.locationEn || experience.location || ""
+                      : experience.locationVi || experience.location || ""
+                  }
+                  className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+                  placeholder={
+                    activeTab === "en"
+                      ? "Ha Noi, Viet Nam"
+                      : "Hà Nội, Việt Nam"
+                  }
+                />
+              </div>
+
+              {/* Description */}
+              <div>
+                <label
+                  htmlFor={`description_${activeTab}`}
+                  className="mb-3 block text-sm font-semibold text-foreground"
+                >
+                  Description ({activeTab === "en" ? "English" : "Tiếng Việt"}){" "}
+                  <span className="text-destructive">*</span>
+                </label>
+                <textarea
+                  id={`description_${activeTab}`}
+                  name={`description_${activeTab}`}
+                  rows={6}
+                  defaultValue={
+                    activeTab === "en"
+                      ? experience.descriptionEn || experience.description || ""
+                      : experience.descriptionVi || experience.description || ""
+                  }
+                  className="w-full resize-y rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
+                  placeholder={
+                    activeTab === "en"
+                      ? "Describe your responsibilities, impact, and key contributions..."
+                      : "Mô tả trách nhiệm, tác động và đóng góp chính của bạn..."
+                  }
+                />
+              </div>
+            </div>
+          )}
+        </LocaleTabs>
+
+        {/* Period */}
         <div>
           <label
             htmlFor="period"
@@ -88,41 +176,6 @@ export function EditExperienceForm({ experience }: EditExperienceFormProps) {
             defaultValue={experience.period}
             className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
             placeholder="8/2022 - 11/2023"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="location"
-            className="mb-3 block text-sm font-semibold text-foreground"
-          >
-            Location
-          </label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            defaultValue={experience.location || ""}
-            className="w-full rounded-md border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
-            placeholder="Ha Noi, Viet Nam"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="description"
-            className="mb-3 block text-sm font-semibold text-foreground"
-          >
-            Description <span className="text-destructive">*</span>
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            rows={6}
-            required
-            defaultValue={experience.description}
-            className="w-full resize-y rounded-none border border-border/30 bg-background px-4 py-3 text-foreground placeholder-foreground/50 focus:border-primary focus:outline-none transition-colors"
-            placeholder="Describe your responsibilities, impact, and key contributions..."
           />
         </div>
 

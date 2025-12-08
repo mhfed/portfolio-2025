@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { SectionTitle } from "./section-title";
 import { TimelineItem } from "./timeline-item";
 import { db } from "@/lib/db";
@@ -16,6 +16,7 @@ interface TimelineItemProps {
 
 export async function WorkExperienceSection() {
   const t = await getTranslations("experience");
+  const locale = (await getLocale()) as "en" | "vi";
 
   let dbExperiences: (typeof experiences.$inferSelect)[] = [];
   try {
@@ -28,11 +29,27 @@ export async function WorkExperienceSection() {
     dbExperiences = [];
   }
 
+  // Helper to get localized value with fallback
+  const getLocalized = (
+    enValue: string | null | undefined,
+    viValue: string | null | undefined,
+    fallback: string | null | undefined
+  ): string => {
+    if (locale === "vi") {
+      return viValue || enValue || fallback || "";
+    }
+    return enValue || viValue || fallback || "";
+  };
+
   const timelineItems: TimelineItemProps[] = dbExperiences.map((exp) => ({
-    company: exp.company,
-    position: exp.position,
+    company: getLocalized(exp.companyEn, exp.companyVi, exp.company),
+    position: getLocalized(exp.positionEn, exp.positionVi, exp.position),
     period: exp.period,
-    description: exp.description,
+    description: getLocalized(
+      exp.descriptionEn,
+      exp.descriptionVi,
+      exp.description
+    ),
     skills: exp.skills || [],
   }));
 
@@ -70,10 +87,10 @@ export async function WorkExperienceSection() {
               {t("noExperience") || "No work experience yet."}
             </p>
           ) : (
-            dbExperiences.map((exp, idx) => (
+            timelineItems.map((item, idx) => (
               <div key={idx}>
-                <TimelineItem {...exp} skills={exp.skills || []} />
-                {idx < dbExperiences.length - 1 && (
+                <TimelineItem {...item} />
+                {idx < timelineItems.length - 1 && (
                   <Separator className="my-8 h-0.5 bg-border" />
                 )}
               </div>

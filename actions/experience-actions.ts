@@ -26,28 +26,49 @@ export async function createExperience(
   formData: FormData,
 ): Promise<CreateExperienceResult> {
   try {
-    const company = formData.get("company") as string;
-    const position = formData.get("position") as string;
-    const period = formData.get("period") as string;
+    // Extract form data - locale fields
+    const companyEn = formData.get("company_en") as string | null;
+    const companyVi = formData.get("company_vi") as string | null;
+    const positionEn = formData.get("position_en") as string | null;
+    const positionVi = formData.get("position_vi") as string | null;
+    const descriptionEn = formData.get("description_en") as string | null;
+    const descriptionVi = formData.get("description_vi") as string | null;
+    const locationEn = formData.get("location_en") as string | null;
+    const locationVi = formData.get("location_vi") as string | null;
+    
+    // Legacy fields for backward compatibility
+    const company = formData.get("company") as string | null;
+    const position = formData.get("position") as string | null;
+    const description = formData.get("description") as string | null;
     const location = formData.get("location") as string | null;
-    const description = formData.get("description") as string;
+    
+    // Non-locale fields
+    const period = formData.get("period") as string;
     const skillsInput = formData.get("skills") as string | null;
     const orderIndexRaw = formData.get("orderIndex") as string | null;
 
-    if (!company || company.trim() === "") {
-      return { success: false, error: "Company is required" };
+    // Validate: at least one locale must have required fields
+    const finalCompanyEn = companyEn?.trim() || company?.trim() || "";
+    const finalCompanyVi = companyVi?.trim() || company?.trim() || "";
+    const finalPositionEn = positionEn?.trim() || position?.trim() || "";
+    const finalPositionVi = positionVi?.trim() || position?.trim() || "";
+    const finalDescriptionEn = descriptionEn?.trim() || description?.trim() || "";
+    const finalDescriptionVi = descriptionVi?.trim() || description?.trim() || "";
+
+    if (!finalCompanyEn && !finalCompanyVi) {
+      return { success: false, error: "Company is required (at least in one language)" };
     }
 
-    if (!position || position.trim() === "") {
-      return { success: false, error: "Position is required" };
+    if (!finalPositionEn && !finalPositionVi) {
+      return { success: false, error: "Position is required (at least in one language)" };
     }
 
     if (!period || period.trim() === "") {
       return { success: false, error: "Period is required" };
     }
 
-    if (!description || description.trim() === "") {
-      return { success: false, error: "Description is required" };
+    if (!finalDescriptionEn && !finalDescriptionVi) {
+      return { success: false, error: "Description is required (at least in one language)" };
     }
 
     const skills = skillsInput
@@ -66,11 +87,19 @@ export async function createExperience(
     }
 
     await db.insert(experiences).values({
-      company: company.trim(),
-      position: position.trim(),
+      company: finalCompanyEn || finalCompanyVi || "",
+      companyEn: finalCompanyEn || null,
+      companyVi: finalCompanyVi || null,
+      position: finalPositionEn || finalPositionVi || "",
+      positionEn: finalPositionEn || null,
+      positionVi: finalPositionVi || null,
       period: period.trim(),
-      location: location?.trim() || null,
-      description: description.trim(),
+      location: locationEn?.trim() || locationVi?.trim() || location?.trim() || null,
+      locationEn: locationEn?.trim() || null,
+      locationVi: locationVi?.trim() || null,
+      description: finalDescriptionEn || finalDescriptionVi || "",
+      descriptionEn: finalDescriptionEn || null,
+      descriptionVi: finalDescriptionVi || null,
       skills: skills && skills.length > 0 ? skills : null,
       orderIndex,
     });
@@ -144,28 +173,49 @@ export async function updateExperience(
   formData: FormData,
 ): Promise<UpdateExperienceResult> {
   try {
-    const company = formData.get("company") as string;
-    const position = formData.get("position") as string;
-    const period = formData.get("period") as string;
+    // Extract form data - locale fields
+    const companyEn = formData.get("company_en") as string | null;
+    const companyVi = formData.get("company_vi") as string | null;
+    const positionEn = formData.get("position_en") as string | null;
+    const positionVi = formData.get("position_vi") as string | null;
+    const descriptionEn = formData.get("description_en") as string | null;
+    const descriptionVi = formData.get("description_vi") as string | null;
+    const locationEn = formData.get("location_en") as string | null;
+    const locationVi = formData.get("location_vi") as string | null;
+    
+    // Legacy fields for backward compatibility
+    const company = formData.get("company") as string | null;
+    const position = formData.get("position") as string | null;
+    const description = formData.get("description") as string | null;
     const location = formData.get("location") as string | null;
-    const description = formData.get("description") as string;
+    
+    // Non-locale fields
+    const period = formData.get("period") as string;
     const skillsInput = formData.get("skills") as string | null;
     const orderIndexRaw = formData.get("orderIndex") as string | null;
 
-    if (!company || company.trim() === "") {
-      return { success: false, error: "Company is required" };
+    // Validate: at least one locale must have required fields
+    const finalCompanyEn = companyEn?.trim() || company?.trim() || "";
+    const finalCompanyVi = companyVi?.trim() || company?.trim() || "";
+    const finalPositionEn = positionEn?.trim() || position?.trim() || "";
+    const finalPositionVi = positionVi?.trim() || position?.trim() || "";
+    const finalDescriptionEn = descriptionEn?.trim() || description?.trim() || "";
+    const finalDescriptionVi = descriptionVi?.trim() || description?.trim() || "";
+
+    if (!finalCompanyEn && !finalCompanyVi) {
+      return { success: false, error: "Company is required (at least in one language)" };
     }
 
-    if (!position || position.trim() === "") {
-      return { success: false, error: "Position is required" };
+    if (!finalPositionEn && !finalPositionVi) {
+      return { success: false, error: "Position is required (at least in one language)" };
     }
 
     if (!period || period.trim() === "") {
       return { success: false, error: "Period is required" };
     }
 
-    if (!description || description.trim() === "") {
-      return { success: false, error: "Description is required" };
+    if (!finalDescriptionEn && !finalDescriptionVi) {
+      return { success: false, error: "Description is required (at least in one language)" };
     }
 
     const skills = skillsInput
@@ -186,11 +236,19 @@ export async function updateExperience(
     await db
       .update(experiences)
       .set({
-        company: company.trim(),
-        position: position.trim(),
+        company: finalCompanyEn || finalCompanyVi || "",
+        companyEn: finalCompanyEn || null,
+        companyVi: finalCompanyVi || null,
+        position: finalPositionEn || finalPositionVi || "",
+        positionEn: finalPositionEn || null,
+        positionVi: finalPositionVi || null,
         period: period.trim(),
-        location: location?.trim() || null,
-        description: description.trim(),
+        location: locationEn?.trim() || locationVi?.trim() || location?.trim() || null,
+        locationEn: locationEn?.trim() || null,
+        locationVi: locationVi?.trim() || null,
+        description: finalDescriptionEn || finalDescriptionVi || "",
+        descriptionEn: finalDescriptionEn || null,
+        descriptionVi: finalDescriptionVi || null,
         skills: skills && skills.length > 0 ? skills : null,
         orderIndex,
       })

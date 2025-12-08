@@ -26,23 +26,38 @@ export async function createProject(
   formData: FormData,
 ): Promise<CreateProjectResult> {
   try {
-    // Extract form data
-    const title = formData.get("title") as string;
-    const year = formData.get("year") as string | null;
-    const description = formData.get("description") as string;
+    // Extract form data - locale fields
+    const titleEn = formData.get("title_en") as string | null;
+    const titleVi = formData.get("title_vi") as string | null;
+    const descriptionEn = formData.get("description_en") as string | null;
+    const descriptionVi = formData.get("description_vi") as string | null;
+    const detailsEn = formData.get("details_en") as string | null;
+    const detailsVi = formData.get("details_vi") as string | null;
+    
+    // Legacy fields for backward compatibility
+    const title = formData.get("title") as string | null;
+    const description = formData.get("description") as string | null;
     const details = formData.get("details") as string | null;
+    
+    // Non-locale fields
+    const year = formData.get("year") as string | null;
     const imageUrl = formData.get("imageUrl") as string;
     const liveUrl = formData.get("liveUrl") as string | null;
     const githubUrl = formData.get("githubUrl") as string | null;
     const techStackInput = formData.get("techStack") as string | null;
 
-    // Validate required fields
-    if (!title || title.trim() === "") {
-      return { success: false, error: "Title is required" };
+    // Validate: at least one locale must have title and description
+    const finalTitleEn = titleEn?.trim() || title?.trim() || "";
+    const finalTitleVi = titleVi?.trim() || title?.trim() || "";
+    const finalDescriptionEn = descriptionEn?.trim() || description?.trim() || "";
+    const finalDescriptionVi = descriptionVi?.trim() || description?.trim() || "";
+
+    if (!finalTitleEn && !finalTitleVi) {
+      return { success: false, error: "Title is required (at least in one language)" };
     }
 
-    if (!description || description.trim() === "") {
-      return { success: false, error: "Description is required" };
+    if (!finalDescriptionEn && !finalDescriptionVi) {
+      return { success: false, error: "Description is required (at least in one language)" };
     }
 
     if (!imageUrl || imageUrl.trim() === "") {
@@ -59,10 +74,16 @@ export async function createProject(
 
     // Insert into database
     await db.insert(projects).values({
-      title: title.trim(),
+      title: finalTitleEn || finalTitleVi || "",
+      titleEn: finalTitleEn || null,
+      titleVi: finalTitleVi || null,
       year: year?.trim() || null,
-      description: description.trim(),
-      details: details?.trim() || null,
+      description: finalDescriptionEn || finalDescriptionVi || "",
+      descriptionEn: finalDescriptionEn || null,
+      descriptionVi: finalDescriptionVi || null,
+      details: detailsEn?.trim() || detailsVi?.trim() || details?.trim() || null,
+      detailsEn: detailsEn?.trim() || null,
+      detailsVi: detailsVi?.trim() || null,
       imageUrl: imageUrl.trim(),
       liveUrl: liveUrl?.trim() || null,
       githubUrl: githubUrl?.trim() || null,
@@ -139,23 +160,38 @@ export async function updateProject(
   formData: FormData,
 ): Promise<UpdateProjectResult> {
   try {
-    // Extract form data
-    const title = formData.get("title") as string;
-    const year = formData.get("year") as string | null;
-    const description = formData.get("description") as string;
+    // Extract form data - locale fields
+    const titleEn = formData.get("title_en") as string | null;
+    const titleVi = formData.get("title_vi") as string | null;
+    const descriptionEn = formData.get("description_en") as string | null;
+    const descriptionVi = formData.get("description_vi") as string | null;
+    const detailsEn = formData.get("details_en") as string | null;
+    const detailsVi = formData.get("details_vi") as string | null;
+    
+    // Legacy fields for backward compatibility
+    const title = formData.get("title") as string | null;
+    const description = formData.get("description") as string | null;
     const details = formData.get("details") as string | null;
+    
+    // Non-locale fields
+    const year = formData.get("year") as string | null;
     const imageUrl = formData.get("imageUrl") as string;
     const liveUrl = formData.get("liveUrl") as string | null;
     const githubUrl = formData.get("githubUrl") as string | null;
     const techStackInput = formData.get("techStack") as string | null;
 
-    // Validate required fields
-    if (!title || title.trim() === "") {
-      return { success: false, error: "Title is required" };
+    // Validate: at least one locale must have title and description
+    const finalTitleEn = titleEn?.trim() || title?.trim() || "";
+    const finalTitleVi = titleVi?.trim() || title?.trim() || "";
+    const finalDescriptionEn = descriptionEn?.trim() || description?.trim() || "";
+    const finalDescriptionVi = descriptionVi?.trim() || description?.trim() || "";
+
+    if (!finalTitleEn && !finalTitleVi) {
+      return { success: false, error: "Title is required (at least in one language)" };
     }
 
-    if (!description || description.trim() === "") {
-      return { success: false, error: "Description is required" };
+    if (!finalDescriptionEn && !finalDescriptionVi) {
+      return { success: false, error: "Description is required (at least in one language)" };
     }
 
     if (!imageUrl || imageUrl.trim() === "") {
@@ -174,10 +210,16 @@ export async function updateProject(
     await db
       .update(projects)
       .set({
-        title: title.trim(),
+        title: finalTitleEn || finalTitleVi || "",
+        titleEn: finalTitleEn || null,
+        titleVi: finalTitleVi || null,
         year: year?.trim() || null,
-        description: description.trim(),
-        details: details?.trim() || null,
+        description: finalDescriptionEn || finalDescriptionVi || "",
+        descriptionEn: finalDescriptionEn || null,
+        descriptionVi: finalDescriptionVi || null,
+        details: detailsEn?.trim() || detailsVi?.trim() || details?.trim() || null,
+        detailsEn: detailsEn?.trim() || null,
+        detailsVi: detailsVi?.trim() || null,
         imageUrl: imageUrl.trim(),
         liveUrl: liveUrl?.trim() || null,
         githubUrl: githubUrl?.trim() || null,

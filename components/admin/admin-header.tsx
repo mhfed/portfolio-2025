@@ -47,6 +47,7 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
     if (pathname === "/admin/experiences/add") return "Add experience";
     if (pathname.startsWith("/admin/experiences/edit"))
       return "Edit experience";
+    if (pathname === "/admin/settings") return "Settings";
     return "Dashboard";
   }, [pathname]);
 
@@ -60,6 +61,8 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
       return "Create a new work experience entry";
     if (pathname.startsWith("/admin/experiences/edit"))
       return "Update an existing work experience entry";
+    if (pathname === "/admin/settings")
+      return "Manage locale-specific text content";
     return "Overview of your portfolio projects";
   }, [pathname]);
 

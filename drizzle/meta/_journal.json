@@ -15,6 +15,20 @@
       "when": 1764927810874,
       "tag": "0001_sudden_guardsmen",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1765175632765,
+      "tag": "0002_thankful_sauron",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1765176374729,
+      "tag": "0003_cultured_wonder_man",
+      "breakpoints": true
     }
   ]
 }

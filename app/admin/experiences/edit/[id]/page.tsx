@@ -1,6 +1,6 @@
-import { getExperienceById } from "@/actions/experience-actions";
-import { notFound } from "next/navigation";
-import { EditExperienceForm } from "./edit-experience-form";
+import { getExperienceById } from '@/actions/experience-actions';
+import { notFound } from 'next/navigation';
+import { EditExperienceForm } from './edit-experience-form';
 
 interface EditExperiencePageProps {
   params: Promise<{ id: string }>;
@@ -23,12 +23,12 @@ export default async function EditExperiencePage({
   }
 
   return (
-    <div className="mx-auto w-full max-w-2xl space-y-6">
+    <div className='mx-auto w-full max-w-2xl space-y-6'>
       <div>
-        <h2 className="text-lg font-semibold text-foreground">
+        <h2 className='text-lg font-semibold text-foreground'>
           Edit experience
         </h2>
-        <p className="text-sm text-muted-foreground">
+        <p className='text-sm text-muted-foreground'>
           Update the information for this work experience entry.
         </p>
       </div>
@@ -36,10 +36,18 @@ export default async function EditExperiencePage({
         experience={{
           id: experience.id,
           company: experience.company,
+          companyEn: experience.companyEn,
+          companyVi: experience.companyVi,
           position: experience.position,
+          positionEn: experience.positionEn,
+          positionVi: experience.positionVi,
           period: experience.period,
           location: experience.location,
+          locationEn: experience.locationEn,
+          locationVi: experience.locationVi,
           description: experience.description,
+          descriptionEn: experience.descriptionEn,
+          descriptionVi: experience.descriptionVi,
           skills: experience.skills,
           orderIndex: experience.orderIndex,
         }}

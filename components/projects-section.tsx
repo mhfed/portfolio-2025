@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { SectionTitle } from "./section-title";
 import { ProjectCard } from "./project-card";
 import { db } from "@/lib/db";
@@ -7,6 +7,7 @@ import { desc } from "drizzle-orm";
 
 export async function ProjectsSection() {
   const t = await getTranslations("projects");
+  const locale = (await getLocale()) as "en" | "vi";
 
   // Fetch projects from database, ordered by createdAt descending
   let dbProjects: (typeof projects.$inferSelect)[] = [];
@@ -23,17 +24,40 @@ export async function ProjectsSection() {
   }
 
   // Map database results to match ProjectCard interface
+  // Select locale-specific values with fallback
   const mappedProjects = dbProjects.map(
-    (project: typeof projects.$inferSelect) => ({
-      image: project.imageUrl,
-      title: project.title,
-      year: project.year || "",
-      description: project.description,
-      details: project.details || "",
-      liveUrl: project.liveUrl || undefined,
-      githubUrl: project.githubUrl || undefined,
-      techStack: project.techStack || [],
-    }),
+    (project: typeof projects.$inferSelect) => {
+      // Helper to get localized value with fallback
+      const getLocalized = (
+        enValue: string | null | undefined,
+        viValue: string | null | undefined,
+        fallback: string | null | undefined
+      ): string => {
+        if (locale === "vi") {
+          return viValue || enValue || fallback || "";
+        }
+        return enValue || viValue || fallback || "";
+      };
+
+      return {
+        image: project.imageUrl,
+        title: getLocalized(project.titleEn, project.titleVi, project.title),
+        year: project.year || "",
+        description: getLocalized(
+          project.descriptionEn,
+          project.descriptionVi,
+          project.description
+        ),
+        details: getLocalized(
+          project.detailsEn,
+          project.detailsVi,
+          project.details
+        ),
+        liveUrl: project.liveUrl || undefined,
+        githubUrl: project.githubUrl || undefined,
+        techStack: project.techStack || [],
+      };
+    },
   );
 
   return (

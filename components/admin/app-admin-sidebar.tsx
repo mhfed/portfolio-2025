@@ -8,6 +8,7 @@ import {
   PlusCircle,
   Globe2,
   Briefcase,
+  Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +37,11 @@ const navItems = [
     label: "Add experience",
     href: "/admin/experiences/add",
     icon: PlusCircle,
+  },
+  {
+    label: "Settings",
+    href: "/admin/settings",
+    icon: Settings,
   },
 ];
 
@@ -80,11 +86,13 @@ export function AppAdminSidebar({
           const isActive =
             item.href === "/admin"
               ? pathname === "/admin" || pathname.startsWith("/admin/edit")
-              : pathname === item.href;
+              : item.href === "/admin/settings"
+                ? pathname === "/admin/settings"
+                : pathname === item.href;
 
           return (
             <Link
-              key={item.href}
+              key={item.href + item.label}
               href={item.href}
               onClick={onLinkClick}
               className={cn(
