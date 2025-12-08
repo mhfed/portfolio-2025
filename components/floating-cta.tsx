@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
-import { Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
+import { Download } from 'lucide-react';
+import { ShinyButton } from './ui/shiny-button';
 
 export function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
-  const t = useTranslations("header");
+  const t = useTranslations('header');
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -18,13 +18,13 @@ export function FloatingCTA() {
       }
     };
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
   const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/resume.pdf";
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
     link.download = `Nguyen-Minh-Hieu-Resume.pdf`;
     document.body.appendChild(link);
     link.click();
@@ -34,16 +34,16 @@ export function FloatingCTA() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-50">
-      <Button
+    <div className='fixed bottom-6 left-6 z-50'>
+      <ShinyButton
         onClick={handleDownload}
-        variant="gradient"
-        size="lg"
-        aria-label={t("downloadResume")}
+        variant='gradient'
+        size='lg'
+        aria-label={t('downloadResume')}
       >
-        <Download className="w-5 h-5" />
-        <span className="hidden sm:inline">{t("downloadResume")}</span>
-      </Button>
+        <Download className='w-5 h-5' />
+        <span className='hidden sm:inline'>{t('downloadResume')}</span>
+      </ShinyButton>
     </div>
   );
 }

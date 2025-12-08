@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Marquee } from "./ui/marquee";
 import StackIcon, { IconName } from "tech-stack-icons";
-import { Database, Smartphone } from "lucide-react";
+import { Database, Smartphone, FileCode } from "lucide-react";
 import { ComponentType } from "react";
 
 interface TechItem {
@@ -14,7 +14,7 @@ const technologies: TechItem[] = [
   { name: "React", iconName: "react" },
   { name: "Next.js", iconName: "nextjs" },
   { name: "TypeScript", iconName: "typescript" },
-  { name: "JavaScript", iconName: "javascript" },
+  { name: "JavaScript", IconComponent: FileCode },
   { name: "Tailwind CSS", iconName: "tailwindcss" },
   { name: "Node.js", iconName: "nodejs" },
   { name: "Redux", iconName: "redux" },
