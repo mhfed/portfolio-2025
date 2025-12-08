@@ -15,7 +15,9 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://your-domain.com";
+  const baseUrl = process.env.NODE_ENV === "development"
+  ? "http://localhost:3000"
+  : "https://minhhieu.is-a.dev";
   const titles = {
     en: "Nguyen Minh Hieu - Frontend Developer Portfolio",
     vi: "Nguyen Minh Hieu - Portfolio Lập Trình Viên Frontend",
@@ -112,7 +114,9 @@ export default async function LocaleLayout({ children, params }: Props) {
       locale === "vi"
         ? "Lập trình viên Frontend với 5+ năm kinh nghiệm"
         : "Frontend Developer with 5+ years of experience",
-    url: process.env.NEXT_PUBLIC_BASE_URL || "https://your-domain.com",
+    url: process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://minhhieu.is-a.dev",
     sameAs: ["https://github.com/mhfed", "https://linkedin.com/in/mhfed"],
     knowsAbout: [
       "React.js",
