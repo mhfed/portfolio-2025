@@ -39,11 +39,27 @@ const navItems = [
   },
 ];
 
-export function AppAdminSidebar() {
+interface AppAdminSidebarProps {
+  variant?: "desktop" | "mobile";
+  onLinkClick?: () => void;
+}
+
+export function AppAdminSidebar({
+  variant = "desktop",
+  onLinkClick,
+}: AppAdminSidebarProps) {
   const pathname = usePathname();
+  const isMobile = variant === "mobile";
 
   return (
-    <aside className="hidden md:flex fixed inset-y-0 left-0 z-30 w-64 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
+    <aside
+      className={cn(
+        "w-64 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground",
+        isMobile
+          ? "flex h-full"
+          : "hidden md:flex fixed inset-y-0 left-0 z-30",
+      )}
+    >
       {/* Brand */}
       <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-4">
         <div className="flex h-8 w-8 items-center justify-center bg-sidebar-primary text-sidebar-primary-foreground text-xs font-bold uppercase">
@@ -70,12 +86,14 @@ export function AppAdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onLinkClick}
               className={cn(
                 "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 isActive
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"
                   : "text-sidebar-foreground/80",
+                isMobile && "min-h-[44px] touch-manipulation",
               )}
             >
               <Icon className="h-4 w-4" />
@@ -89,7 +107,11 @@ export function AppAdminSidebar() {
       <div className="border-t border-sidebar-border px-4 py-3 text-xs text-sidebar-foreground/60 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 hover:text-sidebar-foreground/90"
+          onClick={onLinkClick}
+          className={cn(
+            "inline-flex items-center gap-1 hover:text-sidebar-foreground/90",
+            isMobile && "min-h-[44px] touch-manipulation",
+          )}
         >
           <Globe2 className="h-3.5 w-3.5" />
           <span>View site</span>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Menu, PlusCircle, Sun, Moon } from "lucide-react";
-import { Drawer, DrawerContentSide } from "@/components/ui/drawer";
+import { Drawer, DrawerContentLeft } from "@/components/ui/drawer";
 import { AppAdminSidebar } from "@/components/admin/app-admin-sidebar";
 import { cn } from "@/lib/utils";
 
@@ -86,40 +86,40 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border/40 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-6 lg:px-8">
-        <div className="flex items-center gap-3">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2.5 md:gap-3 md:px-6 md:py-3 lg:px-8">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
           {/* Mobile sidebar trigger */}
           <button
             type="button"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden touch-manipulation"
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation"
           >
             <Menu className="h-4 w-4" />
           </button>
 
-          <div className="flex flex-col gap-0.5">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="flex flex-col gap-0.5 min-w-0">
+            <div className="hidden md:flex items-center gap-2 text-xs text-muted-foreground">
               <Link href="/admin" className="hover:text-foreground">
                 Admin
               </Link>
               <span className="text-border">/</span>
               <span className="text-foreground/80">{title}</span>
             </div>
-            <h1 className="text-base font-semibold leading-tight tracking-tight md:text-lg">
+            <h1 className="text-sm font-semibold leading-tight tracking-tight truncate md:text-base lg:text-lg">
               {title}
             </h1>
-            <p className="text-xs text-muted-foreground md:text-sm">
+            <p className="hidden md:block text-xs text-muted-foreground md:text-sm">
               {description}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
           <button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring touch-manipulation"
             aria-label="Toggle theme"
           >
             {displayIsDark ? (
@@ -133,21 +133,30 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
             <Link
               href={primaryAction.href}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-md border border-primary/60 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground md:text-sm",
+                "inline-flex items-center gap-1.5 rounded-md border border-primary/60 bg-primary/10 px-2.5 py-1.5 text-xs font-medium text-primary shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground touch-manipulation",
+                "md:px-3 md:text-sm",
               )}
             >
               <PlusCircle className="h-3.5 w-3.5" />
-              <span>{primaryAction.label}</span>
+              <span className="hidden sm:inline">{primaryAction.label}</span>
+              <span className="sm:hidden">Add</span>
             </Link>
           )}
         </div>
       </div>
 
       {/* Mobile sidebar drawer */}
-      <Drawer open={mobileOpen} onOpenChange={setMobileOpen}>
-        <DrawerContentSide className="w-64 border-l-0 border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
-          <AppAdminSidebar />
-        </DrawerContentSide>
+      <Drawer
+        open={mobileOpen}
+        onOpenChange={setMobileOpen}
+        direction="left"
+      >
+        <DrawerContentLeft className="border-sidebar-border bg-sidebar text-sidebar-foreground">
+          <AppAdminSidebar
+            variant="mobile"
+            onLinkClick={() => setMobileOpen(false)}
+          />
+        </DrawerContentLeft>
       </Drawer>
     </header>
   );

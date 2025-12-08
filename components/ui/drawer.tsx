@@ -127,6 +127,28 @@ const DrawerContentSide = React.forwardRef<
 ));
 DrawerContentSide.displayName = "DrawerContentSide";
 
+// Custom left drawer for admin sidebar menu
+const DrawerContentLeft = React.forwardRef<
+  React.ElementRef<typeof DrawerPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DrawerPortal>
+    <DrawerOverlay />
+    <DrawerPrimitive.Content
+      ref={ref}
+      className={cn(
+        "fixed z-50 flex h-full flex-col rounded-r-lg border-r border-border bg-background",
+        "left-0 top-0 bottom-0 w-64",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </DrawerPrimitive.Content>
+  </DrawerPortal>
+));
+DrawerContentLeft.displayName = "DrawerContentLeft";
+
 export {
   Drawer,
   DrawerPortal,
@@ -135,6 +157,7 @@ export {
   DrawerClose,
   DrawerContent,
   DrawerContentSide,
+  DrawerContentLeft,
   DrawerHeader,
   DrawerFooter,
   DrawerTitle,
