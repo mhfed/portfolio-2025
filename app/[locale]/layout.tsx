@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { Analytics } from "@vercel/analytics/react";
+import { LenisProvider } from "@/components/providers/lenis-provider";
 
 type Props = {
   children: React.ReactNode;
@@ -129,8 +130,10 @@ export default async function LocaleLayout({ children, params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <NextIntlClientProvider messages={messages}>
-        {children}
-        <Analytics />
+        <LenisProvider>
+          {children}
+          <Analytics />
+        </LenisProvider>
       </NextIntlClientProvider>
     </>
   );

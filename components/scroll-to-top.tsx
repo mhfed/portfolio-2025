@@ -2,45 +2,33 @@
 
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
+import { useLenis } from "@/components/providers/lenis-provider";
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const lenis = useLenis();
 
   useEffect(() => {
-    const toggleVisibility = () => {
+    if (!lenis) return;
+
+    const handleScroll = ({ scroll }: { scroll: number }) => {
       // Show button when page is scrolled down 300px
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(scroll > 300);
     };
 
-    // Throttle scroll events for performance
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          toggleVisibility();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    toggleVisibility(); // Check initial state
+    lenis.on("scroll", handleScroll);
+    // Check initial state
+    setIsVisible(lenis.scroll > 300);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      lenis.off("scroll", handleScroll);
     };
-  }, []);
+  }, [lenis]);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.2 });
+    }
   };
 
   return (

@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import { motion, MotionProps, useScroll } from 'motion/react';
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { useLenis } from "@/components/providers/lenis-provider";
 
-import { cn } from '@/lib/utils';
-
-interface ScrollProgressProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps> {
+interface ScrollProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   ref?: React.Ref<HTMLDivElement>;
 }
 
@@ -14,17 +13,38 @@ export function ScrollProgress({
   ref,
   ...props
 }: ScrollProgressProps) {
-  const { scrollYProgress } = useScroll();
+  const [progress, setProgress] = useState(0);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    const handleScroll = ({
+      progress: scrollProgress,
+    }: {
+      progress: number;
+    }) => {
+      setProgress(scrollProgress);
+    };
+
+    lenis.on("scroll", handleScroll);
+    // Set initial progress
+    setProgress(lenis.progress);
+
+    return () => {
+      lenis.off("scroll", handleScroll);
+    };
+  }, [lenis]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
       className={cn(
-        'fixed inset-x-0 top-0 z-50 h-px origin-left bg-gradient-to-r from-[#A97CF8] via-[#F38CB8] to-[#FDCC92]',
-        className
+        "fixed inset-x-0 top-0 z-50 h-px origin-left bg-gradient-to-r from-[#A97CF8] via-[#F38CB8] to-[#FDCC92] transition-transform duration-75 ease-out",
+        className,
       )}
       style={{
-        scaleX: scrollYProgress,
+        transform: `scaleX(${progress})`,
       }}
       {...props}
     />
