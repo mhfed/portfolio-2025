@@ -70,7 +70,18 @@
   "blog": {
     "title": "RECENTLY PUBLISHED",
     "readMore": "READ MORE →",
-    "allCategories": "ALL CATEGORIES"
+    "allCategories": "ALL CATEGORIES",
+    "allPosts": "All Posts",
+    "noPosts": "No posts available yet.",
+    "publishedOn": "Published on",
+    "readTime": "min read",
+    "views": "views",
+    "categories": "Categories",
+    "tags": "Tags",
+    "search": "Search posts...",
+    "backToBlog": "← Back to Blog",
+    "relatedPosts": "Related Posts",
+    "tableOfContents": "Table of Contents"
   },
   "collaborate": {
     "title": "LET'S COLLABORATE",

@@ -70,7 +70,18 @@
   "blog": {
     "title": "BÀI VIẾT GẦN ĐÂY",
     "readMore": "ĐỌC THÊM →",
-    "allCategories": "TẤT CẢ DANH MỤC"
+    "allCategories": "TẤT CẢ DANH MỤC",
+    "allPosts": "Tất cả bài viết",
+    "noPosts": "Chưa có bài viết nào.",
+    "publishedOn": "Xuất bản vào",
+    "readTime": "phút đọc",
+    "views": "lượt xem",
+    "categories": "Danh mục",
+    "tags": "Thẻ",
+    "search": "Tìm kiếm bài viết...",
+    "backToBlog": "← Quay lại Blog",
+    "relatedPosts": "Bài viết liên quan",
+    "tableOfContents": "Mục lục"
   },
   "collaborate": {
     "title": "HÃY HỢP TÁC",
