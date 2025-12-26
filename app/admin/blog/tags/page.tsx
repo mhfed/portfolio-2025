@@ -1,10 +1,10 @@
-import { getAllTags, createTag } from '@/actions/post-actions';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import { TagForm } from './tag-form';
+import { getAllTags, createTag } from '@/actions/post-actions'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import { TagForm } from './tag-form'
 
 export default async function TagsPage() {
-  const tags = await getAllTags();
+  const tags = await getAllTags()
 
   return (
     <div className='space-y-6'>
@@ -51,5 +51,5 @@ export default async function TagsPage() {
         )}
       </section>
     </div>
-  );
+  )
 }

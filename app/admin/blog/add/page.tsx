@@ -1,6 +1,6 @@
-import { PostForm } from './post-form';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { PostForm } from './post-form'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export default function AddPostPage() {
   return (
@@ -24,5 +24,5 @@ export default function AddPostPage() {
 
       <PostForm />
     </div>
-  );
+  )
 }

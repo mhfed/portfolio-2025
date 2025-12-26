@@ -1,73 +1,73 @@
-'use client';
+'use client'
 
-import { useActionState, useState, useEffect } from 'react';
+import { useActionState, useState, useEffect } from 'react'
 import {
   updatePost,
   getAllCategories,
   getAllTags,
   getPostById,
-} from '@/actions/post-actions';
-import type { UpdatePostResult } from '@/actions/post-actions';
-import { ImageUploadDropzone } from '@/components/admin-image-upload-dropzone';
-import { LocaleTabs } from '@/components/admin/locale-tabs';
-import { TipTapEditor } from '@/components/blog/tiptap-editor';
-import { generateSlug } from '@/lib/utils';
-import { format } from 'date-fns';
+} from '@/actions/post-actions'
+import type { UpdatePostResult } from '@/actions/post-actions'
+import { ImageUploadDropzone } from '@/components/admin-image-upload-dropzone'
+import { LocaleTabs } from '@/components/admin/locale-tabs'
+import { TipTapEditor } from '@/components/blog/tiptap-editor'
+import { generateSlug } from '@/lib/utils'
+import { format } from 'date-fns'
 
 interface EditPostFormProps {
-  post: Awaited<ReturnType<typeof getPostById>>;
+  post: Awaited<ReturnType<typeof getPostById>>
 }
 
 export function EditPostForm({ post }: EditPostFormProps) {
   const [state, formAction] = useActionState<UpdatePostResult, FormData>(
     updatePostAction,
     { success: true }
-  );
-  const [coverImage, setCoverImage] = useState(post?.coverImage || '');
+  )
+  const [coverImage, setCoverImage] = useState(post?.coverImage || '')
   const [categories, setCategories] = useState<
     Array<{ id: number; name: string }>
-  >([]);
-  const [tags, setTags] = useState<Array<{ id: number; name: string }>>([]);
+  >([])
+  const [tags, setTags] = useState<Array<{ id: number; name: string }>>([])
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>(
     post?.categories?.map((c) => c.id) || []
-  );
+  )
   const [selectedTagIds, setSelectedTagIds] = useState<number[]>(
     post?.tags?.map((t) => t.id) || []
-  );
-  const [contentEn, setContentEn] = useState<any>(post?.contentEn || null);
-  const [contentVi, setContentVi] = useState<any>(post?.contentVi || null);
-  const [slug, setSlug] = useState(post?.slug || '');
-  const [titleEn, setTitleEn] = useState(post?.titleEn || '');
-  const [titleVi, setTitleVi] = useState(post?.titleVi || '');
-  const [autoGenerateSlug, setAutoGenerateSlug] = useState(false);
+  )
+  const [contentEn, setContentEn] = useState<any>(post?.contentEn || null)
+  const [contentVi, setContentVi] = useState<any>(post?.contentVi || null)
+  const [slug, setSlug] = useState(post?.slug || '')
+  const [titleEn, setTitleEn] = useState(post?.titleEn || '')
+  const [titleVi, setTitleVi] = useState(post?.titleVi || '')
+  const [autoGenerateSlug, setAutoGenerateSlug] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
-      const [cats, tgs] = await Promise.all([getAllCategories(), getAllTags()]);
-      setCategories(cats);
-      setTags(tgs);
-    };
-    fetchData();
-  }, []);
+      const [cats, tgs] = await Promise.all([getAllCategories(), getAllTags()])
+      setCategories(cats)
+      setTags(tgs)
+    }
+    fetchData()
+  }, [])
 
   async function updatePostAction(
     _prevState: UpdatePostResult,
     formData: FormData
   ): Promise<UpdatePostResult> {
     if (!post) {
-      return { success: false, error: 'Post not found' };
+      return { success: false, error: 'Post not found' }
     }
-    formData.append('id', post.id.toString());
-    return updatePost(post.id, formData);
+    formData.append('id', post.id.toString())
+    return updatePost(post.id, formData)
   }
 
   if (!post) {
-    return <div>Post not found</div>;
+    return <div>Post not found</div>
   }
 
   const publishedAtFormatted = post.publishedAt
     ? format(new Date(post.publishedAt), "yyyy-MM-dd'T'HH:mm")
-    : '';
+    : ''
 
   return (
     <>
@@ -136,33 +136,25 @@ export function EditPostForm({ post }: EditPostFormProps) {
                       : titleVi || post.titleVi || ''
                   }
                   onChange={(e) => {
-                    const value = e.target.value;
+                    const value = e.target.value
                     if (activeTab === 'en') {
-                      setTitleEn(value);
+                      setTitleEn(value)
                       if (autoGenerateSlug) {
                         // Use current title, fallback to other locale's title or existing post title
                         const titleToUse =
-                          value ||
-                          titleVi ||
-                          post.titleVi ||
-                          post.titleEn ||
-                          '';
+                          value || titleVi || post.titleVi || post.titleEn || ''
                         if (titleToUse) {
-                          setSlug(generateSlug(titleToUse));
+                          setSlug(generateSlug(titleToUse))
                         }
                       }
                     } else {
-                      setTitleVi(value);
+                      setTitleVi(value)
                       if (autoGenerateSlug) {
                         // Use current title, fallback to other locale's title or existing post title
                         const titleToUse =
-                          value ||
-                          titleEn ||
-                          post.titleEn ||
-                          post.titleVi ||
-                          '';
+                          value || titleEn || post.titleEn || post.titleVi || ''
                         if (titleToUse) {
-                          setSlug(generateSlug(titleToUse));
+                          setSlug(generateSlug(titleToUse))
                         }
                       }
                     }
@@ -205,9 +197,9 @@ export function EditPostForm({ post }: EditPostFormProps) {
                   }
                   onChange={(content) => {
                     if (activeTab === 'en') {
-                      setContentEn(content);
+                      setContentEn(content)
                     } else {
-                      setContentVi(content);
+                      setContentVi(content)
                     }
                   }}
                   placeholder={
@@ -241,7 +233,7 @@ export function EditPostForm({ post }: EditPostFormProps) {
           <ImageUploadDropzone
             initialUrl={coverImage}
             onUploadSuccess={(url) => {
-              setCoverImage(url);
+              setCoverImage(url)
             }}
             label='Cover Image'
             description='Drag and drop a cover image here, or click to browse.'
@@ -285,11 +277,11 @@ export function EditPostForm({ post }: EditPostFormProps) {
                       setSelectedCategoryIds([
                         ...selectedCategoryIds,
                         category.id,
-                      ]);
+                      ])
                     } else {
                       setSelectedCategoryIds(
                         selectedCategoryIds.filter((id) => id !== category.id)
-                      );
+                      )
                     }
                   }}
                   className='rounded border-border'
@@ -322,11 +314,11 @@ export function EditPostForm({ post }: EditPostFormProps) {
                   checked={selectedTagIds.includes(tag.id)}
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setSelectedTagIds([...selectedTagIds, tag.id]);
+                      setSelectedTagIds([...selectedTagIds, tag.id])
                     } else {
                       setSelectedTagIds(
                         selectedTagIds.filter((id) => id !== tag.id)
-                      );
+                      )
                     }
                   }}
                   className='rounded border-border'
@@ -402,5 +394,5 @@ export function EditPostForm({ post }: EditPostFormProps) {
         </div>
       </form>
     </>
-  );
+  )
 }

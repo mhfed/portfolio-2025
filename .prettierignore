@@ -1,0 +1,22 @@
+# Ignore built output
+.next/
+out/
+build/
+coverage/
+
+# Node modules
+node_modules/
+
+# Env files
+.env*
+.vercel/
+
+# Logs
+*.log
+
+# IDE & system files
+.DS_Store
+*.tsbuildinfo
+
+# Public assets (static files, images, fonts, etc.)
+public/

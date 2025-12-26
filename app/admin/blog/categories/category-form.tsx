@@ -1,38 +1,38 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { createCategory } from '@/actions/post-actions';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react'
+import { createCategory } from '@/actions/post-actions'
+import { useRouter } from 'next/navigation'
 
 export function CategoryForm() {
-  const [slug, setSlug] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+  const [slug, setSlug] = useState('')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError(null)
 
     try {
-      const result = await createCategory(slug, name, description);
+      const result = await createCategory(slug, name, description)
       if (result.success) {
-        setSlug('');
-        setName('');
-        setDescription('');
-        router.refresh();
+        setSlug('')
+        setName('')
+        setDescription('')
+        router.refresh()
       } else {
-        setError(result.error || 'Failed to create category');
+        setError(result.error || 'Failed to create category')
       }
     } catch (err) {
-      setError('An error occurred');
+      setError('An error occurred')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <form
@@ -110,5 +110,5 @@ export function CategoryForm() {
         {isSubmitting ? 'Creating...' : 'Create Category'}
       </button>
     </form>
-  );
+  )
 }

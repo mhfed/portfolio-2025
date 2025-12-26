@@ -1,36 +1,36 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { createTag } from '@/actions/post-actions';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react'
+import { createTag } from '@/actions/post-actions'
+import { useRouter } from 'next/navigation'
 
 export function TagForm() {
-  const [slug, setSlug] = useState('');
-  const [name, setName] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+  const [slug, setSlug] = useState('')
+  const [name, setName] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError(null)
 
     try {
-      const result = await createTag(slug, name);
+      const result = await createTag(slug, name)
       if (result.success) {
-        setSlug('');
-        setName('');
-        router.refresh();
+        setSlug('')
+        setName('')
+        router.refresh()
       } else {
-        setError(result.error || 'Failed to create tag');
+        setError(result.error || 'Failed to create tag')
       }
     } catch (err) {
-      setError('An error occurred');
+      setError('An error occurred')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <form
@@ -89,5 +89,5 @@ export function TagForm() {
         {isSubmitting ? 'Creating...' : 'Create Tag'}
       </button>
     </form>
-  );
+  )
 }

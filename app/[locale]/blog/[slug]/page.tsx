@@ -1,51 +1,51 @@
-import { getPostBySlug, incrementViewCount } from '@/actions/post-actions';
-import { BlogContent } from '@/components/blog/blog-content';
-import { BlogTOC } from '@/components/blog/blog-toc';
-import { Badge } from '@/components/ui/badge';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { hasLocale } from 'next-intl';
-import { routing } from '@/i18n/routing';
-import { Metadata } from 'next';
-import { format } from 'date-fns';
-import { Eye, Calendar, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { getPostBySlug, incrementViewCount } from '@/actions/post-actions'
+import { BlogContent } from '@/components/blog/blog-content'
+import { BlogTOC } from '@/components/blog/blog-toc'
+import { Badge } from '@/components/ui/badge'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
+import { routing } from '@/i18n/routing'
+import { Metadata } from 'next'
+import { format } from 'date-fns'
+import { Eye, Calendar, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
+import Image from 'next/image'
 
 interface BlogPostPageProps {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { locale, slug } = await params
 
   if (!hasLocale(routing.locales, locale)) {
-    return {};
+    return {}
   }
 
-  const post = await getPostBySlug(slug, locale);
+  const post = await getPostBySlug(slug, locale)
 
   if (!post || !post.isPublished) {
     return {
       title: 'Post Not Found',
-    };
+    }
   }
 
   const title =
     locale === 'vi'
       ? post.titleVi || post.titleEn || post.title
-      : post.titleEn || post.titleVi || post.title;
+      : post.titleEn || post.titleVi || post.title
   const excerpt =
     locale === 'vi'
       ? post.excerptVi || post.excerptEn || post.excerpt
-      : post.excerptEn || post.excerptVi || post.excerpt;
+      : post.excerptEn || post.excerptVi || post.excerpt
 
   const siteUrl =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'https://minhhieu.is-a.dev';
+      : 'https://minhhieu.is-a.dev'
 
   return {
     title: `${title} | Blog`,
@@ -73,58 +73,58 @@ export async function generateMetadata({
       description: excerpt || undefined,
       images: post.coverImage ? [post.coverImage] : [],
     },
-  };
+  }
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { locale, slug } = await params;
+  const { locale, slug } = await params
 
   if (!hasLocale(routing.locales, locale)) {
-    notFound();
+    notFound()
   }
 
-  setRequestLocale(locale);
-  const t = await getTranslations('blog');
+  setRequestLocale(locale)
+  const t = await getTranslations('blog')
 
-  const post = await getPostBySlug(slug, locale);
+  const post = await getPostBySlug(slug, locale)
 
   if (!post || !post.isPublished) {
-    notFound();
+    notFound()
   }
 
   // Increment view count (fire and forget)
-  incrementViewCount(post.id).catch(console.error);
+  incrementViewCount(post.id).catch(console.error)
 
   // Get localized content
   const displayTitle =
     locale === 'vi'
       ? post.titleVi || post.titleEn || post.title
-      : post.titleEn || post.titleVi || post.title;
+      : post.titleEn || post.titleVi || post.title
   const displayExcerpt =
     locale === 'vi'
       ? post.excerptVi || post.excerptEn || post.excerpt
-      : post.excerptEn || post.excerptVi || post.excerpt;
+      : post.excerptEn || post.excerptVi || post.excerpt
   // Helper to check if content is valid (not null, not empty object)
   const isValidContent = (content: any): boolean => {
-    if (!content) return false;
+    if (!content) return false
     if (typeof content === 'object') {
       // Check if it's a valid TipTap document or has content
-      if (content.type === 'doc') return true;
-      if (Array.isArray(content) && content.length > 0) return true;
-      if (Object.keys(content).length > 0) return true;
-      return false;
+      if (content.type === 'doc') return true
+      if (Array.isArray(content) && content.length > 0) return true
+      if (Object.keys(content).length > 0) return true
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   const getValidContent = (contents: any[]): any => {
-    return contents.find((c) => isValidContent(c)) || null;
-  };
+    return contents.find((c) => isValidContent(c)) || null
+  }
 
   const displayContent =
     locale === 'vi'
       ? getValidContent([post.contentVi, post.contentEn, post.content])
-      : getValidContent([post.contentEn, post.contentVi, post.content]);
+      : getValidContent([post.contentEn, post.contentVi, post.content])
 
   return (
     <div className='container mx-auto px-4 py-8 md:py-12 lg:py-16'>
@@ -240,5 +240,5 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
       </div>
     </div>
-  );
+  )
 }

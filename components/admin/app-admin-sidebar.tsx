@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard,
   FolderKanban,
@@ -12,8 +12,8 @@ import {
   BookOpen,
   Tag,
   FolderTree,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+} from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const navItems = [
   {
@@ -66,19 +66,19 @@ const navItems = [
     href: '/admin/settings',
     icon: Settings,
   },
-];
+]
 
 interface AppAdminSidebarProps {
-  variant?: 'desktop' | 'mobile';
-  onLinkClick?: () => void;
+  variant?: 'desktop' | 'mobile'
+  onLinkClick?: () => void
 }
 
 export function AppAdminSidebar({
   variant = 'desktop',
   onLinkClick,
 }: AppAdminSidebarProps) {
-  const pathname = usePathname();
-  const isMobile = variant === 'mobile';
+  const pathname = usePathname()
+  const isMobile = variant === 'mobile'
 
   return (
     <aside
@@ -103,25 +103,25 @@ export function AppAdminSidebar({
       {/* Navigation */}
       <nav className='flex-1 space-y-1 px-3 py-4 text-sm'>
         {navItems.map((item) => {
-          const Icon = item.icon;
-          let isActive = false;
+          const Icon = item.icon
+          let isActive = false
           if (item.href === '/admin') {
             isActive =
-              pathname === '/admin' || pathname.startsWith('/admin/edit');
+              pathname === '/admin' || pathname.startsWith('/admin/edit')
           } else if (item.href === '/admin/settings') {
-            isActive = pathname === '/admin/settings';
+            isActive = pathname === '/admin/settings'
           } else if (item.href === '/admin/blog') {
             isActive =
               pathname === '/admin/blog' ||
-              pathname.startsWith('/admin/blog/edit');
+              pathname.startsWith('/admin/blog/edit')
           } else if (item.href === '/admin/blog/add') {
-            isActive = pathname === '/admin/blog/add';
+            isActive = pathname === '/admin/blog/add'
           } else if (item.href === '/admin/blog/categories') {
-            isActive = pathname === '/admin/blog/categories';
+            isActive = pathname === '/admin/blog/categories'
           } else if (item.href === '/admin/blog/tags') {
-            isActive = pathname === '/admin/blog/tags';
+            isActive = pathname === '/admin/blog/tags'
           } else {
-            isActive = pathname === item.href;
+            isActive = pathname === item.href
           }
 
           return (
@@ -141,7 +141,7 @@ export function AppAdminSidebar({
               <Icon className='h-4 w-4' />
               <span>{item.label}</span>
             </Link>
-          );
+          )
         })}
       </nav>
 
@@ -161,5 +161,5 @@ export function AppAdminSidebar({
         <span className='text-[10px] uppercase tracking-wide'>v1 Admin</span>
       </div>
     </aside>
-  );
+  )
 }

@@ -1,45 +1,45 @@
-'use client';
+'use client'
 
-import { useActionState, useState, useEffect } from 'react';
+import { useActionState, useState, useEffect } from 'react'
 import {
   createPost,
   getAllCategories,
   getAllTags,
-} from '@/actions/post-actions';
-import type { CreatePostResult } from '@/actions/post-actions';
-import { ImageUploadDropzone } from '@/components/admin-image-upload-dropzone';
-import { LocaleTabs } from '@/components/admin/locale-tabs';
-import { TipTapEditor } from '@/components/blog/tiptap-editor';
-import { generateSlug } from '@/lib/utils';
+} from '@/actions/post-actions'
+import type { CreatePostResult } from '@/actions/post-actions'
+import { ImageUploadDropzone } from '@/components/admin-image-upload-dropzone'
+import { LocaleTabs } from '@/components/admin/locale-tabs'
+import { TipTapEditor } from '@/components/blog/tiptap-editor'
+import { generateSlug } from '@/lib/utils'
 
 export function PostForm() {
   const [state, formAction] = useActionState<CreatePostResult, FormData>(
     createPost,
     { success: true }
-  );
-  const [coverImage, setCoverImage] = useState('');
+  )
+  const [coverImage, setCoverImage] = useState('')
   const [categories, setCategories] = useState<
     Array<{ id: number; name: string }>
-  >([]);
-  const [tags, setTags] = useState<Array<{ id: number; name: string }>>([]);
-  const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
-  const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
-  const [contentEn, setContentEn] = useState<any>(null);
-  const [contentVi, setContentVi] = useState<any>(null);
-  const [slug, setSlug] = useState('');
-  const [titleEn, setTitleEn] = useState('');
-  const [titleVi, setTitleVi] = useState('');
-  const [autoGenerateSlug, setAutoGenerateSlug] = useState(true);
+  >([])
+  const [tags, setTags] = useState<Array<{ id: number; name: string }>>([])
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([])
+  const [selectedTagIds, setSelectedTagIds] = useState<number[]>([])
+  const [contentEn, setContentEn] = useState<any>(null)
+  const [contentVi, setContentVi] = useState<any>(null)
+  const [slug, setSlug] = useState('')
+  const [titleEn, setTitleEn] = useState('')
+  const [titleVi, setTitleVi] = useState('')
+  const [autoGenerateSlug, setAutoGenerateSlug] = useState(true)
 
   useEffect(() => {
     // Fetch categories and tags
     const fetchData = async () => {
-      const [cats, tgs] = await Promise.all([getAllCategories(), getAllTags()]);
-      setCategories(cats);
-      setTags(tgs);
-    };
-    fetchData();
-  }, []);
+      const [cats, tgs] = await Promise.all([getAllCategories(), getAllTags()])
+      setCategories(cats)
+      setTags(tgs)
+    }
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -106,23 +106,23 @@ export function PostForm() {
                   name={`title_${activeTab}`}
                   value={activeTab === 'en' ? titleEn : titleVi}
                   onChange={(e) => {
-                    const value = e.target.value;
+                    const value = e.target.value
                     if (activeTab === 'en') {
-                      setTitleEn(value);
+                      setTitleEn(value)
                       if (autoGenerateSlug) {
                         // Use current title, fallback to other locale's title
-                        const titleToUse = value || titleVi;
+                        const titleToUse = value || titleVi
                         if (titleToUse) {
-                          setSlug(generateSlug(titleToUse));
+                          setSlug(generateSlug(titleToUse))
                         }
                       }
                     } else {
-                      setTitleVi(value);
+                      setTitleVi(value)
                       if (autoGenerateSlug) {
                         // Use current title, fallback to other locale's title
-                        const titleToUse = value || titleEn;
+                        const titleToUse = value || titleEn
                         if (titleToUse) {
-                          setSlug(generateSlug(titleToUse));
+                          setSlug(generateSlug(titleToUse))
                         }
                       }
                     }
@@ -164,9 +164,9 @@ export function PostForm() {
                   content={activeTab === 'en' ? contentEn : contentVi}
                   onChange={(content) => {
                     if (activeTab === 'en') {
-                      setContentEn(content);
+                      setContentEn(content)
                     } else {
-                      setContentVi(content);
+                      setContentVi(content)
                     }
                   }}
                   placeholder={
@@ -200,7 +200,7 @@ export function PostForm() {
           <ImageUploadDropzone
             initialUrl={coverImage}
             onUploadSuccess={(url) => {
-              setCoverImage(url);
+              setCoverImage(url)
             }}
             label='Cover Image'
             description='Drag and drop a cover image here, or click to browse. The Cloudinary URL will be filled in below.'
@@ -248,11 +248,11 @@ export function PostForm() {
                       setSelectedCategoryIds([
                         ...selectedCategoryIds,
                         category.id,
-                      ]);
+                      ])
                     } else {
                       setSelectedCategoryIds(
                         selectedCategoryIds.filter((id) => id !== category.id)
-                      );
+                      )
                     }
                   }}
                   className='rounded border-border'
@@ -285,11 +285,11 @@ export function PostForm() {
                   checked={selectedTagIds.includes(tag.id)}
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setSelectedTagIds([...selectedTagIds, tag.id]);
+                      setSelectedTagIds([...selectedTagIds, tag.id])
                     } else {
                       setSelectedTagIds(
                         selectedTagIds.filter((id) => id !== tag.id)
-                      );
+                      )
                     }
                   }}
                   className='rounded border-border'
@@ -362,5 +362,5 @@ export function PostForm() {
         </div>
       </form>
     </>
-  );
+  )
 }

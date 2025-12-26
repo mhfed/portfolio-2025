@@ -1,128 +1,140 @@
-"use server";
+'use server'
 
-import { db } from "@/lib/db";
-import { experiences } from "@/db/schema";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { asc, desc, eq } from "drizzle-orm";
+import { db } from '@/lib/db'
+import { experiences } from '@/db/schema'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { asc, desc, eq } from 'drizzle-orm'
 
 export interface CreateExperienceResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export interface UpdateExperienceResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export interface DeleteExperienceResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export async function createExperience(
   _prevState: CreateExperienceResult,
-  formData: FormData,
+  formData: FormData
 ): Promise<CreateExperienceResult> {
   try {
     // Extract form data - locale fields
-    const companyEn = formData.get("company_en") as string | null;
-    const companyVi = formData.get("company_vi") as string | null;
-    const positionEn = formData.get("position_en") as string | null;
-    const positionVi = formData.get("position_vi") as string | null;
-    const descriptionEn = formData.get("description_en") as string | null;
-    const descriptionVi = formData.get("description_vi") as string | null;
-    const locationEn = formData.get("location_en") as string | null;
-    const locationVi = formData.get("location_vi") as string | null;
-    
+    const companyEn = formData.get('company_en') as string | null
+    const companyVi = formData.get('company_vi') as string | null
+    const positionEn = formData.get('position_en') as string | null
+    const positionVi = formData.get('position_vi') as string | null
+    const descriptionEn = formData.get('description_en') as string | null
+    const descriptionVi = formData.get('description_vi') as string | null
+    const locationEn = formData.get('location_en') as string | null
+    const locationVi = formData.get('location_vi') as string | null
+
     // Legacy fields for backward compatibility
-    const company = formData.get("company") as string | null;
-    const position = formData.get("position") as string | null;
-    const description = formData.get("description") as string | null;
-    const location = formData.get("location") as string | null;
-    
+    const company = formData.get('company') as string | null
+    const position = formData.get('position') as string | null
+    const description = formData.get('description') as string | null
+    const location = formData.get('location') as string | null
+
     // Non-locale fields
-    const period = formData.get("period") as string;
-    const skillsInput = formData.get("skills") as string | null;
-    const orderIndexRaw = formData.get("orderIndex") as string | null;
+    const period = formData.get('period') as string
+    const skillsInput = formData.get('skills') as string | null
+    const orderIndexRaw = formData.get('orderIndex') as string | null
 
     // Validate: at least one locale must have required fields
-    const finalCompanyEn = companyEn?.trim() || company?.trim() || "";
-    const finalCompanyVi = companyVi?.trim() || company?.trim() || "";
-    const finalPositionEn = positionEn?.trim() || position?.trim() || "";
-    const finalPositionVi = positionVi?.trim() || position?.trim() || "";
-    const finalDescriptionEn = descriptionEn?.trim() || description?.trim() || "";
-    const finalDescriptionVi = descriptionVi?.trim() || description?.trim() || "";
+    const finalCompanyEn = companyEn?.trim() || company?.trim() || ''
+    const finalCompanyVi = companyVi?.trim() || company?.trim() || ''
+    const finalPositionEn = positionEn?.trim() || position?.trim() || ''
+    const finalPositionVi = positionVi?.trim() || position?.trim() || ''
+    const finalDescriptionEn =
+      descriptionEn?.trim() || description?.trim() || ''
+    const finalDescriptionVi =
+      descriptionVi?.trim() || description?.trim() || ''
 
     if (!finalCompanyEn && !finalCompanyVi) {
-      return { success: false, error: "Company is required (at least in one language)" };
+      return {
+        success: false,
+        error: 'Company is required (at least in one language)',
+      }
     }
 
     if (!finalPositionEn && !finalPositionVi) {
-      return { success: false, error: "Position is required (at least in one language)" };
+      return {
+        success: false,
+        error: 'Position is required (at least in one language)',
+      }
     }
 
-    if (!period || period.trim() === "") {
-      return { success: false, error: "Period is required" };
+    if (!period || period.trim() === '') {
+      return { success: false, error: 'Period is required' }
     }
 
     if (!finalDescriptionEn && !finalDescriptionVi) {
-      return { success: false, error: "Description is required (at least in one language)" };
+      return {
+        success: false,
+        error: 'Description is required (at least in one language)',
+      }
     }
 
     const skills = skillsInput
       ? skillsInput
-          .split(",")
+          .split(',')
           .map((skill) => skill.trim())
           .filter((skill) => skill.length > 0)
-      : null;
+      : null
 
-    let orderIndex: number | null = null;
-    if (orderIndexRaw && orderIndexRaw.trim() !== "") {
-      const parsed = Number.parseInt(orderIndexRaw, 10);
+    let orderIndex: number | null = null
+    if (orderIndexRaw && orderIndexRaw.trim() !== '') {
+      const parsed = Number.parseInt(orderIndexRaw, 10)
       if (!Number.isNaN(parsed)) {
-        orderIndex = parsed;
+        orderIndex = parsed
       }
     }
 
     await db.insert(experiences).values({
-      company: finalCompanyEn || finalCompanyVi || "",
+      company: finalCompanyEn || finalCompanyVi || '',
       companyEn: finalCompanyEn || null,
       companyVi: finalCompanyVi || null,
-      position: finalPositionEn || finalPositionVi || "",
+      position: finalPositionEn || finalPositionVi || '',
       positionEn: finalPositionEn || null,
       positionVi: finalPositionVi || null,
       period: period.trim(),
-      location: locationEn?.trim() || locationVi?.trim() || location?.trim() || null,
+      location:
+        locationEn?.trim() || locationVi?.trim() || location?.trim() || null,
       locationEn: locationEn?.trim() || null,
       locationVi: locationVi?.trim() || null,
-      description: finalDescriptionEn || finalDescriptionVi || "",
+      description: finalDescriptionEn || finalDescriptionVi || '',
       descriptionEn: finalDescriptionEn || null,
       descriptionVi: finalDescriptionVi || null,
       skills: skills && skills.length > 0 ? skills : null,
       orderIndex,
-    });
+    })
 
-    revalidatePath("/");
-    revalidatePath("/admin/experiences");
+    revalidatePath('/')
+    revalidatePath('/admin/experiences')
 
-    redirect("/admin/experiences");
+    redirect('/admin/experiences')
   } catch (error) {
     if (
       error instanceof Error &&
-      typeof (error as any).digest === "string" &&
-      (error as any).digest.startsWith("NEXT_REDIRECT")
+      typeof (error as any).digest === 'string' &&
+      (error as any).digest.startsWith('NEXT_REDIRECT')
     ) {
-      throw error;
+      throw error
     }
 
-    console.error("Error creating experience:", error);
+    console.error('Error creating experience:', error)
     return {
       success: false,
       error:
-        error instanceof Error ? error.message : "Failed to create experience",
-    };
+        error instanceof Error ? error.message : 'Failed to create experience',
+    }
   }
 }
 
@@ -131,12 +143,12 @@ export async function getAllExperiences() {
     const rows = await db
       .select()
       .from(experiences)
-      .orderBy(asc(experiences.orderIndex), desc(experiences.createdAt));
+      .orderBy(asc(experiences.orderIndex), desc(experiences.createdAt))
 
-    return rows;
+    return rows
   } catch (error) {
-    console.error("Error fetching experiences:", error);
-    return [];
+    console.error('Error fetching experiences:', error)
+    return []
   }
 }
 
@@ -146,152 +158,164 @@ export async function getExperienceById(id: number) {
       .select()
       .from(experiences)
       .where(eq(experiences.id, id))
-      .limit(1);
+      .limit(1)
 
-    return row[0] || null;
+    return row[0] || null
   } catch (error) {
-    console.error("Error fetching experience:", error);
-    return null;
+    console.error('Error fetching experience:', error)
+    return null
   }
 }
 
 export async function updateExperienceAction(
   _prevState: UpdateExperienceResult,
-  formData: FormData,
+  formData: FormData
 ): Promise<UpdateExperienceResult> {
-  const id = Number.parseInt(formData.get("id") as string, 10);
+  const id = Number.parseInt(formData.get('id') as string, 10)
 
   if (Number.isNaN(id)) {
-    return { success: false, error: "Invalid experience ID" };
+    return { success: false, error: 'Invalid experience ID' }
   }
 
-  return updateExperience(id, formData);
+  return updateExperience(id, formData)
 }
 
 export async function updateExperience(
   id: number,
-  formData: FormData,
+  formData: FormData
 ): Promise<UpdateExperienceResult> {
   try {
     // Extract form data - locale fields
-    const companyEn = formData.get("company_en") as string | null;
-    const companyVi = formData.get("company_vi") as string | null;
-    const positionEn = formData.get("position_en") as string | null;
-    const positionVi = formData.get("position_vi") as string | null;
-    const descriptionEn = formData.get("description_en") as string | null;
-    const descriptionVi = formData.get("description_vi") as string | null;
-    const locationEn = formData.get("location_en") as string | null;
-    const locationVi = formData.get("location_vi") as string | null;
-    
+    const companyEn = formData.get('company_en') as string | null
+    const companyVi = formData.get('company_vi') as string | null
+    const positionEn = formData.get('position_en') as string | null
+    const positionVi = formData.get('position_vi') as string | null
+    const descriptionEn = formData.get('description_en') as string | null
+    const descriptionVi = formData.get('description_vi') as string | null
+    const locationEn = formData.get('location_en') as string | null
+    const locationVi = formData.get('location_vi') as string | null
+
     // Legacy fields for backward compatibility
-    const company = formData.get("company") as string | null;
-    const position = formData.get("position") as string | null;
-    const description = formData.get("description") as string | null;
-    const location = formData.get("location") as string | null;
-    
+    const company = formData.get('company') as string | null
+    const position = formData.get('position') as string | null
+    const description = formData.get('description') as string | null
+    const location = formData.get('location') as string | null
+
     // Non-locale fields
-    const period = formData.get("period") as string;
-    const skillsInput = formData.get("skills") as string | null;
-    const orderIndexRaw = formData.get("orderIndex") as string | null;
+    const period = formData.get('period') as string
+    const skillsInput = formData.get('skills') as string | null
+    const orderIndexRaw = formData.get('orderIndex') as string | null
 
     // Validate: at least one locale must have required fields
-    const finalCompanyEn = companyEn?.trim() || company?.trim() || "";
-    const finalCompanyVi = companyVi?.trim() || company?.trim() || "";
-    const finalPositionEn = positionEn?.trim() || position?.trim() || "";
-    const finalPositionVi = positionVi?.trim() || position?.trim() || "";
-    const finalDescriptionEn = descriptionEn?.trim() || description?.trim() || "";
-    const finalDescriptionVi = descriptionVi?.trim() || description?.trim() || "";
+    const finalCompanyEn = companyEn?.trim() || company?.trim() || ''
+    const finalCompanyVi = companyVi?.trim() || company?.trim() || ''
+    const finalPositionEn = positionEn?.trim() || position?.trim() || ''
+    const finalPositionVi = positionVi?.trim() || position?.trim() || ''
+    const finalDescriptionEn =
+      descriptionEn?.trim() || description?.trim() || ''
+    const finalDescriptionVi =
+      descriptionVi?.trim() || description?.trim() || ''
 
     if (!finalCompanyEn && !finalCompanyVi) {
-      return { success: false, error: "Company is required (at least in one language)" };
+      return {
+        success: false,
+        error: 'Company is required (at least in one language)',
+      }
     }
 
     if (!finalPositionEn && !finalPositionVi) {
-      return { success: false, error: "Position is required (at least in one language)" };
+      return {
+        success: false,
+        error: 'Position is required (at least in one language)',
+      }
     }
 
-    if (!period || period.trim() === "") {
-      return { success: false, error: "Period is required" };
+    if (!period || period.trim() === '') {
+      return { success: false, error: 'Period is required' }
     }
 
     if (!finalDescriptionEn && !finalDescriptionVi) {
-      return { success: false, error: "Description is required (at least in one language)" };
+      return {
+        success: false,
+        error: 'Description is required (at least in one language)',
+      }
     }
 
     const skills = skillsInput
       ? skillsInput
-          .split(",")
+          .split(',')
           .map((skill) => skill.trim())
           .filter((skill) => skill.length > 0)
-      : null;
+      : null
 
-    let orderIndex: number | null = null;
-    if (orderIndexRaw && orderIndexRaw.trim() !== "") {
-      const parsed = Number.parseInt(orderIndexRaw, 10);
+    let orderIndex: number | null = null
+    if (orderIndexRaw && orderIndexRaw.trim() !== '') {
+      const parsed = Number.parseInt(orderIndexRaw, 10)
       if (!Number.isNaN(parsed)) {
-        orderIndex = parsed;
+        orderIndex = parsed
       }
     }
 
     await db
       .update(experiences)
       .set({
-        company: finalCompanyEn || finalCompanyVi || "",
+        company: finalCompanyEn || finalCompanyVi || '',
         companyEn: finalCompanyEn || null,
         companyVi: finalCompanyVi || null,
-        position: finalPositionEn || finalPositionVi || "",
+        position: finalPositionEn || finalPositionVi || '',
         positionEn: finalPositionEn || null,
         positionVi: finalPositionVi || null,
         period: period.trim(),
-        location: locationEn?.trim() || locationVi?.trim() || location?.trim() || null,
+        location:
+          locationEn?.trim() || locationVi?.trim() || location?.trim() || null,
         locationEn: locationEn?.trim() || null,
         locationVi: locationVi?.trim() || null,
-        description: finalDescriptionEn || finalDescriptionVi || "",
+        description: finalDescriptionEn || finalDescriptionVi || '',
         descriptionEn: finalDescriptionEn || null,
         descriptionVi: finalDescriptionVi || null,
         skills: skills && skills.length > 0 ? skills : null,
         orderIndex,
       })
-      .where(eq(experiences.id, id));
+      .where(eq(experiences.id, id))
 
-    revalidatePath("/");
-    revalidatePath("/admin/experiences");
+    revalidatePath('/')
+    revalidatePath('/admin/experiences')
 
-    redirect("/admin/experiences");
+    redirect('/admin/experiences')
   } catch (error) {
     if (
       error instanceof Error &&
-      typeof (error as any).digest === "string" &&
-      (error as any).digest.startsWith("NEXT_REDIRECT")
+      typeof (error as any).digest === 'string' &&
+      (error as any).digest.startsWith('NEXT_REDIRECT')
     ) {
-      throw error;
+      throw error
     }
 
-    console.error("Error updating experience:", error);
+    console.error('Error updating experience:', error)
     return {
       success: false,
       error:
-        error instanceof Error ? error.message : "Failed to update experience",
-    };
+        error instanceof Error ? error.message : 'Failed to update experience',
+    }
   }
 }
 
 export async function deleteExperience(
-  id: number,
+  id: number
 ): Promise<DeleteExperienceResult> {
   try {
-    await db.delete(experiences).where(eq(experiences.id, id));
+    await db.delete(experiences).where(eq(experiences.id, id))
 
-    revalidatePath("/");
-    revalidatePath("/admin/experiences");
+    revalidatePath('/')
+    revalidatePath('/admin/experiences')
 
-    return { success: true };
+    return { success: true }
   } catch (error) {
-    console.error("Error deleting experience:", error);
+    console.error('Error deleting experience:', error)
     return {
       success: false,
       error:
-        error instanceof Error ? error.message : "Failed to delete experience",
-    };
+        error instanceof Error ? error.message : 'Failed to delete experience',
+    }
   }
 }

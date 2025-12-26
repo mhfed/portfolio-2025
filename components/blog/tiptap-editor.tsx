@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Link from '@tiptap/extension-link';
-import Image from '@tiptap/extension-image';
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import Link from '@tiptap/extension-link'
+import Image from '@tiptap/extension-image'
 import {
   Bold,
   Italic,
@@ -17,16 +17,16 @@ import {
   Link as LinkIcon,
   Image as ImageIcon,
   Terminal,
-} from 'lucide-react';
-import { useCallback, useEffect } from 'react';
-import { cn } from '@/lib/utils';
+} from 'lucide-react'
+import { useCallback, useEffect } from 'react'
+import { cn } from '@/lib/utils'
 
 interface TipTapEditorProps {
-  content?: any;
-  onChange?: (content: any) => void;
-  placeholder?: string;
-  locale?: string;
-  className?: string;
+  content?: any
+  onChange?: (content: any) => void
+  placeholder?: string
+  locale?: string
+  className?: string
 }
 
 export function TipTapEditor({
@@ -67,55 +67,55 @@ export function TipTapEditor({
     },
     onUpdate: ({ editor }) => {
       if (onChange) {
-        onChange(editor.getJSON());
+        onChange(editor.getJSON())
       }
     },
-  });
+  })
 
   // Update content when prop changes
   useEffect(() => {
     if (editor && content) {
-      const currentContent = editor.getJSON();
+      const currentContent = editor.getJSON()
       if (JSON.stringify(currentContent) !== JSON.stringify(content)) {
-        editor.commands.setContent(content);
+        editor.commands.setContent(content)
       }
     }
-  }, [content, editor]);
+  }, [content, editor])
 
   const setLink = useCallback(() => {
-    if (!editor) return;
+    if (!editor) return
 
-    const previousUrl = editor.getAttributes('link').href;
-    const url = window.prompt('URL', previousUrl);
+    const previousUrl = editor.getAttributes('link').href
+    const url = window.prompt('URL', previousUrl)
 
     if (url === null) {
-      return;
+      return
     }
 
     if (url === '') {
-      editor.chain().focus().extendMarkRange('link').unsetLink().run();
-      return;
+      editor.chain().focus().extendMarkRange('link').unsetLink().run()
+      return
     }
 
-    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
-  }, [editor]);
+    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+  }, [editor])
 
   const addImage = useCallback(() => {
-    if (!editor) return;
+    if (!editor) return
 
-    const url = window.prompt('Image URL');
+    const url = window.prompt('Image URL')
 
     if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
+      editor.chain().focus().setImage({ src: url }).run()
     }
-  }, [editor]);
+  }, [editor])
 
   if (!editor) {
     return (
       <div className='flex items-center justify-center min-h-[300px] border border-border/30 rounded-md bg-background'>
         <p className='text-sm text-muted-foreground'>Loading editor...</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -319,5 +319,5 @@ export function TipTapEditor({
         className='prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none'
       />
     </div>
-  );
+  )
 }

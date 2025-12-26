@@ -1,67 +1,67 @@
-import * as React from "react";
-import Link from "next/link";
-import { cva, type VariantProps } from "class-variance-authority";
-import { ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
+import * as React from 'react'
+import Link from 'next/link'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { ExternalLink } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const linkVariants = cva(
-  "inline-flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  'inline-flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
-        default: "text-primary hover:text-primary/80 hover:scale-105",
+        default: 'text-primary hover:text-primary/80 hover:scale-105',
         primary:
-          "px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary hover:border-primary/50 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]",
+          'px-4 py-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-md text-primary hover:border-primary/50 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]',
         ghost:
-          "px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground hover:border-primary/30 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]",
+          'px-4 py-2 bg-background hover:bg-primary/10 border border-border/30 rounded-md text-foreground hover:border-primary/30 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]',
       },
       size: {
-        default: "text-sm",
-        sm: "text-xs",
-        lg: "text-base",
+        default: 'text-sm',
+        sm: 'text-xs',
+        lg: 'text-base',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  },
-);
+  }
+)
 
 export interface LinkProps
   extends
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof linkVariants> {
-  href: string;
-  external?: boolean;
-  children: React.ReactNode;
+  href: string
+  external?: boolean
+  children: React.ReactNode
 }
 
 const UiLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (
     { className, variant, size, href, external = false, children, ...props },
-    ref,
+    ref
   ) => {
     const content = (
       <>
         {children}
-        {external && <ExternalLink className="h-4 w-4" />}
+        {external && <ExternalLink className='h-4 w-4' />}
       </>
-    );
+    )
 
-    if (external || href.startsWith("http")) {
+    if (external || href.startsWith('http')) {
       return (
         <a
           ref={ref}
           href={href}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
           className={cn(linkVariants({ variant, size }), className)}
           {...props}
         >
           {content}
         </a>
-      );
+      )
     }
 
     return (
@@ -73,9 +73,9 @@ const UiLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
       >
         {content}
       </Link>
-    );
-  },
-);
-UiLink.displayName = "Link";
+    )
+  }
+)
+UiLink.displayName = 'Link'
 
-export { UiLink, linkVariants };
+export { UiLink, linkVariants }

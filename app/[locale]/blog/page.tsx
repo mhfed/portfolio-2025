@@ -1,26 +1,26 @@
-import { getAllPosts } from '@/actions/post-actions';
-import { BlogCard } from '@/components/blog/blog-card';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { hasLocale } from 'next-intl';
-import { routing } from '@/i18n/routing';
+import { getAllPosts } from '@/actions/post-actions'
+import { BlogCard } from '@/components/blog/blog-card'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
+import { routing } from '@/i18n/routing'
 
 interface BlogPageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string }>
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const { locale } = await params;
+  const { locale } = await params
 
   if (!hasLocale(routing.locales, locale)) {
-    notFound();
+    notFound()
   }
 
-  setRequestLocale(locale);
-  const t = await getTranslations('blog');
+  setRequestLocale(locale)
+  const t = await getTranslations('blog')
 
   // Fetch published posts for this locale
-  const posts = await getAllPosts(locale, true);
+  const posts = await getAllPosts(locale, true)
 
   return (
     <div className='container mx-auto px-4 py-8 md:py-12 lg:py-16'>
@@ -64,5 +64,5 @@ export default async function BlogPage({ params }: BlogPageProps) {
         )}
       </div>
     </div>
-  );
+  )
 }

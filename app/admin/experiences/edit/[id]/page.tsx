@@ -1,25 +1,25 @@
-import { getExperienceById } from '@/actions/experience-actions';
-import { notFound } from 'next/navigation';
-import { EditExperienceForm } from './edit-experience-form';
+import { getExperienceById } from '@/actions/experience-actions'
+import { notFound } from 'next/navigation'
+import { EditExperienceForm } from './edit-experience-form'
 
 interface EditExperiencePageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }
 
 export default async function EditExperiencePage({
   params,
 }: EditExperiencePageProps) {
-  const { id } = await params;
-  const experienceId = Number.parseInt(id, 10);
+  const { id } = await params
+  const experienceId = Number.parseInt(id, 10)
 
   if (Number.isNaN(experienceId)) {
-    notFound();
+    notFound()
   }
 
-  const experience = await getExperienceById(experienceId);
+  const experience = await getExperienceById(experienceId)
 
   if (!experience) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -53,5 +53,5 @@ export default async function EditExperiencePage({
         }}
       />
     </div>
-  );
+  )
 }

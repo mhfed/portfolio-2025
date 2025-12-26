@@ -1,37 +1,37 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { deletePost } from '@/actions/post-actions';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react'
+import { deletePost } from '@/actions/post-actions'
+import { useRouter } from 'next/navigation'
 
 interface DeletePostButtonProps {
-  postId: number;
+  postId: number
 }
 
 export function DeletePostButton({ postId }: DeletePostButtonProps) {
-  const [isDeleting, setIsDeleting] = useState(false);
-  const router = useRouter();
+  const [isDeleting, setIsDeleting] = useState(false)
+  const router = useRouter()
 
   const handleDelete = async () => {
     if (!confirm('Are you sure you want to delete this post?')) {
-      return;
+      return
     }
 
-    setIsDeleting(true);
+    setIsDeleting(true)
     try {
-      const result = await deletePost(postId);
+      const result = await deletePost(postId)
       if (result.success) {
-        router.refresh();
+        router.refresh()
       } else {
-        alert(result.error || 'Failed to delete post');
+        alert(result.error || 'Failed to delete post')
       }
     } catch (error) {
-      console.error('Error deleting post:', error);
-      alert('Failed to delete post');
+      console.error('Error deleting post:', error)
+      alert('Failed to delete post')
     } finally {
-      setIsDeleting(false);
+      setIsDeleting(false)
     }
-  };
+  }
 
   return (
     <button
@@ -41,5 +41,5 @@ export function DeletePostButton({ postId }: DeletePostButtonProps) {
     >
       {isDeleting ? 'Deleting...' : 'Delete'}
     </button>
-  );
+  )
 }

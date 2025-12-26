@@ -1,25 +1,25 @@
-import { getProjectById } from '@/actions/project-actions';
-import { EditForm } from './edit-form';
-import { notFound } from 'next/navigation';
+import { getProjectById } from '@/actions/project-actions'
+import { EditForm } from './edit-form'
+import { notFound } from 'next/navigation'
 
 interface EditProjectPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }
 
 export default async function EditProjectPage({
   params,
 }: EditProjectPageProps) {
-  const { id } = await params;
-  const projectId = parseInt(id, 10);
+  const { id } = await params
+  const projectId = parseInt(id, 10)
 
   if (isNaN(projectId)) {
-    notFound();
+    notFound()
   }
 
-  const project = await getProjectById(projectId);
+  const project = await getProjectById(projectId)
 
   if (!project) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -50,5 +50,5 @@ export default async function EditProjectPage({
         }}
       />
     </div>
-  );
+  )
 }

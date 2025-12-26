@@ -1,24 +1,24 @@
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
-import Link from 'next/link';
-import { format } from 'date-fns';
-import { Eye, Calendar } from 'lucide-react';
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { Badge } from '@/components/ui/badge'
+import Image from 'next/image'
+import Link from 'next/link'
+import { format } from 'date-fns'
+import { Eye, Calendar } from 'lucide-react'
 
 interface BlogCardProps {
-  slug: string;
-  title: string;
-  titleEn?: string | null;
-  titleVi?: string | null;
-  excerpt?: string | null;
-  excerptEn?: string | null;
-  excerptVi?: string | null;
-  coverImage?: string | null;
-  publishedAt?: Date | null;
-  viewCount?: number;
-  categories?: Array<{ slug: string; name: string }>;
-  tags?: Array<{ slug: string; name: string }>;
-  locale?: string;
+  slug: string
+  title: string
+  titleEn?: string | null
+  titleVi?: string | null
+  excerpt?: string | null
+  excerptEn?: string | null
+  excerptVi?: string | null
+  coverImage?: string | null
+  publishedAt?: Date | null
+  viewCount?: number
+  categories?: Array<{ slug: string; name: string }>
+  tags?: Array<{ slug: string; name: string }>
+  locale?: string
 }
 
 export function BlogCard({
@@ -38,11 +38,11 @@ export function BlogCard({
 }: BlogCardProps) {
   // Get localized title and excerpt
   const displayTitle =
-    locale === 'vi' ? titleVi || titleEn || title : titleEn || titleVi || title;
+    locale === 'vi' ? titleVi || titleEn || title : titleEn || titleVi || title
   const displayExcerpt =
     locale === 'vi'
       ? excerptVi || excerptEn || excerpt
-      : excerptEn || excerptVi || excerpt;
+      : excerptEn || excerptVi || excerpt
 
   return (
     <article className='group flex flex-col h-full border border-border rounded-lg overflow-hidden bg-card hover:shadow-lg transition-shadow duration-300'>
@@ -109,5 +109,5 @@ export function BlogCard({
         </div>
       </div>
     </article>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import { getAllCategories, createCategory } from '@/actions/post-actions';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import { CategoryForm } from './category-form';
+import { getAllCategories, createCategory } from '@/actions/post-actions'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import { CategoryForm } from './category-form'
 
 export default async function CategoriesPage() {
-  const categories = await getAllCategories();
+  const categories = await getAllCategories()
 
   return (
     <div className='space-y-6'>
@@ -60,5 +60,5 @@ export default async function CategoriesPage() {
         )}
       </section>
     </div>
-  );
+  )
 }

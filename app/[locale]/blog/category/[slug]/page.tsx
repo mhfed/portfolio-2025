@@ -1,31 +1,31 @@
-import { getPostsByCategory } from '@/actions/post-actions';
-import { BlogCard } from '@/components/blog/blog-card';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { hasLocale } from 'next-intl';
-import { routing } from '@/i18n/routing';
-import { getAllCategories } from '@/actions/post-actions';
+import { getPostsByCategory } from '@/actions/post-actions'
+import { BlogCard } from '@/components/blog/blog-card'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
+import { routing } from '@/i18n/routing'
+import { getAllCategories } from '@/actions/post-actions'
 
 interface CategoryPageProps {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { locale, slug } = await params;
+  const { locale, slug } = await params
 
   if (!hasLocale(routing.locales, locale)) {
-    notFound();
+    notFound()
   }
 
-  setRequestLocale(locale);
-  const t = await getTranslations('blog');
+  setRequestLocale(locale)
+  const t = await getTranslations('blog')
 
-  const posts = await getPostsByCategory(slug, locale);
-  const categories = await getAllCategories();
-  const category = categories.find((c) => c.slug === slug);
+  const posts = await getPostsByCategory(slug, locale)
+  const categories = await getAllCategories()
+  const category = categories.find((c) => c.slug === slug)
 
   if (!category) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -67,5 +67,5 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         )}
       </div>
     </div>
-  );
+  )
 }

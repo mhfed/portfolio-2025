@@ -1,6 +1,6 @@
-'use server';
+'use server'
 
-import { db } from '@/lib/db';
+import { db } from '@/lib/db'
 import {
   posts,
   categories,
@@ -8,24 +8,24 @@ import {
   postCategories,
   postTags,
   views,
-} from '@/db/schema';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { desc, eq, and, or, ilike, sql, inArray, isNull } from 'drizzle-orm';
+} from '@/db/schema'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { desc, eq, and, or, ilike, sql, inArray, isNull } from 'drizzle-orm'
 
 export interface CreatePostResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export interface UpdatePostResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export interface DeletePostResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export async function createPost(
@@ -34,32 +34,32 @@ export async function createPost(
 ): Promise<CreatePostResult> {
   try {
     // Extract form data - locale fields
-    const titleEn = formData.get('title_en') as string | null;
-    const titleVi = formData.get('title_vi') as string | null;
-    const excerptEn = formData.get('excerpt_en') as string | null;
-    const excerptVi = formData.get('excerpt_vi') as string | null;
-    const contentEnRaw = formData.get('content_en') as string | null;
-    const contentViRaw = formData.get('content_vi') as string | null;
+    const titleEn = formData.get('title_en') as string | null
+    const titleVi = formData.get('title_vi') as string | null
+    const excerptEn = formData.get('excerpt_en') as string | null
+    const excerptVi = formData.get('excerpt_vi') as string | null
+    const contentEnRaw = formData.get('content_en') as string | null
+    const contentViRaw = formData.get('content_vi') as string | null
 
     // Legacy fields for backward compatibility
-    const title = formData.get('title') as string | null;
-    const excerpt = formData.get('excerpt') as string | null;
-    const contentRaw = formData.get('content') as string | null;
+    const title = formData.get('title') as string | null
+    const excerpt = formData.get('excerpt') as string | null
+    const contentRaw = formData.get('content') as string | null
 
     // Non-locale fields
-    const slug = formData.get('slug') as string;
-    const coverImage = formData.get('coverImage') as string | null;
-    const publishedAtRaw = formData.get('publishedAt') as string | null;
-    const isPublished = formData.get('isPublished') === 'true';
-    const locale = formData.get('locale') as string | null;
+    const slug = formData.get('slug') as string
+    const coverImage = formData.get('coverImage') as string | null
+    const publishedAtRaw = formData.get('publishedAt') as string | null
+    const isPublished = formData.get('isPublished') === 'true'
+    const locale = formData.get('locale') as string | null
 
     // Category and tag IDs
-    const categoryIdsRaw = formData.get('categoryIds') as string | null;
-    const tagIdsRaw = formData.get('tagIds') as string | null;
+    const categoryIdsRaw = formData.get('categoryIds') as string | null
+    const tagIdsRaw = formData.get('tagIds') as string | null
 
     // Validate slug
     if (!slug || slug.trim() === '') {
-      return { success: false, error: 'Slug is required' };
+      return { success: false, error: 'Slug is required' }
     }
 
     // Check if slug already exists
@@ -67,31 +67,31 @@ export async function createPost(
       .select()
       .from(posts)
       .where(eq(posts.slug, slug.trim()))
-      .limit(1);
+      .limit(1)
 
     if (existingPost.length > 0) {
-      return { success: false, error: 'Slug already exists' };
+      return { success: false, error: 'Slug already exists' }
     }
 
     // Validate: at least one locale must have title
-    const finalTitleEn = titleEn?.trim() || title?.trim() || '';
-    const finalTitleVi = titleVi?.trim() || title?.trim() || '';
+    const finalTitleEn = titleEn?.trim() || title?.trim() || ''
+    const finalTitleVi = titleVi?.trim() || title?.trim() || ''
 
     if (!finalTitleEn && !finalTitleVi) {
       return {
         success: false,
         error: 'Title is required (at least in one language)',
-      };
+      }
     }
 
     // Parse JSON content
-    let contentEn = null;
-    let contentVi = null;
-    let content = null;
+    let contentEn = null
+    let contentVi = null
+    let content = null
 
     if (contentEnRaw && contentEnRaw.trim()) {
       try {
-        const parsed = JSON.parse(contentEnRaw);
+        const parsed = JSON.parse(contentEnRaw)
         // Only set if it's a valid TipTap document (has type: 'doc' or is a non-empty object/array)
         if (parsed && typeof parsed === 'object') {
           if (
@@ -99,17 +99,17 @@ export async function createPost(
             (Array.isArray(parsed) && parsed.length > 0) ||
             Object.keys(parsed).length > 0
           ) {
-            contentEn = parsed;
+            contentEn = parsed
           }
         }
       } catch {
-        contentEn = null;
+        contentEn = null
       }
     }
 
     if (contentViRaw && contentViRaw.trim()) {
       try {
-        const parsed = JSON.parse(contentViRaw);
+        const parsed = JSON.parse(contentViRaw)
         // Only set if it's a valid TipTap document (has type: 'doc' or is a non-empty object/array)
         if (parsed && typeof parsed === 'object') {
           if (
@@ -117,17 +117,17 @@ export async function createPost(
             (Array.isArray(parsed) && parsed.length > 0) ||
             Object.keys(parsed).length > 0
           ) {
-            contentVi = parsed;
+            contentVi = parsed
           }
         }
       } catch {
-        contentVi = null;
+        contentVi = null
       }
     }
 
     if (contentRaw && contentRaw.trim()) {
       try {
-        const parsed = JSON.parse(contentRaw);
+        const parsed = JSON.parse(contentRaw)
         // Only set if it's a valid TipTap document (has type: 'doc' or is a non-empty object/array)
         if (parsed && typeof parsed === 'object') {
           if (
@@ -135,11 +135,11 @@ export async function createPost(
             (Array.isArray(parsed) && parsed.length > 0) ||
             Object.keys(parsed).length > 0
           ) {
-            content = parsed;
+            content = parsed
           }
         }
       } catch {
-        content = null;
+        content = null
       }
     }
 
@@ -148,7 +148,7 @@ export async function createPost(
       ? new Date(publishedAtRaw)
       : isPublished
         ? new Date()
-        : null;
+        : null
 
     // Insert post
     const [newPost] = await db
@@ -170,14 +170,14 @@ export async function createPost(
         isPublished: isPublished,
         locale: locale?.trim() || null,
       })
-      .returning();
+      .returning()
 
     // Insert categories
     if (categoryIdsRaw) {
       const categoryIds = categoryIdsRaw
         .split(',')
         .map((id) => parseInt(id.trim(), 10))
-        .filter((id) => !isNaN(id));
+        .filter((id) => !isNaN(id))
 
       if (categoryIds.length > 0) {
         await db.insert(postCategories).values(
@@ -185,7 +185,7 @@ export async function createPost(
             postId: newPost.id,
             categoryId,
           }))
-        );
+        )
       }
     }
 
@@ -194,7 +194,7 @@ export async function createPost(
       const tagIds = tagIdsRaw
         .split(',')
         .map((id) => parseInt(id.trim(), 10))
-        .filter((id) => !isNaN(id));
+        .filter((id) => !isNaN(id))
 
       if (tagIds.length > 0) {
         await db.insert(postTags).values(
@@ -202,7 +202,7 @@ export async function createPost(
             postId: newPost.id,
             tagId,
           }))
-        );
+        )
       }
     }
 
@@ -210,82 +210,82 @@ export async function createPost(
     await db.insert(views).values({
       postId: newPost.id,
       viewCount: 0,
-    });
+    })
 
     // Revalidate paths
-    revalidatePath('/blog');
-    revalidatePath('/admin/blog');
+    revalidatePath('/blog')
+    revalidatePath('/admin/blog')
 
     // Redirect to admin blog page
-    redirect('/admin/blog');
+    redirect('/admin/blog')
   } catch (error) {
     if (
       error instanceof Error &&
       typeof (error as any).digest === 'string' &&
       (error as any).digest.startsWith('NEXT_REDIRECT')
     ) {
-      throw error;
+      throw error
     }
 
-    console.error('Error creating post:', error);
+    console.error('Error creating post:', error)
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to create post',
-    };
+    }
   }
 }
 
 export async function getAllPosts(locale?: string, isPublished?: boolean) {
   try {
-    let query = db.select().from(posts);
+    let query = db.select().from(posts)
 
-    const conditions = [];
+    const conditions = []
 
     if (locale) {
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)));
+      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
     }
 
     if (isPublished !== undefined) {
-      conditions.push(eq(posts.isPublished, isPublished));
+      conditions.push(eq(posts.isPublished, isPublished))
     }
 
     if (conditions.length > 0) {
-      query = query.where(and(...conditions)) as any;
+      query = query.where(and(...conditions)) as any
     }
 
     const dbPosts = await query.orderBy(
       desc(posts.publishedAt || posts.createdAt)
-    );
+    )
 
-    return dbPosts;
+    return dbPosts
   } catch (error) {
-    console.error('Error fetching posts:', error);
-    return [];
+    console.error('Error fetching posts:', error)
+    return []
   }
 }
 
 export async function getPostBySlug(slug: string, locale?: string) {
   try {
-    const conditions = [eq(posts.slug, slug)];
+    const conditions = [eq(posts.slug, slug)]
 
     if (locale) {
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)));
+      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
     }
 
     const [post] = await db
       .select()
       .from(posts)
       .where(and(...conditions))
-      .limit(1);
+      .limit(1)
 
     if (!post) {
-      return null;
+      return null
     }
 
     // Get categories
@@ -298,7 +298,7 @@ export async function getPostBySlug(slug: string, locale?: string) {
       })
       .from(postCategories)
       .innerJoin(categories, eq(postCategories.categoryId, categories.id))
-      .where(eq(postCategories.postId, post.id));
+      .where(eq(postCategories.postId, post.id))
 
     // Get tags
     const postTagsData = await db
@@ -309,24 +309,24 @@ export async function getPostBySlug(slug: string, locale?: string) {
       })
       .from(postTags)
       .innerJoin(tags, eq(postTags.tagId, tags.id))
-      .where(eq(postTags.postId, post.id));
+      .where(eq(postTags.postId, post.id))
 
     // Get view count
     const [viewData] = await db
       .select()
       .from(views)
       .where(eq(views.postId, post.id))
-      .limit(1);
+      .limit(1)
 
     return {
       ...post,
       categories: postCats,
       tags: postTagsData,
       viewCount: viewData?.viewCount || 0,
-    };
+    }
   } catch (error) {
-    console.error('Error fetching post:', error);
-    return null;
+    console.error('Error fetching post:', error)
+    return null
   }
 }
 
@@ -336,10 +336,10 @@ export async function getPostById(id: number) {
       .select()
       .from(posts)
       .where(eq(posts.id, id))
-      .limit(1);
+      .limit(1)
 
     if (!post) {
-      return null;
+      return null
     }
 
     // Get categories
@@ -352,7 +352,7 @@ export async function getPostById(id: number) {
       })
       .from(postCategories)
       .innerJoin(categories, eq(postCategories.categoryId, categories.id))
-      .where(eq(postCategories.postId, post.id));
+      .where(eq(postCategories.postId, post.id))
 
     // Get tags
     const postTagsData = await db
@@ -363,16 +363,16 @@ export async function getPostById(id: number) {
       })
       .from(postTags)
       .innerJoin(tags, eq(postTags.tagId, tags.id))
-      .where(eq(postTags.postId, post.id));
+      .where(eq(postTags.postId, post.id))
 
     return {
       ...post,
       categories: postCats,
       tags: postTagsData,
-    };
+    }
   } catch (error) {
-    console.error('Error fetching post:', error);
-    return null;
+    console.error('Error fetching post:', error)
+    return null
   }
 }
 
@@ -380,13 +380,13 @@ export async function updatePostAction(
   _prevState: UpdatePostResult,
   formData: FormData
 ): Promise<UpdatePostResult> {
-  const id = parseInt(formData.get('id') as string, 10);
+  const id = parseInt(formData.get('id') as string, 10)
 
   if (isNaN(id)) {
-    return { success: false, error: 'Invalid post ID' };
+    return { success: false, error: 'Invalid post ID' }
   }
 
-  return updatePost(id, formData);
+  return updatePost(id, formData)
 }
 
 export async function updatePost(
@@ -395,32 +395,32 @@ export async function updatePost(
 ): Promise<UpdatePostResult> {
   try {
     // Extract form data - locale fields
-    const titleEn = formData.get('title_en') as string | null;
-    const titleVi = formData.get('title_vi') as string | null;
-    const excerptEn = formData.get('excerpt_en') as string | null;
-    const excerptVi = formData.get('excerpt_vi') as string | null;
-    const contentEnRaw = formData.get('content_en') as string | null;
-    const contentViRaw = formData.get('content_vi') as string | null;
+    const titleEn = formData.get('title_en') as string | null
+    const titleVi = formData.get('title_vi') as string | null
+    const excerptEn = formData.get('excerpt_en') as string | null
+    const excerptVi = formData.get('excerpt_vi') as string | null
+    const contentEnRaw = formData.get('content_en') as string | null
+    const contentViRaw = formData.get('content_vi') as string | null
 
     // Legacy fields
-    const title = formData.get('title') as string | null;
-    const excerpt = formData.get('excerpt') as string | null;
-    const contentRaw = formData.get('content') as string | null;
+    const title = formData.get('title') as string | null
+    const excerpt = formData.get('excerpt') as string | null
+    const contentRaw = formData.get('content') as string | null
 
     // Non-locale fields
-    const slug = formData.get('slug') as string;
-    const coverImage = formData.get('coverImage') as string | null;
-    const publishedAtRaw = formData.get('publishedAt') as string | null;
-    const isPublished = formData.get('isPublished') === 'true';
-    const locale = formData.get('locale') as string | null;
+    const slug = formData.get('slug') as string
+    const coverImage = formData.get('coverImage') as string | null
+    const publishedAtRaw = formData.get('publishedAt') as string | null
+    const isPublished = formData.get('isPublished') === 'true'
+    const locale = formData.get('locale') as string | null
 
     // Category and tag IDs
-    const categoryIdsRaw = formData.get('categoryIds') as string | null;
-    const tagIdsRaw = formData.get('tagIds') as string | null;
+    const categoryIdsRaw = formData.get('categoryIds') as string | null
+    const tagIdsRaw = formData.get('tagIds') as string | null
 
     // Validate slug
     if (!slug || slug.trim() === '') {
-      return { success: false, error: 'Slug is required' };
+      return { success: false, error: 'Slug is required' }
     }
 
     // Check if slug already exists (excluding current post)
@@ -428,31 +428,31 @@ export async function updatePost(
       .select()
       .from(posts)
       .where(and(eq(posts.slug, slug.trim()), sql`${posts.id} != ${id}`))
-      .limit(1);
+      .limit(1)
 
     if (existingPost.length > 0) {
-      return { success: false, error: 'Slug already exists' };
+      return { success: false, error: 'Slug already exists' }
     }
 
     // Validate: at least one locale must have title
-    const finalTitleEn = titleEn?.trim() || title?.trim() || '';
-    const finalTitleVi = titleVi?.trim() || title?.trim() || '';
+    const finalTitleEn = titleEn?.trim() || title?.trim() || ''
+    const finalTitleVi = titleVi?.trim() || title?.trim() || ''
 
     if (!finalTitleEn && !finalTitleVi) {
       return {
         success: false,
         error: 'Title is required (at least in one language)',
-      };
+      }
     }
 
     // Parse JSON content
-    let contentEn = null;
-    let contentVi = null;
-    let content = null;
+    let contentEn = null
+    let contentVi = null
+    let content = null
 
     if (contentEnRaw && contentEnRaw.trim()) {
       try {
-        const parsed = JSON.parse(contentEnRaw);
+        const parsed = JSON.parse(contentEnRaw)
         // Only set if it's a valid TipTap document (has type: 'doc' or is a non-empty object/array)
         if (parsed && typeof parsed === 'object') {
           if (
@@ -460,17 +460,17 @@ export async function updatePost(
             (Array.isArray(parsed) && parsed.length > 0) ||
             Object.keys(parsed).length > 0
           ) {
-            contentEn = parsed;
+            contentEn = parsed
           }
         }
       } catch {
-        contentEn = null;
+        contentEn = null
       }
     }
 
     if (contentViRaw && contentViRaw.trim()) {
       try {
-        const parsed = JSON.parse(contentViRaw);
+        const parsed = JSON.parse(contentViRaw)
         // Only set if it's a valid TipTap document (has type: 'doc' or is a non-empty object/array)
         if (parsed && typeof parsed === 'object') {
           if (
@@ -478,17 +478,17 @@ export async function updatePost(
             (Array.isArray(parsed) && parsed.length > 0) ||
             Object.keys(parsed).length > 0
           ) {
-            contentVi = parsed;
+            contentVi = parsed
           }
         }
       } catch {
-        contentVi = null;
+        contentVi = null
       }
     }
 
     if (contentRaw && contentRaw.trim()) {
       try {
-        const parsed = JSON.parse(contentRaw);
+        const parsed = JSON.parse(contentRaw)
         // Only set if it's a valid TipTap document (has type: 'doc' or is a non-empty object/array)
         if (parsed && typeof parsed === 'object') {
           if (
@@ -496,11 +496,11 @@ export async function updatePost(
             (Array.isArray(parsed) && parsed.length > 0) ||
             Object.keys(parsed).length > 0
           ) {
-            content = parsed;
+            content = parsed
           }
         }
       } catch {
-        content = null;
+        content = null
       }
     }
 
@@ -509,7 +509,7 @@ export async function updatePost(
       ? new Date(publishedAtRaw)
       : isPublished
         ? new Date()
-        : null;
+        : null
 
     // Update post
     await db
@@ -532,16 +532,16 @@ export async function updatePost(
         locale: locale?.trim() || null,
         updatedAt: new Date(),
       })
-      .where(eq(posts.id, id));
+      .where(eq(posts.id, id))
 
     // Update categories - delete existing and insert new
-    await db.delete(postCategories).where(eq(postCategories.postId, id));
+    await db.delete(postCategories).where(eq(postCategories.postId, id))
 
     if (categoryIdsRaw) {
       const categoryIds = categoryIdsRaw
         .split(',')
         .map((id) => parseInt(id.trim(), 10))
-        .filter((id) => !isNaN(id));
+        .filter((id) => !isNaN(id))
 
       if (categoryIds.length > 0) {
         await db.insert(postCategories).values(
@@ -549,18 +549,18 @@ export async function updatePost(
             postId: id,
             categoryId,
           }))
-        );
+        )
       }
     }
 
     // Update tags - delete existing and insert new
-    await db.delete(postTags).where(eq(postTags.postId, id));
+    await db.delete(postTags).where(eq(postTags.postId, id))
 
     if (tagIdsRaw) {
       const tagIds = tagIdsRaw
         .split(',')
         .map((id) => parseInt(id.trim(), 10))
-        .filter((id) => !isNaN(id));
+        .filter((id) => !isNaN(id))
 
       if (tagIds.length > 0) {
         await db.insert(postTags).values(
@@ -568,50 +568,50 @@ export async function updatePost(
             postId: id,
             tagId,
           }))
-        );
+        )
       }
     }
 
     // Revalidate paths
-    revalidatePath('/blog');
-    revalidatePath(`/blog/${slug}`);
-    revalidatePath('/admin/blog');
+    revalidatePath('/blog')
+    revalidatePath(`/blog/${slug}`)
+    revalidatePath('/admin/blog')
 
     // Redirect to admin blog page
-    redirect('/admin/blog');
+    redirect('/admin/blog')
   } catch (error) {
     if (
       error instanceof Error &&
       typeof (error as any).digest === 'string' &&
       (error as any).digest.startsWith('NEXT_REDIRECT')
     ) {
-      throw error;
+      throw error
     }
 
-    console.error('Error updating post:', error);
+    console.error('Error updating post:', error)
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to update post',
-    };
+    }
   }
 }
 
 export async function deletePost(id: number): Promise<DeletePostResult> {
   try {
     // Delete post (cascade will handle related records)
-    await db.delete(posts).where(eq(posts.id, id));
+    await db.delete(posts).where(eq(posts.id, id))
 
     // Revalidate paths
-    revalidatePath('/blog');
-    revalidatePath('/admin/blog');
+    revalidatePath('/blog')
+    revalidatePath('/admin/blog')
 
-    return { success: true };
+    return { success: true }
   } catch (error) {
-    console.error('Error deleting post:', error);
+    console.error('Error deleting post:', error)
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to delete post',
-    };
+    }
   }
 }
 
@@ -622,7 +622,7 @@ export async function incrementViewCount(postId: number) {
       .select()
       .from(views)
       .where(eq(views.postId, postId))
-      .limit(1);
+      .limit(1)
 
     if (existing) {
       // Update existing record
@@ -632,16 +632,16 @@ export async function incrementViewCount(postId: number) {
           viewCount: sql`${views.viewCount} + 1`,
           updatedAt: new Date(),
         })
-        .where(eq(views.postId, postId));
+        .where(eq(views.postId, postId))
     } else {
       // Insert new record
       await db.insert(views).values({
         postId,
         viewCount: 1,
-      });
+      })
     }
   } catch (error) {
-    console.error('Error incrementing view count:', error);
+    console.error('Error incrementing view count:', error)
   }
 }
 
@@ -650,13 +650,13 @@ export async function getPostsByCategory(
   locale?: string
 ) {
   try {
-    const conditions = [eq(categories.slug, categorySlug)];
+    const conditions = [eq(categories.slug, categorySlug)]
 
     if (locale) {
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)));
+      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
     }
 
     const dbPosts = await db
@@ -680,24 +680,24 @@ export async function getPostsByCategory(
       .innerJoin(postCategories, eq(posts.id, postCategories.postId))
       .innerJoin(categories, eq(postCategories.categoryId, categories.id))
       .where(and(...conditions))
-      .orderBy(desc(posts.publishedAt || posts.createdAt));
+      .orderBy(desc(posts.publishedAt || posts.createdAt))
 
-    return dbPosts;
+    return dbPosts
   } catch (error) {
-    console.error('Error fetching posts by category:', error);
-    return [];
+    console.error('Error fetching posts by category:', error)
+    return []
   }
 }
 
 export async function getPostsByTag(tagSlug: string, locale?: string) {
   try {
-    const conditions = [eq(tags.slug, tagSlug)];
+    const conditions = [eq(tags.slug, tagSlug)]
 
     if (locale) {
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)));
+      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
     }
 
     const dbPosts = await db
@@ -721,18 +721,18 @@ export async function getPostsByTag(tagSlug: string, locale?: string) {
       .innerJoin(postTags, eq(posts.id, postTags.postId))
       .innerJoin(tags, eq(postTags.tagId, tags.id))
       .where(and(...conditions))
-      .orderBy(desc(posts.publishedAt || posts.createdAt));
+      .orderBy(desc(posts.publishedAt || posts.createdAt))
 
-    return dbPosts;
+    return dbPosts
   } catch (error) {
-    console.error('Error fetching posts by tag:', error);
-    return [];
+    console.error('Error fetching posts by tag:', error)
+    return []
   }
 }
 
 export async function searchPosts(query: string, locale?: string) {
   try {
-    const searchTerm = `%${query}%`;
+    const searchTerm = `%${query}%`
     const conditions = [
       or(
         ilike(posts.title, searchTerm),
@@ -742,55 +742,55 @@ export async function searchPosts(query: string, locale?: string) {
         ilike(posts.excerptEn, searchTerm),
         ilike(posts.excerptVi, searchTerm)
       ),
-    ];
+    ]
 
     if (locale) {
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)));
+      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
     }
 
     const dbPosts = await db
       .select()
       .from(posts)
       .where(and(...conditions))
-      .orderBy(desc(posts.publishedAt || posts.createdAt));
+      .orderBy(desc(posts.publishedAt || posts.createdAt))
 
-    return dbPosts;
+    return dbPosts
   } catch (error) {
-    console.error('Error searching posts:', error);
-    return [];
+    console.error('Error searching posts:', error)
+    return []
   }
 }
 
 // Category and Tag management functions
 export async function getAllCategories() {
   try {
-    return await db.select().from(categories).orderBy(categories.name);
+    return await db.select().from(categories).orderBy(categories.name)
   } catch (error) {
-    console.error('Error fetching categories:', error);
-    return [];
+    console.error('Error fetching categories:', error)
+    return []
   }
 }
 
 export async function getAllTags() {
   try {
-    return await db.select().from(tags).orderBy(tags.name);
+    return await db.select().from(tags).orderBy(tags.name)
   } catch (error) {
-    console.error('Error fetching tags:', error);
-    return [];
+    console.error('Error fetching tags:', error)
+    return []
   }
 }
 
 export interface CreateCategoryResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export interface CreateTagResult {
-  success: boolean;
-  error?: string;
+  success: boolean
+  error?: string
 }
 
 export async function createCategory(
@@ -804,27 +804,27 @@ export async function createCategory(
       .select()
       .from(categories)
       .where(eq(categories.slug, slug))
-      .limit(1);
+      .limit(1)
 
     if (existing.length > 0) {
-      return { success: false, error: 'Category slug already exists' };
+      return { success: false, error: 'Category slug already exists' }
     }
 
     await db.insert(categories).values({
       slug,
       name,
       description: description || null,
-    });
+    })
 
-    revalidatePath('/admin/blog/categories');
-    return { success: true };
+    revalidatePath('/admin/blog/categories')
+    return { success: true }
   } catch (error) {
-    console.error('Error creating category:', error);
+    console.error('Error creating category:', error)
     return {
       success: false,
       error:
         error instanceof Error ? error.message : 'Failed to create category',
-    };
+    }
   }
 }
 
@@ -838,24 +838,24 @@ export async function createTag(
       .select()
       .from(tags)
       .where(eq(tags.slug, slug))
-      .limit(1);
+      .limit(1)
 
     if (existing.length > 0) {
-      return { success: false, error: 'Tag slug already exists' };
+      return { success: false, error: 'Tag slug already exists' }
     }
 
     await db.insert(tags).values({
       slug,
       name,
-    });
+    })
 
-    revalidatePath('/admin/blog/tags');
-    return { success: true };
+    revalidatePath('/admin/blog/tags')
+    return { success: true }
   } catch (error) {
-    console.error('Error creating tag:', error);
+    console.error('Error creating tag:', error)
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to create tag',
-    };
+    }
   }
 }

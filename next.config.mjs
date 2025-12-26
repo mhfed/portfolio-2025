@@ -1,4 +1,4 @@
-import createNextIntlPlugin from "next-intl/plugin";
+import createNextIntlPlugin from 'next-intl/plugin'
 // import withPWA from "@ducanh2912/next-pwa"; // PWA is currently commented out
 
 /** @type {import('next').NextConfig} */
@@ -10,20 +10,20 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    formats: ["image/avif", "image/webp"],
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
       },
     ],
   },
-};
+}
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin()
 
 // const pwaConfig = withPWA({
 //   dest: "public",
@@ -37,4 +37,4 @@ const withNextIntl = createNextIntlPlugin();
 //   },
 // });
 
-export default withNextIntl(nextConfig);
+export default withNextIntl(nextConfig)

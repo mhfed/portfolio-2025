@@ -1,31 +1,31 @@
-import { getPostsByTag } from '@/actions/post-actions';
-import { BlogCard } from '@/components/blog/blog-card';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { hasLocale } from 'next-intl';
-import { routing } from '@/i18n/routing';
-import { getAllTags } from '@/actions/post-actions';
+import { getPostsByTag } from '@/actions/post-actions'
+import { BlogCard } from '@/components/blog/blog-card'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
+import { routing } from '@/i18n/routing'
+import { getAllTags } from '@/actions/post-actions'
 
 interface TagPageProps {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const { locale, slug } = await params;
+  const { locale, slug } = await params
 
   if (!hasLocale(routing.locales, locale)) {
-    notFound();
+    notFound()
   }
 
-  setRequestLocale(locale);
-  const t = await getTranslations('blog');
+  setRequestLocale(locale)
+  const t = await getTranslations('blog')
 
-  const posts = await getPostsByTag(slug, locale);
-  const tags = await getAllTags();
-  const tag = tags.find((t) => t.slug === slug);
+  const posts = await getPostsByTag(slug, locale)
+  const tags = await getAllTags()
+  const tag = tags.find((t) => t.slug === slug)
 
   if (!tag) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -64,5 +64,5 @@ export default async function TagPage({ params }: TagPageProps) {
         )}
       </div>
     </div>
-  );
+  )
 }

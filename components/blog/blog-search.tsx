@@ -1,60 +1,60 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import { Command } from 'cmdk';
-import { useRouter } from 'next/navigation';
-import { useLocale } from '@/hooks/use-locale';
-import { searchPosts } from '@/actions/post-actions';
-import { Search, FileText } from 'lucide-react';
+import { useState, useEffect } from 'react'
+import { Command } from 'cmdk'
+import { useRouter } from 'next/navigation'
+import { useLocale } from '@/hooks/use-locale'
+import { searchPosts } from '@/actions/post-actions'
+import { Search, FileText } from 'lucide-react'
 
 interface BlogSearchProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open: boolean
+  onOpenChange: (open: boolean) => void
 }
 
 export function BlogSearch({ open, onOpenChange }: BlogSearchProps) {
-  const [search, setSearch] = useState('');
-  const [results, setResults] = useState<any[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const router = useRouter();
-  const { locale } = useLocale();
+  const [search, setSearch] = useState('')
+  const [results, setResults] = useState<any[]>([])
+  const [isSearching, setIsSearching] = useState(false)
+  const router = useRouter()
+  const { locale } = useLocale()
 
   useEffect(() => {
     if (!open) {
-      setSearch('');
-      setResults([]);
-      return;
+      setSearch('')
+      setResults([])
+      return
     }
-  }, [open]);
+  }, [open])
 
   useEffect(() => {
     if (search.length < 2) {
-      setResults([]);
-      return;
+      setResults([])
+      return
     }
 
     const timeoutId = setTimeout(async () => {
-      setIsSearching(true);
+      setIsSearching(true)
       try {
-        const posts = await searchPosts(search, locale);
-        setResults(posts);
+        const posts = await searchPosts(search, locale)
+        setResults(posts)
       } catch (error) {
-        console.error('Error searching posts:', error);
-        setResults([]);
+        console.error('Error searching posts:', error)
+        setResults([])
       } finally {
-        setIsSearching(false);
+        setIsSearching(false)
       }
-    }, 300);
+    }, 300)
 
-    return () => clearTimeout(timeoutId);
-  }, [search, locale]);
+    return () => clearTimeout(timeoutId)
+  }, [search, locale])
 
   const handleSelect = (slug: string) => {
-    router.push(`/${locale}/blog/${slug}`);
-    onOpenChange(false);
-  };
+    router.push(`/${locale}/blog/${slug}`)
+    onOpenChange(false)
+  }
 
-  if (!open) return null;
+  if (!open) return null
 
   return (
     <div className='fixed inset-0 z-50 flex items-start justify-center pt-[20vh] px-4'>
@@ -94,7 +94,7 @@ export function BlogSearch({ open, onOpenChange }: BlogSearchProps) {
             const title =
               locale === 'vi'
                 ? post.titleVi || post.titleEn || post.title
-                : post.titleEn || post.titleVi || post.title;
+                : post.titleEn || post.titleVi || post.title
 
             return (
               <Command.Item
@@ -113,10 +113,10 @@ export function BlogSearch({ open, onOpenChange }: BlogSearchProps) {
                   )}
                 </div>
               </Command.Item>
-            );
+            )
           })}
         </Command.List>
       </Command>
     </div>
-  );
+  )
 }

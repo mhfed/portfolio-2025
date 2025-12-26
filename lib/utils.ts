@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 
 /**
@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
  * Converts Vietnamese characters to ASCII equivalents
  */
 export function generateSlug(title: string): string {
-  if (!title) return '';
+  if (!title) return ''
 
   // Vietnamese character mapping
   const vietnameseMap: Record<string, string> = {
@@ -148,7 +148,7 @@ export function generateSlug(title: string): string {
     Ỷ: 'Y',
     Ỹ: 'Y',
     Đ: 'D',
-  };
+  }
 
   return title
     .trim()
@@ -159,5 +159,5 @@ export function generateSlug(title: string): string {
     .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and dashes
     .replace(/\s+/g, '-') // Replace spaces with dashes
     .replace(/-+/g, '-') // Replace multiple dashes with single dash
-    .replace(/^-+|-+$/g, ''); // Remove leading and trailing dashes
+    .replace(/^-+|-+$/g, '') // Remove leading and trailing dashes
 }

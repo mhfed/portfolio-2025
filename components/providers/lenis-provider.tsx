@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   createContext,
@@ -7,18 +7,18 @@ import {
   useRef,
   useState,
   ReactNode,
-} from "react";
-import Lenis from "lenis";
+} from 'react'
+import Lenis from 'lenis'
 
 interface LenisContextType {
-  lenis: Lenis | null;
+  lenis: Lenis | null
 }
 
-const LenisContext = createContext<LenisContextType>({ lenis: null });
+const LenisContext = createContext<LenisContextType>({ lenis: null })
 
 export function LenisProvider({ children }: { children: ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
-  const [lenis, setLenis] = useState<Lenis | null>(null);
+  const lenisRef = useRef<Lenis | null>(null)
+  const [lenis, setLenis] = useState<Lenis | null>(null)
 
   useEffect(() => {
     // Initialize Lenis
@@ -28,36 +28,36 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       smooth: true,
       smoothTouch: false, // Disable on touch devices for better performance
       touchMultiplier: 2,
-    });
+    })
 
-    lenisRef.current = lenisInstance;
-    setLenis(lenisInstance);
+    lenisRef.current = lenisInstance
+    setLenis(lenisInstance)
 
     // RequestAnimationFrame loop
     function raf(time: number) {
-      lenisInstance.raf(time);
-      requestAnimationFrame(raf);
+      lenisInstance.raf(time)
+      requestAnimationFrame(raf)
     }
 
-    requestAnimationFrame(raf);
+    requestAnimationFrame(raf)
 
     // Cleanup
     return () => {
-      lenisInstance.destroy();
-      lenisRef.current = null;
-      setLenis(null);
-    };
-  }, []);
+      lenisInstance.destroy()
+      lenisRef.current = null
+      setLenis(null)
+    }
+  }, [])
 
   return (
     <LenisContext.Provider value={{ lenis }}>{children}</LenisContext.Provider>
-  );
+  )
 }
 
 export function useLenis() {
-  const context = useContext(LenisContext);
+  const context = useContext(LenisContext)
   if (!context) {
-    throw new Error("useLenis must be used within a LenisProvider");
+    throw new Error('useLenis must be used within a LenisProvider')
   }
-  return context.lenis;
+  return context.lenis
 }

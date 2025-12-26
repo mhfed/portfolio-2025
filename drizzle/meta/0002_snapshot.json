@@ -122,10 +122,7 @@
         "locale_settings_locale_key_unique": {
           "name": "locale_settings_locale_key_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "locale",
-            "key"
-          ]
+          "columns": ["locale", "key"]
         }
       },
       "policies": {},

@@ -1,12 +1,12 @@
-import { getAllPosts } from '@/actions/post-actions';
-import Link from 'next/link';
-import Image from 'next/image';
-import { deletePost } from '@/actions/post-actions';
-import { DeletePostButton } from './delete-post-button';
-import { Badge } from '@/components/ui/badge';
+import { getAllPosts } from '@/actions/post-actions'
+import Link from 'next/link'
+import Image from 'next/image'
+import { deletePost } from '@/actions/post-actions'
+import { DeletePostButton } from './delete-post-button'
+import { Badge } from '@/components/ui/badge'
 
 export default async function AdminBlogPage() {
-  const posts = await getAllPosts(undefined, undefined); // Get all posts (published and draft)
+  const posts = await getAllPosts(undefined, undefined) // Get all posts (published and draft)
 
   return (
     <div className='space-y-6'>
@@ -125,5 +125,5 @@ export default async function AdminBlogPage() {
         )}
       </section>
     </div>
-  );
+  )
 }

@@ -1,25 +1,25 @@
-import { getPostById } from '@/actions/post-actions';
-import { EditPostForm } from './edit-post-form';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import { notFound } from 'next/navigation';
+import { getPostById } from '@/actions/post-actions'
+import { EditPostForm } from './edit-post-form'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import { notFound } from 'next/navigation'
 
 interface EditPostPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>
 }
 
 export default async function EditPostPage({ params }: EditPostPageProps) {
-  const { id } = await params;
-  const postId = parseInt(id, 10);
+  const { id } = await params
+  const postId = parseInt(id, 10)
 
   if (isNaN(postId)) {
-    notFound();
+    notFound()
   }
 
-  const post = await getPostById(postId);
+  const post = await getPostById(postId)
 
   if (!post) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -43,5 +43,5 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
 
       <EditPostForm post={post} />
     </div>
-  );
+  )
 }

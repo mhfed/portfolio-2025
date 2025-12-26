@@ -9,7 +9,7 @@ import {
   boolean,
   jsonb,
   index,
-} from 'drizzle-orm/pg-core';
+} from 'drizzle-orm/pg-core'
 
 export const projects = pgTable('projects', {
   id: serial('id').primaryKey(),
@@ -28,7 +28,7 @@ export const projects = pgTable('projects', {
   githubUrl: text('github_url'),
   techStack: text('tech_stack').array(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-});
+})
 
 export const experiences = pgTable('experiences', {
   id: serial('id').primaryKey(),
@@ -48,7 +48,7 @@ export const experiences = pgTable('experiences', {
   skills: text('skills').array(),
   orderIndex: integer('order_index'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-});
+})
 
 export const localeSettings = pgTable(
   'locale_settings',
@@ -63,7 +63,7 @@ export const localeSettings = pgTable(
   (table) => ({
     uniqueLocaleKey: unique().on(table.locale, table.key),
   })
-);
+)
 
 // Blog schema
 export const posts = pgTable(
@@ -91,7 +91,7 @@ export const posts = pgTable(
     slugIdx: index('posts_slug_idx').on(table.slug),
     slugUnique: unique('posts_slug_unique').on(table.slug),
   })
-);
+)
 
 export const categories = pgTable(
   'categories',
@@ -105,7 +105,7 @@ export const categories = pgTable(
   (table) => ({
     slugUnique: unique('categories_slug_unique').on(table.slug),
   })
-);
+)
 
 export const tags = pgTable(
   'tags',
@@ -118,7 +118,7 @@ export const tags = pgTable(
   (table) => ({
     slugUnique: unique('tags_slug_unique').on(table.slug),
   })
-);
+)
 
 export const postCategories = pgTable(
   'post_categories',
@@ -136,7 +136,7 @@ export const postCategories = pgTable(
       table.categoryId
     ),
   })
-);
+)
 
 export const postTags = pgTable(
   'post_tags',
@@ -151,7 +151,7 @@ export const postTags = pgTable(
   (table) => ({
     uniquePostTag: unique('post_tags_unique').on(table.postId, table.tagId),
   })
-);
+)
 
 export const views = pgTable('views', {
   id: serial('id').primaryKey(),
@@ -161,4 +161,4 @@ export const views = pgTable('views', {
     .unique(),
   viewCount: integer('view_count').default(0),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
-});
+})
