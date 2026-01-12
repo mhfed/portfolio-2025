@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/hero-section'
 import { AboutSection } from '@/components/about-section'
 import { WorkExperienceSection } from '@/components/work-experience-section'
 import { ProjectsSection } from '@/components/projects-section'
+import { BlogSection } from '@/components/blog-section'
 import { LetsCollaborateSection } from '@/components/lets-collaborate-section'
 import { ScrollObserver } from '@/components/scroll-observer'
 import { ScrollToTop } from '@/components/scroll-to-top'
@@ -34,6 +35,11 @@ export default function Home() {
 
       {/* Projects Section */}
       <ProjectsSection />
+
+      <Separator className='my-12' />
+
+      {/* Blog Section */}
+      <BlogSection />
 
       <Separator className='my-12' />
 

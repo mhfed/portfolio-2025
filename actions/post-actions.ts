@@ -235,7 +235,11 @@ export async function createPost(
   }
 }
 
-export async function getAllPosts(locale?: string, isPublished?: boolean) {
+export async function getAllPosts(
+  locale?: string,
+  isPublished?: boolean,
+  limit?: number
+) {
   try {
     let query = db.select().from(posts)
 
@@ -256,9 +260,13 @@ export async function getAllPosts(locale?: string, isPublished?: boolean) {
       query = query.where(and(...conditions)) as any
     }
 
-    const dbPosts = await query.orderBy(
-      desc(posts.publishedAt || posts.createdAt)
-    )
+    query = query.orderBy(desc(posts.publishedAt || posts.createdAt)) as any
+
+    if (limit !== undefined && limit > 0) {
+      query = query.limit(limit) as any
+    }
+
+    const dbPosts = await query
 
     return dbPosts
   } catch (error) {
@@ -275,7 +283,10 @@ export async function getPostBySlug(slug: string, locale?: string) {
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
+      const localeCondition = or(eq(posts.locale, locale), isNull(posts.locale))
+      if (localeCondition) {
+        conditions.push(localeCondition)
+      }
     }
 
     const [post] = await db
@@ -656,7 +667,10 @@ export async function getPostsByCategory(
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
+      const localeCondition = or(eq(posts.locale, locale), isNull(posts.locale))
+      if (localeCondition) {
+        conditions.push(localeCondition)
+      }
     }
 
     const dbPosts = await db
@@ -697,7 +711,10 @@ export async function getPostsByTag(tagSlug: string, locale?: string) {
       // Flexible locale filtering:
       // - Posts with locale = null can be accessed from any locale
       // - Posts with a specific locale can only be accessed from that locale
-      conditions.push(or(eq(posts.locale, locale), isNull(posts.locale)))
+      const localeCondition = or(eq(posts.locale, locale), isNull(posts.locale))
+      if (localeCondition) {
+        conditions.push(localeCondition)
+      }
     }
 
     const dbPosts = await db

@@ -69,6 +69,7 @@
   },
   "blog": {
     "title": "RECENTLY PUBLISHED",
+    "viewAllPosts": "View All Posts →",
     "readMore": "READ MORE →",
     "allCategories": "ALL CATEGORIES",
     "allPosts": "All Posts",
