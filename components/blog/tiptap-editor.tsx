@@ -4,9 +4,16 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
+import Typography from '@tiptap/extension-typography'
+import Underline from '@tiptap/extension-underline'
+import { Table } from '@tiptap/extension-table'
+import { TableRow } from '@tiptap/extension-table-row'
+import { TableHeader } from '@tiptap/extension-table-header'
+import { TableCell } from '@tiptap/extension-table-cell'
 import {
   Bold,
   Italic,
+  Underline as UnderlineIcon,
   List,
   ListOrdered,
   Heading1,
@@ -50,6 +57,17 @@ export function TipTapEditor({
           },
         },
       }),
+      Typography,
+      Underline,
+      Table.configure({
+        resizable: true,
+        HTMLAttributes: {
+          class: 'border-collapse table-auto w-full',
+        },
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
@@ -174,6 +192,21 @@ export function TipTapEditor({
           title='Italic'
         >
           <Italic className='h-4 w-4' />
+        </button>
+
+        <button
+          type='button'
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          disabled={!editor.can().chain().focus().toggleUnderline().run()}
+          className={cn(
+            'p-2 rounded-md transition-colors',
+            editor.isActive('underline')
+              ? 'bg-primary text-primary-foreground'
+              : 'hover:bg-accent text-foreground/70'
+          )}
+          title='Underline'
+        >
+          <UnderlineIcon className='h-4 w-4' />
         </button>
 
         <div className='w-px h-6 bg-border/30 mx-1' />
