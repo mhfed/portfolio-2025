@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { Playfair_Display, Great_Vibes, Noto_Serif } from 'next/font/google'
+import Image from 'next/image'
 
 const playfair = Playfair_Display({
   subsets: ['latin', 'vietnamese'],
@@ -76,8 +77,17 @@ export function CountdownClient() {
         notoSerif.className
       )}
     >
-      {/* Background Image - White base */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden -z-10 bg-[url('https://res.cloudinary.com/dt3epooyc/image/upload/v1768234983/portfolio/arb7ckuxyvozhwsuuwlb.png')] bg-contain bg-[center_30%] md:bg-center bg-no-repeat bg-[#110000]" />
+      {/* Background Image - White base with Preloading */}
+      <div className='absolute inset-0 w-full h-full overflow-hidden -z-10 bg-[#110000]'>
+        <Image
+          src='https://res.cloudinary.com/dt3epooyc/image/upload/v1768234983/portfolio/arb7ckuxyvozhwsuuwlb.png'
+          alt='Lunar New Year Background'
+          fill
+          priority
+          className='object-contain object-[center_30%] md:object-center'
+          sizes='100vw'
+        />
+      </div>
 
       {/* Subtle Overlay to ensure text pop if needed (very light gradient) */}
       <div className='absolute inset-0 bg-gradient-to-b from-[#5e0c0c]/80 via-transparent to-[#5e0c0c]/80 pointer-events-none' />
