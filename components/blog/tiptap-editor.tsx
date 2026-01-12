@@ -17,8 +17,10 @@ import {
   Link as LinkIcon,
   Image as ImageIcon,
   Terminal,
+  Maximize,
+  Minimize,
 } from 'lucide-react'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 interface TipTapEditorProps {
@@ -36,6 +38,8 @@ export function TipTapEditor({
   locale,
   className,
 }: TipTapEditorProps) {
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
@@ -62,7 +66,7 @@ export function TipTapEditor({
     editorProps: {
       attributes: {
         class:
-          'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[300px] px-4 py-3',
+          'blog-content prose prose-lg prose-slate dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-strong:text-foreground prose-code:text-primary prose-pre:bg-card prose-pre:border prose-pre:border-border',
         'data-placeholder': placeholder,
       },
     },
@@ -82,6 +86,18 @@ export function TipTapEditor({
       }
     }
   }, [content, editor])
+
+  // Handle ESC key to exit fullscreen
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFullscreen) {
+        setIsFullscreen(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isFullscreen])
 
   const setLink = useCallback(() => {
     if (!editor) return
@@ -123,6 +139,7 @@ export function TipTapEditor({
     <div
       className={cn(
         'border border-border/30 rounded-md bg-background overflow-hidden',
+        isFullscreen && 'fixed inset-0 z-50 rounded-none flex flex-col',
         className
       )}
     >
@@ -312,12 +329,36 @@ export function TipTapEditor({
         >
           <ImageIcon className='h-4 w-4' />
         </button>
+
+        <div className='w-px h-6 bg-border/30 mx-1' />
+
+        {/* Fullscreen Toggle */}
+        <button
+          type='button'
+          onClick={() => setIsFullscreen(!isFullscreen)}
+          className={cn(
+            'p-2 rounded-md transition-colors',
+            isFullscreen
+              ? 'bg-primary text-primary-foreground'
+              : 'hover:bg-accent text-foreground/70'
+          )}
+          title={isFullscreen ? 'Exit Fullscreen (ESC)' : 'Fullscreen'}
+        >
+          {isFullscreen ? (
+            <Minimize className='h-4 w-4' />
+          ) : (
+            <Maximize className='h-4 w-4' />
+          )}
+        </button>
       </div>
 
       {/* Editor Content */}
       <EditorContent
         editor={editor}
-        className='prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none'
+        className={cn(
+          'prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none',
+          isFullscreen && 'flex-1 overflow-auto'
+        )}
       />
     </div>
   )

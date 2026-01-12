@@ -60,7 +60,7 @@ export function BlogContent({ content }: BlogContentProps) {
     <article
       ref={contentRef}
       /* Quan trọng: Sử dụng prose kết hợp với các biến CSS của bạn */
-      className='blog-content prose prose-slate dark:prose-invert max-w-none 
+      className='blog-content prose prose-lg  prose-slate dark:prose-invert max-w-none 
                  prose-headings:text-foreground prose-p:text-foreground/90
                  prose-strong:text-foreground prose-code:text-primary
                  prose-pre:bg-card prose-pre:border prose-pre:border-border'
