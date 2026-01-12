@@ -4,6 +4,10 @@ import { useEffect, useRef, useMemo } from 'react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
+import { Table } from '@tiptap/extension-table'
+import { TableRow } from '@tiptap/extension-table-row'
+import { TableHeader } from '@tiptap/extension-table-header'
+import { TableCell } from '@tiptap/extension-table-cell'
 import { renderToHTMLString } from '@tiptap/static-renderer/pm/html-string'
 
 interface BlogContentProps {
@@ -20,6 +24,16 @@ export function BlogContent({ content }: BlogContentProps) {
       }),
       Link.configure({ HTMLAttributes: { class: 'blog-link' } }),
       Image.configure({ HTMLAttributes: { class: 'blog-image' } }),
+      // KHAI BÁO THÊM Ở ĐÂY ĐỂ RENDERER HIỂU CẤU TRÚC BẢNG
+      Table.configure({
+        resizable: true,
+        HTMLAttributes: {
+          class: 'blog-table',
+        },
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ],
     []
   )

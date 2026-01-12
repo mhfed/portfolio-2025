@@ -893,3 +893,49 @@ html.lenis body {
     }
   }
 }
+@layer base {
+  /* Container bao quanh nội dung blog */
+  .blog-content {
+    /* Quan trọng: Tạo bối cảnh để table không tràn ra ngoài */
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Tạo thanh cuộn cho Table */
+  .blog-content table {
+    /* 1. Ghi đè inline style của TipTap */
+    display: block !important;
+    width: 100% !important;
+    min-width: unset !important;
+    max-width: 100% !important;
+
+    /* 2. Cho phép cuộn ngang */
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+
+    /* 3. Để các cột tự co giãn theo nội dung thay vì fixed 125px */
+    table-layout: auto !important;
+    border-collapse: collapse;
+    @apply my-6 border border-border;
+  }
+
+  /* Đảm bảo colgroup không ép chiều rộng */
+  .blog-content colgroup {
+    display: none !important;
+  }
+
+  .blog-content td,
+  .blog-content th {
+    /* Đặt min-width vừa phải để chữ không bị bó quá hẹp */
+    min-width: 120px !important;
+    @apply border border-border p-3 text-sm align-top;
+
+    /* Fix các thuộc tính colwidth lạ */
+    width: auto !important;
+  }
+
+  /* Reset margin cho thẻ p bên trong bảng để cân đối */
+  .blog-content td p {
+    @apply m-0 leading-normal;
+  }
+}
