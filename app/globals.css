@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@plugin '@tailwindcss/typography';
 
 :root {
   /* Light mode: Inverted Dracula theme */
@@ -808,122 +809,56 @@ html.lenis body {
 .dark .ProseMirror pre {
   background-color: hsl(var(--muted) / 0.3);
 }
+/* Tối ưu Blog Content cho Neon Theme */
+@layer base {
+  .blog-content {
+    /* Đảm bảo text luôn lấy từ biến --foreground của bạn */
+    color: var(--foreground);
+  }
 
-/* Blog Content Rendered Styles (for displayed content, not editor) */
-.blog-content {
-  line-height: 1.75;
-}
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3 {
+    @apply text-foreground font-display tracking-tight;
+    /* Hiệu ứng neon nhẹ cho tiêu đề nếu muốn */
+    /* text-shadow: 0 0 10px var(--primary) / 0.2; */
+  }
 
-.blog-content p {
-  margin: 0.75rem 0;
-}
+  .blog-content a {
+    @apply text-primary hover:text-accent transition-colors duration-200;
+  }
 
-.blog-content h1,
-.blog-content h2,
-.blog-content h3,
-.blog-content h4,
-.blog-content h5,
-.blog-content h6 {
-  font-weight: 600;
-  line-height: 1.2;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-}
+  /* Style cho Code Block thích ứng theo Theme */
+  .blog-content pre {
+    background-color: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
 
-.blog-content h1 {
-  font-size: 2rem;
-}
+  .dark .blog-content pre {
+    background-color: oklch(
+      0.15 0.02 0
+    ) !important; /* Lấy màu tối hơn card một chút */
+    border-color: var(--primary) / 0.2 !important;
+  }
 
-.blog-content h2 {
-  font-size: 1.5rem;
-}
+  .blog-content code {
+    @apply text-primary font-mono bg-muted/50 px-1.5 py-0.5 rounded border border-border/50;
+    /* Xóa các dấu quote mặc định của prose */
+  }
 
-.blog-content h3 {
-  font-size: 1.25rem;
-}
+  .blog-content code::before,
+  .blog-content code::after {
+    content: '' !important;
+  }
 
-.blog-content ul,
-.blog-content ol {
-  padding-left: 1.5rem;
-  margin: 0.75rem 0;
-}
+  .blog-content pre code {
+    @apply text-foreground bg-transparent border-none p-0;
+  }
 
-.blog-content li {
-  margin: 0.25rem 0;
-}
-
-.blog-content blockquote {
-  border-left: 4px solid hsl(var(--border));
-  padding-left: 1rem;
-  margin: 1rem 0;
-  font-style: italic;
-  color: hsl(var(--muted-foreground));
-}
-
-.blog-content code {
-  background-color: hsl(var(--muted));
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
-  font-family:
-    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
-    monospace;
-}
-
-.blog-content pre {
-  background-color: hsl(var(--muted));
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin: 1rem 0;
-}
-
-.blog-content pre code {
-  background-color: transparent;
-  padding: 0;
-  font-size: 0.875rem;
-}
-
-.blog-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-  margin: 1rem 0;
-}
-
-.blog-content a {
-  color: hsl(var(--primary));
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.blog-content a:hover {
-  color: hsl(var(--primary) / 0.8);
-}
-
-.blog-content strong {
-  font-weight: 600;
-}
-
-.blog-content em {
-  font-style: italic;
-}
-
-.blog-content hr {
-  margin: 2rem 0;
-  border: none;
-  border-top: 1px solid hsl(var(--border));
-}
-
-/* Dark mode adjustments */
-.dark .blog-content blockquote {
-  border-left-color: hsl(var(--border));
-}
-
-.dark .blog-content code {
-  background-color: hsl(var(--muted) / 0.5);
-}
-
-.dark .blog-content pre {
-  background-color: hsl(var(--muted) / 0.3);
+  /* Bo góc và đổ bóng cho ảnh blog */
+  .blog-content img {
+    @apply rounded-xl border border-border shadow-2xl mx-auto my-10;
+  }
 }
