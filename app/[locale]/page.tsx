@@ -4,14 +4,17 @@ import { AboutSection } from '@/components/about-section'
 import { WorkExperienceSection } from '@/components/work-experience-section'
 import { ProjectsSection } from '@/components/projects-section'
 import { BlogSection } from '@/components/blog-section'
-import { LetsCollaborateSection } from '@/components/lets-collaborate-section'
+import { Footer } from '@/components/footer'
 import { ScrollObserver } from '@/components/scroll-observer'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { FloatingCTA } from '@/components/floating-cta'
 import { Separator } from '@/components/ui/separator'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
+import { getLocale } from 'next-intl/server'
 
-export default function Home() {
+export default async function Home() {
+  const locale = await getLocale()
+
   return (
     <main className='w-full pb-20 md:pb-24 lg:pb-28'>
       {/* <ScrollObserver /> */}
@@ -43,8 +46,8 @@ export default function Home() {
 
       <Separator className='my-12' />
 
-      {/* Collaborate Section */}
-      <LetsCollaborateSection />
+      {/* Footer with Collaborate Section */}
+      <Footer locale={locale} />
 
       {/* Floating Actions */}
       <FloatingCTA />

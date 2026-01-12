@@ -4,6 +4,7 @@
       "about": "About",
       "experience": "Experience",
       "projects": "Projects",
+      "blog": "Blog",
       "collaborate": "Collaborate"
     },
     "downloadResume": "Download Resume"
@@ -82,7 +83,8 @@
     "search": "Search posts...",
     "backToBlog": "← Back to Blog",
     "relatedPosts": "Related Posts",
-    "tableOfContents": "Table of Contents"
+    "tableOfContents": "Table of Contents",
+    "home": "Home"
   },
   "collaborate": {
     "title": "LET'S COLLABORATE",

@@ -4,6 +4,7 @@
       "about": "Về tôi",
       "experience": "Kinh nghiệm",
       "projects": "Dự án",
+      "blog": "Blog",
       "collaborate": "Hợp tác"
     },
     "downloadResume": "Tải CV"
@@ -82,7 +83,8 @@
     "search": "Tìm kiếm bài viết...",
     "backToBlog": "← Quay lại Blog",
     "relatedPosts": "Bài viết liên quan",
-    "tableOfContents": "Mục lục"
+    "tableOfContents": "Mục lục",
+    "home": "Trang chủ"
   },
   "collaborate": {
     "title": "HÃY HỢP TÁC",

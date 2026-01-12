@@ -10,6 +10,7 @@ import { routing } from '@/i18n/routing'
 import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { ScrollProgress } from './ui/scroll-progress'
 import { useLenis } from '@/components/providers/lenis-provider'
+import Link from 'next/link'
 
 export function Header() {
   const [isDark, setIsDark] = useState(false)
@@ -48,14 +49,22 @@ export function Header() {
     { name: t('about'), href: '#about', key: 'about' },
     { name: t('experience'), href: '#experience', key: 'experience' },
     { name: t('projects'), href: '#projects', key: 'projects' },
+    { name: t('blog'), href: `/${locale}/blog`, key: 'blog' },
     { name: t('collaborate'), href: '#collaborate', key: 'collaborate' },
   ]
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
     const href = e.currentTarget.getAttribute('href')
     if (!href) return
 
+    // If it's a route link (starts with /), let it navigate normally
+    if (href.startsWith('/')) {
+      setIsMobileMenuOpen(false)
+      return
+    }
+
+    // For anchor links, use smooth scroll
+    e.preventDefault()
     const element = document.querySelector(href) as HTMLElement | null
     if (element && lenis) {
       // Get header height for offset
@@ -112,17 +121,28 @@ export function Header() {
 
           {/* Desktop Navigation Links */}
           <div className='hidden md:flex gap-8 items-center'>
-            {navLinks.map((link) => (
-              <a
-                key={link.key}
-                href={link.href}
-                onClick={handleNavClick}
-                className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
-              >
-                {link.name}
-                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith('/') ? (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
+                >
+                  {link.name}
+                  <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
+                </Link>
+              ) : (
+                <a
+                  key={link.key}
+                  href={link.href}
+                  onClick={handleNavClick}
+                  className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
+                >
+                  {link.name}
+                  <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
+                </a>
+              )
+            )}
           </div>
 
           {/* Right Side Actions */}
@@ -206,16 +226,27 @@ export function Header() {
           <nav className='flex flex-col h-full'>
             {/* Navigation Links */}
             <div className='flex flex-col p-6 gap-1 flex-1 overflow-y-auto'>
-              {navLinks.map((link) => (
-                <a
-                  key={link.key}
-                  href={link.href}
-                  onClick={handleNavClick}
-                  className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.href.startsWith('/') ? (
+                  <Link
+                    key={link.key}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.key}
+                    href={link.href}
+                    onClick={handleNavClick}
+                    className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
             </div>
 
             {/* Mobile Actions - Language & Theme */}
