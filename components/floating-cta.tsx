@@ -24,7 +24,7 @@ export function FloatingCTA() {
 
   const handleDownload = () => {
     const link = document.createElement('a')
-    link.href = '/resume.pdf'
+    link.href = '/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
     link.download = `CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf`
     document.body.appendChild(link)
     link.click()
