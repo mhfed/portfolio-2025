@@ -1,18 +1,15 @@
 import { getAllPosts } from '@/actions/post-actions'
 import { BlogCard } from '@/components/blog/blog-card'
 import { SectionTitle } from '@/components/section-title'
-import { Button } from '@/components/ui/button'
-import { useTranslations } from 'next-intl'
 import { getTranslations, getLocale } from 'next-intl/server'
-import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 export async function BlogSection() {
-  const locale = await getLocale()
+  const locale = (await getLocale()) as 'en' | 'vi'
   const t = await getTranslations('blog')
 
-  // Fetch recent published posts (limit to 6)
-  const posts = await getAllPosts(locale, true, 6)
+  // Fetch a small number of recent published posts for the homepage
+  const posts = await getAllPosts(locale, true, 3)
 
   // Don't render section if no posts
   if (posts.length === 0) {
@@ -20,18 +17,18 @@ export async function BlogSection() {
   }
 
   return (
-    <section className='container mx-auto px-4 py-8 md:py-12 lg:py-16'>
-      <div className='max-w-7xl mx-auto'>
+    <section id='blog' className='px-4 md:px-6'>
+      <div className='max-w-5xl mx-auto'>
         {/* Section Header */}
-        <div className='flex items-center justify-between mb-8 md:mb-12'>
-          <SectionTitle title={t('title')} />
-          <Link
-            href='/blog'
-            className='group flex items-center gap-2 text-sm md:text-base font-medium text-foreground/70 hover:text-primary transition-colors'
+        <div className='flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-12'>
+          <SectionTitle title={t('title')} className='mb-0' />
+          <a
+            href={`/${locale}/blog`}
+            className='group inline-flex items-center gap-2 text-xs md:text-sm font-medium text-foreground/70 hover:text-primary transition-colors uppercase tracking-wide'
           >
             {t('viewAllPosts')}
             <ArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
-          </Link>
+          </a>
         </div>
 
         {/* Blog Posts Grid */}
