@@ -40,6 +40,7 @@ export function FloatingCTA() {
         variant='gradient'
         size='lg'
         aria-label={t('downloadResume')}
+        className='rounded-full'
       >
         <Download className='w-5 h-5' />
         <span className='hidden sm:inline'>{t('downloadResume')}</span>

@@ -18,7 +18,12 @@ export function ResumeDownloadButton() {
   }
 
   return (
-    <ShinyButton onClick={handleDownload} variant='default' size='lg'>
+    <ShinyButton
+      onClick={handleDownload}
+      variant='default'
+      size='lg'
+      className='rounded-full'
+    >
       <Download className='w-4 h-4' />
       {t('downloadResume')}
     </ShinyButton>
