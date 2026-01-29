@@ -33,10 +33,10 @@ export default function middleware(request: NextRequest) {
 
   // Handle /admin routes - exclude from intl middleware
   if (pathname.startsWith('/admin')) {
-    // Redirect /vi/admin or /en/admin to /admin
-    if (pathname.match(/^\/(en|vi)\/admin/)) {
+    // Redirect /vi/admin, /en/admin, or /zh-TW/admin to /admin
+    if (pathname.match(/^\/(en|vi|zh-TW)\/admin/)) {
       const newUrl = request.nextUrl.clone()
-      newUrl.pathname = pathname.replace(/^\/(en|vi)\//, '/')
+      newUrl.pathname = pathname.replace(/^\/(en|vi|zh-TW)\//, '/')
       return NextResponse.redirect(newUrl)
     }
 

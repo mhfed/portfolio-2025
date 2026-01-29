@@ -1,0 +1,106 @@
+{
+  "header": {
+    "nav": {
+      "about": "關於我",
+      "experience": "經歷",
+      "projects": "專案",
+      "blog": "部落格",
+      "collaborate": "合作"
+    },
+    "downloadResume": "下載履歷"
+  },
+  "hero": {
+    "front": "NGUYEN",
+    "middle": "MINH",
+    "end": "HIEU",
+    "developer": "前端開發工程師",
+    "contact": {
+      "basedIn": "目前所在地",
+      "location": "越南河內",
+      "sayHello": "打聲招呼",
+      "email": "nmhieu04091999@gmail.com"
+    },
+    "textBlockLeft": "持續學習並掌握最新趨勢，將是實現這些目標的關鍵。",
+    "textBlockRight": "長期來看，我志在專精於為網頁、行動裝置，甚至桌面平台打造創新且受歡迎的應用程式。"
+  },
+  "about": {
+    "title": "關於我",
+    "description1": "擁有5年經驗的前端開發工程師，專精於開發與維護前端網頁應用程式。熟練掌握 JavaScript、TypeScript、HTML、CSS、ES6、React.js 和 Next.js。具備程式碼測試與除錯經驗。",
+    "coreSkills": "核心技能",
+    "yearsExperience": "年經驗",
+    "yearsDescription": "運用現代技術打造網頁體驗",
+    "clientSatisfaction": "客戶滿意度",
+    "satisfactionDescription": "致力於超越期望"
+  },
+  "experience": {
+    "title": "工作<br />經歷",
+    "readMore": "閱讀更多..."
+  },
+  "projects": {
+    "title": "專案作品",
+    "viewProject": "查看專案 →",
+    "noProjects": "目前尚無專案。"
+  },
+  "technologies": {
+    "title": "技術能力",
+    "frontend": {
+      "title": "前端技術",
+      "description": "HTML、CSS、JavaScript、TypeScript、React.js、Next.js"
+    },
+    "stateManagement": {
+      "title": "狀態管理",
+      "description": "使用 Redux 進行高效的應用程式狀態管理"
+    },
+    "uiLibraries": {
+      "title": "UI 函式庫",
+      "description": "Material-UI、Ant Design、Tailwind CSS、Bootstrap、Sass"
+    },
+    "mobile": {
+      "title": "行動開發",
+      "description": "React Native、RN Reanimated 用於行動應用程式開發"
+    },
+    "apis": {
+      "title": "API 與協定",
+      "description": "RESTful APIs、WebSockets、SSE 用於即時功能"
+    },
+    "tools": {
+      "title": "工具與實用程式",
+      "description": "Git、Webpack、Babel、Firebase、Axios、i18n"
+    }
+  },
+  "blog": {
+    "title": "最新文章",
+    "viewAllPosts": "查看所有文章 →",
+    "readMore": "閱讀更多 →",
+    "allCategories": "所有分類",
+    "allPosts": "全部文章",
+    "noPosts": "目前尚無文章。",
+    "publishedOn": "發布於",
+    "readTime": "分鐘閱讀",
+    "views": "瀏覽次數",
+    "categories": "分類",
+    "tags": "標籤",
+    "search": "搜尋文章...",
+    "backToBlog": "← 返回部落格",
+    "relatedPosts": "相關文章",
+    "tableOfContents": "目錄",
+    "home": "首頁"
+  },
+  "collaborate": {
+    "title": "讓我們合作",
+    "description": "有令人興奮的專案想法嗎？我很樂意聽取您的想法。讓我們一起創造精彩的作品。",
+    "form": {
+      "yourName": "您的姓名",
+      "emailAddress": "電子郵件",
+      "message": "訊息",
+      "namePlaceholder": "王小明",
+      "emailPlaceholder": "xiaoming@example.com",
+      "messagePlaceholder": "請告訴我您的專案...",
+      "sendMessage": "發送訊息",
+      "messageSent": "訊息已發送！🎉"
+    },
+    "orConnect": "或透過以下方式聯繫",
+    "reachDirectly": "或直接聯繫我",
+    "phone": "電話："
+  }
+}
