@@ -7,6 +7,8 @@ import { Button } from './ui/button'
 import { TechMarquee } from './tech-marquee'
 import { SocialsDock } from './socials-dock'
 import Image from 'next/image'
+import HeroOutlineFill from './hero-name'
+import HeroName from './hero-name'
 
 export async function HeroSection() {
   const t = await getTranslations('hero')
@@ -20,11 +22,12 @@ export async function HeroSection() {
           <div className='space-y-8 md:space-y-10 overflow-visible'>
             {/* Name Section */}
             <div className='relative w-full flex flex-col gap-4 md:gap-6 overflow-visible'>
-              <HeroTypingText
+              {/* <HeroTypingText
                 frontText={t('front')}
                 middleText={t('middle')}
                 endText={t('end')}
-              />
+              /> */}
+              <HeroName />
             </div>
 
             <div className='flex items-center gap-4'>
@@ -36,7 +39,7 @@ export async function HeroSection() {
           </div>
 
           {/* Download Resume Button & Social Links */}
-          <div className='mt-4 relative rounded-lg overflow-hidden'>
+          <div className='relative rounded-lg overflow-hidden'>
             <Image
               src='https://res.cloudinary.com/dt3epooyc/image/upload/v1769702375/portfolio/yddxvjkmf3cceyw5ijwo.jpg'
               alt='Hero Avatar'
