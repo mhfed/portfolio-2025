@@ -50,21 +50,6 @@ export const experiences = pgTable('experiences', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 
-export const localeSettings = pgTable(
-  'locale_settings',
-  {
-    id: serial('id').primaryKey(),
-    locale: text('locale').notNull(),
-    key: text('key').notNull(),
-    value: text('value').notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at').defaultNow().notNull(),
-  },
-  (table) => ({
-    uniqueLocaleKey: unique().on(table.locale, table.key),
-  })
-)
-
 // Blog schema
 export const posts = pgTable(
   'posts',
