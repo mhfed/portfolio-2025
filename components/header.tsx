@@ -51,10 +51,18 @@ export function Header() {
   }
 
   const navLinks = [
-    { name: t('about'), href: '#about', key: 'about' },
-    { name: t('experience'), href: '#experience', key: 'experience' },
-    { name: t('projects'), href: '#projects', key: 'projects' },
-    { name: t('collaborate'), href: '#collaborate', key: 'collaborate' },
+    { name: t('about'), href: `${homePath}#about`, key: 'about' },
+    {
+      name: t('experience'),
+      href: `${homePath}#experience`,
+      key: 'experience',
+    },
+    { name: t('projects'), href: `${homePath}#projects`, key: 'projects' },
+    {
+      name: t('collaborate'),
+      href: `${homePath}#collaborate`,
+      key: 'collaborate',
+    },
     { name: t('blog'), href: `/${locale}/blog`, key: 'blog' },
   ]
 
@@ -62,27 +70,38 @@ export function Header() {
     const href = e.currentTarget.getAttribute('href')
     if (!href) return
 
-    // If it's a route link (starts with /), let it navigate normally
-    if (href.startsWith('/')) {
+    // If it's a route link (starts with / but no #), let it navigate normally
+    if (href.startsWith('/') && !href.includes('#')) {
       setIsMobileMenuOpen(false)
       return
     }
 
-    // For anchor links, use smooth scroll
-    e.preventDefault()
-    const element = document.querySelector(href) as HTMLElement | null
-    if (element && lenis) {
-      // Get header height for offset
-      const headerHeight = parseInt(
-        getComputedStyle(document.documentElement).getPropertyValue(
-          '--header-height'
-        ) || '60'
-      )
-      lenis.scrollTo(element, {
-        offset: -headerHeight,
-        duration: 1.2,
-      })
+    // Check if we're on the home page
+    const isHomePage =
+      pathname === '/' || pathname === `/${locale}` || pathname === ''
+
+    // Extract the anchor from href (e.g., "/#about" -> "#about" or "/vi#about" -> "#about")
+    const anchorMatch = href.match(/#[\w-]+$/)
+    const anchor = anchorMatch ? anchorMatch[0] : null
+
+    if (isHomePage && anchor) {
+      // On home page, use smooth scroll
+      e.preventDefault()
+      const element = document.querySelector(anchor) as HTMLElement | null
+      if (element && lenis) {
+        const headerHeight = parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            '--header-height'
+          ) || '60'
+        )
+        lenis.scrollTo(element, {
+          offset: -headerHeight,
+          duration: 1.2,
+        })
+      }
     }
+    // If not on home page, let it navigate normally (the href already has full path)
+
     setIsMobileMenuOpen(false)
   }
 
