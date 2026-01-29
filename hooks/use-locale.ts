@@ -15,7 +15,7 @@ export function useLocale() {
   // Get locale from params (from [locale] segment)
   const locale = (params?.locale as string) || routing.defaultLocale
 
-  const setLocale = (newLocale: 'en' | 'vi') => {
+  const setLocale = (newLocale: 'en' | 'vi' | 'zh-TW') => {
     if (locale === newLocale) return
 
     setIsLoading(true)

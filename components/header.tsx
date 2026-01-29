@@ -11,6 +11,7 @@ import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { ScrollProgress } from './ui/scroll-progress'
 import { useLenis } from '@/components/providers/lenis-provider'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export function Header() {
   const [isDark, setIsDark] = useState(false)
@@ -21,6 +22,10 @@ export function Header() {
   const tContact = useTranslations('hero.contact')
   const { locale, setLocale, isLoading } = useLocale()
   const lenis = useLenis()
+  const pathname = usePathname()
+
+  // Determine home path based on locale
+  const homePath = locale === 'en' ? '/' : `/${locale}`
 
   useEffect(() => {
     setMounted(true)
@@ -40,7 +45,7 @@ export function Header() {
     }
   }
 
-  const handleLanguageChange = (newLocale: 'en' | 'vi') => {
+  const handleLanguageChange = (newLocale: 'en' | 'vi' | 'zh-TW') => {
     setLocale(newLocale)
     setIsLanguageMenuOpen(false)
   }
@@ -49,8 +54,8 @@ export function Header() {
     { name: t('about'), href: '#about', key: 'about' },
     { name: t('experience'), href: '#experience', key: 'experience' },
     { name: t('projects'), href: '#projects', key: 'projects' },
-    { name: t('blog'), href: `/${locale}/blog`, key: 'blog' },
     { name: t('collaborate'), href: '#collaborate', key: 'collaborate' },
+    { name: t('blog'), href: `/${locale}/blog`, key: 'blog' },
   ]
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -87,14 +92,22 @@ export function Header() {
   return (
     <>
       <header
-        className='sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/10 relative'
+        className='sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 border-b border-border/10'
         style={{ height: 'var(--header-height)' }}
       >
         <nav className='max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4'>
-          <ScrollProgress className='h-0.5 top-[var(--header-height)]' />
+          <ScrollProgress className='h-0.5 top-(--header-height)' />
 
-          {/* Contact Info - Left Side (2 columns) */}
-          <div className='flex flex-row gap-6 md:gap-8 flex-shrink-0 min-w-0'>
+          {/* Logo - Left Side on Desktop, Center on Mobile */}
+          <Link
+            href={homePath}
+            className='text-primary font-mono text-lg md:text-xl font-bold hover:opacity-80 transition-opacity md:order-first order-0 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0'
+          >
+            &lt;Hieu /&gt;
+          </Link>
+
+          {/* Contact Info - Left Side (2 columns) - Hidden on Mobile */}
+          <div className='hidden md:flex flex-row gap-6 md:gap-8 shrink-0 min-w-0'>
             {/* Based in */}
             <div className='flex flex-col gap-0.5'>
               <span className='text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider'>
@@ -146,7 +159,7 @@ export function Header() {
           </div>
 
           {/* Right Side Actions */}
-          <div className='flex items-center gap-3 md:gap-4 flex-shrink-0'>
+          <div className='flex items-center gap-3 md:gap-4 shrink-0'>
             {/* Language Switcher - Desktop only */}
             <div className='hidden md:block relative'>
               <button
