@@ -3,119 +3,135 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  /* Light mode: Inverted Dracula theme */
+  /* Light Mode - Luxury Gold Theme */
   --header-height: 60px;
 
-  /* Neon High-Tech Light Mode - OKLCH values */
-  /* Background: Off-white/light gray - neutral base cho neon colors */
-  --background: oklch(0.98 0.01 0);
-  /* Foreground: Deep dark với high contrast */
-  --foreground: oklch(0.15 0.02 0);
-  /* Card/Popover: Slightly off-white */
-  --card: oklch(0.99 0.01 0);
-  --card-foreground: oklch(0.15 0.02 0);
-  --popover: oklch(0.99 0.01 0);
-  --popover-foreground: oklch(0.15 0.02 0);
-  /* Primary: Neon yellow-green/lime - vàng xanh sáng (brighter cho light mode) */
+  /* Background: Pure White for crispness */
+  --background: hsl(0 0% 100%);
+  /* Foreground: Dark Grey (matches dark bg) for readability */
+  --foreground: hsl(225 14% 11%);
+
+  /* Card/Popover: White */
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(225 14% 11%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(225 14% 11%);
+
+  /* Primary: Luxury Gold */
   --primary: oklch(0.6 0.22 145);
-  /* Primary foreground: Deep dark */
-  --primary-foreground: oklch(0.15 0.02 0);
-  /* Secondary: Neon magenta/pink */
-  --secondary: oklch(0.55 0.25 330);
-  /* Secondary foreground: Deep dark */
-  --secondary-foreground: oklch(0.15 0.02 0);
-  /* Muted: Light gray */
-  --muted: oklch(0.92 0.01 0);
-  /* Muted foreground: Medium dark */
-  --muted-foreground: oklch(0.4 0.02 0);
-  /* Accent: Neon green */
-  --accent: oklch(0.6 0.25 150);
-  /* Accent foreground: Deep dark */
-  --accent-foreground: oklch(0.15 0.02 0);
-  /* Destructive: Red (kept for errors) */
-  --destructive: oklch(0.65 0.22 15);
-  /* Destructive foreground: Cream */
-  --destructive-foreground: oklch(0.96 0.03 85);
-  /* Border/Input/Ring: Light gray with neon accents */
-  --border: oklch(0.88 0.01 0);
-  --input: oklch(0.95 0.01 0);
-  --ring: oklch(0.7 0.3 120);
-  /* Chart colors - neon palette */
-  --chart-1: oklch(0.55 0.25 220); /* Neon cyan */
-  --chart-2: oklch(0.55 0.25 330); /* Neon magenta */
-  --chart-3: oklch(0.6 0.25 150); /* Electric green */
-  --chart-4: oklch(0.55 0.25 300); /* Neon purple */
-  --chart-5: oklch(0.75 0.2 90); /* Neon yellow */
-  /* Accent colors - neon tones */
-  --green: oklch(0.6 0.25 150); /* Electric green */
-  --green-foreground: oklch(0.15 0.02 0);
-  --cyan: oklch(0.6 0.25 200); /* Bright neon cyan */
-  --cyan-foreground: oklch(0.15 0.02 0);
-  --purple: oklch(0.55 0.25 300); /* Neon purple */
-  --purple-foreground: oklch(0.15 0.02 0);
-  --blue: oklch(0.55 0.25 250); /* Electric blue */
-  --blue-foreground: oklch(0.15 0.02 0);
-  --magenta: oklch(0.55 0.25 330); /* Neon magenta */
-  --magenta-foreground: oklch(0.15 0.02 0);
-  --yellow: oklch(0.75 0.2 90); /* Neon yellow */
-  --yellow-foreground: oklch(0.15 0.02 0);
+  --primary-foreground: hsl(0 0% 100%);
+
+  /* Secondary: Light Cream/Gold tint */
+  --secondary: hsl(46 20% 96%);
+  --secondary-foreground: hsl(225 14% 11%);
+
+  /* Muted: Very pale gold/beige */
+  --muted: hsl(46 20% 96%);
+  --muted-foreground: hsl(220 10% 40%);
+
+  /* Accent: Subtle Gold/Beige for hovers */
+  --accent: hsl(46 30% 90%);
+  --accent-foreground: hsl(225 14% 11%);
+
+  /* Destructive: Standard Red */
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+
+  /* Border/Input/Ring: Subtle Gold */
+  --border: hsl(46 30% 90%);
+  --input: hsl(46 30% 90%);
+  --ring: hsl(46 65% 52%);
+
+  /* Chart colors - Adapted for Light Mode */
+  --chart-1: hsl(156 87% 35%); /* Green (Up) - Darker for contrast */
+  --chart-2: hsl(352 90% 55%); /* Red (Down) */
+  --chart-3: hsl(46 65% 52%); /* Gold */
+  --chart-4: hsl(220 10% 40%); /* Dark Grey */
+  --chart-5: hsl(46 30% 70%); /* Muted Gold */
+
+  /* Semantic Colors - Trading style (Light Mode) */
+  --green: hsl(156 87% 35%);
+  --green-foreground: hsl(0 0% 100%);
+
+  --cyan: hsl(180 100% 40%);
+  --cyan-foreground: hsl(0 0% 100%);
+
+  --purple: hsl(270 50% 50%);
+  --purple-foreground: hsl(0 0% 100%);
+
+  --blue: hsl(210 100% 45%);
+  --blue-foreground: hsl(0 0% 100%);
+
+  --magenta: hsl(330 100% 45%);
+  --magenta-foreground: hsl(0 0% 100%);
+
+  --yellow: hsl(46 65% 52%);
+  --yellow-foreground: hsl(0 0% 100%);
+
   --radius: 0.5rem;
 }
 
 .dark {
-  /* Dark Mode - Neon High-Tech (Primary Mode) - OKLCH values */
-  /* Background: Deep dark - almost black để neon nổi bật */
-  --background: oklch(0.1 0.02 0);
-  /* Foreground: Light gray/white - high contrast */
-  --foreground: oklch(0.95 0.01 0);
-  /* Card/Popover: Slightly lighter dark */
-  --card: oklch(0.12 0.02 0);
-  --card-foreground: oklch(0.95 0.01 0);
-  --popover: oklch(0.12 0.02 0);
-  --popover-foreground: oklch(0.95 0.01 0);
-  /* Primary: Very bright neon yellow-green/lime - vàng xanh sáng */
-  --primary: oklch(0.92 0.24 126.52);
-  /* Primary foreground: Dark background */
-  --primary-foreground: oklch(0.1 0.02 0);
-  /* Secondary: Bright neon magenta */
-  --secondary: oklch(0.7 0.3 330);
-  /* Secondary foreground: Dark background */
-  --secondary-foreground: oklch(0.1 0.02 0);
-  /* Muted: Medium dark */
-  --muted: oklch(0.2 0.02 0);
-  /* Muted foreground: Light gray */
-  --muted-foreground: oklch(0.8 0.01 0);
-  /* Accent: Bright neon green */
-  --accent: oklch(0.75 0.3 150);
-  /* Accent foreground: Dark background */
-  --accent-foreground: oklch(0.1 0.02 0);
-  /* Destructive: Red (kept for errors) */
-  --destructive: oklch(0.65 0.22 15);
-  /* Destructive foreground: Light cream */
-  --destructive-foreground: oklch(0.95 0.02 85);
-  /* Border/Input/Ring: Dark với neon accents */
-  --border: oklch(0.25 0.02 0);
-  --input: oklch(0.15 0.02 0);
-  --ring: oklch(0.8 0.3 120);
-  /* Chart colors - neon palette */
-  --chart-1: oklch(0.7 0.3 220); /* Bright neon cyan */
-  --chart-2: oklch(0.7 0.3 330); /* Bright neon magenta */
-  --chart-3: oklch(0.75 0.3 150); /* Bright electric green */
-  --chart-4: oklch(0.7 0.3 300); /* Bright neon purple */
-  --chart-5: oklch(0.8 0.25 90); /* Bright neon yellow */
-  /* Accent colors - very bright neon cho dark mode */
-  --green: oklch(0.75 0.3 150); /* Very bright electric green */
-  --green-foreground: oklch(0.1 0.02 0);
-  --cyan: oklch(0.7 0.3 200); /* Very bright neon cyan */
-  --cyan-foreground: oklch(0.1 0.02 0);
-  --purple: oklch(0.7 0.3 300); /* Very bright neon purple */
-  --purple-foreground: oklch(0.1 0.02 0);
-  --blue: oklch(0.7 0.3 250); /* Very bright electric blue */
-  --blue-foreground: oklch(0.1 0.02 0);
-  --magenta: oklch(0.7 0.3 330); /* Very bright neon magenta */
-  --magenta-foreground: oklch(0.1 0.02 0);
-  --yellow: oklch(0.8 0.25 90); /* Very bright neon yellow */
-  --yellow-foreground: oklch(0.1 0.02 0);
+  /* Dark Mode - Binance Theme */
+  --background: hsl(225 16% 10%);
+  --foreground: hsl(0 0% 100%);
+
+  /* Card/Popover: Using Accent Color or slightly lighter */
+  --card: hsl(225 12% 16%);
+  --card-foreground: hsl(0 0% 100%);
+  --popover: hsl(225 12% 16%);
+  --popover-foreground: hsl(0 0% 100%);
+
+  /* Primary: Binance Gold */
+  --primary: oklch(0.92 0.24 126);
+  --primary-foreground: hsl(225 14% 11%);
+
+  /* Secondary: Muted/Dark Grey */
+  --secondary: hsl(225 10% 20%);
+  --secondary-foreground: hsl(0 0% 100%);
+
+  /* Muted */
+  --muted: hsl(225 10% 20%);
+  --muted-foreground: hsl(220 10% 60%);
+
+  /* Accent */
+  --accent: hsl(225 12% 16%);
+  --accent-foreground: hsl(0 0% 100%);
+
+  /* Destructive: Binance Red */
+  --destructive: hsl(352 90% 62%);
+  --destructive-foreground: hsl(0 0% 100%);
+
+  /* Border/Input/Ring */
+  --border: hsl(225 10% 20%);
+  --input: hsl(225 10% 20%);
+  --ring: hsl(48 96% 60%);
+
+  /* Chart colors - Trading style */
+  --chart-1: hsl(156 87% 42%); /* Green (Up) */
+  --chart-2: hsl(352 90% 62%); /* Red (Down) */
+  --chart-3: hsl(48 96% 60%); /* Gold */
+  --chart-4: hsl(225 10% 60%); /* Grey */
+  --chart-5: hsl(225 10% 80%); /* Light Grey */
+
+  /* Semantic Colors - Trading style */
+  --green: hsl(156 87% 42%);
+  --green-foreground: hsl(0 0% 100%);
+
+  --cyan: hsl(180 100% 50%);
+  --cyan-foreground: hsl(225 14% 11%);
+
+  --purple: hsl(270 50% 60%);
+  --purple-foreground: hsl(0 0% 100%);
+
+  --blue: hsl(210 100% 50%);
+  --blue-foreground: hsl(0 0% 100%);
+
+  --magenta: hsl(330 100% 50%);
+  --magenta-foreground: hsl(0 0% 100%);
+
+  --yellow: hsl(48 96% 60%);
+  --yellow-foreground: hsl(225 14% 11%);
 }
 
 @theme inline {
