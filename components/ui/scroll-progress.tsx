@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
-import { useLenis } from '@/components/providers/lenis-provider'
+import { useLenis } from 'lenis/react'
 
 interface ScrollProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   ref?: React.Ref<HTMLDivElement>

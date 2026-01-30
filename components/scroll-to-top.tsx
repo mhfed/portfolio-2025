@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { ArrowUp } from 'lucide-react'
-import { useLenis } from '@/components/providers/lenis-provider'
+import { useLenis } from 'lenis/react'
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)

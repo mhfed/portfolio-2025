@@ -6,12 +6,10 @@ import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { Sun, Moon, Languages } from 'lucide-react'
 import { useLocale } from '@/hooks/use-locale'
-import { routing } from '@/i18n/routing'
+import { routing, Link, usePathname } from '@/i18n/routing'
 import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { ScrollProgress } from './ui/scroll-progress'
-import { useLenis } from '@/components/providers/lenis-provider'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useLenis } from 'lenis/react'
 
 export function Header() {
   const [isDark, setIsDark] = useState(false)
@@ -24,13 +22,38 @@ export function Header() {
   const lenis = useLenis()
   const pathname = usePathname()
 
-  // Determine home path based on locale
-  const homePath = locale === 'en' ? '/' : `/${locale}`
+  // Home path - next-intl Link handles locale automatically
+  const homePath = '/'
 
   useEffect(() => {
     setMounted(true)
     setIsDark(document.documentElement.classList.contains('dark'))
   }, [])
+
+  // Handle scroll to hash on initial page load or when URL has hash
+  useEffect(() => {
+    if (!mounted) return
+
+    const hash = window.location.hash
+    if (hash && lenis) {
+      // Small delay to ensure DOM is ready and Lenis is initialized
+      const timer = setTimeout(() => {
+        const element = document.querySelector(hash) as HTMLElement | null
+        if (element) {
+          const headerHeight = parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue(
+              '--header-height'
+            ) || '60'
+          )
+          lenis.scrollTo(element, {
+            offset: -headerHeight,
+            duration: 1.2,
+          })
+        }
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [mounted, lenis])
 
   const toggleTheme = () => {
     const newIsDark = !isDark
@@ -51,43 +74,54 @@ export function Header() {
   }
 
   const navLinks = [
-    { name: t('about'), href: `${homePath}#about`, key: 'about' },
+    { name: t('about'), href: '/#about', key: 'about' },
     {
       name: t('experience'),
-      href: `${homePath}#experience`,
+      href: '/#experience',
       key: 'experience',
     },
-    { name: t('projects'), href: `${homePath}#projects`, key: 'projects' },
+    { name: t('projects'), href: '/#projects', key: 'projects' },
     {
       name: t('collaborate'),
-      href: `${homePath}#collaborate`,
+      href: '/#collaborate',
       key: 'collaborate',
     },
-    { name: t('blog'), href: `/${locale}/blog`, key: 'blog' },
+    { name: t('blog'), href: '/blog', key: 'blog' },
   ]
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute('href')
-    if (!href) return
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    // Close mobile menu
+    setIsMobileMenuOpen(false)
 
-    // If it's a route link (starts with / but no #), let it navigate normally
-    if (href.startsWith('/') && !href.includes('#')) {
-      setIsMobileMenuOpen(false)
+    // If it's a route link (no #), let Next.js handle it normally
+    if (!href.includes('#')) {
       return
     }
-
-    // Check if we're on the home page
-    const isHomePage =
-      pathname === '/' || pathname === `/${locale}` || pathname === ''
 
     // Extract the anchor from href (e.g., "/#about" -> "#about" or "/vi#about" -> "#about")
     const anchorMatch = href.match(/#[\w-]+$/)
     const anchor = anchorMatch ? anchorMatch[0] : null
 
-    if (isHomePage && anchor) {
-      // On home page, use smooth scroll
+    if (!anchor) return
+
+    // Check if we're on the home page
+    // usePathname from next-intl returns path WITHOUT locale prefix
+    // So home page is always '/' regardless of locale
+    const isHomePage = pathname === '/'
+
+    if (isHomePage) {
+      // On home page, prevent default navigation and use smooth scroll
       e.preventDefault()
+      e.stopPropagation()
+
+      // Update URL hash immediately
+      window.history.pushState(null, '', anchor)
+
       const element = document.querySelector(anchor) as HTMLElement | null
+
       if (element && lenis) {
         const headerHeight = parseInt(
           getComputedStyle(document.documentElement).getPropertyValue(
@@ -98,11 +132,22 @@ export function Header() {
           offset: -headerHeight,
           duration: 1.2,
         })
+      } else if (element) {
+        // Fallback: use native smooth scroll if Lenis is not available
+        const headerHeight = parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            '--header-height'
+          ) || '60'
+        )
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY
+        window.scrollTo({
+          top: elementPosition - headerHeight,
+          behavior: 'smooth',
+        })
       }
     }
-    // If not on home page, let it navigate normally (the href already has full path)
-
-    setIsMobileMenuOpen(false)
+    // If not on home page, let Next.js navigate to the page with anchor
   }
 
   // Render header immediately to prevent layout shift, use default values until mounted
@@ -153,28 +198,18 @@ export function Header() {
 
           {/* Desktop Navigation Links */}
           <div className='hidden md:flex gap-8 items-center'>
-            {navLinks.map((link) =>
-              link.href.startsWith('/') ? (
-                <Link
-                  key={link.key}
-                  href={link.href}
-                  className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
-                >
-                  {link.name}
-                  <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
-                </Link>
-              ) : (
-                <a
-                  key={link.key}
-                  href={link.href}
-                  onClick={handleNavClick}
-                  className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
-                >
-                  {link.name}
-                  <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
-                </a>
-              )
-            )}
+            {navLinks.map((link) => (
+              <Link
+                key={link.key}
+                href={link.href}
+                scroll={!link.href.includes('#')}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
+              >
+                {link.name}
+                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
+              </Link>
+            ))}
           </div>
 
           {/* Right Side Actions */}
@@ -258,27 +293,17 @@ export function Header() {
           <nav className='flex flex-col h-full'>
             {/* Navigation Links */}
             <div className='flex flex-col p-6 gap-1 flex-1 overflow-y-auto'>
-              {navLinks.map((link) =>
-                link.href.startsWith('/') ? (
-                  <Link
-                    key={link.key}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
-                  >
-                    {link.name}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.key}
-                    href={link.href}
-                    onClick={handleNavClick}
-                    className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
-                  >
-                    {link.name}
-                  </a>
-                )
-              )}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  scroll={!link.href.includes('#')}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
 
             {/* Mobile Actions - Language & Theme */}
