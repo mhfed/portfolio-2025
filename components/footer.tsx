@@ -22,7 +22,7 @@ export async function Footer({ locale }: FooterProps) {
         <div className='space-y-12'>
           {/* Collaborate Section */}
           <div className='space-y-4'>
-            <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold text-foreground'>
+            <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold text-primary'>
               {t('title')}
             </h2>
             <p className='text-base md:text-lg lg:text-xl text-foreground/70'>
