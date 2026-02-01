@@ -15,7 +15,7 @@ import {
 } from './ui/drawer'
 import { ScrollArea } from './ui/scroll-area'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface TimelineItemProps {
   company: string

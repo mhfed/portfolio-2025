@@ -2,8 +2,8 @@
 
 import { ExternalLink } from 'lucide-react'
 import { Badge } from './ui/badge'
-import Image from 'next/image'
 import type { Project } from '@/data/projects'
+import { Safari } from '@/components/magicui/safari'
 
 interface ProjectCardProps extends Project {
   isAlternate: boolean
@@ -22,22 +22,30 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const isRight = isAlternate
 
+  // Helper to extract domain for the address bar
+  const getDomain = (url?: string) => {
+    if (!url) return ''
+    try {
+      return new URL(url).hostname
+    } catch {
+      return url
+    }
+  }
+
   return (
-    <div className='pb-8 last:pb-0'>
+    <div className='pb-12 last:pb-0'>
       <div
-        className={`flex flex-col md:flex-row gap-6 items-start ${
+        className={`flex flex-col md:flex-row gap-8 md:gap-10 items-center ${
           isRight ? 'md:flex-row-reverse' : ''
         }`}
       >
-        {/* Project Image - Smaller, on left/right alternating */}
+        {/* Project Image - Safari Browser Mockup */}
         {image && (
-          <div className='relative w-full md:w-1/3 flex-shrink-0 h-40 md:h-48 overflow-hidden border-8 border-border bg-muted/50'>
-            <Image
+          <div className='w-full md:w-5/12 transform transition-transform duration-300 hover:scale-[1.02]'>
+            <Safari
               src={image}
-              alt={title}
-              fill
-              className='object-cover'
-              sizes='(max-width: 768px) 100vw, 33vw'
+              url={getDomain(liveUrl) || 'project-demo.com'}
+              className='w-full shadow-lg'
             />
           </div>
         )}
