@@ -4,7 +4,6 @@ import { TimelineItem } from './timeline-item'
 import { db } from '@/lib/db'
 import { experiences } from '@/db/schema'
 import { desc } from 'drizzle-orm'
-import { Separator } from './ui/separator'
 
 interface TimelineItemProps {
   company: string
@@ -55,47 +54,45 @@ export async function WorkExperienceSection() {
 
   return (
     <section id='experience' className='px-4 md:px-6'>
-      <div className='max-w-5xl mx-auto md:flex gap-8'>
-        {/* Left: Title */}
-        <div className='w-fit'>
+      <div className='max-w-5xl mx-auto'>
+        {/* Header */}
+        <div className='mb-8 md:mb-12'>
           <SectionTitle
-            title={
-              <>
-                {t('title')
-                  .split(/<br\s*\/?>/i)
-                  .flatMap((part, idx, arr) =>
-                    idx < arr.length - 1
-                      ? [part, <br key={`br-${idx}`} />]
-                      : [part]
-                  )}
-              </>
-            }
-            className='sticky top-24 self-start'
+            title={t.rich('title', {
+              br: () => <br />,
+            })}
+            className='mb-0'
           />
         </div>
-        {/* Vertical Separator: Only render on md+ screens, full height between items */}
-        <div className='hidden md:flex items-stretch px-0'>
-          <div className='w-px bg-border h-full mx-4' />
-        </div>
 
-        {/* <Separator className='bg-border' orientation='vertical' /> */}
+        {/* Timeline Layout */}
+        <div className='relative'>
+          {/* Vertical line */}
+          <div className='absolute left-3 md:left-32 top-0 bottom-0 w-px bg-border/70 pointer-events-none' />
 
-        {/* Right: Timeline Items */}
-        <div className='flex-1 space-y-8'>
-          {dbExperiences.length === 0 ? (
-            <p className='text-muted-foreground text-center py-12'>
-              {t('noExperience') || 'No work experience yet.'}
-            </p>
-          ) : (
-            timelineItems.map((item, idx) => (
-              <div key={idx}>
-                <TimelineItem {...item} />
-                {idx < timelineItems.length - 1 && (
-                  <Separator className='my-8 h-0.5 bg-border' />
-                )}
-              </div>
-            ))
-          )}
+          <div className='space-y-8 md:space-y-12'>
+            {dbExperiences.length === 0 ? (
+              <p className='pl-10 md:pl-40 text-muted-foreground'>
+                {t('noExperience') || 'No work experience yet.'}
+              </p>
+            ) : (
+              timelineItems.map((item, idx) => (
+                <div key={idx} className='relative pl-10 md:pl-40'>
+                  {/* Dot */}
+                  <div className='absolute left-1 md:left-[calc(8rem-6px)] top-2 w-3 h-3 rounded-full bg-background border border-primary shadow-sm' />
+
+                  {/* Period - Desktop */}
+                  <div className='hidden md:block md:absolute md:left-0 md:top-1 md:w-32 md:text-right md:pr-4'>
+                    <span className='text-xs text-foreground/60 uppercase tracking-[0.16em] font-medium'>
+                      {item.period}
+                    </span>
+                  </div>
+
+                  <TimelineItem {...item} />
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     </section>

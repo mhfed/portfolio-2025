@@ -30,10 +30,48 @@
     "yearsExperience": "Years of Experience",
     "yearsDescription": "Building web experiences with modern technologies",
     "clientSatisfaction": "Client Satisfaction",
-    "satisfactionDescription": "Dedicated to exceeding expectations"
+    "satisfactionDescription": "Dedicated to exceeding expectations",
+    "skillList": {
+      "frontend": {
+        "label": "Frontend",
+        "value": "React.js (Reactjs), Next.js, Vue.js, TypeScript, JavaScript (ES6+), Tailwind CSS, HTML5, CSS3, Sass."
+      },
+      "state": {
+        "label": "State & Data",
+        "value": "Redux, React Query, RESTful APIs, WebSockets, SSE, GraphQL."
+      },
+      "performance": {
+        "label": "Performance & Tracking",
+        "value": "Core Web Vitals, Google Analytics 4 (GA4), Gtag, TikTok/Facebook Pixel, Sentry."
+      },
+      "devops": {
+        "label": "DevOps & Tools",
+        "value": "Gitlab CI/CD, PM2, Self-hosting (Linux), Vite, Webpack, Babel."
+      },
+      "mobile": {
+        "label": "Mobile & Others",
+        "value": "React Native, Zalo Mini App, Canvas API, i18n."
+      },
+      "agile": {
+        "label": "Agile/Scrum",
+        "value": "Proficient in full SDLC(Software Development Life Cycle), sprint planning, and retrospectives."
+      },
+      "codeQuality": {
+        "label": "Code Quality",
+        "value": "Strong focus on Clean Code, Code Reviews, and Unit Testing."
+      },
+      "productMindset": {
+        "label": "Product Mindset",
+        "value": "Translating complex business requirements into scalable technical solutions."
+      },
+      "leadership": {
+        "label": "Leadership",
+        "value": "Architecting base projects and mentoring teams on coding standards."
+      }
+    }
   },
   "experience": {
-    "title": "WORK <br /> EXPERIENCE",
+    "title": "WORK <br></br> EXPERIENCE",
     "readMore": "Read more..."
   },
   "projects": {
@@ -105,6 +143,7 @@
   },
   "common": {
     "seeMore": "See more",
+    "showLess": "Show less",
     "close": "Close"
   }
 }

@@ -30,7 +30,45 @@
     "yearsExperience": "年經驗",
     "yearsDescription": "運用現代技術打造網頁體驗",
     "clientSatisfaction": "客戶滿意度",
-    "satisfactionDescription": "致力於超越期望"
+    "satisfactionDescription": "致力於超越期望",
+    "skillList": {
+      "frontend": {
+        "label": "Frontend",
+        "value": "React.js (Reactjs), Next.js, Vue.js, TypeScript, JavaScript (ES6+), Tailwind CSS, HTML5, CSS3, Sass."
+      },
+      "state": {
+        "label": "State & Data",
+        "value": "Redux, React Query, RESTful APIs, WebSockets, SSE, GraphQL."
+      },
+      "performance": {
+        "label": "Performance & Tracking",
+        "value": "Core Web Vitals, Google Analytics 4 (GA4), Gtag, TikTok/Facebook Pixel, Sentry."
+      },
+      "devops": {
+        "label": "DevOps & Tools",
+        "value": "Gitlab CI/CD, PM2, Self-hosting (Linux), Vite, Webpack, Babel."
+      },
+      "mobile": {
+        "label": "Mobile & Others",
+        "value": "React Native, Zalo Mini App, Canvas API, i18n."
+      },
+      "agile": {
+        "label": "Agile/Scrum",
+        "value": "精通軟體開發生命週期 (SDLC)、衝刺規劃與回顧。"
+      },
+      "codeQuality": {
+        "label": "Code Quality",
+        "value": "重視 Clean Code、程式碼審查與單元測試。"
+      },
+      "productMindset": {
+        "label": "Product Mindset",
+        "value": "將複雜的商業需求轉化為可擴展的技術解決方案。"
+      },
+      "leadership": {
+        "label": "Leadership",
+        "value": "架構基礎專案並指導團隊程式碼標準。"
+      }
+    }
   },
   "experience": {
     "title": "工作<br />經歷",
@@ -102,5 +140,10 @@
     "orConnect": "或透過以下方式聯繫",
     "reachDirectly": "或直接聯繫我",
     "phone": "電話："
+  },
+  "common": {
+    "seeMore": "閱讀更多",
+    "showLess": "收起",
+    "close": "關閉"
   }
 }

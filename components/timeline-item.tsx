@@ -51,7 +51,7 @@ export function TimelineItem({
   // But strictly, we should only show if details is present.
 
   return (
-    <div className='pb-8 last:pb-0'>
+    <div>
       <div className=''>
         <div className='flex items-start gap-4 justify-between'>
           <h3 className='text-lg md:text-xl lg:text-2xl text-foreground font-semibold '>
@@ -59,13 +59,13 @@ export function TimelineItem({
           </h3>
           <Badge
             variant='outline'
-            className='bg-primary/50 border-primary/20 text-foreground hover:bg-primary/20 hover:border-primary/40 hover:scale-105 hover:shadow-sm active:scale-[0.98] font-medium rounded-full'
+            className='bg-primary/50 border-primary/20 text-foreground hover:bg-primary/20 hover:border-primary/40 hover:scale-105 hover:shadow-sm active:scale-[0.98] font-medium rounded-full md:hidden'
             size='md'
           >
             {period}
           </Badge>
         </div>
-        <p className='text-base md:text-lg lg:text-xl text-foreground/80 leading-relaxed italic mb-2'>
+        <p className='text-base md:text-base lg:text-base text-foreground/80 leading-relaxed italic mb-2'>
           {position}
         </p>
 
@@ -77,7 +77,7 @@ export function TimelineItem({
           <DrawerTrigger asChild>
             <Button
               variant='link'
-              className='px-0 text-primary h-auto font-medium mt-1 mb-2 hover:no-underline hover:opacity-80'
+              className='px-0 h-auto font-medium mt-1 mb-2 hover:opacity-80 opacity-90'
             >
               {seeMoreText}
             </Button>

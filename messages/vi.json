@@ -30,10 +30,48 @@
     "yearsExperience": "Năm kinh nghiệm",
     "yearsDescription": "Xây dựng trải nghiệm web với công nghệ hiện đại",
     "clientSatisfaction": "Hài lòng khách hàng",
-    "satisfactionDescription": "Cam kết vượt quá mong đợi"
+    "satisfactionDescription": "Cam kết vượt quá mong đợi",
+    "skillList": {
+      "frontend": {
+        "label": "Frontend",
+        "value": "React.js (Reactjs), Next.js, Vue.js, TypeScript, JavaScript (ES6+), Tailwind CSS, HTML5, CSS3, Sass."
+      },
+      "state": {
+        "label": "State & Data",
+        "value": "Redux, React Query, RESTful APIs, WebSockets, SSE, GraphQL."
+      },
+      "performance": {
+        "label": "Performance & Tracking",
+        "value": "Core Web Vitals, Google Analytics 4 (GA4), Gtag, TikTok/Facebook Pixel, Sentry."
+      },
+      "devops": {
+        "label": "DevOps & Tools",
+        "value": "Gitlab CI/CD, PM2, Self-hosting (Linux), Vite, Webpack, Babel."
+      },
+      "mobile": {
+        "label": "Mobile & Others",
+        "value": "React Native, Zalo Mini App, Canvas API, i18n."
+      },
+      "agile": {
+        "label": "Agile/Scrum",
+        "value": "Thành thạo quy trình phát triển phần mềm (SDLC), sprint planning và retrospectives."
+      },
+      "codeQuality": {
+        "label": "Code Quality",
+        "value": "Chú trọng vào Clean Code, Code Reviews và Unit Testing."
+      },
+      "productMindset": {
+        "label": "Product Mindset",
+        "value": "Chuyển đổi yêu cầu kinh doanh phức tạp thành giải pháp kỹ thuật mở rộng."
+      },
+      "leadership": {
+        "label": "Leadership",
+        "value": "Kiến trúc dự án nền tảng và hướng dẫn team về tiêu chuẩn coding."
+      }
+    }
   },
   "experience": {
-    "title": "KINH NGHIỆM <br /> LÀM VIỆC",
+    "title": "KINH NGHIỆM <br></br> LÀM VIỆC",
     "readMore": "Xem thêm..."
   },
   "projects": {
@@ -105,6 +143,7 @@
   },
   "common": {
     "seeMore": "Xem thêm",
+    "showLess": "Thu gọn",
     "close": "Đóng"
   }
 }
