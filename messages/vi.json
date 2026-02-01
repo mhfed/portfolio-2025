@@ -102,5 +102,9 @@
     "orConnect": "HOẶC KẾT NỐI TRÊN",
     "reachDirectly": "Hoặc liên hệ trực tiếp tại",
     "phone": "Số điện thoại:"
+  },
+  "common": {
+    "seeMore": "Xem thêm",
+    "close": "Đóng"
   }
 }
