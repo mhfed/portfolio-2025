@@ -1,6 +1,6 @@
 import { getTranslations, getLocale } from 'next-intl/server'
-import { TimelineItem } from './timeline-item'
 import { db } from '@/lib/db'
+import { ExpandableText } from './expandable-text'
 import { experiences } from '@/db/schema'
 import { desc } from 'drizzle-orm'
 
@@ -65,49 +65,31 @@ export async function WorkExperienceSection() {
           {t('noExperience') || 'No work experience yet.'}
         </p>
       ) : (
-        <div className='relative flex flex-col -space-y-16'>
-          {timelineItems.map((item, idx) => {
-            const stationNum = String(idx + 1).padStart(2, '0')
-            const translateX = idx === 0 ? 'translate-x-8' : idx === 1 ? 'translate-x-16' : 'translate-x-24'
-
-            return (
-              <div
-                key={idx}
-                className='archive-card relative group'
-                style={{ zIndex: idx + 1 }}
-              >
-                <div className={`inline-block px-6 py-2 bg-muted border-t-2 border-x-2 border-foreground font-bold mono-text text-sm ${translateX} rounded-t-lg`}>
-                  STATION_{stationNum}.INF
-                </div>
-                <div className='bg-card border-2 border-foreground p-8 shadow-neo-dark dark:shadow-neo'>
-                  <div className='grid grid-cols-1 md:grid-cols-12 gap-8 items-start'>
-                    <div className='md:col-span-3'>
-                      <span className='mono-text text-xl font-bold text-primary'>{item.period}</span>
-                    </div>
-                    <div className='md:col-span-9'>
-                      <h3 className='text-2xl font-bold uppercase mb-1'>{item.company}</h3>
-                      <p className='mono-text font-bold text-muted-foreground mb-4'>{item.position}</p>
-                      <p className='text-muted-foreground mb-6'>
-                        {item.description}
-                      </p>
-                      {item.skills.length > 0 && (
-                        <div className='flex flex-wrap gap-2'>
-                          {item.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className='bg-foreground text-background px-3 py-1 text-xs mono-text font-bold'
-                            >
-                              {skill.toUpperCase()}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+        <div className='flex flex-col gap-12'>
+          {timelineItems.map((item, idx) => (
+            <div key={idx} className='grid grid-cols-1 md:grid-cols-12 gap-8 items-start'>
+              <div className='md:col-span-3'>
+                <span className='mono-text text-xl font-bold text-primary'>{item.period}</span>
               </div>
-            )
-          })}
+              <div className='md:col-span-9 border-l-2 border-foreground/20 pl-8'>
+                <h3 className='text-2xl font-bold uppercase mb-1'>{item.company}</h3>
+                <p className='mono-text font-bold text-muted-foreground mb-4'>{item.position}</p>
+                <ExpandableText text={item.description} />
+                {item.skills.length > 0 && (
+                  <div className='flex flex-wrap gap-2'>
+                    {item.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className='bg-foreground/80 text-background px-3 py-1 text-xs mono-text font-bold'
+                      >
+                        {skill.toUpperCase()}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </section>
