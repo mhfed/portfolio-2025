@@ -167,7 +167,7 @@ export function Header() {
             href={homePath}
             className='flex items-center gap-3'
           >
-            <div className='size-10 bg-primary flex items-center justify-center shadow-neo-sm'>
+            <div className='size-10 bg-primary flex items-center justify-center rounded shadow-neo-sm'>
               <span className='text-white font-bold mono-text text-lg'>&gt;_</span>
             </div>
             <div>

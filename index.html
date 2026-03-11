@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NGUYEN MINH HIEU | Creative Developer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#ff5e1f",
+                "background-light": "#f8f6f5",
+                "background-dark": "#23150f",
+              },
+              fontFamily: {
+                "display": ["Space Grotesk", "sans-serif"],
+                "mono": ["JetBrains Mono", "monospace"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+              boxShadow: {
+                'neo': '4px 4px 0px 0px rgba(255, 94, 31, 1)',
+                'neo-dark': '4px 4px 0px 0px rgba(0, 0, 0, 1)',
+                'neo-sm': '2px 2px 0px 0px rgba(255, 94, 31, 1)',
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .mono-text {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .archive-card {
+            transition: transform 0.3s ease;
+        }
+        .archive-card:hover {
+            transform: translateY(-8px);
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col items-center">
+<!-- Header (Preserved) -->
+<header class="w-full max-w-[1200px] flex items-center justify-between px-6 py-6 border-b-2 border-primary/20">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary flex items-center justify-center rounded shadow-neo-sm">
+<span class="material-symbols-outlined text-white">terminal</span>
+</div>
+<div>
+<h2 class="text-xl font-bold leading-tight tracking-tight uppercase">Minh Hieu</h2>
+<p class="text-xs mono-text text-primary font-bold">v3.0.4-stable</p>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8 mono-text text-sm">
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary" href="#">~/projects</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary" href="#">~/stack</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary" href="#">~/about</a>
+<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary" href="#">~/contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-5 py-2 font-bold mono-text text-sm shadow-neo transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none">
+                        RESUME.PDF
+                    </button>
+</div>
+</header>
+<main class="w-full max-w-[1200px] flex-1 px-6 py-12">
+<!-- Hero & Tech Stack (Preserved) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
+<section class="lg:col-span-8 flex flex-col gap-8">
+<div class="bg-white dark:bg-slate-800 border-2 border-slate-900 dark:border-slate-100 p-8 shadow-neo-dark dark:shadow-neo relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<span class="material-symbols-outlined text-[120px]">code</span>
+</div>
+<div class="relative z-10">
+<span class="mono-text text-primary font-bold mb-4 block">// GREETING_SEQUENCE</span>
+<h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tighter uppercase leading-[0.9]">
+                                    Nguyen <br/> <span class="text-primary">Minh Hieu</span>
+</h1>
+<p class="text-xl max-w-2xl text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+                                    Creative Developer &amp; Technical Architect specialized in building high-performance 
+                                    web systems with a focus on <span class="underline decoration-primary decoration-4 underline-offset-4">modular architecture</span> and user experience.
+                                </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-white px-8 py-3 font-bold mono-text shadow-neo-dark transition-all hover:-translate-y-1">
+                                        INITIATE_CONTACT
+                                    </button>
+<div class="flex items-center gap-2 px-4 py-3 border-2 border-slate-900 dark:border-slate-100 font-bold mono-text text-sm">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                        AVAILABLE_FOR_PROJECTS
+                                    </div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between border-b-2 border-slate-900/10 dark:border-white/10 pb-2">
+<h2 class="text-2xl font-bold mono-text">/root/tech-stack</h2>
+<span class="text-xs mono-text text-slate-400">6 items found</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="group border-2 border-slate-900 dark:border-slate-100 p-5 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined mb-3 text-primary group-hover:text-white transition-colors">terminal</span>
+<h3 class="font-bold uppercase mb-1">Frontend</h3>
+<p class="text-sm opacity-70 mono-text">React, Next.js, TypeScript</p>
+</div>
+<div class="group border-2 border-slate-900 dark:border-slate-100 p-5 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined mb-3 text-primary group-hover:text-white transition-colors">database</span>
+<h3 class="font-bold uppercase mb-1">Backend</h3>
+<p class="text-sm opacity-70 mono-text">Node.js, Go, Python</p>
+</div>
+<div class="group border-2 border-slate-900 dark:border-slate-100 p-5 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined mb-3 text-primary group-hover:text-white transition-colors">cloud</span>
+<h3 class="font-bold uppercase mb-1">Cloud</h3>
+<p class="text-sm opacity-70 mono-text">AWS, Docker, Vercel</p>
+</div>
+<div class="group border-2 border-slate-900 dark:border-slate-100 p-5 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined mb-3 text-primary group-hover:text-white transition-colors">construction</span>
+<h3 class="font-bold uppercase mb-1">Tools</h3>
+<p class="text-sm opacity-70 mono-text">Git, Neovim, Tmux</p>
+</div>
+<div class="group border-2 border-slate-900 dark:border-slate-100 p-5 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined mb-3 text-primary group-hover:text-white transition-colors">smartphone</span>
+<h3 class="font-bold uppercase mb-1">Mobile</h3>
+<p class="text-sm opacity-70 mono-text">React Native, Flutter</p>
+</div>
+<div class="group border-2 border-slate-900 dark:border-slate-100 p-5 hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined mb-3 text-primary group-hover:text-white transition-colors">storage</span>
+<h3 class="font-bold uppercase mb-1">Database</h3>
+<p class="text-sm opacity-70 mono-text">PostgreSQL, Redis</p>
+</div>
+</div>
+</div>
+</section>
+<aside class="lg:col-span-4 flex flex-col gap-8">
+<div class="border-2 border-slate-900 dark:border-slate-100 bg-background-light dark:bg-slate-800 p-6 shadow-neo-dark dark:shadow-neo">
+<div class="aspect-square bg-slate-200 dark:bg-slate-700 mb-6 border-2 border-slate-900 dark:border-slate-100 overflow-hidden grayscale contrast-125">
+<img alt="Profile of Minh Hieu" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSlrpT9Brvo-qh9WAQUb_P4KeovD0T-V4w_VigPk84wy0t6sMRzzy4cRnbX5Gc32lj0kTJQL87oORPBor-ks9fb3fcqMkX4hgm4p6qhrYIcqcGHapGjg37KtJeC0CC4BHsmif6np6cDHoYkh1S7ysfFnVlEElP8SoyhH8VxcscGnkvSvC20lsKW4giJTGeqmPncwRSkvZHt2NgMYJPWXIXgvCB4SEhtuxtWwOJTIU_w3W6kByFPJpRfK0igH2Ftmj2slBhDRxn6mM9"/>
+</div>
+<div class="flex flex-col gap-4">
+<div class="border-l-4 border-primary pl-4">
+<p class="text-xs mono-text uppercase text-slate-500">Location</p>
+<p class="font-bold">Vietnam, Earth</p>
+</div>
+<div class="border-l-4 border-primary pl-4">
+<p class="text-xs mono-text uppercase text-slate-500">Experience</p>
+<p class="font-bold">6+ Years Coding</p>
+</div>
+<div class="border-l-4 border-primary pl-4">
+<p class="text-xs mono-text uppercase text-slate-500">Specialty</p>
+<p class="font-bold">System Architecture</p>
+</div>
+</div>
+</div>
+<div class="border-2 border-slate-900 dark:border-slate-100 p-6 flex flex-col gap-4">
+<h3 class="font-bold mono-text border-b border-slate-900/10 dark:border-white/10 pb-2">/logs/recent_activity</h3>
+<ul class="text-sm flex flex-col gap-3 mono-text">
+<li class="flex gap-2">
+<span class="text-primary">&gt;&gt;&gt;</span>
+<span>Pushed v2.1 to 'neo-portal'</span>
+</li>
+<li class="flex gap-2">
+<span class="text-primary">&gt;&gt;&gt;</span>
+<span>Resolved #142 memory leak</span>
+</li>
+<li class="flex gap-2 opacity-50">
+<span class="text-primary">&gt;&gt;&gt;</span>
+<span>Updated documentation</span>
+</li>
+</ul>
+</div>
+</aside>
+</div>
+<!-- Work Experience Section: Variation 3 (Archive Folder) -->
+<section class="mt-24 mb-32">
+<div class="flex items-center justify-between border-b-2 border-slate-900 dark:border-slate-100 pb-4 mb-16">
+<h2 class="text-3xl font-bold uppercase tracking-tight">/root/work_experience</h2>
+<span class="mono-text text-sm text-primary font-bold">4_STATIONS_ACTIVE</span>
+</div>
+<div class="relative flex flex-col -space-y-16">
+<!-- Archive Card 1 -->
+<div class="archive-card relative z-[1] group">
+<div class="inline-block px-6 py-2 bg-slate-100 dark:bg-slate-700 border-t-2 border-x-2 border-slate-900 dark:border-slate-100 font-bold mono-text text-sm translate-x-8 rounded-t-lg">
+                                STATION_01.INF
+                            </div>
+<div class="bg-white dark:bg-slate-800 border-2 border-slate-900 dark:border-slate-100 p-8 shadow-neo-dark dark:shadow-neo">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-3">
+<span class="mono-text text-xl font-bold text-primary">04/2024 - PRESENT</span>
+</div>
+<div class="md:col-span-9">
+<h3 class="text-2xl font-bold uppercase mb-1">COOLMATE</h3>
+<p class="mono-text font-bold text-slate-500 mb-4">Frontend Developer</p>
+<p class="text-slate-600 dark:text-slate-400 mb-6">
+                                            Working on frontend development projects using modern web technologies to enhance user commerce experiences.
+                                        </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">REACT.JS</span>
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">NEXT.JS</span>
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">TYPESCRIPT</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Archive Card 2 -->
+<div class="archive-card relative z-[2] group">
+<div class="inline-block px-6 py-2 bg-slate-100 dark:bg-slate-700 border-t-2 border-x-2 border-slate-900 dark:border-slate-100 font-bold mono-text text-sm translate-x-16 rounded-t-lg">
+                                STATION_02.INF
+                            </div>
+<div class="bg-white dark:bg-slate-800 border-2 border-slate-900 dark:border-slate-100 p-8 shadow-neo-dark dark:shadow-neo">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-3">
+<span class="mono-text text-xl font-bold text-primary">08/2022 - 04/2024</span>
+</div>
+<div class="md:col-span-9">
+<h3 class="text-2xl font-bold uppercase mb-1">NOVUS FINTECH</h3>
+<p class="mono-text font-bold text-slate-500 mb-4">Frontend Developer</p>
+<p class="text-slate-600 dark:text-slate-400 mb-6">
+                                            Developed CMS Website (CGSI, Iress Wealth, Admin Portal Equix) implementing login flow, user authentication, form management with Formik and Yup validation. Created theme builder feature for customizing trading interfaces.
+                                        </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">REACTJS</span>
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">REDUX</span>
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">REST_API</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Archive Card 3 -->
+<div class="archive-card relative z-[3] group">
+<div class="inline-block px-6 py-2 bg-slate-100 dark:bg-slate-700 border-t-2 border-x-2 border-slate-900 dark:border-slate-100 font-bold mono-text text-sm translate-x-24 rounded-t-lg">
+                                STATION_03.INF
+                            </div>
+<div class="bg-white dark:bg-slate-800 border-2 border-slate-900 dark:border-slate-100 p-8 shadow-neo-dark dark:shadow-neo">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-3">
+<span class="mono-text text-xl font-bold text-primary">07/2021 - 08/2022</span>
+</div>
+<div class="md:col-span-9">
+<h3 class="text-2xl font-bold uppercase mb-1">METACITY</h3>
+<p class="mono-text font-bold text-slate-500 mb-4">Frontend Developer</p>
+<p class="text-slate-600 dark:text-slate-400 mb-6">
+                                            Developed Metacity System and Landing Page. Created interface, effect animation, and customized game interface. Translated designs from Figma to HTML and CSS while ensuring UX and UI design integrity.
+                                        </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">NEXTJS</span>
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">SASS</span>
+<span class="bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3 py-1 text-xs mono-text font-bold">ANT_DESIGN</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Projects Section (Preserved) -->
+<section class="mt-24 mb-32">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-3xl font-bold uppercase tracking-tight">/home/featured_projects</h2>
+<a class="mono-text text-sm text-primary font-bold hover:underline" href="#">VIEW_ALL.EXE</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="border-2 border-slate-900 dark:border-slate-100 bg-white dark:bg-slate-800 shadow-neo-dark dark:shadow-neo group">
+<div class="h-64 bg-slate-100 dark:bg-slate-900 border-b-2 border-slate-900 dark:border-slate-100 relative overflow-hidden">
+<img alt="Cybersecurity Dashboard project" class="w-full h-full object-cover transition-transform group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApsT4smS9mlAd6nJX3IB1F1ky7ELnA9eNlhY0nZcgSkbPxH3kA_u4946v8eRuYCPmhoiLs9EFGY8Ko51kxPxJD2h32sF1uDnTMMTuJgMd-Cdvfl5RSh4VAjkVJ3hYQs-1I3bXFed8cepfUX-hFnXRagqZQtx2QC6NzQTfMCxtIpoWSd32Axvj_jQV-_Fj_gEmhoZynLuC4nBy-Bn3HpdsLwYELV4_mmJPJ--Z9cHjAaXfmhxibw3WVLPEzrNn0bt0gcSDET0pziBKy"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-slate-900 text-white px-4 py-2 mono-text font-bold">VIEW_CASE_STUDY</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-xl font-bold uppercase">Aegis Shield v2</h3>
+<p class="text-sm mono-text text-primary">Security Infrastructure</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">open_in_new</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 mb-6 text-sm">
+                                    Distributed threat detection system capable of processing 100k requests per second with zero latency impact.
+                                </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 text-[10px] mono-text font-bold">GOLANG</span>
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 text-[10px] mono-text font-bold">KUBERNETES</span>
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 text-[10px] mono-text font-bold">REDIS</span>
+</div>
+</div>
+</div>
+<div class="border-2 border-slate-900 dark:border-slate-100 bg-white dark:bg-slate-800 shadow-neo-dark dark:shadow-neo group">
+<div class="h-64 bg-slate-100 dark:bg-slate-900 border-b-2 border-slate-900 dark:border-slate-100 relative overflow-hidden">
+<img alt="Fluid design interface project" class="w-full h-full object-cover transition-transform group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSChvObTi7V9d0-W10ila3tdVtr1Qtqq3Jr7-8fzerPxWNF2LmQdTcItL-pklf9VKJbJFzKgDXqOcZ7XQCnfUPNCANn0ggDsdpdMcpX5pGrfb7F_wJM0isNc9eM-gA5gNIIc5vHwWEm5mOE7Ib-12XIyKvEB6eHEQq0E6X_eiEDZ2f89bKUmidaYlGW2NAko2znguD1l6kz09S1M4j-K7NNwSJ_jLQo5ldeOz4Hz5dZa9vlZgSVfF3F702VreHRmzs60b1l-nG5XWV"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="bg-slate-900 text-white px-4 py-2 mono-text font-bold">VIEW_CASE_STUDY</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-xl font-bold uppercase">FlowUI Engine</h3>
+<p class="text-sm mono-text text-primary">Design Systems</p>
+</div>
+<span class="material-symbols-outlined text-slate-400">open_in_new</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 mb-6 text-sm">
+                                    A modular framework for building accessible and fluid interfaces across all browser environments.
+                                </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 text-[10px] mono-text font-bold">TYPESCRIPT</span>
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 text-[10px] mono-text font-bold">WEBGL</span>
+<span class="bg-slate-100 dark:bg-slate-700 px-2 py-1 text-[10px] mono-text font-bold">POSTCSS</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Let's Collaborate Section: Variation 3 (Full-Bleed Orange) -->
+<section class="w-full bg-primary py-24 px-6 border-y-4 border-slate-900 dark:border-white overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+<div class="grid grid-cols-12 h-full">
+<div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div><div class="border-r border-white h-full"></div>
+</div>
+</div>
+<div class="max-w-[1000px] mx-auto relative z-10">
+<div class="bg-white text-slate-900 border-4 border-slate-900 shadow-neo-dark flex flex-col md:flex-row items-stretch overflow-hidden">
+<div class="md:w-1/2 aspect-square md:aspect-auto border-b-4 md:border-b-0 md:border-r-4 border-slate-900 overflow-hidden grayscale contrast-125">
+<img alt="Minh Hieu portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSlrpT9Brvo-qh9WAQUb_P4KeovD0T-V4w_VigPk84wy0t6sMRzzy4cRnbX5Gc32lj0kTJQL87oORPBor-ks9fb3fcqMkX4hgm4p6qhrYIcqcGHapGjg37KtJeC0CC4BHsmif6np6cDHoYkh1S7ysfFnVlEElP8SoyhH8VxcscGnkvSvC20lsKW4giJTGeqmPncwRSkvZHt2NgMYJPWXIXgvCB4SEhtuxtWwOJTIU_w3W6kByFPJpRfK0igH2Ftmj2slBhDRxn6mM9"/>
+</div>
+<div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+<span class="mono-text font-bold mb-4 block text-primary">/connection/establish</span>
+<h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">
+                                Let's <br/> Collaborate
+                            </h2>
+<p class="text-lg mb-8 text-slate-600">
+                                Have a complex technical challenge? I'm ready to architect and build the next phase of your digital evolution.
+                            </p>
+<div class="flex flex-col gap-4">
+<a class="bg-slate-900 text-white px-8 py-4 font-bold mono-text hover:bg-black transition-colors text-center shadow-neo-sm" href="mailto:nmhieu04091999@gmail.com">
+                                    SEND_MESSAGE.EXE
+                                </a>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-100 p-3 border-2 border-slate-900 text-center mono-text font-bold text-sm">GITHUB</div>
+<div class="bg-slate-100 p-3 border-2 border-slate-900 text-center mono-text font-bold text-sm">LINKEDIN</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class="w-full max-w-[1200px] mt-12 p-6 border-t-2 border-slate-900 dark:border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 pb-12">
+<div class="flex flex-col gap-2">
+<h2 class="text-xl font-bold uppercase">Minh Hieu © 2024</h2>
+<p class="mono-text text-xs opacity-50">BUILT_WITH_PRECISION_AND_PASSION</p>
+</div>
+<div class="flex items-center gap-6 mono-text text-sm">
+<a class="hover:text-primary transition-colors" href="#">GITHUB</a>
+<a class="hover:text-primary transition-colors" href="#">LINKEDIN</a>
+<a class="hover:text-primary transition-colors" href="#">TWITTER</a>
+<a class="hover:text-primary transition-colors" href="#">E-MAIL</a>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs mono-text">LATEST_SYNC:</span>
+<span class="text-xs mono-text font-bold bg-green-500/20 text-green-600 dark:text-green-400 px-2 py-1">SUCCESSFUL</span>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

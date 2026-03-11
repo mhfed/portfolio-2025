@@ -4,7 +4,7 @@
 
 :root {
   /* Light Mode - Neo-Brutalist Orange Theme */
-  --header-height: 60px;
+  --header-height: 72px;
 
   /* Background: Warm off-white */
   --background: hsl(20 18% 97%);
@@ -42,32 +42,6 @@
   --input: hsl(215 28% 17%);
   --ring: hsl(17 100% 56%);
 
-  /* Chart colors */
-  --chart-1: hsl(156 87% 35%);
-  --chart-2: hsl(352 90% 55%);
-  --chart-3: hsl(17 100% 56%);
-  --chart-4: hsl(220 10% 40%);
-  --chart-5: hsl(17 70% 70%);
-
-  /* Semantic Colors */
-  --green: hsl(156 87% 35%);
-  --green-foreground: hsl(0 0% 100%);
-
-  --cyan: hsl(180 100% 40%);
-  --cyan-foreground: hsl(0 0% 100%);
-
-  --purple: hsl(270 50% 50%);
-  --purple-foreground: hsl(0 0% 100%);
-
-  --blue: hsl(210 100% 45%);
-  --blue-foreground: hsl(0 0% 100%);
-
-  --magenta: hsl(330 100% 45%);
-  --magenta-foreground: hsl(0 0% 100%);
-
-  --yellow: hsl(46 65% 52%);
-  --yellow-foreground: hsl(0 0% 100%);
-
   --radius: 0.125rem;
 }
 
@@ -77,7 +51,7 @@
   --foreground: hsl(210 40% 98%);
 
   /* Card/Popover */
-  --card: hsl(217 19% 27%);
+  --card: hsl(217 33% 17%);
   --card-foreground: hsl(210 40% 98%);
   --popover: hsl(217 19% 27%);
   --popover-foreground: hsl(210 40% 98%);
@@ -107,31 +81,6 @@
   --input: hsl(210 40% 98%);
   --ring: hsl(17 100% 56%);
 
-  /* Chart colors */
-  --chart-1: hsl(156 87% 42%);
-  --chart-2: hsl(352 90% 62%);
-  --chart-3: hsl(17 100% 56%);
-  --chart-4: hsl(215 20% 65%);
-  --chart-5: hsl(210 40% 80%);
-
-  /* Semantic Colors */
-  --green: hsl(156 87% 42%);
-  --green-foreground: hsl(0 0% 100%);
-
-  --cyan: hsl(180 100% 50%);
-  --cyan-foreground: hsl(225 14% 11%);
-
-  --purple: hsl(270 50% 60%);
-  --purple-foreground: hsl(0 0% 100%);
-
-  --blue: hsl(210 100% 50%);
-  --blue-foreground: hsl(0 0% 100%);
-
-  --magenta: hsl(330 100% 50%);
-  --magenta-foreground: hsl(0 0% 100%);
-
-  --yellow: hsl(48 96% 60%);
-  --yellow-foreground: hsl(225 14% 11%);
 }
 
 @theme inline {
@@ -144,7 +93,7 @@
 
   /* Neo-brutalist shadow tokens */
   --shadow-neo: 4px 4px 0px 0px hsl(17 100% 56%);
-  --shadow-neo-dark: 4px 4px 0px 0px hsl(215 28% 17%);
+  --shadow-neo-dark: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   --shadow-neo-sm: 2px 2px 0px 0px hsl(17 100% 56%);
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
@@ -166,27 +115,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-green: var(--green);
-  --color-green-foreground: var(--green-foreground);
-  --color-cyan: var(--cyan);
-  --color-cyan-foreground: var(--cyan-foreground);
-  --color-purple: var(--purple);
-  --color-purple-foreground: var(--purple-foreground);
-  --color-blue: var(--blue);
-  --color-blue-foreground: var(--blue-foreground);
-  --color-magenta: var(--magenta);
-  --color-magenta-foreground: var(--magenta-foreground);
-  --color-yellow: var(--yellow);
-  --color-yellow-foreground: var(--yellow-foreground);
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  --radius: 0.125rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
   --color-sidebar: var(--card);
   --color-sidebar-foreground: var(--foreground);
   --color-sidebar-primary: var(--primary);
@@ -224,14 +157,20 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     position: relative;
+    transition: color 200ms, background-color 200ms, border-color 200ms;
   }
   button {
     @apply cursor-pointer;
   }
 
   .mono-text {
-    font-family: var(--font-mono);
+    font-family: var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace;
   }
 
   /* Neo-brutalist shadow utilities */
@@ -239,7 +178,7 @@
     box-shadow: 4px 4px 0px 0px var(--primary);
   }
   .shadow-neo-dark {
-    box-shadow: 4px 4px 0px 0px var(--foreground);
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   }
   .shadow-neo-sm {
     box-shadow: 2px 2px 0px 0px var(--primary);
@@ -257,7 +196,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --header-height: 72px;
+    --header-height: 88px;
   }
 }
 
@@ -274,240 +213,20 @@
     border-width: 0;
   }
 
-  /* Add marquee animations for tech stack - removed duplicate, using @theme inline version */
 
-  /* Add scroll animation utilities */
-  .scroll-animate {
-    @apply opacity-0 translate-y-10 transition-all duration-700;
-  }
 
-  /* Add opacity-100 and translate-y-0 state for scroll animations to show elements */
-  .opacity-100 {
-    opacity: 1;
-  }
 
-  .translate-y-0 {
-    transform: translateY(0);
-  }
-
-  .opacity-0 {
-    opacity: 0;
-  }
-
-  .translate-y-10 {
-    transform: translateY(2.5rem);
-  }
-
-  .transition-all {
-    transition-property: all;
-  }
-
-  .duration-700 {
-    transition-duration: 700ms;
-  }
-
-  /* Animated pulse with delay */
-  @keyframes pulse-delay {
-    0%,
-    100% {
-      opacity: 0.4;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
-
-  .animate-pulse.delay-500 {
-    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    animation-delay: 0.5s;
-  }
-
-  .animate-pulse.delay-1000 {
-    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    animation-delay: 1s;
-  }
-
-  .animate-pulse.delay-2000 {
-    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    animation-delay: 2s;
-  }
-
-  .animate-pulse.delay-3000 {
-    animation: pulse-delay 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    animation-delay: 3s;
-  }
-
-  .animate-bounce.delay-500 {
-    animation-delay: 0.5s;
-  }
-
-  .animate-bounce.delay-1000 {
-    animation-delay: 1s;
-  }
-
-  .animate-bounce.delay-1500 {
-    animation-delay: 1.5s;
-  }
-
-  .animate-bounce.delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animate-bounce.delay-2500 {
-    animation-delay: 2.5s;
-  }
-
-  .animate-bounce.delay-3000 {
-    animation-delay: 3s;
-  }
 
   /* Radial gradient utility */
   .bg-gradient-radial {
     background-image: radial-gradient(circle, var(--tw-gradient-stops));
   }
 
-  /* Gradient utilities for neon colors */
-  .bg-gradient-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--magenta) 100%);
-  }
 
-  .bg-gradient-accent {
-    background: linear-gradient(
-      135deg,
-      var(--green) 0%,
-      var(--cyan) 50%,
-      var(--purple) 100%
-    );
-  }
 
-  .bg-gradient-neon {
-    background: linear-gradient(
-      135deg,
-      var(--blue) 0%,
-      var(--cyan) 50%,
-      var(--magenta) 100%
-    );
-  }
 
-  /* Color overlay utilities */
-  .overlay-primary {
-    background: linear-gradient(
-      135deg,
-      var(--primary) / 10 0%,
-      transparent 50%,
-      var(--accent) / 5 100%
-    );
-  }
 
-  .overlay-accent {
-    background: linear-gradient(
-      135deg,
-      var(--green) / 8 0%,
-      var(--cyan) / 5 50%,
-      var(--purple) / 8 100%
-    );
-  }
-
-  .overlay-neon {
-    background: linear-gradient(
-      135deg,
-      var(--cyan) / 8 0%,
-      var(--magenta) / 5 50%,
-      var(--yellow) / 8 100%
-    );
-  }
-
-  /* Scroll Animation Utilities */
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 0.8s ease-out,
-      transform 0.8s ease-out;
-  }
-
-  .scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .scroll-reveal-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition:
-      opacity 0.8s ease-out,
-      transform 0.8s ease-out;
-  }
-
-  .scroll-reveal-left.revealed {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .scroll-reveal-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition:
-      opacity 0.8s ease-out,
-      transform 0.8s ease-out;
-  }
-
-  .scroll-reveal-right.revealed {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .scroll-reveal-scale {
-    opacity: 0;
-    transform: scale(0.9);
-    transition:
-      opacity 0.8s ease-out,
-      transform 0.8s ease-out;
-  }
-
-  .scroll-reveal-scale.revealed {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Highlight on scroll */
-  .scroll-highlight {
-    position: relative;
-  }
-
-  .scroll-highlight::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0;
-    background: linear-gradient(90deg, var(--primary) / 20, var(--accent) / 20);
-    transition: width 0.6s ease-out;
-    z-index: -1;
-  }
-
-  .scroll-highlight.highlighted::before {
-    width: 100%;
-  }
-
-  /* Parallax utilities */
-  .parallax-slow {
-    transform: translateZ(0);
-    will-change: transform;
-  }
-
-  .parallax-medium {
-    transform: translateZ(0);
-    will-change: transform;
-  }
-
-  .parallax-fast {
-    transform: translateZ(0);
-    will-change: transform;
-  }
-
-  /* Animation keyframes */
+  /* Animation keyframes (used by countdown page) */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -519,28 +238,6 @@
     }
   }
 
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
   @keyframes scaleIn {
     from {
       opacity: 0;
@@ -549,24 +246,6 @@
     to {
       opacity: 1;
       transform: scale(1);
-    }
-  }
-
-  @keyframes highlight {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -1000px 0;
-    }
-    100% {
-      background-position: 1000px 0;
     }
   }
 
@@ -587,123 +266,19 @@
     }
   }
 
-  @keyframes neonPulse {
-    0%,
-    100% {
-      box-shadow:
-        0 0 5px currentColor,
-        0 0 10px currentColor,
-        0 0 15px currentColor;
-    }
-    50% {
-      box-shadow:
-        0 0 10px currentColor,
-        0 0 20px currentColor,
-        0 0 30px currentColor;
-    }
-  }
-
-  /* Neon glow utilities */
   .neon-glow-text {
     animation: neonGlow 2s ease-in-out infinite;
-  }
-
-  .neon-glow-box {
-    animation: neonPulse 2s ease-in-out infinite;
-  }
-
-  .text-neon-cyan {
-    color: var(--cyan);
-    text-shadow:
-      0 0 5px var(--cyan),
-      0 0 10px var(--cyan),
-      0 0 15px var(--cyan);
-  }
-
-  .text-neon-magenta {
-    color: var(--magenta);
-    text-shadow:
-      0 0 5px var(--magenta),
-      0 0 10px var(--magenta),
-      0 0 15px var(--magenta);
-  }
-
-  .text-neon-green {
-    color: var(--green);
-    text-shadow:
-      0 0 5px var(--green),
-      0 0 10px var(--green),
-      0 0 15px var(--green);
-  }
-
-  .shadow-neon-primary {
-    box-shadow:
-      0 0 10px var(--primary) / 50,
-      0 0 20px var(--primary) / 30,
-      0 0 30px var(--primary) / 20;
-  }
-
-  .shadow-neon-cyan {
-    box-shadow:
-      0 0 10px var(--cyan) / 50,
-      0 0 20px var(--cyan) / 30,
-      0 0 30px var(--cyan) / 20;
-  }
-
-  .shadow-neon-magenta {
-    box-shadow:
-      0 0 10px var(--magenta) / 50,
-      0 0 20px var(--magenta) / 30,
-      0 0 30px var(--magenta) / 20;
   }
 
   .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
   }
 
-  .animate-fade-in-left {
-    animation: fadeInLeft 0.8s ease-out forwards;
-  }
-
-  .animate-fade-in-right {
-    animation: fadeInRight 0.8s ease-out forwards;
-  }
-
   .animate-scale-in {
     animation: scaleIn 0.8s ease-out forwards;
   }
 
-  .animate-shimmer {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent
-    );
-    background-size: 1000px 100%;
-    animation: shimmer 2s infinite;
-  }
 
-  /* Grid pattern opacity variables */
-  :root {
-    --grid-opacity: 0.06;
-  }
-
-  .dark {
-    --grid-opacity: 0.1;
-  }
-
-  /* Sections có z-index để tạo stacking context, nhưng background không che grid */
-  section {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Content bên trong sections cần z-index cao hơn grid (z-5) */
-  section > * {
-    position: relative;
-    z-index: 10;
-  }
 }
 
 /* Lenis Smooth Scroll CSS */

@@ -34,9 +34,9 @@ export async function Footer({ locale }: FooterProps) {
         </div>
 
         <div className='max-w-[1000px] mx-auto relative z-10'>
-          <div className='bg-card text-foreground border-4 border-foreground shadow-neo-dark flex flex-col md:flex-row items-stretch overflow-hidden'>
+          <div className='bg-white text-slate-900 border-4 border-slate-900 shadow-neo-dark flex flex-col md:flex-row items-stretch overflow-hidden'>
             {/* Portrait */}
-            <div className='md:w-1/2 aspect-square md:aspect-auto border-b-4 md:border-b-0 md:border-r-4 border-foreground overflow-hidden grayscale contrast-125'>
+            <div className='md:w-1/2 aspect-square md:aspect-auto border-b-4 md:border-b-0 md:border-r-4 border-slate-900 overflow-hidden grayscale contrast-125'>
               <Image
                 src='https://res.cloudinary.com/dt3epooyc/image/upload/v1769702375/portfolio/yddxvjkmf3cceyw5ijwo.jpg'
                 alt='Minh Hieu portrait'
@@ -52,13 +52,13 @@ export async function Footer({ locale }: FooterProps) {
                 {t('title').split(' ').slice(0, 2).join(' ')}<br />
                 {t('title').split(' ').slice(2).join(' ')}
               </h2>
-              <p className='text-lg mb-8 text-muted-foreground'>
+              <p className='text-lg mb-8 text-slate-600'>
                 {t('description')}
               </p>
               <div className='flex flex-col gap-4'>
                 <a
                   href={`mailto:${tContact('email')}`}
-                  className='bg-foreground text-background px-8 py-4 font-bold mono-text hover:opacity-90 transition-colors text-center shadow-neo-sm'
+                  className='bg-slate-900 text-white px-8 py-4 font-bold mono-text hover:bg-black transition-colors text-center shadow-neo-sm'
                 >
                   SEND_MESSAGE.EXE
                 </a>
@@ -67,7 +67,7 @@ export async function Footer({ locale }: FooterProps) {
                     href='https://github.com/mhfed'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='bg-muted p-3 border-2 border-foreground text-center mono-text font-bold text-sm hover:bg-primary hover:text-white transition-all'
+                    className='bg-slate-100 p-3 border-2 border-slate-900 text-center mono-text font-bold text-sm hover:bg-primary hover:text-white transition-all'
                   >
                     GITHUB
                   </a>
@@ -75,7 +75,7 @@ export async function Footer({ locale }: FooterProps) {
                     href='https://linkedin.com/in/mhfed'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='bg-muted p-3 border-2 border-foreground text-center mono-text font-bold text-sm hover:bg-primary hover:text-white transition-all'
+                    className='bg-slate-100 p-3 border-2 border-slate-900 text-center mono-text font-bold text-sm hover:bg-primary hover:text-white transition-all'
                   >
                     LINKEDIN
                   </a>
@@ -97,6 +97,7 @@ export async function Footer({ locale }: FooterProps) {
         <div className='flex items-center gap-6 mono-text text-sm'>
           <a className='hover:text-primary transition-colors' href='https://github.com/mhfed' target='_blank' rel='noopener noreferrer'>GITHUB</a>
           <a className='hover:text-primary transition-colors' href='https://linkedin.com/in/mhfed' target='_blank' rel='noopener noreferrer'>LINKEDIN</a>
+          <a className='hover:text-primary transition-colors' href='https://twitter.com/mhfed' target='_blank' rel='noopener noreferrer'>TWITTER</a>
           <a className='hover:text-primary transition-colors' href={`mailto:${tContact('email')}`}>E-MAIL</a>
         </div>
         <div className='flex items-center gap-2'>
