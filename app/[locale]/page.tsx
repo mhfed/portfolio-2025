@@ -8,7 +8,6 @@ import { Footer } from '@/components/footer'
 import { ScrollObserver } from '@/components/scroll-observer'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { FloatingCTA } from '@/components/floating-cta'
-import { Separator } from '@/components/ui/separator'
 import { ScrollProgress } from '@/components/ui/scroll-progress'
 import { getLocale } from 'next-intl/server'
 
@@ -16,42 +15,34 @@ export default async function Home() {
   const locale = await getLocale()
 
   return (
-    <main className='w-full pb-20 md:pb-24 lg:pb-28'>
-      {/* <ScrollObserver /> */}
+    <div className='relative flex min-h-screen w-full flex-col overflow-x-hidden'>
+      <div className='layout-container flex h-full grow flex-col items-center'>
+        <Header />
 
-      <Header />
+        <main className='w-full flex-1'>
+          {/* Hero Section */}
+          <HeroSection />
 
-      {/* Hero Section */}
-      <HeroSection />
+          {/* About Section */}
+          <AboutSection />
 
-      <Separator className='my-12' />
+          {/* Work Experience Section */}
+          <WorkExperienceSection />
 
-      {/* About Section */}
-      <AboutSection />
+          {/* Projects Section */}
+          <ProjectsSection />
 
-      <Separator className='my-12' />
+          {/* Blog Section */}
+          <BlogSection />
+        </main>
 
-      {/* Work Experience Section */}
-      <WorkExperienceSection />
+        {/* Collaborate & Footer */}
+        <Footer locale={locale} />
 
-      <Separator className='my-12' />
-
-      {/* Projects Section */}
-      <ProjectsSection />
-
-      <Separator className='my-12' />
-
-      {/* Blog Section */}
-      <BlogSection />
-
-      <Separator className='my-12' />
-
-      {/* Footer with Collaborate Section */}
-      <Footer locale={locale} />
-
-      {/* Floating Actions */}
-      <FloatingCTA />
-      <ScrollToTop />
-    </main>
+        {/* Floating Actions */}
+        <FloatingCTA />
+        <ScrollToTop />
+      </div>
+    </div>
   )
 }

@@ -1,9 +1,8 @@
 'use client'
 
 import { ExternalLink } from 'lucide-react'
-import { Badge } from './ui/badge'
 import type { Project } from '@/data/projects'
-import { Safari } from '@/components/magicui/safari'
+import Image from 'next/image'
 
 interface ProjectCardProps extends Project {
   isAlternate: boolean
@@ -18,91 +17,59 @@ export function ProjectCard({
   techStack,
   liveUrl,
   githubUrl,
-  isAlternate,
 }: ProjectCardProps) {
-  const isRight = isAlternate
-
-  // Helper to extract domain for the address bar
-  const getDomain = (url?: string) => {
-    if (!url) return ''
-    try {
-      return new URL(url).hostname
-    } catch {
-      return url
-    }
-  }
-
   return (
-    <div className='pb-12 last:pb-0'>
-      <div
-        className={`flex flex-col md:flex-row gap-8 md:gap-10 items-center ${
-          isRight ? 'md:flex-row-reverse' : ''
-        }`}
-      >
-        {/* Project Image - Safari Browser Mockup */}
-        {image && (
-          <div className='w-full md:w-5/12 transform transition-transform duration-300 hover:scale-[1.02]'>
-            <Safari
-              src={image}
-              url={getDomain(liveUrl) || 'project-demo.com'}
-              className='w-full shadow-lg'
-            />
+    <div className='border-2 border-foreground bg-card shadow-neo-dark dark:shadow-neo group'>
+      {/* Project Image */}
+      {image && (
+        <div className='h-64 bg-muted border-b-2 border-foreground relative overflow-hidden'>
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className='object-cover transition-transform group-hover:scale-105'
+          />
+          <div className='absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center'>
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='bg-foreground text-background px-4 py-2 mono-text font-bold'
+              >
+                VIEW_CASE_STUDY
+              </a>
+            )}
           </div>
-        )}
-
-        {/* Content */}
-        <div className='flex-1 space-y-2'>
-          <div className='flex items-start justify-between gap-4'>
-            <div>
-              <h3 className='text-lg md:text-xl lg:text-2xl text-foreground font-semibold mb-1'>
-                {title}
-              </h3>
-              {year && (
-                <Badge variant='primary' size='sm'>
-                  {year}
-                </Badge>
-              )}
-            </div>
+        </div>
+      )}
+      <div className='p-6'>
+        <div className='flex justify-between items-start mb-4'>
+          <div>
+            <h3 className='text-xl font-bold uppercase'>{title}</h3>
+            {year && <p className='text-sm mono-text text-primary'>{year}</p>}
           </div>
-          <p className='text-sm md:text-base lg:text-base text-foreground/80 leading-relaxed'>
-            {description}
-          </p>
-          {techStack && techStack.length > 0 && (
-            <div className='flex flex-wrap gap-2 mt-3'>
-              {techStack.map((tech) => (
-                <Badge key={tech} variant='outline' size='sm'>
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          )}
-          {(liveUrl || githubUrl) && (
-            <div className='flex items-center gap-4 mt-4'>
-              {liveUrl && (
-                <a
-                  href={liveUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='text-xs md:text-sm lg:text-sm text-primary hover:underline flex items-center gap-1'
-                >
-                  View Project
-                  <ExternalLink className='w-3 h-3' />
-                </a>
-              )}
-              {githubUrl && (
-                <a
-                  href={githubUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='text-xs md:text-sm lg:text-sm text-foreground/70 hover:text-foreground hover:underline flex items-center gap-1'
-                >
-                  GitHub
-                  <ExternalLink className='w-3 h-3' />
-                </a>
-              )}
-            </div>
+          {liveUrl && (
+            <a href={liveUrl} target='_blank' rel='noopener noreferrer'>
+              <ExternalLink className='w-5 h-5 text-muted-foreground hover:text-primary transition-colors' />
+            </a>
           )}
         </div>
+        <p className='text-muted-foreground mb-6 text-sm'>
+          {description}
+        </p>
+        {techStack && techStack.length > 0 && (
+          <div className='flex flex-wrap gap-2'>
+            {techStack.map((tech) => (
+              <span
+                key={tech}
+                className='bg-muted px-2 py-1 text-[10px] mono-text font-bold'
+              >
+                {tech.toUpperCase()}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

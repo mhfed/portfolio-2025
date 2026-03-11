@@ -156,58 +156,37 @@ export function Header() {
   return (
     <>
       <header
-        className='sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 border-b border-border/10'
+        className='sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 border-b-2 border-primary/20'
         style={{ height: 'var(--header-height)' }}
       >
-        <nav className='max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4'>
+        <nav className='max-w-[1200px] mx-auto px-6 h-full flex items-center justify-between gap-4'>
           <ScrollProgress className='h-0.5 top-(--header-height)' />
 
-          {/* Logo - Left Side on Desktop, Center on Mobile */}
+          {/* Logo */}
           <Link
             href={homePath}
-            className='text-primary font-mono text-lg md:text-xl font-bold hover:opacity-80 transition-opacity md:order-first order-0 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0'
+            className='flex items-center gap-3'
           >
-            &lt;Hieu /&gt;
+            <div className='size-10 bg-primary flex items-center justify-center shadow-neo-sm'>
+              <span className='text-white font-bold mono-text text-lg'>&gt;_</span>
+            </div>
+            <div>
+              <h2 className='text-xl font-bold leading-tight tracking-tight uppercase'>Minh Hieu</h2>
+              <p className='text-xs mono-text text-primary font-bold'>v3.0.4-stable</p>
+            </div>
           </Link>
 
-          {/* Contact Info - Left Side (2 columns) - Hidden on Mobile */}
-          <div className='hidden md:flex flex-row gap-6 md:gap-8 shrink-0 min-w-0'>
-            {/* Based in */}
-            <div className='flex flex-col gap-0.5'>
-              <span className='text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider'>
-                {tContact('basedIn')}
-              </span>
-              <span className='text-xs md:text-sm text-foreground/80 font-semibold truncate'>
-                {tContact('location')}
-              </span>
-            </div>
-
-            {/* Say hello */}
-            <div className='flex flex-col gap-0.5'>
-              <span className='text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider'>
-                {tContact('sayHello')}
-              </span>
-              <a
-                href={`mailto:${tContact('email')}`}
-                className='text-xs md:text-sm text-foreground/80 font-semibold underline hover:text-primary transition-colors truncate'
-              >
-                {tContact('email')}
-              </a>
-            </div>
-          </div>
-
           {/* Desktop Navigation Links */}
-          <div className='hidden md:flex gap-8 items-center'>
+          <div className='hidden md:flex items-center gap-8 mono-text text-sm'>
             {navLinks.map((link) => (
               <Link
                 key={link.key}
                 href={link.href}
                 scroll={!link.href.includes('#')}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
+                className='hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary'
               >
-                {link.name}
-                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
+                ~/{link.name.toLowerCase()}
               </Link>
             ))}
           </div>
@@ -218,7 +197,7 @@ export function Header() {
             <div className='hidden md:block relative'>
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className='p-2 rounded-md hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer'
+                className='p-2 hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer'
                 aria-label='Change language'
               >
                 <Languages className='w-4 h-4 text-foreground transition-transform duration-300' />
@@ -230,12 +209,12 @@ export function Header() {
                     className='fixed inset-0 z-40'
                     onClick={() => setIsLanguageMenuOpen(false)}
                   />
-                  <div className='absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50 min-w-[120px] overflow-hidden'>
+                  <div className='absolute right-0 top-full mt-2 bg-background border-2 border-foreground shadow-neo-dark z-50 min-w-[120px] overflow-hidden'>
                     {routing.locales.map((loc) => (
                       <button
                         key={loc}
                         onClick={() => handleLanguageChange(loc)}
-                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-all duration-300 ease-in-out rounded-md cursor-pointer hover:scale-[1.02] ${
+                        className={`w-full px-4 py-2 text-left text-sm mono-text font-bold hover:bg-primary hover:text-white transition-all cursor-pointer ${
                           locale === loc ? 'bg-primary/20 font-semibold' : ''
                         }`}
                       >
@@ -250,7 +229,7 @@ export function Header() {
             {/* Theme Toggle - Desktop only */}
             <button
               onClick={toggleTheme}
-              className='hidden md:flex p-2 rounded-lg hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer'
+              className='hidden md:flex p-2 hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer'
               aria-label='Toggle theme'
             >
               {displayIsDark ? (
@@ -258,6 +237,21 @@ export function Header() {
               ) : (
                 <Moon className='w-4 h-4 text-foreground transition-transform duration-300' />
               )}
+            </button>
+
+            {/* Resume Button */}
+            <button
+              onClick={() => {
+                const link = document.createElement('a')
+                link.href = '/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
+                link.download = 'CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+              }}
+              className='hidden md:block bg-foreground text-background px-5 py-2 font-bold mono-text text-sm shadow-neo transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none'
+            >
+              RESUME.PDF
             </button>
 
             {/* Mobile Menu Button */}
@@ -299,24 +293,24 @@ export function Header() {
                   href={link.href}
                   scroll={!link.href.includes('#')}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
+                  className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-bold uppercase py-4 px-4 mono-text hover:bg-primary/10 active:bg-primary/20 touch-manipulation border-b-2 border-border/10'
                 >
-                  {link.name}
+                  ~/{link.name.toLowerCase()}
                 </Link>
               ))}
             </div>
 
             {/* Mobile Actions - Language & Theme */}
-            <div className='border-t border-border/30 p-4 space-y-3'>
+            <div className='border-t-2 border-foreground p-4 space-y-3'>
               {/* Language Switcher */}
               <div className='relative'>
                 <button
                   onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                  className='w-full flex items-center justify-between px-4 py-3 rounded-md hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer'
+                  className='w-full flex items-center justify-between px-4 py-3 hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer'
                   aria-label='Change language'
                 >
-                  <span className='text-sm font-medium text-foreground'>
-                    Language
+                  <span className='text-sm font-bold mono-text text-foreground'>
+                    LANGUAGE
                   </span>
                   <Languages className='w-5 h-5 text-foreground' />
                 </button>
@@ -327,12 +321,12 @@ export function Header() {
                       className='fixed inset-0 z-40'
                       onClick={() => setIsLanguageMenuOpen(false)}
                     />
-                    <div className='absolute left-0 right-0 bottom-full mb-2 bg-background border border-border/30 rounded-lg shadow-lg z-50'>
+                    <div className='absolute left-0 right-0 bottom-full mb-2 bg-background border-2 border-foreground shadow-neo-dark z-50'>
                       {routing.locales.map((loc) => (
                         <button
                           key={loc}
                           onClick={() => handleLanguageChange(loc)}
-                          className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors rounded-md cursor-pointer ${
+                          className={`w-full px-4 py-3 text-left text-sm mono-text font-bold hover:bg-primary hover:text-white transition-colors cursor-pointer ${
                             locale === loc ? 'bg-primary/20 font-semibold' : ''
                           }`}
                         >
@@ -347,17 +341,32 @@ export function Header() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className='w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer'
+                className='w-full flex items-center justify-between px-4 py-3 hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer'
                 aria-label='Toggle theme'
               >
-                <span className='text-sm font-medium text-foreground'>
-                  Theme
+                <span className='text-sm font-bold mono-text text-foreground'>
+                  THEME
                 </span>
                 {displayIsDark ? (
                   <Sun className='w-5 h-5 text-foreground' />
                 ) : (
                   <Moon className='w-5 h-5 text-foreground' />
                 )}
+              </button>
+
+              {/* Resume Download */}
+              <button
+                onClick={() => {
+                  const link = document.createElement('a')
+                  link.href = '/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
+                  link.download = 'CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
+                  document.body.appendChild(link)
+                  link.click()
+                  document.body.removeChild(link)
+                }}
+                className='w-full bg-foreground text-background px-4 py-3 font-bold mono-text text-sm shadow-neo transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none text-center'
+              >
+                RESUME.PDF
               </button>
             </div>
           </nav>

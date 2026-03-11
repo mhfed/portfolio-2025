@@ -1,5 +1,4 @@
 import { getTranslations, getLocale } from 'next-intl/server'
-import { SectionTitle } from './section-title'
 import { ProjectCard } from './project-card'
 import { db } from '@/lib/db'
 import { projects } from '@/db/schema'
@@ -18,16 +17,12 @@ export async function ProjectsSection() {
       .orderBy(desc(projects.createdAt))
   } catch (error) {
     console.error('Error fetching projects:', error)
-    // Return empty array if database query fails
-    // This allows the page to render with "No projects" message
     dbProjects = []
   }
 
   // Map database results to match ProjectCard interface
-  // Select locale-specific values with fallback
   const mappedProjects = dbProjects.map(
     (project: typeof projects.$inferSelect) => {
-      // Helper to get localized value with fallback
       const getLocalized = (
         enValue: string | null | undefined,
         viValue: string | null | undefined,
@@ -61,26 +56,29 @@ export async function ProjectsSection() {
   )
 
   return (
-    <section id='projects' className='px-4 md:px-6'>
-      <div className='max-w-5xl mx-auto'>
-        <SectionTitle title={t('title')} />
-        <div className='space-y-8'>
-          {mappedProjects.length === 0 ? (
-            <p className='text-muted-foreground text-center py-12'>
-              {t('noProjects') || 'No projects available yet.'}
-            </p>
-          ) : (
-            mappedProjects.map((project, idx) => (
-              <ProjectCard
-                key={project.title + idx}
-                {...project}
-                isAlternate={idx % 2 === 1}
-                index={idx}
-              />
-            ))
-          )}
-        </div>
+    <section id='projects' className='w-full max-w-[1200px] mx-auto px-6 mt-24 mb-32'>
+      <div className='flex items-center justify-between mb-8'>
+        <h2 className='text-3xl font-bold uppercase tracking-tight'>/home/featured_projects</h2>
+        <span className='mono-text text-sm text-primary font-bold hover:underline cursor-pointer'>
+          {t('viewProject') || 'VIEW_ALL.EXE'}
+        </span>
       </div>
+      {mappedProjects.length === 0 ? (
+        <p className='text-muted-foreground text-center py-12'>
+          {t('noProjects') || 'No projects available yet.'}
+        </p>
+      ) : (
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+          {mappedProjects.map((project, idx) => (
+            <ProjectCard
+              key={project.title + idx}
+              {...project}
+              isAlternate={idx % 2 === 1}
+              index={idx}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }

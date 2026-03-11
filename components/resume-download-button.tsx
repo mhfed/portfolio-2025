@@ -2,15 +2,13 @@
 
 import { useTranslations } from 'next-intl'
 import { Download } from 'lucide-react'
-import { ShinyButton } from './ui/shiny-button'
 
 export function ResumeDownloadButton() {
   const t = useTranslations('header')
 
   const handleDownload = () => {
-    // Create a link element and trigger download
     const link = document.createElement('a')
-    link.href = '/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf' // Update with actual resume path
+    link.href = '/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
     link.download = 'CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
     document.body.appendChild(link)
     link.click()
@@ -18,14 +16,12 @@ export function ResumeDownloadButton() {
   }
 
   return (
-    <ShinyButton
+    <button
       onClick={handleDownload}
-      variant='default'
-      size='lg'
-      className='rounded-full'
+      className='bg-foreground text-background px-6 py-3 font-bold mono-text text-sm shadow-neo transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none inline-flex items-center gap-2'
     >
       <Download className='w-4 h-4' />
-      {t('downloadResume')}
-    </ShinyButton>
+      RESUME.PDF
+    </button>
   )
 }

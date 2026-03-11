@@ -3,53 +3,53 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  /* Light Mode - Luxury Gold Theme */
+  /* Light Mode - Neo-Brutalist Orange Theme */
   --header-height: 60px;
 
-  /* Background: Pure White for crispness */
-  --background: hsl(0 0% 100%);
-  /* Foreground: Dark Grey (matches dark bg) for readability */
-  --foreground: hsl(225 14% 11%);
+  /* Background: Warm off-white */
+  --background: hsl(20 18% 97%);
+  /* Foreground: Near-black for readability */
+  --foreground: hsl(215 28% 17%);
 
   /* Card/Popover: White */
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(225 14% 11%);
+  --card-foreground: hsl(215 28% 17%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(225 14% 11%);
+  --popover-foreground: hsl(215 28% 17%);
 
-  /* Primary: Luxury Gold */
-  --primary: oklch(0.6 0.22 145);
+  /* Primary: Bright Orange */
+  --primary: hsl(17 100% 56%);
   --primary-foreground: hsl(0 0% 100%);
 
-  /* Secondary: Light Cream/Gold tint */
-  --secondary: hsl(46 20% 96%);
-  --secondary-foreground: hsl(225 14% 11%);
+  /* Secondary: Light warm grey */
+  --secondary: hsl(210 10% 96%);
+  --secondary-foreground: hsl(215 28% 17%);
 
-  /* Muted: Very pale gold/beige */
-  --muted: hsl(46 20% 96%);
-  --muted-foreground: hsl(220 10% 40%);
+  /* Muted */
+  --muted: hsl(210 10% 96%);
+  --muted-foreground: hsl(215 16% 47%);
 
-  /* Accent: Subtle Gold/Beige for hovers */
-  --accent: hsl(46 30% 90%);
-  --accent-foreground: hsl(225 14% 11%);
+  /* Accent */
+  --accent: hsl(210 10% 96%);
+  --accent-foreground: hsl(215 28% 17%);
 
-  /* Destructive: Standard Red */
+  /* Destructive */
   --destructive: hsl(0 84% 60%);
   --destructive-foreground: hsl(0 0% 100%);
 
-  /* Border/Input/Ring: Subtle Gold */
-  --border: hsl(46 30% 90%);
-  --input: hsl(46 30% 90%);
-  --ring: hsl(46 65% 52%);
+  /* Border/Input/Ring */
+  --border: hsl(215 28% 17%);
+  --input: hsl(215 28% 17%);
+  --ring: hsl(17 100% 56%);
 
-  /* Chart colors - Adapted for Light Mode */
-  --chart-1: hsl(156 87% 35%); /* Green (Up) - Darker for contrast */
-  --chart-2: hsl(352 90% 55%); /* Red (Down) */
-  --chart-3: hsl(46 65% 52%); /* Gold */
-  --chart-4: hsl(220 10% 40%); /* Dark Grey */
-  --chart-5: hsl(46 30% 70%); /* Muted Gold */
+  /* Chart colors */
+  --chart-1: hsl(156 87% 35%);
+  --chart-2: hsl(352 90% 55%);
+  --chart-3: hsl(17 100% 56%);
+  --chart-4: hsl(220 10% 40%);
+  --chart-5: hsl(17 70% 70%);
 
-  /* Semantic Colors - Trading style (Light Mode) */
+  /* Semantic Colors */
   --green: hsl(156 87% 35%);
   --green-foreground: hsl(0 0% 100%);
 
@@ -68,53 +68,53 @@
   --yellow: hsl(46 65% 52%);
   --yellow-foreground: hsl(0 0% 100%);
 
-  --radius: 0.5rem;
+  --radius: 0.125rem;
 }
 
 .dark {
-  /* Dark Mode - Binance Theme */
-  --background: hsl(225 16% 10%);
-  --foreground: hsl(0 0% 100%);
+  /* Dark Mode - Neo-Brutalist */
+  --background: hsl(18 30% 8%);
+  --foreground: hsl(210 40% 98%);
 
-  /* Card/Popover: Using Accent Color or slightly lighter */
-  --card: hsl(225 12% 16%);
-  --card-foreground: hsl(0 0% 100%);
-  --popover: hsl(225 12% 16%);
-  --popover-foreground: hsl(0 0% 100%);
+  /* Card/Popover */
+  --card: hsl(217 19% 27%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(217 19% 27%);
+  --popover-foreground: hsl(210 40% 98%);
 
-  /* Primary: Binance Gold */
-  --primary: oklch(0.92 0.24 126);
-  --primary-foreground: hsl(225 14% 11%);
+  /* Primary: Bright Orange */
+  --primary: hsl(17 100% 56%);
+  --primary-foreground: hsl(0 0% 100%);
 
-  /* Secondary: Muted/Dark Grey */
-  --secondary: hsl(225 10% 20%);
-  --secondary-foreground: hsl(0 0% 100%);
+  /* Secondary */
+  --secondary: hsl(217 10% 20%);
+  --secondary-foreground: hsl(210 40% 98%);
 
   /* Muted */
-  --muted: hsl(225 10% 20%);
-  --muted-foreground: hsl(220 10% 60%);
+  --muted: hsl(217 10% 20%);
+  --muted-foreground: hsl(215 20% 65%);
 
   /* Accent */
-  --accent: hsl(225 12% 16%);
-  --accent-foreground: hsl(0 0% 100%);
+  --accent: hsl(217 19% 27%);
+  --accent-foreground: hsl(210 40% 98%);
 
-  /* Destructive: Binance Red */
+  /* Destructive */
   --destructive: hsl(352 90% 62%);
   --destructive-foreground: hsl(0 0% 100%);
 
   /* Border/Input/Ring */
-  --border: hsl(225 10% 20%);
-  --input: hsl(225 10% 20%);
-  --ring: hsl(48 96% 60%);
+  --border: hsl(210 40% 98%);
+  --input: hsl(210 40% 98%);
+  --ring: hsl(17 100% 56%);
 
-  /* Chart colors - Trading style */
-  --chart-1: hsl(156 87% 42%); /* Green (Up) */
-  --chart-2: hsl(352 90% 62%); /* Red (Down) */
-  --chart-3: hsl(48 96% 60%); /* Gold */
-  --chart-4: hsl(225 10% 60%); /* Grey */
-  --chart-5: hsl(225 10% 80%); /* Light Grey */
+  /* Chart colors */
+  --chart-1: hsl(156 87% 42%);
+  --chart-2: hsl(352 90% 62%);
+  --chart-3: hsl(17 100% 56%);
+  --chart-4: hsl(215 20% 65%);
+  --chart-5: hsl(210 40% 80%);
 
-  /* Semantic Colors - Trading style */
+  /* Semantic Colors */
   --green: hsl(156 87% 42%);
   --green-foreground: hsl(0 0% 100%);
 
@@ -136,11 +136,16 @@
 
 @theme inline {
   /* Font families */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-space-grotesk), 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --font-display:
-    var(--font-space-grotesk), 'Space Grotesk', 'Inter', system-ui,
+    var(--font-space-grotesk), 'Space Grotesk', system-ui,
     -apple-system, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Monaco, monospace;
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, 'SF Mono', Monaco, monospace;
+
+  /* Neo-brutalist shadow tokens */
+  --shadow-neo: 4px 4px 0px 0px hsl(17 100% 56%);
+  --shadow-neo-dark: 4px 4px 0px 0px hsl(215 28% 17%);
+  --shadow-neo-sm: 2px 2px 0px 0px hsl(17 100% 56%);
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -218,15 +223,35 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
     position: relative;
   }
   button {
     @apply cursor-pointer;
   }
 
-  /* Sections không tạo background mới che grid - chỉ dùng transparent */
-  section[class*='bg-background'] {
-    background-color: transparent !important;
+  .mono-text {
+    font-family: var(--font-mono);
+  }
+
+  /* Neo-brutalist shadow utilities */
+  .shadow-neo {
+    box-shadow: 4px 4px 0px 0px var(--primary);
+  }
+  .shadow-neo-dark {
+    box-shadow: 4px 4px 0px 0px var(--foreground);
+  }
+  .shadow-neo-sm {
+    box-shadow: 2px 2px 0px 0px var(--primary);
+  }
+
+  /* Archive card hover */
+  .archive-card {
+    transition: transform 0.3s ease;
+  }
+  .archive-card:hover {
+    transform: translateY(-8px);
+    z-index: 50 !important;
   }
 }
 
