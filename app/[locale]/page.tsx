@@ -2,6 +2,7 @@ import { Header } from '@/components/header'
 import { HeroSection } from '@/components/hero-section'
 import { WorkExperienceSection } from '@/components/work-experience-section'
 import { ProjectsSection } from '@/components/projects-section'
+import { CollaborateSection } from '@/components/collaborate-section'
 import { BlogSection } from '@/components/blog-section'
 import { Footer } from '@/components/footer'
 import { ScrollToTop } from '@/components/scroll-to-top'
@@ -25,6 +26,9 @@ export default async function Home() {
 
           {/* Projects Section */}
           <ProjectsSection />
+
+          {/* Collaborate Section */}
+          <CollaborateSection />
 
           {/* Blog Section */}
           <BlogSection />
