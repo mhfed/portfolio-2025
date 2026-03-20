@@ -61,10 +61,10 @@ export async function ProjectsSection() {
   )
 
   return (
-    <section id='projects' className='px-4 md:px-6'>
+    <section id='projects' className='scroll-mt-24 px-4 md:px-6'>
       <div className='max-w-5xl mx-auto'>
         <SectionTitle title={t('title')} />
-        <div className='space-y-8'>
+        <div className='space-y-4 md:space-y-6'>
           {mappedProjects.length === 0 ? (
             <p className='text-muted-foreground text-center py-12'>
               {t('noProjects') || 'No projects available yet.'}

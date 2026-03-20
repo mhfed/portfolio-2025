@@ -4,7 +4,7 @@ export async function HeroTextBlocks() {
   const t = await getTranslations('hero')
 
   return (
-    <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-12 md:mt-16'>
+    <div className='mt-8 grid w-full grid-cols-1 gap-4 md:mt-10 md:grid-cols-2 md:gap-8'>
       {/* Left text block */}
       <div className='text-left md:text-left'>
         <p className='text-base md:text-lg lg:text-xl text-foreground/70'>

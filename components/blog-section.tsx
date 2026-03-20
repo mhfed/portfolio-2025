@@ -18,10 +18,10 @@ export async function BlogSection() {
   }
 
   return (
-    <section id='blog' className='px-4 md:px-6'>
+    <section id='blog' className='scroll-mt-24 px-4 md:px-6'>
       <div className='max-w-5xl mx-auto'>
         {/* Section Header */}
-        <div className='flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-12'>
+        <div className='mb-4 flex flex-col gap-3 md:mb-6 md:flex-row md:items-end md:justify-between'>
           <SectionTitle title={t('title')} className='mb-0' />
           <Link
             href={`/${locale}/blog`}
@@ -37,7 +37,7 @@ export async function BlogSection() {
           {/* Vertical line */}
           <div className='absolute left-3 md:left-32 top-0 bottom-0 w-px bg-border/70 pointer-events-none' />
 
-          <div className='space-y-6 md:space-y-7'>
+          <div className='space-y-4 md:space-y-5'>
             {posts.map((post) => {
               const displayTitle =
                 locale === 'vi'

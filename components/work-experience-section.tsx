@@ -53,10 +53,10 @@ export async function WorkExperienceSection() {
   }))
 
   return (
-    <section id='experience' className='px-4 md:px-6'>
+    <section id='experience' className='scroll-mt-24 px-4 md:px-6'>
       <div className='max-w-5xl mx-auto'>
         {/* Header */}
-        <div className='mb-8 md:mb-12'>
+        <div className='mb-4 md:mb-6'>
           <SectionTitle
             title={t.rich('title', {
               br: () => <br />,
@@ -70,7 +70,7 @@ export async function WorkExperienceSection() {
           {/* Vertical line */}
           <div className='absolute left-3 md:left-32 top-0 bottom-0 w-px bg-border/70 pointer-events-none' />
 
-          <div className='space-y-8 md:space-y-12'>
+          <div className='space-y-5 md:space-y-7'>
             {dbExperiences.length === 0 ? (
               <p className='pl-10 md:pl-40 text-muted-foreground'>
                 {t('noExperience') || 'No work experience yet.'}

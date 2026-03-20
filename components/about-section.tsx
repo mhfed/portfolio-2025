@@ -6,10 +6,10 @@ export async function AboutSection() {
   const t = await getTranslations('about')
 
   return (
-    <section id='about' className='px-4 md:px-6'>
+    <section id='about' className='scroll-mt-24 px-4 md:px-6'>
       <div className='max-w-5xl mx-auto'>
         <SectionTitle title={t('title')} />
-        <div className='space-y-6'>
+        <div className='space-y-4 md:space-y-5'>
           <p className='text-base md:text-lg lg:text-xl text-foreground/80 leading-relaxed'>
             {t('description1')}
           </p>

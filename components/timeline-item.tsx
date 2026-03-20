@@ -52,9 +52,9 @@ export function TimelineItem({
 
   return (
     <div>
-      <div className=''>
-        <div className='flex items-start gap-4 justify-between'>
-          <h3 className='text-lg md:text-xl lg:text-2xl text-foreground font-semibold '>
+      <div>
+        <div className='flex items-start justify-between gap-3'>
+          <h3 className='text-lg md:text-xl lg:text-2xl text-foreground font-semibold'>
             {company}
           </h3>
           <Badge
@@ -65,7 +65,7 @@ export function TimelineItem({
             {period}
           </Badge>
         </div>
-        <p className='text-base md:text-base lg:text-base text-foreground/80 leading-relaxed italic mb-2'>
+        <p className='mb-1 text-base text-foreground/80 leading-relaxed italic md:text-base lg:text-base'>
           {position}
         </p>
 
@@ -77,7 +77,7 @@ export function TimelineItem({
           <DrawerTrigger asChild>
             <Button
               variant='link'
-              className='px-0 h-auto font-medium mt-1 mb-2 hover:opacity-80 opacity-90'
+              className='mt-1 h-auto px-0 py-0 font-medium opacity-90 hover:opacity-80'
             >
               {seeMoreText}
             </Button>
@@ -109,7 +109,7 @@ export function TimelineItem({
         </Drawer>
 
         {skills && skills.length > 0 && (
-          <div className='flex flex-wrap gap-2 mt-3'>
+          <div className='mt-2 flex flex-wrap gap-2'>
             {skills.map((skill) => (
               <Badge key={skill} variant='primary' size='sm'>
                 {skill}

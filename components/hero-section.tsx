@@ -14,14 +14,14 @@ export async function HeroSection() {
   const t = await getTranslations('hero')
 
   return (
-    <section className='flex flex-col justify-between pt-24 md:pt-20 px-6 relative'>
+    <section className='relative flex flex-col justify-between px-4 pt-16 md:px-6 md:pt-12 lg:pt-16'>
       {/* Main Content */}
-      <div className='flex-1 flex flex-col justify-center max-w-7xl w-full mx-auto relative z-10 px-4 md:px-6 lg:px-8'>
-        <div className='flex flex-col md:flex-row justify-between gap-8 md:gap-10 items-start overflow-visible'>
+      <div className='relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-0 md:px-2 lg:px-4'>
+        <div className='flex flex-col items-start justify-between gap-6 overflow-visible md:flex-row md:gap-6 lg:gap-8'>
           {/* Left column: Name + Text blocks */}
-          <div className='space-y-8 md:space-y-10 overflow-visible'>
+          <div className='space-y-5 md:space-y-6 overflow-visible'>
             {/* Name Section */}
-            <div className='relative w-full flex flex-col gap-4 md:gap-6 overflow-visible'>
+            <div className='relative flex w-full flex-col gap-2 overflow-visible md:gap-4'>
               {/* <HeroTypingText
                 frontText={t('front')}
                 middleText={t('middle')}
@@ -30,7 +30,7 @@ export async function HeroSection() {
               <HeroName />
             </div>
 
-            <div className='flex items-center gap-4'>
+            <div className='flex items-center gap-2 md:gap-3'>
               <SocialsDock />
             </div>
             <ResumeDownloadButton />
@@ -39,17 +39,17 @@ export async function HeroSection() {
           </div>
 
           {/* Download Resume Button & Social Links */}
-          <div className='relative rounded-lg overflow-hidden'>
+          <div className='relative overflow-hidden rounded-lg'>
             <Image
               src='https://res.cloudinary.com/dt3epooyc/image/upload/v1769702375/portfolio/yddxvjkmf3cceyw5ijwo.jpg'
               alt='Hero Avatar'
               width={300}
               height={400}
               priority={true}
-              className='aspect-3/4 object-cover object-top'
+              className='aspect-3/4 w-full max-w-[240px] object-cover object-top md:max-w-[260px] lg:max-w-[280px]'
             />
 
-            <div className='flex items-center gap-2 md:gap-3 absolute bottom-0 right-0 z-20 w-full justify-center bg-foreground backdrop-blur-sm'>
+            <div className='absolute bottom-0 right-0 z-20 flex w-full items-center justify-center gap-2 bg-foreground backdrop-blur-sm md:gap-3'>
               {/* Vietnamese Flag Icon */}
               <div className='flex items-center'>
                 <span className='text-lg md:text-xl'>🇻🇳</span>

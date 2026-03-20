@@ -97,10 +97,10 @@ export function SocialsDock() {
                   aria-label={social.name}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-14 md:size-16 rounded-full'
+                    'size-11 md:size-12 rounded-full'
                   )}
                 >
-                  <social.icon className='size-5 md:size-6' />
+                  <social.icon className='size-4 md:size-5' />
                 </a>
               </TooltipTrigger>
               <TooltipContent>

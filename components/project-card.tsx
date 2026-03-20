@@ -33,15 +33,15 @@ export function ProjectCard({
   }
 
   return (
-    <div className='pb-12 last:pb-0'>
+    <div className='pb-6 md:pb-8 last:pb-0'>
       <div
-        className={`flex flex-col md:flex-row gap-8 md:gap-10 items-center ${
+        className={`flex flex-col items-start gap-4 md:flex-row md:gap-6 ${
           isRight ? 'md:flex-row-reverse' : ''
         }`}
       >
         {/* Project Image - Safari Browser Mockup */}
         {image && (
-          <div className='w-full md:w-5/12 transform transition-transform duration-300 hover:scale-[1.02]'>
+          <div className='w-full md:w-5/12 transform transition-transform duration-300 hover:scale-[1.01]'>
             <Safari
               src={image}
               url={getDomain(liveUrl) || 'project-demo.com'}
@@ -68,7 +68,7 @@ export function ProjectCard({
             {description}
           </p>
           {techStack && techStack.length > 0 && (
-            <div className='flex flex-wrap gap-2 mt-3'>
+            <div className='mt-2 flex flex-wrap gap-2'>
               {techStack.map((tech) => (
                 <Badge key={tech} variant='outline' size='sm'>
                   {tech}
@@ -77,7 +77,7 @@ export function ProjectCard({
             </div>
           )}
           {(liveUrl || githubUrl) && (
-            <div className='flex items-center gap-4 mt-4'>
+            <div className='mt-2 flex items-center gap-4'>
               {liveUrl && (
                 <a
                   href={liveUrl}

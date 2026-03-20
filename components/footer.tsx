@@ -17,9 +17,12 @@ export async function Footer({ locale }: FooterProps) {
   ]
 
   return (
-    <footer id='collaborate' className='px-4 md:px-6  mt-16 md:mt-20 lg:mt-24'>
-      <div className='max-w-5xl mx-auto py-8 md:py-12'>
-        <div className='space-y-12'>
+    <footer
+      id='collaborate'
+      className='mt-8 px-4 md:mt-12 md:px-6 lg:mt-16'
+    >
+      <div className='max-w-5xl mx-auto py-6 md:py-8'>
+        <div className='space-y-8 md:space-y-10'>
           {/* Collaborate Section */}
           <div className='space-y-4'>
             <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold text-primary'>
@@ -43,7 +46,7 @@ export async function Footer({ locale }: FooterProps) {
           </div>
 
           {/* Footer Links & Copyright */}
-          <div className='pt-8 border-t border-border/30 space-y-4'>
+          <div className='space-y-3 border-t border-border/30 pt-5 md:pt-6'>
             {/* Quick Links */}
             <nav className='flex flex-wrap gap-4 justify-center md:justify-start'>
               {footerLinks.map((link) => (

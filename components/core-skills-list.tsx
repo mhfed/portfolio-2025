@@ -32,14 +32,14 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
   const hasMore = items.length > initialCount
 
   return (
-    <div className='ml-4 md:ml-8'>
-      <h3 className='text-lg md:text-xl lg:text-xl text-muted-foreground mb-4 font-semibold italic'>
+    <div className='ml-2 md:ml-4'>
+      <h3 className='mb-3 text-lg font-semibold italic text-muted-foreground md:text-xl lg:text-xl'>
         {title}
       </h3>
 
       <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
-        <div className='flex flex-col gap-3 ml-4 md:ml-8'>
-          <ul className='flex flex-col gap-3'>
+        <div className='ml-4 flex flex-col gap-2 md:ml-6'>
+          <ul className='flex flex-col gap-2'>
             {visibleItems.map((item) => (
               <li
                 key={item.id}
@@ -54,7 +54,7 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
           </ul>
 
           <CollapsibleContent className='overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down'>
-            <ul className='flex flex-col gap-3'>
+            <ul className='flex flex-col gap-2'>
               {hiddenItems.map((item) => (
                 <li
                   key={item.id}
@@ -71,7 +71,7 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
         </div>
 
         {hasMore && (
-          <div className='mt-4 ml-4 md:ml-8'>
+          <div className='mt-3 ml-4 md:ml-6'>
             <CollapsibleTrigger asChild>
               <Button
                 variant='link'

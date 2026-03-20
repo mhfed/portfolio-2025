@@ -16,7 +16,7 @@ export default async function Home() {
   const locale = await getLocale()
 
   return (
-    <main className='w-full pb-20 md:pb-24 lg:pb-28'>
+    <main className='w-full pb-12 md:pb-16 lg:pb-20'>
       {/* <ScrollObserver /> */}
 
       <Header />
@@ -24,27 +24,27 @@ export default async function Home() {
       {/* Hero Section */}
       <HeroSection />
 
-      <Separator className='my-12' />
+      <Separator className='my-6 md:my-8 lg:my-10' />
 
       {/* About Section */}
       <AboutSection />
 
-      <Separator className='my-12' />
+      <Separator className='my-6 md:my-8 lg:my-10' />
 
       {/* Work Experience Section */}
       <WorkExperienceSection />
 
-      <Separator className='my-12' />
+      <Separator className='my-6 md:my-8 lg:my-10' />
 
       {/* Projects Section */}
       <ProjectsSection />
 
-      <Separator className='my-12' />
+      <Separator className='my-6 md:my-8 lg:my-10' />
 
       {/* Blog Section */}
       <BlogSection />
 
-      <Separator className='my-12' />
+      <Separator className='my-6 md:my-8 lg:my-10' />
 
       {/* Footer with Collaborate Section */}
       <Footer locale={locale} />
