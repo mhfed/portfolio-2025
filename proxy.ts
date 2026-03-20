@@ -31,6 +31,13 @@ function checkBasicAuth(request: NextRequest): boolean {
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
+  // Force the root path to the English homepage.
+  if (pathname === '/') {
+    const newUrl = request.nextUrl.clone()
+    newUrl.pathname = '/en'
+    return NextResponse.redirect(newUrl)
+  }
+
   // Handle /admin routes - exclude from intl middleware
   if (pathname.startsWith('/admin')) {
     // Redirect /vi/admin, /en/admin, or /zh-TW/admin to /admin

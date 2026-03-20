@@ -9,7 +9,10 @@ export const routing = defineRouting({
   defaultLocale: 'en',
 
   // The locale prefix strategy
-  localePrefix: 'as-needed', // Default locale (en) uses no prefix, others use /vi/...
+  localePrefix: 'always', // Always prefix locales, including the default locale at /en
+
+  // Do not infer locale from browser settings or previous cookies
+  localeDetection: false,
 })
 
 // Lightweight wrappers around Next.js' navigation APIs
