@@ -4,21 +4,24 @@ import type React from 'react'
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
-import { Sun, Moon, Languages } from 'lucide-react'
+import { Sun, Moon, Languages, Palette } from 'lucide-react'
 import { useLocale } from '@/hooks/use-locale'
+import { useTheme } from '@/hooks/use-theme'
 import { routing, Link, usePathname } from '@/i18n/routing'
 import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { ScrollProgress } from './ui/scroll-progress'
 import { useLenis } from 'lenis/react'
+import { ThemeSelector } from './theme-selector'
 
 export function Header() {
-  const [isDark, setIsDark] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
   const t = useTranslations('header.nav')
   const tContact = useTranslations('hero.contact')
   const { locale, setLocale, isLoading } = useLocale()
+  const { isDark, accentTheme, toggleMode, setAccentTheme } = useTheme()
   const lenis = useLenis()
   const pathname = usePathname()
 
@@ -27,7 +30,6 @@ export function Header() {
 
   useEffect(() => {
     setMounted(true)
-    setIsDark(document.documentElement.classList.contains('dark'))
   }, [])
 
   // Handle scroll to hash on initial page load or when URL has hash
@@ -54,19 +56,6 @@ export function Header() {
       return () => clearTimeout(timer)
     }
   }, [mounted, lenis])
-
-  const toggleTheme = () => {
-    const newIsDark = !isDark
-    setIsDark(newIsDark)
-
-    if (newIsDark) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
-  }
 
   const handleLanguageChange = (newLocale: 'en' | 'vi' | 'zh-TW') => {
     setLocale(newLocale)
@@ -248,17 +237,38 @@ export function Header() {
             </div>
 
             {/* Theme Toggle - Desktop only */}
-            <button
-              onClick={toggleTheme}
-              className='hidden md:flex p-2 rounded-lg hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer'
-              aria-label='Toggle theme'
-            >
-              {displayIsDark ? (
-                <Sun className='w-4 h-4 text-foreground transition-transform duration-300' />
-              ) : (
-                <Moon className='w-4 h-4 text-foreground transition-transform duration-300' />
+            <div className='relative hidden md:block'>
+              <button
+                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+                className='flex items-center gap-2 rounded-lg p-2 hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-105 touch-manipulation cursor-pointer'
+                aria-label='Open theme settings'
+              >
+                <Palette className='h-4 w-4 text-foreground transition-transform duration-300' />
+                {displayIsDark ? (
+                  <Moon className='h-4 w-4 text-primary transition-transform duration-300' />
+                ) : (
+                  <Sun className='h-4 w-4 text-primary transition-transform duration-300' />
+                )}
+              </button>
+
+              {isThemeMenuOpen && (
+                <>
+                  <div
+                    className='fixed inset-0 z-40'
+                    onClick={() => setIsThemeMenuOpen(false)}
+                  />
+                  <div className='absolute right-0 top-full z-50 mt-2'>
+                    <ThemeSelector
+                      compact
+                      isDark={displayIsDark}
+                      accentTheme={accentTheme}
+                      onToggleMode={toggleMode}
+                      onAccentThemeChange={setAccentTheme}
+                    />
+                  </div>
+                </>
               )}
-            </button>
+            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -345,23 +355,17 @@ export function Header() {
               </div>
 
               {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className='w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer'
-                aria-label='Toggle theme'
-              >
-                <span className='text-sm font-medium text-foreground'>
-                  Theme
-                </span>
-                {displayIsDark ? (
-                  <Sun className='w-5 h-5 text-foreground' />
-                ) : (
-                  <Moon className='w-5 h-5 text-foreground' />
-                )}
-              </button>
+              <div className='px-1 pt-1'>
+                <ThemeSelector
+                  isDark={displayIsDark}
+                  accentTheme={accentTheme}
+                  onToggleMode={toggleMode}
+                  onAccentThemeChange={setAccentTheme}
+                />
+              </div>
             </div>
           </nav>
-        </DrawerContent>
+      </DrawerContent>
       </Drawer>
     </>
   )

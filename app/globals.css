@@ -115,6 +115,126 @@
   --yellow-foreground: hsl(225 14% 11%);
 }
 
+:root[data-accent-theme='cobalt'] {
+  --primary: hsl(221 83% 53%);
+  --primary-foreground: hsl(0 0% 100%);
+  --accent: hsl(214 100% 95%);
+  --accent-foreground: hsl(222 32% 14%);
+  --ring: hsl(221 83% 53%);
+  --chart-1: hsl(221 83% 53%);
+  --chart-4: hsl(199 89% 48%);
+  --blue: hsl(217 91% 60%);
+  --cyan: hsl(199 89% 48%);
+}
+
+:root.dark[data-accent-theme='cobalt'] {
+  --primary: hsl(213 94% 68%);
+  --primary-foreground: hsl(222 32% 14%);
+  --accent: hsl(220 28% 17%);
+  --accent-foreground: hsl(210 20% 96%);
+  --ring: hsl(213 94% 68%);
+  --chart-1: hsl(213 94% 68%);
+  --chart-4: hsl(199 89% 58%);
+  --blue: hsl(213 94% 68%);
+  --cyan: hsl(199 89% 58%);
+}
+
+:root[data-accent-theme='emerald'] {
+  --primary: hsl(158 64% 34%);
+  --primary-foreground: hsl(0 0% 100%);
+  --accent: hsl(152 45% 92%);
+  --accent-foreground: hsl(222 32% 14%);
+  --ring: hsl(158 64% 34%);
+  --chart-1: hsl(158 64% 34%);
+  --chart-4: hsl(142 71% 45%);
+  --green: hsl(158 64% 34%);
+  --cyan: hsl(173 58% 39%);
+}
+
+:root.dark[data-accent-theme='emerald'] {
+  --primary: hsl(160 84% 39%);
+  --primary-foreground: hsl(222 32% 14%);
+  --accent: hsl(160 20% 15%);
+  --accent-foreground: hsl(210 20% 96%);
+  --ring: hsl(160 84% 39%);
+  --chart-1: hsl(160 84% 39%);
+  --chart-4: hsl(142 71% 50%);
+  --green: hsl(160 84% 39%);
+  --cyan: hsl(173 70% 48%);
+}
+
+:root[data-accent-theme='coral'] {
+  --primary: hsl(7 78% 57%);
+  --primary-foreground: hsl(0 0% 100%);
+  --accent: hsl(12 100% 94%);
+  --accent-foreground: hsl(222 32% 14%);
+  --ring: hsl(7 78% 57%);
+  --chart-1: hsl(7 78% 57%);
+  --chart-4: hsl(345 83% 63%);
+  --magenta: hsl(345 83% 63%);
+  --yellow: hsl(32 95% 56%);
+}
+
+:root.dark[data-accent-theme='coral'] {
+  --primary: hsl(9 91% 68%);
+  --primary-foreground: hsl(222 32% 14%);
+  --accent: hsl(8 26% 16%);
+  --accent-foreground: hsl(210 20% 96%);
+  --ring: hsl(9 91% 68%);
+  --chart-1: hsl(9 91% 68%);
+  --chart-4: hsl(345 83% 68%);
+  --magenta: hsl(345 83% 68%);
+  --yellow: hsl(32 95% 62%);
+}
+
+:root[data-accent-theme='violet'] {
+  --primary: hsl(262 67% 52%);
+  --primary-foreground: hsl(0 0% 100%);
+  --accent: hsl(270 100% 96%);
+  --accent-foreground: hsl(222 32% 14%);
+  --ring: hsl(262 67% 52%);
+  --chart-1: hsl(262 67% 52%);
+  --chart-4: hsl(292 76% 61%);
+  --purple: hsl(262 67% 52%);
+  --magenta: hsl(292 76% 61%);
+}
+
+:root.dark[data-accent-theme='violet'] {
+  --primary: hsl(267 85% 73%);
+  --primary-foreground: hsl(222 32% 14%);
+  --accent: hsl(260 26% 16%);
+  --accent-foreground: hsl(210 20% 96%);
+  --ring: hsl(267 85% 73%);
+  --chart-1: hsl(267 85% 73%);
+  --chart-4: hsl(292 76% 68%);
+  --purple: hsl(267 85% 73%);
+  --magenta: hsl(292 76% 68%);
+}
+
+:root[data-accent-theme='amber'] {
+  --primary: hsl(35 92% 45%);
+  --primary-foreground: hsl(0 0% 100%);
+  --accent: hsl(45 100% 92%);
+  --accent-foreground: hsl(222 32% 14%);
+  --ring: hsl(35 92% 45%);
+  --chart-1: hsl(35 92% 45%);
+  --chart-4: hsl(24 95% 53%);
+  --yellow: hsl(43 96% 50%);
+  --magenta: hsl(24 95% 53%);
+}
+
+:root.dark[data-accent-theme='amber'] {
+  --primary: hsl(43 96% 56%);
+  --primary-foreground: hsl(222 32% 14%);
+  --accent: hsl(34 24% 16%);
+  --accent-foreground: hsl(210 20% 96%);
+  --ring: hsl(43 96% 56%);
+  --chart-1: hsl(43 96% 56%);
+  --chart-4: hsl(24 95% 60%);
+  --yellow: hsl(43 96% 56%);
+  --magenta: hsl(24 95% 60%);
+}
+
 @theme inline {
   /* Font families */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
