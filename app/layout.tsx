@@ -27,7 +27,7 @@ export default function RootLayout({
       <head>
         <link rel='manifest' href='/manifest.json' />
         <link rel='apple-touch-icon' href='/icon-192x192.png' />
-        <meta name='theme-color' content='#3b82f6' />
+        <meta name='theme-color' content='#0f766e' />
       </head>
       <body
         className={`${inter.className} ${spaceGrotesk.variable} bg-background text-foreground`}
