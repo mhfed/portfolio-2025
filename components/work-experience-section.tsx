@@ -54,44 +54,44 @@ export async function WorkExperienceSection() {
 
   return (
     <section id='experience' className='scroll-mt-24 px-4 md:px-6'>
-      <div className='max-w-5xl mx-auto'>
-        {/* Header */}
-        <div className='mb-4 md:mb-6'>
-          <SectionTitle
-            title={t.rich('title', {
-              br: () => <br />,
-            })}
-            className='mb-0'
-          />
-        </div>
+      <div className='mx-auto max-w-[1200px]'>
+        <div className='terminal-panel px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
+          <div className='mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+            <SectionTitle
+              title={t.rich('title', {
+                br: () => <br />,
+              })}
+              className='mb-0'
+            />
 
-        {/* Timeline Layout */}
-        <div className='relative'>
-          {/* Vertical line */}
-          <div className='absolute left-3 md:left-32 top-0 bottom-0 w-px bg-border/70 pointer-events-none' />
+            <span className='self-start rounded-full border border-primary/15 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-primary'>
+              {timelineItems.length} entries
+            </span>
+          </div>
 
-          <div className='space-y-5 md:space-y-7'>
-            {dbExperiences.length === 0 ? (
-              <p className='pl-10 md:pl-40 text-muted-foreground'>
-                {t('noExperience') || 'No work experience yet.'}
-              </p>
-            ) : (
-              timelineItems.map((item, idx) => (
-                <div key={idx} className='relative pl-10 md:pl-40'>
-                  {/* Dot */}
-                  <div className='absolute left-1 md:left-[calc(8rem-6px)] top-2 w-3 h-3 rounded-full bg-background border border-primary shadow-sm' />
+          <div className='overflow-hidden rounded-[1.5rem] border border-primary/15 bg-background/55'>
+            <div className='flex items-center justify-between border-b border-primary/10 px-4 py-3 md:px-5'>
+              <div className='flex items-center gap-2'>
+                <span className='h-2.5 w-2.5 rounded-full bg-red-400/70' />
+                <span className='h-2.5 w-2.5 rounded-full bg-yellow-400/70' />
+                <span className='h-2.5 w-2.5 rounded-full bg-primary/80' />
+              </div>
+              <span className='font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/55'>
+                work_logs.sh
+              </span>
+            </div>
 
-                  {/* Period - Desktop */}
-                  <div className='hidden md:block md:absolute md:left-0 md:top-1 md:w-32 md:text-right md:pr-4'>
-                    <span className='text-xs text-foreground/60 uppercase tracking-[0.16em] font-medium'>
-                      {item.period}
-                    </span>
-                  </div>
-
-                  <TimelineItem {...item} />
-                </div>
-              ))
-            )}
+            <div className='space-y-4 p-4 md:p-6'>
+              {dbExperiences.length === 0 ? (
+                <p className='rounded-[1.25rem] border border-dashed border-primary/15 px-4 py-8 text-center text-muted-foreground'>
+                  {t('noExperience') || 'No work experience yet.'}
+                </p>
+              ) : (
+                timelineItems.map((item, idx) => (
+                  <TimelineItem key={`${item.company}-${idx}`} {...item} />
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>

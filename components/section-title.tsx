@@ -5,10 +5,12 @@ interface SectionTitleProps {
 
 export function SectionTitle({ title, className = '' }: SectionTitleProps) {
   return (
-    <h2
-      className={`mb-4 text-2xl font-bold uppercase leading-tight tracking-tight text-primary md:mb-6 md:text-3xl lg:text-4xl ${className}`}
-    >
-      {title}
-    </h2>
+    <div className={`mb-5 md:mb-7 ${className}`}>
+      <span className='terminal-label mb-3'>section</span>
+      <h2 className='font-display text-3xl font-semibold uppercase leading-[0.95] tracking-[-0.06em] text-foreground md:text-4xl lg:text-5xl'>
+        {title}
+      </h2>
+      <div className='terminal-divider mt-4' />
+    </div>
   )
 }

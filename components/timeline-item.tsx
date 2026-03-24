@@ -5,7 +5,6 @@ import { Button } from './ui/button'
 import {
   Drawer,
   DrawerTrigger,
-  DrawerContent,
   DrawerContentSide,
   DrawerHeader,
   DrawerTitle,
@@ -15,7 +14,7 @@ import {
 } from './ui/drawer'
 import { ScrollArea } from './ui/scroll-area'
 import { useTranslations } from 'next-intl'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface TimelineItemProps {
   company: string
@@ -51,50 +50,49 @@ export function TimelineItem({
   // But strictly, we should only show if details is present.
 
   return (
-    <div>
-      <div>
-        <div className='flex items-start justify-between gap-3'>
-          <h3 className='text-lg md:text-xl lg:text-2xl text-foreground font-semibold'>
+    <article className='rounded-[1.4rem] border border-primary/12 bg-card/80 p-5 md:p-6'>
+      <div className='flex flex-col gap-4 md:flex-row md:items-start md:justify-between'>
+        <div className='min-w-0'>
+          <div className='mb-3 flex flex-wrap items-center gap-2'>
+            <Badge
+              variant='outline'
+              className='rounded-full border-primary/20 bg-primary/10 font-mono text-[10px] uppercase tracking-[0.24em] text-primary hover:bg-primary/10'
+              size='sm'
+            >
+              {period}
+            </Badge>
+          </div>
+
+          <h3 className='text-xl font-semibold tracking-[-0.04em] text-foreground md:text-2xl'>
             {company}
           </h3>
-          <Badge
-            variant='outline'
-            className='bg-primary/50 border-primary/20 text-foreground hover:bg-primary/20 hover:border-primary/40 hover:scale-105 hover:shadow-sm active:scale-[0.98] font-medium rounded-full md:hidden'
-            size='md'
-          >
-            {period}
-          </Badge>
+          <p className='mt-1 text-sm uppercase tracking-[0.18em] text-foreground/55 md:text-[13px]'>
+            {position}
+          </p>
         </div>
-        <p className='mb-1 text-base text-foreground/80 leading-relaxed italic md:text-base lg:text-base'>
-          {position}
-        </p>
-
-        <p className='text-sm md:text-base lg:text-base text-foreground/80 leading-relaxed line-clamp-2'>
-          {description}
-        </p>
 
         <Drawer open={isOpen} onOpenChange={setIsOpen} direction='right'>
           <DrawerTrigger asChild>
             <Button
-              variant='link'
-              className='mt-1 h-auto px-0 py-0 font-medium opacity-90 hover:opacity-80'
+              variant='outline'
+              className='shrink-0 rounded-full font-mono text-[10px] uppercase tracking-[0.24em]'
             >
               {seeMoreText}
             </Button>
           </DrawerTrigger>
-          <DrawerContentSide className='data-[vaul-drawer-direction=bottom]:max-h-[50vh] data-[vaul-drawer-direction=top]:max-h-[50vh]'>
-            <div className='w-full h-full flex flex-col'>
+          <DrawerContentSide className='border-primary/15 bg-card/95 backdrop-blur-xl data-[vaul-drawer-direction=bottom]:max-h-[50vh] data-[vaul-drawer-direction=top]:max-h-[50vh]'>
+            <div className='flex h-full w-full flex-col'>
               <DrawerHeader className='text-left'>
-                <DrawerTitle className='text-2xl font-bold'>
+                <DrawerTitle className='text-2xl font-semibold tracking-[-0.05em]'>
                   {company}
                 </DrawerTitle>
-                <DrawerDescription className='text-lg font-medium text-foreground/90'>
-                  {position} ({period})
+                <DrawerDescription className='font-mono text-xs uppercase tracking-[0.2em] text-primary/80'>
+                  {position} / {period}
                 </DrawerDescription>
               </DrawerHeader>
-              <div className='p-4 py-0 flex-1 overflow-hidden'>
+              <div className='flex-1 overflow-hidden px-4 pb-2'>
                 <ScrollArea className='h-full pr-4'>
-                  <div className='whitespace-pre-line text-foreground/80 leading-relaxed pb-8'>
+                  <div className='whitespace-pre-line pb-8 text-sm leading-relaxed text-foreground/80 md:text-base'>
                     {description}
                   </div>
                 </ScrollArea>
@@ -107,17 +105,21 @@ export function TimelineItem({
             </div>
           </DrawerContentSide>
         </Drawer>
-
-        {skills && skills.length > 0 && (
-          <div className='mt-2 flex flex-wrap gap-2'>
-            {skills.map((skill) => (
-              <Badge key={skill} variant='primary' size='sm'>
-                {skill}
-              </Badge>
-            ))}
-          </div>
-        )}
       </div>
-    </div>
+
+      <p className='mt-4 line-clamp-3 text-sm leading-relaxed text-foreground/75 md:text-base'>
+        {description}
+      </p>
+
+      {skills && skills.length > 0 && (
+        <div className='mt-4 flex flex-wrap gap-2'>
+          {skills.map((skill) => (
+            <Badge key={skill} variant='primary' size='sm'>
+              {skill}
+            </Badge>
+          ))}
+        </div>
+      )}
+    </article>
   )
 }

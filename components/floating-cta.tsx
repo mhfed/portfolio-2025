@@ -34,7 +34,7 @@ export function FloatingCTA() {
   if (!isVisible) return null
 
   return (
-    <div className='fixed bottom-6 left-6 z-50'>
+    <div className='fixed bottom-[4.5rem] left-4 z-50 md:bottom-20 md:left-6'>
       <ShinyButton
         onClick={handleDownload}
         variant='gradient'

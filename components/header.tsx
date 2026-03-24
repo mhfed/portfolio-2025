@@ -4,7 +4,7 @@ import type React from 'react'
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
-import { Sun, Moon, Languages, Palette } from 'lucide-react'
+import { Sun, Moon, Languages, Palette, Search } from 'lucide-react'
 import { useLocale } from '@/hooks/use-locale'
 import { useTheme } from '@/hooks/use-theme'
 import { routing, Link, usePathname } from '@/i18n/routing'
@@ -141,76 +141,74 @@ export function Header() {
 
   // Render header immediately to prevent layout shift, use default values until mounted
   const displayIsDark = mounted ? isDark : false
+  const isBlogPage = pathname.startsWith('/blog')
 
   return (
     <>
       <header
-        className='sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 border-b border-border/10'
+        className='sticky top-0 z-50 border-b border-primary/15 bg-background/80 backdrop-blur-2xl supports-backdrop-filter:bg-background/55'
         style={{ height: 'var(--header-height)' }}
       >
-        <nav className='max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between gap-4'>
-          <ScrollProgress className='h-0.5 top-(--header-height)' />
+        <nav className='mx-auto flex h-full max-w-[1600px] items-center justify-between gap-3 px-4 md:px-6 lg:px-8'>
+          <ScrollProgress className='top-[calc(var(--header-height)-1px)] h-px' />
 
-          {/* Logo - Left Side on Desktop, Center on Mobile */}
           <Link
             href={homePath}
-            className='text-primary font-mono text-lg md:text-xl font-bold hover:opacity-80 transition-opacity md:order-first order-0 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0'
+            className='group flex min-w-0 items-center gap-3'
           >
-            &lt;Hieu /&gt;
-          </Link>
-
-          {/* Contact Info - Left Side (2 columns) - Hidden on Mobile */}
-          <div className='hidden md:flex flex-row gap-6 md:gap-8 shrink-0 min-w-0'>
-            {/* Based in */}
-            <div className='flex flex-col gap-0.5'>
-              <span className='text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider'>
-                {tContact('basedIn')}
+            <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 font-mono text-xs font-semibold tracking-[0.3em] text-primary'>
+              OS
+            </span>
+            <div className='min-w-0'>
+              <span className='block font-mono text-[10px] uppercase tracking-[0.3em] text-primary/70'>
+                architect node
               </span>
-              <span className='text-xs md:text-sm text-foreground/80 font-semibold truncate'>
-                {tContact('location')}
+              <span className='block truncate font-display text-base font-semibold tracking-[0.18em] text-foreground transition-colors group-hover:text-primary md:text-lg'>
+                HIEU_OS
               </span>
             </div>
+          </Link>
 
-            {/* Say hello */}
-            <div className='flex flex-col gap-0.5'>
-              <span className='text-[10px] md:text-xs text-foreground/60 font-medium uppercase tracking-wider'>
-                {tContact('sayHello')}
-              </span>
-              <a
-                href={`mailto:${tContact('email')}`}
-                className='text-xs md:text-sm text-foreground/80 font-semibold underline hover:text-primary transition-colors truncate'
-              >
-                {tContact('email')}
-              </a>
+          <div className='hidden xl:flex min-w-0 items-center gap-3 rounded-full border border-primary/15 bg-card/60 px-4 py-2'>
+            <Search className='h-4 w-4 shrink-0 text-primary' />
+            <div className='truncate font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/65'>
+              {tContact('basedIn')}: {tContact('location')}
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <div className='hidden md:flex gap-8 items-center'>
+          <div className='hidden md:flex items-center gap-1 rounded-full border border-primary/15 bg-card/60 p-1.5'>
             {navLinks.map((link) => (
               <Link
                 key={link.key}
                 href={link.href}
                 scroll={!link.href.includes('#')}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className='text-foreground/80 hover:text-primary transition-all duration-300 ease-in-out text-sm font-medium uppercase relative group'
+                className={`rounded-full px-3 py-2 font-mono text-[11px] uppercase tracking-[0.26em] transition-all duration-300 ${
+                  link.key === 'blog' && isBlogPage
+                    ? 'bg-primary/12 text-primary shadow-[0_0_20px_rgba(34,211,153,0.1)]'
+                    : 'text-foreground/70 hover:bg-primary/10 hover:text-primary'
+                }`}
               >
                 {link.name}
-                <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out group-hover:w-full'></span>
               </Link>
             ))}
           </div>
 
-          {/* Right Side Actions */}
-          <div className='flex items-center gap-3 md:gap-4 shrink-0'>
-            {/* Language Switcher - Desktop only */}
+          <div className='flex items-center gap-2 md:gap-3 shrink-0'>
+            <a
+              href={`mailto:${tContact('email')}`}
+              className='hidden lg:flex items-center rounded-full border border-primary/15 bg-card/60 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/75 transition-colors hover:border-primary/40 hover:text-primary'
+            >
+              {tContact('sayHello')}: {tContact('email')}
+            </a>
+
             <div className='hidden md:block relative'>
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className='p-2 rounded-md hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-110 touch-manipulation cursor-pointer'
+                className='inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-primary/15 bg-card/60 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary'
                 aria-label='Change language'
               >
-                <Languages className='w-4 h-4 text-foreground transition-transform duration-300' />
+                <Languages className='h-4 w-4 text-foreground transition-transform duration-300' />
               </button>
 
               {isLanguageMenuOpen && (
@@ -219,13 +217,15 @@ export function Header() {
                     className='fixed inset-0 z-40'
                     onClick={() => setIsLanguageMenuOpen(false)}
                   />
-                  <div className='absolute right-0 top-full mt-2 bg-background border border-border/30 rounded-lg shadow-lg z-50 min-w-[120px] overflow-hidden'>
+                  <div className='absolute right-0 top-full z-50 mt-3 min-w-[140px] overflow-hidden rounded-2xl border border-primary/15 bg-card/95 p-2 shadow-2xl backdrop-blur-xl'>
                     {routing.locales.map((loc) => (
                       <button
                         key={loc}
                         onClick={() => handleLanguageChange(loc)}
-                        className={`w-full px-4 py-2 text-left text-sm hover:bg-primary/10 transition-all duration-300 ease-in-out rounded-md cursor-pointer hover:scale-[1.02] ${
-                          locale === loc ? 'bg-primary/20 font-semibold' : ''
+                        className={`w-full rounded-xl px-4 py-2.5 text-left font-mono text-xs uppercase tracking-[0.24em] transition-all duration-300 ${
+                          locale === loc
+                            ? 'bg-primary/15 text-primary'
+                            : 'text-foreground/75 hover:bg-primary/10 hover:text-primary'
                         }`}
                       >
                         {loc.toUpperCase()}
@@ -240,7 +240,7 @@ export function Header() {
             <div className='relative hidden md:block'>
               <button
                 onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-                className='flex items-center gap-2 rounded-lg p-2 hover:bg-primary/10 transition-all duration-300 ease-in-out hover:scale-105 touch-manipulation cursor-pointer'
+                className='inline-flex h-10 items-center gap-2 rounded-2xl border border-primary/15 bg-card/60 px-3 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10'
                 aria-label='Open theme settings'
               >
                 <Palette className='h-4 w-4 text-foreground transition-transform duration-300' />
@@ -273,7 +273,7 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className='md:hidden flex flex-col gap-1.5 w-7 h-7 justify-center items-center touch-manipulation p-1 cursor-pointer'
+              className='flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-2xl border border-primary/15 bg-card/60 p-1 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 md:hidden'
               aria-label='Toggle menu'
               aria-expanded={isMobileMenuOpen}
             >
@@ -297,38 +297,38 @@ export function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu - Bottom Sheet */}
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerContent className='max-h-[85vh]'>
+        <DrawerContent className='max-h-[85vh] border-primary/15 bg-card/95 backdrop-blur-2xl'>
           <nav className='flex flex-col h-full'>
-            {/* Navigation Links */}
-            <div className='flex flex-col p-6 gap-1 flex-1 overflow-y-auto'>
+            <div className='px-6 pt-6'>
+              <span className='terminal-label'>system menu</span>
+            </div>
+
+            <div className='flex flex-1 flex-col gap-1 overflow-y-auto p-6'>
               {navLinks.map((link) => (
                 <Link
                   key={link.key}
                   href={link.href}
                   scroll={!link.href.includes('#')}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className='text-foreground hover:text-primary transition-all duration-300 ease-in-out text-base font-semibold uppercase py-4 px-4 rounded-md hover:bg-primary/10 active:bg-primary/20 touch-manipulation hover:scale-[1.02]'
+                  className='rounded-2xl border border-transparent px-4 py-4 font-mono text-sm uppercase tracking-[0.24em] text-foreground transition-all duration-300 hover:border-primary/20 hover:bg-primary/10 hover:text-primary'
                 >
                   {link.name}
                 </Link>
               ))}
             </div>
 
-            {/* Mobile Actions - Language & Theme */}
-            <div className='border-t border-border/30 p-4 space-y-3'>
-              {/* Language Switcher */}
+            <div className='space-y-3 border-t border-primary/15 p-4'>
               <div className='relative'>
                 <button
                   onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                  className='w-full flex items-center justify-between px-4 py-3 rounded-md hover:bg-primary/10 transition-colors touch-manipulation cursor-pointer'
+                  className='flex w-full items-center justify-between rounded-2xl border border-primary/15 bg-background/60 px-4 py-3 transition-colors'
                   aria-label='Change language'
                 >
-                  <span className='text-sm font-medium text-foreground'>
+                  <span className='font-mono text-xs uppercase tracking-[0.24em] text-foreground'>
                     Language
                   </span>
-                  <Languages className='w-5 h-5 text-foreground' />
+                  <Languages className='h-5 w-5 text-foreground' />
                 </button>
 
                 {isLanguageMenuOpen && (
@@ -337,13 +337,15 @@ export function Header() {
                       className='fixed inset-0 z-40'
                       onClick={() => setIsLanguageMenuOpen(false)}
                     />
-                    <div className='absolute left-0 right-0 bottom-full mb-2 bg-background border border-border/30 rounded-lg shadow-lg z-50'>
+                    <div className='absolute bottom-full left-0 right-0 z-50 mb-2 rounded-2xl border border-primary/15 bg-card/95 p-2 shadow-lg'>
                       {routing.locales.map((loc) => (
                         <button
                           key={loc}
                           onClick={() => handleLanguageChange(loc)}
-                          className={`w-full px-4 py-3 text-left text-sm hover:bg-primary/10 transition-colors rounded-md cursor-pointer ${
-                            locale === loc ? 'bg-primary/20 font-semibold' : ''
+                          className={`w-full rounded-xl px-4 py-3 text-left font-mono text-xs uppercase tracking-[0.24em] transition-colors ${
+                            locale === loc
+                              ? 'bg-primary/15 text-primary'
+                              : 'text-foreground/75 hover:bg-primary/10 hover:text-primary'
                           }`}
                         >
                           {loc.toUpperCase()}
@@ -354,7 +356,6 @@ export function Header() {
                 )}
               </div>
 
-              {/* Theme Toggle */}
               <div className='px-1 pt-1'>
                 <ThemeSelector
                   isDark={displayIsDark}
@@ -365,7 +366,7 @@ export function Header() {
               </div>
             </div>
           </nav>
-      </DrawerContent>
+        </DrawerContent>
       </Drawer>
     </>
   )

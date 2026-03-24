@@ -1,6 +1,6 @@
 import { getTranslations, getLocale } from 'next-intl/server'
 import { SectionTitle } from './section-title'
-import { ProjectCard } from './project-card'
+import { ProjectRepositoryCard } from './project-repository-card'
 import { db } from '@/lib/db'
 import { projects } from '@/db/schema'
 import { desc } from 'drizzle-orm'
@@ -62,23 +62,31 @@ export async function ProjectsSection() {
 
   return (
     <section id='projects' className='scroll-mt-24 px-4 md:px-6'>
-      <div className='max-w-5xl mx-auto'>
-        <SectionTitle title={t('title')} />
-        <div className='space-y-4 md:space-y-6'>
-          {mappedProjects.length === 0 ? (
-            <p className='text-muted-foreground text-center py-12'>
-              {t('noProjects') || 'No projects available yet.'}
-            </p>
-          ) : (
-            mappedProjects.map((project, idx) => (
-              <ProjectCard
-                key={project.title + idx}
-                {...project}
-                isAlternate={idx % 2 === 1}
-                index={idx}
-              />
-            ))
-          )}
+      <div className='mx-auto max-w-[1200px]'>
+        <div className='terminal-panel px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
+          <div className='mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+            <SectionTitle title={t('title')} className='mb-0' />
+            <span className='self-start rounded-full border border-primary/15 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-primary'>
+              repository: {mappedProjects.length} modules
+            </span>
+          </div>
+
+          <div className='grid auto-rows-[minmax(250px,auto)] grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4'>
+            {mappedProjects.length === 0 ? (
+              <p className='col-span-full rounded-[1.25rem] border border-dashed border-primary/15 py-12 text-center text-muted-foreground'>
+                {t('noProjects') || 'No projects available yet.'}
+              </p>
+            ) : (
+              mappedProjects.map((project, idx) => (
+                <ProjectRepositoryCard
+                  key={project.title + idx}
+                  {...project}
+                  index={idx}
+                  featured={idx === 0}
+                />
+              ))
+            )}
+          </div>
         </div>
       </div>
     </section>

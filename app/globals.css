@@ -16,6 +16,22 @@
 
   --primary: hsl(187 72% 32%);
   --primary-foreground: hsl(0 0% 100%);
+  --theme-secondary: hsl(167 63% 42%);
+  --theme-tertiary: hsl(203 76% 58%);
+  --theme-soft: hsl(184 42% 92%);
+  --theme-strong: hsl(187 44% 20%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 10%, transparent) 0%,
+      transparent 32%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 24%, var(--background)) 0%, var(--background) 28%);
 
   --secondary: hsl(200 24% 94%);
   --secondary-foreground: hsl(222 32% 14%);
@@ -34,95 +50,91 @@
   --input: hsl(210 19% 87%);
   --ring: hsl(187 72% 32%);
 
-  --chart-1: hsl(187 72% 32%);
-  --chart-2: hsl(8 73% 56%);
-  --chart-3: hsl(220 22% 34%);
-  --chart-4: hsl(160 45% 42%);
-  --chart-5: hsl(198 30% 66%);
-
   --green: hsl(160 70% 33%);
-  --green-foreground: hsl(0 0% 100%);
-
   --cyan: hsl(190 82% 38%);
-  --cyan-foreground: hsl(0 0% 100%);
-
   --purple: hsl(254 32% 45%);
-  --purple-foreground: hsl(0 0% 100%);
-
   --blue: hsl(208 74% 42%);
-  --blue-foreground: hsl(0 0% 100%);
-
   --magenta: hsl(334 64% 46%);
-  --magenta-foreground: hsl(0 0% 100%);
-
   --yellow: hsl(38 78% 48%);
-  --yellow-foreground: hsl(222 32% 14%);
 
   --radius: 0.5rem;
 }
 
 .dark {
   /* Dark Mode - Deep Slate and Teal */
-  --background: hsl(222 30% 9%);
+  --background: hsl(220 32% 7%);
   --foreground: hsl(210 20% 96%);
 
-  --card: hsl(222 24% 13%);
+  --card: hsl(220 24% 10%);
   --card-foreground: hsl(210 20% 96%);
-  --popover: hsl(222 24% 13%);
+  --popover: hsl(220 24% 10%);
   --popover-foreground: hsl(210 20% 96%);
 
   --primary: hsl(184 65% 58%);
   --primary-foreground: hsl(222 32% 14%);
+  --theme-secondary: hsl(169 68% 46%);
+  --theme-tertiary: hsl(198 88% 62%);
+  --theme-soft: hsl(188 24% 16%);
+  --theme-strong: hsl(188 56% 72%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 16%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
+      transparent 28%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 72%, var(--background)) 0%, var(--background) 32%);
 
-  --secondary: hsl(218 18% 18%);
+  --secondary: hsl(220 17% 14%);
   --secondary-foreground: hsl(210 20% 96%);
 
-  --muted: hsl(218 18% 18%);
+  --muted: hsl(220 17% 14%);
   --muted-foreground: hsl(214 14% 68%);
 
-  --accent: hsl(217 22% 15%);
+  --accent: hsl(220 18% 12%);
   --accent-foreground: hsl(210 20% 96%);
 
   --destructive: hsl(352 90% 62%);
   --destructive-foreground: hsl(0 0% 100%);
 
-  --border: hsl(218 17% 22%);
-  --input: hsl(218 17% 22%);
+  --border: hsl(220 14% 20%);
+  --input: hsl(220 14% 20%);
   --ring: hsl(184 65% 58%);
 
-  --chart-1: hsl(184 65% 58%);
-  --chart-2: hsl(352 90% 62%);
-  --chart-3: hsl(210 18% 72%);
-  --chart-4: hsl(160 52% 45%);
-  --chart-5: hsl(38 80% 60%);
-
   --green: hsl(160 62% 45%);
-  --green-foreground: hsl(0 0% 100%);
-
   --cyan: hsl(188 78% 56%);
-  --cyan-foreground: hsl(225 14% 11%);
-
   --purple: hsl(255 40% 68%);
-  --purple-foreground: hsl(0 0% 100%);
-
   --blue: hsl(205 86% 62%);
-  --blue-foreground: hsl(0 0% 100%);
-
   --magenta: hsl(334 82% 64%);
-  --magenta-foreground: hsl(0 0% 100%);
-
   --yellow: hsl(38 92% 62%);
-  --yellow-foreground: hsl(225 14% 11%);
 }
 
 :root[data-accent-theme='cobalt'] {
   --primary: hsl(221 83% 53%);
   --primary-foreground: hsl(0 0% 100%);
+  --theme-secondary: hsl(199 89% 48%);
+  --theme-tertiary: hsl(249 83% 67%);
+  --theme-soft: hsl(214 100% 95%);
+  --theme-strong: hsl(221 58% 24%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
+      transparent 30%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 26%, var(--background)) 0%, var(--background) 28%);
   --accent: hsl(214 100% 95%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(221 83% 53%);
-  --chart-1: hsl(221 83% 53%);
-  --chart-4: hsl(199 89% 48%);
   --blue: hsl(217 91% 60%);
   --cyan: hsl(199 89% 48%);
 }
@@ -130,11 +142,25 @@
 :root.dark[data-accent-theme='cobalt'] {
   --primary: hsl(213 94% 68%);
   --primary-foreground: hsl(222 32% 14%);
+  --theme-secondary: hsl(199 89% 58%);
+  --theme-tertiary: hsl(250 95% 76%);
+  --theme-soft: hsl(220 28% 17%);
+  --theme-strong: hsl(214 100% 78%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 18%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 14%, transparent) 0%,
+      transparent 28%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 76%, var(--background)) 0%, var(--background) 32%);
   --accent: hsl(220 28% 17%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(213 94% 68%);
-  --chart-1: hsl(213 94% 68%);
-  --chart-4: hsl(199 89% 58%);
   --blue: hsl(213 94% 68%);
   --cyan: hsl(199 89% 58%);
 }
@@ -142,11 +168,25 @@
 :root[data-accent-theme='emerald'] {
   --primary: hsl(158 64% 34%);
   --primary-foreground: hsl(0 0% 100%);
+  --theme-secondary: hsl(173 58% 39%);
+  --theme-tertiary: hsl(84 57% 45%);
+  --theme-soft: hsl(152 45% 92%);
+  --theme-strong: hsl(158 46% 18%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 10%, transparent) 0%,
+      transparent 28%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%, var(--background) 30%);
   --accent: hsl(152 45% 92%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(158 64% 34%);
-  --chart-1: hsl(158 64% 34%);
-  --chart-4: hsl(142 71% 45%);
   --green: hsl(158 64% 34%);
   --cyan: hsl(173 58% 39%);
 }
@@ -154,11 +194,25 @@
 :root.dark[data-accent-theme='emerald'] {
   --primary: hsl(160 84% 39%);
   --primary-foreground: hsl(222 32% 14%);
+  --theme-secondary: hsl(173 70% 48%);
+  --theme-tertiary: hsl(84 67% 54%);
+  --theme-soft: hsl(160 20% 15%);
+  --theme-strong: hsl(162 84% 72%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 18%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
+      transparent 28%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
   --accent: hsl(160 20% 15%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(160 84% 39%);
-  --chart-1: hsl(160 84% 39%);
-  --chart-4: hsl(142 71% 50%);
   --green: hsl(160 84% 39%);
   --cyan: hsl(173 70% 48%);
 }
@@ -166,11 +220,25 @@
 :root[data-accent-theme='coral'] {
   --primary: hsl(7 78% 57%);
   --primary-foreground: hsl(0 0% 100%);
+  --theme-secondary: hsl(345 83% 63%);
+  --theme-tertiary: hsl(32 95% 56%);
+  --theme-soft: hsl(12 100% 94%);
+  --theme-strong: hsl(8 54% 22%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
+      transparent 30%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%, var(--background) 30%);
   --accent: hsl(12 100% 94%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(7 78% 57%);
-  --chart-1: hsl(7 78% 57%);
-  --chart-4: hsl(345 83% 63%);
   --magenta: hsl(345 83% 63%);
   --yellow: hsl(32 95% 56%);
 }
@@ -178,11 +246,25 @@
 :root.dark[data-accent-theme='coral'] {
   --primary: hsl(9 91% 68%);
   --primary-foreground: hsl(222 32% 14%);
+  --theme-secondary: hsl(345 83% 68%);
+  --theme-tertiary: hsl(32 95% 62%);
+  --theme-soft: hsl(8 26% 16%);
+  --theme-strong: hsl(10 92% 80%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 18%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
+      transparent 28%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
   --accent: hsl(8 26% 16%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(9 91% 68%);
-  --chart-1: hsl(9 91% 68%);
-  --chart-4: hsl(345 83% 68%);
   --magenta: hsl(345 83% 68%);
   --yellow: hsl(32 95% 62%);
 }
@@ -190,11 +272,25 @@
 :root[data-accent-theme='violet'] {
   --primary: hsl(262 67% 52%);
   --primary-foreground: hsl(0 0% 100%);
+  --theme-secondary: hsl(292 76% 61%);
+  --theme-tertiary: hsl(221 83% 61%);
+  --theme-soft: hsl(270 100% 96%);
+  --theme-strong: hsl(262 44% 22%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
+      transparent 30%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%, var(--background) 30%);
   --accent: hsl(270 100% 96%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(262 67% 52%);
-  --chart-1: hsl(262 67% 52%);
-  --chart-4: hsl(292 76% 61%);
   --purple: hsl(262 67% 52%);
   --magenta: hsl(292 76% 61%);
 }
@@ -202,11 +298,25 @@
 :root.dark[data-accent-theme='violet'] {
   --primary: hsl(267 85% 73%);
   --primary-foreground: hsl(222 32% 14%);
+  --theme-secondary: hsl(292 76% 68%);
+  --theme-tertiary: hsl(221 91% 70%);
+  --theme-soft: hsl(260 26% 16%);
+  --theme-strong: hsl(272 92% 84%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 18%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
+      transparent 28%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
   --accent: hsl(260 26% 16%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(267 85% 73%);
-  --chart-1: hsl(267 85% 73%);
-  --chart-4: hsl(292 76% 68%);
   --purple: hsl(267 85% 73%);
   --magenta: hsl(292 76% 68%);
 }
@@ -214,11 +324,25 @@
 :root[data-accent-theme='amber'] {
   --primary: hsl(35 92% 45%);
   --primary-foreground: hsl(0 0% 100%);
+  --theme-secondary: hsl(24 95% 53%);
+  --theme-tertiary: hsl(12 88% 60%);
+  --theme-soft: hsl(45 100% 92%);
+  --theme-strong: hsl(34 58% 20%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 14%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
+      transparent 30%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 30%, var(--background)) 0%, var(--background) 30%);
   --accent: hsl(45 100% 92%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(35 92% 45%);
-  --chart-1: hsl(35 92% 45%);
-  --chart-4: hsl(24 95% 53%);
   --yellow: hsl(43 96% 50%);
   --magenta: hsl(24 95% 53%);
 }
@@ -226,11 +350,25 @@
 :root.dark[data-accent-theme='amber'] {
   --primary: hsl(43 96% 56%);
   --primary-foreground: hsl(222 32% 14%);
+  --theme-secondary: hsl(24 95% 60%);
+  --theme-tertiary: hsl(10 92% 66%);
+  --theme-soft: hsl(34 24% 16%);
+  --theme-strong: hsl(43 94% 82%);
+  --page-gradient:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--theme-secondary) 18%, transparent) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
+      transparent 28%
+    ),
+    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
   --accent: hsl(34 24% 16%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(43 96% 56%);
-  --chart-1: hsl(43 96% 56%);
-  --chart-4: hsl(24 95% 60%);
   --yellow: hsl(43 96% 56%);
   --magenta: hsl(24 95% 60%);
 }
@@ -241,7 +379,8 @@
   --font-display:
     var(--font-space-grotesk), 'Space Grotesk', 'Inter', system-ui,
     -apple-system, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Monaco, monospace;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'SF Mono', Monaco,
+    monospace;
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -251,6 +390,10 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-theme-secondary: var(--theme-secondary);
+  --color-theme-tertiary: var(--theme-tertiary);
+  --color-theme-soft: var(--theme-soft);
+  --color-theme-strong: var(--theme-strong);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -262,23 +405,12 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --color-green: var(--green);
-  --color-green-foreground: var(--green-foreground);
   --color-cyan: var(--cyan);
-  --color-cyan-foreground: var(--cyan-foreground);
   --color-purple: var(--purple);
-  --color-purple-foreground: var(--purple-foreground);
   --color-blue: var(--blue);
-  --color-blue-foreground: var(--blue-foreground);
   --color-magenta: var(--magenta);
-  --color-magenta-foreground: var(--magenta-foreground);
   --color-yellow: var(--yellow);
-  --color-yellow-foreground: var(--yellow-foreground);
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -290,7 +422,6 @@
   --color-sidebar-accent: var(--accent);
   --color-sidebar-accent-foreground: var(--accent-foreground);
   --color-sidebar-border: var(--border);
-  --color-sidebar-ring: var(--ring);
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 
@@ -314,13 +445,64 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
     position: relative;
+    min-height: 100vh;
+    isolation: isolate;
+    background-image: var(--page-gradient);
+    background-attachment: fixed;
   }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--primary) 10%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--primary) 10%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 48px 48px;
+    opacity: 0.12;
+    mask-image: radial-gradient(circle at center, black 25%, transparent 90%);
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at top center,
+        color-mix(in srgb, var(--primary) 18%, transparent) 0%,
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at bottom right,
+        color-mix(in srgb, var(--theme-tertiary) 14%, transparent) 0%,
+        transparent 30%
+      );
+    opacity: 0.9;
+  }
+
   button {
     @apply cursor-pointer;
   }
@@ -338,6 +520,131 @@
 }
 
 @layer utilities {
+  .terminal-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--card) 96%, transparent) 0%,
+        color-mix(in srgb, var(--background) 88%, var(--card)) 100%
+      );
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .terminal-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--primary) 12%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--primary) 10%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 28px 28px;
+    opacity: 0.18;
+    mask-image: linear-gradient(180deg, black 0%, transparent 100%);
+  }
+
+  .terminal-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at top right,
+        color-mix(in srgb, var(--primary) 18%, transparent) 0%,
+        transparent 34%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 20%,
+        transparent 80%,
+        rgba(255, 255, 255, 0.02) 100%
+      );
+    opacity: 0.4;
+  }
+
+  .terminal-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .terminal-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--primary) 8%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--primary) 8%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 32px 32px;
+  }
+
+  .terminal-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--primary) 80%, var(--foreground));
+  }
+
+  .terminal-label::before {
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 9999px;
+    background: var(--primary);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--primary) 60%, transparent);
+  }
+
+  .terminal-divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--primary) 50%, transparent) 18%,
+      color-mix(in srgb, var(--primary) 20%, transparent) 82%,
+      transparent 100%
+    );
+  }
+
+  .terminal-scanlines {
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04) 0,
+      transparent 1px,
+      transparent 8px
+    );
+    background-size: 100% 9px;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 18px color-mix(in srgb, var(--primary) 45%, transparent);
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -444,15 +751,20 @@
 
   /* Gradient utilities for neon colors */
   .bg-gradient-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--magenta) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--theme-secondary) 55%,
+      var(--theme-tertiary) 100%
+    );
   }
 
   .bg-gradient-accent {
     background: linear-gradient(
       135deg,
-      var(--green) 0%,
-      var(--cyan) 50%,
-      var(--purple) 100%
+      var(--theme-secondary) 0%,
+      color-mix(in srgb, var(--theme-secondary) 55%, var(--theme-tertiary)) 52%,
+      var(--theme-tertiary) 100%
     );
   }
 
@@ -471,16 +783,16 @@
       135deg,
       var(--primary) / 10 0%,
       transparent 50%,
-      var(--accent) / 5 100%
+      var(--theme-secondary) / 8 100%
     );
   }
 
   .overlay-accent {
     background: linear-gradient(
       135deg,
-      var(--green) / 8 0%,
-      var(--cyan) / 5 50%,
-      var(--purple) / 8 100%
+      var(--theme-secondary) / 10 0%,
+      var(--theme-tertiary) / 8 52%,
+      var(--primary) / 8 100%
     );
   }
 
@@ -719,6 +1031,32 @@
       0 0 30px var(--primary) / 20;
   }
 
+  .text-theme-gradient {
+    background-image: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--theme-secondary) 55%,
+      var(--theme-tertiary) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .bg-theme-soft {
+    background: color-mix(in srgb, var(--theme-soft) 62%, transparent);
+  }
+
+  .border-theme-soft {
+    border-color: color-mix(in srgb, var(--theme-secondary) 24%, var(--border));
+  }
+
+  .shadow-theme-glow {
+    box-shadow:
+      0 16px 40px color-mix(in srgb, var(--theme-secondary) 14%, transparent),
+      0 6px 18px color-mix(in srgb, var(--theme-tertiary) 10%, transparent);
+  }
+
   .shadow-neon-cyan {
     box-shadow:
       0 0 10px var(--cyan) / 50,
@@ -758,15 +1096,6 @@
     );
     background-size: 1000px 100%;
     animation: shimmer 2s infinite;
-  }
-
-  /* Grid pattern opacity variables */
-  :root {
-    --grid-opacity: 0.06;
-  }
-
-  .dark {
-    --grid-opacity: 0.1;
   }
 
   /* Sections có z-index để tạo stacking context, nhưng background không che grid */

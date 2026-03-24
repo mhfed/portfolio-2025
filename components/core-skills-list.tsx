@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import {
   Collapsible,
   CollapsibleTrigger,
@@ -25,63 +24,73 @@ interface CoreSkillsListProps {
 export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
   const t = useTranslations('common')
   const [isExpanded, setIsExpanded] = useState(false)
-  const initialCount = 4
+  const initialCount = 6
 
   const visibleItems = items.slice(0, initialCount)
   const hiddenItems = items.slice(initialCount)
   const hasMore = items.length > initialCount
 
   return (
-    <div className='ml-2 md:ml-4'>
-      <h3 className='mb-3 text-lg font-semibold italic text-muted-foreground md:text-xl lg:text-xl'>
-        {title}
-      </h3>
+    <div className='rounded-[1.5rem] border border-primary/15 bg-background/45 p-5 md:p-6'>
+      <div className='mb-5 flex items-center justify-between gap-4'>
+        <div>
+          <span className='terminal-label'>capability matrix</span>
+          <h3 className='mt-3 font-display text-2xl font-semibold tracking-[-0.05em] text-foreground md:text-3xl'>
+            {title}
+          </h3>
+        </div>
+        <span className='hidden rounded-full border border-primary/15 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-primary sm:inline-flex'>
+          {items.length} modules
+        </span>
+      </div>
 
       <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
-        <div className='ml-4 flex flex-col gap-2 md:ml-6'>
-          <ul className='flex flex-col gap-2'>
-            {visibleItems.map((item) => (
-              <li
-                key={item.id}
-                className='text-sm md:text-base list-disc text-muted-foreground'
-              >
-                <span className='font-bold text-muted-foreground'>
-                  {item.label}:
-                </span>{' '}
-                <span className='leading-relaxed'>{item.value}</span>
-              </li>
-            ))}
-          </ul>
-
-          <CollapsibleContent className='overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down'>
-            <ul className='flex flex-col gap-2'>
-              {hiddenItems.map((item) => (
-                <li
-                  key={item.id}
-                  className='text-sm md:text-base list-disc text-muted-foreground'
-                >
-                  <span className='font-bold text-muted-foreground'>
-                    {item.label}:
-                  </span>{' '}
-                  <span className='leading-relaxed'>{item.value}</span>
-                </li>
-              ))}
-            </ul>
-          </CollapsibleContent>
+        <div className='grid gap-3 md:grid-cols-2'>
+          {visibleItems.map((item) => (
+            <article
+              key={item.id}
+              className='rounded-[1.25rem] border border-primary/12 bg-card/80 p-4'
+            >
+              <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
+                {item.label}
+              </div>
+              <p className='mt-3 text-sm leading-relaxed text-foreground/72'>
+                {item.value}
+              </p>
+            </article>
+          ))}
         </div>
 
+        <CollapsibleContent className='overflow-hidden pt-3 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down'>
+          <div className='grid gap-3 md:grid-cols-2'>
+            {hiddenItems.map((item) => (
+              <article
+                key={item.id}
+                className='rounded-[1.25rem] border border-primary/12 bg-card/80 p-4'
+              >
+                <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
+                  {item.label}
+                </div>
+                <p className='mt-3 text-sm leading-relaxed text-foreground/72'>
+                  {item.value}
+                </p>
+              </article>
+            ))}
+          </div>
+        </CollapsibleContent>
+
         {hasMore && (
-          <div className='mt-3 ml-4 md:ml-6'>
+          <div className='mt-4'>
             <CollapsibleTrigger asChild>
               <Button
                 variant='link'
-                className='p-0 h-auto font-medium text-foreground/60 hover:text-primary flex items-center gap-1 group'
+                className='group h-auto p-0 font-mono text-[11px] uppercase tracking-[0.24em] text-primary hover:text-primary/80'
               >
                 {isExpanded ? t('showLess') : t('seeMore')}
                 {isExpanded ? (
-                  <ChevronUp className='w-4 h-4 group-hover:-translate-y-0.5 transition-transform' />
+                  <ChevronUp className='h-4 w-4 transition-transform group-hover:-translate-y-0.5' />
                 ) : (
-                  <ChevronDown className='w-4 h-4 group-hover:translate-y-0.5 transition-transform' />
+                  <ChevronDown className='h-4 w-4 transition-transform group-hover:translate-y-0.5' />
                 )}
               </Button>
             </CollapsibleTrigger>

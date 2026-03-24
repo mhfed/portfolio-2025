@@ -17,54 +17,72 @@ export async function Footer({ locale }: FooterProps) {
   ]
 
   return (
-    <footer
-      id='collaborate'
-      className='mt-8 px-4 md:mt-12 md:px-6 lg:mt-16'
-    >
-      <div className='max-w-5xl mx-auto py-6 md:py-8'>
-        <div className='space-y-8 md:space-y-10'>
-          {/* Collaborate Section */}
-          <div className='space-y-4'>
-            <h2 className='text-2xl md:text-3xl lg:text-4xl font-bold text-primary'>
-              {t('title')}
-            </h2>
-            <p className='text-base md:text-lg lg:text-xl text-foreground/70'>
-              {t('description') ||
-                "Have an exciting project in mind? I'd love to hear about it."}
-            </p>
-            <a
-              href={`mailto:${tContact('email')}`}
-              className='text-base md:text-lg lg:text-xl md:lg:text-2xl text-foreground hover:text-primary transition-colors inline-block'
-            >
-              {tContact('email')}
-            </a>
-          </div>
-
-          {/* Socials Dock */}
-          <div className='flex justify-center md:justify-end'>
-            <SocialsDock />
-          </div>
-
-          {/* Footer Links & Copyright */}
-          <div className='space-y-3 border-t border-border/30 pt-5 md:pt-6'>
-            {/* Quick Links */}
-            <nav className='flex flex-wrap gap-4 justify-center md:justify-start'>
-              {footerLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className='text-sm text-foreground/60 hover:text-primary transition-colors'
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Copyright */}
-            <div className='text-xs md:text-sm text-foreground/60 text-center md:text-left'>
-              Copyright © {new Date().getFullYear()} Nguyen Minh Hieu. All
-              Rights Reserved
+    <footer id='collaborate' className='mt-10 px-4 pb-20 md:mt-14 md:px-6'>
+      <div className='mx-auto max-w-[1200px]'>
+        <div className='terminal-panel px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
+          <div className='grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end'>
+            <div className='space-y-4'>
+              <span className='terminal-label'>collaboration channel</span>
+              <h2 className='font-display text-3xl font-semibold uppercase leading-[0.95] tracking-[-0.06em] text-foreground md:text-4xl lg:text-5xl'>
+                {t('title')}
+              </h2>
+              <p className='max-w-2xl text-base leading-relaxed text-foreground/72 md:text-lg'>
+                {t('description') ||
+                  "Have an exciting project in mind? I'd love to hear about it."}
+              </p>
+              <a
+                href={`mailto:${tContact('email')}`}
+                className='inline-block text-lg text-primary transition-colors hover:text-primary/80 md:text-2xl'
+              >
+                {tContact('email')}
+              </a>
             </div>
+
+            <div className='space-y-6'>
+              <div>
+                <div className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/75'>
+                  quick links
+                </div>
+                <nav className='mt-3 flex flex-wrap gap-3'>
+                  {footerLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className='rounded-full border border-primary/15 bg-background/50 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70 transition-colors hover:border-primary/40 hover:text-primary'
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+
+              <div>
+                <div className='mb-3 font-mono text-[10px] uppercase tracking-[0.28em] text-primary/75'>
+                  direct links
+                </div>
+                <SocialsDock />
+              </div>
+            </div>
+          </div>
+
+          <div className='terminal-divider mt-8' />
+        </div>
+      </div>
+
+      <div className='fixed inset-x-0 bottom-0 z-40 border-t border-primary/15 bg-background/80 backdrop-blur-xl'>
+        <div className='mx-auto flex h-12 max-w-[1600px] items-center justify-between gap-4 px-4 md:px-6 lg:px-8'>
+          <div className='flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.24em]'>
+            <span className='text-primary'>sys_status: ready</span>
+            <span className='hidden text-foreground/50 sm:inline'>
+              locale: {locale}
+            </span>
+            <span className='hidden text-foreground/50 md:inline'>
+              channel: encrypted
+            </span>
+          </div>
+
+          <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/50'>
+            © {new Date().getFullYear()} Nguyen Minh Hieu // All rights reserved
           </div>
         </div>
       </div>

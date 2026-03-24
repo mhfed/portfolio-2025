@@ -14,14 +14,14 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]',
         outline:
-          'border border-border/30 bg-background hover:bg-primary/10 text-foreground hover:border-primary/50 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]',
+          'border border-border/30 bg-background hover:bg-[color:color-mix(in_srgb,var(--theme-soft)_50%,transparent)] text-foreground hover:border-[color:color-mix(in_srgb,var(--theme-secondary)_35%,var(--border))] hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]',
         secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]',
+          'bg-[color:color-mix(in_srgb,var(--theme-soft)_68%,var(--secondary))] text-secondary-foreground hover:bg-[color:color-mix(in_srgb,var(--theme-soft)_82%,var(--secondary))] hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]',
         ghost:
-          'hover:bg-primary/10 hover:text-primary hover:scale-[1.05] active:scale-[0.95]',
+          'hover:bg-[color:color-mix(in_srgb,var(--theme-soft)_55%,transparent)] hover:text-[var(--theme-secondary)] hover:scale-[1.05] active:scale-[0.95]',
         link: 'text-primary underline-offset-4 hover:underline hover:text-primary/80',
         gradient:
-          'bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl hover:scale-105 active:scale-[1.02]',
+          'bg-[linear-gradient(135deg,var(--primary)_0%,var(--theme-secondary)_55%,var(--theme-tertiary)_100%)] text-primary-foreground shadow-lg hover:shadow-xl hover:scale-105 active:scale-[1.02]',
       },
       size: {
         default: 'h-10 px-4 py-2',

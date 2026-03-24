@@ -54,8 +54,8 @@ export function ThemeSelector({
               className={cn(
                 'group relative overflow-hidden rounded-lg border p-2 text-left transition-all',
                 isActive
-                  ? 'border-primary bg-primary/10 shadow-sm'
-                  : 'border-border/60 bg-card hover:border-primary/40 hover:bg-primary/5'
+                  ? 'border-primary bg-theme-soft shadow-theme-glow'
+                  : 'border-border/60 bg-card hover:border-primary/40 hover:bg-theme-soft'
               )}
               aria-pressed={isActive}
               aria-label={`Use ${theme.label} theme`}

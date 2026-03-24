@@ -19,25 +19,20 @@ export async function BlogSection() {
 
   return (
     <section id='blog' className='scroll-mt-24 px-4 md:px-6'>
-      <div className='max-w-5xl mx-auto'>
-        {/* Section Header */}
-        <div className='mb-4 flex flex-col gap-3 md:mb-6 md:flex-row md:items-end md:justify-between'>
-          <SectionTitle title={t('title')} className='mb-0' />
-          <Link
-            href={`/${locale}/blog`}
-            className='group inline-flex items-center gap-2 text-xs md:text-sm font-medium text-foreground/70 hover:text-primary transition-colors uppercase tracking-wide'
-          >
-            {t('viewAllPosts')}
-            <ArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
-          </Link>
-        </div>
+      <div className='mx-auto max-w-[1200px]'>
+        <div className='terminal-panel px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
+          <div className='mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+            <SectionTitle title={t('title')} className='mb-0' />
+            <Link
+              href={`/${locale}/blog`}
+              className='group inline-flex items-center gap-2 self-start rounded-full border border-primary/15 bg-primary/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.28em] text-primary transition-colors hover:bg-primary/15'
+            >
+              {t('viewAllPosts')}
+              <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+            </Link>
+          </div>
 
-        {/* Timeline Layout */}
-        <div className='relative'>
-          {/* Vertical line */}
-          <div className='absolute left-3 md:left-32 top-0 bottom-0 w-px bg-border/70 pointer-events-none' />
-
-          <div className='space-y-4 md:space-y-5'>
+          <div className='grid gap-4 lg:grid-cols-2'>
             {posts.map((post) => {
               const displayTitle =
                 locale === 'vi'
@@ -52,35 +47,44 @@ export async function BlogSection() {
               const date = post.publishedAt || post.createdAt
 
               return (
-                <article key={post.id} className='relative pl-10 md:pl-40'>
-                  {/* Dot */}
-                  <div className='absolute left-1 md:left-[calc(8rem-6px)] top-2 w-3 h-3 rounded-full bg-background border border-primary shadow-sm' />
+                <article
+                  key={post.id}
+                  className='rounded-[1.4rem] border border-primary/12 bg-card/80 p-5 md:p-6'
+                >
+                  <div className='mb-4 flex items-center justify-between gap-4'>
+                    {date ? (
+                      <time className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/75'>
+                        {format(new Date(date), 'dd MMM yyyy')}
+                      </time>
+                    ) : (
+                      <span className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/75'>
+                        unpublished
+                      </span>
+                    )}
+                    <span className='rounded-full border border-primary/15 bg-background/55 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/70'>
+                      log_{post.id}
+                    </span>
+                  </div>
 
-                  {/* Date */}
-                  {date && (
-                    <time className='block text-[11px] md:text-xs text-foreground/60 uppercase tracking-[0.16em] mb-1 md:absolute md:left-0 md:top-2 md:w-32 md:text-right md:pr-4 md:mb-0'>
-                      {format(new Date(date), 'dd MMM yyyy')}
-                    </time>
+                  <Link href={`/${locale}/blog/${post.slug}`} className='group'>
+                    <h2 className='text-xl font-semibold tracking-[-0.04em] text-foreground transition-colors group-hover:text-primary md:text-2xl'>
+                      {displayTitle}
+                    </h2>
+                  </Link>
+
+                  {displayExcerpt && (
+                    <p className='mt-3 line-clamp-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
+                      {displayExcerpt}
+                    </p>
                   )}
 
-                  <div>
-                    {/* Title */}
-                    <Link
-                      href={`/${locale}/blog/${post.slug}`}
-                      className='group'
-                    >
-                      <h2 className='text-sm md:text-base lg:text-lg font-semibold text-foreground mb-1 md:mb-1.5 group-hover:text-primary transition-colors'>
-                        {displayTitle}
-                      </h2>
-                    </Link>
-
-                    {/* Excerpt */}
-                    {displayExcerpt && (
-                      <p className='text-xs md:text-sm text-foreground/70 leading-relaxed line-clamp-2 md:line-clamp-3'>
-                        {displayExcerpt}
-                      </p>
-                    )}
-                  </div>
+                  <Link
+                    href={`/${locale}/blog/${post.slug}`}
+                    className='mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-primary transition-colors hover:text-primary/80'
+                  >
+                    read log
+                    <ArrowRight className='h-4 w-4' />
+                  </Link>
                 </article>
               )
             })}

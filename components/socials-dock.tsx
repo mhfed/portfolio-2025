@@ -2,15 +2,12 @@
 import React from 'react'
 import { CalendarIcon, MailIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { Dock, DockIcon } from '@/components/ui/dock'
 export type IconProps = React.HTMLAttributes<SVGElement>
 const Icons = {
   calendar: (props: IconProps) => <CalendarIcon {...props} />,
@@ -79,9 +76,9 @@ const DATA = {
 export function SocialsDock() {
   return (
     <TooltipProvider>
-      <Dock direction='middle' className='m-0 border-none'>
+      <div className='flex flex-wrap items-center gap-2'>
         {Object.entries(DATA.contact.social).map(([name, social]) => (
-          <DockIcon key={name}>
+          <div key={name}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <a
@@ -96,8 +93,7 @@ export function SocialsDock() {
                   }
                   aria-label={social.name}
                   className={cn(
-                    buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-11 md:size-12 rounded-full'
+                    'inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/20 bg-background/60 text-foreground/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10 hover:text-primary'
                   )}
                 >
                   <social.icon className='size-4 md:size-5' />
@@ -107,9 +103,9 @@ export function SocialsDock() {
                 <p>{name}</p>
               </TooltipContent>
             </Tooltip>
-          </DockIcon>
+          </div>
         ))}
-      </Dock>
+      </div>
     </TooltipProvider>
   )
 }

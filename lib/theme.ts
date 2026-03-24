@@ -1,4 +1,4 @@
-export const DEFAULT_ACCENT_THEME = 'teal'
+export const DEFAULT_ACCENT_THEME = 'emerald'
 
 export const COLOR_THEMES = [
   {
@@ -53,4 +53,3 @@ export function applyAccentTheme(theme: AccentTheme) {
   document.documentElement.dataset.accentTheme = theme
   localStorage.setItem('accent-theme', theme)
 }
-

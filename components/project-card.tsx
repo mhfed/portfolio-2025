@@ -41,7 +41,7 @@ export function ProjectCard({
       >
         {/* Project Image - Safari Browser Mockup */}
         {image && (
-          <div className='w-full md:w-5/12 transform transition-transform duration-300 hover:scale-[1.01]'>
+          <div className='shadow-theme-glow w-full rounded-2xl md:w-5/12 transform transition-transform duration-300 hover:scale-[1.01]'>
             <Safari
               src={image}
               url={getDomain(liveUrl) || 'project-demo.com'}
@@ -83,7 +83,7 @@ export function ProjectCard({
                   href={liveUrl}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-xs md:text-sm lg:text-sm text-primary hover:underline flex items-center gap-1'
+                  className='text-xs md:text-sm lg:text-sm text-[var(--theme-secondary)] hover:underline flex items-center gap-1'
                 >
                   View Project
                   <ExternalLink className='w-3 h-3' />
