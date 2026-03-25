@@ -9,27 +9,34 @@ import { TechMarquee } from './tech-marquee'
 export async function HeroSection() {
   const t = await getTranslations('hero')
   const tContact = await getTranslations('hero.contact')
+  const profileMeta = [
+    { label: tContact('basedIn'), value: tContact('location') },
+    { label: 'Focus', value: 'UI systems' },
+    { label: 'Experience', value: '4.5+ years' },
+  ]
+
+  const miniHighlights = ['React', 'Next.js', 'TypeScript']
 
   return (
     <section
       id='home-top'
-      className='section-shell scroll-mt-24 px-4 pt-4 md:px-6 md:pt-6 lg:pt-8'
+      className='section-shell scroll-mt-24 px-4 py-4 md:px-6 md:py-6 lg:py-8'
     >
-      <div className='hero-shell mx-auto max-w-[1280px]'>
-        <div className='grid gap-8 lg:min-h-[72svh] lg:grid-cols-[minmax(0,1fr)_minmax(280px,32vw)] lg:items-center lg:gap-10 xl:gap-12'>
-          <div className='max-w-[52rem]'>
+      <div className='hero-shell mx-auto max-w-7xl'>
+        <div className='grid gap-10 lg:min-h-[72svh] lg:grid-cols-[minmax(0,1.06fr)_minmax(360px,0.94fr)] lg:items-center lg:gap-12 xl:gap-14'>
+          <div className='max-w-[50rem]'>
             <Reveal>
               <span className='section-kicker'>
                 Available for selected product & frontend work
               </span>
             </Reveal>
 
-            <h1 className='mt-4 font-display text-[2.85rem] font-semibold leading-[0.86] tracking-[-0.095em] text-foreground sm:text-[4.15rem] lg:text-[5.15rem] xl:text-[5.6rem]'>
+            <h1 className='mt-4 font-display text-[2.85rem] font-semibold leading-[0.88] tracking-[-0.092em] text-foreground sm:text-[4rem] lg:text-[4.85rem] xl:text-[5.25rem]'>
               <span className='hero-line'>
                 {t('front')} {t('middle')}
               </span>
               <span className='hero-line hero-accent-text'>{t('end')}</span>
-              <span className='hero-line text-foreground/84'>
+              <span className='hero-line text-foreground/78'>
                 Frontend systems
               </span>
             </h1>
@@ -65,41 +72,79 @@ export async function HeroSection() {
           </div>
 
           <Reveal variant='right' delay={180}>
-            <div className='relative space-y-3'>
-              <div className='absolute inset-x-[14%] bottom-[10%] top-[20%] -z-10 rounded-full bg-primary/14 blur-[64px]' />
+            <div className='relative mx-auto w-full max-w-[34rem] lg:mr-0 lg:ml-auto'>
+              <div className='absolute right-[-8%] top-[8%] -z-10 h-44 w-44 rounded-full bg-primary/14 blur-3xl' />
+              <div className='absolute bottom-[12%] left-[-4%] -z-10 h-28 w-28 rounded-full bg-[color:color-mix(in_srgb,var(--theme-tertiary)_22%,transparent)] blur-2xl' />
 
-              <div className='relative aspect-[5/6] overflow-hidden rounded-[1.9rem]'>
-                <Image
-                  src='https://res.cloudinary.com/dt3epooyc/image/upload/v1769702375/portfolio/yddxvjkmf3cceyw5ijwo.jpg'
-                  alt='Hero Avatar'
-                  fill
-                  priority
-                  className='object-cover object-top transition duration-700 hover:scale-[1.04]'
-                  sizes='(min-width: 1280px) 33vw, (min-width: 1024px) 36vw, 100vw'
-                />
-                <div className='absolute inset-0 bg-gradient-to-t from-background/72 via-background/8 to-transparent' />
-              </div>
+              <div className='border border-white/10 bg-background/14 p-5 backdrop-blur-sm md:p-6'>
+                <div className='flex items-start gap-5'>
+                  <div className='relative h-36 w-28 shrink-0 overflow-hidden rounded-[1.2rem] border border-white/10 md:h-40 md:w-32'>
+                    <Image
+                      src='https://res.cloudinary.com/dt3epooyc/image/upload/v1769702375/portfolio/yddxvjkmf3cceyw5ijwo.jpg'
+                      alt='Hero Avatar'
+                      fill
+                      priority
+                      className='object-cover object-top transition duration-700 hover:scale-[1.04]'
+                      sizes='160px'
+                    />
+                    <div className='absolute inset-0 bg-linear-to-t from-background/72 via-transparent to-transparent' />
+                  </div>
 
-              <div className='space-y-0 border-t border-white/10 pr-1'>
-                <div className='flex items-start justify-between gap-4 border-b border-white/10 py-3 text-sm'>
-                  <span className='font-mono uppercase tracking-[0.22em] text-primary/72'>
-                    Based in
-                  </span>
-                  <span className='max-w-[16rem] text-right text-foreground/74'>
-                    {tContact('location')}
-                  </span>
+                  <div className='min-w-0 flex-1'>
+                    <p className='font-mono text-[10px] uppercase tracking-[0.3em] text-primary/72'>
+                      Profile
+                    </p>
+                    <h2 className='mt-2 font-display text-[1.8rem] font-semibold leading-[0.95] tracking-[-0.06em] text-foreground md:text-[2rem]'>
+                      {t('developer')}
+                    </h2>
+                    <p className='mt-3 max-w-[18rem] text-sm leading-relaxed text-foreground/66 md:text-[0.96rem]'>
+                      Building clean interfaces and frontend systems with strong
+                      product taste.
+                    </p>
+
+                    <div className='mt-4 flex flex-wrap gap-2'>
+                      {miniHighlights.map((item) => (
+                        <span
+                          key={item}
+                          className='inline-flex items-center rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/68'
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                <div className='flex items-start justify-between gap-4 border-b border-white/10 py-3 text-sm'>
-                  <span className='font-mono uppercase tracking-[0.22em] text-primary/72'>
-                    Contact
-                  </span>
-                  <a
-                    href={`mailto:${tContact('email')}`}
-                    className='max-w-[16rem] break-all text-right text-foreground/74 transition-colors hover:text-primary'
-                  >
-                    {tContact('email')}
-                  </a>
+                <div className='mt-5 border-t border-white/10 pt-4'>
+                  <div className='space-y-3'>
+                    {profileMeta.map((item) => (
+                      <div
+                        key={item.label}
+                        className='flex items-start justify-between gap-4 text-sm'
+                      >
+                        <span className='font-mono uppercase tracking-[0.22em] text-primary/68'>
+                          {item.label}
+                        </span>
+                        <span className='max-w-[12.5rem] text-right text-foreground/72'>
+                          {item.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className='mt-4 border-t border-white/10 pt-4'>
+                    <div className='flex items-start justify-between gap-4 text-sm'>
+                      <span className='font-mono uppercase tracking-[0.22em] text-primary/68'>
+                        Contact
+                      </span>
+                      <a
+                        href={`mailto:${tContact('email')}`}
+                        className='max-w-[12.5rem] break-all text-right text-foreground/72 transition-colors hover:text-primary'
+                      >
+                        {tContact('email')}
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -17,7 +17,7 @@ export default async function Home() {
 
       <HeroSection />
 
-      <div className='mx-auto max-w-[1280px] space-y-16 px-4 pb-10 md:px-6 md:pb-14 lg:space-y-24'>
+      <div className='mx-auto max-w-7xl space-y-16 px-4 pb-10 md:px-6 md:pb-14 lg:space-y-24'>
         <AboutSection />
         <ProjectsSection />
         <WorkExperienceSection />
