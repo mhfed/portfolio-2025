@@ -57,9 +57,10 @@ export function TimelineItem({
           <p className='mt-1 text-sm font-medium text-foreground/58 md:text-base'>
             {position}
           </p>
-          <p className='mt-4 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base'>
-            {description}
-          </p>
+          <p
+            className='mt-4 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base'
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
 
           {skills && skills.length > 0 && (
             <p className='mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/50'>
@@ -89,9 +90,10 @@ export function TimelineItem({
               </DrawerHeader>
               <div className='flex-1 overflow-hidden px-4 pb-2'>
                 <ScrollArea className='h-full pr-4'>
-                  <div className='whitespace-pre-line pb-8 text-sm leading-relaxed text-foreground/80 md:text-base'>
-                    {description}
-                  </div>
+                  <div
+                    className='pb-8 text-sm leading-relaxed text-foreground/80 md:text-base'
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
                 </ScrollArea>
               </div>
               <DrawerFooter className='pt-2'>
