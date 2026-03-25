@@ -4,6 +4,7 @@ import { TimelineItem } from './timeline-item'
 import { db } from '@/lib/db'
 import { experiences } from '@/db/schema'
 import { desc } from 'drizzle-orm'
+import { Reveal } from './ui/reveal'
 
 interface TimelineItemProps {
   company: string
@@ -53,46 +54,44 @@ export async function WorkExperienceSection() {
   }))
 
   return (
-    <section id='experience' className='scroll-mt-24 px-4 md:px-6'>
-      <div className='mx-auto max-w-[1200px]'>
-        <div className='terminal-panel px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
-          <div className='mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+    <section
+      id='experience'
+      className='section-shell scroll-mt-24 px-4 md:px-6'
+    >
+      <div className='mx-auto max-w-[1280px]'>
+        <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+          <Reveal>
             <SectionTitle
               title={t.rich('title', {
                 br: () => <br />,
               })}
               className='mb-0'
             />
+          </Reveal>
 
-            <span className='self-start rounded-full border border-primary/15 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-primary'>
-              {timelineItems.length} entries
+          <Reveal delay={140}>
+            <span className='font-mono text-[11px] uppercase tracking-[0.24em] text-foreground/48'>
+              {timelineItems.length} roles
             </span>
-          </div>
+          </Reveal>
+        </div>
 
-          <div className='overflow-hidden rounded-[1.5rem] border border-primary/15 bg-background/55'>
-            <div className='flex items-center justify-between border-b border-primary/10 px-4 py-3 md:px-5'>
-              <div className='flex items-center gap-2'>
-                <span className='h-2.5 w-2.5 rounded-full bg-red-400/70' />
-                <span className='h-2.5 w-2.5 rounded-full bg-yellow-400/70' />
-                <span className='h-2.5 w-2.5 rounded-full bg-primary/80' />
-              </div>
-              <span className='font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/55'>
-                work_logs.sh
-              </span>
-            </div>
-
-            <div className='space-y-4 p-4 md:p-6'>
-              {dbExperiences.length === 0 ? (
-                <p className='rounded-[1.25rem] border border-dashed border-primary/15 px-4 py-8 text-center text-muted-foreground'>
-                  {t('noExperience') || 'No work experience yet.'}
-                </p>
-              ) : (
-                timelineItems.map((item, idx) => (
-                  <TimelineItem key={`${item.company}-${idx}`} {...item} />
-                ))
-              )}
-            </div>
-          </div>
+        <div className='mt-8 border-b border-white/10'>
+          {dbExperiences.length === 0 ? (
+            <p className='border-t border-dashed border-white/10 px-4 py-8 text-center text-muted-foreground'>
+              {t('noExperience') || 'No work experience yet.'}
+            </p>
+          ) : (
+            timelineItems.map((item, idx) => (
+              <Reveal
+                key={`${item.company}-${idx}`}
+                delay={idx * 90}
+                variant={idx % 2 === 0 ? 'left' : 'right'}
+              >
+                <TimelineItem {...item} />
+              </Reveal>
+            ))
+          )}
         </div>
       </div>
     </section>

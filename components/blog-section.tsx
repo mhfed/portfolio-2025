@@ -4,6 +4,7 @@ import { getTranslations, getLocale } from 'next-intl/server'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { format } from 'date-fns'
+import { Reveal } from './ui/reveal'
 
 export async function BlogSection() {
   const locale = (await getLocale()) as 'en' | 'vi'
@@ -18,77 +19,80 @@ export async function BlogSection() {
   }
 
   return (
-    <section id='blog' className='scroll-mt-24 px-4 md:px-6'>
-      <div className='mx-auto max-w-[1200px]'>
-        <div className='terminal-panel px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
-          <div className='mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+    <section id='blog' className='section-shell scroll-mt-24 px-4 md:px-6'>
+      <div className='mx-auto max-w-[1280px]'>
+        <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+          <Reveal>
             <SectionTitle title={t('title')} className='mb-0' />
+          </Reveal>
+          <Reveal delay={140}>
             <Link
               href={`/${locale}/blog`}
-              className='group inline-flex items-center gap-2 self-start rounded-full border border-primary/15 bg-primary/10 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.28em] text-primary transition-colors hover:bg-primary/15'
+              className='group inline-flex items-center gap-2 self-start text-sm font-medium text-foreground/70 transition-colors hover:text-foreground'
             >
               {t('viewAllPosts')}
               <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
             </Link>
-          </div>
+          </Reveal>
+        </div>
 
-          <div className='grid gap-4 lg:grid-cols-2'>
-            {posts.map((post) => {
-              const displayTitle =
-                locale === 'vi'
-                  ? post.titleVi || post.titleEn || post.title
-                  : post.titleEn || post.titleVi || post.title
+        <div className='mt-8 border-b border-white/10'>
+          {posts.map((post, idx) => {
+            const displayTitle =
+              locale === 'vi'
+                ? post.titleVi || post.titleEn || post.title
+                : post.titleEn || post.titleVi || post.title
 
-              const displayExcerpt =
-                locale === 'vi'
-                  ? post.excerptVi || post.excerptEn || post.excerpt
-                  : post.excerptEn || post.excerptVi || post.excerpt
+            const displayExcerpt =
+              locale === 'vi'
+                ? post.excerptVi || post.excerptEn || post.excerpt
+                : post.excerptEn || post.excerptVi || post.excerpt
 
-              const date = post.publishedAt || post.createdAt
+            const date = post.publishedAt || post.createdAt
 
-              return (
-                <article
-                  key={post.id}
-                  className='rounded-[1.4rem] border border-primary/12 bg-card/80 p-5 md:p-6'
-                >
-                  <div className='mb-4 flex items-center justify-between gap-4'>
+            return (
+              <Reveal
+                key={post.id}
+                delay={idx * 90}
+                variant={idx % 2 === 0 ? 'left' : 'right'}
+              >
+                <article className='group border-t border-white/10 py-6 md:py-7 lg:grid lg:grid-cols-[140px_minmax(0,1fr)_auto] lg:gap-8 lg:items-start'>
+                  <div className='mb-3 text-sm text-foreground/52 lg:mb-0'>
                     {date ? (
-                      <time className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/75'>
-                        {format(new Date(date), 'dd MMM yyyy')}
-                      </time>
+                      <time>{format(new Date(date), 'dd MMM yyyy')}</time>
                     ) : (
-                      <span className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/75'>
-                        unpublished
-                      </span>
+                      <span>unpublished</span>
                     )}
-                    <span className='rounded-full border border-primary/15 bg-background/55 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/70'>
-                      log_{post.id}
-                    </span>
                   </div>
 
-                  <Link href={`/${locale}/blog/${post.slug}`} className='group'>
-                    <h2 className='text-xl font-semibold tracking-[-0.04em] text-foreground transition-colors group-hover:text-primary md:text-2xl'>
-                      {displayTitle}
-                    </h2>
-                  </Link>
+                  <div className='min-w-0'>
+                    <Link
+                      href={`/${locale}/blog/${post.slug}`}
+                      className='block'
+                    >
+                      <h2 className='font-display text-2xl font-semibold tracking-[-0.06em] text-foreground transition-colors duration-300 group-hover:text-primary md:text-[2rem]'>
+                        {displayTitle}
+                      </h2>
+                    </Link>
 
-                  {displayExcerpt && (
-                    <p className='mt-3 line-clamp-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
-                      {displayExcerpt}
-                    </p>
-                  )}
+                    {displayExcerpt && (
+                      <p className='mt-3 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base'>
+                        {displayExcerpt}
+                      </p>
+                    )}
+                  </div>
 
                   <Link
                     href={`/${locale}/blog/${post.slug}`}
-                    className='mt-5 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-primary transition-colors hover:text-primary/80'
+                    className='mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80 lg:mt-1'
                   >
-                    read log
-                    <ArrowRight className='h-4 w-4' />
+                    Read article
+                    <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
                   </Link>
                 </article>
-              )
-            })}
-          </div>
+              </Reveal>
+            )
+          })}
         </div>
       </div>
     </section>

@@ -1,6 +1,5 @@
 'use client'
 
-import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import {
   Drawer,
@@ -33,7 +32,6 @@ export function TimelineItem({
 }: TimelineItemProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  // Use a safe fallback for translations if next-intl context is not available or fails
   let seeMoreText = 'See more'
   let closeText = 'Close'
 
@@ -41,53 +39,52 @@ export function TimelineItem({
     const t = useTranslations('common')
     seeMoreText = t('seeMore')
     closeText = t('close')
-  } catch (e) {
-    // Fallback if useTranslations fails or isn't wrapped in Provider
+  } catch {
+    // Fall back to the default labels if the provider is unavailable.
   }
 
-  // Determine if we show the button (only if details exist)
-  // For demo purposes, if details is missing but we want to show it, we can assume it might be added later.
-  // But strictly, we should only show if details is present.
-
   return (
-    <article className='rounded-[1.4rem] border border-primary/12 bg-card/80 p-5 md:p-6'>
-      <div className='flex flex-col gap-4 md:flex-row md:items-start md:justify-between'>
-        <div className='min-w-0'>
-          <div className='mb-3 flex flex-wrap items-center gap-2'>
-            <Badge
-              variant='outline'
-              className='rounded-full border-primary/20 bg-primary/10 font-mono text-[10px] uppercase tracking-[0.24em] text-primary hover:bg-primary/10'
-              size='sm'
-            >
-              {period}
-            </Badge>
-          </div>
+    <article className='group border-t border-white/10 py-6 md:py-7 lg:py-8'>
+      <div className='grid gap-5 md:grid-cols-[140px_minmax(0,1fr)_auto] md:items-start md:gap-6'>
+        <div className='font-mono text-[11px] uppercase tracking-[0.24em] text-primary/75'>
+          {period}
+        </div>
 
-          <h3 className='text-xl font-semibold tracking-[-0.04em] text-foreground md:text-2xl'>
+        <div className='min-w-0'>
+          <h3 className='font-display text-2xl font-semibold leading-tight tracking-[-0.06em] text-foreground transition-colors duration-300 group-hover:text-primary md:text-[2rem]'>
             {company}
           </h3>
-          <p className='mt-1 text-sm uppercase tracking-[0.18em] text-foreground/55 md:text-[13px]'>
+          <p className='mt-1 text-sm font-medium text-foreground/58 md:text-base'>
             {position}
           </p>
+          <p className='mt-4 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base'>
+            {description}
+          </p>
+
+          {skills && skills.length > 0 && (
+            <p className='mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/50'>
+              {skills.join(' / ')}
+            </p>
+          )}
         </div>
 
         <Drawer open={isOpen} onOpenChange={setIsOpen} direction='right'>
           <DrawerTrigger asChild>
             <Button
-              variant='outline'
-              className='shrink-0 rounded-full font-mono text-[10px] uppercase tracking-[0.24em]'
+              variant='ghost'
+              className='shrink-0 rounded-full border border-white/10 px-4 hover:border-primary/30'
             >
               {seeMoreText}
             </Button>
           </DrawerTrigger>
-          <DrawerContentSide className='border-primary/15 bg-card/95 backdrop-blur-xl data-[vaul-drawer-direction=bottom]:max-h-[50vh] data-[vaul-drawer-direction=top]:max-h-[50vh]'>
+          <DrawerContentSide className='border-white/10 bg-card/95 backdrop-blur-xl data-[vaul-drawer-direction=bottom]:max-h-[50vh] data-[vaul-drawer-direction=top]:max-h-[50vh]'>
             <div className='flex h-full w-full flex-col'>
               <DrawerHeader className='text-left'>
-                <DrawerTitle className='text-2xl font-semibold tracking-[-0.05em]'>
+                <DrawerTitle className='font-display text-2xl font-semibold tracking-[-0.05em]'>
                   {company}
                 </DrawerTitle>
-                <DrawerDescription className='font-mono text-xs uppercase tracking-[0.2em] text-primary/80'>
-                  {position} / {period}
+                <DrawerDescription className='text-sm text-foreground/62'>
+                  {position} · {period}
                 </DrawerDescription>
               </DrawerHeader>
               <div className='flex-1 overflow-hidden px-4 pb-2'>
@@ -106,20 +103,6 @@ export function TimelineItem({
           </DrawerContentSide>
         </Drawer>
       </div>
-
-      <p className='mt-4 line-clamp-3 text-sm leading-relaxed text-foreground/75 md:text-base'>
-        {description}
-      </p>
-
-      {skills && skills.length > 0 && (
-        <div className='mt-4 flex flex-wrap gap-2'>
-          {skills.map((skill) => (
-            <Badge key={skill} variant='primary' size='sm'>
-              {skill}
-            </Badge>
-          ))}
-        </div>
-      )}
     </article>
   )
 }

@@ -1,9 +1,10 @@
 import { getTranslations } from 'next-intl/server'
-import { ResumeDownloadButton } from './resume-download-button'
-import { Button } from './ui/button'
-import { TechMarquee } from './tech-marquee'
-import { SocialsDock } from './socials-dock'
 import Image from 'next/image'
+import { ResumeDownloadButton } from './resume-download-button'
+import { SocialsDock } from './socials-dock'
+import { Button } from './ui/button'
+import { Reveal } from './ui/reveal'
+import { TechMarquee } from './tech-marquee'
 
 export async function HeroSection() {
   const t = await getTranslations('hero')
@@ -12,148 +13,146 @@ export async function HeroSection() {
   return (
     <section
       id='home-top'
-      className='scroll-mt-24 px-4 pt-6 md:px-6 md:pt-8 lg:pt-10'
+      className='section-shell scroll-mt-24 px-4 pt-4 md:px-6 md:pt-6 lg:pt-8'
     >
-      <div className='mx-auto flex w-full max-w-[1200px] flex-col gap-6'>
-        <div className='grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]'>
-          <div className='terminal-panel terminal-grid px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
-            <div className='mb-6 flex flex-wrap items-center gap-3'>
-              <span className='terminal-label'>
-                system initialization successful
+      <div className='hero-shell mx-auto max-w-[1280px]'>
+        <div className='grid gap-8 lg:min-h-[72svh] lg:grid-cols-[minmax(0,1fr)_minmax(280px,32vw)] lg:items-center lg:gap-10 xl:gap-12'>
+          <div className='max-w-[52rem]'>
+            <Reveal>
+              <span className='section-kicker'>
+                Available for selected product & frontend work
               </span>
-              <span className='rounded-full border border-primary/20 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-primary'>
+            </Reveal>
+
+            <h1 className='mt-4 font-display text-[2.85rem] font-semibold leading-[0.86] tracking-[-0.095em] text-foreground sm:text-[4.15rem] lg:text-[5.15rem] xl:text-[5.6rem]'>
+              <span className='hero-line'>
+                {t('front')} {t('middle')}
+              </span>
+              <span className='hero-line hero-accent-text'>{t('end')}</span>
+              <span className='hero-line text-foreground/84'>
+                Frontend systems
+              </span>
+            </h1>
+
+            <Reveal delay={120}>
+              <p className='mt-4 text-base font-medium text-foreground/84 md:text-xl lg:text-[1.35rem]'>
                 {t('developer')}
-              </span>
-            </div>
+              </p>
+            </Reveal>
 
-            <div className='grid gap-8 lg:grid-cols-[minmax(0,1fr)_240px]'>
-              <div>
-                <h1 className='font-display text-[3rem] font-semibold uppercase leading-[0.82] tracking-[-0.1em] text-foreground sm:text-[4.25rem] lg:text-[5.5rem]'>
-                  {t('front')}
-                  <br />
-                  {t('middle')}
-                  <br />
-                  <span className='text-glow text-primary'>{t('end')}</span>
-                </h1>
+            <Reveal delay={220}>
+              <p className='mt-4 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base lg:text-[1.025rem]'>
+                {t('textBlockLeft')}
+              </p>
+            </Reveal>
 
-                <p className='mt-6 max-w-2xl text-base leading-relaxed text-foreground/72 md:text-lg'>
-                  {t('textBlockLeft')}
-                </p>
+            <Reveal delay={320}>
+              <div className='mt-6 flex flex-wrap gap-3'>
+                <ResumeDownloadButton />
+                <Button variant='outline' size='lg' asChild>
+                  <a href={`mailto:${tContact('email')}`}>
+                    {tContact('sayHello')}
+                  </a>
+                </Button>
+              </div>
+            </Reveal>
 
-                <div className='mt-6 flex flex-wrap gap-3'>
-                  <ResumeDownloadButton />
-                  <Button variant='outline' size='lg' asChild>
-                    <a href={`mailto:${tContact('email')}`}>CONTACT_SYS.EXE</a>
-                  </Button>
-                </div>
+            <Reveal delay={420}>
+              <div className='mt-5'>
+                <SocialsDock />
+              </div>
+            </Reveal>
+          </div>
 
-                <div className='mt-6'>
-                  <SocialsDock />
-                </div>
+          <Reveal variant='right' delay={180}>
+            <div className='relative space-y-3'>
+              <div className='absolute inset-x-[14%] bottom-[10%] top-[20%] -z-10 rounded-full bg-primary/14 blur-[64px]' />
+
+              <div className='relative aspect-[5/6] overflow-hidden rounded-[1.9rem]'>
+                <Image
+                  src='https://res.cloudinary.com/dt3epooyc/image/upload/v1769702375/portfolio/yddxvjkmf3cceyw5ijwo.jpg'
+                  alt='Hero Avatar'
+                  fill
+                  priority
+                  className='object-cover object-top transition duration-700 hover:scale-[1.04]'
+                  sizes='(min-width: 1280px) 33vw, (min-width: 1024px) 36vw, 100vw'
+                />
+                <div className='absolute inset-0 bg-gradient-to-t from-background/72 via-background/8 to-transparent' />
               </div>
 
-              <div className='grid gap-3 self-start'>
-                <div className='rounded-[1.25rem] border border-primary/15 bg-background/55 p-4'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/70'>
-                    role
-                  </div>
-                  <div className='mt-2 text-lg font-semibold text-foreground'>
-                    {t('developer')}
-                  </div>
-                </div>
-
-                <div className='rounded-[1.25rem] border border-primary/15 bg-background/55 p-4'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/70'>
-                    {tContact('basedIn')}
-                  </div>
-                  <div className='mt-2 text-sm leading-relaxed text-foreground/80'>
+              <div className='space-y-0 border-t border-white/10 pr-1'>
+                <div className='flex items-start justify-between gap-4 border-b border-white/10 py-3 text-sm'>
+                  <span className='font-mono uppercase tracking-[0.22em] text-primary/72'>
+                    Based in
+                  </span>
+                  <span className='max-w-[16rem] text-right text-foreground/74'>
                     {tContact('location')}
-                  </div>
+                  </span>
                 </div>
 
-                <div className='rounded-[1.25rem] border border-primary/15 bg-background/55 p-4'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/70'>
-                    {tContact('sayHello')}
-                  </div>
+                <div className='flex items-start justify-between gap-4 border-b border-white/10 py-3 text-sm'>
+                  <span className='font-mono uppercase tracking-[0.22em] text-primary/72'>
+                    Contact
+                  </span>
                   <a
                     href={`mailto:${tContact('email')}`}
-                    className='mt-2 block break-all text-sm leading-relaxed text-foreground/80 transition-colors hover:text-primary'
+                    className='max-w-[16rem] break-all text-right text-foreground/74 transition-colors hover:text-primary'
                   >
                     {tContact('email')}
                   </a>
                 </div>
               </div>
             </div>
-
-            <div className='terminal-divider my-6' />
-
-            <div className='grid gap-4 md:grid-cols-2'>
-              <div className='rounded-[1.25rem] border border-primary/15 bg-background/45 p-4'>
-                <div className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/70'>
-                  core directive
-                </div>
-                <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
-                  {t('textBlockLeft')}
-                </p>
-              </div>
-
-              <div className='rounded-[1.25rem] border border-primary/15 bg-background/45 p-4'>
-                <div className='font-mono text-[10px] uppercase tracking-[0.28em] text-primary/70'>
-                  long range vision
-                </div>
-                <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
-                  {t('textBlockRight')}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className='terminal-panel terminal-scanlines overflow-hidden border-primary/20'>
-            <Image
-              src='https://res.cloudinary.com/dt3epooyc/image/upload/v1769702375/portfolio/yddxvjkmf3cceyw5ijwo.jpg'
-              alt='Hero Avatar'
-              width={640}
-              height={880}
-              priority={true}
-              className='h-full min-h-[420px] w-full object-cover object-top'
-            />
-            <div className='absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent' />
-
-            <div className='absolute inset-x-5 bottom-5 rounded-[1.4rem] border border-primary/20 bg-background/75 p-5 backdrop-blur-md'>
-              <div className='font-mono text-[10px] uppercase tracking-[0.3em] text-primary/80'>
-                architect profile
-              </div>
-              <div className='mt-2 text-2xl font-semibold tracking-[-0.05em] text-foreground'>
-                {t('developer')}
-              </div>
-              <div className='mt-4 grid gap-3 text-sm text-foreground/72'>
-                <div className='flex items-center justify-between gap-3 border-b border-primary/10 pb-3'>
-                  <span className='font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55'>
-                    Region
-                  </span>
-                  <span>{tContact('location')}</span>
-                </div>
-                <div className='flex items-center justify-between gap-3'>
-                  <span className='font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55'>
-                    Status
-                  </span>
-                  <span className='text-primary'>Ready for collaboration</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          </Reveal>
         </div>
 
-        <div className='terminal-panel px-4 py-4 md:px-5'>
-          <div className='mb-4 flex items-center justify-between gap-4'>
-            <span className='terminal-label'>stack protocols</span>
-            <span className='font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/55'>
-              synchronized modules
-            </span>
-          </div>
-          <TechMarquee />
+        <Reveal delay={260}>
+          <div className='soft-divider mt-10' />
+        </Reveal>
+
+        <div className='mt-6 grid gap-6 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)] lg:gap-8'>
+          <Reveal delay={120}>
+            <p className='max-w-2xl text-base leading-relaxed text-foreground/68 md:text-lg'>
+              {t('textBlockRight')}
+            </p>
+          </Reveal>
+
+          <Reveal delay={220} variant='right'>
+            <div className='space-y-0'>
+              <div className='flex items-start justify-between gap-4 border-t border-white/10 py-3 text-sm'>
+                <span className='font-mono uppercase tracking-[0.22em] text-primary/72'>
+                  Core stack
+                </span>
+                <span className='max-w-[18rem] text-right text-foreground/72'>
+                  React, Next.js, TypeScript, Tailwind CSS
+                </span>
+              </div>
+              <div className='flex items-start justify-between gap-4 border-t border-white/10 py-3 text-sm'>
+                <span className='font-mono uppercase tracking-[0.22em] text-primary/72'>
+                  Working style
+                </span>
+                <span className='max-w-[18rem] text-right text-foreground/72'>
+                  Product thinking, polished UI, maintainable frontend systems
+                </span>
+              </div>
+              <div className='flex items-start justify-between gap-4 border-y border-white/10 py-3 text-sm'>
+                <span className='font-mono uppercase tracking-[0.22em] text-primary/72'>
+                  Availability
+                </span>
+                <span className='max-w-[18rem] text-right text-foreground/72'>
+                  Open to product, platform, and interface-focused work
+                </span>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
+
+      <Reveal delay={280}>
+        <div className='marquee-shell mt-8 -mx-4 border-y border-white/10 bg-background/28 md:-mx-6'>
+          <TechMarquee />
+        </div>
+      </Reveal>
     </section>
   )
 }

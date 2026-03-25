@@ -31,7 +31,11 @@
       color-mix(in srgb, var(--theme-tertiary) 10%, transparent) 0%,
       transparent 32%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 24%, var(--background)) 0%, var(--background) 28%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 24%, var(--background)) 0%,
+      var(--background) 28%
+    );
 
   --secondary: hsl(200 24% 94%);
   --secondary-foreground: hsl(222 32% 14%);
@@ -62,12 +66,12 @@
 
 .dark {
   /* Dark Mode - Deep Slate and Teal */
-  --background: hsl(220 32% 7%);
+  --background: hsl(223 28% 8%);
   --foreground: hsl(210 20% 96%);
 
-  --card: hsl(220 24% 10%);
+  --card: hsl(224 22% 12%);
   --card-foreground: hsl(210 20% 96%);
-  --popover: hsl(220 24% 10%);
+  --popover: hsl(224 22% 12%);
   --popover-foreground: hsl(210 20% 96%);
 
   --primary: hsl(184 65% 58%);
@@ -87,22 +91,26 @@
       color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
       transparent 28%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 72%, var(--background)) 0%, var(--background) 32%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 72%, var(--background)) 0%,
+      var(--background) 32%
+    );
 
-  --secondary: hsl(220 17% 14%);
+  --secondary: hsl(224 18% 15%);
   --secondary-foreground: hsl(210 20% 96%);
 
-  --muted: hsl(220 17% 14%);
+  --muted: hsl(224 18% 15%);
   --muted-foreground: hsl(214 14% 68%);
 
-  --accent: hsl(220 18% 12%);
+  --accent: hsl(224 20% 13%);
   --accent-foreground: hsl(210 20% 96%);
 
   --destructive: hsl(352 90% 62%);
   --destructive-foreground: hsl(0 0% 100%);
 
-  --border: hsl(220 14% 20%);
-  --input: hsl(220 14% 20%);
+  --border: hsl(222 15% 24%);
+  --input: hsl(222 15% 24%);
   --ring: hsl(184 65% 58%);
 
   --green: hsl(160 62% 45%);
@@ -131,7 +139,11 @@
       color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
       transparent 30%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 26%, var(--background)) 0%, var(--background) 28%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 26%, var(--background)) 0%,
+      var(--background) 28%
+    );
   --accent: hsl(214 100% 95%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(221 83% 53%);
@@ -157,7 +169,11 @@
       color-mix(in srgb, var(--theme-tertiary) 14%, transparent) 0%,
       transparent 28%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 76%, var(--background)) 0%, var(--background) 32%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 76%, var(--background)) 0%,
+      var(--background) 32%
+    );
   --accent: hsl(220 28% 17%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(213 94% 68%);
@@ -183,7 +199,11 @@
       color-mix(in srgb, var(--theme-tertiary) 10%, transparent) 0%,
       transparent 28%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%, var(--background) 30%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%,
+      var(--background) 30%
+    );
   --accent: hsl(152 45% 92%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(158 64% 34%);
@@ -209,7 +229,11 @@
       color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
       transparent 28%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%,
+      var(--background) 32%
+    );
   --accent: hsl(160 20% 15%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(160 84% 39%);
@@ -235,7 +259,11 @@
       color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
       transparent 30%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%, var(--background) 30%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%,
+      var(--background) 30%
+    );
   --accent: hsl(12 100% 94%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(7 78% 57%);
@@ -261,7 +289,11 @@
       color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
       transparent 28%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%,
+      var(--background) 32%
+    );
   --accent: hsl(8 26% 16%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(9 91% 68%);
@@ -287,7 +319,11 @@
       color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
       transparent 30%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%, var(--background) 30%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 28%, var(--background)) 0%,
+      var(--background) 30%
+    );
   --accent: hsl(270 100% 96%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(262 67% 52%);
@@ -313,7 +349,11 @@
       color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
       transparent 28%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%,
+      var(--background) 32%
+    );
   --accent: hsl(260 26% 16%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(267 85% 73%);
@@ -339,7 +379,11 @@
       color-mix(in srgb, var(--theme-tertiary) 11%, transparent) 0%,
       transparent 30%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 30%, var(--background)) 0%, var(--background) 30%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 30%, var(--background)) 0%,
+      var(--background) 30%
+    );
   --accent: hsl(45 100% 92%);
   --accent-foreground: hsl(222 32% 14%);
   --ring: hsl(35 92% 45%);
@@ -365,7 +409,11 @@
       color-mix(in srgb, var(--theme-tertiary) 12%, transparent) 0%,
       transparent 28%
     ),
-    linear-gradient(180deg, color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%, var(--background) 32%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--theme-soft) 78%, var(--background)) 0%,
+      var(--background) 32%
+    );
   --accent: hsl(34 24% 16%);
   --accent-foreground: hsl(210 20% 96%);
   --ring: hsl(43 96% 56%);
@@ -379,8 +427,8 @@
   --font-display:
     var(--font-space-grotesk), 'Space Grotesk', 'Inter', system-ui,
     -apple-system, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'SF Mono', Monaco,
-    monospace;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, 'SF Mono', Monaco, monospace;
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -467,20 +515,23 @@
     inset: 0;
     z-index: -2;
     pointer-events: none;
-    background-image:
-      linear-gradient(
-        to right,
-        color-mix(in srgb, var(--primary) 10%, transparent) 1px,
-        transparent 1px
+    background:
+      radial-gradient(
+        circle at 10% 15%,
+        color-mix(in srgb, var(--primary) 14%, transparent) 0%,
+        transparent 28%
       ),
-      linear-gradient(
-        to bottom,
-        color-mix(in srgb, var(--primary) 10%, transparent) 1px,
-        transparent 1px
+      radial-gradient(
+        circle at 85% 10%,
+        color-mix(in srgb, var(--theme-tertiary) 10%, transparent) 0%,
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 50% 100%,
+        color-mix(in srgb, var(--theme-secondary) 8%, transparent) 0%,
+        transparent 32%
       );
-    background-size: 48px 48px;
-    opacity: 0.12;
-    mask-image: radial-gradient(circle at center, black 25%, transparent 90%);
+    opacity: 0.95;
   }
 
   body::after {
@@ -490,17 +541,20 @@
     z-index: -1;
     pointer-events: none;
     background:
-      radial-gradient(
-        circle at top center,
-        color-mix(in srgb, var(--primary) 18%, transparent) 0%,
-        transparent 34%
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 18%,
+        transparent 82%,
+        rgba(255, 255, 255, 0.02) 100%
       ),
       radial-gradient(
-        circle at bottom right,
-        color-mix(in srgb, var(--theme-tertiary) 14%, transparent) 0%,
-        transparent 30%
+        circle at center,
+        transparent 0%,
+        rgba(4, 10, 22, 0.18) 65%,
+        rgba(4, 10, 22, 0.45) 100%
       );
-    opacity: 0.9;
+    opacity: 1;
   }
 
   button {
@@ -520,17 +574,305 @@
 }
 
 @layer utilities {
+  .surface-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--card) 95%, transparent) 0%,
+      color-mix(in srgb, var(--card) 82%, var(--background)) 100%
+    );
+    box-shadow:
+      0 24px 80px rgba(2, 8, 23, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+  }
+
+  .surface-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 18%),
+      radial-gradient(
+        circle at top right,
+        color-mix(in srgb, var(--primary) 12%, transparent) 0%,
+        transparent 36%
+      );
+  }
+
+  .surface-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .surface-card {
+    border-radius: 1.4rem;
+    border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+    background: color-mix(in srgb, var(--card) 90%, transparent);
+    box-shadow: 0 16px 40px rgba(2, 8, 23, 0.18);
+  }
+
+  .section-shell {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 640px;
+  }
+
+  .hover-lift {
+    transition:
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 320ms ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 70px rgba(2, 8, 23, 0.24);
+  }
+
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at top right,
+      color-mix(in srgb, var(--primary) 18%, transparent) 0%,
+      transparent 36%
+    );
+    opacity: 0;
+    transition: opacity 360ms ease;
+  }
+
+  .spotlight-card:hover::after {
+    opacity: 1;
+  }
+
+  .section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--primary) 72%, var(--foreground));
+  }
+
+  .section-kicker::before {
+    content: '';
+    height: 1px;
+    width: 2.75rem;
+    background: color-mix(in srgb, var(--primary) 42%, transparent);
+  }
+
+  .soft-divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--foreground) 16%, transparent) 18%,
+      color-mix(in srgb, var(--foreground) 8%, transparent) 82%,
+      transparent 100%
+    );
+  }
+
+  .reveal-base {
+    opacity: 0;
+    filter: blur(10px);
+    transition:
+      transform 780ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 780ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 780ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity, filter;
+  }
+
+  .reveal-up {
+    transform: translateY(42px);
+  }
+
+  .reveal-left {
+    transform: translateX(-42px);
+  }
+
+  .reveal-right {
+    transform: translateX(42px);
+  }
+
+  .reveal-scale {
+    transform: translateY(24px) scale(0.96);
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .hero-shell {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-shell::before {
+    content: '';
+    position: absolute;
+    inset: -12% 45% 30% -10%;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--primary) 18%, transparent) 0%,
+      transparent 70%
+    );
+    filter: blur(34px);
+    opacity: 0.9;
+  }
+
+  .hero-shell::after {
+    content: '';
+    position: absolute;
+    inset: 36% -10% -18% 55%;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--theme-tertiary) 16%, transparent) 0%,
+      transparent 72%
+    );
+    filter: blur(42px);
+    opacity: 0.75;
+  }
+
+  .hero-shell > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(14px);
+    animation: hero-line-enter 880ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hero-line:nth-child(1) {
+    animation-delay: 120ms;
+  }
+
+  .hero-line:nth-child(2) {
+    animation-delay: 250ms;
+  }
+
+  .hero-line:nth-child(3) {
+    animation-delay: 380ms;
+  }
+
+  .hero-accent-text {
+    background-image: linear-gradient(
+      135deg,
+      var(--foreground) 0%,
+      color-mix(in srgb, var(--primary) 88%, white) 45%,
+      color-mix(in srgb, var(--theme-tertiary) 70%, white) 100%
+    );
+    background-size: 180% 180%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: hero-gradient-shift 9s ease infinite;
+  }
+
+  .float-card {
+    animation: float-card 7s ease-in-out infinite;
+  }
+
+  .float-card-delayed {
+    animation-delay: 1.4s;
+  }
+
+  .marquee-shell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .marquee-shell::before,
+  .marquee-shell::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 14%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .marquee-shell::before {
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--background) 96%, transparent) 0%,
+      transparent 100%
+    );
+  }
+
+  .marquee-shell::after {
+    right: 0;
+    background: linear-gradient(
+      270deg,
+      color-mix(in srgb, var(--background) 96%, transparent) 0%,
+      transparent 100%
+    );
+  }
+
+  @keyframes hero-line-enter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes hero-gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes float-card {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
   .terminal-panel {
     position: relative;
     overflow: hidden;
     border-radius: 1.5rem;
     border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--border));
-    background:
-      linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--card) 96%, transparent) 0%,
-        color-mix(in srgb, var(--background) 88%, var(--card)) 100%
-      );
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--card) 96%, transparent) 0%,
+      color-mix(in srgb, var(--background) 88%, var(--card)) 100%
+    );
     box-shadow:
       0 24px 80px rgba(0, 0, 0, 0.35),
       inset 0 1px 0 rgba(255, 255, 255, 0.04);

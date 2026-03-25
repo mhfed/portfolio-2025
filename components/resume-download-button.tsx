@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { Download } from 'lucide-react'
-import { ShinyButton } from './ui/shiny-button'
+import { Button } from './ui/button'
 
 export function ResumeDownloadButton() {
   const t = useTranslations('header')
@@ -18,7 +18,7 @@ export function ResumeDownloadButton() {
   }
 
   return (
-    <ShinyButton
+    <Button
       onClick={handleDownload}
       variant='default'
       size='lg'
@@ -26,6 +26,6 @@ export function ResumeDownloadButton() {
     >
       <Download className='w-4 h-4' />
       {t('downloadResume')}
-    </ShinyButton>
+    </Button>
   )
 }

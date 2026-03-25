@@ -4,6 +4,7 @@ import { ProjectRepositoryCard } from './project-repository-card'
 import { db } from '@/lib/db'
 import { projects } from '@/db/schema'
 import { desc } from 'drizzle-orm'
+import { Reveal } from './ui/reveal'
 
 export async function ProjectsSection() {
   const t = await getTranslations('projects')
@@ -61,32 +62,35 @@ export async function ProjectsSection() {
   )
 
   return (
-    <section id='projects' className='scroll-mt-24 px-4 md:px-6'>
-      <div className='mx-auto max-w-[1200px]'>
-        <div className='terminal-panel px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-10'>
-          <div className='mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+    <section id='projects' className='section-shell scroll-mt-24 px-4 md:px-6'>
+      <div className='mx-auto max-w-[1280px]'>
+        <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+          <Reveal>
             <SectionTitle title={t('title')} className='mb-0' />
-            <span className='self-start rounded-full border border-primary/15 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-primary'>
-              repository: {mappedProjects.length} modules
+          </Reveal>
+          <Reveal delay={140}>
+            <span className='font-mono text-[11px] uppercase tracking-[0.24em] text-foreground/48'>
+              {mappedProjects.length} selected builds
             </span>
-          </div>
+          </Reveal>
+        </div>
 
-          <div className='grid auto-rows-[minmax(250px,auto)] grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4'>
-            {mappedProjects.length === 0 ? (
-              <p className='col-span-full rounded-[1.25rem] border border-dashed border-primary/15 py-12 text-center text-muted-foreground'>
-                {t('noProjects') || 'No projects available yet.'}
-              </p>
-            ) : (
-              mappedProjects.map((project, idx) => (
-                <ProjectRepositoryCard
-                  key={project.title + idx}
-                  {...project}
-                  index={idx}
-                  featured={idx === 0}
-                />
-              ))
-            )}
-          </div>
+        <div className='mt-8 border-b border-white/10'>
+          {mappedProjects.length === 0 ? (
+            <p className='border-t border-dashed border-white/10 py-12 text-center text-muted-foreground'>
+              {t('noProjects') || 'No projects available yet.'}
+            </p>
+          ) : (
+            mappedProjects.map((project, idx) => (
+              <Reveal
+                key={project.title + idx}
+                delay={idx * 90}
+                variant={idx === 0 ? 'scale' : idx % 2 === 0 ? 'left' : 'right'}
+              >
+                <ProjectRepositoryCard {...project} featured={idx === 0} />
+              </Reveal>
+            ))
+          )}
         </div>
       </div>
     </section>

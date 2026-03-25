@@ -34,21 +34,18 @@ const TechCard = ({ name, iconName, IconComponent }: TechItem) => {
   return (
     <div
       className={cn(
-        'relative flex flex-row items-center gap-3 px-4 py-3 cursor-pointer rounded-full border transition-all duration-300 shrink-0',
-        // light styles
-        'border-border/50 bg-background/50 hover:bg-background hover:border-primary/50',
-        // dark styles
-        'dark:border-border/50 dark:bg-background/30 dark:hover:bg-background/50 dark:hover:border-primary/50'
+        'group relative flex shrink-0 cursor-pointer flex-row items-center gap-3 border-r border-white/10 px-5 py-4 transition-all duration-300 md:px-7',
+        'text-foreground/72 hover:text-foreground'
       )}
     >
-      <div className='w-6 h-6 shrink-0 flex items-center justify-center'>
+      <div className='flex h-5 w-5 shrink-0 items-center justify-center text-primary/78 transition-transform duration-300 group-hover:translate-y-[-1px] group-hover:text-primary'>
         {IconComponent ? (
-          <IconComponent className='w-full h-full text-foreground/80' />
+          <IconComponent className='h-full w-full' />
         ) : iconName ? (
           <StackIcon name={iconName as IconName} className='w-full h-full' />
         ) : null}
       </div>
-      <span className='text-sm font-medium text-foreground/80 whitespace-nowrap'>
+      <span className='whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.24em]'>
         {name}
       </span>
     </div>
@@ -57,19 +54,21 @@ const TechCard = ({ name, iconName, IconComponent }: TechItem) => {
 
 export function TechMarquee() {
   return (
-    <div className='relative flex w-full flex-col items-center justify-center overflow-hidden py-8 '>
-      <Marquee pauseOnHover className='[--duration:20s]'>
+    <div className='relative flex w-full flex-col items-center justify-center overflow-hidden py-3 md:py-4'>
+      <Marquee pauseOnHover className='p-0 [--duration:24s] [--gap:0rem]'>
         {firstRow.map((tech) => (
           <TechCard key={tech.name} {...tech} />
         ))}
       </Marquee>
-      <Marquee reverse pauseOnHover className='[--duration:20s]'>
+      <Marquee
+        reverse
+        pauseOnHover
+        className='border-t border-white/10 p-0 [--duration:26s] [--gap:0rem]'
+      >
         {secondRow.map((tech) => (
           <TechCard key={tech.name} {...tech} />
         ))}
       </Marquee>
-      <div className='from-background pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r'></div>
-      <div className='from-background pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l'></div>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import {
   CollapsibleContent,
 } from '@/components/ui/collapsible'
 import { useTranslations } from 'next-intl'
+import { Reveal } from './ui/reveal'
 
 interface SkillItem {
   id: string
@@ -31,50 +32,48 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
   const hasMore = items.length > initialCount
 
   return (
-    <div className='rounded-[1.5rem] border border-primary/15 bg-background/45 p-5 md:p-6'>
+    <div>
       <div className='mb-5 flex items-center justify-between gap-4'>
         <div>
-          <span className='terminal-label'>capability matrix</span>
+          <span className='section-kicker'>capabilities</span>
           <h3 className='mt-3 font-display text-2xl font-semibold tracking-[-0.05em] text-foreground md:text-3xl'>
             {title}
           </h3>
         </div>
-        <span className='hidden rounded-full border border-primary/15 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-primary sm:inline-flex'>
-          {items.length} modules
+        <span className='hidden rounded-full border border-white/10 bg-background/55 px-3 py-1 text-sm text-foreground/68 sm:inline-flex'>
+          {items.length} items
         </span>
       </div>
 
       <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
-        <div className='grid gap-3 md:grid-cols-2'>
-          {visibleItems.map((item) => (
-            <article
-              key={item.id}
-              className='rounded-[1.25rem] border border-primary/12 bg-card/80 p-4'
-            >
-              <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                {item.label}
-              </div>
-              <p className='mt-3 text-sm leading-relaxed text-foreground/72'>
-                {item.value}
-              </p>
-            </article>
+        <div className='space-y-0 border-t border-white/10'>
+          {visibleItems.map((item, idx) => (
+            <Reveal key={item.id} delay={idx * 70} variant='scale'>
+              <article className='grid gap-2 border-b border-white/10 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6'>
+                <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75 md:pt-1'>
+                  {item.label}
+                </div>
+                <p className='text-sm leading-relaxed text-foreground/72 md:text-[15px]'>
+                  {item.value}
+                </p>
+              </article>
+            </Reveal>
           ))}
         </div>
 
         <CollapsibleContent className='overflow-hidden pt-3 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down'>
-          <div className='grid gap-3 md:grid-cols-2'>
-            {hiddenItems.map((item) => (
-              <article
-                key={item.id}
-                className='rounded-[1.25rem] border border-primary/12 bg-card/80 p-4'
-              >
-                <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                  {item.label}
-                </div>
-                <p className='mt-3 text-sm leading-relaxed text-foreground/72'>
-                  {item.value}
-                </p>
-              </article>
+          <div className='space-y-0'>
+            {hiddenItems.map((item, idx) => (
+              <Reveal key={item.id} delay={idx * 70} variant='scale'>
+                <article className='grid gap-2 border-b border-white/10 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6'>
+                  <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75 md:pt-1'>
+                    {item.label}
+                  </div>
+                  <p className='text-sm leading-relaxed text-foreground/72 md:text-[15px]'>
+                    {item.value}
+                  </p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </CollapsibleContent>
@@ -84,7 +83,7 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
             <CollapsibleTrigger asChild>
               <Button
                 variant='link'
-                className='group h-auto p-0 font-mono text-[11px] uppercase tracking-[0.24em] text-primary hover:text-primary/80'
+                className='group h-auto p-0 text-sm font-medium text-primary hover:text-primary/80'
               >
                 {isExpanded ? t('showLess') : t('seeMore')}
                 {isExpanded ? (

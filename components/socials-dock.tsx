@@ -1,16 +1,9 @@
 'use client'
 import React from 'react'
-import { CalendarIcon, MailIcon } from 'lucide-react'
+import { MailIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
 export type IconProps = React.HTMLAttributes<SVGElement>
 const Icons = {
-  calendar: (props: IconProps) => <CalendarIcon {...props} />,
   email: (props: IconProps) => <MailIcon {...props} />,
   linkedin: (props: IconProps) => (
     <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' {...props}>
@@ -75,37 +68,24 @@ const DATA = {
 }
 export function SocialsDock() {
   return (
-    <TooltipProvider>
-      <div className='flex flex-wrap items-center gap-2'>
-        {Object.entries(DATA.contact.social).map(([name, social]) => (
-          <div key={name}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <a
-                  href={social.url}
-                  target={
-                    social.url.startsWith('mailto:') ? undefined : '_blank'
-                  }
-                  rel={
-                    social.url.startsWith('mailto:')
-                      ? undefined
-                      : 'noopener noreferrer'
-                  }
-                  aria-label={social.name}
-                  className={cn(
-                    'inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/20 bg-background/60 text-foreground/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10 hover:text-primary'
-                  )}
-                >
-                  <social.icon className='size-4 md:size-5' />
-                </a>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{name}</p>
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        ))}
-      </div>
-    </TooltipProvider>
+    <div className='flex flex-wrap items-center gap-x-5 gap-y-3'>
+      {Object.entries(DATA.contact.social).map(([name, social]) => (
+        <a
+          key={name}
+          href={social.url}
+          target={social.url.startsWith('mailto:') ? undefined : '_blank'}
+          rel={
+            social.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'
+          }
+          aria-label={social.name}
+          className={cn(
+            'group inline-flex items-center gap-2 text-sm text-foreground/68 transition-colors hover:text-foreground'
+          )}
+        >
+          <social.icon className='size-4 text-primary/80 transition-transform duration-300 group-hover:translate-x-0.5' />
+          <span>{social.name}</span>
+        </a>
+      ))}
+    </div>
   )
 }
