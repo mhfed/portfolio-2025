@@ -14,6 +14,7 @@ import {
 import { ScrollArea } from './ui/scroll-area'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 interface TimelineItemProps {
   company: string
@@ -21,6 +22,8 @@ interface TimelineItemProps {
   period: string
   description: string
   skills: string[]
+  isFirst?: boolean
+  isLast?: boolean
 }
 
 export function TimelineItem({
@@ -29,6 +32,8 @@ export function TimelineItem({
   period,
   description,
   skills,
+  isFirst,
+  isLast,
 }: TimelineItemProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -44,8 +49,24 @@ export function TimelineItem({
   }
 
   return (
-    <article className='group border-t border-white/10 py-6 md:py-7 lg:py-8'>
-      <div className='grid gap-5 md:grid-cols-[140px_minmax(0,1fr)_auto] md:items-start md:gap-6'>
+    <article className='group relative border-t border-white/10 py-6 md:py-8 lg:py-10 first:border-t-0'>
+      {/* Vertical Timeline Line */}
+      <div
+        className={cn(
+          'absolute left-[16px] md:left-[164px] w-px bg-linear-to-b from-white/10 via-white/20 to-white/10',
+          isFirst ? 'top-10 bottom-0' : isLast ? 'top-0 bottom-[calc(100%-40px)]' : 'top-0 bottom-0'
+        )}
+      />
+
+      {/* Timeline Dot */}
+      <div
+        className={cn(
+          'absolute left-[16px] md:left-[164px] top-[38px] md:top-[46px] z-20 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-primary bg-background shadow-[0_0_12px_rgba(var(--primary),0.2)] transition-all duration-500 group-hover:scale-125 group-hover:shadow-[0_0_15px_rgba(var(--primary),0.6)]',
+          'before:absolute before:inset-0 before:rounded-full before:bg-primary/20 before:blur-sm before:opacity-0 group-hover:before:opacity-100'
+        )}
+      />
+
+      <div className='grid gap-5 pl-8 md:grid-cols-[140px_minmax(0,1fr)_auto] md:items-start md:gap-x-12 md:pl-0'>
         <div className='font-mono text-[11px] uppercase tracking-[0.24em] text-primary/75'>
           {period}
         </div>

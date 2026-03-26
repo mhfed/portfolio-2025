@@ -88,7 +88,11 @@ export async function WorkExperienceSection() {
                 delay={idx * 90}
                 variant={idx % 2 === 0 ? 'left' : 'right'}
               >
-                <TimelineItem {...item} />
+                <TimelineItem
+                  {...item}
+                  isFirst={idx === 0}
+                  isLast={idx === timelineItems.length - 1}
+                />
               </Reveal>
             ))
           )}
