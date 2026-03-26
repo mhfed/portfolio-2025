@@ -6,6 +6,8 @@ import { Button } from './ui/button'
 import { Reveal } from './ui/reveal'
 import { TechMarquee } from './tech-marquee'
 
+import { HeroTypingText } from './hero-typing-text'
+
 export async function HeroSection() {
   const t = await getTranslations('hero')
   const tContact = await getTranslations('hero.contact')
@@ -31,11 +33,13 @@ export async function HeroSection() {
               </span>
             </Reveal>
 
-            <h1 className='mt-6 font-display text-[3rem] font-semibold leading-[0.85] tracking-[-0.092em] text-foreground sm:text-[4.5rem] lg:text-[5.25rem] xl:text-[5.75rem]'>
-              <span className='hero-line'>
-                {t('front')} {t('middle')} {t('end')}
-              </span>
-            </h1>
+            <div className='mt-6'>
+              <HeroTypingText
+                frontText={t('front')}
+                middleText={t('middle')}
+                endText={t('end')}
+              />
+            </div>
 
             <Reveal delay={120}>
               <p className='mt-6 text-base font-medium text-foreground/84 md:text-xl lg:text-[1.45rem]'>

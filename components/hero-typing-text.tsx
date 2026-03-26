@@ -149,13 +149,11 @@ export function HeroTypingText({
     <div className='flex flex-col items-start gap-2 md:gap-3 overflow-visible w-full'>
       <h1
         ref={line1Ref}
-        className='text-4xl md:text-5xl lg:text-6xl text-primary text-left min-h-[1.2em] leading-tight tracking-tight overflow-visible w-full font-black uppercase'
-        style={{ fontFamily: 'var(--font-display)' }}
+        className='font-display text-[3rem] font-semibold leading-[0.85] tracking-[-0.092em] text-foreground sm:text-[4.5rem] lg:text-[5.25rem] xl:text-[5.75rem] min-h-[0.85em] overflow-visible w-full uppercase'
       />
       <h1
         ref={line2Ref}
-        className='text-4xl md:text-5xl lg:text-6xl text-primary text-left min-h-[1.2em] leading-tight tracking-tight overflow-visible w-full font-black uppercase'
-        style={{ fontFamily: 'var(--font-display)' }}
+        className='font-display text-[3rem] font-semibold leading-[0.85] tracking-[-0.092em] text-foreground sm:text-[4.5rem] lg:text-[5.25rem] xl:text-[5.75rem] min-h-[0.85em] overflow-visible w-full uppercase'
       />
     </div>
   )
