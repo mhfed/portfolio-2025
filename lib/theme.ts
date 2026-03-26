@@ -1,4 +1,4 @@
-export const DEFAULT_ACCENT_THEME = 'teal'
+export const DEFAULT_ACCENT_THEME = 'cobalt'
 
 export const COLOR_THEMES = [
   {
