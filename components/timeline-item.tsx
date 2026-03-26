@@ -57,8 +57,8 @@ export function TimelineItem({
           <p className='mt-1 text-sm font-medium text-foreground/58 md:text-base'>
             {position}
           </p>
-          <p
-            className='mt-4 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base'
+          <div
+            className='line-clamp-5 mt-4 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base'
             dangerouslySetInnerHTML={{ __html: description }}
           />
 
