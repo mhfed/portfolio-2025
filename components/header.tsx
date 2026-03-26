@@ -122,6 +122,16 @@ export function Header() {
     }
   }
 
+  useEffect(() => {
+    if (!lenis) return
+    if (isMobileMenuOpen) {
+      lenis.stop()
+    } else {
+      lenis.start()
+    }
+    return () => lenis.start()
+  }, [isMobileMenuOpen, lenis])
+
   const displayIsDark = mounted ? isDark : false
   const isBlogPage = pathname.startsWith('/blog')
 
@@ -265,74 +275,84 @@ export function Header() {
       </header>
 
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerContent className='max-h-[85vh] rounded-t-[28px] border-white/10 bg-card/95 px-2 pb-4 pt-6 backdrop-blur-2xl'>
-          <nav className='flex h-full flex-col'>
-            <div className='px-4'>
-              <span className='section-kicker'>navigation</span>
-            </div>
+        <DrawerContent className='max-h-[92vh] rounded-t-[28px] border-white/10 bg-card/95 backdrop-blur-2xl'>
+          <div 
+            className='flex-1 min-h-0 overflow-y-auto px-2 pb-12 pt-6' 
+            data-vaul-no-drag 
+            data-lenis-prevent
+            style={{ overscrollBehavior: 'contain' }}
+          >
+            <nav className='flex flex-col'>
+              <div className='px-4'>
+                <span className='section-kicker'>navigation</span>
+              </div>
 
-            <div className='mt-6 flex flex-1 flex-col gap-1 overflow-y-auto px-2'>
-              {navLinks.map((link) => (
-                <Link
-                  key={link.key}
-                  href={link.href}
-                  scroll={!link.href.includes('#')}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className='rounded-2xl px-4 py-4 text-lg font-medium text-foreground transition-all duration-300 hover:bg-primary/10'
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
+              <div className='mt-6 flex flex-col gap-1'>
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.key}
+                    href={link.href}
+                    scroll={!link.href.includes('#')}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className='rounded-2xl px-4 py-4 text-lg font-medium text-foreground transition-all duration-300 hover:bg-primary/10'
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
 
-            <div className='space-y-3 border-t border-white/10 p-3 pt-4'>
-              <div className='relative'>
-                <button
-                  onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                  className='flex w-full items-center justify-between rounded-2xl border border-white/10 bg-background/60 px-4 py-3 transition-colors'
-                  aria-label='Change language'
-                >
-                  <span className='text-sm font-medium text-foreground'>
-                    Language
-                  </span>
-                  <Languages className='h-5 w-5 text-foreground' />
-                </button>
-
-                {isLanguageMenuOpen && (
-                  <>
-                    <div
-                      className='fixed inset-0 z-40'
-                      onClick={() => setIsLanguageMenuOpen(false)}
-                    />
-                    <div className='absolute bottom-full left-0 right-0 z-50 mb-2 rounded-2xl border border-white/10 bg-card/95 p-2 shadow-lg'>
-                      {routing.locales.map((loc) => (
-                        <button
-                          key={loc}
-                          onClick={() => handleLanguageChange(loc)}
-                          className={`w-full rounded-xl px-4 py-3 text-left text-sm transition-colors ${
-                            locale === loc
-                              ? 'bg-primary/10 text-primary'
-                              : 'text-foreground/72 hover:bg-primary/10 hover:text-foreground'
-                          }`}
-                        >
-                          {loc.toUpperCase()}
-                        </button>
-                      ))}
+              <div className='mt-8 space-y-4 border-t border-white/10 p-4 pt-6'>
+                <div className='relative'>
+                  <button
+                    onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                    className='flex w-full items-center justify-between rounded-2xl border border-white/10 bg-background/60 px-4 py-4 transition-colors'
+                    aria-label='Change language'
+                  >
+                    <span className='text-base font-medium text-foreground'>
+                      Language
+                    </span>
+                    <div className='flex items-center gap-2'>
+                      <span className='text-sm text-primary uppercase font-bold'>{locale}</span>
+                      <Languages className='h-5 w-5 text-foreground' />
                     </div>
-                  </>
-                )}
-              </div>
+                  </button>
 
-              <div className='px-1 pt-1'>
-                <ThemeSelector
-                  isDark={displayIsDark}
-                  accentTheme={accentTheme}
-                  onToggleMode={toggleMode}
-                  onAccentThemeChange={setAccentTheme}
-                />
+                  {isLanguageMenuOpen && (
+                    <>
+                      <div
+                        className='fixed inset-0 z-40'
+                        onClick={() => setIsLanguageMenuOpen(false)}
+                      />
+                      <div className='absolute bottom-full left-0 right-0 z-50 mb-2 rounded-2xl border border-white/10 bg-card/95 p-2 shadow-lg'>
+                        {routing.locales.map((loc) => (
+                          <button
+                            key={loc}
+                            onClick={() => handleLanguageChange(loc)}
+                            className={`w-full rounded-xl px-4 py-3 text-left text-sm transition-colors ${
+                              locale === loc
+                                ? 'bg-primary/10 text-primary'
+                                : 'text-foreground/72 hover:bg-primary/10 hover:text-foreground'
+                            }`}
+                          >
+                            {loc.toUpperCase()}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <div className='pt-2'>
+                  <ThemeSelector
+                    isDark={displayIsDark}
+                    accentTheme={accentTheme}
+                    onToggleMode={toggleMode}
+                    onAccentThemeChange={setAccentTheme}
+                  />
+                </div>
               </div>
-            </div>
-          </nav>
+            </nav>
+          </div>
         </DrawerContent>
       </Drawer>
     </>
