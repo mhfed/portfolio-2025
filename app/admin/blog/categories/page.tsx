@@ -1,4 +1,4 @@
-import { getAllCategories, createCategory } from '@/actions/post-actions'
+import { getAllCategories } from '@/actions/post-actions'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { CategoryForm } from './category-form'

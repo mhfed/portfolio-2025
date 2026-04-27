@@ -42,7 +42,6 @@ export function TipTapEditor({
   content,
   onChange,
   placeholder = 'Start writing...',
-  locale,
   className,
 }: TipTapEditorProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)

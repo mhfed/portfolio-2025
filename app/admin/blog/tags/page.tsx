@@ -1,4 +1,4 @@
-import { getAllTags, createTag } from '@/actions/post-actions'
+import { getAllTags } from '@/actions/post-actions'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { TagForm } from './tag-form'

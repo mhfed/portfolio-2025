@@ -3,7 +3,6 @@ import {
   serial,
   text,
   timestamp,
-  pgEnum,
   integer,
   unique,
   boolean,

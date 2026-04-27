@@ -33,7 +33,6 @@ export function BlogCard({
   publishedAt,
   viewCount = 0,
   categories = [],
-  tags = [],
   locale = 'en',
 }: BlogCardProps) {
   // Get localized title and excerpt

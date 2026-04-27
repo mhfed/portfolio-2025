@@ -1,8 +1,15 @@
 import Image from 'next/image'
 import { ExternalLink } from 'lucide-react'
-import type { Project } from '@/data/projects'
 
-interface ProjectRepositoryCardProps extends Project {
+interface ProjectRepositoryCardProps {
+  image: string
+  title: string
+  year: string
+  description: string
+  details: string
+  liveUrl?: string
+  githubUrl?: string
+  techStack: string[]
   featured?: boolean
 }
 

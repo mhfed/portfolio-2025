@@ -11,7 +11,7 @@ import {
 } from '@/db/schema'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { desc, eq, and, or, ilike, sql, inArray, isNull } from 'drizzle-orm'
+import { desc, eq, and, or, ilike, sql, isNull } from 'drizzle-orm'
 
 export interface CreatePostResult {
   success: boolean

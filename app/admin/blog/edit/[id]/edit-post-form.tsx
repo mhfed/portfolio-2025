@@ -354,7 +354,7 @@ export function EditPostForm({ post }: EditPostFormProps) {
               type='checkbox'
               name='isPublished'
               value='true'
-              defaultChecked={post.isPublished}
+              defaultChecked={post.isPublished ?? false}
               className='rounded border-border'
             />
             <span className='text-sm font-semibold text-foreground'>

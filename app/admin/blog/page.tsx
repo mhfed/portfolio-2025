@@ -1,7 +1,6 @@
 import { getAllPosts } from '@/actions/post-actions'
 import Link from 'next/link'
 import Image from 'next/image'
-import { deletePost } from '@/actions/post-actions'
 import { DeletePostButton } from './delete-post-button'
 import { Badge } from '@/components/ui/badge'
 
