@@ -11,6 +11,7 @@ interface ProjectRepositoryCardProps {
   githubUrl?: string
   techStack: string[]
   featured?: boolean
+  index?: number
 }
 
 export function ProjectRepositoryCard({
@@ -22,160 +23,52 @@ export function ProjectRepositoryCard({
   techStack,
   liveUrl,
   githubUrl,
-  featured = false,
+  index = 1,
 }: ProjectRepositoryCardProps) {
-  if (featured) {
-    return (
-      <article className='group border-t border-white/10 py-8 md:py-10 lg:py-12'>
-        <div className='grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(280px,0.8fr)] lg:items-start lg:gap-12'>
-          <div className='max-w-2xl'>
-            {year && (
-              <span className='font-mono text-[11px] uppercase tracking-[0.24em] text-primary/72'>
-                {year}
-              </span>
-            )}
-
-            <h3 className='mt-4 font-display text-4xl font-semibold leading-[0.92] tracking-[-0.08em] text-foreground transition-colors duration-300 group-hover:text-primary md:text-5xl lg:text-[4.25rem]'>
-              {title}
-            </h3>
-
-            <p className='mt-5 text-base leading-relaxed text-foreground/74 md:text-lg'>
-              {description}
-            </p>
-
-            {details && (
-              <p className='mt-4 max-w-xl text-sm leading-relaxed text-foreground/58 md:text-base'>
-                {details}
-              </p>
-            )}
-
-            {techStack.length > 0 && (
-              <p className='mt-6 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/50'>
-                {techStack.slice(0, 6).join(' / ')}
-              </p>
-            )}
-
-            {(liveUrl || githubUrl) && (
-              <div className='mt-7 flex flex-wrap gap-5 text-sm font-medium'>
-                {liveUrl && (
-                  <a
-                    href={liveUrl}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='inline-flex items-center gap-2 text-primary transition-colors hover:text-primary/80'
-                  >
-                    View project
-                    <ExternalLink className='h-4 w-4' />
-                  </a>
-                )}
-                {githubUrl && (
-                  <a
-                    href={githubUrl}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='inline-flex items-center gap-2 text-foreground/68 transition-colors hover:text-foreground'
-                  >
-                    Source
-                    <ExternalLink className='h-4 w-4' />
-                  </a>
-                )}
-              </div>
-            )}
-          </div>
-
-          <div className='space-y-4'>
-            <div className='relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-white/[0.04]'>
-              <Image
-                src={image}
-                alt={title}
-                fill
-                className='object-cover transition duration-900 group-hover:scale-[1.04]'
-                sizes='(min-width: 1024px) 42vw, 100vw'
-              />
-            </div>
-
-            <div className='flex items-center justify-between border-t border-white/10 pt-3 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/42'>
-              <span>Featured build</span>
-              <span>
-                {techStack.length > 0
-                  ? `${techStack.length} tools`
-                  : 'In production'}
-              </span>
-            </div>
-          </div>
-        </div>
-      </article>
-    )
-  }
+  const formattedIndex = index < 10 ? `0${index}` : index.toString()
 
   return (
-    <article className='group border-t border-white/10 py-6 md:py-7 lg:py-8'>
-      <div className='grid gap-6 lg:grid-cols-[110px_minmax(0,1fr)_280px] lg:items-start lg:gap-8'>
-        <span className='font-mono text-[11px] uppercase tracking-[0.24em] text-primary/72'>
-          {year || 'Selected'}
+    <article className='magnetic relative group flex flex-col md:flex-row md:items-center justify-between border-b border-white/20 py-8 md:py-12 cursor-none transition-colors duration-500 hover:bg-white/[0.02]'>
+      
+      {/* List Content */}
+      <div className='flex items-center gap-8 md:gap-16 z-10 pointer-events-none'>
+        <span className='font-mono text-xs md:text-sm text-white/30 group-hover:text-white/60 transition-colors'>
+          {formattedIndex}
         </span>
-
-        <div className='min-w-0'>
-          <h3 className='font-display text-2xl font-semibold leading-tight tracking-[-0.06em] text-foreground transition-colors duration-300 group-hover:text-primary md:text-[2rem]'>
-            {title}
-          </h3>
-
-          <p className='mt-3 max-w-2xl text-sm leading-relaxed text-foreground/74 md:text-base'>
-            {description}
-          </p>
-
-          {details && (
-            <p className='mt-3 max-w-2xl text-sm leading-relaxed text-foreground/58'>
-              {details}
-            </p>
-          )}
-
-          {techStack.length > 0 && (
-            <p className='mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/50'>
-              {techStack.slice(0, 5).join(' / ')}
-            </p>
-          )}
-        </div>
-
-        <div className='grid gap-4'>
-          <div className='relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-white/[0.04]'>
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className='object-cover transition duration-900 group-hover:scale-[1.05]'
-              sizes='(min-width: 1280px) 22vw, (min-width: 1024px) 280px, 100vw'
-            />
-          </div>
-
-          {(liveUrl || githubUrl) && (
-            <div className='flex flex-wrap gap-4 text-sm font-medium lg:justify-end'>
-              {liveUrl && (
-                <a
-                  href={liveUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-flex items-center gap-2 text-primary transition-colors hover:text-primary/80'
-                >
-                  View
-                  <ExternalLink className='h-4 w-4' />
-                </a>
-              )}
-              {githubUrl && (
-                <a
-                  href={githubUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-flex items-center gap-2 text-foreground/68 transition-colors hover:text-foreground'
-                >
-                  Source
-                  <ExternalLink className='h-4 w-4' />
-                </a>
-              )}
-            </div>
-          )}
-        </div>
+        <h3 className='font-sans font-bold text-4xl md:text-6xl lg:text-[5rem] uppercase tracking-tighter text-white/70 group-hover:text-white transition-all duration-500 group-hover:translate-x-4'>
+          {title}
+        </h3>
       </div>
+
+      <div className='mt-6 md:mt-0 z-10 flex items-center gap-8 md:gap-16 pointer-events-none'>
+        <span className='font-serif italic text-lg md:text-2xl text-white/50 group-hover:text-white/80 transition-colors hidden lg:block'>
+          {techStack.slice(0, 3).join(' — ')}
+        </span>
+        <span className='font-mono text-xs text-white/30 group-hover:text-white/60 uppercase tracking-widest'>
+          {year || '2025'}
+        </span>
+      </div>
+
+      {/* Hover Image Reveal */}
+      <div className='fixed top-1/2 left-1/2 w-[300px] md:w-[450px] aspect-[4/5] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-700 ease-out z-0 overflow-hidden mix-blend-difference'>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={image}
+          alt={title}
+          className='w-full h-full object-cover grayscale opacity-80 scale-125 group-hover:scale-100 transition-transform duration-1000'
+        />
+      </div>
+
+      {/* Invisible clickable overlay */}
+      {(liveUrl || githubUrl) && (
+        <a 
+          href={liveUrl || githubUrl} 
+          target='_blank' 
+          rel='noopener noreferrer' 
+          className='absolute inset-0 z-20'
+          aria-label={`View ${title}`}
+        />
+      )}
     </article>
   )
 }

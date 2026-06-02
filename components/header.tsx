@@ -2,33 +2,51 @@
 
 import type React from 'react'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useTranslations } from 'next-intl'
-import { Languages, Moon, Palette, Sun } from 'lucide-react'
+import { Languages } from 'lucide-react'
 import { useLocale } from '@/hooks/use-locale'
-import { useTheme } from '@/hooks/use-theme'
 import { routing, Link, usePathname } from '@/i18n/routing'
 import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { ScrollProgress } from './ui/scroll-progress'
 import { useLenis } from 'lenis/react'
-import { ThemeSelector } from './theme-selector'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Magnetic } from './ui/magnetic'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function Header() {
   const [mounted, setMounted] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
-  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
   const t = useTranslations('header.nav')
   const tContact = useTranslations('hero.contact')
   const { locale, setLocale } = useLocale()
-  const { isDark, accentTheme, toggleMode, setAccentTheme } = useTheme()
   const lenis = useLenis()
   const pathname = usePathname()
 
   const homePath = '/'
 
+  const headerRef = useRef<HTMLHeadingElement>(null)
+
   useEffect(() => {
     setMounted(true)
+    
+    // Header Scroll Reveal
+    const showAnim = gsap.from(headerRef.current, { 
+      yPercent: -100,
+      paused: true,
+      duration: 0.3
+    }).progress(1)
+    
+    ScrollTrigger.create({
+      start: "top top",
+      end: 99999,
+      onUpdate: (self) => {
+        self.direction === -1 ? showAnim.play() : showAnim.reverse()
+      }
+    })
   }, [])
 
   useEffect(() => {
@@ -132,17 +150,15 @@ export function Header() {
     return () => lenis.start()
   }, [isMobileMenuOpen, lenis])
 
-  const displayIsDark = mounted ? isDark : false
   const isBlogPage = pathname.startsWith('/blog')
 
   return (
     <>
       <header
-        className='sticky top-0 z-50 border-b border-white/10 bg-background/70 backdrop-blur-xl supports-backdrop-filter:bg-background/60'
-        style={{ height: 'var(--header-height)' }}
+        ref={headerRef}
+        className='fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 mix-blend-difference'
       >
-        <nav className='mx-auto flex h-full max-w-[1280px] items-center justify-between gap-4 px-4 md:px-6'>
-          <ScrollProgress className='top-[calc(var(--header-height)-1px)] h-px' />
+        <nav className='mx-auto flex w-full items-center justify-between'>
 
           <Link href={homePath} className='group min-w-0'>
             <div className='min-w-0'>
@@ -157,26 +173,27 @@ export function Header() {
 
           <div className='hidden lg:flex items-center gap-7'>
             {navLinks.map((link) => (
-              <Link
-                key={link.key}
-                href={link.href}
-                scroll={!link.href.includes('#')}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`text-sm font-medium transition-colors duration-300 ${
-                  link.key === 'blog' && isBlogPage
-                    ? 'text-primary'
-                    : 'text-foreground/68 hover:text-foreground'
-                }`}
-              >
-                {link.name}
-              </Link>
+              <Magnetic key={link.key}>
+                <Link
+                  href={link.href}
+                  scroll={!link.href.includes('#')}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`text-sm font-medium transition-colors duration-300 block ${
+                    link.key === 'blog' && isBlogPage
+                      ? 'text-primary'
+                      : 'text-foreground/68 hover:text-foreground'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              </Magnetic>
             ))}
           </div>
 
           <div className='flex shrink-0 items-center gap-2 md:gap-3'>
             <a
               href={`mailto:${tContact('email')}`}
-              className='hidden items-center rounded-full border border-white/10 bg-card/70 px-4 py-2 text-sm text-foreground/72 transition-colors hover:border-primary/30 hover:text-foreground xl:inline-flex'
+              className='cinematic-link hidden xl:inline-flex'
             >
               {tContact('email')}
             </a>
@@ -184,7 +201,7 @@ export function Header() {
             <div className='relative hidden md:block'>
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
+                className='cinematic-link'
                 aria-label='Change language'
               >
                 <Languages className='h-4 w-4 text-foreground' />
@@ -215,60 +232,13 @@ export function Header() {
               )}
             </div>
 
-            <div className='relative hidden md:block'>
-              <button
-                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-                className='inline-flex h-10 items-center gap-2 rounded-full border border-white/10 bg-card/70 px-3 transition-all duration-300 hover:border-primary/30 hover:bg-card'
-                aria-label='Open theme settings'
-              >
-                <Palette className='h-4 w-4 text-foreground' />
-                {displayIsDark ? (
-                  <Moon className='h-4 w-4 text-primary' />
-                ) : (
-                  <Sun className='h-4 w-4 text-primary' />
-                )}
-              </button>
-
-              {isThemeMenuOpen && (
-                <>
-                  <div
-                    className='fixed inset-0 z-40'
-                    onClick={() => setIsThemeMenuOpen(false)}
-                  />
-                  <div className='absolute right-0 top-full z-50 mt-3'>
-                    <ThemeSelector
-                      compact
-                      isDark={displayIsDark}
-                      accentTheme={accentTheme}
-                      onToggleMode={toggleMode}
-                      onAccentThemeChange={setAccentTheme}
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className='flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 bg-card/70 p-1 transition-all duration-300 hover:border-primary/30 hover:bg-card md:hidden'
+              className='cinematic-link md:hidden'
               aria-label='Toggle menu'
               aria-expanded={isMobileMenuOpen}
             >
-              <span
-                className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
-                  isMobileMenuOpen ? 'translate-y-2 rotate-45' : ''
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
-                  isMobileMenuOpen ? 'opacity-0' : ''
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 bg-foreground transition-all duration-300 ${
-                  isMobileMenuOpen ? '-translate-y-2 -rotate-45' : ''
-                }`}
-              />
+              Menu
             </button>
           </div>
         </nav>
@@ -340,15 +310,6 @@ export function Header() {
                       </div>
                     </>
                   )}
-                </div>
-
-                <div className='pt-2'>
-                  <ThemeSelector
-                    isDark={displayIsDark}
-                    accentTheme={accentTheme}
-                    onToggleMode={toggleMode}
-                    onAccentThemeChange={setAccentTheme}
-                  />
                 </div>
               </div>
             </nav>

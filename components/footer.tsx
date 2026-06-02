@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import { SocialsDock } from './socials-dock'
 import Link from 'next/link'
 import { Reveal } from './ui/reveal'
+import { FooterClientAnimator } from './footer-client-animator'
 
 interface FooterProps {
   locale: string
@@ -18,8 +19,12 @@ export async function Footer({ locale }: FooterProps) {
   ]
 
   return (
-    <footer id='collaborate' className='section-shell px-4 pb-8 md:px-6'>
-      <div className='mx-auto max-w-[1280px]'>
+    <footer id='collaborate' className='section-shell px-4 pb-8 md:px-6 relative overflow-hidden'>
+      <FooterClientAnimator />
+      <div className='massive-footer-text absolute left-0 right-0 top-[20%] z-0 flex items-center justify-center font-display text-[15vw] font-black uppercase tracking-tighter text-foreground opacity-10 pointer-events-none whitespace-nowrap select-none mix-blend-overlay'>
+        LET'S TALK
+      </div>
+      <div className='mx-auto max-w-[1280px] relative z-10'>
         <div className='border-t border-white/10 pt-10 md:pt-12'>
           <div className='grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end'>
             <Reveal>

@@ -3,68 +3,34 @@ import { SectionTitle } from './section-title'
 import { CoreSkillsList } from './core-skills-list'
 import { Reveal } from './ui/reveal'
 
-export async function AboutSection() {
-  const t = await getTranslations('about')
-  const skillItems = [
-    'frontend',
-    'state',
-    'performance',
-    'devops',
-    'mobile',
-    'agile',
-    'codeQuality',
-    'productMindset',
-    'leadership',
-  ].map((key) => ({
-    id: key,
-    label: t(`skillList.${key}.label`),
-    value: t(`skillList.${key}.value`),
-  }))
+import { AboutClientAnimator } from './about-client-animator'
 
+export function AboutSection() {
   return (
-    <section id='about' className='section-shell scroll-mt-24 px-4 md:px-6'>
-      <div className='mx-auto max-w-[1280px]'>
-        <div className='grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]'>
-          <div className='space-y-6'>
-            <Reveal>
-              <SectionTitle title={t('title')} />
-            </Reveal>
-
-            <Reveal delay={120}>
-              <p className='max-w-2xl text-base leading-relaxed text-foreground/75 md:text-lg'>
-                {t('description1')}
-              </p>
-            </Reveal>
-
-            <div className='grid gap-3 sm:grid-cols-2'>
-              <Reveal delay={220} variant='left'>
-                <div className='border-t border-white/10 pt-4'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    Focus
-                  </div>
-                  <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
-                    {t('yearsDescription')}
-                  </p>
-                </div>
-              </Reveal>
-
-              <Reveal delay={320} variant='left'>
-                <div className='border-t border-white/10 pt-4'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    Approach
-                  </div>
-                  <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
-                    {t('satisfactionDescription')}
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-
-          <Reveal delay={180} variant='right'>
-            <CoreSkillsList title={t('coreSkills')} items={skillItems} />
-          </Reveal>
-        </div>
+    <section id='about' className='relative w-full min-h-screen bg-black flex items-center py-32 px-4 md:px-12'>
+      <AboutClientAnimator />
+      <div className='max-w-[1400px] mx-auto w-full'>
+        <p className='about-reveal-text font-serif text-[clamp(2rem,5vw,5rem)] leading-tight text-white/20 uppercase'>
+          <span className='about-word'>I </span>
+          <span className='about-word'>am </span>
+          <span className='about-word'>a </span>
+          <span className='about-word text-white italic'>Creative </span>
+          <span className='about-word text-white italic'>Developer </span>
+          <span className='about-word'>specializing </span>
+          <span className='about-word'>in </span>
+          <span className='about-word'>building </span>
+          <span className='about-word'>high-end </span>
+          <span className='about-word'>digital </span>
+          <span className='about-word'>experiences </span>
+          <span className='about-word'>with </span>
+          <span className='about-word'>a </span>
+          <span className='about-word'>focus </span>
+          <span className='about-word'>on </span>
+          <span className='about-word text-white italic'>motion, </span>
+          <span className='about-word text-white italic'>interaction, </span>
+          <span className='about-word'>and </span>
+          <span className='about-word text-white italic'>performance.</span>
+        </p>
       </div>
     </section>
   )
