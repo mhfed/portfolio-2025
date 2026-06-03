@@ -1731,3 +1731,19 @@ html body[data-scroll-locked] {
     @apply m-0 leading-normal;
   }
 }
+
+/* Custom Smooth Cursor CSS overrides */
+@media (any-hover: hover) and (any-pointer: fine) {
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
+  .custom-cursor-active input,
+  .custom-cursor-active textarea,
+  .custom-cursor-active [contenteditable] {
+    cursor: text !important;
+  }
+  .custom-cursor-active iframe {
+    cursor: auto !important;
+  }
+}
+
