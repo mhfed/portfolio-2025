@@ -137,6 +137,8 @@ export default async function LocaleLayout({ children, params }: Props) {
       />
       <NextIntlClientProvider messages={messages}>
         <LenisProvider>
+          <div className="fixed inset-0 z-[-1] pointer-events-none ambient-mesh-gradient"></div>
+          <div className="fixed inset-0 z-[-1] pointer-events-none film-grain opacity-[0.03]"></div>
           {children}
           <Analytics />
         </LenisProvider>

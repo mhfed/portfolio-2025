@@ -7,7 +7,7 @@ export async function HeroSection() {
   return (
     <section
       id='home-top'
-      className='relative w-full h-screen flex items-center justify-center overflow-hidden bg-black'
+      className='relative w-full h-screen flex items-center justify-center overflow-hidden bg-background'
     >
       <HeroClientAnimator />
       
@@ -17,14 +17,22 @@ export async function HeroSection() {
             viewBox="0 0 1200 200" 
             className='hero-svg w-full max-w-[1400px] h-auto'
           >
+            <defs>
+              <linearGradient id="aurora-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#8B5CF6" />   {/* Violet */}
+                <stop offset="50%" stopColor="#2DD4BF" />  {/* Teal */}
+                <stop offset="100%" stopColor="#F43F5E" /> {/* Rose */}
+              </linearGradient>
+            </defs>
             <text 
               x="50%" 
               y="50%" 
               textAnchor="middle" 
               dominantBaseline="middle" 
-              className='hero-svg-text text-[100px] font-sans font-bold tracking-tighter uppercase fill-transparent stroke-white stroke-1'
+              className='hero-svg-text text-[100px] font-sans font-bold tracking-tighter uppercase fill-transparent stroke-1'
+              style={{ stroke: 'url(#aurora-gradient)' }}
             >
-              NGUYEN <tspan className='font-serif italic font-light stroke-white/50'>MINH</tspan> HIEU
+              NGUYEN <tspan className='font-serif italic font-light opacity-80' style={{ stroke: 'url(#aurora-gradient)' }}>MINH</tspan> HIEU
             </text>
           </svg>
         </div>

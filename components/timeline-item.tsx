@@ -47,9 +47,14 @@ export function TimelineItem({
             {period}
           </span>
           <div className='flex items-center gap-6'>
-            <h3 className='font-sans font-bold text-3xl md:text-5xl lg:text-6xl uppercase tracking-tighter text-white/70 group-hover:text-white transition-all duration-500'>
-              {company}
-            </h3>
+            <div className='relative'>
+              <h3 className='font-sans font-bold text-3xl md:text-5xl lg:text-6xl uppercase tracking-tighter text-white/70 group-hover:opacity-0 transition-opacity duration-500'>
+                {company}
+              </h3>
+              <h3 className='absolute top-0 left-0 font-sans font-bold text-3xl md:text-5xl lg:text-6xl uppercase tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-teal-400 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500' aria-hidden="true">
+                {company}
+              </h3>
+            </div>
             {/* Hover Slide In Role (Desktop only) */}
             <span className='hidden lg:block font-serif italic text-2xl text-white/50 opacity-0 -translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500'>
               {position}

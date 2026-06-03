@@ -19,12 +19,15 @@ export async function Footer({ locale }: FooterProps) {
   ]
 
   return (
-    <footer id='collaborate' className='section-shell px-4 pb-8 md:px-6 relative overflow-hidden'>
+    <footer id='collaborate' className='w-full bg-background px-4 pb-8 md:px-6 relative overflow-hidden h-full'>
       <FooterClientAnimator />
-      <div className='massive-footer-text absolute left-0 right-0 top-[20%] z-0 flex items-center justify-center font-display text-[15vw] font-black uppercase tracking-tighter text-foreground opacity-10 pointer-events-none whitespace-nowrap select-none mix-blend-overlay'>
+      
+      {/* Massive Background Text */}
+      <div className='absolute inset-0 z-0 flex items-center justify-center font-display text-[15vw] font-black uppercase tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-teal-400 to-rose-500 opacity-20 pointer-events-none whitespace-nowrap select-none overflow-hidden'>
         LET'S TALK
       </div>
-      <div className='mx-auto max-w-[1280px] relative z-10'>
+
+      <div className='mx-auto max-w-[1400px] relative z-10 pt-16 md:pt-24'>
         <div className='border-t border-white/10 pt-10 md:pt-12'>
           <div className='grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end'>
             <Reveal>

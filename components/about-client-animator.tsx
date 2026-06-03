@@ -12,7 +12,8 @@ export function AboutClientAnimator() {
       const words = gsap.utils.toArray('.about-word')
       
       gsap.to(words, {
-        color: '#FFFFFF',
+        color: (i, el) => el.classList.contains('neon') ? 'transparent' : '#FFFFFF',
+        opacity: 1,
         stagger: 0.1,
         ease: 'none',
         scrollTrigger: {

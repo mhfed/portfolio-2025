@@ -32,12 +32,17 @@ export function ProjectRepositoryCard({
       
       {/* List Content */}
       <div className='flex items-center gap-8 md:gap-16 z-10 pointer-events-none'>
-        <span className='font-mono text-xs md:text-sm text-white/30 group-hover:text-white/60 transition-colors'>
+        <span className='font-mono text-xs md:text-sm text-white/30 group-hover:text-white/60 transition-colors mt-2 md:mt-4'>
           {formattedIndex}
         </span>
-        <h3 className='font-sans font-bold text-4xl md:text-6xl lg:text-[5rem] uppercase tracking-tighter text-white/70 group-hover:text-white transition-all duration-500 group-hover:translate-x-4'>
-          {title}
-        </h3>
+        <div className='relative transition-transform duration-500 group-hover:translate-x-4'>
+          <h3 className='font-sans font-bold text-4xl md:text-6xl lg:text-[5rem] uppercase tracking-tighter text-white/70 group-hover:opacity-0 transition-opacity duration-500'>
+            {title}
+          </h3>
+          <h3 className='absolute top-0 left-0 font-sans font-bold text-4xl md:text-6xl lg:text-[5rem] uppercase tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-teal-400 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500' aria-hidden="true">
+            {title}
+          </h3>
+        </div>
       </div>
 
       <div className='mt-6 md:mt-0 z-10 flex items-center gap-8 md:gap-16 pointer-events-none'>

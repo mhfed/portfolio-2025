@@ -60,7 +60,7 @@ export function Preloader() {
   return (
     <div
       ref={overlayRef}
-      className='fixed inset-0 z-[10000] flex items-center justify-center bg-black pointer-events-none'
+      className='fixed inset-0 z-[10000] flex items-center justify-center bg-background pointer-events-none'
     >
       <div className='overflow-hidden'>
         <div 

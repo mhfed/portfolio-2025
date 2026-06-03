@@ -8,30 +8,52 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function FooterClientAnimator() {
   useLayoutEffect(() => {
+    // 1. Curtain Footer Height Setup
+    const setFooterHeight = () => {
+      const footer = document.querySelector('footer') as HTMLElement
+      const main = document.querySelector('main') as HTMLElement
+      
+      if (footer && main) {
+        // Apply the footer height as bottom margin to the main content
+        main.style.marginBottom = `${footer.offsetHeight}px`
+      }
+    }
+
+    // Initial setup and on window resize
+    setFooterHeight()
+    window.addEventListener('resize', setFooterHeight)
+
+    // 2. Parallax Animations
     const ctx = gsap.context(() => {
       const footer = document.querySelector('footer') as HTMLElement
       const massiveText = document.querySelector('.massive-footer-text') as HTMLElement
       
-      if (!footer || !massiveText) return
+      if (!footer) return
 
-      gsap.fromTo(massiveText, 
-        { yPercent: 50, scale: 0.8, opacity: 0 },
-        {
-          yPercent: 0,
-          scale: 1,
-          opacity: 0.1, // Subtle watermark effect
-          ease: 'none',
-          scrollTrigger: {
-            trigger: footer,
-            start: 'top bottom',
-            end: 'bottom bottom',
-            scrub: true,
+      // We still want parallax inside the footer when the curtain opens
+      // But since footer is fixed, scrollTrigger needs to hook into the page scroll
+      if (massiveText) {
+        gsap.fromTo(massiveText, 
+          { yPercent: 30, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 0.1, // Subtle watermark effect
+            ease: 'none',
+            scrollTrigger: {
+              trigger: document.body,
+              start: 'bottom-=' + (footer.offsetHeight * 0.8) + ' bottom',
+              end: 'bottom bottom',
+              scrub: true,
+            }
           }
-        }
-      )
+        )
+      }
     })
 
-    return () => ctx.revert()
+    return () => {
+      window.removeEventListener('resize', setFooterHeight)
+      ctx.revert()
+    }
   }, [])
 
   return null

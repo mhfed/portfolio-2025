@@ -63,7 +63,7 @@ export async function ProjectsSection() {
   )
 
   return (
-    <section id='projects' className='relative bg-black'>
+    <section id='projects' className='relative bg-background'>
       {/* Title Section */}
       <div className='px-4 md:px-12 pt-32 pb-16'>
         <div className='max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8 border-b border-white/20 pb-8'>

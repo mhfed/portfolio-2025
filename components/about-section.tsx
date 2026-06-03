@@ -7,15 +7,15 @@ import { AboutClientAnimator } from './about-client-animator'
 
 export function AboutSection() {
   return (
-    <section id='about' className='relative w-full min-h-screen bg-black flex items-center py-32 px-4 md:px-12'>
+    <section id='about' className='relative w-full min-h-screen bg-background flex items-center py-32 px-4 md:px-12'>
       <AboutClientAnimator />
       <div className='max-w-[1400px] mx-auto w-full'>
         <p className='about-reveal-text font-serif text-[clamp(2rem,5vw,5rem)] leading-tight text-white/20 uppercase'>
           <span className='about-word'>I </span>
           <span className='about-word'>am </span>
           <span className='about-word'>a </span>
-          <span className='about-word text-white italic'>Creative </span>
-          <span className='about-word text-white italic'>Developer </span>
+          <span className='about-word neon opacity-20 bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-teal-400 to-rose-500 italic'>Creative </span>
+          <span className='about-word neon opacity-20 bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-teal-400 to-violet-500 italic'>Developer </span>
           <span className='about-word'>specializing </span>
           <span className='about-word'>in </span>
           <span className='about-word'>building </span>
