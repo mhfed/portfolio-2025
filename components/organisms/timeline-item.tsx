@@ -6,6 +6,7 @@ import { Collapsible } from '@/components/ui/collapsible'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { motion } from 'motion/react'
 
 const TimelineItemContext = React.createContext<{
   isExpanded: boolean
@@ -141,15 +142,54 @@ export function TimelineItemCollapsible({
 export function TimelineItemDescription({ html }: { html: string }) {
   const context = React.use(TimelineItemContext)
   const isExpanded = context?.isExpanded ?? false
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const [height, setHeight] = React.useState<number | string>('auto')
+  const [isTruncated, setIsTruncated] = React.useState(false)
+
+  React.useEffect(() => {
+    const element = containerRef.current
+    if (!element) return
+
+    const checkTruncation = () => {
+      const scrollHeight = element.scrollHeight
+      const collapsedHeight = 96 // 4 lines approx
+      setIsTruncated(scrollHeight > collapsedHeight)
+      
+      if (isExpanded) {
+        setHeight(scrollHeight)
+      } else {
+        setHeight(Math.min(scrollHeight, collapsedHeight))
+      }
+    }
+
+    checkTruncation()
+
+    const resizeObserver = new ResizeObserver(() => {
+      checkTruncation()
+    })
+    resizeObserver.observe(element)
+
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [isExpanded, html])
 
   return (
-    <div
-      className={cn(
-        'max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base transition-all duration-300',
-        !isExpanded && 'line-clamp-4'
+    <motion.div
+      initial={false}
+      animate={{ height }}
+      transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+      className='relative overflow-hidden'
+    >
+      <div
+        ref={containerRef}
+        className='max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base'
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+      {isTruncated && !isExpanded && (
+        <div className='absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-background to-transparent pointer-events-none' />
       )}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    </motion.div>
   )
 }
 
