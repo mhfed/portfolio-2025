@@ -1,4 +1,6 @@
 import type React from 'react'
+import { Suspense } from 'react'
+import { LiquidBackground } from '@/components/liquid-background'
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
@@ -7,6 +9,26 @@ import { hasLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { Analytics } from '@vercel/analytics/react'
 import { LenisProvider } from '@/components/providers/lenis-provider'
+import { Playfair_Display, Inter, Space_Grotesk } from 'next/font/google'
+import { cn } from '@/lib/utils'
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+})
 
 type Props = {
   children: React.ReactNode
@@ -135,14 +157,15 @@ export default async function LocaleLayout({ children, params }: Props) {
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <NextIntlClientProvider messages={messages}>
-        <LenisProvider>
-          <div className="fixed inset-0 z-[-1] pointer-events-none ambient-mesh-gradient"></div>
-          <div className="fixed inset-0 z-[-1] pointer-events-none film-grain opacity-[0.03]"></div>
-          {children}
-          <Analytics />
-        </LenisProvider>
-      </NextIntlClientProvider>
+      <body className={cn('min-h-screen font-sans antialiased bg-background text-foreground overflow-x-hidden', playfair.variable, inter.variable, spaceGrotesk.variable)}>
+        <LiquidBackground />
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <LenisProvider>
+            {children}
+            <Analytics />
+          </LenisProvider>
+        </NextIntlClientProvider>
+      </body>
     </>
   )
 }

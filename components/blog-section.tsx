@@ -19,12 +19,13 @@ export async function BlogSection() {
   }
 
   return (
-    <section id='blog' className='section-shell scroll-mt-24 px-4 md:px-6'>
-      <div className='mx-auto max-w-[1280px]'>
-        <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
-          <Reveal>
-            <SectionTitle title={t('title')} className='mb-0' />
-          </Reveal>
+    <section id='blog' className='relative w-full py-12 z-10'>
+      {/* Title Section */}
+      <div className='px-4 md:px-12 pt-16 pb-8'>
+        <div className='max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8 border-b border-black/10 pb-8'>
+          <h2 className='font-serif italic font-light text-[4rem] md:text-[7rem] leading-[0.9] tracking-[-0.04em] text-zinc-900'>
+            {t('title')}
+          </h2>
           <Reveal delay={140}>
             <Link
               href={`/${locale}/blog`}

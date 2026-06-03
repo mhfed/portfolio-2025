@@ -63,18 +63,20 @@ export function TechMarquee() {
   }, [])
 
   return (
-    <div 
-      ref={containerRef}
-      className="relative flex w-full flex-col items-center justify-center overflow-hidden py-8 md:py-16 border-y border-white/20 bg-background z-10"
+    <section 
+      id='tech' 
+      className="relative flex w-full flex-col items-center justify-center overflow-hidden py-12 md:py-32 z-10"
     >
-      <div className="relative flex whitespace-nowrap">
-        <div ref={text1Ref} className="flex whitespace-nowrap font-sans text-[12vw] md:text-[8vw] font-black uppercase tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-teal-400 to-rose-500 pr-4">
-          {marqueeText}
-        </div>
-        <div ref={text2Ref} className="absolute left-[100%] flex whitespace-nowrap font-sans text-[12vw] md:text-[8vw] font-black uppercase tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-teal-400 to-rose-500 pr-4">
-          {marqueeText}
+      <div ref={containerRef} className="w-full overflow-hidden">
+        <div className="relative flex whitespace-nowrap mix-blend-difference">
+          <div ref={text1Ref} className="flex whitespace-nowrap font-serif italic text-[12vw] md:text-[10vw] font-light text-white/20 pr-8">
+            {marqueeText}
+          </div>
+          <div ref={text2Ref} className="absolute left-[100%] flex whitespace-nowrap font-serif italic text-[12vw] md:text-[10vw] font-light text-white/20 pr-8">
+            {marqueeText}
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

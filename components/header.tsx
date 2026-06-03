@@ -162,10 +162,10 @@ export function Header() {
 
           <Link href={homePath} className='group min-w-0'>
             <div className='min-w-0'>
-              <span className='block truncate font-display text-lg font-semibold tracking-[-0.06em] text-foreground transition-colors group-hover:text-primary md:text-xl'>
+              <span className='block truncate font-display text-lg font-semibold tracking-[-0.06em] text-white transition-colors group-hover:text-white/80 md:text-xl'>
                 Nguyen Minh Hieu
               </span>
-              <span className='block truncate text-xs text-foreground/55 md:text-sm'>
+              <span className='block truncate text-xs text-white/55 md:text-sm'>
                 {tContact('location')} · Frontend Developer
               </span>
             </div>
@@ -180,8 +180,8 @@ export function Header() {
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`text-sm font-medium transition-colors duration-300 block ${
                     link.key === 'blog' && isBlogPage
-                      ? 'text-primary'
-                      : 'text-foreground/68 hover:text-foreground'
+                      ? 'text-white/80'
+                      : 'text-white/68 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -204,7 +204,7 @@ export function Header() {
                 className='cinematic-link'
                 aria-label='Change language'
               >
-                <Languages className='h-4 w-4 text-foreground' />
+                <Languages className='h-4 w-4 text-white' />
               </button>
 
               {isLanguageMenuOpen && (
@@ -213,15 +213,15 @@ export function Header() {
                     className='fixed inset-0 z-40'
                     onClick={() => setIsLanguageMenuOpen(false)}
                   />
-                  <div className='absolute right-0 top-full z-50 mt-3 min-w-[140px] overflow-hidden rounded-[22px] border border-white/10 bg-card/95 p-2 shadow-2xl backdrop-blur-xl'>
+                  <div className='absolute right-0 top-full z-50 mt-3 min-w-[140px] overflow-hidden rounded-[22px] border border-white/20 bg-card/95 p-2 shadow-2xl backdrop-blur-xl'>
                     {routing.locales.map((loc) => (
                       <button
                         key={loc}
                         onClick={() => handleLanguageChange(loc)}
                         className={`w-full rounded-2xl px-4 py-2.5 text-left text-sm transition-all duration-300 ${
                           locale === loc
-                            ? 'bg-primary/10 text-primary'
-                            : 'text-foreground/72 hover:bg-primary/10 hover:text-foreground'
+                            ? 'bg-primary/10 text-white/80'
+                            : 'text-white/72 hover:bg-primary/10 hover:text-white'
                         }`}
                       >
                         {loc.toUpperCase()}
@@ -245,7 +245,7 @@ export function Header() {
       </header>
 
       <Drawer open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <DrawerContent className='max-h-[92vh] rounded-t-[28px] border-white/10 bg-card/95 backdrop-blur-2xl'>
+        <DrawerContent className='max-h-[92vh] rounded-t-[28px] border-white/20 bg-card/95 backdrop-blur-2xl'>
           <div 
             className='flex-1 min-h-0 overflow-y-auto px-2 pb-12 pt-6' 
             data-vaul-no-drag 
@@ -264,26 +264,26 @@ export function Header() {
                     href={link.href}
                     scroll={!link.href.includes('#')}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className='rounded-2xl px-4 py-4 text-lg font-medium text-foreground transition-all duration-300 hover:bg-primary/10'
+                    className='rounded-2xl px-4 py-4 text-lg font-medium text-white transition-all duration-300 hover:bg-primary/10'
                   >
                     {link.name}
                   </Link>
                 ))}
               </div>
 
-              <div className='mt-8 space-y-4 border-t border-white/10 p-4 pt-6'>
+              <div className='mt-8 space-y-4 border-t border-white/20 p-4 pt-6'>
                 <div className='relative'>
                   <button
                     onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                    className='flex w-full items-center justify-between rounded-2xl border border-white/10 bg-background/60 px-4 py-4 transition-colors'
+                    className='flex w-full items-center justify-between rounded-2xl border border-white/20 bg-background/60 px-4 py-4 transition-colors'
                     aria-label='Change language'
                   >
-                    <span className='text-base font-medium text-foreground'>
+                    <span className='text-base font-medium text-white'>
                       Language
                     </span>
                     <div className='flex items-center gap-2'>
-                      <span className='text-sm text-primary uppercase font-bold'>{locale}</span>
-                      <Languages className='h-5 w-5 text-foreground' />
+                      <span className='text-sm text-white/80 uppercase font-bold'>{locale}</span>
+                      <Languages className='h-5 w-5 text-white' />
                     </div>
                   </button>
 
@@ -293,15 +293,15 @@ export function Header() {
                         className='fixed inset-0 z-40'
                         onClick={() => setIsLanguageMenuOpen(false)}
                       />
-                      <div className='absolute bottom-full left-0 right-0 z-50 mb-2 rounded-2xl border border-white/10 bg-card/95 p-2 shadow-lg'>
+                      <div className='absolute bottom-full left-0 right-0 z-50 mb-2 rounded-2xl border border-white/20 bg-card/95 p-2 shadow-lg'>
                         {routing.locales.map((loc) => (
                           <button
                             key={loc}
                             onClick={() => handleLanguageChange(loc)}
                             className={`w-full rounded-xl px-4 py-3 text-left text-sm transition-colors ${
                               locale === loc
-                                ? 'bg-primary/10 text-primary'
-                                : 'text-foreground/72 hover:bg-primary/10 hover:text-foreground'
+                                ? 'bg-primary/10 text-white/80'
+                                : 'text-white/72 hover:bg-primary/10 hover:text-white'
                             }`}
                           >
                             {loc.toUpperCase()}

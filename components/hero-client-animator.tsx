@@ -21,7 +21,7 @@ export function HeroClientAnimator() {
 
         // Fill the text
         gsap.to(heroText, {
-          fill: '#FFFFFF',
+          fill: '#09090B',
           duration: 1.5,
           ease: 'power2.out',
           delay: 4

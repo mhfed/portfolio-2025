@@ -1,6 +1,6 @@
 import { getTranslations, getLocale } from 'next-intl/server'
 import { SectionTitle } from './section-title'
-import { TimelineItem } from './timeline-item'
+import { ExperienceInteractiveList } from './experience-interactive-list'
 import { db } from '@/lib/db'
 import { experiences } from '@/db/schema'
 import { desc } from 'drizzle-orm'
@@ -54,38 +54,23 @@ export async function WorkExperienceSection() {
   }))
 
   return (
-    <section id='experience' className='relative w-full bg-background'>
+    <section id='experience' className='relative w-full z-10 pt-8'>
       {/* Title Section */}
-      <div className='px-4 md:px-12 pt-32 pb-16'>
-        <div className='max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8 border-b border-white/20 pb-8'>
-          <h2 className='text-white font-sans text-4xl md:text-6xl font-bold uppercase tracking-tighter'>
+      <div className='px-4 md:px-12 pt-16 pb-8'>
+        <div className='max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8 border-b border-black/10 pb-8'>
+          <h2 className='font-serif italic font-light text-[4rem] md:text-[7rem] leading-[0.9] tracking-[-0.04em] text-zinc-900'>
             {t.rich('title', {
               br: () => <br />,
             })}
           </h2>
-          <span className='font-serif italic text-lg md:text-xl text-white/50'>
+          <span className='font-serif italic text-lg md:text-xl text-zinc-500'>
             ({timelineItems.length} Roles)
           </span>
         </div>
       </div>
 
-      <div className='relative z-10 max-w-[1400px] mx-auto px-4 md:px-12 pb-48'>
-        <div className='flex flex-col border-b border-white/20'>
-          {dbExperiences.length === 0 ? (
-            <p className='px-4 py-8 text-center text-muted-foreground'>
-              {t('noExperience') || 'No work experience yet.'}
-            </p>
-          ) : (
-            timelineItems.map((item, idx) => (
-              <TimelineItem
-                key={`${item.company}-${idx}`}
-                {...item}
-                isFirst={idx === 0}
-                isLast={idx === timelineItems.length - 1}
-              />
-            ))
-          )}
-        </div>
+      <div className='relative z-10 max-w-[1400px] mx-auto px-4 md:px-12 pb-24'>
+        <ExperienceInteractiveList timelineItems={timelineItems} />
       </div>
     </section>
   )

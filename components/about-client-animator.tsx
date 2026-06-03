@@ -9,10 +9,10 @@ gsap.registerPlugin(ScrollTrigger)
 export function AboutClientAnimator() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const words = gsap.utils.toArray('.about-word')
+      const words = gsap.utils.toArray('.about-reveal-text > span')
       
       gsap.to(words, {
-        color: (i, el) => el.classList.contains('neon') ? 'transparent' : '#FFFFFF',
+        color: (i, el) => el.classList.contains('neon') ? 'transparent' : '#09090B',
         opacity: 1,
         stagger: 0.1,
         ease: 'none',

@@ -6,41 +6,41 @@
   /* Extreme Minimalism Awwwards Theme */
   --header-height: 80px;
 
-  --background: #020617; /* Deep Slate (slate-950) */
-  --foreground: hsl(0 0% 100%); /* Pure White */
+  --background: #FAFAFA;
+  --foreground: #09090B;
 
-  --card: hsl(0 0% 4%);
-  --card-foreground: hsl(0 0% 100%);
-  --popover: hsl(0 0% 0%);
-  --popover-foreground: hsl(0 0% 100%);
+  --card: #F4F4F5;
+  --card-foreground: #09090B;
+  --popover: #FAFAFA;
+  --popover-foreground: #09090B;
 
-  --primary: hsl(0 0% 100%); /* Pure White */
-  --primary-foreground: hsl(0 0% 0%);
+  --primary: #09090B; /* Deep Black */
+  --primary-foreground: #FAFAFA;
   
-  --theme-secondary: hsl(0 0% 15%); 
-  --theme-tertiary: hsl(0 0% 30%); 
-  --theme-soft: hsl(0 0% 10%);
-  --theme-strong: hsl(0 0% 100%);
+  --theme-secondary: #E4E4E7; 
+  --theme-tertiary: #D4D4D8; 
+  --theme-soft: #F4F4F5;
+  --theme-strong: #09090B;
   
   --page-gradient: none; 
 
-  --secondary: hsl(0 0% 10%);
-  --secondary-foreground: hsl(0 0% 100%);
+  --secondary: #F4F4F5;
+  --secondary-foreground: #09090B;
 
-  --muted: hsl(0 0% 10%);
-  --muted-foreground: hsl(0 0% 60%);
+  --muted: #F4F4F5;
+  --muted-foreground: #71717A;
 
-  --accent: hsl(0 0% 100%); 
-  --accent-foreground: hsl(0 0% 0%);
+  --accent: #F4F4F5; 
+  --accent-foreground: #09090B;
 
-  --destructive: hsl(0 0% 100%);
-  --destructive-foreground: hsl(0 0% 0%);
+  --destructive: #EF4444;
+  --destructive-foreground: #FAFAFA;
 
-  --border: hsl(0 0% 15%);
-  --input: hsl(0 0% 15%);
-  --ring: hsl(0 0% 100%);
+  --border: #E4E4E7;
+  --input: #E4E4E7;
+  --ring: #09090B;
 
-  --radius: 0px; 
+  --radius: 0px;
 }
 
 @theme inline {
@@ -144,10 +144,10 @@
 
   .ambient-mesh-gradient {
     background-image: 
-      radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 50%), 
-      radial-gradient(at 100% 0%, rgba(45, 212, 191, 0.12) 0px, transparent 50%), 
-      radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.12) 0px, transparent 50%), 
-      radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.12) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(251, 146, 60, 0.15) 0px, transparent 50%), 
+      radial-gradient(at 100% 0%, rgba(167, 139, 250, 0.15) 0px, transparent 50%), 
+      radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.15) 0px, transparent 50%), 
+      radial-gradient(at 0% 100%, rgba(251, 146, 60, 0.15) 0px, transparent 50%);
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
@@ -1325,3 +1325,15 @@ html body[data-scroll-locked] {
     @apply m-0 leading-normal;
   }
 }
+
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(5vw, -5vw) scale(1.1); }
+  66% { transform: translate(-3vw, 4vw) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+  animation: blob 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }

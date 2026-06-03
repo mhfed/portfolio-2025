@@ -1,101 +1,109 @@
 'use client'
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { ChevronDown, ChevronUp } from 'lucide-react'
-import {
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from '@/components/ui/collapsible'
-import { useTranslations } from 'next-intl'
-import { Reveal } from './ui/reveal'
+import React, { useRef, useLayoutEffect } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-interface SkillItem {
-  id: string
-  label: string
-  value: string
-}
+export function CoreSkillsList({ title, items }: any) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const leftColRef = useRef<HTMLDivElement>(null)
+  const itemsRef = useRef<(HTMLDivElement | null)[]>([])
 
-interface CoreSkillsListProps {
-  title: string
-  items: SkillItem[]
-}
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    
+    // Check if we are on desktop
+    const isDesktop = window.matchMedia('(min-width: 768px)').matches
 
-export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
-  const t = useTranslations('common')
-  const [isExpanded, setIsExpanded] = useState(false)
-  const initialCount = 6
+    const ctx = gsap.context(() => {
+      if (isDesktop && leftColRef.current && containerRef.current) {
+        // Pin the left column title
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: 'top 20%',
+          end: 'bottom 80%',
+          pin: leftColRef.current,
+          pinSpacing: false,
+        })
+      }
 
-  const visibleItems = items.slice(0, initialCount)
-  const hiddenItems = items.slice(initialCount)
-  const hasMore = items.length > initialCount
+      // Animate each skill block as it scrolls into view
+      itemsRef.current.forEach((item) => {
+        if (!item) return
+        
+        // Initial state
+        gsap.set(item, { opacity: 0.1, filter: 'blur(10px)', y: 50 })
+        
+        // Animation
+        gsap.to(item, { 
+            opacity: 1, 
+            filter: 'blur(0px)',
+            y: 0,
+            duration: 1.2,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 80%',
+              end: 'bottom 20%',
+              toggleActions: 'play reverse play reverse',
+            }
+          }
+        )
+      })
+
+      // Text Fill Animation
+      const textFills = gsap.utils.toArray('.scroll-text-fill')
+      textFills.forEach((el: any) => {
+        gsap.to(el, {
+          backgroundPositionX: '0%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 75%',
+            end: 'bottom 25%',
+            scrub: 1,
+          }
+        })
+      })
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <div>
-      <div className='mb-5 flex items-center justify-between gap-4'>
-        <div>
-          <span className='section-kicker'>capabilities</span>
-          <h3 className='mt-3 font-display text-2xl font-semibold tracking-[-0.05em] text-foreground md:text-3xl'>
-            {title}
-          </h3>
-        </div>
-        <span className='hidden rounded-full border border-white/10 bg-background/55 px-3 py-1 text-sm text-foreground/68 sm:inline-flex'>
-          {items.length} items
-        </span>
+    <div ref={containerRef} className='w-full mt-24 pt-16 border-t border-black/10 relative flex flex-col md:flex-row gap-12'>
+      <div className='w-full md:w-1/3 z-10' ref={leftColRef}>
+        <h3 className='font-serif italic font-light text-5xl md:text-7xl text-zinc-900 leading-[0.9] tracking-[-0.02em]'>
+          {title}
+        </h3>
       </div>
-
-      <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
-        <div className='space-y-0 border-t border-white/10'>
-          {visibleItems.map((item, idx) => (
-            <Reveal key={item.id} delay={idx * 70} variant='scale'>
-              <article className='grid gap-2 border-b border-white/10 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6'>
-                <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75 md:pt-1'>
-                  {item.label}
-                </div>
-                <p className='text-sm leading-relaxed text-foreground/72 md:text-[15px]'>
-                  {item.value}
-                </p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-
-        <CollapsibleContent className='overflow-hidden pt-3 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down'>
-          <div className='space-y-0'>
-            {hiddenItems.map((item, idx) => (
-              <Reveal key={item.id} delay={idx * 70} variant='scale'>
-                <article className='grid gap-2 border-b border-white/10 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75 md:pt-1'>
-                    {item.label}
-                  </div>
-                  <p className='text-sm leading-relaxed text-foreground/72 md:text-[15px]'>
-                    {item.value}
-                  </p>
-                </article>
-              </Reveal>
-            ))}
+      
+      <div className='w-full md:w-2/3 flex flex-col gap-24 md:gap-40 pb-24 md:pb-48 pt-12 md:pt-0'>
+        {items.map((item: any, idx: number) => (
+          <div 
+            key={item.id} 
+            ref={(el) => { itemsRef.current[idx] = el }}
+            className='flex flex-col gap-4 md:gap-6 will-change-transform'
+          >
+             <span className='font-serif italic text-zinc-300 text-5xl md:text-7xl'>0{idx + 1}</span>
+             <h4 className='font-sans font-light uppercase tracking-[0.15em] text-zinc-900 text-2xl md:text-4xl'>
+               {item.label}
+             </h4>
+             <p 
+               className='scroll-text-fill font-light text-lg md:text-2xl leading-relaxed max-w-xl'
+               style={{
+                 backgroundImage: 'linear-gradient(to right, #111827 50%, #d4d4d8 50%)',
+                 backgroundSize: '200% 100%',
+                 backgroundPositionX: '100%',
+                 WebkitBackgroundClip: 'text',
+                 color: 'transparent'
+               }}
+             >
+               {item.value}
+             </p>
           </div>
-        </CollapsibleContent>
-
-        {hasMore && (
-          <div className='mt-4'>
-            <CollapsibleTrigger asChild>
-              <Button
-                variant='link'
-                className='group h-auto p-0 text-sm font-medium text-primary hover:text-primary/80'
-              >
-                {isExpanded ? t('showLess') : t('seeMore')}
-                {isExpanded ? (
-                  <ChevronUp className='h-4 w-4 transition-transform group-hover:-translate-y-0.5' />
-                ) : (
-                  <ChevronDown className='h-4 w-4 transition-transform group-hover:translate-y-0.5' />
-                )}
-              </Button>
-            </CollapsibleTrigger>
-          </div>
-        )}
-      </Collapsible>
+        ))}
+      </div>
     </div>
   )
 }

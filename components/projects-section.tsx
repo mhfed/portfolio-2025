@@ -63,21 +63,20 @@ export async function ProjectsSection() {
   )
 
   return (
-    <section id='projects' className='relative bg-background'>
-      {/* Title Section */}
-      <div className='px-4 md:px-12 pt-32 pb-16'>
-        <div className='max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8 border-b border-white/20 pb-8'>
-          <h2 className='text-white font-sans text-4xl md:text-6xl font-bold uppercase tracking-tighter'>
-            Selected Works
+    <section id='projects' className='relative w-full min-h-[50vh] overflow-hidden py-12 z-10'>
+      <div className='relative z-10 px-4 md:px-12 pt-8'>
+        <div className='max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-8 border-b border-black/10 pb-8'>
+          <h2 className='font-serif italic font-light text-[4rem] md:text-[7rem] leading-[0.9] tracking-[-0.04em] text-zinc-900'>
+            {t('title')}
           </h2>
-          <span className='font-serif italic text-lg md:text-xl text-white/50'>
+          <span className='font-serif italic text-lg md:text-xl text-zinc-500'>
             ({mappedProjects.length} Projects)
           </span>
         </div>
       </div>
 
       <div className='relative z-10 max-w-[1400px] mx-auto px-4 md:px-12 pb-48'>
-        <div className='flex flex-col group/list'>
+        <div className='flex flex-col border-t border-black/10 mt-12'>
           {mappedProjects.length === 0 ? (
             <div className='flex h-[50vh] w-full items-center justify-center'>
               <p className='text-muted-foreground'>{t('noProjects') || 'No projects available yet.'}</p>

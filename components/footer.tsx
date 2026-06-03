@@ -19,16 +19,17 @@ export async function Footer({ locale }: FooterProps) {
   ]
 
   return (
-    <footer id='collaborate' className='w-full bg-background px-4 pb-8 md:px-6 relative overflow-hidden h-full'>
+    <footer id='collaborate' className='w-full bg-background p-4 md:p-8 relative overflow-hidden h-full'>
+      <div className="relative w-full h-full min-h-[500px] bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-zinc-200 overflow-hidden flex flex-col justify-between">
       <FooterClientAnimator />
       
       {/* Massive Background Text */}
-      <div className='absolute inset-0 z-0 flex items-center justify-center font-display text-[15vw] font-black uppercase tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-teal-400 to-rose-500 opacity-20 pointer-events-none whitespace-nowrap select-none overflow-hidden'>
+      <div className='absolute inset-0 z-0 flex items-center justify-center font-display text-[15vw] font-black uppercase tracking-tighter text-zinc-200 pointer-events-none whitespace-nowrap select-none overflow-hidden'>
         LET'S TALK
       </div>
 
       <div className='mx-auto max-w-[1400px] relative z-10 pt-16 md:pt-24'>
-        <div className='border-t border-white/10 pt-10 md:pt-12'>
+        <div className='border-t border-black/10 pt-10 md:pt-12'>
           <div className='grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end'>
             <Reveal>
               <div className='space-y-5'>
@@ -79,7 +80,7 @@ export async function Footer({ locale }: FooterProps) {
           </div>
 
           <Reveal delay={260}>
-            <div className='mt-10 flex flex-col gap-3 border-t border-white/10 pt-5 text-sm text-foreground/56 md:flex-row md:items-center md:justify-between'>
+            <div className='mt-10 flex flex-col gap-3 border-t border-black/10 pt-5 text-sm text-foreground/56 md:flex-row md:items-center md:justify-between'>
               <div>© {new Date().getFullYear()} Nguyen Minh Hieu</div>
               <div className='flex items-center gap-3'>
                 <span>{locale.toUpperCase()}</span>
@@ -87,6 +88,7 @@ export async function Footer({ locale }: FooterProps) {
               </div>
             </div>
           </Reveal>
+        </div>
         </div>
       </div>
     </footer>

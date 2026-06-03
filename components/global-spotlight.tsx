@@ -26,9 +26,9 @@ export function GlobalSpotlight() {
   return (
     <div
       ref={spotlightRef}
-      className='pointer-events-none fixed left-0 top-0 z-[0] h-[100vw] w-[100vw] md:h-[1000px] md:w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-screen opacity-50 transition-opacity duration-1000'
+      className='pointer-events-none fixed left-0 top-0 z-[0] h-[100vw] w-[100vw] md:h-[1000px] md:w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 transition-opacity duration-1000'
       style={{
-        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(45, 212, 191, 0.15) 30%, rgba(244, 63, 94, 0.05) 50%, rgba(0,0,0,0) 70%)',
+        background: 'radial-gradient(circle, rgba(251,146,60,0.15) 0%, rgba(167,139,250,0.15) 30%, rgba(56,189,248,0.05) 50%, rgba(0,0,0,0) 70%)',
       }}
     />
   )

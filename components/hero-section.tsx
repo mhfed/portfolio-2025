@@ -1,46 +1,32 @@
 import { getTranslations } from 'next-intl/server'
 import { HeroClientAnimator } from './hero-client-animator'
+import { Magnetic } from './ui/magnetic'
 
 export async function HeroSection() {
   const t = await getTranslations('hero')
 
   return (
-    <section
-      id='home-top'
-      className='relative w-full h-screen flex items-center justify-center overflow-hidden bg-background'
+    <section 
+      id='hero' 
+      className='relative w-full min-h-screen flex items-center justify-center p-4 md:p-8 pt-24'
     >
       <HeroClientAnimator />
       
-      <div className='z-10 text-center w-full px-4 flex flex-col items-center mix-blend-difference'>
-        <div className='overflow-hidden w-full flex justify-center'>
-          <svg 
-            viewBox="0 0 1200 200" 
-            className='hero-svg w-full max-w-[1400px] h-auto'
-          >
-            <defs>
-              <linearGradient id="aurora-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#8B5CF6" />   {/* Violet */}
-                <stop offset="50%" stopColor="#2DD4BF" />  {/* Teal */}
-                <stop offset="100%" stopColor="#F43F5E" /> {/* Rose */}
-              </linearGradient>
-            </defs>
-            <text 
-              x="50%" 
-              y="50%" 
-              textAnchor="middle" 
-              dominantBaseline="middle" 
-              className='hero-svg-text text-[100px] font-sans font-bold tracking-tighter uppercase fill-transparent stroke-1'
-              style={{ stroke: 'url(#aurora-gradient)' }}
-            >
-              NGUYEN <tspan className='font-serif italic font-light opacity-80' style={{ stroke: 'url(#aurora-gradient)' }}>MINH</tspan> HIEU
-            </text>
-          </svg>
-        </div>
-        <div className='overflow-hidden mt-6 md:mt-8'>
-          <h2 className='hero-subtitle font-sans text-[clamp(0.75rem,1.5vw,1.5rem)] tracking-[0.5em] text-white/40 translate-y-[100%] uppercase'>
-            Creative Developer
-          </h2>
-        </div>
+      <div className='z-10 text-center w-full px-4 flex flex-col items-center pt-32'>
+        <Magnetic>
+          <div className='inline-block mb-6 md:mb-12 cursor-pointer'>
+            <span className='font-mono text-sm tracking-[0.3em] uppercase text-zinc-900/50 block mb-4 animate-fade-in'>
+              {t('developer')}
+            </span>
+            <h1 className='font-serif italic font-light text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[11vw] leading-[0.8] tracking-[-0.04em] text-zinc-900 animate-slide-up-fade'>
+              Nguyen <br className="md:hidden" />Minh Hieu
+            </h1>
+          </div>
+        </Magnetic>
+
+        <p className='max-w-2xl text-lg md:text-2xl text-zinc-500 font-light tracking-wide mt-8 animate-slide-up-fade' style={{ animationDelay: '0.2s' }}>
+          {t('textBlockLeft')}
+        </p>
       </div>
 
       {/* Interactive Image Trail (6 images buffer) */}
@@ -75,16 +61,14 @@ export async function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className='absolute bottom-12 left-1/2 -translate-x-1/2 z-20'>
-        <a href="#about" className='magnetic group flex flex-col items-center gap-4 cursor-none'>
-          <span className='font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 group-hover:text-white transition-colors duration-300'>
+        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 hidden md:flex'>
+          <div className='w-[1px] h-12 bg-zinc-900/20 relative overflow-hidden'>
+            <div className='absolute top-0 left-0 w-full h-full bg-zinc-900 animate-scroll-down' />
+          </div>
+          <span className='font-mono text-[10px] uppercase tracking-[0.3em] text-zinc-400 group-hover:text-zinc-900 transition-colors duration-300'>
             Scroll
           </span>
-          <div className='w-[1px] h-12 bg-white/20 relative overflow-hidden'>
-            <div className='absolute top-0 left-0 w-full h-full bg-white animate-scroll-down' />
-          </div>
-        </a>
-      </div>
+        </div>
     </section>
   )
 }
