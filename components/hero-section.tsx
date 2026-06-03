@@ -41,19 +41,19 @@ export async function HeroSection() {
               />
             </div>
 
-            <Reveal delay={120}>
+            <Reveal delay={60}>
               <p className='mt-6 text-base font-medium text-foreground/84 md:text-xl lg:text-[1.45rem]'>
                 {t('developer')}
               </p>
             </Reveal>
 
-            <Reveal delay={220}>
+            <Reveal delay={100}>
               <p className='mt-5 max-w-2xl text-sm leading-relaxed text-foreground/72 md:text-base lg:text-[1.05rem]'>
                 {t('textBlockLeft')}
               </p>
             </Reveal>
 
-            <Reveal delay={320}>
+            <Reveal delay={140}>
               <div className='mt-8 flex flex-wrap gap-4'>
                 <ResumeDownloadButton />
                 <Button variant='secondary' size='lg' asChild className='h-12 px-8'>
@@ -64,14 +64,14 @@ export async function HeroSection() {
               </div>
             </Reveal>
 
-            <Reveal delay={420}>
+            <Reveal delay={180}>
               <div className='mt-8'>
                 <SocialsDock />
               </div>
             </Reveal>
           </div>
 
-          <Reveal variant='right' delay={180}>
+          <Reveal variant='right' delay={80}>
             <div className='relative mx-auto w-full max-w-[32rem] lg:ml-auto'>
               <div className='absolute -right-8 -top-8 -z-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl' />
               <div className='absolute -bottom-8 -left-8 -z-10 h-48 w-48 rounded-full bg-[color:color-mix(in_srgb,var(--theme-tertiary)_15%,transparent)] blur-3xl' />
@@ -151,18 +151,18 @@ export async function HeroSection() {
           </Reveal>
         </div>
 
-        <Reveal delay={260}>
+        <Reveal delay={120}>
           <div className='soft-divider mt-16' />
         </Reveal>
 
         <div className='mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16'>
-          <Reveal delay={120}>
+          <Reveal delay={60}>
             <p className='max-w-xl text-base leading-relaxed text-foreground/60 md:text-lg lg:text-[1.125rem]'>
               {t('textBlockRight')}
             </p>
           </Reveal>
 
-          <Reveal delay={220} variant='right'>
+          <Reveal delay={100} variant='right'>
             <div className='divide-y divide-white/10 border-y border-white/10'>
               <div className='flex items-center justify-between gap-4 py-4 text-sm'>
                 <span className='font-mono text-[11px] uppercase tracking-[0.25em] text-primary/70'>
@@ -193,7 +193,7 @@ export async function HeroSection() {
         </div>
       </div>
 
-      <Reveal delay={280}>
+      <Reveal delay={140}>
         <div className='marquee-shell mt-8 -mx-4 border-y border-white/10 bg-background/28 md:-mx-6'>
           <TechMarquee />
         </div>

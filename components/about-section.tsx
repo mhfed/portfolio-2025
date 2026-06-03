@@ -30,14 +30,14 @@ export async function AboutSection() {
               <SectionTitle title={t('title')} />
             </Reveal>
 
-            <Reveal delay={120}>
+            <Reveal delay={60}>
               <p className='max-w-2xl text-base leading-relaxed text-foreground/75 md:text-lg'>
                 {t('description1')}
               </p>
             </Reveal>
 
             <div className='grid gap-3 sm:grid-cols-2'>
-              <Reveal delay={220} variant='left'>
+              <Reveal delay={100} variant='left'>
                 <div className='border-t border-white/10 pt-4'>
                   <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
                     Focus
@@ -48,7 +48,7 @@ export async function AboutSection() {
                 </div>
               </Reveal>
 
-              <Reveal delay={320} variant='left'>
+              <Reveal delay={140} variant='left'>
                 <div className='border-t border-white/10 pt-4'>
                   <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
                     Approach
@@ -61,7 +61,7 @@ export async function AboutSection() {
             </div>
           </div>
 
-          <Reveal delay={180} variant='right'>
+          <Reveal delay={80} variant='right'>
             <CoreSkillsList title={t('coreSkills')} items={skillItems} />
           </Reveal>
         </div>

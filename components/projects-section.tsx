@@ -1,33 +1,36 @@
 import { getTranslations, getLocale } from 'next-intl/server'
 import { SectionTitle } from './section-title'
 import { ProjectRepositoryCard } from './project-repository-card'
-import { db } from '@/lib/db'
-import { projects } from '@/db/schema'
-import { desc } from 'drizzle-orm'
 import { Reveal } from './ui/reveal'
+import dbProjects from '@/data/projects.json'
+
+interface ProjectData {
+  id: number
+  title: string
+  titleEn: string | null
+  titleVi: string | null
+  year: string | null
+  description: string
+  descriptionEn: string | null
+  descriptionVi: string | null
+  details: string | null
+  detailsEn: string | null
+  detailsVi: string | null
+  imageUrl: string
+  liveUrl: string | null
+  githubUrl: string | null
+  techStack: string[] | null
+  createdAt?: string
+}
 
 export async function ProjectsSection() {
   const t = await getTranslations('projects')
   const locale = (await getLocale()) as 'en' | 'vi'
 
-  // Fetch projects from database, ordered by createdAt descending
-  let dbProjects: (typeof projects.$inferSelect)[] = []
-  try {
-    dbProjects = await db
-      .select()
-      .from(projects)
-      .orderBy(desc(projects.createdAt))
-  } catch (error) {
-    console.error('Error fetching projects:', error)
-    // Return empty array if database query fails
-    // This allows the page to render with "No projects" message
-    dbProjects = []
-  }
-
   // Map database results to match ProjectCard interface
   // Select locale-specific values with fallback
-  const mappedProjects = dbProjects.map(
-    (project: typeof projects.$inferSelect) => {
+  const mappedProjects = (dbProjects as ProjectData[]).map(
+    (project: ProjectData) => {
       // Helper to get localized value with fallback
       const getLocalized = (
         enValue: string | null | undefined,
@@ -68,7 +71,7 @@ export async function ProjectsSection() {
           <Reveal>
             <SectionTitle title={t('title')} className='mb-0' />
           </Reveal>
-          <Reveal delay={140}>
+          <Reveal delay={80}>
             <span className='font-mono text-[11px] uppercase tracking-[0.24em] text-foreground/48'>
               {mappedProjects.length} selected builds
             </span>
@@ -84,7 +87,7 @@ export async function ProjectsSection() {
             mappedProjects.map((project, idx) => (
               <Reveal
                 key={project.title + idx}
-                delay={idx * 90}
+                delay={idx * 40}
                 variant={idx === 0 ? 'scale' : idx % 2 === 0 ? 'left' : 'right'}
               >
                 <ProjectRepositoryCard {...project} featured={idx === 0} />

@@ -3,7 +3,6 @@ import { HeroSection } from '@/components/hero-section'
 import { AboutSection } from '@/components/about-section'
 import { WorkExperienceSection } from '@/components/work-experience-section'
 import { ProjectsSection } from '@/components/projects-section'
-import { BlogSection } from '@/components/blog-section'
 import { Footer } from '@/components/footer'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { getLocale } from 'next-intl/server'
@@ -21,7 +20,6 @@ export default async function Home() {
         <AboutSection />
         <WorkExperienceSection />
         <ProjectsSection />
-        <BlogSection />
         <Footer locale={locale} />
       </div>
 

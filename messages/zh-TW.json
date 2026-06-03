@@ -4,7 +4,6 @@
       "about": "關於我",
       "experience": "經歷",
       "projects": "專案",
-      "blog": "部落格",
       "collaborate": "合作"
     },
     "downloadResume": "下載履歷"
@@ -105,24 +104,6 @@
       "title": "工具與實用程式",
       "description": "Git、Webpack、Babel、Firebase、Axios、i18n"
     }
-  },
-  "blog": {
-    "title": "最新文章",
-    "viewAllPosts": "查看所有文章 →",
-    "readMore": "閱讀更多 →",
-    "allCategories": "所有分類",
-    "allPosts": "全部文章",
-    "noPosts": "目前尚無文章。",
-    "publishedOn": "發布於",
-    "readTime": "分鐘閱讀",
-    "views": "瀏覽次數",
-    "categories": "分類",
-    "tags": "標籤",
-    "search": "搜尋文章...",
-    "backToBlog": "← 返回部落格",
-    "relatedPosts": "相關文章",
-    "tableOfContents": "目錄",
-    "home": "首頁"
   },
   "collaborate": {
     "title": "讓我們合作",

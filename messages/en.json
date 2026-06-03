@@ -4,7 +4,6 @@
       "about": "About",
       "experience": "Experience",
       "projects": "Projects",
-      "blog": "Blog",
       "collaborate": "Collaborate"
     },
     "downloadResume": "Resume"
@@ -105,24 +104,6 @@
       "title": "TOOLS & UTILITIES",
       "description": "Git, Webpack, Babel, Firebase, Axios, i18n"
     }
-  },
-  "blog": {
-    "title": "RECENTLY PUBLISHED",
-    "viewAllPosts": "View All Posts →",
-    "readMore": "READ MORE →",
-    "allCategories": "ALL CATEGORIES",
-    "allPosts": "All Posts",
-    "noPosts": "No posts available yet.",
-    "publishedOn": "Published on",
-    "readTime": "min read",
-    "views": "views",
-    "categories": "Categories",
-    "tags": "Tags",
-    "search": "Search posts...",
-    "backToBlog": "← Back to Blog",
-    "relatedPosts": "Related Posts",
-    "tableOfContents": "Table of Contents",
-    "home": "Home"
   },
   "collaborate": {
     "title": "LET'S COLLABORATE",

@@ -1,0 +1,98 @@
+[
+  {
+    "id": 5,
+    "title": "Portfolio Designer",
+    "titleEn": "Portfolio Designer",
+    "titleVi": null,
+    "year": "2026",
+    "description": "User Experience Designer, artist and storyteller.",
+    "descriptionEn": "User Experience Designer, artist and storyteller.",
+    "descriptionVi": null,
+    "details": null,
+    "detailsEn": null,
+    "detailsVi": null,
+    "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
+    "liveUrl": "https://www.duongminhle.site/",
+    "githubUrl": null,
+    "techStack": [
+      "nextjs",
+      "react",
+      "typescript",
+      "tailwind"
+    ],
+    "createdAt": "2026-02-25T08:09:32.821Z"
+  },
+  {
+    "id": 4,
+    "title": "Starlento",
+    "titleEn": "Starlento",
+    "titleVi": null,
+    "year": "2024",
+    "description": "Starlento",
+    "descriptionEn": "Starlento",
+    "descriptionVi": null,
+    "details": "Gia nhập biệt đội Talent Starlento\r\n\r\nỨng tuyển ngay Cơ hội Casting Call mới nhấ",
+    "detailsEn": "Gia nhập biệt đội Talent Starlento\r\n\r\nỨng tuyển ngay Cơ hội Casting Call mới nhấ",
+    "detailsVi": null,
+    "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
+    "liveUrl": "https://starlento.vn/",
+    "githubUrl": null,
+    "techStack": [
+      "nextjs",
+      "react",
+      "typescript",
+      "css",
+      "redux"
+    ],
+    "createdAt": "2025-12-08T05:01:50.887Z"
+  },
+  {
+    "id": 3,
+    "title": "CGSI, Iress Wealth, Admin Portal Equix",
+    "titleEn": null,
+    "titleVi": null,
+    "year": "2023",
+    "description": "Tradding Platform",
+    "descriptionEn": null,
+    "descriptionVi": null,
+    "details": "Implementing the login flow and user authentication with a third party.\r\nPerforming functions such as: adding, editing, deleting, and updating data using Formik to handle form data validation with Yub for the reports, notification, users, and article screens.\r\nCreating advanced filtering functionalities for the list screens. Update form and validation field.\r\nDeveloping a theme builder feature on the CMS to customize the color scheme of the trading application on mobile devices.",
+    "detailsEn": null,
+    "detailsVi": null,
+    "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764925609/portfolio/yd0imbldaoctara4lwxn.png",
+    "liveUrl": "https://www.equix.com.au/",
+    "githubUrl": null,
+    "techStack": [
+      "react",
+      "canvas",
+      "javascript",
+      "sse",
+      "realtime",
+      "streaming"
+    ],
+    "createdAt": "2025-12-05T09:07:22.757Z"
+  },
+  {
+    "id": 2,
+    "title": "Metacity System, Landing Page",
+    "titleEn": null,
+    "titleVi": null,
+    "year": "2022",
+    "description": "Web 3 blockchain",
+    "descriptionEn": null,
+    "descriptionVi": null,
+    "details": "Make interface, effect animation, customize game interface.\r\nTranslated designs from Figma to HTML and CSS while ensuring that the UX and UI design are maintained\r\nRefactor code, investigate code and fix-bugs.\r\nEnsuring cross-browser compatibility and responsiveness across various devices and screen sizes\r\nTech: NextJS, ReactJS, Redux, Sass, Ant Design, PHP, Git, Axios...",
+    "detailsEn": null,
+    "detailsVi": null,
+    "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
+    "liveUrl": "https://www.metacity.com/",
+    "githubUrl": null,
+    "techStack": [
+      "nextjs",
+      "react",
+      "typescript",
+      "css",
+      "redux"
+    ],
+    "createdAt": "2025-12-05T07:33:57.375Z"
+  }
+]

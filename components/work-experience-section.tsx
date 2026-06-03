@@ -1,10 +1,28 @@
 import { getTranslations, getLocale } from 'next-intl/server'
 import { SectionTitle } from './section-title'
 import { TimelineItem } from './timeline-item'
-import { db } from '@/lib/db'
-import { experiences } from '@/db/schema'
-import { desc } from 'drizzle-orm'
 import { Reveal } from './ui/reveal'
+import dbExperiences from '@/data/experiences.json'
+
+interface ExperienceData {
+  id: number
+  company: string
+  companyEn: string | null
+  companyVi: string | null
+  position: string
+  positionEn: string | null
+  positionVi: string | null
+  period: string
+  location: string | null
+  locationEn: string | null
+  locationVi: string | null
+  description: string
+  descriptionEn: string | null
+  descriptionVi: string | null
+  skills: string[] | null
+  orderIndex: number | null
+  createdAt?: string
+}
 
 interface TimelineItemProps {
   company: string
@@ -18,17 +36,6 @@ export async function WorkExperienceSection() {
   const t = await getTranslations('experience')
   const locale = (await getLocale()) as 'en' | 'vi'
 
-  let dbExperiences: (typeof experiences.$inferSelect)[] = []
-  try {
-    dbExperiences = await db
-      .select()
-      .from(experiences)
-      .orderBy(desc(experiences.createdAt))
-  } catch (error) {
-    console.error('Error fetching experiences:', error)
-    dbExperiences = []
-  }
-
   // Helper to get localized value with fallback
   const getLocalized = (
     enValue: string | null | undefined,
@@ -41,7 +48,7 @@ export async function WorkExperienceSection() {
     return enValue || viValue || fallback || ''
   }
 
-  const timelineItems: TimelineItemProps[] = dbExperiences.map((exp) => ({
+  const timelineItems: TimelineItemProps[] = (dbExperiences as ExperienceData[]).map((exp) => ({
     company: getLocalized(exp.companyEn, exp.companyVi, exp.company),
     position: getLocalized(exp.positionEn, exp.positionVi, exp.position),
     period: exp.period,
@@ -69,7 +76,7 @@ export async function WorkExperienceSection() {
             />
           </Reveal>
 
-          <Reveal delay={140}>
+          <Reveal delay={80}>
             <span className='font-mono text-[11px] uppercase tracking-[0.24em] text-foreground/48'>
               {timelineItems.length} roles
             </span>
@@ -85,7 +92,7 @@ export async function WorkExperienceSection() {
             timelineItems.map((item, idx) => (
               <Reveal
                 key={`${item.company}-${idx}`}
-                delay={idx * 90}
+                delay={idx * 40}
                 variant={idx % 2 === 0 ? 'left' : 'right'}
               >
                 <TimelineItem

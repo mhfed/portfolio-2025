@@ -689,28 +689,28 @@
 
   .reveal-base {
     opacity: 0;
-    filter: blur(10px);
+    filter: blur(4px);
     transition:
-      transform 780ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 780ms cubic-bezier(0.22, 1, 0.36, 1),
-      filter 780ms cubic-bezier(0.22, 1, 0.36, 1);
+      transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 400ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 400ms cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform, opacity, filter;
   }
 
   .reveal-up {
-    transform: translateY(42px);
+    transform: translateY(12px);
   }
 
   .reveal-left {
-    transform: translateX(-42px);
+    transform: translateX(-12px);
   }
 
   .reveal-right {
-    transform: translateX(42px);
+    transform: translateX(12px);
   }
 
   .reveal-scale {
-    transform: translateY(24px) scale(0.96);
+    transform: translateY(8px) scale(0.98);
   }
 
   .reveal-visible {

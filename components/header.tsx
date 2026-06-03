@@ -66,7 +66,6 @@ export function Header() {
     { name: t('experience'), href: '/#experience', key: 'experience' },
     { name: t('projects'), href: '/#projects', key: 'projects' },
     { name: t('collaborate'), href: '/#collaborate', key: 'collaborate' },
-    { name: t('blog'), href: '/blog', key: 'blog' },
   ]
 
   const handleNavClick = (
@@ -133,7 +132,6 @@ export function Header() {
   }, [isMobileMenuOpen, lenis])
 
   const displayIsDark = mounted ? isDark : false
-  const isBlogPage = pathname.startsWith('/blog')
 
   return (
     <>
@@ -162,11 +160,7 @@ export function Header() {
                 href={link.href}
                 scroll={!link.href.includes('#')}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`text-sm font-medium transition-colors duration-300 ${
-                  link.key === 'blog' && isBlogPage
-                    ? 'text-primary'
-                    : 'text-foreground/68 hover:text-foreground'
-                }`}
+                className='text-sm font-medium transition-colors duration-300 text-foreground/68 hover:text-foreground'
               >
                 {link.name}
               </Link>

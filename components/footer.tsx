@@ -10,11 +10,9 @@ interface FooterProps {
 export async function Footer({ locale }: FooterProps) {
   const t = await getTranslations('collaborate')
   const tContact = await getTranslations('hero.contact')
-  const tBlog = await getTranslations('blog')
 
   const footerLinks = [
-    { name: tBlog('home'), href: `/${locale}` },
-    { name: tBlog('allPosts'), href: `/${locale}/blog` },
+    { name: locale === 'vi' ? 'Trang chủ' : 'Home', href: `/${locale}` },
   ]
 
   return (
@@ -41,7 +39,7 @@ export async function Footer({ locale }: FooterProps) {
               </div>
             </Reveal>
 
-            <Reveal delay={180} variant='right'>
+            <Reveal delay={80} variant='right'>
               <div className='grid gap-8 sm:grid-cols-2'>
                 <div>
                   <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
@@ -70,7 +68,7 @@ export async function Footer({ locale }: FooterProps) {
             </Reveal>
           </div>
 
-          <Reveal delay={260}>
+          <Reveal delay={120}>
             <div className='mt-10 flex flex-col gap-3 border-t border-white/10 pt-5 text-sm text-foreground/56 md:flex-row md:items-center md:justify-between'>
               <div>© {new Date().getFullYear()} Nguyen Minh Hieu</div>
               <div className='flex items-center gap-3'>

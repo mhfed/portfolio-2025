@@ -4,7 +4,6 @@
       "about": "Về tôi",
       "experience": "Kinh nghiệm",
       "projects": "Dự án",
-      "blog": "Blog",
       "collaborate": "Hợp tác"
     },
     "downloadResume": "Tải CV"
@@ -15,13 +14,13 @@
     "end": "HIEU",
     "developer": "Frontend Developer",
     "contact": {
-      "basedIn": "Based in",
-      "location": "Ha Noi, Viet Nam",
-      "sayHello": "Say hello",
+      "basedIn": "Sống tại",
+      "location": "Hà Nội, Việt Nam",
+      "sayHello": "Liên hệ",
       "email": "nmhieu04091999@gmail.com"
     },
-    "textBlockLeft": "Continuous learning and staying updated with the latest trends will be key to achieving these goals.",
-    "textBlockRight": "In the long term, I aspire to specialize in building innovative and popular applications for web, mobile, and potentially desktop platforms."
+    "textBlockLeft": "Liên tục học hỏi và cập nhật những xu hướng công nghệ mới nhất là chìa khóa để tôi đạt được những mục tiêu này.",
+    "textBlockRight": "Về lâu dài, tôi mong muốn chuyên sâu vào việc phát triển các ứng dụng sáng tạo và phổ biến trên các nền tảng web, di động và có thể là cả máy tính để bàn."
   },
   "about": {
     "title": "VỀ TÔI",
@@ -105,24 +104,6 @@
       "title": "CÔNG CỤ & TIỆN ÍCH",
       "description": "Git, Webpack, Babel, Firebase, Axios, i18n"
     }
-  },
-  "blog": {
-    "title": "BÀI VIẾT GẦN ĐÂY",
-    "viewAllPosts": "Xem tất cả bài viết →",
-    "readMore": "ĐỌC THÊM →",
-    "allCategories": "TẤT CẢ DANH MỤC",
-    "allPosts": "Tất cả bài viết",
-    "noPosts": "Chưa có bài viết nào.",
-    "publishedOn": "Xuất bản vào",
-    "readTime": "phút đọc",
-    "views": "lượt xem",
-    "categories": "Danh mục",
-    "tags": "Thẻ",
-    "search": "Tìm kiếm bài viết...",
-    "backToBlog": "← Quay lại Blog",
-    "relatedPosts": "Bài viết liên quan",
-    "tableOfContents": "Mục lục",
-    "home": "Trang chủ"
   },
   "collaborate": {
     "title": "HÃY HỢP TÁC",
