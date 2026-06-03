@@ -78,21 +78,28 @@ export async function ProjectsSection() {
           </Reveal>
         </div>
 
-        <div className='mt-8 border-b border-white/10'>
+        <div className='mt-8'>
           {mappedProjects.length === 0 ? (
             <p className='border-t border-dashed border-white/10 py-12 text-center text-muted-foreground'>
               {t('noProjects') || 'No projects available yet.'}
             </p>
           ) : (
-            mappedProjects.map((project, idx) => (
-              <Reveal
-                key={project.title + idx}
-                delay={idx * 40}
-                variant={idx === 0 ? 'scale' : idx % 2 === 0 ? 'left' : 'right'}
-              >
-                <ProjectRepositoryCard {...project} featured={idx === 0} />
-              </Reveal>
-            ))
+            <div className='flex flex-col gap-12 lg:gap-16'>
+              {mappedProjects.map((project, idx) => (
+                <Reveal
+                  key={project.title + idx}
+                  delay={idx * 60}
+                  variant='up'
+                  className='w-full'
+                >
+                  <ProjectRepositoryCard 
+                    {...project} 
+                    isEven={idx % 2 === 1} 
+                    isFirst={idx === 0}
+                  />
+                </Reveal>
+              ))}
+            </div>
           )}
         </div>
       </div>
