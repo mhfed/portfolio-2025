@@ -6,13 +6,26 @@
       "projects": "專案",
       "collaborate": "合作"
     },
-    "downloadResume": "下載履歷"
+    "downloadResume": "下載履歷",
+    "language": "語言",
+    "themeMode": "主題模式",
+    "dark": "深色",
+    "light": "淺色",
+    "colorTheme": "主題色彩",
+    "changeLanguage": "切換語言",
+    "toggleTheme": "切換深淺色模式",
+    "openThemeSettings": "開啟主題設定",
+    "useTheme": "使用 {theme} 主題",
+    "developer": "前端開發工程師"
   },
   "hero": {
     "front": "NGUYEN",
     "middle": "MINH",
     "end": "HIEU",
     "developer": "前端開發工程師",
+    "status": "接受精選產品與前端專案",
+    "profile": "個人資料",
+    "intro": "打造高階數位體驗，專注於效能、無障礙設計與精緻的 UI 系統。",
     "contact": {
       "basedIn": "目前所在地",
       "location": "越南河內",
@@ -20,10 +33,27 @@
       "email": "nmhieu04091999@gmail.com"
     },
     "textBlockLeft": "持續學習並掌握最新趨勢，將是實現這些目標的關鍵。",
-    "textBlockRight": "長期來看，我志在專精於為網頁、行動裝置，甚至桌面平台打造創新且受歡迎的應用程式。"
+    "textBlockRight": "長期來看，我志在專精於為網頁、行動裝置，甚至桌面平台打造創新且受歡迎的應用程式。",
+    "meta": {
+      "focus": "核心領域",
+      "focusValue": "UI 系統",
+      "experience": "工作年資",
+      "experienceValue": "4.5 年以上",
+      "contact": "聯絡方式",
+      "coreStack": "核心技術棧",
+      "coreStackValue": "React, Next.js, TS, Tailwind",
+      "workingStyle": "工作風格",
+      "workingStyleValue": "產品思維與精緻 UI",
+      "availability": "求職狀態",
+      "availabilityValue": "開放尋求新機會"
+    }
   },
   "about": {
     "title": "關於我",
+    "focus": "核心領域",
+    "approach": "工作方法",
+    "capabilities": "核心能力",
+    "itemsCount": "{count} 項",
     "description1": "擁有5年經驗的前端開發工程師，專精於開發與維護前端網頁應用程式。熟練掌握 JavaScript、TypeScript、HTML、CSS、ES6、React.js 和 Next.js。具備程式碼測試與除錯經驗。",
     "coreSkills": "核心技能",
     "yearsExperience": "年經驗",
@@ -71,12 +101,156 @@
   },
   "experience": {
     "title": "工作<br />經歷",
-    "readMore": "閱讀更多..."
+    "kicker": "概述",
+    "readMore": "閱讀更多...",
+    "noExperience": "目前尚無工作經歷。",
+    "list": [
+      {
+        "id": 1,
+        "company": "IT Lab FPOLY",
+        "position": "前端實習開發工程師",
+        "period": "2/2021 - 7/2021",
+        "location": "河內",
+        "description": "參與多個網頁專案，學習前端開發的最佳實踐，並在網頁技術方面奠定堅實的基礎。",
+        "skills": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "React"
+        ]
+      },
+      {
+        "id": 2,
+        "company": "METACITY",
+        "position": "前端開發工程師",
+        "period": "7/2021 - 8/2022",
+        "location": "河內",
+        "description": "開發 Metacity 系統與登陸頁面。製作介面、動畫特效並客製化遊戲介面。將 Figma 設計稿轉換為 HTML/CSS，同時確保維持良好的 UX/UI 設計。重構程式碼、調查並修復 Bug。確保跨瀏覽器相容性以及在各式裝置與螢幕尺寸上的響應式呈現。",
+        "skills": [
+          "NextJS",
+          "ReactJS",
+          "Redux",
+          "Sass",
+          "Ant Design",
+          "PHP"
+        ]
+      },
+      {
+        "id": 3,
+        "company": "NOVUS FINTECH",
+        "position": "前端開發工程師",
+        "period": "08/2022 - 04/2024",
+        "location": "河內",
+        "description": "開發 CMS 網站 (CGSI、Iress Wealth、Admin Portal Equix)，實現登入流程、用戶驗證，以及使用 Formik 與 Yup 驗證進行表單管理。建立主題建构器功能以自訂交易應用程式的色彩配置。開發交易網站 (EQUIX、MAGPIE、CGSI)，具備登入、註冊、忘記密碼等功能，並整合 reCAPTCHA 與 PIN 碼雙重驗證。使用 Server-Sent Events (SSE) 實現即時更新的交易功能。利用 Next.js 建立基本面嵌入式網站以追蹤股票資訊。",
+        "skills": [
+          "TypeScript",
+          "ReactJS",
+          "Redux",
+          "RestAPI",
+          "Formik",
+          "Yup",
+          "Material",
+          "UI",
+          "SSE",
+          "Next.js",
+          "Chart.js"
+        ]
+      },
+      {
+        "id": 4,
+        "company": "COOLMATE",
+        "position": "前端開發工程師",
+        "period": "04/2024 - Present",
+        "location": "河內",
+        "description": "規劃並執行整個電子商務前台的轉型。<br/>系統遷移（主導）：帶領前台從 Laravel 遷移至 Next.js，將 Google PageSpeed Insights 分數從 29 分提升至 90+ 分，並優化 SEO 表現。<br/>業務影響：透過效能優化與 UX 改善，直接促使轉換率（CR）從 1.5% 提升至 2.5%。<br/>基礎設施與 DevOps：使用 PM2 建立自我託管環境並自動化 GitLab CI/CD workflows；開發 Hotfix 腳本以確保 99.9% 的上線率。<br/>開發者體驗（DX）：將內部管理入口網站從舊版 React 遷移至 React + Vite 進行現代化，大幅縮短建置時間。<br/>產品成長：為會員計劃開發 Zalo Mini App 以擴大客戶觸及面。整合全面的追蹤功能（GA4、Pixel）以實現數據驅動的行銷策略。<br/>領導力：設計基礎專案架構，並指導團隊成員模組化開發與高品質的程式碼標準。",
+        "skills": [
+          "React.js",
+          "Next.js",
+          "TypeScript",
+          "JavaScript"
+        ]
+      }
+    ]
   },
   "projects": {
     "title": "專案作品",
+    "kicker": "概述",
+    "projectCase": "專案案例",
+    "launchApp": "啟動應用",
+    "sourceCode": "原始碼",
+    "selected": "精選",
     "viewProject": "查看專案 →",
-    "noProjects": "目前尚無專案。"
+    "noProjects": "目前尚無專案。",
+    "list": [
+      {
+        "id": 5,
+        "title": "Portfolio Designer",
+        "year": "2026",
+        "description": "使用者體驗設計師、藝術家與故事講述者。",
+        "details": "",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
+        "liveUrl": "https://www.duongminhle.site/",
+        "githubUrl": null,
+        "techStack": [
+          "nextjs",
+          "react",
+          "typescript",
+          "tailwind"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Starlento",
+        "year": "2024",
+        "description": "Starlento",
+        "details": "加入 Starlento 達人團隊\n\n立即申請最新的海選面試機會",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
+        "liveUrl": "https://starlento.vn/",
+        "githubUrl": null,
+        "techStack": [
+          "nextjs",
+          "react",
+          "typescript",
+          "css",
+          "redux"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "CGSI, Iress Wealth, Admin Portal Equix",
+        "year": "2023",
+        "description": "交易平台",
+        "details": "實現第三方登入流程與用戶驗證。\n使用 Formik 處理表單資料驗證（搭配 Yup），實作報告、通知、使用者和文章畫面的資料新增、修改、刪除與更新功能。\n為列表畫面建立進階篩選功能。更新表單與驗證欄位。\n在 CMS 上開發主題建构器功能，以自訂行動裝置上交易應用程式的色彩配置。",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764925609/portfolio/yd0imbldaoctara4lwxn.png",
+        "liveUrl": "https://www.equix.com.au/",
+        "githubUrl": null,
+        "techStack": [
+          "react",
+          "canvas",
+          "javascript",
+          "sse",
+          "realtime",
+          "streaming"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Metacity System, Landing Page",
+        "year": "2022",
+        "description": "Web 3 區塊鏈",
+        "details": "製作介面、動畫特效、客製化遊戲介面。\n將 Figma 設計圖轉換為 HTML 和 CSS，同時確保維持 UX 和 UI 設計。\n重構程式碼、排查程式碼並修復 Bug。\n確保跨瀏覽器相容性以及在不同裝置與螢幕尺寸上的響應式呈現。",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
+        "liveUrl": "https://www.metacity.com/",
+        "githubUrl": null,
+        "techStack": [
+          "nextjs",
+          "react",
+          "typescript",
+          "css",
+          "redux"
+        ]
+      }
+    ]
   },
   "technologies": {
     "title": "技術能力",
@@ -107,6 +281,10 @@
   },
   "collaborate": {
     "title": "讓我們合作",
+    "kicker": "讓我們合作",
+    "quickLinks": "快速連結",
+    "directLinks": "社群連結",
+    "allRightsReserved": "保留所有權利",
     "description": "有令人興奮的專案想法嗎？我很樂意聽取您的想法。讓我們一起創造精彩的作品。",
     "form": {
       "yourName": "您的姓名",
@@ -125,6 +303,9 @@
   "common": {
     "seeMore": "閱讀更多",
     "showLess": "收起",
-    "close": "關閉"
+    "close": "關閉",
+    "home": "首頁",
+    "sendEmail": "發送電子郵件",
+    "overview": "概述"
   }
 }

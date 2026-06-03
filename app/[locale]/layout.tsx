@@ -22,10 +22,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const titles = {
     en: 'Nguyen Minh Hieu - Frontend Developer Portfolio',
     vi: 'Nguyen Minh Hieu - Portfolio Lập Trình Viên Frontend',
+    'zh-TW': 'Nguyen Minh Hieu - 前端開發工程師個人作品集',
   }
   const descriptions = {
     en: 'Frontend Developer with 5+ years of experience in React.js, Next.js, TypeScript. Specialized in building modern web applications with clean code and exceptional user experiences.',
     vi: 'Lập trình viên Frontend với 5+ năm kinh nghiệm về React.js, Next.js, TypeScript. Chuyên xây dựng ứng dụng web hiện đại với code sạch và trải nghiệm người dùng tuyệt vời.',
+    'zh-TW': '擁有 5 年以上經驗的前端開發工程師，專精於 React.js, Next.js, TypeScript。致力於以乾淨的程式碼打造現代化網頁應用，並提供卓越的使用者體驗。',
   }
 
   const title = titles[locale as keyof typeof titles] || titles.en
@@ -46,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       'JavaScript',
       'Portfolio',
       'Nguyen Minh Hieu',
-      locale === 'vi' ? 'Lập trình viên Frontend' : '',
+      locale === 'vi' ? 'Lập trình viên Frontend' : locale === 'zh-TW' ? '前端開發工程師' : '',
     ].filter(Boolean),
     authors: [{ name: 'Nguyen Minh Hieu' }],
     creator: 'Nguyen Minh Hieu',
@@ -114,7 +116,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     description:
       locale === 'vi'
         ? 'Lập trình viên Frontend với 5+ năm kinh nghiệm'
-        : 'Frontend Developer with 5+ years of experience',
+        : locale === 'zh-TW'
+          ? '擁有 5 年以上經驗的前端開發工程師'
+          : 'Frontend Developer with 5+ years of experience',
     url:
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'

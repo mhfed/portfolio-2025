@@ -9,12 +9,14 @@ import { TechMarquee } from './tech-marquee'
 import { HeroTypingText } from './hero-typing-text'
 
 export async function HeroSection() {
-  const t = await getTranslations('hero')
-  const tContact = await getTranslations('hero.contact')
+  const [t, tContact] = await Promise.all([
+    getTranslations('hero'),
+    getTranslations('hero.contact'),
+  ])
   const profileMeta = [
     { label: tContact('basedIn'), value: tContact('location') },
-    { label: 'Focus', value: 'UI systems' },
-    { label: 'Experience', value: '4.5+ years' },
+    { label: t('meta.focus'), value: t('meta.focusValue') },
+    { label: t('meta.experience'), value: t('meta.experienceValue') },
   ]
 
   const miniHighlights = ['React', 'Next.js', 'TypeScript']
@@ -29,7 +31,7 @@ export async function HeroSection() {
           <div className='max-w-[52rem]'>
             <Reveal>
               <span className='section-kicker'>
-                Available for selected product & frontend work
+                {t('status')}
               </span>
             </Reveal>
 
@@ -56,8 +58,16 @@ export async function HeroSection() {
             <Reveal delay={140}>
               <div className='mt-8 flex flex-wrap gap-4'>
                 <ResumeDownloadButton />
-                <Button variant='secondary' size='lg' asChild className='h-12 px-8'>
-                  <a href={`mailto:${tContact('email')}`} className='inline-flex items-center gap-2'>
+                <Button
+                  variant='secondary'
+                  size='lg'
+                  asChild
+                  className='h-12 px-8'
+                >
+                  <a
+                    href={`mailto:${tContact('email')}`}
+                    className='inline-flex items-center gap-2'
+                  >
                     {tContact('sayHello')}
                   </a>
                 </Button>
@@ -92,14 +102,13 @@ export async function HeroSection() {
 
                   <div className='min-w-0 flex-1'>
                     <p className='font-mono text-[10px] font-medium uppercase tracking-[0.4em] text-primary/80'>
-                      Profile
+                      {t('profile')}
                     </p>
                     <h2 className='mt-3 font-display text-[2rem] font-semibold leading-[0.9] tracking-[-0.06em] text-foreground md:text-[2.25rem]'>
                       {t('developer')}
                     </h2>
                     <p className='mt-4 text-sm leading-relaxed text-foreground/60 md:text-[0.95rem]'>
-                      Building high-end digital experiences with a focus on
-                      performance, accessibility, and polished UI systems.
+                      {t('intro')}
                     </p>
 
                     <div className='mt-5 flex flex-wrap gap-2'>
@@ -135,7 +144,7 @@ export async function HeroSection() {
                   <div className='mt-6 border-t border-white/10 pt-6'>
                     <div className='flex items-center justify-between gap-4 text-sm'>
                       <span className='font-mono text-[11px] uppercase tracking-[0.25em] text-primary/70'>
-                        Contact
+                        {t('meta.contact')}
                       </span>
                       <a
                         href={`mailto:${tContact('email')}`}
@@ -166,26 +175,26 @@ export async function HeroSection() {
             <div className='divide-y divide-white/10 border-y border-white/10'>
               <div className='flex items-center justify-between gap-4 py-4 text-sm'>
                 <span className='font-mono text-[11px] uppercase tracking-[0.25em] text-primary/70'>
-                  Core stack
+                  {t('meta.coreStack')}
                 </span>
                 <span className='text-right font-medium text-foreground/80'>
-                  React, Next.js, TS, Tailwind
+                  {t('meta.coreStackValue')}
                 </span>
               </div>
               <div className='flex items-center justify-between gap-4 py-4 text-sm'>
                 <span className='font-mono text-[11px] uppercase tracking-[0.25em] text-primary/70'>
-                  Working style
+                  {t('meta.workingStyle')}
                 </span>
                 <span className='text-right font-medium text-foreground/80'>
-                  Product thinking & polished UI
+                  {t('meta.workingStyleValue')}
                 </span>
               </div>
               <div className='flex items-center justify-between gap-4 py-4 text-sm'>
                 <span className='font-mono text-[11px] uppercase tracking-[0.25em] text-primary/70'>
-                  Availability
+                  {t('meta.availability')}
                 </span>
                 <span className='text-right font-medium text-foreground/80'>
-                  Open to new opportunities
+                  {t('meta.availabilityValue')}
                 </span>
               </div>
             </div>

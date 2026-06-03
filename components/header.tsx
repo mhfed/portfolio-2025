@@ -19,7 +19,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
-  const t = useTranslations('header.nav')
+  const tHeader = useTranslations('header')
   const tContact = useTranslations('hero.contact')
   const { locale, setLocale } = useLocale()
   const { isDark, accentTheme, toggleMode, setAccentTheme } = useTheme()
@@ -63,10 +63,10 @@ export function Header() {
   }
 
   const navLinks = [
-    { name: t('about'), href: '/#about', key: 'about' },
-    { name: t('experience'), href: '/#experience', key: 'experience' },
-    { name: t('projects'), href: '/#projects', key: 'projects' },
-    { name: t('collaborate'), href: '/#collaborate', key: 'collaborate' },
+    { name: tHeader('nav.about'), href: '/#about', key: 'about' },
+    { name: tHeader('nav.experience'), href: '/#experience', key: 'experience' },
+    { name: tHeader('nav.projects'), href: '/#projects', key: 'projects' },
+    { name: tHeader('nav.collaborate'), href: '/#collaborate', key: 'collaborate' },
   ]
 
   const handleNavClick = (
@@ -149,7 +149,7 @@ export function Header() {
                 Nguyen Minh Hieu
               </span>
               <span className='block truncate text-xs text-foreground/55 md:text-sm'>
-                {tContact('location')} · Frontend Developer
+                {tContact('location')} · {tHeader('developer')}
               </span>
             </div>
           </Link>
@@ -180,7 +180,7 @@ export function Header() {
               <button
                 onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
                 className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
-                aria-label='Change language'
+                aria-label={tHeader('changeLanguage')}
               >
                 <Languages className='h-4 w-4 text-foreground' />
               </button>
@@ -216,7 +216,7 @@ export function Header() {
                 theme={displayIsDark ? 'dark' : 'light'}
                 onThemeChange={toggleMode}
                 className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
-                aria-label='Toggle light and dark mode'
+                aria-label={tHeader('toggleTheme')}
               >
                 {displayIsDark ? (
                   <Moon className='h-4 w-4 text-primary' />
@@ -231,7 +231,7 @@ export function Header() {
               <button
                 onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
                 className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
-                aria-label='Open theme settings'
+                aria-label={tHeader('openThemeSettings')}
               >
                 <Palette className='h-4 w-4 text-foreground' />
               </button>
@@ -311,10 +311,10 @@ export function Header() {
                   <button
                     onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
                     className='flex w-full items-center justify-between rounded-2xl border border-white/10 bg-background/60 px-4 py-4 transition-colors'
-                    aria-label='Change language'
+                    aria-label={tHeader('changeLanguage')}
                   >
                     <span className='text-base font-medium text-foreground'>
-                      Language
+                      {tHeader('language')}
                     </span>
                     <div className='flex items-center gap-2'>
                       <span className='text-sm text-primary uppercase font-bold'>{locale}</span>
@@ -349,23 +349,23 @@ export function Header() {
 
                 <div className='flex items-center justify-between rounded-2xl border border-white/10 bg-background/60 px-4 py-3.5'>
                   <span className='text-base font-medium text-foreground'>
-                    Theme Mode
+                    {tHeader('themeMode')}
                   </span>
                   <AnimatedThemeToggler
                     theme={displayIsDark ? 'dark' : 'light'}
                     onThemeChange={toggleMode}
                     className='inline-flex h-10 px-4 items-center gap-2 rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
-                    aria-label='Toggle light and dark mode'
+                    aria-label={tHeader('toggleTheme')}
                   >
                     {displayIsDark ? (
                       <>
                         <Moon className='h-4 w-4 text-primary' />
-                        <span className='text-sm font-medium'>Dark</span>
+                        <span className='text-sm font-medium'>{tHeader('dark')}</span>
                       </>
                     ) : (
                       <>
                         <Sun className='h-4 w-4 text-primary' />
-                        <span className='text-sm font-medium'>Light</span>
+                        <span className='text-sm font-medium'>{tHeader('light')}</span>
                       </>
                     )}
                   </AnimatedThemeToggler>

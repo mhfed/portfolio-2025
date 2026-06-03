@@ -1,68 +1,46 @@
-import { getTranslations, getLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { SectionTitle } from './section-title'
-import { ProjectRepositoryCard } from './project-repository-card'
+import {
+  ProjectCardRoot,
+  ProjectCardMockup,
+  ProjectCardDetails,
+  ProjectCardHeader,
+  ProjectCardTitle,
+  ProjectCardDescription,
+  ProjectCardResponsibilities,
+  ProjectCardTechStack,
+  ProjectCardActions,
+  ProjectCardLink,
+} from './project-repository-card'
 import { Reveal } from './ui/reveal'
-import dbProjects from '@/data/projects.json'
 
 interface ProjectData {
   id: number
   title: string
-  titleEn: string | null
-  titleVi: string | null
-  year: string | null
+  year: string
   description: string
-  descriptionEn: string | null
-  descriptionVi: string | null
-  details: string | null
-  detailsEn: string | null
-  detailsVi: string | null
+  details: string
   imageUrl: string
   liveUrl: string | null
   githubUrl: string | null
-  techStack: string[] | null
-  createdAt?: string
+  techStack: string[]
 }
 
 export async function ProjectsSection() {
   const t = await getTranslations('projects')
-  const locale = (await getLocale()) as 'en' | 'vi'
+  const projectsList = (t.raw('list') || []) as ProjectData[]
 
-  // Map database results to match ProjectCard interface
-  // Select locale-specific values with fallback
-  const mappedProjects = (dbProjects as ProjectData[]).map(
-    (project: ProjectData) => {
-      // Helper to get localized value with fallback
-      const getLocalized = (
-        enValue: string | null | undefined,
-        viValue: string | null | undefined,
-        fallback: string | null | undefined
-      ): string => {
-        if (locale === 'vi') {
-          return viValue || enValue || fallback || ''
-        }
-        return enValue || viValue || fallback || ''
-      }
-
-      return {
-        image: project.imageUrl,
-        title: getLocalized(project.titleEn, project.titleVi, project.title),
-        year: project.year || '',
-        description: getLocalized(
-          project.descriptionEn,
-          project.descriptionVi,
-          project.description
-        ),
-        details: getLocalized(
-          project.detailsEn,
-          project.detailsVi,
-          project.details
-        ),
-        liveUrl: project.liveUrl || undefined,
-        githubUrl: project.githubUrl || undefined,
-        techStack: project.techStack || [],
-      }
-    }
-  )
+  // Map localization records to match ProjectCard interface
+  const mappedProjects = projectsList.map((project: ProjectData) => ({
+    image: project.imageUrl,
+    title: project.title,
+    year: project.year || '',
+    description: project.description,
+    details: project.details,
+    liveUrl: project.liveUrl || undefined,
+    githubUrl: project.githubUrl || undefined,
+    techStack: project.techStack || [],
+  }))
 
   return (
     <section id='projects' className='section-shell scroll-mt-24 px-4 md:px-6'>
@@ -84,21 +62,59 @@ export async function ProjectsSection() {
               {t('noProjects') || 'No projects available yet.'}
             </p>
           ) : (
-            <div className='flex flex-col gap-12 lg:gap-16'>
-              {mappedProjects.map((project, idx) => (
-                <Reveal
-                  key={project.title + idx}
-                  delay={idx * 60}
-                  variant='up'
-                  className='w-full'
-                >
-                  <ProjectRepositoryCard 
-                    {...project} 
-                    isEven={idx % 2 === 1} 
-                    isFirst={idx === 0}
-                  />
-                </Reveal>
-              ))}
+            <div className='flex flex-col'>
+              {mappedProjects.map((project, idx) => {
+                const detailsList = project.details
+                  ? project.details
+                      .split(/\r?\n/)
+                      .map((line) => line.trim())
+                      .filter((line) => line.length > 0)
+                  : []
+
+                return (
+                  <Reveal
+                    key={project.title + idx}
+                    delay={idx * 60}
+                    variant='up'
+                    className='w-full'
+                  >
+                    <ProjectCardRoot
+                      isEven={idx % 2 === 1}
+                      isFirst={idx === 0}
+                    >
+                      <ProjectCardMockup
+                        image={project.image}
+                        title={project.title}
+                      />
+                      <ProjectCardDetails>
+                        <ProjectCardHeader year={project.year} />
+                        <ProjectCardTitle>{project.title}</ProjectCardTitle>
+                        <ProjectCardDescription>
+                          {project.description}
+                        </ProjectCardDescription>
+                        <ProjectCardResponsibilities items={detailsList} />
+                        <ProjectCardTechStack tags={project.techStack} />
+                        {(project.liveUrl || project.githubUrl) && (
+                          <ProjectCardActions>
+                            {project.liveUrl && (
+                              <ProjectCardLink
+                                href={project.liveUrl}
+                                type='live'
+                              />
+                            )}
+                            {project.githubUrl && (
+                              <ProjectCardLink
+                                href={project.githubUrl}
+                                type='github'
+                              />
+                            )}
+                          </ProjectCardActions>
+                        )}
+                      </ProjectCardDetails>
+                    </ProjectCardRoot>
+                  </Reveal>
+                )
+              })}
             </div>
           )}
         </div>

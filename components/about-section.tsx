@@ -40,7 +40,7 @@ export async function AboutSection() {
               <Reveal delay={100} variant='left'>
                 <div className='border-t border-white/10 pt-4'>
                   <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    Focus
+                    {t('focus')}
                   </div>
                   <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
                     {t('yearsDescription')}
@@ -51,7 +51,7 @@ export async function AboutSection() {
               <Reveal delay={140} variant='left'>
                 <div className='border-t border-white/10 pt-4'>
                   <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    Approach
+                    {t('approach')}
                   </div>
                   <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
                     {t('satisfactionDescription')}

@@ -8,11 +8,14 @@ interface FooterProps {
 }
 
 export async function Footer({ locale }: FooterProps) {
-  const t = await getTranslations('collaborate')
-  const tContact = await getTranslations('hero.contact')
+  const [t, tContact, tCommon] = await Promise.all([
+    getTranslations('collaborate'),
+    getTranslations('hero.contact'),
+    getTranslations('common'),
+  ])
 
   const footerLinks = [
-    { name: locale === 'vi' ? 'Trang chủ' : 'Home', href: `/${locale}` },
+    { name: tCommon('home'), href: `/${locale}` },
   ]
 
   return (
@@ -22,7 +25,7 @@ export async function Footer({ locale }: FooterProps) {
           <div className='grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end'>
             <Reveal>
               <div className='space-y-5'>
-                <span className='section-kicker'>let&apos;s work together</span>
+                <span className='section-kicker'>{t('kicker')}</span>
                 <h2 className='max-w-3xl font-display text-3xl font-semibold leading-[0.92] tracking-[-0.07em] text-foreground md:text-5xl lg:text-[4.5rem]'>
                   {t('title')}
                 </h2>
@@ -43,7 +46,7 @@ export async function Footer({ locale }: FooterProps) {
               <div className='grid gap-8 sm:grid-cols-2'>
                 <div>
                   <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    quick links
+                    {t('quickLinks')}
                   </div>
                   <nav className='mt-4 space-y-3'>
                     {footerLinks.map((link) => (
@@ -60,7 +63,7 @@ export async function Footer({ locale }: FooterProps) {
 
                 <div>
                   <div className='mb-4 font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    direct links
+                    {t('directLinks')}
                   </div>
                   <SocialsDock />
                 </div>
@@ -73,7 +76,7 @@ export async function Footer({ locale }: FooterProps) {
               <div>© {new Date().getFullYear()} Nguyen Minh Hieu</div>
               <div className='flex items-center gap-3'>
                 <span>{locale.toUpperCase()}</span>
-                <span>All rights reserved</span>
+                <span>{t('allRightsReserved')}</span>
               </div>
             </div>
           </Reveal>

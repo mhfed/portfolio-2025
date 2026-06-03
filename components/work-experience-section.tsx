@@ -1,64 +1,34 @@
-import { getTranslations, getLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { SectionTitle } from './section-title'
-import { TimelineItem } from './timeline-item'
+import {
+  TimelineItemRoot,
+  TimelineItemLine,
+  TimelineItemDot,
+  TimelineItemBody,
+  TimelineItemPeriod,
+  TimelineItemContent,
+  TimelineItemCompany,
+  TimelineItemPosition,
+  TimelineItemCollapsible,
+  TimelineItemDescription,
+  TimelineItemSkills,
+  TimelineItemTrigger,
+} from './timeline-item'
 import { Reveal } from './ui/reveal'
-import dbExperiences from '@/data/experiences.json'
-
-interface ExperienceData {
+interface TimelineItemProps {
   id: number
   company: string
-  companyEn: string | null
-  companyVi: string | null
-  position: string
-  positionEn: string | null
-  positionVi: string | null
-  period: string
-  location: string | null
-  locationEn: string | null
-  locationVi: string | null
-  description: string
-  descriptionEn: string | null
-  descriptionVi: string | null
-  skills: string[] | null
-  orderIndex: number | null
-  createdAt?: string
-}
-
-interface TimelineItemProps {
-  company: string
   position: string
   period: string
+  location: string
   description: string
   skills: string[]
 }
 
 export async function WorkExperienceSection() {
   const t = await getTranslations('experience')
-  const locale = (await getLocale()) as 'en' | 'vi'
 
-  // Helper to get localized value with fallback
-  const getLocalized = (
-    enValue: string | null | undefined,
-    viValue: string | null | undefined,
-    fallback: string | null | undefined
-  ): string => {
-    if (locale === 'vi') {
-      return viValue || enValue || fallback || ''
-    }
-    return enValue || viValue || fallback || ''
-  }
-
-  const timelineItems: TimelineItemProps[] = (dbExperiences as ExperienceData[]).map((exp) => ({
-    company: getLocalized(exp.companyEn, exp.companyVi, exp.company),
-    position: getLocalized(exp.positionEn, exp.positionVi, exp.position),
-    period: exp.period,
-    description: getLocalized(
-      exp.descriptionEn,
-      exp.descriptionVi,
-      exp.description
-    ),
-    skills: exp.skills || [],
-  }))
+  const timelineItems = (t.raw('list') || []) as TimelineItemProps[]
 
   return (
     <section
@@ -84,7 +54,7 @@ export async function WorkExperienceSection() {
         </div>
 
         <div className='mt-8 border-b border-white/10'>
-          {dbExperiences.length === 0 ? (
+          {timelineItems.length === 0 ? (
             <p className='border-t border-dashed border-white/10 px-4 py-8 text-center text-muted-foreground'>
               {t('noExperience') || 'No work experience yet.'}
             </p>
@@ -95,11 +65,33 @@ export async function WorkExperienceSection() {
                 delay={idx * 40}
                 variant={idx % 2 === 0 ? 'left' : 'right'}
               >
-                <TimelineItem
-                  {...item}
+                <TimelineItemRoot
                   isFirst={idx === 0}
                   isLast={idx === timelineItems.length - 1}
-                />
+                >
+                  <TimelineItemLine />
+                  <TimelineItemDot />
+                  <TimelineItemBody>
+                    <TimelineItemPeriod>
+                      {item.period}
+                    </TimelineItemPeriod>
+                    <TimelineItemContent>
+                      <TimelineItemCompany>
+                        {item.company}
+                      </TimelineItemCompany>
+                      <TimelineItemPosition>
+                        {item.position}
+                      </TimelineItemPosition>
+                      <TimelineItemCollapsible>
+                        <TimelineItemDescription
+                          html={item.description}
+                        />
+                        <TimelineItemSkills skills={item.skills} />
+                      </TimelineItemCollapsible>
+                    </TimelineItemContent>
+                    <TimelineItemTrigger />
+                  </TimelineItemBody>
+                </TimelineItemRoot>
               </Reveal>
             ))
           )}

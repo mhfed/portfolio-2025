@@ -3,6 +3,7 @@
 import { Check, Palette } from 'lucide-react'
 import { COLOR_THEMES, type AccentTheme } from '@/lib/theme'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 
 interface ThemeSelectorProps {
   accentTheme: AccentTheme
@@ -15,6 +16,7 @@ export function ThemeSelector({
   onAccentThemeChange,
   compact = false,
 }: ThemeSelectorProps) {
+  const tHeader = useTranslations('header')
   return (
     <div
       className={cn(
@@ -24,7 +26,7 @@ export function ThemeSelector({
     >
       <div className='mb-3 flex items-center gap-2'>
         <Palette className='h-4 w-4 text-primary' />
-        <span className='text-sm font-medium text-foreground'>Color theme</span>
+        <span className='text-sm font-medium text-foreground'>{tHeader('colorTheme')}</span>
       </div>
 
       <div className='grid grid-cols-3 gap-2'>
@@ -43,7 +45,7 @@ export function ThemeSelector({
                   : 'border-border/60 bg-card hover:border-primary/40 hover:bg-theme-soft'
               )}
               aria-pressed={isActive}
-              aria-label={`Use ${theme.label} theme`}
+              aria-label={tHeader('useTheme', { theme: theme.label })}
             >
               <span
                 className='mb-2 block h-8 rounded-md'

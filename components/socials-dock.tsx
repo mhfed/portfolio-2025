@@ -2,6 +2,7 @@
 import React from 'react'
 import { MailIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 export type IconProps = React.HTMLAttributes<SVGElement>
 const Icons = {
   email: (props: IconProps) => <MailIcon {...props} />,
@@ -67,25 +68,29 @@ const DATA = {
   },
 }
 export function SocialsDock() {
+  const t = useTranslations('common')
   return (
     <div className='flex flex-wrap items-center gap-x-5 gap-y-3'>
-      {Object.entries(DATA.contact.social).map(([name, social]) => (
-        <a
-          key={name}
-          href={social.url}
-          target={social.url.startsWith('mailto:') ? undefined : '_blank'}
-          rel={
-            social.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'
-          }
-          aria-label={social.name}
-          className={cn(
-            'group inline-flex items-center gap-2 text-sm text-foreground/68 transition-colors hover:text-foreground'
-          )}
-        >
-          <social.icon className='size-4 text-primary/80 transition-transform duration-300 group-hover:translate-x-0.5' />
-          <span>{social.name}</span>
-        </a>
-      ))}
+      {Object.entries(DATA.contact.social).map(([name, social]) => {
+        const displayName = name === 'email' ? t('sendEmail') : social.name
+        return (
+          <a
+            key={name}
+            href={social.url}
+            target={social.url.startsWith('mailto:') ? undefined : '_blank'}
+            rel={
+              social.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'
+            }
+            aria-label={displayName}
+            className={cn(
+              'group inline-flex items-center gap-2 text-sm text-foreground/68 transition-colors hover:text-foreground'
+            )}
+          >
+            <social.icon className='size-4 text-primary/80 transition-transform duration-300 group-hover:translate-x-0.5' />
+            <span>{displayName}</span>
+          </a>
+        )
+      })}
     </div>
   )
 }

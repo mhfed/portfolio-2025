@@ -6,13 +6,26 @@
       "projects": "Dự án",
       "collaborate": "Hợp tác"
     },
-    "downloadResume": "Tải CV"
+    "downloadResume": "Tải CV",
+    "language": "Ngôn ngữ",
+    "themeMode": "Chế độ giao diện",
+    "dark": "Tối",
+    "light": "Sáng",
+    "colorTheme": "Màu chủ đạo",
+    "changeLanguage": "Thay đổi ngôn ngữ",
+    "toggleTheme": "Chuyển đổi giao diện sáng tối",
+    "openThemeSettings": "Mở cài đặt giao diện",
+    "useTheme": "Sử dụng chủ đề {theme}",
+    "developer": "Frontend Developer"
   },
   "hero": {
     "front": "NGUYEN",
     "middle": "MINH",
     "end": "HIEU",
     "developer": "Frontend Developer",
+    "status": "Sẵn sàng cho các dự án sản phẩm & frontend chọn lọc",
+    "profile": "Hồ sơ",
+    "intro": "Xây dựng các trải nghiệm kỹ thuật số cao cấp, tập trung vào hiệu suất, khả năng tiếp cận và hệ thống giao diện tinh tế.",
     "contact": {
       "basedIn": "Sống tại",
       "location": "Hà Nội, Việt Nam",
@@ -20,10 +33,27 @@
       "email": "nmhieu04091999@gmail.com"
     },
     "textBlockLeft": "Liên tục học hỏi và cập nhật những xu hướng công nghệ mới nhất là chìa khóa để tôi đạt được những mục tiêu này.",
-    "textBlockRight": "Về lâu dài, tôi mong muốn chuyên sâu vào việc phát triển các ứng dụng sáng tạo và phổ biến trên các nền tảng web, di động và có thể là cả máy tính để bàn."
+    "textBlockRight": "Về lâu dài, tôi mong muốn chuyên sâu vào việc phát triển các ứng dụng sáng tạo và phổ biến trên các nền tảng web, di động và có thể là cả máy tính để bàn.",
+    "meta": {
+      "focus": "Trọng tâm",
+      "focusValue": "Hệ thống UI",
+      "experience": "Kinh nghiệm",
+      "experienceValue": "4.5+ năm",
+      "contact": "Liên hệ",
+      "coreStack": "Công nghệ cốt lõi",
+      "coreStackValue": "React, Next.js, TS, Tailwind",
+      "workingStyle": "Phong cách làm việc",
+      "workingStyleValue": "Tư duy sản phẩm & UI tinh tế",
+      "availability": "Trạng thái công việc",
+      "availabilityValue": "Sẵn sàng đón nhận cơ hội mới"
+    }
   },
   "about": {
     "title": "VỀ TÔI",
+    "focus": "Trọng tâm",
+    "approach": "Phương châm",
+    "capabilities": "năng lực",
+    "itemsCount": "{count} mục",
     "description1": "Lập trình viên Front-end có kỹ năng với 5 năm kinh nghiệm trong việc phát triển và duy trì các ứng dụng web front-end. Thành thạo JavaScript, TypeScript, HTML, CSS, ES6, React.js và Next.js. Có kinh nghiệm trong kiểm tra và gỡ lỗi mã.",
     "coreSkills": "Kỹ năng cốt lõi",
     "yearsExperience": "Năm kinh nghiệm",
@@ -71,12 +101,156 @@
   },
   "experience": {
     "title": "KINH NGHIỆM <br></br> LÀM VIỆC",
-    "readMore": "Xem thêm..."
+    "kicker": "tổng quan",
+    "readMore": "Xem thêm...",
+    "noExperience": "Chưa có kinh nghiệm làm việc.",
+    "list": [
+      {
+        "id": 1,
+        "company": "IT Lab FPOLY",
+        "position": "Thực tập sinh Lập trình viên Frontend",
+        "period": "2/2021 - 7/2021",
+        "location": "Hà Nội",
+        "description": "Tham gia đóng góp vào nhiều dự án web, học hỏi các phương pháp phát triển front-end tốt nhất và xây dựng nền tảng vững chắc về công nghệ web.",
+        "skills": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "React"
+        ]
+      },
+      {
+        "id": 2,
+        "company": "METACITY",
+        "position": "Lập trình viên Frontend",
+        "period": "7/2021 - 8/2022",
+        "location": "Hà Nội",
+        "description": "Phát triển Hệ thống Metacity và Trang giới thiệu (Landing Page). Tạo giao diện, hiệu ứng chuyển động và tùy chỉnh giao diện trò chơi. Chuyển đổi thiết kế từ Figma sang HTML và CSS trong khi vẫn đảm bảo duy trì thiết kế UX và UI. Tối ưu cấu trúc mã (refactor), tìm hiểu và sửa lỗi. Đảm bảo khả năng tương thích chéo trình duyệt và tính phản hồi linh hoạt trên nhiều thiết bị và kích thước màn hình khác nhau.",
+        "skills": [
+          "NextJS",
+          "ReactJS",
+          "Redux",
+          "Sass",
+          "Ant Design",
+          "PHP"
+        ]
+      },
+      {
+        "id": 3,
+        "company": "NOVUS FINTECH",
+        "position": "Lập trình viên Frontend",
+        "period": "08/2022 - 04/2024",
+        "location": "Hà Nội",
+        "description": "Phát triển CMS Website (CGSI, Iress Wealth, Admin Portal Equix), triển khai luồng đăng nhập, xác thực người dùng, quản lý biểu mẫu với Formik và xác thực Yup. Tạo tính năng xây dựng giao diện (theme builder) để tùy chỉnh bảng màu của ứng dụng giao dịch. Phát triển Website Giao dịch (EQUIX, MAGPIE, CGSI) với các tính năng đăng ký, đăng nhập, quên mật khẩu sử dụng reCAPTCHA, xác thực hai yếu tố (2FA) bằng mã PIN. Triển khai các tính năng giao dịch với cập nhật thời gian thực bằng Server-Sent Events (SSE). Sử dụng Next.js để tạo Website nhúng phân tích cơ bản nhằm theo dõi thông tin cổ phiếu.",
+        "skills": [
+          "TypeScript",
+          "ReactJS",
+          "Redux",
+          "RestAPI",
+          "Formik",
+          "Yup",
+          "Material",
+          "UI",
+          "SSE",
+          "Next.js",
+          "Chart.js"
+        ]
+      },
+      {
+        "id": 4,
+        "company": "COOLMATE",
+        "position": "Lập trình viên Frontend",
+        "period": "04/2024 - Present",
+        "location": "Hà Nội",
+        "description": "Kiến trúc và thực thi chuyển đổi toàn bộ E-commerce Storefront.<br/>Chuyển đổi Hệ thống (Trưởng nhóm): Dẫn dắt việc di chuyển mã nguồn storefront từ Laravel sang Next.js, nâng điểm Google PageSpeed Insights từ 29 lên 90+ và cải thiện hiệu suất SEO.<br/>Tác động Kinh doanh: Đóng góp trực tiếp vào việc tăng Tỷ lệ chuyển đổi (CR) từ 1.5% lên 2.5% thông qua tối ưu hóa hiệu suất và cải thiện trải nghiệm người dùng (UX).<br/>Hạ tầng & DevOps: Thiết lập môi trường tự vận hành (self-hosting) bằng PM2 và tự động hóa quy trình GitLab CI/CD; phát triển các mã kịch bản hotfix đảm bảo thời gian hoạt động 99.9%.<br/>Trải nghiệm Lập trình viên (DX): Hiện đại hóa Cổng quản trị nội bộ (Admin Portal) bằng cách chuyển từ React kế thừa sang React + Vite, giảm đáng kể thời gian build.<br/>Tăng trưởng Sản phẩm: Phát triển Zalo Mini App cho chương trình Khách hàng thân thiết để mở rộng tệp khách hàng. Tích hợp hệ thống theo dõi toàn diện (GA4, Pixel) phục vụ cho các chiến lược marketing dựa trên dữ liệu.<br/>Năng lực Lãnh đạo: Thiết kế kiến trúc dự án cơ sở (Base Project) và hướng dẫn các thành viên trong nhóm về tiêu chuẩn phát triển dạng mô-đun và chất lượng mã nguồn cao.",
+        "skills": [
+          "React.js",
+          "Next.js",
+          "TypeScript",
+          "JavaScript"
+        ]
+      }
+    ]
   },
   "projects": {
     "title": "DỰ ÁN",
+    "kicker": "tổng quan",
+    "projectCase": "Chi tiết dự án",
+    "launchApp": "Mở ứng dụng",
+    "sourceCode": "Mã nguồn",
+    "selected": "Chọn lọc",
     "viewProject": "XEM DỰ ÁN →",
-    "noProjects": "Chưa có dự án nào."
+    "noProjects": "Chưa có dự án nào.",
+    "list": [
+      {
+        "id": 5,
+        "title": "Portfolio Designer",
+        "year": "2026",
+        "description": "Nhà thiết kế trải nghiệm người dùng, nghệ sĩ và người kể chuyện.",
+        "details": "",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
+        "liveUrl": "https://www.duongminhle.site/",
+        "githubUrl": null,
+        "techStack": [
+          "nextjs",
+          "react",
+          "typescript",
+          "tailwind"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Starlento",
+        "year": "2024",
+        "description": "Starlento",
+        "details": "Gia nhập biệt đội Talent Starlento\n\nỨng tuyển ngay Cơ hội Casting Call mới nhất",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
+        "liveUrl": "https://starlento.vn/",
+        "githubUrl": null,
+        "techStack": [
+          "nextjs",
+          "react",
+          "typescript",
+          "css",
+          "redux"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "CGSI, Iress Wealth, Admin Portal Equix",
+        "year": "2023",
+        "description": "Nền tảng Giao dịch",
+        "details": "Triển khai luồng đăng nhập và xác thực người dùng với bên thứ ba.\nThực hiện các chức năng như: thêm, sửa, xóa và cập nhật dữ liệu sử dụng Formik để xử lý xác thực dữ liệu biểu mẫu với Yup cho các màn hình báo cáo, thông báo, người dùng và bài viết.\nTạo chức năng lọc nâng cao cho các màn hình danh sách. Cập nhật biểu mẫu và trường xác thực.\nPhát triển tính năng xây dựng giao diện (theme builder) trên CMS để tùy chỉnh bảng màu của ứng dụng giao dịch trên thiết bị di động.",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764925609/portfolio/yd0imbldaoctara4lwxn.png",
+        "liveUrl": "https://www.equix.com.au/",
+        "githubUrl": null,
+        "techStack": [
+          "react",
+          "canvas",
+          "javascript",
+          "sse",
+          "realtime",
+          "streaming"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Metacity System, Landing Page",
+        "year": "2022",
+        "description": "Web 3 blockchain",
+        "details": "Thiết kế giao diện, hiệu ứng chuyển động, tùy chỉnh giao diện game.\nChuyển đổi các bản thiết kế từ Figma sang HTML và CSS trong khi vẫn đảm bảo duy trì thiết kế UX/UI.\nTối ưu hóa mã nguồn, khảo sát lỗi và sửa lỗi.\nĐảm bảo khả năng hiển thị tương thích trên nhiều trình duyệt và tính phản hồi (responsive) trên nhiều kích thước màn hình và thiết bị khác nhau.",
+        "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
+        "liveUrl": "https://www.metacity.com/",
+        "githubUrl": null,
+        "techStack": [
+          "nextjs",
+          "react",
+          "typescript",
+          "css",
+          "redux"
+        ]
+      }
+    ]
   },
   "technologies": {
     "title": "CÔNG NGHỆ CỦA TÔI",
@@ -107,6 +281,10 @@
   },
   "collaborate": {
     "title": "HÃY HỢP TÁC",
+    "kicker": "hãy hợp tác",
+    "quickLinks": "liên kết nhanh",
+    "directLinks": "kết nối trực tiếp",
+    "allRightsReserved": "Bản quyền đã được bảo lưu",
     "description": "Bạn có dự án thú vị? Tôi rất muốn nghe về nó. Hãy cùng tạo ra điều gì đó tuyệt vời.",
     "form": {
       "yourName": "Tên của bạn",
@@ -125,6 +303,9 @@
   "common": {
     "seeMore": "Xem thêm",
     "showLess": "Thu gọn",
-    "close": "Đóng"
+    "close": "Đóng",
+    "home": "Trang chủ",
+    "sendEmail": "Gửi Email",
+    "overview": "tổng quan"
   }
 }

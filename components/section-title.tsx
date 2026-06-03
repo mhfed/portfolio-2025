@@ -1,12 +1,15 @@
+import { useTranslations } from 'next-intl'
+
 interface SectionTitleProps {
   title: React.ReactNode
   className?: string
 }
 
 export function SectionTitle({ title, className = '' }: SectionTitleProps) {
+  const t = useTranslations('common')
   return (
     <div className={`mb-5 md:mb-7 ${className}`}>
-      <span className='section-kicker mb-3'>overview</span>
+      <span className='section-kicker mb-3'>{t('overview')}</span>
       <h2 className='font-display text-3xl font-semibold leading-[0.95] tracking-[-0.06em] text-foreground md:text-4xl lg:text-5xl'>
         {title}
       </h2>

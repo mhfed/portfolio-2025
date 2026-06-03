@@ -24,6 +24,7 @@ interface CoreSkillsListProps {
 
 export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
   const t = useTranslations('common')
+  const tAbout = useTranslations('about')
   const [isExpanded, setIsExpanded] = useState(false)
   const initialCount = 6
 
@@ -35,13 +36,13 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
     <div>
       <div className='mb-5 flex items-center justify-between gap-4'>
         <div>
-          <span className='section-kicker'>capabilities</span>
+          <span className='section-kicker'>{tAbout('capabilities')}</span>
           <h3 className='mt-3 font-display text-2xl font-semibold tracking-[-0.05em] text-foreground md:text-3xl'>
             {title}
           </h3>
         </div>
         <span className='hidden rounded-full border border-white/10 bg-background/55 px-3 py-1 text-sm text-foreground/68 sm:inline-flex'>
-          {items.length} items
+          {tAbout('itemsCount', { count: items.length })}
         </span>
       </div>
 
