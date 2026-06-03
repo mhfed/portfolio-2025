@@ -12,6 +12,7 @@ import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { ScrollProgress } from './ui/scroll-progress'
 import { useLenis } from 'lenis/react'
 import { ThemeSelector } from './theme-selector'
+import { AnimatedThemeToggler } from './ui/animated-theme-toggler'
 
 export function Header() {
   const [mounted, setMounted] = useState(false)
@@ -209,18 +210,30 @@ export function Header() {
               )}
             </div>
 
-            <div className='relative hidden md:block'>
-              <button
-                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-                className='inline-flex h-10 items-center gap-2 rounded-full border border-white/10 bg-card/70 px-3 transition-all duration-300 hover:border-primary/30 hover:bg-card'
-                aria-label='Open theme settings'
+            {/* Direct Theme Toggle button */}
+            <div className='hidden md:block'>
+              <AnimatedThemeToggler
+                theme={displayIsDark ? 'dark' : 'light'}
+                onThemeChange={toggleMode}
+                className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
+                aria-label='Toggle light and dark mode'
               >
-                <Palette className='h-4 w-4 text-foreground' />
                 {displayIsDark ? (
                   <Moon className='h-4 w-4 text-primary' />
                 ) : (
                   <Sun className='h-4 w-4 text-primary' />
                 )}
+              </AnimatedThemeToggler>
+            </div>
+
+            {/* Accent Color picker button */}
+            <div className='relative hidden md:block'>
+              <button
+                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+                className='inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
+                aria-label='Open theme settings'
+              >
+                <Palette className='h-4 w-4 text-foreground' />
               </button>
 
               {isThemeMenuOpen && (
@@ -232,9 +245,7 @@ export function Header() {
                   <div className='absolute right-0 top-full z-50 mt-3'>
                     <ThemeSelector
                       compact
-                      isDark={displayIsDark}
                       accentTheme={accentTheme}
-                      onToggleMode={toggleMode}
                       onAccentThemeChange={setAccentTheme}
                     />
                   </div>
@@ -336,11 +347,33 @@ export function Header() {
                   )}
                 </div>
 
+                <div className='flex items-center justify-between rounded-2xl border border-white/10 bg-background/60 px-4 py-3.5'>
+                  <span className='text-base font-medium text-foreground'>
+                    Theme Mode
+                  </span>
+                  <AnimatedThemeToggler
+                    theme={displayIsDark ? 'dark' : 'light'}
+                    onThemeChange={toggleMode}
+                    className='inline-flex h-10 px-4 items-center gap-2 rounded-full border border-white/10 bg-card/70 transition-all duration-300 hover:border-primary/30 hover:bg-card'
+                    aria-label='Toggle light and dark mode'
+                  >
+                    {displayIsDark ? (
+                      <>
+                        <Moon className='h-4 w-4 text-primary' />
+                        <span className='text-sm font-medium'>Dark</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sun className='h-4 w-4 text-primary' />
+                        <span className='text-sm font-medium'>Light</span>
+                      </>
+                    )}
+                  </AnimatedThemeToggler>
+                </div>
+
                 <div className='pt-2'>
                   <ThemeSelector
-                    isDark={displayIsDark}
                     accentTheme={accentTheme}
-                    onToggleMode={toggleMode}
                     onAccentThemeChange={setAccentTheme}
                   />
                 </div>
