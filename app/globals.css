@@ -1747,3 +1747,20 @@ html body[data-scroll-locked] {
   }
 }
 
+/* Magic UI View Transition configurations */
+::view-transition-old(root) {
+  mix-blend-mode: normal;
+  animation: none;
+}
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation: none;
+}
+html[data-magicui-theme-vt="active"]::view-transition-group(root) {
+  animation-duration: var(--magicui-theme-toggle-vt-duration);
+}
+html[data-magicui-theme-vt="active"]::view-transition-new(root) {
+  clip-path: var(--magicui-theme-vt-clip-from);
+}
+
+

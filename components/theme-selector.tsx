@@ -3,6 +3,7 @@
 import { Check, Palette, Sun, Moon } from 'lucide-react'
 import { COLOR_THEMES, type AccentTheme } from '@/lib/theme'
 import { cn } from '@/lib/utils'
+import { AnimatedThemeToggler } from './ui/animated-theme-toggler'
 
 interface ThemeSelectorProps {
   isDark: boolean
@@ -31,15 +32,15 @@ export function ThemeSelector({
           <Palette className='h-4 w-4 text-primary' />
           <span className='text-sm font-medium text-foreground'>Color theme</span>
         </div>
-        <button
-          type='button'
-          onClick={onToggleMode}
+        <AnimatedThemeToggler
+          theme={isDark ? 'dark' : 'light'}
+          onThemeChange={onToggleMode}
           className='inline-flex h-9 items-center gap-2 rounded-full border border-border/60 bg-muted/60 px-3 text-xs font-medium text-foreground transition-colors hover:bg-primary/10'
           aria-label='Toggle light and dark mode'
         >
           {isDark ? <Sun className='h-3.5 w-3.5' /> : <Moon className='h-3.5 w-3.5' />}
           <span>{isDark ? 'Light' : 'Dark'}</span>
-        </button>
+        </AnimatedThemeToggler>
       </div>
 
       <div className='grid grid-cols-3 gap-2'>
