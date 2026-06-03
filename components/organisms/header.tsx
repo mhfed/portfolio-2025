@@ -9,10 +9,10 @@ import { useLocale } from '@/hooks/use-locale'
 import { useTheme } from '@/hooks/use-theme'
 import { routing, Link, usePathname } from '@/i18n/routing'
 import { Drawer, DrawerContent } from '@/components/ui/drawer'
-import { ScrollProgress } from './ui/scroll-progress'
+import { ScrollProgress } from '@/components/ui/scroll-progress'
 import { useLenis } from 'lenis/react'
-import { ThemeSelector } from './theme-selector'
-import { AnimatedThemeToggler } from './ui/animated-theme-toggler'
+import { ThemeSelector } from '@/components/molecules/theme-selector'
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 
 export function Header() {
   const [mounted, setMounted] = useState(false)

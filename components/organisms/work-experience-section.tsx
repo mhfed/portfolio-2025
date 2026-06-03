@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { SectionTitle } from './section-title'
+import { SectionTitle } from '@/components/atoms/section-title'
 import {
   TimelineItemRoot,
   TimelineItemLine,
@@ -13,8 +13,8 @@ import {
   TimelineItemDescription,
   TimelineItemSkills,
   TimelineItemTrigger,
-} from './timeline-item'
-import { Reveal } from './ui/reveal'
+} from '@/components/organisms/timeline-item'
+import { Reveal } from '@/components/ui/reveal'
 interface TimelineItemProps {
   id: number
   company: string

@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { Download } from 'lucide-react'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 
 export function ResumeDownloadButton() {
   const t = useTranslations('header')

@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { Button } from './ui/button'
-import { Collapsible } from './ui/collapsible'
+import { Button } from '@/components/ui/button'
+import { Collapsible } from '@/components/ui/collapsible'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { ChevronDown, ChevronUp } from 'lucide-react'

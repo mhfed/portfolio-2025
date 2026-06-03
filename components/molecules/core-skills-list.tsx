@@ -9,7 +9,7 @@ import {
   CollapsibleContent,
 } from '@/components/ui/collapsible'
 import { useTranslations } from 'next-intl'
-import { Reveal } from './ui/reveal'
+import { Reveal } from '@/components/ui/reveal'
 
 interface SkillItem {
   id: string

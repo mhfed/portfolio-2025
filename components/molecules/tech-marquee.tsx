@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Marquee } from './ui/marquee'
+import { Marquee } from '@/components/ui/marquee'
 import StackIcon, { IconName } from 'tech-stack-icons'
 import { Database, Smartphone, FileCode } from 'lucide-react'
 import { ComponentType } from 'react'

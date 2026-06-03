@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { SectionTitle } from './section-title'
+import { SectionTitle } from '@/components/atoms/section-title'
 import {
   ProjectCardRoot,
   ProjectCardMockup,
@@ -11,8 +11,8 @@ import {
   ProjectCardTechStack,
   ProjectCardActions,
   ProjectCardLink,
-} from './project-repository-card'
-import { Reveal } from './ui/reveal'
+} from '@/components/organisms/project-repository-card'
+import { Reveal } from '@/components/ui/reveal'
 
 interface ProjectData {
   id: number

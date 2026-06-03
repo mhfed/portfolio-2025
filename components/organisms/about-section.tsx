@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
-import { SectionTitle } from './section-title'
-import { CoreSkillsList } from './core-skills-list'
-import { Reveal } from './ui/reveal'
+import { SectionTitle } from '@/components/atoms/section-title'
+import { CoreSkillsList } from '@/components/molecules/core-skills-list'
+import { Reveal } from '@/components/ui/reveal'
 
 export async function AboutSection() {
   const t = await getTranslations('about')

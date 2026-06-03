@@ -1,10 +1,10 @@
-import { Header } from '@/components/header'
-import { HeroSection } from '@/components/hero-section'
-import { AboutSection } from '@/components/about-section'
-import { WorkExperienceSection } from '@/components/work-experience-section'
-import { ProjectsSection } from '@/components/projects-section'
-import { Footer } from '@/components/footer'
-import { ScrollToTop } from '@/components/scroll-to-top'
+import { Header } from '@/components/organisms/header'
+import { HeroSection } from '@/components/organisms/hero-section'
+import { AboutSection } from '@/components/organisms/about-section'
+import { WorkExperienceSection } from '@/components/organisms/work-experience-section'
+import { ProjectsSection } from '@/components/organisms/projects-section'
+import { Footer } from '@/components/organisms/footer'
+import { ScrollToTop } from '@/components/atoms/scroll-to-top'
 import { getLocale } from 'next-intl/server'
 
 export default async function Home() {

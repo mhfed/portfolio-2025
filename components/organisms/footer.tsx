@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
-import { SocialsDock } from './socials-dock'
+import { SocialsDock } from '@/components/molecules/socials-dock'
 import Link from 'next/link'
-import { Reveal } from './ui/reveal'
+import { Reveal } from '@/components/ui/reveal'
 
 interface FooterProps {
   locale: string

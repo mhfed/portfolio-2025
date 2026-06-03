@@ -1,12 +1,11 @@
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
-import { ResumeDownloadButton } from './resume-download-button'
-import { SocialsDock } from './socials-dock'
-import { Button } from './ui/button'
-import { Reveal } from './ui/reveal'
-import { TechMarquee } from './tech-marquee'
-
-import { HeroTypingText } from './hero-typing-text'
+import { ResumeDownloadButton } from '@/components/atoms/resume-download-button'
+import { SocialsDock } from '@/components/molecules/socials-dock'
+import { Button } from '@/components/ui/button'
+import { Reveal } from '@/components/ui/reveal'
+import { TechMarquee } from '@/components/molecules/tech-marquee'
+import { HeroTypingText } from '@/components/molecules/hero-typing-text'
 
 export async function HeroSection() {
   const [t, tContact] = await Promise.all([
