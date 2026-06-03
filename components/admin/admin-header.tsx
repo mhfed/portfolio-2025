@@ -7,7 +7,6 @@ import { Drawer, DrawerContentLeft } from '@/components/ui/drawer'
 import { AppAdminSidebar } from '@/components/admin/app-admin-sidebar'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/hooks/use-theme'
-import { ThemeSelector } from '@/components/theme-selector'
 
 interface AdminHeaderProps {
   pathname: string
@@ -16,9 +15,7 @@ interface AdminHeaderProps {
 export function AdminHeader({ pathname }: AdminHeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [themeMenuOpen, setThemeMenuOpen] = useState(false)
-  const { mounted, isDark, accentTheme, toggleMode, setAccentTheme } =
-    useTheme()
-  const displayIsDark = mounted ? isDark : false
+  const { mounted } = useTheme()
 
   const title = useMemo(() => {
     if (pathname === '/admin/add') return 'Add project'
@@ -99,32 +96,7 @@ export function AdminHeader({ pathname }: AdminHeaderProps) {
 
         <div className='flex items-center gap-1.5 md:gap-2 shrink-0'>
           <div className='relative'>
-            <button
-              type='button'
-              onClick={() => setThemeMenuOpen(!themeMenuOpen)}
-              className='inline-flex h-9 w-9 items-center justify-center rounded-md border border-border/50 bg-background text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring touch-manipulation'
-              aria-label='Open theme settings'
-            >
-              <Palette className='h-4 w-4' />
-            </button>
-
-            {themeMenuOpen && (
-              <>
-                <div
-                  className='fixed inset-0 z-40'
-                  onClick={() => setThemeMenuOpen(false)}
-                />
-                <div className='absolute right-0 top-full z-50 mt-2'>
-                  <ThemeSelector
-                    compact
-                    isDark={displayIsDark}
-                    accentTheme={accentTheme}
-                    onToggleMode={toggleMode}
-                    onAccentThemeChange={setAccentTheme}
-                  />
-                </div>
-              </>
-            )}
+            {/* Theme selector removed */}
           </div>
 
           {primaryAction && (
