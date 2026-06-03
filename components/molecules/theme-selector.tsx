@@ -4,6 +4,7 @@ import { Check, Palette } from 'lucide-react'
 import { COLOR_THEMES, type AccentTheme } from '@/lib/theme'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
+import { motion } from 'motion/react'
 
 interface ThemeSelectorProps {
   accentTheme: AccentTheme
@@ -34,10 +35,12 @@ export function ThemeSelector({
           const isActive = theme.id === accentTheme
 
           return (
-            <button
+            <motion.button
               key={theme.id}
               type='button'
               onClick={() => onAccentThemeChange(theme.id)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               className={cn(
                 'group relative overflow-hidden rounded-lg border p-2 text-left transition-all',
                 isActive
@@ -59,7 +62,7 @@ export function ThemeSelector({
                   <Check className='h-3 w-3' />
                 </span>
               )}
-            </button>
+            </motion.button>
           )
         })}
       </div>

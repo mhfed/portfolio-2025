@@ -3,6 +3,7 @@ import React from 'react'
 import { MailIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
+import { motion } from 'motion/react'
 export type IconProps = React.HTMLAttributes<SVGElement>
 const Icons = {
   email: (props: IconProps) => <MailIcon {...props} />,
@@ -74,7 +75,7 @@ export function SocialsDock() {
       {Object.entries(DATA.contact.social).map(([name, social]) => {
         const displayName = name === 'email' ? t('sendEmail') : social.name
         return (
-          <a
+          <motion.a
             key={name}
             href={social.url}
             target={social.url.startsWith('mailto:') ? undefined : '_blank'}
@@ -82,13 +83,16 @@ export function SocialsDock() {
               social.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'
             }
             aria-label={displayName}
+            whileHover={{ x: 3, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
             className={cn(
               'group inline-flex items-center gap-2 text-sm text-foreground/68 transition-colors hover:text-foreground'
             )}
           >
-            <social.icon className='size-4 text-primary/80 transition-transform duration-300 group-hover:translate-x-0.5' />
+            <social.icon className='size-4 text-primary/80 transition-transform duration-300' />
             <span>{displayName}</span>
-          </a>
+          </motion.a>
         )
       })}
     </div>

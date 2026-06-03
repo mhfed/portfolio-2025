@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Reveal } from '@/components/ui/reveal'
 import { TechMarquee } from '@/components/molecules/tech-marquee'
 import { HeroTypingText } from '@/components/molecules/hero-typing-text'
+import { FloatingCard } from '@/components/molecules/floating-card'
 
 export async function HeroSection() {
   const [t, tContact] = await Promise.all([
@@ -85,7 +86,7 @@ export async function HeroSection() {
               <div className='absolute -right-8 -top-8 -z-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl' />
               <div className='absolute -bottom-8 -left-8 -z-10 h-48 w-48 rounded-full bg-[color:color-mix(in_srgb,var(--theme-tertiary)_15%,transparent)] blur-3xl' />
 
-              <div className='relative overflow-hidden border border-white/10 bg-background/20 p-6 backdrop-blur-md md:p-8'>
+              <FloatingCard className='relative overflow-hidden border border-white/10 bg-background/20 p-6 backdrop-blur-md md:p-8'>
                 <div className='flex flex-col gap-6 sm:flex-row sm:items-start'>
                   <div className='relative h-48 w-36 shrink-0 overflow-hidden rounded-2xl border border-white/10 md:h-52 md:w-40'>
                     <Image
@@ -151,11 +152,11 @@ export async function HeroSection() {
                       >
                         {tContact('email')}
                       </a>
-                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </FloatingCard>
+          </div>
           </Reveal>
         </div>
 

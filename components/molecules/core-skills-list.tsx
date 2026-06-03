@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/collapsible'
 import { useTranslations } from 'next-intl'
 import { Reveal } from '@/components/ui/reveal'
+import { motion } from 'motion/react'
 
 interface SkillItem {
   id: string
@@ -50,14 +51,21 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
         <div className='space-y-0 border-t border-white/10'>
           {visibleItems.map((item, idx) => (
             <Reveal key={item.id} delay={idx * 70} variant='scale'>
-              <article className='grid gap-2 border-b border-white/10 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6'>
+              <motion.article 
+                className='grid gap-2 border-b border-white/10 py-4 px-3 rounded-lg md:grid-cols-[180px_minmax(0,1fr)] md:gap-6 -mx-3 transition-colors'
+                whileHover={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                  borderColor: 'var(--primary)',
+                }}
+                transition={{ duration: 0.2 }}
+              >
                 <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75 md:pt-1'>
                   {item.label}
                 </div>
                 <p className='text-sm leading-relaxed text-foreground/72 md:text-[15px]'>
                   {item.value}
                 </p>
-              </article>
+              </motion.article>
             </Reveal>
           ))}
         </div>
@@ -66,14 +74,21 @@ export function CoreSkillsList({ title, items }: CoreSkillsListProps) {
           <div className='space-y-0'>
             {hiddenItems.map((item, idx) => (
               <Reveal key={item.id} delay={idx * 70} variant='scale'>
-                <article className='grid gap-2 border-b border-white/10 py-4 md:grid-cols-[180px_minmax(0,1fr)] md:gap-6'>
+                <motion.article 
+                  className='grid gap-2 border-b border-white/10 py-4 px-3 rounded-lg md:grid-cols-[180px_minmax(0,1fr)] md:gap-6 -mx-3 transition-colors'
+                  whileHover={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                    borderColor: 'var(--primary)',
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
                   <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75 md:pt-1'>
                     {item.label}
                   </div>
                   <p className='text-sm leading-relaxed text-foreground/72 md:text-[15px]'>
                     {item.value}
                   </p>
-                </article>
+                </motion.article>
               </Reveal>
             ))}
           </div>
