@@ -3,7 +3,6 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
-import { SmoothCursor } from '@/components/ui/smooth-cursor'
 
 const inter = Inter({
   subsets: ['latin', 'vietnamese'],
@@ -42,7 +41,6 @@ export default function RootLayout({
       >
         <ThemeProvider>
           {children}
-          <SmoothCursor />
         </ThemeProvider>
         <Toaster />
       </body>
