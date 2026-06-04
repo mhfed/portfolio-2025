@@ -22,7 +22,7 @@ export function ResumeDownloadButton() {
       onClick={handleDownload}
       variant='default'
       size='lg'
-      className='rounded-full'
+      className='min-h-12 rounded-full px-5 font-semibold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5'
     >
       <Download className='w-4 h-4' />
       {t('downloadResume')}

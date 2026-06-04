@@ -68,6 +68,8 @@ const DATA = {
     },
   },
 }
+import { MagneticWrapper } from '@/components/atoms/magnetic-wrapper'
+
 export function SocialsDock() {
   const t = useTranslations('common')
   return (
@@ -75,24 +77,25 @@ export function SocialsDock() {
       {Object.entries(DATA.contact.social).map(([name, social]) => {
         const displayName = name === 'email' ? t('sendEmail') : social.name
         return (
-          <motion.a
-            key={name}
-            href={social.url}
-            target={social.url.startsWith('mailto:') ? undefined : '_blank'}
-            rel={
-              social.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'
-            }
-            aria-label={displayName}
-            whileHover={{ x: 3, scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            className={cn(
-              'group inline-flex items-center gap-2 text-sm text-foreground/68 transition-colors hover:text-foreground'
-            )}
-          >
-            <social.icon className='size-4 text-primary/80 transition-transform duration-300' />
-            <span>{displayName}</span>
-          </motion.a>
+          <MagneticWrapper key={name} range={30} strength={0.3}>
+            <motion.a
+              href={social.url}
+              target={social.url.startsWith('mailto:') ? undefined : '_blank'}
+              rel={
+                social.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'
+              }
+              aria-label={displayName}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              className={cn(
+                'group inline-flex items-center gap-2 text-sm text-foreground/68 transition-colors hover:text-foreground'
+              )}
+            >
+              <social.icon className='size-4 text-primary/80 transition-transform duration-300' />
+              <span>{displayName}</span>
+            </motion.a>
+          </MagneticWrapper>
         )
       })}
     </div>

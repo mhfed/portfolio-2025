@@ -25,12 +25,64 @@ export function TimelineItemRoot({
   isLast?: boolean
 }) {
   const [isExpanded, setIsExpanded] = React.useState(false)
+  const elementRef = React.useRef<HTMLElement>(null)
+
+  React.useEffect(() => {
+    const element = elementRef.current
+    if (!element) return
+
+    let gsapInstance: any
+    let scrollTriggerInstance: any
+
+    Promise.all([
+      import('gsap'),
+      import('gsap/ScrollTrigger')
+    ]).then(([{ gsap }, { ScrollTrigger }]) => {
+      gsapInstance = gsap
+      scrollTriggerInstance = ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger)
+
+      gsap.set(element, {
+        opacity: 0.1,
+        y: 50,
+        rotateX: -12,
+        transformPerspective: 1000,
+      })
+
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 94%',
+          end: 'top 78%',
+          scrub: 0.8,
+        },
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        ease: 'power2.out',
+      })
+    })
+
+    return () => {
+      if (scrollTriggerInstance) {
+        const triggers = scrollTriggerInstance.getAll()
+        triggers.forEach((t: any) => {
+          if (t.trigger === element) {
+            t.kill()
+          }
+        })
+      }
+    }
+  }, [])
 
   return (
     <TimelineItemContext.Provider
       value={{ isExpanded, setIsExpanded, isFirst, isLast }}
     >
-      <article className='group relative border-t border-white/10 py-6 md:py-8 lg:py-10 first:border-t-0'>
+      <article
+        ref={elementRef}
+        className='group relative border-t border-white/10 py-8 md:py-10 lg:py-12 first:border-t-0 transform-style-3d backface-hidden'
+      >
         {children}
       </article>
     </TimelineItemContext.Provider>
@@ -45,7 +97,7 @@ export function TimelineItemLine() {
   return (
     <div
       className={cn(
-        'absolute left-[16px] md:left-[164px] w-px bg-linear-to-b from-white/10 via-white/20 to-white/10',
+        'absolute left-[16px] md:left-[164px] w-px bg-linear-to-b from-white/[0.04] via-white/[0.12] to-white/[0.04]',
         isFirst
           ? 'top-10 bottom-0'
           : isLast
@@ -60,8 +112,7 @@ export function TimelineItemDot() {
   return (
     <div
       className={cn(
-        'absolute left-[16px] md:left-[164px] top-[38px] md:top-[46px] z-20 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-primary bg-background shadow-[0_0_12px_rgba(var(--primary),0.2)] transition-all duration-500 group-hover:scale-125 group-hover:shadow-[0_0_15px_rgba(var(--primary),0.6)]',
-        'before:absolute before:inset-0 before:rounded-full before:bg-primary/20 before:blur-sm before:opacity-0 group-hover:before:opacity-100'
+        'absolute left-[16px] md:left-[164px] top-[38px] md:top-[46px] z-20 h-2 w-2 -translate-x-1/2 rounded-full bg-primary/40 group-hover:bg-primary transition-all duration-300 group-hover:scale-110 shadow-xs border border-background'
       )}
     />
   )
@@ -101,7 +152,7 @@ export function TimelineItemCompany({
   children: React.ReactNode
 }) {
   return (
-    <h3 className='font-display text-2xl font-semibold leading-tight tracking-[-0.06em] text-foreground transition-colors duration-300 group-hover:text-primary md:text-[2rem]'>
+    <h3 className='font-display text-3xl font-semibold uppercase leading-[0.9] tracking-normal text-foreground transition-colors duration-300 group-hover:text-primary md:text-5xl'>
       {children}
     </h3>
   )
@@ -113,7 +164,7 @@ export function TimelineItemPosition({
   children: React.ReactNode
 }) {
   return (
-    <p className='mt-1 text-sm font-medium text-foreground/58 md:text-base'>
+    <p className='mt-3 text-sm font-medium text-foreground/58 md:text-base'>
       {children}
     </p>
   )
@@ -196,9 +247,16 @@ export function TimelineItemDescription({ html }: { html: string }) {
 export function TimelineItemSkills({ skills }: { skills: string[] }) {
   if (!skills || skills.length === 0) return null
   return (
-    <p className='mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/50'>
-      {skills.join(' / ')}
-    </p>
+    <div className='mt-5 flex flex-wrap gap-x-4 gap-y-2'>
+      {skills.map((skill, idx) => (
+        <span
+          key={idx}
+          className='font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-foreground/48'
+        >
+          {skill}
+        </span>
+      ))}
+    </div>
   )
 }
 
@@ -222,13 +280,13 @@ export function TimelineItemTrigger() {
     <Button
       variant='ghost'
       onClick={() => setIsExpanded(!isExpanded)}
-      className='shrink-0 rounded-full border border-white/10 px-4 hover:border-primary/30 inline-flex items-center gap-1.5'
+      className='shrink-0 h-9 rounded-none border-0 bg-transparent px-0 hover:bg-transparent inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-foreground/60 hover:text-primary transition-all duration-300'
     >
       <span>{isExpanded ? showLessText : seeMoreText}</span>
       {isExpanded ? (
-        <ChevronUp className='h-3.5 w-3.5 transition-transform' />
+        <ChevronUp className='h-3.5 w-3.5 transition-transform text-primary/80' />
       ) : (
-        <ChevronDown className='h-3.5 w-3.5 transition-transform' />
+        <ChevronDown className='h-3.5 w-3.5 transition-transform text-primary/80' />
       )}
     </Button>
   )

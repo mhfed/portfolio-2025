@@ -1,69 +1,47 @@
 import { getTranslations } from 'next-intl/server'
-import { SectionTitle } from '@/components/atoms/section-title'
-import { CoreSkillsList } from '@/components/molecules/core-skills-list'
 import { Reveal } from '@/components/ui/reveal'
 
 export async function AboutSection() {
   const t = await getTranslations('about')
-  const skillItems = [
-    'frontend',
-    'state',
-    'performance',
-    'devops',
-    'mobile',
-    'agile',
-    'codeQuality',
-    'productMindset',
-    'leadership',
-  ].map((key) => ({
-    id: key,
-    label: t(`skillList.${key}.label`),
-    value: t(`skillList.${key}.value`),
-  }))
+  const highlights = ['React', 'Next.js', 'TypeScript', 'UI systems', 'Performance', 'Animation']
 
   return (
-    <section id='about' className='section-shell scroll-mt-24 px-4 md:px-6'>
-      <div className='mx-auto max-w-[1280px]'>
-        <div className='grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]'>
-          <div className='space-y-6'>
-            <Reveal>
-              <SectionTitle title={t('title')} />
-            </Reveal>
+    <section id='about' className='section-shell scroll-mt-28 px-4 py-28 md:px-6 lg:py-40'>
+      <div className='mx-auto max-w-[1500px]'>
+        <div className='grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-start'>
+          <Reveal>
+            <div className='sticky top-28 space-y-5'>
+              <span className='section-kicker'>About</span>
+              <h2 className='max-w-2xl font-display text-[clamp(3rem,7.2vw,8.5rem)] font-semibold uppercase leading-[0.84] tracking-normal text-foreground'>
+                Product pressure. Visual craft.
+              </h2>
+            </div>
+          </Reveal>
 
-            <Reveal delay={60}>
-              <p className='max-w-2xl text-base leading-relaxed text-foreground/75 md:text-lg'>
-                {t('description1')}
+          <div className='space-y-12'>
+            <Reveal delay={80}>
+              <p className='about-lede'>
+                I build frontend systems that feel sharp on first glance and
+                hold up under production traffic.
               </p>
             </Reveal>
 
-            <div className='grid gap-3 sm:grid-cols-2'>
-              <Reveal delay={100} variant='left'>
-                <div className='border-t border-white/10 pt-4'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    {t('focus')}
-                  </div>
-                  <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
-                    {t('yearsDescription')}
-                  </p>
-                </div>
-              </Reveal>
+            <Reveal delay={140}>
+              <p className='max-w-4xl text-lg leading-9 text-foreground/68 md:text-2xl md:leading-[1.55]'>
+                {t('description1')} My strongest work sits around React,
+                Next.js, TypeScript, UI systems, performance tuning, and motion
+                that makes products feel polished without slowing them down.
+              </p>
+            </Reveal>
 
-              <Reveal delay={140} variant='left'>
-                <div className='border-t border-white/10 pt-4'>
-                  <div className='font-mono text-[10px] uppercase tracking-[0.24em] text-primary/75'>
-                    {t('approach')}
-                  </div>
-                  <p className='mt-3 text-sm leading-relaxed text-foreground/72 md:text-base'>
-                    {t('satisfactionDescription')}
-                  </p>
-                </div>
-              </Reveal>
+            <div className='about-index'>
+              {highlights.map((item, index) => (
+                <Reveal key={item} delay={180 + index * 45} variant='up'>
+                  <span>{item}</span>
+                </Reveal>
+              ))}
             </div>
           </div>
-
-          <Reveal delay={80} variant='right'>
-            <CoreSkillsList title={t('coreSkills')} items={skillItems} />
-          </Reveal>
         </div>
       </div>
     </section>

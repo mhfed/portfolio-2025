@@ -34,18 +34,18 @@ const TechCard = ({ name, iconName, IconComponent }: TechItem) => {
   return (
     <div
       className={cn(
-        'group relative flex shrink-0 cursor-pointer flex-row items-center gap-3 border-r border-white/10 px-5 py-4 transition-all duration-300 md:px-7',
-        'text-foreground/72 hover:text-foreground'
+        'group relative flex shrink-0 cursor-pointer flex-row items-center gap-3 border-r border-white/[0.06] px-5 py-3.5 transition-all duration-300 md:px-7',
+        'text-foreground/60 hover:text-foreground'
       )}
     >
-      <div className='flex h-5 w-5 shrink-0 items-center justify-center text-primary/78 transition-transform duration-300 group-hover:translate-y-[-1px] group-hover:text-primary'>
+      <div className='flex h-5 w-5 shrink-0 items-center justify-center filter grayscale opacity-45 contrast-75 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 group-hover:text-primary'>
         {IconComponent ? (
           <IconComponent className='h-full w-full' />
         ) : iconName ? (
           <StackIcon name={iconName as IconName} className='w-full h-full' />
         ) : null}
       </div>
-      <span className='whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.24em]'>
+      <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 group-hover:text-foreground'>
         {name}
       </span>
     </div>

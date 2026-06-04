@@ -1,8 +1,7 @@
 'use client'
 
+import { useEffect, useMemo, useState } from 'react'
 import type React from 'react'
-
-import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Languages, Moon, Palette, Sun } from 'lucide-react'
 import { useLocale } from '@/hooks/use-locale'
@@ -19,6 +18,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('home-top')
   const tHeader = useTranslations('header')
   const tContact = useTranslations('hero.contact')
   const { locale, setLocale } = useLocale()
@@ -62,12 +62,59 @@ export function Header() {
     setIsLanguageMenuOpen(false)
   }
 
-  const navLinks = [
-    { name: tHeader('nav.about'), href: '/#about', key: 'about' },
-    { name: tHeader('nav.experience'), href: '/#experience', key: 'experience' },
-    { name: tHeader('nav.projects'), href: '/#projects', key: 'projects' },
-    { name: tHeader('nav.collaborate'), href: '/#collaborate', key: 'collaborate' },
-  ]
+  const navLinks = useMemo(
+    () => [
+      { name: 'Home', href: '/#home-top', key: 'home-top' },
+      { name: tHeader('nav.about'), href: '/#about', key: 'about' },
+      { name: 'Skills', href: '/#skills', key: 'skills' },
+      {
+        name: tHeader('nav.experience'),
+        href: '/#experience',
+        key: 'experience',
+      },
+      { name: tHeader('nav.projects'), href: '/#projects', key: 'projects' },
+      {
+        name: tHeader('nav.collaborate'),
+        href: '/#collaborate',
+        key: 'collaborate',
+      },
+    ],
+    [tHeader]
+  )
+
+  useEffect(() => {
+    if (!mounted) return
+
+    const sections = navLinks
+      .map((link) => document.getElementById(link.key))
+      .filter((section): section is HTMLElement => Boolean(section))
+
+    let frame = 0
+
+    const updateActiveSection = () => {
+      const marker = window.scrollY + window.innerHeight * 0.34
+      const current =
+        sections.findLast((section) => section.offsetTop <= marker) ??
+        sections[0]
+
+      if (current?.id) {
+        setActiveSection(current.id)
+      }
+    }
+
+    const handleScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(updateActiveSection)
+    }
+
+    updateActiveSection()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [mounted, navLinks])
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -137,31 +184,35 @@ export function Header() {
   return (
     <>
       <header
-        className='sticky top-0 z-50 border-b border-white/10 bg-background/70 backdrop-blur-xl supports-backdrop-filter:bg-background/60'
+        className='fixed left-0 right-0 top-0 z-40 px-3 pt-4 md:px-6 md:pt-5'
         style={{ height: 'var(--header-height)' }}
       >
-        <nav className='mx-auto flex h-full max-w-[1280px] items-center justify-between gap-4 px-4 md:px-6'>
+        <nav className='mx-auto flex h-14 max-w-[1280px] items-center justify-between gap-4 rounded-full border border-white/10 bg-background/72 px-3 shadow-[0_18px_70px_rgba(0,0,0,0.22)] backdrop-blur-2xl supports-backdrop-filter:bg-background/62 md:h-16 md:px-4'>
           <ScrollProgress className='top-[calc(var(--header-height)-1px)] h-px' />
 
           <Link href={homePath} className='group min-w-0'>
             <div className='min-w-0'>
-              <span className='block truncate font-display text-lg font-semibold tracking-[-0.06em] text-foreground transition-colors group-hover:text-primary md:text-xl'>
-                Nguyen Minh Hieu
+              <span className='block truncate font-display text-base font-semibold tracking-normal text-foreground transition-colors group-hover:text-primary md:text-lg'>
+                Minh Hieu
               </span>
-              <span className='block truncate text-xs text-foreground/55 md:text-sm'>
+              <span className='hidden truncate text-xs text-foreground/55 sm:block'>
                 {tContact('location')} · {tHeader('developer')}
               </span>
             </div>
           </Link>
 
-          <div className='hidden lg:flex items-center gap-7'>
+          <div className='hidden items-center rounded-full border border-white/[0.06] bg-white/[0.035] p-1 lg:flex'>
             {navLinks.map((link) => (
               <Link
                 key={link.key}
                 href={link.href}
                 scroll={!link.href.includes('#')}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className='text-sm font-medium transition-colors duration-300 text-foreground/68 hover:text-foreground'
+                className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  activeSection === link.key
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-foreground/62 hover:bg-white/[0.06] hover:text-foreground'
+                }`}
               >
                 {link.name}
               </Link>
@@ -171,7 +222,7 @@ export function Header() {
           <div className='flex shrink-0 items-center gap-2 md:gap-3'>
             <a
               href={`mailto:${tContact('email')}`}
-              className='hidden items-center rounded-full border border-white/10 bg-card/70 px-4 py-2 text-sm text-foreground/72 transition-colors hover:border-primary/30 hover:text-foreground xl:inline-flex'
+                className='hidden items-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-foreground/72 transition-colors hover:border-primary/30 hover:text-foreground xl:inline-flex'
             >
               {tContact('email')}
             </a>

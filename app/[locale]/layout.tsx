@@ -7,6 +7,8 @@ import { hasLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { Analytics } from '@vercel/analytics/react'
 import { LenisProvider } from '@/components/providers/lenis-provider'
+import { CustomCursor } from '@/components/atoms/custom-cursor'
+import { InteractiveCanvas } from '@/components/atoms/interactive-canvas'
 
 type Props = {
   children: React.ReactNode
@@ -141,6 +143,8 @@ export default async function LocaleLayout({ children, params }: Props) {
       />
       <NextIntlClientProvider messages={messages}>
         <LenisProvider>
+          <InteractiveCanvas />
+          <CustomCursor />
           {children}
           <Analytics />
         </LenisProvider>

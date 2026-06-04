@@ -1,27 +1,19 @@
 import type React from 'react'
-import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 
-const inter = Inter({
-  subsets: ['latin', 'vietnamese'],
+const geist = Geist({
+  subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-geist',
 })
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
+const geistMono = Geist_Mono({
+  subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-space-grotesk',
-  weight: ['400', '500', '600', '700'],
-})
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-jetbrains-mono',
-  weight: ['400', '500', '600'],
+  variable: '--font-geist-mono',
 })
 
 export default function RootLayout({
@@ -37,7 +29,7 @@ export default function RootLayout({
         <meta name='theme-color' content='#07110c' />
       </head>
       <body
-        className={`${inter.className} ${spaceGrotesk.variable} ${jetBrainsMono.variable} bg-background text-foreground`}
+        className={`${geist.className} ${geist.variable} ${geistMono.variable} bg-background text-foreground antialiased`}
       >
         <ThemeProvider>
           {children}
