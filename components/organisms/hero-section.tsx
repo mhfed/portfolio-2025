@@ -24,7 +24,7 @@ export async function HeroSection() {
 
             <Reveal delay={80}>
               <h1 className='mt-7 font-display text-[clamp(4.5rem,13.4vw,15rem)] font-semibold uppercase leading-[0.76] tracking-normal text-foreground'>
-                Frontend
+                <span className='text-[clamp(3rem,8.4vw,10rem)]'>Frontend</span>
                 <span className='block text-primary'>Developer</span>
               </h1>
             </Reveal>
