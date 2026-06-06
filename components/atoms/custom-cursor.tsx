@@ -13,8 +13,9 @@ export function CustomCursor() {
     const canUseCustomCursor = window.matchMedia(
       '(hover: hover) and (pointer: fine)'
     ).matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    if (!canUseCustomCursor) return
+    if (!canUseCustomCursor || reduced) return
 
     const dot = dotRef.current
     const ring = ringRef.current
@@ -27,8 +28,14 @@ export function CustomCursor() {
     const dotPosition = { ...mouse }
     const ringPosition = { ...mouse }
     let animationFrameId = 0
+    let visible = document.visibilityState === 'visible'
 
     const render = () => {
+      if (!visible) {
+        animationFrameId = 0
+        return
+      }
+
       dotPosition.x += (mouse.x - dotPosition.x) * 0.28
       dotPosition.y += (mouse.y - dotPosition.y) * 0.28
       ringPosition.x += (mouse.x - ringPosition.x) * 0.14
@@ -43,6 +50,13 @@ export function CustomCursor() {
     const handlePointerMove = (event: PointerEvent) => {
       mouse.x = event.clientX
       mouse.y = event.clientY
+    }
+
+    const handleVisibilityChange = () => {
+      visible = document.visibilityState === 'visible'
+      if (visible && animationFrameId === 0) {
+        animationFrameId = requestAnimationFrame(render)
+      }
     }
 
     const handlePointerOver = (event: PointerEvent) => {
@@ -73,6 +87,7 @@ export function CustomCursor() {
     window.addEventListener('pointermove', handlePointerMove, { passive: true })
     document.addEventListener('pointerover', handlePointerOver)
     document.addEventListener('pointerout', handlePointerOut)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
     animationFrameId = requestAnimationFrame(render)
 
     return () => {
@@ -80,6 +95,7 @@ export function CustomCursor() {
       window.removeEventListener('pointermove', handlePointerMove)
       document.removeEventListener('pointerover', handlePointerOver)
       document.removeEventListener('pointerout', handlePointerOut)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       document.documentElement.classList.remove('custom-cursor-enabled')
     }
   }, [])

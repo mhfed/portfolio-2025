@@ -1,13 +1,18 @@
 'use client'
 
 import { ReactLenis, useLenis } from 'lenis/react'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 
 function ScrollVelocityTracker() {
+  const lastSkewRef = useRef(0)
+
   useLenis((lenis) => {
     const velocity = lenis.velocity || 0
-    // Limit skew between -3.5 and 3.5 deg for premium subtle effect
     const skew = Math.min(Math.max(velocity * 0.008, -3.5), 3.5)
+
+    if (Math.abs(skew - lastSkewRef.current) < 0.08) return
+
+    lastSkewRef.current = skew
     document.documentElement.style.setProperty('--scroll-skew', `${skew}deg`)
   })
 

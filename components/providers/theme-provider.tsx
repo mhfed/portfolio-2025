@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 import {
   applyAccentTheme,
@@ -15,8 +15,6 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [mounted, setMounted] = useState(false)
-
   useEffect(() => {
     const savedMode = localStorage.getItem('theme')
     const nextMode: ThemeMode = savedMode === 'light' ? 'light' : 'dark'
@@ -28,10 +26,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
     applyThemeMode(nextMode)
     applyAccentTheme(nextAccentTheme)
-    setMounted(true)
   }, [])
-
-  if (!mounted) return null
 
   return <>{children}</>
 }

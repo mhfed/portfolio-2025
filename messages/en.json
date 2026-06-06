@@ -4,6 +4,7 @@
       "about": "About",
       "experience": "Experience",
       "projects": "Projects",
+      "skills": "Skills",
       "collaborate": "Collaborate"
     },
     "downloadResume": "Resume",
@@ -16,7 +17,8 @@
     "toggleTheme": "Toggle light and dark mode",
     "openThemeSettings": "Open theme settings",
     "useTheme": "Use {theme} theme",
-    "developer": "Frontend Developer"
+    "developer": "Frontend Developer",
+    "contact": "Contact"
   },
   "hero": {
     "front": "NGUYEN",
@@ -25,6 +27,10 @@
     "developer": "Frontend Developer",
     "status": "Available for selected product & frontend work",
     "profile": "Profile",
+    "viewWork": "View Work",
+    "contactMe": "Contact Me",
+    "headline": "Frontend Developer crafting *animated* web experiences.",
+    "description": "I build fast, responsive interfaces where interaction design, performance, and production code all move together.",
     "intro": "Building high-end digital experiences with a focus on performance, accessibility, and polished UI systems.",
     "contact": {
       "basedIn": "Based in",
@@ -53,6 +59,13 @@
     "focus": "Focus",
     "approach": "Approach",
     "capabilities": "capabilities",
+    "statement": "I am a Frontend Developer who likes interfaces that feel designed, not assembled. I care about beautiful UI, meaningful motion, product polish, accessibility, and performance that survives real traffic.",
+    "badges": [
+      "Frontend Developer",
+      "Motion",
+      "Product Polish",
+      "Performance"
+    ],
     "itemsCount": "{count} items",
     "description1": "Skilled Front-end Developer with 5+ years of experience in developing and maintaining front-end web applications. Proficient in JavaScript, TypeScript, HTML, CSS, ES6, React.js, and Next.js. Experienced in code testing and debugging.",
     "coreSkills": "Core Skills",
@@ -101,6 +114,7 @@
   },
   "experience": {
     "title": "WORK <br></br> EXPERIENCE",
+    "headline": "From storefront speed to trading flows and internal product systems.",
     "kicker": "overview",
     "readMore": "Read more...",
     "noExperience": "No work experience yet.",
@@ -172,8 +186,56 @@
       }
     ]
   },
+  "skills": {
+    "title": "Stack as<br />motion language.",
+    "kicker": "capabilities",
+    "headline": "Stack, timing, systems, and the glue between them.",
+    "groups": [
+      {
+        "label": "Frontend",
+        "items": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Tailwind",
+          "Design systems"
+        ]
+      },
+      {
+        "label": "Animation",
+        "items": [
+          "GSAP",
+          "ScrollTrigger",
+          "Motion",
+          "Canvas",
+          "Micro-interactions"
+        ]
+      },
+      {
+        "label": "Backend",
+        "items": [
+          "REST APIs",
+          "SSE",
+          "Supabase",
+          "Auth flows",
+          "Formik/Yup"
+        ]
+      },
+      {
+        "label": "Tooling",
+        "items": [
+          "Vercel",
+          "GitLab CI/CD",
+          "PM2",
+          "Vite",
+          "Performance"
+        ]
+      }
+    ]
+  },
   "projects": {
     "title": "PROJECTS",
+    "headline": "Production surfaces with rhythm, clarity, and enough motion to feel alive.",
     "kicker": "overview",
     "projectCase": "Project case",
     "launchApp": "Launch App",
@@ -281,6 +343,7 @@
   },
   "collaborate": {
     "title": "LET'S COLLABORATE",
+    "poeticHeadline": "Let's build something that moves.",
     "kicker": "let's work together",
     "quickLinks": "quick links",
     "directLinks": "direct links",

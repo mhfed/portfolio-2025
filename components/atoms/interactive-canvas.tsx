@@ -6,13 +6,18 @@ export function InteractiveCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    if (reduced || !canHover) return
+
     const canvas = canvasRef.current
     if (!canvas) return
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    let animationFrameId: number
+    let animationFrameId = 0
+    let visible = document.visibilityState === 'visible'
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
 
@@ -39,9 +44,17 @@ export function InteractiveCanvas() {
       height = canvas.height = window.innerHeight
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
+    const handleVisibilityChange = () => {
+      visible = document.visibilityState === 'visible'
+      if (visible && animationFrameId === 0) {
+        animationFrameId = requestAnimationFrame(animate)
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     window.addEventListener('mouseleave', handleMouseLeave)
     window.addEventListener('resize', handleResize)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
 
     // Particle class
     class Particle {
@@ -108,7 +121,7 @@ export function InteractiveCanvas() {
     }
 
     // Initialize particles
-    const particleCount = Math.min(Math.floor((width * height) / 9000), 120)
+    const particleCount = Math.min(Math.floor((width * height) / 14000), 80)
     const particles: Particle[] = []
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle())
@@ -116,20 +129,12 @@ export function InteractiveCanvas() {
 
     // Animation loop
     const animate = () => {
-      ctx.clearRect(0, 0, width, height)
+      if (!visible) {
+        animationFrameId = 0
+        return
+      }
 
-      // Draw subtle gradient behind particles
-      const gradient = ctx.createRadialGradient(
-        width / 2,
-        height / 2,
-        10,
-        width / 2,
-        height / 2,
-        Math.max(width, height)
-      )
-      
-      // Get background variables if available, otherwise fallback
-      ctx.fillStyle = 'rgba(7, 10, 16, 0.05)'
+      ctx.clearRect(0, 0, width, height)
       
       particles.forEach((particle) => {
         particle.update()
@@ -184,6 +189,7 @@ export function InteractiveCanvas() {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseleave', handleMouseLeave)
       window.removeEventListener('resize', handleResize)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])

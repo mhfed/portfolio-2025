@@ -4,6 +4,7 @@
       "about": "關於我",
       "experience": "經歷",
       "projects": "專案",
+      "skills": "技能",
       "collaborate": "合作"
     },
     "downloadResume": "下載履歷",
@@ -16,7 +17,8 @@
     "toggleTheme": "切換深淺色模式",
     "openThemeSettings": "開啟主題設定",
     "useTheme": "使用 {theme} 主題",
-    "developer": "前端開發工程師"
+    "developer": "前端開發工程師",
+    "contact": "聯絡"
   },
   "hero": {
     "front": "NGUYEN",
@@ -25,6 +27,10 @@
     "developer": "前端開發工程師",
     "status": "接受精選產品與前端專案",
     "profile": "個人資料",
+    "viewWork": "檢視作品",
+    "contactMe": "聯絡我",
+    "headline": "打造 *生動* 網頁體驗 的 前端開發工程師。",
+    "description": "我打造快速且響應式的網頁介面，將互動設計、效能表現與實際代碼緊密結合。",
     "intro": "打造高階數位體驗，專注於效能、無障礙設計與精緻的 UI 系統。",
     "contact": {
       "basedIn": "目前所在地",
@@ -53,6 +59,13 @@
     "focus": "核心領域",
     "approach": "工作方法",
     "capabilities": "核心能力",
+    "statement": "我是一名熱愛精緻設計而非僅僅拼湊介面的前端開發工程師。我專注於美觀的 UI、有意義的動態特效、產品細節磨練、無障礙設計，以及能承受真實流量的高效能表現。",
+    "badges": [
+      "前端開發工程師",
+      "動態特效",
+      "產品細節",
+      "效能表現"
+    ],
     "itemsCount": "{count} 項",
     "description1": "擁有 5 年以上經驗的前端開發工程師，專精於開發與維護前端網頁應用程式。熟練掌握 JavaScript、TypeScript、HTML、CSS、ES6、React.js 和 Next.js。具備程式碼測試與除錯經驗。",
     "coreSkills": "核心技能",
@@ -101,6 +114,7 @@
   },
   "experience": {
     "title": "工作<br />經歷",
+    "headline": "從前台速度到交易流程，再到內部產品系統。",
     "kicker": "概述",
     "readMore": "閱讀更多...",
     "noExperience": "目前尚無工作經歷。",
@@ -160,7 +174,7 @@
         "id": 4,
         "company": "COOLMATE",
         "position": "前端開發工程師",
-        "period": "04/2024 - Present",
+        "period": "04/2024 - 至今",
         "location": "河內",
         "description": "規劃並執行整個電子商務前台的轉型。<br/>系統遷移（主導）：帶領前台從 Laravel 遷移至 Next.js，將 Google PageSpeed Insights 分數從 29 分提升至 90+ 分，並優化 SEO 表現。<br/>業務影響：透過效能優化與 UX 改善，直接促使轉換率（CR）從 1.5% 提升至 2.5%。<br/>基礎設施與 DevOps：使用 PM2 建立自我託管環境並自動化 GitLab CI/CD workflows；開發 Hotfix 腳本以確保 99.9% 的上線率。<br/>開發者體驗（DX）：將內部管理入口網站從舊版 React 遷移至 React + Vite 進行現代化，大幅縮短建置時間。<br/>產品成長：為會員計劃開發 Zalo Mini App 以擴大客戶觸及面。整合全面的追蹤功能（GA4、Pixel）以實現數據驅動的行銷策略。<br/>領導力：設計基礎專案架構，並指導團隊成員模組化開發與高品質的程式碼標準。",
         "skills": [
@@ -172,8 +186,32 @@
       }
     ]
   },
+  "skills": {
+    "title": "Stack as<br />motion language.",
+    "kicker": "核心能力",
+    "headline": "技術棧、時間節奏、系統，以及連結它們的黏合劑。",
+    "groups": [
+      {
+        "label": "前端開發",
+        "items": ["React", "Next.js", "TypeScript", "Tailwind", "設計系統"]
+      },
+      {
+        "label": "動態特效",
+        "items": ["GSAP", "ScrollTrigger", "Motion", "Canvas", "微交互"]
+      },
+      {
+        "label": "後端與驗證",
+        "items": ["REST API", "SSE", "Supabase", "身分驗證", "Formik/Yup"]
+      },
+      {
+        "label": "開發工具",
+        "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "效能優化"]
+      }
+    ]
+  },
   "projects": {
     "title": "專案作品",
+    "headline": "兼具節奏感、清晰度與適度動態特效的實際產品介面。",
     "kicker": "概述",
     "projectCase": "專案案例",
     "launchApp": "啟動應用",
@@ -281,6 +319,7 @@
   },
   "collaborate": {
     "title": "讓我們合作",
+    "poeticHeadline": "讓我們一起打造動人心弦的作品。",
     "kicker": "讓我們合作",
     "quickLinks": "快速連結",
     "directLinks": "社群連結",

@@ -1,30 +1,35 @@
-import { Header } from '@/components/organisms/header'
-import { HeroSection } from '@/components/organisms/hero-section'
-import { AboutSection } from '@/components/organisms/about-section'
-import { SkillsSection } from '@/components/organisms/skills-section'
-import { WorkExperienceSection } from '@/components/organisms/work-experience-section'
-import { ProjectsSection } from '@/components/organisms/projects-section'
-import { Footer } from '@/components/organisms/footer'
-import { ScrollToTop } from '@/components/atoms/scroll-to-top'
-import { getLocale } from 'next-intl/server'
+import {
+  CreativePortfolio,
+  type ExperienceRecord,
+} from '@/components/organisms/creative-portfolio'
+import { normalizeProjects, type LocalizedProjectRecord } from '@/data/projects'
+import { getTranslations } from 'next-intl/server'
 
-export default async function Home() {
-  const locale = await getLocale()
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params
+  const [tProjects, tExperience, tContact] = await Promise.all([
+    getTranslations({ locale, namespace: 'projects' }),
+    getTranslations({ locale, namespace: 'experience' }),
+    getTranslations({ locale, namespace: 'hero.contact' }),
+  ])
+
+  const projects = normalizeProjects(
+    ((tProjects.raw('list') || []) as LocalizedProjectRecord[])
+  )
+  const experiences = (tExperience.raw('list') || []) as ExperienceRecord[]
 
   return (
     <main className='w-full'>
-      <Header />
-
-      <div>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <WorkExperienceSection />
-        <ProjectsSection />
-        <Footer locale={locale} />
-      </div>
-
-      <ScrollToTop />
+      <CreativePortfolio
+        locale={locale}
+        projects={projects}
+        experiences={experiences}
+        email={tContact('email')}
+      />
     </main>
   )
 }

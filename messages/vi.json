@@ -4,6 +4,7 @@
       "about": "Về tôi",
       "experience": "Kinh nghiệm",
       "projects": "Dự án",
+      "skills": "Kỹ năng",
       "collaborate": "Hợp tác"
     },
     "downloadResume": "Tải CV",
@@ -16,15 +17,20 @@
     "toggleTheme": "Chuyển đổi giao diện sáng tối",
     "openThemeSettings": "Mở cài đặt giao diện",
     "useTheme": "Sử dụng chủ đề {theme}",
-    "developer": "Frontend Developer"
+    "developer": "Lập trình viên Frontend",
+    "contact": "Liên hệ"
   },
   "hero": {
     "front": "NGUYEN",
     "middle": "MINH",
     "end": "HIEU",
-    "developer": "Frontend Developer",
+    "developer": "Lập trình viên Frontend",
     "status": "Sẵn sàng cho các dự án sản phẩm & frontend chọn lọc",
     "profile": "Hồ sơ",
+    "viewWork": "Xem dự án",
+    "contactMe": "Liên hệ tôi",
+    "headline": "Lập trình viên Frontend kiến tạo trải nghiệm web *sống động*.",
+    "description": "Tôi xây dựng các giao diện nhanh, mượt mà và trực quan, nơi thiết kế tương tác, hiệu năng và mã nguồn chạy thực tế luôn đồng hành cùng nhau.",
     "intro": "Xây dựng các trải nghiệm kỹ thuật số cao cấp, tập trung vào hiệu suất, khả năng tiếp cận và hệ thống giao diện tinh tế.",
     "contact": {
       "basedIn": "Sống tại",
@@ -53,6 +59,13 @@
     "focus": "Trọng tâm",
     "approach": "Phương châm",
     "capabilities": "năng lực",
+    "statement": "Tôi là một Lập trình viên Frontend yêu thích các giao diện được thiết kế chỉn chu thay vì chỉ lắp ghép. Tôi quan tâm đến giao diện đẹp, chuyển động có ý nghĩa, độ hoàn thiện của sản phẩm, khả năng tiếp cận và hiệu suất hoạt động thực tế.",
+    "badges": [
+      "Lập trình viên Frontend",
+      "Chuyển động",
+      "Độ hoàn thiện",
+      "Hiệu năng"
+    ],
     "itemsCount": "{count} mục",
     "description1": "Lập trình viên Front-end có kỹ năng với 5+ năm kinh nghiệm trong việc phát triển và duy trì các ứng dụng web front-end. Thành thạo JavaScript, TypeScript, HTML, CSS, ES6, React.js và Next.js. Có kinh nghiệm trong kiểm tra và gỡ lỗi mã.",
     "coreSkills": "Kỹ năng cốt lõi",
@@ -101,6 +114,7 @@
   },
   "experience": {
     "title": "KINH NGHIỆM <br></br> LÀM VIỆC",
+    "headline": "Từ tốc độ storefront đến luồng giao dịch và hệ thống sản phẩm nội bộ.",
     "kicker": "tổng quan",
     "readMore": "Xem thêm...",
     "noExperience": "Chưa có kinh nghiệm làm việc.",
@@ -160,7 +174,7 @@
         "id": 4,
         "company": "COOLMATE",
         "position": "Lập trình viên Frontend",
-        "period": "04/2024 - Present",
+        "period": "04/2024 - Hiện tại",
         "location": "Hà Nội",
         "description": "Kiến trúc và thực thi chuyển đổi toàn bộ E-commerce Storefront.<br/>Chuyển đổi Hệ thống (Trưởng nhóm): Dẫn dắt việc di chuyển mã nguồn storefront từ Laravel sang Next.js, nâng điểm Google PageSpeed Insights từ 29 lên 90+ và cải thiện hiệu suất SEO.<br/>Tác động Kinh doanh: Đóng góp trực tiếp vào việc tăng Tỷ lệ chuyển đổi (CR) từ 1.5% lên 2.5% thông qua tối ưu hóa hiệu suất và cải thiện trải nghiệm người dùng (UX).<br/>Hạ tầng & DevOps: Thiết lập môi trường tự vận hành (self-hosting) bằng PM2 và tự động hóa quy trình GitLab CI/CD; phát triển các mã kịch bản hotfix đảm bảo thời gian hoạt động 99.9%.<br/>Trải nghiệm Lập trình viên (DX): Hiện đại hóa Cổng quản trị nội bộ (Admin Portal) bằng cách chuyển từ React kế thừa sang React + Vite, giảm đáng kể thời gian build.<br/>Tăng trưởng Sản phẩm: Phát triển Zalo Mini App cho chương trình Khách hàng thân thiết để mở rộng tệp khách hàng. Tích hợp hệ thống theo dõi toàn diện (GA4, Pixel) phục vụ cho các chiến lược marketing dựa trên dữ liệu.<br/>Năng lực Lãnh đạo: Thiết kế kiến trúc dự án cơ sở (Base Project) và hướng dẫn các thành viên trong nhóm về tiêu chuẩn phát triển dạng mô-đun và chất lượng mã nguồn cao.",
         "skills": [
@@ -172,8 +186,32 @@
       }
     ]
   },
+  "skills": {
+    "title": "Stack as<br />motion language.",
+    "kicker": "năng lực",
+    "headline": "Công nghệ, chuyển động, hệ thống và chất kết dính giữa chúng.",
+    "groups": [
+      {
+        "label": "Frontend",
+        "items": ["React", "Next.js", "TypeScript", "Tailwind", "Hệ thống UI"]
+      },
+      {
+        "label": "Chuyển động",
+        "items": ["GSAP", "ScrollTrigger", "Motion", "Canvas", "Tương tác nhỏ"]
+      },
+      {
+        "label": "Backend/Xác thực",
+        "items": ["REST API", "SSE", "Supabase", "Xác thực", "Formik/Yup"]
+      },
+      {
+        "label": "Công cụ",
+        "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "Tối ưu hiệu năng"]
+      }
+    ]
+  },
   "projects": {
     "title": "DỰ ÁN",
+    "headline": "Các sản phẩm hoàn thiện với nhịp điệu, sự rõ ràng và chuyển động vừa đủ để mang lại cảm giác sống động.",
     "kicker": "tổng quan",
     "projectCase": "Chi tiết dự án",
     "launchApp": "Mở ứng dụng",
@@ -281,6 +319,7 @@
   },
   "collaborate": {
     "title": "HÃY HỢP TÁC",
+    "poeticHeadline": "Hãy cùng nhau xây dựng những sản phẩm đầy cảm xúc.",
     "kicker": "hãy hợp tác",
     "quickLinks": "liên kết nhanh",
     "directLinks": "kết nối trực tiếp",

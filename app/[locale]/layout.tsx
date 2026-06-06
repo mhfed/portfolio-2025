@@ -107,7 +107,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale)
 
   // Get messages from server-side configuration
-  const messages = await getMessages()
+  const messages = await getMessages({ locale })
 
   // Structured data (JSON-LD) for SEO
   const structuredData = {
