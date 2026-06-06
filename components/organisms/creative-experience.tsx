@@ -19,6 +19,9 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
       data-section
     >
       <div className='creative-section__intro'>
+        <p className='creative-kicker' data-reveal>
+          {t('kicker')}
+        </p>
         <h2 data-split-line data-experience-title>
           {t('headline')}
         </h2>

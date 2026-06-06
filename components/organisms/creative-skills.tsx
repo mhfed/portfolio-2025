@@ -7,7 +7,10 @@ export function SkillsSection() {
 
   return (
     <section id='skills' className='creative-section creative-skills' data-section>
-      <div className='creative-section__intro creative-section__intro--split'>
+      <div className='creative-section__intro'>
+        <p className='creative-kicker' data-reveal>
+          {t('kicker')}
+        </p>
         <h2 data-split-line>{t('headline')}</h2>
       </div>
 
