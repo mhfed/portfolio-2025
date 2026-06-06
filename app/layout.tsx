@@ -1,25 +1,19 @@
 import type React from 'react'
-import { Geist_Mono, Manrope, Space_Grotesk } from 'next/font/google'
+import { Inter_Tight, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 
-const manrope = Manrope({
+const interTight = Inter_Tight({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-manrope',
+  variable: '--font-inter-tight',
 })
 
-const spaceGrotesk = Space_Grotesk({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-space-grotesk',
-})
-
-const geistMono = Geist_Mono({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-geist-mono',
+  variable: '--font-jetbrains-mono',
 })
 
 export default function RootLayout({
@@ -35,7 +29,7 @@ export default function RootLayout({
         <meta name='theme-color' content='#07110c' />
       </head>
       <body
-        className={`${manrope.className} ${manrope.variable} ${spaceGrotesk.variable} ${geistMono.variable} bg-background text-foreground antialiased`}
+        className={`${interTight.className} ${interTight.variable} ${jetbrainsMono.variable} bg-background text-foreground antialiased`}
       >
         <ThemeProvider>
           {children}

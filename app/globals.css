@@ -3,6 +3,10 @@
 @plugin '@tailwindcss/typography';
 
 :root {
+  --font-space-grotesk: var(--font-inter-tight);
+  --font-manrope: var(--font-inter-tight);
+  --font-geist-mono: var(--font-jetbrains-mono);
+
   /* Light Mode - Slate and Teal */
   --header-height: 60px;
   --font-display: var(--font-space-grotesk), var(--font-manrope), system-ui,
@@ -793,6 +797,7 @@ body:has(.creative-portfolio)::after {
   background-size: 80px 80px, 80px 80px, auto, auto;
   color: var(--creative-ink);
   font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.015em;
 }
 
 .creative-nav {
@@ -969,7 +974,7 @@ body:has(.creative-portfolio)::after {
   font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(2.5rem, 6.5vw, 6.2rem);
   font-weight: 900;
-  letter-spacing: 0;
+  letter-spacing: -0.03em;
   line-height: 0.92;
   text-transform: uppercase;
 }
@@ -996,7 +1001,7 @@ body:has(.creative-portfolio)::after {
   margin: 0;
   color: var(--creative-muted);
   font-size: clamp(1rem, 1.45vw, 1.35rem);
-  font-weight: 650;
+  font-weight: 300;
   line-height: 1.45;
 }
 
@@ -1186,7 +1191,7 @@ body:has(.creative-portfolio)::after {
   font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(2rem, 3.8vw, 4.65rem);
   font-weight: 900;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   line-height: 1.1;
   text-transform: uppercase;
   text-wrap: balance;
@@ -1253,7 +1258,7 @@ body:has(.creative-portfolio)::after {
   font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(2rem, 5.2vw, 6rem);
   font-weight: 900;
-  letter-spacing: 0;
+  letter-spacing: -0.025em;
   line-height: 1.0;
   text-transform: uppercase;
 }
@@ -1262,7 +1267,7 @@ body:has(.creative-portfolio)::after {
   max-width: 38rem;
   color: currentColor;
   font-size: clamp(0.95rem, 1.3vw, 1.2rem);
-  font-weight: 700;
+  font-weight: 300;
   line-height: 1.35;
   opacity: 0.64;
 }
@@ -1515,7 +1520,7 @@ body:has(.creative-portfolio)::after {
   margin: 0;
   color: var(--creative-lime);
   font-size: clamp(1rem, 1.8vw, 1.55rem);
-  font-weight: 850;
+  font-weight: 600;
   line-height: 1.2;
 }
 
@@ -1529,7 +1534,7 @@ body:has(.creative-portfolio)::after {
   margin: 0;
   color: var(--creative-muted);
   font-size: clamp(0.98rem, 1.18vw, 1.15rem);
-  font-weight: 650;
+  font-weight: 300;
   line-height: 1.62;
   will-change: transform, opacity;
 }
@@ -1621,7 +1626,7 @@ body:has(.creative-portfolio)::after {
   margin: 0;
   color: currentColor;
   font-size: 0.95rem;
-  font-weight: 750;
+  font-weight: 300;
   line-height: 1.55;
   opacity: 0.68;
 }
