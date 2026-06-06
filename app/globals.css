@@ -1299,12 +1299,17 @@ body:has(.creative-portfolio)::after {
   transform: translate(0.35rem, -0.35rem);
 }
 
-.project-preview {
+.project-preview-wrapper {
   position: fixed;
-  top: 50%;
-  right: 4vw;
-  z-index: 30;
-  width: min(32vw, 28rem);
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 100;
+  will-change: transform;
+}
+
+.project-preview {
+  width: min(26vw, 22rem);
   aspect-ratio: 1.18 / 1;
   overflow: hidden;
   border: 1px solid rgba(243, 240, 223, 0.18);
@@ -1312,16 +1317,16 @@ body:has(.creative-portfolio)::after {
   background: #12140f;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-50%) scale(0.9) rotate(3deg);
+  transform: translate(-50%, -50%) scale(0.85) rotate(3deg);
   transition:
-    opacity 220ms ease,
-    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.5);
+    opacity 280ms ease,
+    transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.6);
 }
 
 .project-preview.is-active {
   opacity: 1;
-  transform: translateY(-50%) scale(1) rotate(-2deg);
+  transform: translate(-50%, -50%) scale(1) rotate(-3deg);
 }
 
 .project-preview img {
@@ -1355,6 +1360,10 @@ body:has(.creative-portfolio)::after {
   font-size: 1rem;
   line-height: 1.1;
   text-transform: uppercase;
+}
+
+.work-row__thumbnail {
+  display: none;
 }
 
 .creative-about {
@@ -1740,7 +1749,64 @@ body:has(.creative-portfolio)::after {
   }
 
   .work-row {
-    grid-template-columns: 3rem minmax(0, 1fr) 1.5rem;
+    grid-template-columns: 3rem minmax(0, 1fr) auto 2rem;
+    align-items: start;
+    min-height: auto;
+    padding: 1.8rem 0;
+  }
+
+  .work-row__index {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+    margin-top: 0.2rem;
+  }
+
+  .work-row__main {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .work-row__thumbnail {
+    display: block;
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    width: clamp(100px, 14vw, 130px);
+    aspect-ratio: 16 / 10;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    border: 1px solid var(--creative-line);
+    position: relative;
+    align-self: center;
+    margin-right: 0.6rem;
+    transition:
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 320ms ease;
+  }
+
+  .work-row__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .work-row:hover .work-row__thumbnail {
+    transform: scale(1.04);
+    border-color: var(--creative-lime);
+  }
+
+  .work-row__tags {
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: flex-start;
+    padding-bottom: 0;
+    margin-top: 0.8rem;
+  }
+
+  .work-row > svg {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    align-self: center;
   }
 
   .experience-row {
@@ -1752,12 +1818,6 @@ body:has(.creative-portfolio)::after {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.7rem;
-  }
-
-  .work-row__tags {
-    grid-column: 2 / -1;
-    justify-content: flex-start;
-    padding-bottom: 1.4rem;
   }
 
   .project-preview {
@@ -1824,22 +1884,54 @@ body:has(.creative-portfolio)::after {
   }
 
   .work-row {
-    grid-template-columns: 2.2rem minmax(0, 1fr);
-    min-height: 11rem;
-    padding: 1.2rem 0;
+    grid-template-columns: 2.2rem minmax(0, 1fr) auto 1.5rem;
+    min-height: auto;
+    padding: 1.3rem 0;
   }
 
   .work-row > svg {
-    display: none;
+    display: block;
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    align-self: center;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .work-row__index {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    margin-top: 0.15rem;
+  }
+
+  .work-row__main {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   .work-row__main strong {
-    font-size: clamp(1.8rem, 8vw, 3.2rem);
+    font-size: clamp(1.4rem, 6.5vw, 2.1rem);
+  }
+
+  .work-row__main small {
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
+    margin-top: 0.2rem;
+  }
+
+  .work-row__thumbnail {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    width: clamp(75px, 18vw, 95px);
+    aspect-ratio: 16 / 10;
+    margin-right: 0.35rem;
+    align-self: center;
   }
 
   .work-row__tags {
-    grid-column: 1 / -1;
-    padding-left: 2.2rem;
+    grid-column: 2;
+    grid-row: 2;
+    padding-left: 0;
+    margin-top: 0.7rem;
   }
 
   .experience-row {
