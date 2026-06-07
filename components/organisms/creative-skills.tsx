@@ -34,13 +34,31 @@ export function SkillsSection() {
         </div>
 
         <div className='skill-stack'>
-          {skillGroups.map((group, index) => (
-            <article key={group.label} className='skill-stack__group' data-skill-group>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{group.label}</h3>
-              <p>{group.items.join(' / ')}</p>
-            </article>
-          ))}
+          {skillGroups.map((group, index) => {
+            const themes = ['accent-blue', 'accent-lime', 'accent-orange', 'accent-pink']
+            const groupTheme = themes[index % themes.length]
+
+            return (
+              <article
+                key={group.label}
+                className={`skill-stack__group ${groupTheme}`}
+                data-skill-group
+              >
+                <div className='skill-stack__header'>
+                  <span className='skill-stack__index'>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{group.label}</h3>
+                </div>
+                <div className='skill-stack__items'>
+                  {group.items.map((item) => (
+                    <span key={item} className='skill-item-tag'>
+                      <span className='skill-item-dot' />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

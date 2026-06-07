@@ -1,7 +1,7 @@
-import { Mail } from 'lucide-react'
+import { Mail, FileText } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-export function CreativeNav({ email }: { email: string }) {
+export function CreativeNav({ email, locale }: { email: string; locale: string }) {
   const t = useTranslations('header')
 
   const navItems = [
@@ -10,6 +10,12 @@ export function CreativeNav({ email }: { email: string }) {
     { label: t('nav.experience'), href: '#experience' },
     { label: t('nav.skills'), href: '#skills' },
   ]
+
+  const getResumeUrl = () => {
+    if (locale === 'vi') return '/resumes/Nguyen_Minh_Hieu_CV_vi.pdf'
+    if (locale === 'zh-TW') return '/resumes/Nguyen_Minh_Hieu_CV_zh.pdf'
+    return '/resumes/Nguyen_Minh_Hieu_CV_en.pdf'
+  }
 
   return (
     <header className='creative-nav'>
@@ -26,10 +32,16 @@ export function CreativeNav({ email }: { email: string }) {
         ))}
       </nav>
 
-      <a className='creative-nav__mail' href={`mailto:${email}`}>
-        <Mail aria-hidden='true' />
-        <span>{t('contact')}</span>
-      </a>
+      <div className='creative-nav__actions-wrapper'>
+        <a className='creative-nav__resume' href={getResumeUrl()} download>
+          <FileText aria-hidden='true' />
+          <span>{t('downloadResume')}</span>
+        </a>
+        <a className='creative-nav__mail' href={`mailto:${email}`}>
+          <Mail aria-hidden='true' />
+          <span>{t('contact')}</span>
+        </a>
+      </div>
     </header>
   )
 }

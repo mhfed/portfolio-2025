@@ -18,6 +18,7 @@ export function InteractiveCanvas() {
 
     let animationFrameId = 0
     let visible = document.visibilityState === 'visible'
+    let isCanvasDisabled = false
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
 
@@ -25,6 +26,22 @@ export function InteractiveCanvas() {
       x: -1000,
       y: -1000,
       radius: 120,
+    }
+
+    const checkCanvasSettings = () => {
+      const disabled = localStorage.getItem('disable-canvas') === 'true'
+      isCanvasDisabled = disabled
+      if (disabled) {
+        canvas.style.display = 'none'
+        if (ctx) {
+          ctx.clearRect(0, 0, width, height)
+        }
+      } else {
+        canvas.style.display = 'block'
+        if (visible && animationFrameId === 0) {
+          animationFrameId = requestAnimationFrame(animate)
+        }
+      }
     }
 
     // Handle mouse move
@@ -46,7 +63,7 @@ export function InteractiveCanvas() {
 
     const handleVisibilityChange = () => {
       visible = document.visibilityState === 'visible'
-      if (visible && animationFrameId === 0) {
+      if (visible && animationFrameId === 0 && !isCanvasDisabled) {
         animationFrameId = requestAnimationFrame(animate)
       }
     }
@@ -55,6 +72,7 @@ export function InteractiveCanvas() {
     window.addEventListener('mouseleave', handleMouseLeave)
     window.addEventListener('resize', handleResize)
     document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('settings-updated', checkCanvasSettings)
 
     // Particle class
     class Particle {
@@ -129,7 +147,7 @@ export function InteractiveCanvas() {
 
     // Animation loop
     const animate = () => {
-      if (!visible) {
+      if (!visible || isCanvasDisabled) {
         animationFrameId = 0
         return
       }
@@ -182,7 +200,7 @@ export function InteractiveCanvas() {
       animationFrameId = requestAnimationFrame(animate)
     }
 
-    animate()
+    checkCanvasSettings()
 
     // Cleanup
     return () => {
@@ -190,6 +208,7 @@ export function InteractiveCanvas() {
       window.removeEventListener('mouseleave', handleMouseLeave)
       window.removeEventListener('resize', handleResize)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('settings-updated', checkCanvasSettings)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])

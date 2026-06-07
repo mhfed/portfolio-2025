@@ -21,8 +21,18 @@ export function CustomCursor() {
     const ring = ringRef.current
     if (!dot || !ring) return
 
-    setIsEnabled(true)
-    document.documentElement.classList.add('custom-cursor-enabled')
+    const checkCursorSettings = () => {
+      const disabled = localStorage.getItem('disable-cursor') === 'true'
+      if (disabled) {
+        setIsEnabled(false)
+        document.documentElement.classList.remove('custom-cursor-enabled')
+      } else {
+        setIsEnabled(true)
+        document.documentElement.classList.add('custom-cursor-enabled')
+      }
+    }
+
+    checkCursorSettings()
 
     const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
     const dotPosition = { ...mouse }
@@ -88,6 +98,7 @@ export function CustomCursor() {
     document.addEventListener('pointerover', handlePointerOver)
     document.addEventListener('pointerout', handlePointerOut)
     document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('settings-updated', checkCursorSettings)
     animationFrameId = requestAnimationFrame(render)
 
     return () => {
@@ -96,6 +107,7 @@ export function CustomCursor() {
       document.removeEventListener('pointerover', handlePointerOver)
       document.removeEventListener('pointerout', handlePointerOut)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('settings-updated', checkCursorSettings)
       document.documentElement.classList.remove('custom-cursor-enabled')
     }
   }, [])

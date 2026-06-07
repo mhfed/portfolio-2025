@@ -9,6 +9,7 @@ import { AboutSection } from './creative-about'
 import { ExperienceSection } from './creative-experience'
 import { SkillsSection } from './creative-skills'
 import { ContactSection } from './creative-contact'
+import { SettingsPanel } from './settings-panel'
 
 type CreativePortfolioProps = {
   locale: string
@@ -29,13 +30,14 @@ export function CreativePortfolio({
     <div className='creative-portfolio' data-creative-root>
       <CreativeWaypointsScene />
       <CreativePortfolioEffects />
-      <CreativeNav email={email} />
+      <CreativeNav email={email} locale={locale} />
       <HeroSection email={email} />
       <WorkSection projects={projects} />
-      <AboutSection />
+      <AboutSection locale={locale} />
       <ExperienceSection experiences={experiences} />
       <SkillsSection />
       <ContactSection email={email} locale={locale} />
+      <SettingsPanel />
     </div>
   )
 }
