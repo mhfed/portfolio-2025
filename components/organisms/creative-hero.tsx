@@ -32,14 +32,14 @@ export function HeroSection({ email }: { email: string }) {
   const heroWords = headlineText.split(' ')
 
   return (
-    <section id='top' className='creative-hero' data-section>
-      <div className='creative-hero__content'>
-        <div className='creative-hero__top' data-reveal>
+    <section id='top' className='creative-hero' data-section data-waypoint='hero'>
+      <div className='creative-hero__content' data-hero-stage>
+        <div className='creative-hero__top' data-reveal data-hero-top>
           <p className='creative-kicker'>{t('status')}</p>
           <span className='creative-hero__name'>Nguyen Minh Hieu 🇻🇳</span>
         </div>
 
-        <h1 className='creative-hero__headline'>
+        <h1 className='creative-hero__headline' data-hero-headline>
           <span className='sr-only'>{cleanHeadline}</span>
           <span aria-hidden='true'>
             {heroWords.flatMap((word, index) => {
@@ -59,7 +59,7 @@ export function HeroSection({ email }: { email: string }) {
           </span>
         </h1>
 
-        <div className='creative-hero__bottom'>
+        <div className='creative-hero__bottom' data-hero-copy>
           <p data-reveal>
             {t('description')}
           </p>
@@ -72,9 +72,15 @@ export function HeroSection({ email }: { email: string }) {
         </div>
       </div>
 
-      <AbstractMotionField />
+      <div data-hero-field>
+        <AbstractMotionField />
+      </div>
 
-      <div className='creative-marquee creative-marquee--hero' aria-hidden='true'>
+      <div
+        className='creative-marquee creative-marquee--hero'
+        aria-hidden='true'
+        data-hero-marquee
+      >
         <div>
           <span>React</span>
           <span>Next.js</span>

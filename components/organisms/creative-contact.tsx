@@ -5,7 +5,12 @@ export function ContactSection({ email, locale }: { email: string; locale: strin
   const t = useTranslations('collaborate')
 
   return (
-    <footer id='contact' className='creative-contact' data-section>
+    <footer
+      id='contact'
+      className='creative-contact'
+      data-section
+      data-waypoint='contact'
+    >
       <p className='creative-kicker' data-reveal>
         {t('kicker')}
       </p>

@@ -5,7 +5,12 @@ export function AboutSection() {
   const badges = t.raw('badges') as string[]
 
   return (
-    <section id='about' className='creative-section creative-about' data-section>
+    <section
+      id='about'
+      className='creative-section creative-about'
+      data-section
+      data-waypoint='about'
+    >
       <div className='creative-about__statement' data-split-line>
         {t('statement')}
       </div>

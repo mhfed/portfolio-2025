@@ -17,6 +17,7 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
       id='experience'
       className='creative-section creative-experience'
       data-section
+      data-waypoint='experience'
     >
       <div className='creative-section__intro'>
         <p className='creative-kicker' data-reveal>

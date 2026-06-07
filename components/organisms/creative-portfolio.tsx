@@ -1,6 +1,7 @@
 import type { ProjectCaseStudy } from '@/data/projects'
 import type { ExperienceRecord } from '@/types/experience'
 import { CreativePortfolioEffects } from './creative-portfolio-effects'
+import { CreativeWaypointsScene } from './creative-waypoints-scene'
 import { CreativeNav } from './creative-nav'
 import { HeroSection } from './creative-hero'
 import { WorkSection } from './work-section'
@@ -26,6 +27,7 @@ export function CreativePortfolio({
 }: CreativePortfolioProps) {
   return (
     <div className='creative-portfolio' data-creative-root>
+      <CreativeWaypointsScene />
       <CreativePortfolioEffects />
       <CreativeNav email={email} />
       <HeroSection email={email} />
