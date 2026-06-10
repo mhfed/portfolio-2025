@@ -141,11 +141,14 @@ export default async function LocaleLayout({ children, params }: Props) {
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      <a href='#main-content' className='skip-link'>
+        Skip to content
+      </a>
       <NextIntlClientProvider messages={messages}>
         <LenisProvider>
           <InteractiveCanvas />
           <CustomCursor />
-          {children}
+          <main id='main-content'>{children}</main>
           <Analytics />
         </LenisProvider>
       </NextIntlClientProvider>
