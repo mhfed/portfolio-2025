@@ -240,29 +240,30 @@ export function WorkSection({ projects }: WorkSectionProps) {
 
         <div className='project-gallery' data-project-gallery>
           <div className='project-gallery__track' ref={railRef}>
-            {projects.map((project, index) => {
-              const href = project.liveUrl ?? project.githubUrl ?? '#contact'
-              const target =
-                project.liveUrl || project.githubUrl ? '_blank' : undefined
-              const rel =
-                project.liveUrl || project.githubUrl ? 'noreferrer' : undefined
+            {projects.map((project, index) => {\n              const hasLink = project.liveUrl || project.githubUrl\n              const href = hasLink ? (project.liveUrl ?? project.githubUrl!) : undefined\n              const target = hasLink ? '_blank' : undefined\n              const rel = hasLink ? 'noreferrer' : undefined\n              const isDisabled = !hasLink
 
               return (
-                <a
+                <div
                   key={project.id}
-                  href={href}
                   className={`project-card ${index % 2 === 1 ? 'is-alt' : ''} ${
                     activeIndex === index ? 'is-active' : ''
                   } ${hoveredIndex === index ? 'is-previewed' : ''}`}
-                  target={target}
-                  rel={rel}
-                  aria-label={`${project.title}: ${project.description}`}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onFocus={() => setHoveredIndex(index)}
                   onBlur={() => setHoveredIndex(null)}
                   data-project-card
                 >
+                  {hasLink ? (
+                    <a
+                      href={href}
+                      className='project-card__link'
+                      target={target}
+                      rel={rel}
+                      aria-label={`${project.title}: ${project.description}`}>
+                  </a>
+                  ) : null}
+                  <div className='project-card__content'>
                   <div className='project-card__media' data-project-image>
                     <Image
                       src={project.image}

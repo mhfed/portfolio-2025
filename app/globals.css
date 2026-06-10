@@ -911,8 +911,8 @@ body:has(.creative-portfolio)::after {
 
 .creative-nav__links a {
   border-radius: 999px;
-  padding: 0.65rem 0.9rem;
-  font-size: 0.78rem;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.875rem;
   font-weight: 800;
 }
 
@@ -928,8 +928,8 @@ body:has(.creative-portfolio)::after {
   align-items: center;
   gap: 0.5rem;
   border-radius: 999px;
-  padding: 0.72rem 0.9rem;
-  font-size: 0.78rem;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.875rem;
   font-weight: 900;
 }
 
@@ -983,7 +983,7 @@ body:has(.creative-portfolio)::after {
   max-width: 34rem;
   color: var(--creative-muted);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  font-size: clamp(0.875rem, 1vw, 0.92rem);
   font-weight: 800;
   letter-spacing: 0.12em;
   line-height: 1.6;
@@ -993,7 +993,7 @@ body:has(.creative-portfolio)::after {
 .creative-hero__name {
   color: var(--creative-ink);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  font-size: clamp(0.875rem, 1vw, 0.92rem);
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1285,7 +1285,7 @@ body:has(.creative-portfolio)::after {
 .project-gallery__status span {
   color: var(--creative-lime);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 900;
   letter-spacing: 0.12em;
 }
@@ -1303,7 +1303,7 @@ body:has(.creative-portfolio)::after {
 .project-gallery__status small {
   color: var(--creative-muted);
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   line-height: 1.45;
@@ -1435,7 +1435,7 @@ body:has(.creative-portfolio)::after {
 }
 
 .project-card__meta small {
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 900;
   letter-spacing: 0.1em;
 }
@@ -2421,4 +2421,23 @@ body:has(.creative-portfolio)::after {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 0;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 0.5rem 0;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
 }
