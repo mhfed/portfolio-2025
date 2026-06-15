@@ -77,7 +77,7 @@ export function HeroSection({ email }: { email: string }) {
       </div>
 
       <div
-        className='creative-marquee creative-marquee--hero'
+        className='creative-marquee creative-marquee--hero marquee-mask'
         aria-hidden='true'
         data-hero-marquee
       >

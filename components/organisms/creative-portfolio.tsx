@@ -32,9 +32,9 @@ export function CreativePortfolio({
       <CreativePortfolioEffects />
       <CreativeNav email={email} locale={locale} />
       <HeroSection email={email} />
-      <WorkSection projects={projects} />
       <AboutSection locale={locale} />
       <ExperienceSection experiences={experiences} />
+      <WorkSection projects={projects} />
       <SkillsSection />
       <ContactSection email={email} locale={locale} />
       <SettingsPanel />

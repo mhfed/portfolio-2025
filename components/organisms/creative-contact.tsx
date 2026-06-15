@@ -137,25 +137,35 @@ export function ContactSection({ email, locale }: { email: string; locale: strin
               </label>
             </div>
 
-            <button
-              type='submit'
-              className={`submit-btn ${isSent ? 'is-success' : ''}`}
-              disabled={isSubmitting || isSent}
-            >
-              {isSubmitting ? (
-                <span>Sending...</span>
-              ) : isSent ? (
-                <>
-                  <Check className='w-4 h-4 text-black' aria-hidden='true' />
-                  <span>{t('collaborate.form.messageSent')}</span>
-                </>
-              ) : (
-                <>
-                  <Send className='w-4 h-4' aria-hidden='true' />
-                  <span>{t('collaborate.form.sendMessage')}</span>
-                </>
-              )}
-            </button>
+            <div className={`p-[2px] rounded-full transition-all duration-300 w-fit ${
+              isSent
+                ? 'bg-green-500/20 border border-green-500/40'
+                : 'bg-white/5 border border-white/10 hover:border-white/20'
+            }`}>
+              <button
+                type='submit'
+                className={`submit-btn flex items-center gap-2 !border-0 !bg-transparent !py-3 !px-6 active:scale-[0.96] transition-all duration-200 ${
+                  isSent
+                    ? '!bg-green-500 text-black font-extrabold'
+                    : '!bg-[#080907]/90 hover:!bg-[#10120c] text-creative-ink font-bold'
+                }`}
+                disabled={isSubmitting || isSent}
+              >
+                {isSubmitting ? (
+                  <span className="text-xs uppercase tracking-wider">Sending...</span>
+                ) : isSent ? (
+                  <>
+                    <Check className='w-4 h-4 text-black' aria-hidden='true' />
+                    <span className="text-xs uppercase tracking-wider">{t('collaborate.form.messageSent')}</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className='w-4 h-4 text-creative-lime' aria-hidden='true' />
+                    <span className="text-xs uppercase tracking-wider">{t('collaborate.form.sendMessage')}</span>
+                  </>
+                )}
+              </button>
+            </div>
           </form>
         </div>
 

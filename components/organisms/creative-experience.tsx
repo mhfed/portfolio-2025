@@ -41,7 +41,10 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
               <span className='experience-row__scan' data-experience-scan />
 
               <div className='experience-row__meta' data-experience-meta>
-                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div className="flex items-center gap-3">
+                  <span className='experience-row__index'>{String(index + 1).padStart(2, '0')}</span>
+                  <span className="w-2 h-2 rounded-full bg-creative-lime shadow-[0_0_8px_var(--creative-lime)] animate-pulse" />
+                </div>
                 <strong>{experience.period}</strong>
                 <small>{experience.location}</small>
               </div>

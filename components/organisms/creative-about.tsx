@@ -209,19 +209,23 @@ export function AboutSection({ locale }: { locale: string }) {
           </p>
 
           <div className='about-stats' data-reveal>
-            <div className='stat-card'>
-              <span className='stat-card__number'>5+</span>
-              <div className='stat-card__meta'>
-                <strong>{t('yearsExperience')}</strong>
-                <p>{t('yearsDescription')}</p>
+            <div className="p-[2px] rounded-[1.5rem] bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300">
+              <div className='stat-card bg-[#080907]/90 rounded-[calc(1.5rem-2px)] p-6'>
+                <span className='stat-card__number'>5+</span>
+                <div className='stat-card__meta'>
+                  <strong>{t('yearsExperience')}</strong>
+                  <p>{t('yearsDescription')}</p>
+                </div>
               </div>
             </div>
 
-            <div className='stat-card'>
-              <span className='stat-card__number'>99%</span>
-              <div className='stat-card__meta'>
-                <strong>{t('clientSatisfaction')}</strong>
-                <p>{t('satisfactionDescription')}</p>
+            <div className="p-[2px] rounded-[1.5rem] bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300">
+              <div className='stat-card bg-[#080907]/90 rounded-[calc(1.5rem-2px)] p-6'>
+                <span className='stat-card__number'>99%</span>
+                <div className='stat-card__meta'>
+                  <strong>{t('clientSatisfaction')}</strong>
+                  <p>{t('satisfactionDescription')}</p>
+                </div>
               </div>
             </div>
           </div>

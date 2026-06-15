@@ -8,15 +8,24 @@ import {
   FogExp2,
   Group,
   IcosahedronGeometry,
+  InstancedMesh,
+  Matrix4,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
+  Object3D,
   PerspectiveCamera,
   Scene,
   SphereGeometry,
   TubeGeometry,
   Vector3,
+  Vector2,
   WebGLRenderer,
+  ShaderMaterial,
+  BufferGeometry,
+  BufferAttribute,
+  LineSegments,
+  LineBasicMaterial,
   type ColorRepresentation,
 } from 'three'
 import { loadGSAP } from '@/lib/gsap-utils'
@@ -36,12 +45,6 @@ const WAYPOINTS: Waypoint[] = [
     lookAt: new Vector3(0, 0.1, 0),
   },
   {
-    name: 'Work',
-    accent: '#73ff87',
-    camera: new Vector3(-2.9, 0.55, 7.6),
-    lookAt: new Vector3(-0.2, -0.15, 0),
-  },
-  {
     name: 'About',
     accent: '#ff8a3d',
     camera: new Vector3(2.35, 0.05, 7.1),
@@ -52,6 +55,12 @@ const WAYPOINTS: Waypoint[] = [
     accent: '#ff5ebc',
     camera: new Vector3(0.55, -1.05, 6.7),
     lookAt: new Vector3(0, -0.55, 0),
+  },
+  {
+    name: 'Work',
+    accent: '#73ff87',
+    camera: new Vector3(-2.9, 0.55, 7.6),
+    lookAt: new Vector3(-0.2, -0.15, 0),
   },
   {
     name: 'Skills',
@@ -67,6 +76,105 @@ const WAYPOINTS: Waypoint[] = [
   },
 ]
 
+// Shaders for the morphing liquid core
+const vertexShader = `
+  uniform float uTime;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+
+  // Classic 3D Simplex Noise by Ashima Arts
+  vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+  vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+
+  float snoise(vec3 v){
+    const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+    const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+
+    vec3 i  = floor(v + dot(v, C.yyy) );
+    vec3 x0 =   v - i + dot(i, C.xxx) ;
+
+    vec3 g = step(x0.yzx, x0.xyz);
+    vec3 l = 1.0 - g;
+    vec3 i1 = min( g.xyz, l.zxy );
+    vec3 i2 = max( g.xyz, l.zxy );
+
+    vec3 x1 = x0 - i1 + 1.0 * C.xxx;
+    vec3 x2 = x0 - i2 + 2.0 * C.xxx;
+    vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+
+    i = mod(i, 289.0 );
+    vec4 p = permute( permute( permute(
+               i.z + vec4(0.0, i1.z, i2.z, 1.0) )
+             + i.y + vec4(0.0, i1.y, i2.y, 1.0) )
+             + i.x + vec4(0.0, i1.x, i2.x, 1.0) );
+
+    float n_ = 0.142857142857;
+    vec3  ns = n_ * D.wyz - D.xzx;
+
+    vec4 j = p - 49.0 * floor(p * ns.z *ns.z);
+
+    vec4 x_ = floor(j * ns.z);
+    vec4 y_ = floor(j - 7.0 * x_ );
+
+    vec4 x = x_ *ns.x + ns.yyyy;
+    vec4 y = y_ *ns.x + ns.yyyy;
+    vec4 h = 1.0 - abs(x) - abs(y);
+
+    vec4 b0 = vec4( x.xy, y.xy );
+    vec4 b1 = vec4( x.zw, y.zw );
+
+    vec4 s0 = floor(b0)*2.0 + 1.0;
+    vec4 s1 = floor(b1)*2.0 + 1.0;
+    vec4 sh = -step(h, vec4(0.0));
+
+    vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+    vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+
+    vec3 p0 = vec3(a0.xy,h.x);
+    vec3 p1 = vec3(a0.zw,h.y);
+    vec3 p2 = vec3(a1.xy,h.z);
+    vec3 p3 = vec3(a1.zw,h.w);
+
+    vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+    p0 *= norm.x;
+    p1 *= norm.y;
+    p2 *= norm.z;
+    p3 *= norm.w;
+
+    vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+    m = m * m;
+    return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1),
+                                  dot(p2,x2), dot(p3,x3) ) );
+  }
+
+  void main() {
+    vNormal = normal;
+    vPosition = position;
+    float displacement = snoise(position * 2.2 + uTime * 0.7) * 0.16;
+    vec3 newPosition = position + normal * displacement;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+  }
+`
+
+const fragmentShader = `
+  uniform vec3 uColor;
+  uniform vec3 uEmissiveColor;
+  uniform float uEmissiveIntensity;
+  uniform float uTime;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+
+  void main() {
+    vec3 normal = normalize(vNormal);
+    vec3 viewDir = vec3(0.0, 0.0, 1.0);
+    float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), 3.0);
+    vec3 base = mix(uColor, uEmissiveColor, fresnel * 0.65);
+    float glow = 0.5 + 0.5 * sin(uTime * 1.5);
+    vec3 finalColor = base + uEmissiveColor * fresnel * uEmissiveIntensity * (0.8 + 0.45 * glow);
+    gl_FragColor = vec4(finalColor, 0.9);
+  }
+`
+
 export function CreativeWaypointsScene() {
   const hostRef = useRef<HTMLDivElement>(null)
 
@@ -74,16 +182,39 @@ export function CreativeWaypointsScene() {
     const host = hostRef.current
     if (!host) return
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
     const desktop = window.matchMedia('(min-width: 1024px)').matches
-    if (reduced || !desktop) return
+
+    // Mobile fallback: gradient instead of 3D scene
+    if (reduced || !desktop) {
+      host.style.background = `
+        radial-gradient(circle at 80% 5%, rgba(200, 255, 69, 0.12), transparent 26rem),
+        radial-gradient(circle at 10% 20%, rgba(255, 138, 61, 0.08), transparent 22rem),
+        radial-gradient(circle at 50% 100%, rgba(115, 255, 135, 0.06), transparent 38rem)
+      `
+      return
+    }
 
     let disposed = false
     let rafId = 0
+    let lastTime = performance.now()
     let progressTrigger: { kill: () => void } | undefined
     let resizeObserver: ResizeObserver | undefined
     let currentProgress = 0
     let targetProgress = 0
+
+    // Interactive pointer offset for 3D parallax
+    const mouse3D = new Vector2(0, 0)
+    const targetCameraOffset = new Vector3(0, 0, 0)
+    const currentCameraOffset = new Vector3(0, 0, 0)
+
+    const handlePointerMove = (event: PointerEvent) => {
+      mouse3D.x = (event.clientX / window.innerWidth) * 2 - 1
+      mouse3D.y = -(event.clientY / window.innerHeight) * 2 + 1
+    }
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
 
     const renderer = new WebGLRenderer({
       alpha: true,
@@ -126,7 +257,7 @@ export function CreativeWaypointsScene() {
       WAYPOINTS.map((waypoint) => waypoint.lookAt.clone())
     )
 
-    const ribbonGeometry = new TubeGeometry(ribbonPath, 96, 0.065, 10, false)
+    const ribbonGeometry = new TubeGeometry(ribbonPath, 64, 0.065, 8, false)
     const ribbonMaterial = new MeshStandardMaterial({
       color: '#11160f',
       metalness: 0.92,
@@ -138,14 +269,18 @@ export function CreativeWaypointsScene() {
     ribbon.rotation.x = 0.08
     root.add(ribbon)
 
-    const coreGeometry = new IcosahedronGeometry(0.82, 2)
-    const coreMaterial = new MeshStandardMaterial({
-      color: '#0f130d',
-      metalness: 1,
-      roughness: 0.16,
-      emissive: new Color('#c8ff45'),
-      emissiveIntensity: 0.18,
-      flatShading: false,
+    // Morphing core geometry (needs higher density for smooth deformation)
+    const coreGeometry = new IcosahedronGeometry(0.82, 8)
+    const coreMaterial = new ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms: {
+        uTime: { value: 0 },
+        uColor: { value: new Color('#0f130d') },
+        uEmissiveColor: { value: new Color('#c8ff45') },
+        uEmissiveIntensity: { value: 0.65 },
+      },
+      transparent: true,
     })
     const core = new Mesh(coreGeometry, coreMaterial)
     core.position.set(-0.2, 0.15, 0.1)
@@ -178,7 +313,7 @@ export function CreativeWaypointsScene() {
       return node
     })
 
-    const particleGeometry = new SphereGeometry(0.045, 10, 10)
+    const particleGeometry = new SphereGeometry(0.045, 8, 8)
     const particleMaterial = new MeshBasicMaterial({
       color: '#f3f0df',
       transparent: true,
@@ -186,20 +321,50 @@ export function CreativeWaypointsScene() {
       blending: AdditiveBlending,
       depthWrite: false,
     })
-    const particles = Array.from({ length: 22 }, (_, index) => {
-      const particle = new Mesh(particleGeometry, particleMaterial.clone())
+
+    const particleCount = 22
+    const particles = new InstancedMesh(
+      particleGeometry,
+      particleMaterial,
+      particleCount
+    )
+    const particleData: { position: Vector3; basePosition: Vector3 }[] = []
+    const tempObject = new Object3D()
+
+    for (let index = 0; index < particleCount; index++) {
       const t = (index + 1) / 23
       const position = ribbonPath.getPointAt((t + index * 0.031) % 1)
-      particle.position.copy(position)
-      particle.position.x += Math.sin(index * 1.7) * 0.48
-      particle.position.y += Math.cos(index * 1.3) * 0.36
-      particle.position.z += Math.sin(index * 0.9) * 0.42
-      root.add(particle)
-      return particle
-    })
+      const offsetPosition = position.clone()
+      offsetPosition.x += Math.sin(index * 1.7) * 0.48
+      offsetPosition.y += Math.cos(index * 1.3) * 0.36
+      offsetPosition.z += Math.sin(index * 0.9) * 0.42
 
-    const ambient = new MeshBasicMaterial()
-    void ambient
+      tempObject.position.copy(offsetPosition)
+      tempObject.updateMatrix()
+      particles.setMatrixAt(index, tempObject.matrix)
+
+      particleData.push({
+        position: offsetPosition.clone(),
+        basePosition: offsetPosition.clone(),
+      })
+    }
+    particles.instanceMatrix.needsUpdate = true
+    root.add(particles)
+
+    // Construct 3D Constellations helper
+    const maxLineSegments = 120
+    const linePositions = new Float32Array(maxLineSegments * 2 * 3)
+    const lineGeometry = new BufferGeometry()
+    lineGeometry.setAttribute('position', new BufferAttribute(linePositions, 3))
+    const lineMaterial = new LineBasicMaterial({
+      color: '#c8ff45',
+      transparent: true,
+      opacity: 0.16,
+      blending: AdditiveBlending,
+      depthWrite: false,
+    })
+    const constellations = new LineSegments(lineGeometry, lineMaterial)
+    root.add(constellations)
 
     const tempPosition = new Vector3()
     const tempLookAt = new Vector3()
@@ -208,18 +373,32 @@ export function CreativeWaypointsScene() {
     const renderFrame = () => {
       if (disposed) return
 
-      currentProgress += (targetProgress - currentProgress) * 0.08
+      const now = performance.now()
+      const delta = (now - lastTime) / 16.67
+      lastTime = now
+
+      const lerpFactor = 1 - Math.pow(0.92, delta)
+      currentProgress += (targetProgress - currentProgress) * lerpFactor
+
       const progress = Math.min(1, Math.max(0, currentProgress))
       const scaled = progress * (WAYPOINTS.length - 1)
       const lowerIndex = Math.floor(scaled)
       const upperIndex = Math.min(WAYPOINTS.length - 1, lowerIndex + 1)
       const segmentProgress = scaled - lowerIndex
-      const elapsed = performance.now() * 0.001
+      const elapsed = now * 0.001
 
+      // Update shader uniform time
+      coreMaterial.uniforms.uTime.value = elapsed
+
+      // Camera base path calculations
       cameraPath.getPointAt(progress, tempPosition)
-      camera.position.lerp(tempPosition, 0.08)
-
       lookPath.getPointAt(progress, tempLookAt)
+
+      // Dynamic mouse parallax on camera
+      targetCameraOffset.set(mouse3D.x * 0.85, mouse3D.y * 0.85, 0)
+      currentCameraOffset.lerp(targetCameraOffset, lerpFactor)
+
+      camera.position.copy(tempPosition).add(currentCameraOffset)
       camera.lookAt(tempLookAt)
 
       root.rotation.y = progress * Math.PI * 1.35
@@ -231,6 +410,11 @@ export function CreativeWaypointsScene() {
         segmentProgress
       )
       tempRibbonColor.copy(accentColor)
+
+      // Update core shader uniforms with smooth colors
+      coreMaterial.uniforms.uEmissiveColor.value.copy(tempRibbonColor)
+      lineMaterial.color.copy(tempRibbonColor)
+
       ribbonMaterial.color.lerpColors(
         new Color('#11160f'),
         tempRibbonColor,
@@ -238,8 +422,6 @@ export function CreativeWaypointsScene() {
       )
       ribbonMaterial.emissive.copy(tempRibbonColor)
       ribbonMaterial.emissiveIntensity = 0.12 + progress * 0.24
-      coreMaterial.emissive.copy(tempRibbonColor)
-      coreMaterial.emissiveIntensity = 0.14 + Math.sin(elapsed * 1.2) * 0.04
       auraMaterial.color.copy(tempRibbonColor)
       auraMaterial.opacity = 0.04 + progress * 0.035
 
@@ -252,11 +434,57 @@ export function CreativeWaypointsScene() {
         material.emissiveIntensity = index === activeIndex ? 1.35 : 0.7
       })
 
-      particles.forEach((particle, index) => {
-        particle.position.x += Math.sin(elapsed * 0.3 + index) * 0.0009
-        particle.position.y += Math.cos(elapsed * 0.24 + index) * 0.0007
-        particle.rotation.y += 0.01
-      })
+      // Update particles
+      for (let index = 0; index < particleCount; index++) {
+        const data = particleData[index]
+        data.position.x =
+          data.basePosition.x + Math.sin(elapsed * 0.3 + index) * 0.0012 * delta
+        data.position.y =
+          data.basePosition.y +
+          Math.cos(elapsed * 0.24 + index) * 0.0009 * delta
+
+        tempObject.position.copy(data.position)
+        tempObject.rotation.y += 0.01 * delta
+        tempObject.updateMatrix()
+        particles.setMatrixAt(index, tempObject.matrix)
+      }
+      particles.instanceMatrix.needsUpdate = true
+
+      // Dynamic 3D constellations lines builder
+      let lineIdx = 0
+      const posAttr = constellations.geometry.getAttribute('position') as BufferAttribute
+      const positionsArray = posAttr.array as Float32Array
+
+      for (let i = 0; i < particleCount; i++) {
+        for (let j = i + 1; j < particleCount; j++) {
+          if (lineIdx >= maxLineSegments) break
+
+          const pA = particleData[i].position
+          const pB = particleData[j].position
+          const distance = pA.distanceTo(pB)
+
+          if (distance < 1.35) {
+            const arrIdx = lineIdx * 6
+            positionsArray[arrIdx] = pA.x
+            positionsArray[arrIdx + 1] = pA.y
+            positionsArray[arrIdx + 2] = pA.z
+
+            positionsArray[arrIdx + 3] = pB.x
+            positionsArray[arrIdx + 4] = pB.y
+            positionsArray[arrIdx + 5] = pB.z
+            lineIdx++
+          }
+        }
+      }
+
+      // Zero out unused elements in the buffer
+      for (let k = lineIdx; k < maxLineSegments; k++) {
+        const arrIdx = k * 6
+        for (let idx = 0; idx < 6; idx++) {
+          positionsArray[arrIdx + idx] = 0
+        }
+      }
+      posAttr.needsUpdate = true
 
       renderer.render(scene, camera)
       rafId = window.requestAnimationFrame(renderFrame)
@@ -271,7 +499,9 @@ export function CreativeWaypointsScene() {
     loadGSAP().then(({ ScrollTrigger }) => {
       if (disposed) return
 
-      const rootElement = document.querySelector<HTMLElement>('[data-creative-root]')
+      const rootElement = document.querySelector<HTMLElement>(
+        '[data-creative-root]'
+      )
       if (!rootElement) return
 
       const sections = Array.from(
@@ -283,7 +513,7 @@ export function CreativeWaypointsScene() {
         trigger: rootElement,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 0.85,
+        scrub: 0.6,
         onUpdate(self: { progress: number }) {
           targetProgress = self.progress
         },
@@ -325,6 +555,7 @@ export function CreativeWaypointsScene() {
       disposed = true
       window.cancelAnimationFrame(rafId)
       window.removeEventListener('resize', resize)
+      window.removeEventListener('pointermove', handlePointerMove)
       resizeObserver?.disconnect()
       progressTrigger?.kill()
 
@@ -341,10 +572,9 @@ export function CreativeWaypointsScene() {
         const material = node.material as MeshStandardMaterial
         material.dispose()
       })
-      particles.forEach((particle) => {
-        const material = particle.material as MeshBasicMaterial
-        material.dispose()
-      })
+      particles.dispose()
+      constellations.geometry.dispose()
+      lineMaterial.dispose()
 
       renderer.dispose()
       renderer.domElement.remove()

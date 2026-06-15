@@ -3,17 +3,30 @@
 @plugin '@tailwindcss/typography';
 
 :root {
-  --font-space-grotesk: var(--font-inter-tight);
-  --font-manrope: var(--font-inter-tight);
+  /* Typography Scale */
+  --text-display-xl: clamp(3.5rem, 8vw, 7rem);
+  --text-display-lg: clamp(2.5rem, 6vw, 5rem);
+  --text-display-md: clamp(2rem, 4vw, 3.5rem);
+  --text-body-lg: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-body-md: clamp(1rem, 1.25vw, 1.25rem);
+  --text-body-sm: clamp(0.875rem, 1vw, 1rem);
+  --text-kicker: clamp(0.72rem, 1vw, 0.82rem);
+
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.12em;
+
+  /* Alias: JetBrains Mono serves as the Geist Mono stand-in */
   --font-geist-mono: var(--font-jetbrains-mono);
 
   /* Light Mode - Slate and Teal */
   --header-height: 60px;
-  --font-display: var(--font-space-grotesk), var(--font-manrope), system-ui,
-    -apple-system, sans-serif;
+  --font-display:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, -apple-system,
+    sans-serif;
   --font-body: var(--font-manrope), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, 'SF Mono', Monaco,
-    monospace;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, 'SF Mono', Monaco, monospace;
 
   --background: hsl(210 33% 98%);
   --foreground: hsl(222 32% 14%);
@@ -433,10 +446,11 @@
 @theme inline {
   /* Font families */
   --font-sans: var(--font-manrope), system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-space-grotesk), var(--font-manrope), system-ui,
-    -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, 'SF Mono', Monaco,
-    monospace;
+  --font-display:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, -apple-system,
+    sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, 'SF Mono', Monaco, monospace;
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -604,6 +618,33 @@
     position: relative;
     z-index: 10;
   }
+
+  /* Double-Bezel nested architecture */
+  .double-bezel-outer {
+    background: rgba(243, 240, 223, 0.04);
+    border: 1px solid var(--creative-line);
+    padding: 6px;
+    border-radius: 24px;
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .double-bezel-inner {
+    background: rgba(8, 9, 7, 0.85);
+    border-radius: calc(24px - 6px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .double-bezel-outer:hover {
+    border-color: rgba(200, 255, 69, 0.3);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Fade out edges for marquees */
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -656,10 +697,10 @@ html body[data-scroll-locked] {
   mix-blend-mode: normal;
   animation: none;
 }
-html[data-magicui-theme-vt="active"]::view-transition-group(root) {
+html[data-magicui-theme-vt='active']::view-transition-group(root) {
   animation-duration: var(--magicui-theme-toggle-vt-duration);
 }
-html[data-magicui-theme-vt="active"]::view-transition-new(root) {
+html[data-magicui-theme-vt='active']::view-transition-new(root) {
   clip-path: var(--magicui-theme-vt-clip-from);
 }
 
@@ -775,8 +816,16 @@ html[data-magicui-theme-vt="active"]::view-transition-new(root) {
 
 body:has(.creative-portfolio) {
   background:
-    radial-gradient(circle at 80% 5%, rgba(200, 255, 69, 0.1), transparent 26rem),
-    radial-gradient(circle at 10% 20%, rgba(255, 138, 61, 0.07), transparent 22rem),
+    radial-gradient(
+      circle at 80% 5%,
+      rgba(200, 255, 69, 0.1),
+      transparent 26rem
+    ),
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 138, 61, 0.07),
+      transparent 22rem
+    ),
     var(--creative-bg);
   color: var(--creative-ink);
 }
@@ -794,11 +843,23 @@ body:has(.creative-portfolio)::after {
   background:
     linear-gradient(rgba(243, 240, 223, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(243, 240, 223, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at 50% 0%, rgba(115, 255, 135, 0.08), transparent 38rem),
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(115, 255, 135, 0.08),
+      transparent 38rem
+    ),
     var(--creative-bg);
-  background-size: 80px 80px, 80px 80px, auto, auto;
+  background-size:
+    80px 80px,
+    80px 80px,
+    auto,
+    auto;
   color: var(--creative-ink);
-  font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  font-family:
+    var(--font-manrope),
+    system-ui,
+    -apple-system,
+    sans-serif;
   letter-spacing: -0.015em;
 }
 
@@ -829,7 +890,18 @@ body:has(.creative-portfolio)::after {
 
 @media (max-width: 1023px) {
   .creative-waypoints {
-    display: none;
+    mix-blend-mode: normal;
+    animation: mobile-gradient-pulse 12s ease-in-out infinite;
+  }
+
+  @keyframes mobile-gradient-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.7;
+    }
   }
 }
 
@@ -1025,7 +1097,8 @@ body:has(.creative-portfolio)::after {
   max-width: 16ch;
   margin: 0;
   color: var(--creative-ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(2.5rem, 6.5vw, 6.2rem);
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -1181,7 +1254,8 @@ body:has(.creative-portfolio)::after {
   display: flex;
   width: max-content;
   color: var(--creative-ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-weight: 900;
   text-transform: uppercase;
   white-space: nowrap;
@@ -1190,7 +1264,8 @@ body:has(.creative-portfolio)::after {
 .creative-marquee div {
   display: flex;
   min-width: max-content;
-  animation: creative-marquee 24s linear infinite;
+  animation: creative-marquee calc(24s / var(--marquee-speed, 1)) linear
+    infinite;
 }
 
 .creative-marquee span {
@@ -1245,17 +1320,18 @@ body:has(.creative-portfolio)::after {
 .creative-contact h2 {
   margin: 0;
   color: var(--creative-ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
-  font-size: clamp(2rem, 3.8vw, 4.65rem);
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-size: clamp(1.45rem, 2.4vw, 2.8rem);
   font-weight: 900;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.15;
   text-transform: uppercase;
   text-wrap: balance;
 }
 
 .creative-section__intro h2 {
-  max-width: 18ch;
+  max-width: none;
 }
 
 .work-list {
@@ -1275,64 +1351,19 @@ body:has(.creative-portfolio)::after {
   gap: 0.65rem;
 }
 
-.project-gallery__frame {
+.project-grid {
   display: grid;
-  gap: clamp(1.2rem, 2.5vw, 2rem);
-  min-height: calc(100dvh - 7rem);
-  align-content: center;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  perspective: 1400px;
 }
 
-.project-gallery {
-  position: relative;
-  overflow: clip;
-}
-
-.project-gallery__track {
-  display: flex;
-  align-items: stretch;
-  gap: clamp(1rem, 1.9vw, 1.6rem);
-  will-change: transform;
-  padding-bottom: 0.5rem;
-}
-
-.project-gallery__status {
-  display: grid;
-  justify-items: end;
-  gap: 0.35rem;
-  text-align: right;
-  max-width: 22rem;
-}
-
-.project-gallery__status span {
-  color: var(--creative-lime);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-}
-
-.project-gallery__status strong {
-  color: var(--creative-ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  text-transform: uppercase;
-}
-
-.project-gallery__status small {
-  color: var(--creative-muted);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 1.45;
-  text-transform: uppercase;
+@media (min-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .project-card {
-  flex: 0 0 min(66vw, 920px);
   position: relative;
   display: block;
   aspect-ratio: 16 / 10;
@@ -1343,20 +1374,40 @@ body:has(.creative-portfolio)::after {
   background: transparent;
   color: var(--creative-ink);
   text-decoration: none;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
   transition:
     transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 220ms ease;
 }
 
-.project-card:nth-child(even),
-.project-card.is-alt {
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--creative-lime),
+    var(--creative-green)
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+  z-index: -1;
+  filter: blur(12px);
+}
+
+.project-card:hover::before,
+.project-card:focus-visible::before {
+  opacity: 0.3;
+}
+
+.project-card:nth-child(even) {
   border-top-color: rgba(243, 240, 223, 0.12);
 }
 
 .project-card:hover,
-.project-card:focus-visible,
-.project-card.is-active,
-.project-card.is-previewed {
+.project-card:focus-visible {
   transform: translateY(-2px);
 }
 
@@ -1365,7 +1416,11 @@ body:has(.creative-portfolio)::after {
   inset: 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 30% 20%, rgba(200, 255, 69, 0.12), transparent 24rem),
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(200, 255, 69, 0.12),
+      transparent 24rem
+    ),
     rgba(9, 11, 8, 0.82);
 }
 
@@ -1392,9 +1447,7 @@ body:has(.creative-portfolio)::after {
 }
 
 .project-card:hover .project-card__media img,
-.project-card:focus-visible .project-card__media img,
-.project-card.is-active .project-card__media img,
-.project-card.is-previewed .project-card__media img {
+.project-card:focus-visible .project-card__media img {
   transform: scale(1.035);
 }
 
@@ -1424,14 +1477,8 @@ body:has(.creative-portfolio)::after {
     transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.project-card.is-alt .project-card__body {
-  margin: 0;
-}
-
 .project-card:hover .project-card__body,
-.project-card:focus-visible .project-card__body,
-.project-card.is-active .project-card__body,
-.project-card.is-previewed .project-card__body {
+.project-card:focus-visible .project-card__body {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
@@ -1465,7 +1512,8 @@ body:has(.creative-portfolio)::after {
   grid-column: 1;
   margin: 0;
   color: var(--creative-ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(1.45rem, 2.4vw, 2.7rem);
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -1548,41 +1596,22 @@ body:has(.creative-portfolio)::after {
 }
 
 .project-card:hover .project-card__footer svg,
-.project-card:focus-visible .project-card__footer svg,
-.project-card.is-active .project-card__footer svg,
-.project-card.is-previewed .project-card__footer svg {
+.project-card:focus-visible .project-card__footer svg {
   transform: translate(0.25rem, -0.25rem);
 }
 
 @media (max-width: 1023px) {
-  .project-gallery {
-    overflow: visible;
-  }
-
-  .project-gallery__frame,
   .creative-skills__frame {
     min-height: auto;
   }
 
-  .project-gallery__track {
-    display: grid;
+  .project-grid {
     gap: 1rem;
-    transform: none !important;
   }
 
-  .project-gallery__status {
-    max-width: none;
-    justify-items: start;
-    text-align: left;
-    margin-top: 0.85rem;
-  }
-
-  .project-card,
-  .project-card.is-alt,
-  .project-card:nth-child(even) {
+  .project-card {
     display: grid;
     grid-template-columns: 1fr;
-    flex: none;
     position: relative;
     min-height: auto;
     border-top: 1px solid var(--creative-line);
@@ -1675,11 +1704,12 @@ body:has(.creative-portfolio)::after {
 }
 
 .work-row__main strong {
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(2rem, 5.2vw, 6rem);
   font-weight: 900;
   letter-spacing: -0.025em;
-  line-height: 1.0;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -1798,14 +1828,15 @@ body:has(.creative-portfolio)::after {
 }
 
 .creative-about__statement {
-  max-width: 34ch;
+  max-width: none;
   margin: 0;
   color: var(--creative-ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
-  font-size: clamp(1.55rem, 2.45vw, 3rem);
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-size: clamp(1.25rem, 1.8vw, 2rem);
   font-weight: 800;
   letter-spacing: 0;
-  line-height: 1.14;
+  line-height: 1.25;
   text-wrap: balance;
 }
 
@@ -1863,7 +1894,11 @@ body:has(.creative-portfolio)::after {
   z-index: -1;
   opacity: 0;
   background:
-    radial-gradient(circle at 76% 22%, rgba(200, 255, 69, 0.08), transparent 22rem),
+    radial-gradient(
+      circle at 76% 22%,
+      rgba(200, 255, 69, 0.08),
+      transparent 22rem
+    ),
     linear-gradient(90deg, rgba(200, 255, 69, 0.035), transparent 45%);
   transition: opacity 320ms ease;
 }
@@ -1920,7 +1955,8 @@ body:has(.creative-portfolio)::after {
 .experience-row__heading h3 {
   margin: 0;
   color: var(--creative-ink);
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(2.5rem, 5.8vw, 7.2rem);
   font-weight: 900;
   letter-spacing: 0;
@@ -2047,7 +2083,8 @@ body:has(.creative-portfolio)::after {
 
 .skill-stack__group h3 {
   margin: 4.5rem 0 1rem;
-  font-family: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  font-family:
+    var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
   font-size: clamp(1.8rem, 3vw, 3.4rem);
   font-weight: 900;
   line-height: 0.9;
@@ -2070,7 +2107,11 @@ body:has(.creative-portfolio)::after {
   gap: clamp(1.5rem, 4vw, 3rem);
   padding: clamp(5rem, 10vw, 9rem) clamp(1rem, 4vw, 4rem) 2rem;
   background:
-    radial-gradient(circle at 80% 30%, rgba(255, 94, 188, 0.12), transparent 26rem),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(255, 94, 188, 0.12),
+      transparent 26rem
+    ),
     linear-gradient(180deg, transparent, rgba(200, 255, 69, 0.07));
 }
 
@@ -2335,18 +2376,15 @@ body:has(.creative-portfolio)::after {
     font-size: 3.2rem;
   }
 
-
-
-  .creative-section__intro h2,
-  .creative-about__statement {
-    font-size: clamp(1.9rem, 8vw, 3.35rem);
-    line-height: 1.06;
+  .creative-section__intro h2 {
+    font-size: clamp(1.3rem, 5.5vw, 2.2rem);
+    line-height: 1.15;
   }
 
   .creative-about__statement {
     max-width: 100%;
-    font-size: clamp(1.35rem, 6.2vw, 2.15rem);
-    line-height: 1.18;
+    font-size: clamp(1.1rem, 4.8vw, 1.65rem);
+    line-height: 1.25;
   }
 
   .work-row {
@@ -2452,7 +2490,11 @@ body:has(.creative-portfolio)::after {
   bottom: 1.5rem;
   right: 1.5rem;
   z-index: 60;
-  font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+  font-family:
+    var(--font-manrope),
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 .settings-trigger {
@@ -2823,7 +2865,11 @@ body:has(.creative-portfolio)::after {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 50% 120%, var(--panel-glow, transparent) 0%, transparent 60%);
+  background: radial-gradient(
+    circle at 50% 120%,
+    var(--panel-glow, transparent) 0%,
+    transparent 60%
+  );
   opacity: 0;
   transition: opacity 450ms ease;
 }
@@ -2932,7 +2978,11 @@ body:has(.creative-portfolio)::after {
   }
 
   .accordion-panel::after {
-    background: radial-gradient(circle at 100% 50%, var(--panel-glow, transparent) 0%, transparent 60%);
+    background: radial-gradient(
+      circle at 100% 50%,
+      var(--panel-glow, transparent) 0%,
+      transparent 60%
+    );
   }
 
   .panel-title--vertical {
@@ -3025,7 +3075,11 @@ body:has(.creative-portfolio)::after {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 50% 120%, var(--accent-glow-color, transparent) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at 50% 120%,
+    var(--accent-glow-color, transparent) 0%,
+    transparent 70%
+  );
   opacity: 0;
   transition: opacity 450ms ease;
 }
@@ -3316,5 +3370,37 @@ body:has(.creative-portfolio)::after {
 
   .skill-stack__group {
     min-height: auto;
+  }
+}
+
+/* Touch devices: disable sticky hover states */
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover,
+  .project-card:hover::before,
+  .work-row:hover,
+  .magnetic-link:hover,
+  .magnetic-button:hover,
+  .skill-stack__group:hover,
+  .experience-row:hover {
+    transform: none;
+    opacity: 1;
+    background: inherit;
+    border-color: inherit;
+  }
+
+  .project-card:hover .project-card__media img,
+  .work-row:hover .project-card__media img {
+    transform: scale(1.015);
+  }
+
+  .project-card:hover .project-card__body,
+  .work-row:hover .project-card__body {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  .magnetic-link:hover::after,
+  .magnetic-button:hover::after {
+    opacity: 0;
   }
 }
