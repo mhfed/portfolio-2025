@@ -63,12 +63,6 @@ const WAYPOINTS: Waypoint[] = [
     lookAt: new Vector3(-0.2, -0.15, 0),
   },
   {
-    name: 'Skills',
-    accent: '#c8ff45',
-    camera: new Vector3(-0.9, 1.35, 7.9),
-    lookAt: new Vector3(0, 0.45, 0),
-  },
-  {
     name: 'Contact',
     accent: '#73ff87',
     camera: new Vector3(0.15, -1.45, 6.15),

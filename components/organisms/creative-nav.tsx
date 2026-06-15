@@ -10,7 +10,6 @@ export function CreativeNav({ email, locale }: { email: string; locale: string }
     { label: t('nav.projects'), href: '#work' },
     { label: t('nav.about'), href: '#about' },
     { label: t('nav.experience'), href: '#experience' },
-    { label: t('nav.skills'), href: '#skills' },
   ]
 
   const getResumeUrl = () => {

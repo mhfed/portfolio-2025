@@ -42,14 +42,12 @@ export function CreativePortfolioEffects() {
       const hero = root.querySelector<HTMLElement>('.creative-hero')
       const aboutSection = root.querySelector<HTMLElement>('.creative-about')
       const experienceSection = root.querySelector<HTMLElement>('.creative-experience')
-      const skillsSection = root.querySelector<HTMLElement>('.creative-skills')
       const contactSection = root.querySelector<HTMLElement>('.creative-contact')
 
       if (
         !hero ||
         !aboutSection ||
         !experienceSection ||
-        !skillsSection ||
         !contactSection
       ) {
         return
@@ -77,12 +75,7 @@ export function CreativePortfolioEffects() {
         experienceSection
       ) as HTMLElement[]
 
-      const skillGroups = gsap.utils.toArray(
-        '[data-skill-group]',
-        skillsSection
-      ) as HTMLElement[]
-      const skillHeadline = skillsSection.querySelector<HTMLElement>('.creative-section__intro h2')
-      const skillMarquee = skillsSection.querySelector<HTMLElement>('.creative-marquee--skills')
+
 
       const contactLinks = gsap.utils.toArray('a', contactSection) as HTMLElement[]
       const contactHeadline = contactSection.querySelector<HTMLElement>('h2')
@@ -95,7 +88,6 @@ export function CreativePortfolioEffects() {
           ...heroWords,
           ...aboutBadges,
           ...experienceRows,
-          ...skillGroups,
           ...contactLinks,
         ])
 
@@ -299,67 +291,7 @@ export function CreativePortfolioEffects() {
             )
         })
 
-        if (skillHeadline) {
-          gsap.to(skillHeadline, {
-            xPercent: 4,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: skillsSection,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1,
-            },
-          })
-        }
 
-        if (skillMarquee) {
-          gsap.to(skillMarquee, {
-            xPercent: -6,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: skillsSection,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1,
-            },
-          })
-        }
-
-        gsap.set(skillGroups, { opacity: 0.36, scale: 0.98, y: 18 })
-        ScrollTrigger.batch(skillGroups, {
-          start: 'top 78%',
-          interval: 0.08,
-          onEnter: (elements: Element[]) => {
-            gsap.fromTo(
-              elements,
-              { opacity: 0.34, scale: 0.975, y: 20 },
-              {
-                opacity: 1,
-                scale: 1,
-                y: 0,
-                duration: 0.72,
-                stagger: 0.06,
-                ease: 'power3.out',
-                overwrite: true,
-              }
-            )
-          },
-          onEnterBack: (elements: Element[]) => {
-            gsap.fromTo(
-              elements,
-              { opacity: 0.45, scale: 0.985, y: 10 },
-              {
-                opacity: 1,
-                scale: 1,
-                y: 0,
-                duration: 0.56,
-                stagger: 0.05,
-                ease: 'power3.out',
-                overwrite: true,
-              }
-            )
-          },
-        })
 
         ScrollTrigger.batch(contactLinks, {
           start: 'top 88%',
@@ -389,7 +321,6 @@ export function CreativePortfolioEffects() {
           [
             ...aboutBadges,
             ...experienceRows,
-            ...skillGroups,
             ...contactLinks,
           ],
           {

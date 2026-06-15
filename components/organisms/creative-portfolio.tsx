@@ -7,7 +7,6 @@ import { HeroSection } from './creative-hero'
 import { WorkSection } from './work-section'
 import { AboutSection } from './creative-about'
 import { ExperienceSection } from './creative-experience'
-import { SkillsSection } from './creative-skills'
 import { ContactSection } from './creative-contact'
 import { SettingsPanel } from './settings-panel'
 
@@ -35,7 +34,6 @@ export function CreativePortfolio({
       <AboutSection locale={locale} />
       <ExperienceSection experiences={experiences} />
       <WorkSection projects={projects} />
-      <SkillsSection />
       <ContactSection email={email} locale={locale} />
       <SettingsPanel />
     </div>
