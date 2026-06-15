@@ -14,15 +14,13 @@ export function CreativeNav({ email, locale }: { email: string; locale: string }
   ]
 
   const getResumeUrl = () => {
-    if (locale === 'vi') return '/resumes/Nguyen_Minh_Hieu_CV_vi.pdf'
-    if (locale === 'zh-TW') return '/resumes/Nguyen_Minh_Hieu_CV_zh.pdf'
-    return '/resumes/Nguyen_Minh_Hieu_CV_en.pdf'
+    return '/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
   }
 
   return (
     <header className='creative-nav'>
       {/* Brand logo double bezel */}
-      <div className="p-[2px] rounded-full bg-white/5 border border-white/10 hover:border-white/20 transition-all pointer-events-auto">
+      <div className="p-[2px] rounded-full bg-[#080907]/80 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all pointer-events-auto">
         <a href='#top' className='creative-nav__brand !border-0 !bg-transparent !p-1' aria-label='Back to top'>
           <span>MH</span>
           <small className="pr-2">{t('developer')}</small>
@@ -30,7 +28,7 @@ export function CreativeNav({ email, locale }: { email: string; locale: string }
       </div>
 
       {/* Nav links double bezel */}
-      <div className="p-[2px] rounded-full bg-white/5 border border-white/10 pointer-events-auto max-lg:hidden">
+      <div className="p-[2px] rounded-full bg-[#080907]/80 backdrop-blur-md border border-white/10 pointer-events-auto max-lg:hidden">
         <nav className='creative-nav__links !border-0 !bg-transparent !p-0.5' aria-label='Primary navigation'>
           {navItems.map((item) => (
             <a
@@ -46,13 +44,13 @@ export function CreativeNav({ email, locale }: { email: string; locale: string }
 
       {/* Actions wrapper double bezel */}
       <div className='creative-nav__actions-wrapper'>
-        <div className="p-[2px] rounded-full bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+        <div className="p-[2px] rounded-full bg-[#080907]/80 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all">
           <a className='creative-nav__resume !border-0 !bg-transparent !py-2 !px-3.5' href={getResumeUrl()} download>
             <FileText className="w-3.5 h-3.5" aria-hidden='true' />
             <span>{t('downloadResume')}</span>
           </a>
         </div>
-        <div className="p-[2px] rounded-full bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+        <div className="p-[2px] rounded-full bg-[#080907]/80 backdrop-blur-md border border-white/10 hover:border-white/20 transition-all">
           <a className='creative-nav__mail !border-0 !bg-transparent !py-2 !px-3.5' href={`mailto:${email}`}>
             <Mail className="w-3.5 h-3.5" aria-hidden='true' />
             <span>{t('contact')}</span>

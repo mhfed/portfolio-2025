@@ -57,14 +57,14 @@ export function SettingsPanel() {
   useEffect(() => {
     if (!isOpen) return
 
-    const handleOutsideClick = (event: MouseEvent) => {
+    const handleOutsideClick = (event: PointerEvent) => {
       if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
 
-    document.addEventListener('mousedown', handleOutsideClick)
-    return () => document.removeEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('pointerdown', handleOutsideClick)
+    return () => document.removeEventListener('pointerdown', handleOutsideClick)
   }, [isOpen])
 
   const handleLanguageChange = (nextLocale: 'en' | 'vi' | 'zh-TW') => {
@@ -98,10 +98,7 @@ export function SettingsPanel() {
 
   // Find resume filename or path based on locale
   const getResumeUrl = () => {
-    // Return relative path to public resumes
-    if (currentLocale === 'vi') return '/resumes/Nguyen_Minh_Hieu_CV_vi.pdf'
-    if (currentLocale === 'zh-TW') return '/resumes/Nguyen_Minh_Hieu_CV_zh.pdf'
-    return '/resumes/Nguyen_Minh_Hieu_CV_en.pdf'
+    return '/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
   }
 
   return (

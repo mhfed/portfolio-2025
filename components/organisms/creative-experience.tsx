@@ -43,7 +43,13 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
               <div className='experience-row__meta' data-experience-meta>
                 <div className="flex items-center gap-3">
                   <span className='experience-row__index'>{String(index + 1).padStart(2, '0')}</span>
-                  <span className="w-2 h-2 rounded-full bg-creative-lime shadow-[0_0_8px_var(--creative-lime)] animate-pulse" />
+                  {experience.period.toLowerCase().includes('present') ||
+                  experience.period.toLowerCase().includes('hiện tại') ||
+                  experience.period.toLowerCase().includes('至今') ? (
+                    <span className="w-2 h-2 rounded-full bg-creative-lime shadow-[0_0_8px_var(--creative-lime)] animate-pulse" aria-label="Current Role" />
+                  ) : (
+                    <span className="w-1.5 h-1.5 rounded-full bg-creative-dim" />
+                  )}
                 </div>
                 <strong>{experience.period}</strong>
                 <small>{experience.location}</small>

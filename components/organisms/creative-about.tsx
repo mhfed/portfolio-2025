@@ -114,14 +114,16 @@ export function AboutSection({ locale }: { locale: string }) {
           gsap.set(panel, { flexGrow: 1 })
 
           // Animate height on mobile
+          const content = panel.querySelector('.panel-content') as HTMLElement
+          const naturalHeight = content ? content.scrollHeight : 220
+
           gsap.to(panel, {
-            height: isActive ? 220 : 75,
+            height: isActive ? naturalHeight : 75,
             duration: 0.5,
             ease: 'power3.out',
             overwrite: 'auto',
           })
 
-          const content = panel.querySelector('.panel-content')
           if (content) {
             gsap.to(content, {
               opacity: isActive ? 1 : 0,
