@@ -33,13 +33,13 @@ export function HeroSection({ email }: { email: string }) {
 
   return (
     <section id='top' className='creative-hero relative flex min-h-[100dvh] items-stretch overflow-hidden pt-28 max-sm:pt-24 pb-8 px-[clamp(1rem,4vw,4rem)]' data-section data-waypoint='hero'>
-      <div className='creative-hero__content relative z-20 flex w-full max-w-[1500px] mx-auto flex-col justify-between gap-8' data-hero-stage>
+      <div className='creative-hero__content relative z-20 flex w-full max-w-screen-2xl mx-auto flex-col justify-between gap-8' data-hero-stage>
         <div className='creative-hero__top flex justify-between items-start gap-6 max-md:flex-col-reverse max-md:items-start max-md:gap-2' data-reveal data-hero-top>
-          <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-[clamp(0.72rem,1vw,0.82rem)] font-extrabold tracking-widest leading-relaxed uppercase'>{t('status')}</p>
-          <span className='creative-hero__name text-creative-ink font-mono text-[clamp(0.72rem,1vw,0.82rem)] font-black tracking-widest uppercase whitespace-nowrap'>Nguyen Minh Hieu 🇻🇳</span>
+          <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-kicker font-extrabold tracking-widest leading-relaxed uppercase'>{t('status')}</p>
+          <span className='creative-hero__name text-creative-ink font-mono text-kicker font-black tracking-widest uppercase whitespace-nowrap'>Nguyen Minh Hieu 🇻🇳</span>
         </div>
 
-        <h1 className='creative-hero__headline max-w-[16ch] m-0 text-creative-ink font-display text-[clamp(2.5rem,6.5vw,6.2rem)] max-sm:text-[clamp(2.2rem,9vw,3.8rem)] font-black tracking-tighter leading-[0.92] max-sm:leading-[0.95] uppercase' data-hero-headline>
+        <h1 className='creative-hero__headline max-w-[16ch] m-0 text-creative-ink font-display text-display-xl max-sm:text-display-xl-xs font-black tracking-tighter leading-[0.92] max-sm:leading-[0.95] uppercase' data-hero-headline>
           <span className='sr-only'>{cleanHeadline}</span>
           <span aria-hidden='true'>
             {heroWords.flatMap((word, index) => {
@@ -60,7 +60,7 @@ export function HeroSection({ email }: { email: string }) {
         </h1>
 
         <div className='creative-hero__bottom grid grid-cols-1 lg:grid-cols-[minmax(0,34rem)_minmax(0,24rem)] items-end gap-8 lg:gap-[clamp(2rem,5vw,6rem)]' data-hero-copy>
-          <p className="m-0 text-creative-muted text-[clamp(1rem,1.45vw,1.35rem)] font-light leading-relaxed" data-reveal>
+          <p className="m-0 text-creative-muted text-body-lg font-light leading-relaxed" data-reveal>
             {t('description')}
           </p>
           <div className='creative-hero__actions flex flex-wrap justify-start gap-3' data-reveal>
@@ -77,7 +77,7 @@ export function HeroSection({ email }: { email: string }) {
       </div>
 
       <div
-        className='creative-marquee creative-marquee--hero marquee-mask absolute left-[-2rem] bottom-5 max-sm:bottom-1.5 z-[1] text-[rgba(243,240,223,0.035)] text-[clamp(3rem,8vw,8rem)] max-sm:text-[3.2rem] pointer-events-none flex w-max font-display font-black uppercase whitespace-nowrap'
+        className='creative-marquee creative-marquee--hero marquee-mask absolute left-[-2rem] bottom-5 max-sm:bottom-1.5 z-[1] text-[rgba(243,240,223,0.035)] text-marquee pointer-events-none flex w-max font-display font-black uppercase whitespace-nowrap'
         aria-hidden='true'
         data-hero-marquee
       >

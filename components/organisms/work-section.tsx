@@ -102,16 +102,16 @@ export function WorkSection({ projects }: WorkSectionProps) {
   return (
     <section
       id='work'
-      className='creative-section creative-work relative w-full max-w-[1500px] mx-auto px-[clamp(1rem,4vw,4rem)] !py-32'
+      className='creative-section creative-work relative w-full max-w-screen-2xl mx-auto px-[clamp(1rem,4vw,4rem)] py-[clamp(3.5rem,8vw,8rem)]'
       data-section
       data-waypoint='work'
       ref={sectionRef}
     >
-      <div className='creative-section__intro creative-work__intro grid grid-cols-1 lg:grid-cols-[minmax(10rem,0.48fr)_minmax(0,1fr)] gap-[clamp(2rem,6vw,6rem)] items-start !mb-16'>
-        <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-[clamp(0.72rem,1vw,0.82rem)] font-extrabold tracking-widest leading-relaxed uppercase' data-reveal>
+      <div className='creative-section__intro creative-work__intro grid grid-cols-1 lg:grid-cols-[minmax(10rem,0.48fr)_minmax(0,1fr)] gap-[clamp(2rem,6vw,6rem)] items-start mb-[clamp(2rem,4vw,4rem)]'>
+        <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-kicker font-extrabold tracking-widest leading-relaxed uppercase' data-reveal>
           {t('selected')}
         </p>
-        <h2 data-split-line className="m-0 text-creative-ink font-display text-[clamp(1.45rem,2.4vw,2.8rem)] max-sm:text-[clamp(1.3rem,5.5vw,2.2rem)] font-black tracking-tight leading-[1.15] uppercase [text-wrap:balance] max-w-none">{t('headline')}</h2>
+        <h2 data-split-line className="m-0 text-creative-ink font-display text-display-sm max-sm:text-display-sm-xs font-black tracking-tight leading-[1.15] uppercase [text-wrap:balance] max-w-none">{t('headline')}</h2>
       </div>
 
       {/* Main Content Layout */}

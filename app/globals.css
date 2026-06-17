@@ -505,6 +505,37 @@
   --color-creative-orange: var(--creative-orange);
   --color-creative-pink: var(--creative-pink);
 
+  /* Fluid Display Headline Sizes */
+  --text-display-xl: clamp(2.5rem, 6.5vw, 6.2rem);
+  --text-display-xl-xs: clamp(2.2rem, 9vw, 3.8rem);
+  --text-display-lg: clamp(1.65rem, 3.2vw, 2.5rem);
+  --text-display-lg-xs: clamp(1.4rem, 4.5vw, 1.85rem);
+  --text-display-md: clamp(1.5rem, 2.5vw, 2.25rem);
+  --text-display-sm: clamp(1.45rem, 2.4vw, 2.8rem);
+  --text-display-sm-xs: clamp(1.3rem, 5.5vw, 2.2rem);
+
+  /* Fluid Statement & Special Layout Sizes */
+  --text-statement: clamp(1.25rem, 1.8vw, 2rem);
+  --text-statement-xs: clamp(1.1rem, 4.8vw, 1.65rem);
+  --text-stat: clamp(2.5rem, 4vw, 4.5rem);
+  --text-marquee: clamp(3rem, 8vw, 8rem);
+  --text-panel-title: clamp(1.4rem, 2.2vw, 2.1rem);
+  --text-link-lg: clamp(1rem, 1.35vw, 1.45rem);
+
+  /* Fluid Experience / Timeline Specific Sizes */
+  --text-company-title: clamp(2.5rem, 5.8vw, 7.2rem);
+  --text-company-title-xs: clamp(2rem, 8vw, 3.8rem);
+  --text-role-title: clamp(1rem, 1.8vw, 1.55rem);
+
+  /* Fluid Body copy & Descriptions */
+  --text-body-lg: clamp(1.05rem, 1.35vw, 1.25rem);
+  --text-body-md: clamp(0.98rem, 1.18vw, 1.15rem);
+  --text-body-sm: clamp(0.92rem, 1.18vw, 1.1rem);
+
+  /* Micro-copy & Metadata Labels */
+  --text-kicker: clamp(0.72rem, 1vw, 0.82rem);
+  --text-meta: clamp(0.78rem, 1vw, 0.9rem);
+
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;

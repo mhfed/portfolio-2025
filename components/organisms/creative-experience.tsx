@@ -52,15 +52,15 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
   return (
     <section
       id='experience'
-      className='creative-section creative-experience w-full max-w-[1500px] mx-auto'
+      className='creative-section creative-experience w-full max-w-screen-2xl mx-auto px-[clamp(1rem,4vw,4rem)] py-[clamp(3.5rem,8vw,8rem)]'
       data-section
       data-waypoint='experience'
     >
-      <div className='creative-section__intro grid grid-cols-1 lg:grid-cols-[minmax(10rem,0.48fr)_minmax(0,1fr)] gap-[clamp(2rem,6vw,6rem)] items-start mb-[clamp(2.5rem,6vw,5rem)]'>
-        <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-[clamp(0.72rem,1vw,0.82rem)] font-extrabold tracking-widest leading-relaxed uppercase' data-reveal>
+      <div className='creative-section__intro grid grid-cols-1 lg:grid-cols-[minmax(10rem,0.48fr)_minmax(0,1fr)] gap-[clamp(2rem,6vw,6rem)] items-start mb-[clamp(2rem,4vw,4rem)]'>
+        <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-kicker font-extrabold tracking-widest leading-relaxed uppercase' data-reveal>
           {t('kicker')}
         </p>
-        <h2 data-split-line data-experience-title className="m-0 text-creative-ink font-display text-[clamp(1.45rem,2.4vw,2.8rem)] max-sm:text-[clamp(1.3rem,5.5vw,2.2rem)] font-black tracking-tight leading-[1.15] uppercase [text-wrap:balance] max-w-none">
+        <h2 data-split-line data-experience-title className="m-0 text-creative-ink font-display text-display-sm max-sm:text-display-sm-xs font-black tracking-tight leading-[1.15] uppercase [text-wrap:balance] max-w-none">
           {t('headline')}
         </h2>
       </div>
@@ -73,7 +73,7 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
           return (
             <article
               key={experience.id}
-              className={`experience-row group/row cursor-pointer transition-all duration-300 relative grid grid-cols-1 lg:grid-cols-[minmax(9rem,0.32fr)_1fr] gap-6 lg:gap-[clamp(1.5rem,5vw,5rem)] overflow-hidden border-b border-creative-line py-8 lg:py-[clamp(2rem,4.8vw,4.8rem)] max-sm:py-10 [perspective:1200px] [transform-style:preserve-3d] [will-change:transform] after:content-[''] after:absolute after:inset-0 after:z-[-1] after:opacity-0 after:bg-[radial-gradient(circle_at_76%_22%,rgba(200,255,69,0.08),transparent_22rem),linear-gradient(90deg,rgba(200,255,69,0.035),transparent_45%)] hover:after:opacity-100 after:transition-opacity after:duration-320 ${
+              className={`experience-row group/row cursor-pointer transition-all duration-300 relative grid grid-cols-1 lg:grid-cols-[minmax(9rem,0.32fr)_1fr] gap-6 lg:gap-[clamp(1.5rem,5vw,5rem)] overflow-hidden border-b border-creative-line py-[clamp(1.5rem,3vw,3rem)] max-sm:py-10 [perspective:1200px] [transform-style:preserve-3d] [will-change:transform] after:content-[''] after:absolute after:inset-0 after:z-[-1] after:opacity-0 after:bg-[radial-gradient(circle_at_76%_22%,rgba(200,255,69,0.08),transparent_22rem),linear-gradient(90deg,rgba(200,255,69,0.035),transparent_45%)] hover:after:opacity-100 after:transition-opacity after:duration-320 ${
                 isExpanded ? 'is-expanded' : ''
               }`}
               data-experience-row
@@ -104,15 +104,15 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
                     <span className='w-1.5 h-1.5 rounded-full bg-creative-dim' />
                   )}
                 </div>
-                <strong className="text-creative-ink text-[clamp(0.78rem,1vw,0.9rem)] font-black leading-[1.35]">{experience.period}</strong>
+                <strong className="text-creative-ink text-meta font-black leading-[1.35]">{experience.period}</strong>
                 <small className="text-creative-dim text-[0.72rem] font-black tracking-widest">{experience.location}</small>
               </div>
 
               <div className='experience-row__body w-full grid gap-[clamp(1rem,2vw,1.5rem)]'>
                 <div className='experience-row__heading flex items-start justify-between gap-6 w-full'>
                   <div>
-                    <h3 data-experience-company className="m-0 text-creative-ink font-display text-[clamp(2.5rem,5.8vw,7.2rem)] max-sm:text-[clamp(2rem,8vw,3.8rem)] font-black tracking-normal leading-[0.95] uppercase [will-change:transform,opacity] transition-[color,transform] duration-420 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover/row:text-creative-lime group-hover/row:translate-x-[0.35rem]">{experience.company}</h3>
-                    <p data-experience-role className="m-0 text-creative-lime text-[clamp(1rem,1.8vw,1.55rem)] font-semibold leading-normal">{experience.position}</p>
+                    <h3 data-experience-company className="m-0 text-creative-ink font-display text-company-title max-sm:text-company-title-xs font-black tracking-normal leading-[0.95] uppercase [will-change:transform,opacity] transition-[color,transform] duration-420 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover/row:text-creative-lime group-hover/row:translate-x-[0.35rem]">{experience.company}</h3>
+                    <p data-experience-role className="m-0 text-creative-lime text-role-title font-semibold leading-normal">{experience.position}</p>
                   </div>
                   <div className='experience-row__toggle-btn flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(243,240,223,0.15)] text-creative-muted bg-[rgba(243,240,223,0.03)] transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] mt-1 shrink-0 group-hover/row:border-creative-lime group-hover/row:text-[#080907] group-hover/row:bg-creative-lime group-hover/row:scale-105' aria-hidden='true'>
                     <ChevronDown
@@ -131,7 +131,7 @@ export function ExperienceSection({ experiences }: { experiences: ExperienceReco
                   <div className='experience-row__collapsible-inner min-height-0 grid gap-[clamp(1rem,2vw,1.5rem)]'>
                     <div className='experience-row__copy grid gap-3 max-w-[42rem]'>
                       {descriptionLines.map((line) => (
-                        <p key={line} data-experience-copy className="m-0 text-creative-muted text-[clamp(0.98rem,1.18vw,1.15rem)] font-light leading-[1.62] [will-change:transform,opacity]">
+                        <p key={line} data-experience-copy className="m-0 text-creative-muted text-body-md font-light leading-[1.62] [will-change:transform,opacity]">
                           {line}
                         </p>
                       ))}

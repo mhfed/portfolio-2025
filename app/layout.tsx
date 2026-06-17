@@ -44,6 +44,21 @@ export default function RootLayout({
         <link rel='manifest' href='/manifest.json' />
         <link rel='apple-touch-icon' href='/icon-192x192.png' />
         <meta name='theme-color' content='#07110c' />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const savedTheme = localStorage.getItem('theme');
+                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const activeTheme = savedTheme || systemTheme;
+                document.documentElement.classList.toggle('dark', activeTheme === 'dark');
+
+                const savedAccent = localStorage.getItem('accent-theme') || 'cobalt';
+                document.documentElement.dataset.accentTheme = savedAccent;
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
       <body
         className={`${interTight.className} ${interTight.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${manrope.variable} bg-background text-foreground antialiased`}

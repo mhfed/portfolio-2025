@@ -71,17 +71,17 @@ export function ContactSection({ email, locale }: { email: string; locale: strin
   return (
     <footer
       id='contact'
-      className='creative-contact flex flex-col justify-end gap-[clamp(1.5rem,4vw,3rem)] px-[clamp(1rem,4vw,4rem)] pt-[clamp(5rem,10vw,9rem)] pb-8 bg-[radial-gradient(circle_at_80%_30%,rgba(255,94,188,0.12),transparent_26rem)] after:content-[""] after:absolute after:inset-0 after:z-[-1] after:bg-gradient-to-b after:from-transparent after:to-[rgba(200,255,69,0.07)]'
+      className='creative-contact flex flex-col justify-end gap-[clamp(1.5rem,4vw,3rem)] px-[clamp(1rem,4vw,4rem)] pt-[clamp(3.5rem,8vw,8rem)] pb-[clamp(2rem,4vw,4rem)] bg-[radial-gradient(circle_at_80%_30%,rgba(255,94,188,0.12),transparent_26rem)] after:content-[""] after:absolute after:inset-0 after:z-[-1] after:bg-gradient-to-b after:from-transparent after:to-[rgba(200,255,69,0.07)]'
       data-section
       data-waypoint='contact'
     >
-      <div className='contact-layout grid grid-cols-1 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-[clamp(3rem,8vw,8rem)] w-full max-w-[1500px] mx-auto'>
+      <div className='contact-layout grid grid-cols-1 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-[clamp(3rem,8vw,8rem)] w-full max-w-screen-2xl mx-auto'>
         {/* Left Column: Form & Poetic Headline */}
         <div className='contact-layout__form-side flex flex-col'>
-          <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-[clamp(0.72rem,1vw,0.82rem)] font-extrabold tracking-widest leading-relaxed uppercase' data-reveal>
+          <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-kicker font-extrabold tracking-widest leading-relaxed uppercase' data-reveal>
             {t('collaborate.kicker')}
           </p>
-          <h2 data-split-line className='contact-headline m-0 text-creative-ink font-display text-[clamp(1.65rem,3.2vw,2.5rem)] max-sm:text-[clamp(1.4rem,4.5vw,1.85rem)] font-black tracking-tight leading-[1.25] uppercase [text-wrap:balance] max-w-[24ch] !mb-10'>
+          <h2 data-split-line className='contact-headline m-0 text-creative-ink font-display text-display-lg max-sm:text-display-lg-xs font-black tracking-tight leading-[1.25] uppercase [text-wrap:balance] max-w-[24ch] !mb-10'>
             {t('collaborate.poeticHeadline')}
           </h2>
 
@@ -174,15 +174,15 @@ export function ContactSection({ email, locale }: { email: string; locale: strin
           <div className='contact-info-block flex flex-col gap-5'>
             <span className='info-label font-mono text-[0.68rem] font-black uppercase tracking-widest text-creative-dim'>{t('collaborate.directLinks')}</span>
             <div className='direct-links-grid flex flex-col gap-2.5'>
-              <a href={`mailto:${email}`} className='contact-link-row flex items-center justify-between border-b border-creative-line py-3.5 text-creative-ink no-underline text-[clamp(1rem,1.35vw,1.45rem)] font-semibold transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:border-b-creative-lime hover:text-creative-lime hover:pl-[0.35rem]'>
+              <a href={`mailto:${email}`} className='contact-link-row flex items-center justify-between border-b border-creative-line py-3.5 text-creative-ink no-underline text-link-lg font-semibold transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:border-b-creative-lime hover:text-creative-lime hover:pl-[0.35rem]'>
                 <span className='link-name'>{email}</span>
                 <MoveUpRight className='w-4 h-4' aria-hidden='true' />
               </a>
-              <a href='https://github.com/mhfed' target='_blank' rel='noreferrer' className='contact-link-row flex items-center justify-between border-b border-creative-line py-3.5 text-creative-ink no-underline text-[clamp(1rem,1.35vw,1.45rem)] font-semibold transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:border-b-creative-lime hover:text-creative-lime hover:pl-[0.35rem]'>
+              <a href='https://github.com/mhfed' target='_blank' rel='noreferrer' className='contact-link-row flex items-center justify-between border-b border-creative-line py-3.5 text-creative-ink no-underline text-link-lg font-semibold transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:border-b-creative-lime hover:text-creative-lime hover:pl-[0.35rem]'>
                 <span className='link-name'>GitHub</span>
                 <MoveUpRight className='w-4 h-4' aria-hidden='true' />
               </a>
-              <a href='https://linkedin.com/in/mhfed' target='_blank' rel='noreferrer' className='contact-link-row flex items-center justify-between border-b border-creative-line py-3.5 text-creative-ink no-underline text-[clamp(1rem,1.35vw,1.45rem)] font-semibold transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:border-b-creative-lime hover:text-creative-lime hover:pl-[0.35rem]'>
+              <a href='https://linkedin.com/in/mhfed' target='_blank' rel='noreferrer' className='contact-link-row flex items-center justify-between border-b border-creative-line py-3.5 text-creative-ink no-underline text-link-lg font-semibold transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:border-b-creative-lime hover:text-creative-lime hover:pl-[0.35rem]'>
                 <span className='link-name'>LinkedIn</span>
                 <MoveUpRight className='w-4 h-4' aria-hidden='true' />
               </a>
@@ -200,10 +200,12 @@ export function ContactSection({ email, locale }: { email: string; locale: strin
         </div>
       </div>
 
-      <div className='creative-contact__meta flex flex-wrap justify-between gap-4 border-t border-creative-line pt-5 text-creative-dim font-mono text-[0.72rem] font-black tracking-widest uppercase'>
-        <span>Nguyen Minh Hieu</span>
-        <span>{locale.toUpperCase()}</span>
-        <span>{t('collaborate.allRightsReserved')} &copy; {new Date().getFullYear()}</span>
+      <div className='w-full max-w-screen-2xl mx-auto border-t border-creative-line pt-5'>
+        <div className='creative-contact__meta flex flex-wrap justify-between gap-4 text-creative-dim font-mono text-[0.72rem] font-black tracking-widest uppercase'>
+          <span>Nguyen Minh Hieu</span>
+          <span>{locale.toUpperCase()}</span>
+          <span>{t('collaborate.allRightsReserved')} &copy; {new Date().getFullYear()}</span>
+        </div>
       </div>
     </footer>
   )
