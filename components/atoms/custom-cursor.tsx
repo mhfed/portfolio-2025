@@ -116,18 +116,31 @@ export function CustomCursor() {
     <>
       <div
         ref={dotRef}
-        className={`custom-cursor-dot ${isEnabled ? 'custom-cursor-visible' : ''}`}
+        className={`custom-cursor-dot fixed left-0 top-0 z-[70] pointer-events-none [will-change:transform] transition-[opacity,transform,background-color] duration-[220ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] h-2 w-2 rounded-full bg-[rgba(180,220,240,0.86)] mix-blend-screen motion-reduce:hidden ${
+          isEnabled ? 'opacity-100' : 'opacity-0'
+        }`}
         aria-hidden='true'
       />
       <div
         ref={ringRef}
-        className={`custom-cursor-ring ${isEnabled ? 'custom-cursor-visible' : ''} ${isActive ? 'custom-cursor-ring--active' : ''} ${
-          cursorText ? 'custom-cursor-ring--label' : ''
+        className={`custom-cursor-ring fixed left-0 top-0 z-[70] pointer-events-none [will-change:transform] transition-[width,height,background-color,border-color,opacity,transform] duration-[360ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] grid place-items-center rounded-full border text-[#020617] motion-reduce:hidden ${
+          isEnabled ? 'opacity-100' : 'opacity-0'
+        } ${
+          cursorText
+            ? 'h-[78px] w-[78px] border-transparent bg-white/94 mix-blend-difference'
+            : isActive
+              ? 'h-[54px] w-[54px] border-white/34 bg-white/10'
+              : 'h-[34px] w-[34px] border-[rgba(180,220,240,0.42)]'
         }`}
         aria-hidden='true'
       >
-        {cursorText && <span>{cursorText}</span>}
+        {cursorText && (
+          <span className="max-w-[56px] font-mono text-[9px] font-bold tracking-wider leading-[1.05] text-center uppercase select-none">
+            {cursorText}
+          </span>
+        )}
       </div>
     </>
   )
 }
+

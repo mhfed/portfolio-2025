@@ -217,7 +217,7 @@ export function CreativeWaypointsScene() {
     })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.domElement.className = 'creative-waypoints__canvas'
+    renderer.domElement.className = 'creative-waypoints__canvas w-full h-full block filter drop-shadow-[0_0_42px_rgba(200,255,69,0.14)]'
     renderer.domElement.setAttribute('aria-hidden', 'true')
     host.appendChild(renderer.domElement)
 
@@ -575,5 +575,5 @@ export function CreativeWaypointsScene() {
     }
   }, [])
 
-  return <div className='creative-waypoints' aria-hidden='true' ref={hostRef} />
+  return <div className='creative-waypoints fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.98] mix-blend-screen max-lg:mix-blend-normal max-lg:[animation:mobile-gradient-pulse_12s_ease-in-out_infinite]' aria-hidden='true' ref={hostRef} />
 }
