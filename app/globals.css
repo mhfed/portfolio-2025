@@ -584,27 +584,6 @@
   --color-sidebar-accent: var(--accent);
   --color-sidebar-accent-foreground: var(--accent-foreground);
   --color-sidebar-border: var(--border);
-
-  --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - var(--gap)));
-    }
-  }
-
-  @keyframes marquee-vertical {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(calc(-100% - var(--gap)));
-    }
-  }
 }
 
 @layer base {
@@ -706,8 +685,44 @@
 
   /* Fade out edges for marquees */
   .marquee-mask {
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 15%,
+      black 85%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 15%,
+      black 85%,
+      transparent
+    );
+  }
+
+  /* Custom scrollbar for timeline card details */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--creative-line);
+    border-radius: 2px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--creative-lime);
+  }
+
+  /* Hide native scrollbar (used with custom JS scrollbar) */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -787,33 +802,6 @@ html[data-magicui-theme-vt='active']::view-transition-new(root) {
   }
   50% {
     opacity: 0.7;
-  }
-}
-
-@keyframes creative-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes creative-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes creative-pulse {
-  0%,
-  100% {
-    transform: scale(0.94) rotate(0deg);
-    opacity: 0.72;
-  }
-  50% {
-    transform: scale(1.06) rotate(8deg);
-    opacity: 1;
   }
 }
 

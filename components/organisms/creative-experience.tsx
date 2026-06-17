@@ -1,10 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useTranslations } from 'next-intl'
-import { ChevronDown } from 'lucide-react'
 import type { ExperienceRecord } from '@/types/experience'
 import { loadGSAP } from '@/lib/gsap-utils'
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
 
 function splitExperienceDescription(description: string) {
   return description
@@ -13,145 +16,420 @@ function splitExperienceDescription(description: string) {
     .filter(Boolean)
 }
 
-export function ExperienceSection({ experiences }: { experiences: ExperienceRecord[] }) {
+function FormatDescriptionLine({ line }: { line: string }) {
+  const colonIndex = line.indexOf(':')
+  if (colonIndex > 0 && colonIndex < 35) {
+    const heading = line.substring(0, colonIndex)
+    const content = line.substring(colonIndex + 1)
+    return (
+      <span className='block text-[0.85rem] leading-[1.65]'>
+        <strong className='text-creative-lime font-mono text-[0.75rem] font-bold uppercase tracking-wider mr-1.5'>
+          {heading}:
+        </strong>
+        <span className='text-creative-muted font-light'>{content}</span>
+      </span>
+    )
+  }
+  return (
+    <span className='block text-[0.85rem] leading-[1.65] text-creative-muted font-light'>
+      {line}
+    </span>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scrollable Description with custom scrollbar                       */
+/* ------------------------------------------------------------------ */
+
+function ScrollableDescription({ lines }: { lines: string[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const thumbRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [showScrollbar, setShowScrollbar] = useState(false)
+  const [thumbHeight, setThumbHeight] = useState(0)
+  const [thumbTop, setThumbTop] = useState(0)
+  const isDragging = useRef(false)
+  const dragStartY = useRef(0)
+  const dragStartScroll = useRef(0)
+
+  const updateThumb = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const { scrollHeight, clientHeight, scrollTop } = el
+    if (scrollHeight <= clientHeight) {
+      setShowScrollbar(false)
+      return
+    }
+    setShowScrollbar(true)
+    const ratio = clientHeight / scrollHeight
+    const trackHeight = trackRef.current?.clientHeight ?? clientHeight
+    const height = Math.max(ratio * trackHeight, 24)
+    const top =
+      (scrollTop / (scrollHeight - clientHeight)) * (trackHeight - height)
+    setThumbHeight(height)
+    setThumbTop(top)
+  }, [])
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    updateThumb()
+    el.addEventListener('scroll', updateThumb, { passive: true })
+    const ro = new ResizeObserver(updateThumb)
+    ro.observe(el)
+    return () => {
+      el.removeEventListener('scroll', updateThumb)
+      ro.disconnect()
+    }
+  }, [updateThumb])
+
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    e.preventDefault()
+    isDragging.current = true
+    dragStartY.current = e.clientY
+    dragStartScroll.current = scrollRef.current?.scrollTop ?? 0
+    ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+  }, [])
+
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging.current || !scrollRef.current || !trackRef.current) return
+      const deltaY = e.clientY - dragStartY.current
+      const { scrollHeight, clientHeight } = scrollRef.current
+      const trackHeight = trackRef.current.clientHeight
+      const scrollRatio =
+        (scrollHeight - clientHeight) / (trackHeight - thumbHeight)
+      scrollRef.current.scrollTop =
+        dragStartScroll.current + deltaY * scrollRatio
+    },
+    [thumbHeight]
+  )
+
+  const onPointerUp = useCallback(() => {
+    isDragging.current = false
+  }, [])
+
+  return (
+    <div className='relative flex gap-2'>
+      <div
+        ref={scrollRef}
+        data-lenis-prevent
+        className='flex flex-col gap-3 max-h-[175px] overflow-y-auto pr-1 scrollbar-none'
+      >
+        {lines.map((line) => (
+          <FormatDescriptionLine key={line} line={line} />
+        ))}
+      </div>
+
+      {showScrollbar && (
+        <div
+          ref={trackRef}
+          className='relative w-[3px] shrink-0 rounded-full bg-creative-line/30 self-stretch'
+        >
+          <div
+            ref={thumbRef}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            className='absolute left-0 w-full rounded-full bg-creative-lime/50 hover:bg-creative-lime/80 transition-colors duration-200 cursor-grab active:cursor-grabbing'
+            style={{ height: thumbHeight, top: thumbTop }}
+          />
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main Component                                                     */
+/* ------------------------------------------------------------------ */
+
+export function ExperienceSection({
+  experiences,
+}: {
+  experiences: ExperienceRecord[]
+}) {
   const t = useTranslations('experience')
   const orderedExperiences = [...experiences].reverse()
 
-  const [expandedId, setExpandedId] = useState<string | number | null>(
-    orderedExperiences[0]?.id || null
-  )
+  const [activeIndex, setActiveIndex] = useState(0)
 
-  const toggleExpand = (id: string | number) => {
-    setExpandedId((prev) => (prev === id ? null : id))
-  }
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const leftColRef = useRef<HTMLDivElement>(null)
 
-  // Automatically refresh GSAP ScrollTrigger when layout shifts
+  /* GSAP ScrollTrigger: Pin left column while right scrolls */
   useEffect(() => {
     let active = true
-    let observer: ResizeObserver | null = null
+    let mm: any
 
-    loadGSAP().then(({ ScrollTrigger }) => {
+    loadGSAP().then(({ gsap, ScrollTrigger }) => {
       if (!active) return
-      
-      observer = new ResizeObserver(() => {
+
+      const section = sectionRef.current
+      const leftCol = leftColRef.current
+      if (!section || !leftCol) return
+
+      const reduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches
+      if (reduced) return
+
+      mm = gsap.matchMedia()
+
+      mm.add('(min-width: 1024px)', () => {
+        // Pin the left title column
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top 15%',
+          end: 'bottom 85%',
+          pin: leftCol,
+          pinSpacing: false,
+        })
+
+        // Track active card
+        const cards = gsap.utils.toArray('.experience-card-vertical', section)
+        cards.forEach((card: any, idx: number) => {
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top 50%',
+            end: 'bottom 50%',
+            onToggle: (self: any) => {
+              if (self.isActive) setActiveIndex(idx)
+            },
+          })
+
+          // Scale & fade entrance
+          gsap.fromTo(
+            card,
+            { opacity: 0.3, scale: 0.97, y: 40 },
+            {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                end: 'top 45%',
+                scrub: 0.8,
+              },
+            }
+          )
+        })
+
+        ScrollTrigger.sort()
         ScrollTrigger.refresh()
       })
-
-      const container = document.querySelector('.experience-timeline')
-      if (container) {
-        observer.observe(container)
-      }
     })
 
     return () => {
       active = false
-      observer?.disconnect()
+      mm?.revert()
     }
-  }, [])
+  }, [orderedExperiences.length])
 
   return (
     <section
+      ref={sectionRef}
       id='experience'
-      className='creative-section creative-experience w-full max-w-screen-2xl mx-auto px-[clamp(1rem,4vw,4rem)] py-[clamp(3.5rem,8vw,8rem)]'
+      className='creative-section creative-experience w-full relative py-32 md:py-48'
       data-section
       data-waypoint='experience'
     >
-      <div className='creative-section__intro grid grid-cols-1 lg:grid-cols-[minmax(10rem,0.48fr)_minmax(0,1fr)] gap-[clamp(2rem,6vw,6rem)] items-start mb-[clamp(2rem,4vw,4rem)]'>
-        <p className='creative-kicker max-w-[34rem] text-creative-muted font-mono text-kicker font-extrabold tracking-widest leading-relaxed uppercase' data-reveal>
-          {t('kicker')}
-        </p>
-        <h2 data-split-line data-experience-title className="m-0 text-creative-ink font-display text-display-sm max-sm:text-display-sm-xs font-black tracking-tight leading-[1.15] uppercase [text-wrap:balance] max-w-none">
-          {t('headline')}
-        </h2>
-      </div>
-
-      <div className='experience-timeline border-t border-creative-line'>
-        {orderedExperiences.map((experience, index) => {
-          const descriptionLines = splitExperienceDescription(experience.description)
-          const isExpanded = expandedId === experience.id
-
-          return (
-            <article
-              key={experience.id}
-              className={`experience-row group/row cursor-pointer transition-all duration-300 relative grid grid-cols-1 lg:grid-cols-[minmax(9rem,0.32fr)_1fr] gap-6 lg:gap-[clamp(1.5rem,5vw,5rem)] overflow-hidden border-b border-creative-line py-[clamp(1.5rem,3vw,3rem)] max-sm:py-10 [perspective:1200px] [transform-style:preserve-3d] [will-change:transform] after:content-[''] after:absolute after:inset-0 after:z-[-1] after:opacity-0 after:bg-[radial-gradient(circle_at_76%_22%,rgba(200,255,69,0.08),transparent_22rem),linear-gradient(90deg,rgba(200,255,69,0.035),transparent_45%)] hover:after:opacity-100 after:transition-opacity after:duration-320 ${
-                isExpanded ? 'is-expanded' : ''
-              }`}
-              data-experience-row
-              onClick={() => toggleExpand(experience.id)}
-              role='button'
-              tabIndex={0}
-              aria-expanded={isExpanded}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  toggleExpand(experience.id)
-                }
-              }}
+      <div className='max-w-screen-2xl mx-auto px-[clamp(1rem,4vw,4rem)]'>
+        {/* Desktop: Pinned Left / Scrolling Right */}
+        <div className='hidden lg:grid lg:grid-cols-[minmax(0,0.45fr)_minmax(0,1fr)] gap-[clamp(3rem,6vw,8rem)]'>
+          {/* Left Column (Pinned) */}
+          <div ref={leftColRef} className='flex flex-col gap-8 pt-4'>
+            <h2
+              className='m-0 text-creative-ink font-display font-black tracking-tight leading-[1.1] uppercase [text-wrap:balance]'
+              style={{ fontSize: 'clamp(1.45rem, 2.4vw, 2.8rem)' }}
             >
-              <span className='experience-row__scan absolute top-[-1px] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-creative-lime/72 to-transparent shadow-[0_0_28px_rgba(200,255,69,0.38)] scale-x-0 origin-left pointer-events-none' data-experience-scan />
+              {t('headline')}
+            </h2>
 
-              <div className='experience-row__meta grid lg:grid-cols-1 lg:align-content-start flex flex-wrap items-center gap-[0.65rem] max-lg:gap-2.5 text-creative-muted font-mono uppercase' data-experience-meta>
-                <div className='flex items-center gap-3'>
-                  <span className='experience-row__index text-current font-mono text-[0.85rem] font-black opacity-55'>{String(index + 1).padStart(2, '0')}</span>
-                  {experience.period.toLowerCase().includes('present') ||
-                  experience.period.toLowerCase().includes('hiện tại') ||
-                  experience.period.toLowerCase().includes('至今') ? (
-                    <span
-                      className='w-2 h-2 rounded-full bg-creative-lime shadow-[0_0_8px_var(--creative-lime)] animate-pulse'
-                      aria-label='Current Role'
-                    />
-                  ) : (
-                    <span className='w-1.5 h-1.5 rounded-full bg-creative-dim' />
-                  )}
-                </div>
-                <strong className="text-creative-ink text-meta font-black leading-[1.35]">{experience.period}</strong>
-                <small className="text-creative-dim text-[0.72rem] font-black tracking-widest">{experience.location}</small>
-              </div>
+            {/* Active indicator - company names, no numbers */}
+            <div className='flex flex-col gap-3 mt-6'>
+              {orderedExperiences.map((exp, idx) => (
+                <button
+                  key={`nav-${exp.id}`}
+                  onClick={() => {
+                    const card = document.querySelector(
+                      `[data-exp-index="${idx}"]`
+                    )
+                    if (card)
+                      card.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                      })
+                  }}
+                  className={`text-left font-mono text-[0.72rem] font-bold tracking-wider uppercase transition-all duration-300 border-none bg-transparent outline-none cursor-pointer py-1 ${
+                    activeIndex === idx
+                      ? 'text-creative-lime pl-3'
+                      : 'text-creative-dim hover:text-creative-ink pl-0'
+                  }`}
+                  style={{
+                    borderLeft:
+                      activeIndex === idx
+                        ? '2px solid var(--creative-lime)'
+                        : '2px solid transparent',
+                  }}
+                >
+                  {exp.company}
+                </button>
+              ))}
+            </div>
+          </div>
 
-              <div className='experience-row__body w-full grid gap-[clamp(1rem,2vw,1.5rem)]'>
-                <div className='experience-row__heading flex items-start justify-between gap-6 w-full'>
-                  <div>
-                    <h3 data-experience-company className="m-0 text-creative-ink font-display text-company-title max-sm:text-company-title-xs font-black tracking-normal leading-[0.95] uppercase [will-change:transform,opacity] transition-[color,transform] duration-420 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover/row:text-creative-lime group-hover/row:translate-x-[0.35rem]">{experience.company}</h3>
-                    <p data-experience-role className="m-0 text-creative-lime text-role-title font-semibold leading-normal">{experience.position}</p>
-                  </div>
-                  <div className='experience-row__toggle-btn flex items-center justify-center w-9 h-9 rounded-full border border-[rgba(243,240,223,0.15)] text-creative-muted bg-[rgba(243,240,223,0.03)] transition-all duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] mt-1 shrink-0 group-hover/row:border-creative-lime group-hover/row:text-[#080907] group-hover/row:bg-creative-lime group-hover/row:scale-105' aria-hidden='true'>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform duration-300 ${
-                        isExpanded ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </div>
-                </div>
+          {/* Right Column (Scrolling Cards) */}
+          <div className='flex flex-col gap-16 pb-20'>
+            {orderedExperiences.map((experience, index) => {
+              const descriptionLines = splitExperienceDescription(
+                experience.description
+              )
+              const isCurrent = activeIndex === index
 
+              return (
                 <div
-                  className={`experience-row__collapsible grid transition-[grid-template-rows,opacity,margin-top] duration-300 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] overflow-hidden motion-reduce:transition-none ${
-                    isExpanded ? 'grid-rows-[1fr] opacity-100 mt-[clamp(1rem,2vw,1.5rem)]' : 'grid-rows-[0fr] opacity-0'
+                  key={experience.id}
+                  data-exp-index={index}
+                  className={`experience-card-vertical relative bg-creative-panel/40 backdrop-blur-md border rounded-2xl p-8 flex flex-col gap-5 overflow-hidden transition-[border-color,box-shadow] duration-500 will-change-transform ${
+                    isCurrent
+                      ? 'border-creative-lime/30 shadow-[0_20px_60px_rgba(0,0,0,0.4)]'
+                      : 'border-creative-line hover:border-creative-lime/20'
                   }`}
                 >
-                  <div className='experience-row__collapsible-inner min-height-0 grid gap-[clamp(1rem,2vw,1.5rem)]'>
-                    <div className='experience-row__copy grid gap-3 max-w-[42rem]'>
-                      {descriptionLines.map((line) => (
-                        <p key={line} data-experience-copy className="m-0 text-creative-muted text-body-md font-light leading-[1.62] [will-change:transform,opacity]">
-                          {line}
-                        </p>
-                      ))}
-                    </div>
+                  {/* Meta Row - clean, no icons, no numbering */}
+                  <div className='flex flex-wrap gap-x-4 gap-y-1 font-mono text-[0.72rem] font-bold tracking-widest text-creative-dim uppercase'>
+                    <strong className='text-creative-ink'>
+                      {experience.period}
+                    </strong>
+                    <span>{experience.location}</span>
+                  </div>
 
-                    <div className='experience-row__skills flex flex-wrap gap-2'>
-                      {experience.skills.map((skill) => (
-                        <span key={skill} data-experience-skill className="border border-[rgba(243,240,223,0.22)] rounded-full px-2 py-1.5 text-creative-muted font-mono text-[0.72rem] font-black tracking-wider leading-none uppercase [will-change:transform,opacity] transition-[border-color,color,background-color,transform] duration-[220ms] hover:duration-[260ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover/row:border-creative-lime/42 group-hover/row:text-creative-lime group-hover/row:-translate-y-[2px]">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+                  {/* Company + Role */}
+                  <div className='flex flex-col gap-1 border-t border-creative-line pt-5'>
+                    <h3 className='m-0 text-creative-ink font-display text-2xl font-black uppercase tracking-tight'>
+                      {experience.company}
+                    </h3>
+                    <p className='m-0 text-creative-lime text-base font-semibold leading-normal'>
+                      {experience.position}
+                    </p>
+                  </div>
+
+                  {/* Scrollable Description */}
+                  <ScrollableDescription lines={descriptionLines} />
+
+                  {/* Skills */}
+                  <div className='flex flex-wrap gap-1.5 pt-4 border-t border-creative-line'>
+                    {experience.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className='border border-creative-line rounded-full px-2.5 py-1 text-creative-muted font-mono text-[0.68rem] font-bold tracking-wider leading-none uppercase transition-all duration-300 hover:border-creative-lime hover:text-creative-lime'
+                      >
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </article>
-          )
-        })}
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Mobile / Tablet Vertical Layout */}
+        <div className='lg:hidden flex flex-col w-full gap-8'>
+          <div className='flex flex-col gap-3'>
+            <h2
+              className='m-0 text-creative-ink font-display font-black tracking-tight leading-[1.12] uppercase [text-wrap:balance]'
+              style={{ fontSize: 'clamp(1.3rem, 5.5vw, 2.2rem)' }}
+            >
+              {t('headline')}
+            </h2>
+          </div>
+
+          {/* Timeline */}
+          <div className='mobile-timeline-wrapper relative flex flex-col py-2'>
+            <div className='absolute left-[17px] top-6 bottom-6 w-[1px] bg-creative-line z-0' />
+
+            <div className='flex flex-col gap-8 relative pl-10'>
+              {orderedExperiences.map((experience, idx) => {
+                const descriptionLines = splitExperienceDescription(
+                  experience.description
+                )
+                const isCurrent = activeIndex === idx
+
+                return (
+                  <div
+                    key={`mobile-${experience.id}`}
+                    className='mobile-experience-card relative flex flex-col gap-3'
+                  >
+                    {/* Timeline node - simple, no pinging animation */}
+                    <div
+                      className={`absolute left-[-34px] top-1.5 w-[22px] h-[22px] rounded-full border-2 bg-creative-bg flex items-center justify-center transition-all duration-300 z-10 ${
+                        isCurrent
+                          ? 'border-creative-lime scale-110'
+                          : 'border-creative-dim'
+                      }`}
+                    >
+                      <div
+                        className={`w-1.5 h-1.5 rounded-full transition-transform duration-300 ${
+                          isCurrent
+                            ? 'bg-creative-lime scale-100'
+                            : 'bg-creative-dim scale-75'
+                        }`}
+                      />
+                    </div>
+
+                    {/* Meta */}
+                    <div className='flex flex-wrap gap-x-4 gap-y-1 font-mono text-[0.72rem] tracking-wider text-creative-dim uppercase items-center'>
+                      <span className='text-creative-lime font-black'>
+                        {experience.period}
+                      </span>
+                      <span>{experience.location}</span>
+                    </div>
+
+                    {/* Card */}
+                    <div
+                      className={`border rounded-2xl p-5 bg-creative-panel/40 backdrop-blur-sm flex flex-col gap-4 relative overflow-hidden transition-all duration-300 ${
+                        isCurrent
+                          ? 'border-creative-lime/30'
+                          : 'border-creative-line'
+                      }`}
+                    >
+                      <div>
+                        <h3 className='m-0 text-creative-ink font-display text-xl font-black uppercase tracking-tight'>
+                          {experience.company}
+                        </h3>
+                        <p className='m-0 text-creative-lime text-sm font-semibold leading-normal mt-0.5'>
+                          {experience.position}
+                        </p>
+                      </div>
+
+                      <div className='flex flex-col gap-3 mt-1'>
+                        {descriptionLines.map((line) => (
+                          <FormatDescriptionLine key={line} line={line} />
+                        ))}
+                      </div>
+
+                      <div className='flex flex-wrap gap-1.5 mt-2 pt-4 border-t border-creative-line'>
+                        {experience.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className='border border-creative-line rounded-full px-2 py-0.5 text-creative-muted font-mono text-[0.65rem] font-bold tracking-wider leading-none uppercase'
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
 }
-
