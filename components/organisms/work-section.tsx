@@ -168,7 +168,7 @@ export function WorkSection({ projects }: WorkSectionProps) {
                 <article className='bg-[#080907]/95 rounded-[calc(1.8rem-2px)] p-6 md:p-8 flex flex-col justify-between h-full group'>
                   
                   {/* Mobile-Only MacBook Frame Inline Preview */}
-                  <div className='block lg:hidden w-full mb-6 scale-[0.95] origin-top'>
+                  <div className='block lg:hidden w-[82%] mx-auto mb-6 scale-[0.95] origin-top max-w-[420px]'>
                     <div className='macbook-device'>
                       <div className='macbook-screen-bezel'>
                         <div className='macbook-camera' />

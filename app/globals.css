@@ -528,6 +528,7 @@
   html {
     scroll-behavior: auto;
     color-scheme: dark light;
+    overflow-x: clip;
   }
 
   * {
@@ -1979,6 +1980,55 @@ body:has(.creative-portfolio)::after {
   font-size: clamp(1rem, 1.8vw, 1.55rem);
   font-weight: 600;
   line-height: 1.2;
+}
+
+/* Collapsible layout for Experience timeline */
+.experience-row__collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease, margin-top 300ms ease;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.experience-row__collapsible--expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.experience-row__collapsible-inner {
+  min-height: 0;
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.experience-row__toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(243, 240, 223, 0.15);
+  color: var(--creative-muted);
+  background: rgba(243, 240, 223, 0.03);
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 0.2rem;
+}
+
+.experience-row:hover .experience-row__toggle-btn {
+  border-color: var(--creative-lime);
+  color: #080907;
+  background: var(--creative-lime);
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-row__collapsible,
+  .experience-row__toggle-btn {
+    transition: none !important;
+  }
 }
 
 .experience-row__copy {
