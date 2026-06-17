@@ -7,7 +7,6 @@ import {
   applyThemeMode,
   DEFAULT_ACCENT_THEME,
   isAccentTheme,
-  type ThemeMode,
 } from '@/lib/theme'
 
 interface ThemeProviderProps {
@@ -16,15 +15,14 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => {
-    const savedMode = localStorage.getItem('theme')
-    const nextMode: ThemeMode = savedMode === 'light' ? 'light' : 'dark'
+    // Always force 'dark' theme mode for this portfolio
+    applyThemeMode('dark')
 
     const savedAccentTheme = localStorage.getItem('accent-theme')
     const nextAccentTheme = isAccentTheme(savedAccentTheme)
       ? savedAccentTheme
       : DEFAULT_ACCENT_THEME
 
-    applyThemeMode(nextMode)
     applyAccentTheme(nextAccentTheme)
   }, [])
 

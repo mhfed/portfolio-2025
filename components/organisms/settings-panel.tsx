@@ -7,15 +7,13 @@ import { useTranslations } from 'next-intl'
 import {
   Settings,
   Languages,
-  Sun,
-  Moon,
   MousePointer,
   Sparkles,
   Download,
   Check,
   X,
 } from 'lucide-react'
-import { COLOR_THEMES, applyAccentTheme, applyThemeMode, type AccentTheme, type ThemeMode } from '@/lib/theme'
+import { COLOR_THEMES, applyAccentTheme, type AccentTheme } from '@/lib/theme'
 
 export function SettingsPanel() {
   const t = useTranslations('header')
@@ -25,8 +23,7 @@ export function SettingsPanel() {
   const currentLocale = (params.locale as string) || 'en'
 
   const [isOpen, setIsOpen] = useState(false)
-  const [activeAccent, setActiveAccent] = useState<AccentTheme>('cobalt')
-  const [themeMode, setThemeMode] = useState<ThemeMode>('dark')
+  const [activeAccent, setActiveAccent] = useState<AccentTheme>('lime')
   const [cursorEnabled, setCursorEnabled] = useState(true)
   const [canvasEnabled, setCanvasEnabled] = useState(true)
   const panelRef = useRef<HTMLDivElement>(null)
@@ -36,14 +33,6 @@ export function SettingsPanel() {
     const savedAccent = localStorage.getItem('accent-theme') as AccentTheme
     if (savedAccent) {
       setActiveAccent(savedAccent)
-    }
-
-    const savedTheme = localStorage.getItem('theme') as ThemeMode
-    if (savedTheme) {
-      setThemeMode(savedTheme)
-    } else {
-      const isDark = document.documentElement.classList.contains('dark')
-      setThemeMode(isDark ? 'dark' : 'light')
     }
 
     const cursorDisabled = localStorage.getItem('disable-cursor') === 'true'
@@ -74,12 +63,6 @@ export function SettingsPanel() {
   const handleAccentChange = (accent: AccentTheme) => {
     setActiveAccent(accent)
     applyAccentTheme(accent)
-  }
-
-  const toggleTheme = () => {
-    const nextTheme: ThemeMode = themeMode === 'dark' ? 'light' : 'dark'
-    setThemeMode(nextTheme)
-    applyThemeMode(nextTheme)
   }
 
   const toggleCursor = () => {
@@ -124,32 +107,10 @@ export function SettingsPanel() {
         </div>
 
         <div className="settings-panel__body p-5 flex flex-col gap-5">
-          {/* Theme Mode Option */}
-          <div className="settings-option flex items-center justify-between w-full">
-            <span className="settings-option__label font-mono text-[0.68rem] font-extrabold uppercase tracking-widest text-creative-dim">{t('themeMode')}</span>
-            <button
-              onClick={toggleTheme}
-              className="settings-toggle-btn flex items-center gap-1.5 border border-creative-line rounded-full bg-[rgba(243,240,223,0.04)] px-3.5 py-2 text-creative-ink font-mono text-[0.72rem] font-extrabold cursor-pointer transition-all duration-200 hover:border-[rgba(243,240,223,0.3)] hover:bg-[rgba(243,240,223,0.08)]"
-              aria-label={t('toggleTheme')}
-            >
-              {themeMode === 'dark' ? (
-                <>
-                  <Moon className="w-4 h-4 text-primary" />
-                  <span>{t('dark')}</span>
-                </>
-              ) : (
-                <>
-                  <Sun className="w-4 h-4 text-amber-500" />
-                  <span>{t('light')}</span>
-                </>
-              )}
-            </button>
-          </div>
-
           {/* Accent Color Palette Selection */}
           <div className="settings-option flex items-center justify-between w-full flex-col items-start gap-2">
             <span className="settings-option__label font-mono text-[0.68rem] font-extrabold uppercase tracking-widest text-creative-dim">{t('colorTheme')}</span>
-            <div className="accent-grid grid grid-cols-6 gap-2 w-full">
+            <div className="accent-grid grid grid-cols-7 gap-2 w-full">
               {COLOR_THEMES.map((theme) => (
                 <button
                   key={theme.id}

@@ -155,7 +155,34 @@
   --yellow: hsl(38 92% 62%);
 }
 
+:root[data-accent-theme='lime'] {
+  --creative-lime: #c8ff45;
+}
+:root.dark[data-accent-theme='lime'] {
+  --creative-lime: #c8ff45;
+}
+
+:root[data-accent-theme='teal'] {
+  --creative-lime: #2dd4bf;
+  --primary: hsl(187 72% 32%);
+  --theme-secondary: hsl(167 63% 42%);
+  --theme-tertiary: hsl(203 76% 58%);
+  --theme-soft: hsl(184 42% 92%);
+  --theme-strong: hsl(187 44% 20%);
+  --accent: hsl(191 38% 90%);
+}
+:root.dark[data-accent-theme='teal'] {
+  --creative-lime: #2dd4bf;
+  --primary: hsl(175 90% 55%);
+  --theme-secondary: hsl(165 85% 48%);
+  --theme-tertiary: hsl(190 90% 65%);
+  --theme-soft: hsl(188 20% 10%);
+  --theme-strong: hsl(175 90% 70%);
+  --accent: hsl(224 20% 13%);
+}
+
 :root[data-accent-theme='cobalt'] {
+  --creative-lime: #60a5fa;
   --primary: hsl(221 83% 53%);
   --primary-foreground: hsl(0 0% 100%);
   --theme-secondary: hsl(199 89% 48%);
@@ -186,6 +213,7 @@
 }
 
 :root.dark[data-accent-theme='cobalt'] {
+  --creative-lime: #60a5fa;
   --primary: hsl(213 94% 68%);
   --primary-foreground: hsl(222 32% 14%);
   --theme-secondary: hsl(199 89% 58%);
@@ -216,6 +244,7 @@
 }
 
 :root[data-accent-theme='emerald'] {
+  --creative-lime: #34d399;
   --primary: hsl(158 64% 34%);
   --primary-foreground: hsl(0 0% 100%);
   --theme-secondary: hsl(173 58% 39%);
@@ -246,6 +275,7 @@
 }
 
 :root.dark[data-accent-theme='emerald'] {
+  --creative-lime: #34d399;
   --primary: hsl(160 84% 39%);
   --primary-foreground: hsl(222 32% 14%);
   --theme-secondary: hsl(173 70% 48%);
@@ -276,6 +306,7 @@
 }
 
 :root[data-accent-theme='coral'] {
+  --creative-lime: #fb7185;
   --primary: hsl(7 78% 57%);
   --primary-foreground: hsl(0 0% 100%);
   --theme-secondary: hsl(345 83% 63%);
@@ -306,6 +337,7 @@
 }
 
 :root.dark[data-accent-theme='coral'] {
+  --creative-lime: #fb7185;
   --primary: hsl(9 91% 68%);
   --primary-foreground: hsl(222 32% 14%);
   --theme-secondary: hsl(345 83% 68%);
@@ -336,6 +368,7 @@
 }
 
 :root[data-accent-theme='violet'] {
+  --creative-lime: #c084fc;
   --primary: hsl(262 67% 52%);
   --primary-foreground: hsl(0 0% 100%);
   --theme-secondary: hsl(292 76% 61%);
@@ -366,6 +399,7 @@
 }
 
 :root.dark[data-accent-theme='violet'] {
+  --creative-lime: #c084fc;
   --primary: hsl(267 85% 73%);
   --primary-foreground: hsl(222 32% 14%);
   --theme-secondary: hsl(292 76% 68%);
@@ -396,6 +430,7 @@
 }
 
 :root[data-accent-theme='amber'] {
+  --creative-lime: #fbbf24;
   --primary: hsl(35 92% 45%);
   --primary-foreground: hsl(0 0% 100%);
   --theme-secondary: hsl(24 95% 53%);
@@ -426,6 +461,7 @@
 }
 
 :root.dark[data-accent-theme='amber'] {
+  --creative-lime: #fbbf24;
   --primary: hsl(43 96% 56%);
   --primary-foreground: hsl(222 32% 14%);
   --theme-secondary: hsl(24 95% 60%);

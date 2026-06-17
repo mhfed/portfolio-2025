@@ -1,6 +1,11 @@
-export const DEFAULT_ACCENT_THEME = 'cobalt'
+export const DEFAULT_ACCENT_THEME = 'lime'
 
 export const COLOR_THEMES = [
+  {
+    id: 'lime',
+    label: 'Lime',
+    swatch: 'linear-gradient(135deg, #85b300 0%, #c8ff45 100%)',
+  },
   {
     id: 'teal',
     label: 'Teal',

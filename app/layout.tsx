@@ -48,10 +48,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                const savedTheme = localStorage.getItem('theme');
-                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                const activeTheme = savedTheme || systemTheme;
-                document.documentElement.classList.toggle('dark', activeTheme === 'dark');
+                document.documentElement.classList.add('dark');
 
                 const savedAccent = localStorage.getItem('accent-theme') || 'cobalt';
                 document.documentElement.dataset.accentTheme = savedAccent;
