@@ -57,4 +57,5 @@ export function applyAccentTheme(theme: AccentTheme) {
 
   document.documentElement.dataset.accentTheme = theme
   localStorage.setItem('accent-theme', theme)
+  window.dispatchEvent(new Event('settings-updated'))
 }

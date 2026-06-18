@@ -27,7 +27,7 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
 
   return (
     <div
-      className='project-stack-card relative overflow-hidden rounded-2xl border border-white/8 bg-[#12140f]'
+      className='project-stack-card group relative overflow-hidden rounded-2xl border border-white/8 bg-black/15 backdrop-blur-md'
       data-stack-card
       style={{
         position: 'sticky',
@@ -50,6 +50,7 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
       <div className='grid grid-cols-1 lg:grid-cols-[1fr_1.1fr]'>
         {/* Left: image */}
         <div
+          data-project-col-img
           className='relative overflow-hidden'
           style={{ aspectRatio: '4/3' }}
         >
@@ -58,17 +59,53 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
               src={imageSrc}
               alt={project.title}
               fill
-              className='object-cover object-center'
+              className='object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]'
               quality={85}
               priority={index === 0}
               sizes='(max-width: 1024px) 100vw, 50vw'
             />
           ) : (
             // Fallback placeholder when image URL is missing
-            <div className='absolute inset-0 bg-[#1a1d14] flex items-center justify-center'>
-              <span className='font-mono text-[0.6rem] uppercase tracking-widest text-white/20'>
-                {project.title.slice(0, 2).toUpperCase()}
-              </span>
+            <div className='absolute inset-0 bg-[#0c0e0b] border border-white/5 p-6 flex flex-col justify-between overflow-hidden group/fallback'>
+              {/* Window Controls */}
+              <div className='flex items-center gap-1.5 opacity-60'>
+                <span className='w-2 h-2 rounded-full bg-white/10' />
+                <span className='w-2 h-2 rounded-full bg-white/10' />
+                <span className='w-2 h-2 rounded-full bg-white/10' />
+                <span className='ml-2 font-mono text-[8px] uppercase tracking-wider text-white/40'>
+                  {project.title.toLowerCase().replace(/[^a-z0-9]/g, '_')}.conf
+                </span>
+              </div>
+              
+              {/* Fake Code structure representation */}
+              <div className='my-auto flex flex-col gap-2 font-mono text-[9px] text-white/40 leading-relaxed pl-2'>
+                <div className='flex items-center gap-1.5'>
+                  <span className='text-[var(--creative-lime)]'>const</span>
+                  <span className='text-white/60'>project</span>
+                  <span>=</span>
+                  <span className='text-white/75'>&#123;</span>
+                </div>
+                <div className='pl-4 flex items-center gap-1.5'>
+                  <span>title:</span>
+                  <span className='text-[var(--creative-lime)]'>"{project.title}"</span>,
+                </div>
+                <div className='pl-4 flex items-center gap-1.5'>
+                  <span>year:</span>
+                  <span className='text-[var(--creative-lime)]'>"{project.year}"</span>,
+                </div>
+                <div className='pl-4 flex items-center gap-1.5'>
+                  <span>stack:</span>
+                  <span>[</span>
+                  <span className='text-white/60'>{project.techStack.map(t => `"${t}"`).join(', ')}</span>
+                  <span>]</span>
+                </div>
+                <div className='flex items-center'>
+                  <span className='text-white/75'>&#125;;</span>
+                </div>
+              </div>
+              
+              {/* Ambient Glow */}
+              <div className='absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-[var(--creative-lime)]/5 blur-2xl group-hover/fallback:bg-[var(--creative-lime)]/10 transition-all duration-500' />
             </div>
           )}
 
@@ -81,7 +118,10 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
         </div>
 
         {/* Right: content */}
-        <div className='flex flex-col justify-between p-8 lg:p-10'>
+        <div
+          data-project-col-content
+          className='flex flex-col justify-between p-8 lg:p-10'
+        >
           {/* Top: index number + tech chips */}
           <div className='flex items-start justify-between gap-4'>
             <span

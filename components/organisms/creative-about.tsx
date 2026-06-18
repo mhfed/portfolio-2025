@@ -27,12 +27,10 @@ function TechMarquee() {
   // Duplicate for seamless loop
   const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
   return (
-    <div className='relative w-full overflow-hidden py-6' aria-hidden='true'>
-      {/* Left fade */}
-      <div className='pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[var(--creative-bg)] to-transparent' />
-      {/* Right fade */}
-      <div className='pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[var(--creative-bg)] to-transparent' />
-
+    <div
+      className='marquee-mask relative w-full overflow-hidden py-6'
+      aria-hidden='true'
+    >
       <div
         className='flex items-center gap-8'
         style={{
@@ -89,50 +87,72 @@ function AboutBento({
   deliveryDesc,
   stackLabel,
 }: BentoProps) {
-  const wrapRef = useRef<HTMLDivElement>(null)
+  const countRef = useRef<HTMLSpanElement>(null)
+  const circleRef = useRef<SVGCircleElement>(null)
+  const pillsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const wrap = wrapRef.current
-    if (!wrap) return
-
-    const reduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-    if (reduced) return
-
     let active = true
 
-    loadGSAP().then(({ gsap, ScrollTrigger }) => {
-      if (!active || !wrap) return
+    loadGSAP().then(({ gsap }) => {
+      if (!active) return
 
-      const cards = gsap.utils.toArray<HTMLElement>('.about-stack-card', wrap)
-
-      cards.forEach((card, i) => {
-        if (i === cards.length - 1) return
-
-        // Pin each card at viewport top until the last card arrives
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top top',
-          endTrigger: cards[cards.length - 1],
-          end: 'top top',
-          pin: true,
-          pinSpacing: false,
-        })
-
-        // Shrink + fade as next card scrolls up
-        gsap.to(card, {
-          scale: 0.94,
-          opacity: 0.4,
-          ease: 'none',
+      // CountUp animation for experience
+      if (countRef.current) {
+        const obj = { val: 0 }
+        gsap.to(obj, {
+          val: 5,
+          duration: 1.2,
+          ease: 'power2.out',
           scrollTrigger: {
-            trigger: cards[i + 1],
-            start: 'top bottom',
-            end: 'top top',
-            scrub: true,
+            trigger: countRef.current,
+            start: 'top 85%',
+          },
+          onUpdate: () => {
+            if (countRef.current) {
+              countRef.current.innerText = String(Math.floor(obj.val))
+            }
           },
         })
-      })
+      }
+
+      // Circular progress animation
+      if (circleRef.current) {
+        gsap.fromTo(
+          circleRef.current,
+          { strokeDashoffset: 251.2 },
+          {
+            strokeDashoffset: 251.2 * (1 - 0.95),
+            duration: 1.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: circleRef.current,
+              start: 'top 85%',
+            },
+          }
+        )
+      }
+
+      // Stagger animate tech stack pills
+      if (pillsRef.current) {
+        const pills = pillsRef.current.querySelectorAll('.tech-pill')
+        gsap.fromTo(
+          pills,
+          { scale: 0.85, opacity: 0, y: 12 },
+          {
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.04,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: pillsRef.current,
+              start: 'top 85%',
+            },
+          }
+        )
+      }
     })
 
     return () => {
@@ -141,11 +161,9 @@ function AboutBento({
   }, [])
 
   return (
-    <div ref={wrapRef} className='relative mt-20'>
+    <div className='relative mt-20 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-stretch'>
       {/* ── Card 1 — Years of Experience ─────── */}
-      {/* Dark near-black. Giant lime "5+" anchored bottom-right. */}
-      <div className='about-stack-card sticky top-0 flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl bg-[#080907] p-[clamp(2rem,5vw,4rem)] will-change-transform'>
-        {/* Top-left kicker */}
+      <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20 group'>
         <div className='flex items-center justify-between'>
           <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
             {yearsLabel}
@@ -155,34 +173,26 @@ function AboutBento({
           </p>
         </div>
 
-        {/* Mid description */}
-        <p
-          className='max-w-[22ch] font-display font-extrabold leading-[1.12] tracking-[-0.02em] text-creative-ink/30'
-          style={{ fontSize: 'clamp(1.6rem, 3vw, 2.8rem)' }}
-        >
-          {yearsDesc}
-        </p>
-
-        {/* Giant stat anchored bottom-right */}
-        <div className='flex items-end justify-end'>
+        <div className='my-6 flex items-baseline justify-between gap-4'>
           <p
-            className='m-0 font-display font-black leading-none'
+            className='m-0 font-display font-black leading-none text-[var(--creative-lime)] group-hover:scale-105 transition-transform duration-300'
             style={{
-              fontSize: 'clamp(10rem, 22vw, 20rem)',
-              color: 'var(--creative-lime)',
+              fontSize: 'clamp(5rem, 8vw, 8rem)',
               lineHeight: 0.82,
               letterSpacing: '-0.04em',
             }}
           >
-            5+
+            <span ref={countRef}>0</span>+
           </p>
         </div>
+
+        <p className='m-0 font-body text-[0.85rem] font-light leading-relaxed text-creative-muted'>
+          {yearsDesc}
+        </p>
       </div>
 
       {/* ── Card 2 — Core Stack ──────────────── */}
-      {/* Slightly lighter dark. Pills centered with generous spacing. */}
-      <div className='about-stack-card sticky top-0 flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl bg-[#0b0d08] p-[clamp(2rem,5vw,4rem)] will-change-transform'>
-        {/* Top-left kicker */}
+      <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20'>
         <div className='flex items-center justify-between'>
           <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
             {stackLabel}
@@ -192,28 +202,24 @@ function AboutBento({
           </p>
         </div>
 
-        {/* Pills grid — generous spacing, centered */}
-        <div className='flex flex-wrap items-center justify-center gap-3 py-8'>
+        <div ref={pillsRef} className='flex flex-wrap items-center gap-1.5 py-6'>
           {STACK_TAGS.map((tech) => (
             <span
               key={tech}
-              className='rounded-full border border-[var(--creative-lime)]/20 bg-[var(--creative-lime)]/[0.04] px-5 py-2.5 font-mono text-[0.78rem] font-bold uppercase tracking-[0.14em] text-creative-muted transition-all duration-300 hover:border-[var(--creative-lime)]/60 hover:bg-[var(--creative-lime)]/10 hover:text-creative-ink'
+              className='tech-pill rounded-full border border-[var(--creative-lime)]/15 bg-[var(--creative-lime)]/[0.03] px-3.5 py-1.5 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-creative-muted transition-all duration-300 hover:border-[var(--creative-lime)]/50 hover:bg-[var(--creative-lime)]/8 hover:text-creative-ink'
             >
               {tech}
             </span>
           ))}
         </div>
 
-        {/* Bottom: count */}
-        <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-creative-dim/40'>
+        <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-creative-dim/50'>
           {STACK_TAGS.length} technologies in active use
         </p>
       </div>
 
       {/* ── Card 3 — On-time Delivery ────────── */}
-      {/* Dark. Giant white "95%" bottom-left, kicker top-right. */}
-      <div className='about-stack-card sticky top-0 flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl bg-[#080907] p-[clamp(2rem,5vw,4rem)] will-change-transform'>
-        {/* Top: two-sided kicker */}
+      <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20 group'>
         <div className='flex items-center justify-between'>
           <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
             {deliveryLabel}
@@ -223,76 +229,81 @@ function AboutBento({
           </p>
         </div>
 
-        {/* Mid description — right-aligned */}
-        <p
-          className='ml-auto max-w-[24ch] text-right font-display font-extrabold leading-[1.12] tracking-[-0.02em] text-creative-ink/25'
-          style={{ fontSize: 'clamp(1.6rem, 3vw, 2.8rem)' }}
-        >
-          {deliveryDesc}
-        </p>
-
-        {/* Giant stat anchored bottom-left */}
-        <div className='flex items-end justify-start'>
+        <div className='my-6 flex items-center justify-between gap-6'>
           <p
-            className='m-0 font-display font-black leading-none text-creative-ink'
+            className='m-0 font-display font-black leading-none text-creative-ink group-hover:scale-105 transition-transform duration-300'
             style={{
-              fontSize: 'clamp(10rem, 22vw, 20rem)',
+              fontSize: 'clamp(3.5rem, 5vw, 5.5rem)',
               lineHeight: 0.82,
               letterSpacing: '-0.04em',
             }}
           >
             95%
           </p>
+          <div className='shrink-0 flex items-center justify-center'>
+            <svg className='w-16 h-16 transform -rotate-90' viewBox='0 0 100 100'>
+              <circle className='text-white/5 stroke-current' strokeWidth='8' cx='50' cy='50' r='40' fill='transparent' />
+              <circle
+                ref={circleRef}
+                className='text-[var(--creative-lime)] stroke-current'
+                strokeWidth='8'
+                strokeLinecap='round'
+                cx='50'
+                cy='50'
+                r='40'
+                fill='transparent'
+                strokeDasharray='251.2'
+                strokeDashoffset='251.2'
+              />
+            </svg>
+          </div>
         </div>
+
+        <p className='m-0 font-body text-[0.85rem] font-light leading-relaxed text-creative-muted'>
+          {deliveryDesc}
+        </p>
       </div>
 
-      {/* ── Card 4 — Status (last, no pin) ───── */}
-      {/* Full lime fill — inverts the palette, strong landing. */}
-      <div
-        className='about-stack-card flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl p-[clamp(2rem,5vw,4rem)]'
-        style={{ backgroundColor: 'var(--creative-lime)' }}
-      >
-        {/* Top */}
+      {/* ── Card 4 — Status ───── */}
+      <div className='flex flex-col justify-between rounded-2xl border border-[var(--creative-lime)]/20 bg-[var(--creative-lime)]/[0.04] p-8 min-h-[300px] transition-all duration-300 hover:bg-[var(--creative-lime)]/[0.06] hover:border-[var(--creative-lime)]/40 group'>
         <div className='flex items-center justify-between'>
-          <div className='flex items-center gap-2.5'>
+          <div className='flex items-center gap-2'>
             <span
-              className='h-2 w-2 animate-pulse rounded-full bg-[#080907]'
-              aria-hidden='true'
-            />
-            <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-[#080907]/60'>
+              className='relative flex h-2.5 w-2.5'
+            >
+              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--creative-lime)] opacity-75'></span>
+              <span className='relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--creative-lime)]'></span>
+            </span>
+            <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-[var(--creative-lime)] font-extrabold'>
               Status
             </p>
           </div>
-          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[#080907]/40'>
+          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[var(--creative-lime)]/40'>
             04 / 04
           </p>
         </div>
 
-        {/* Center — big message */}
-        <p
-          className='max-w-[14ch] font-display font-black leading-[1.0] tracking-[-0.04em]'
-          style={{
-            fontSize: 'clamp(3.5rem, 8vw, 7rem)',
-            color: '#080907',
-          }}
-        >
-          Open to new opportunities
-        </p>
-
-        {/* Bottom — CTA row */}
-        <div className='flex items-end justify-between'>
+        <div className='my-6'>
           <p
-            className='m-0 font-mono text-[0.65rem] uppercase tracking-[0.22em]'
-            style={{ color: '#080907', opacity: 0.5 }}
+            className='m-0 font-display font-black leading-[1.05] tracking-[-0.03em] text-creative-ink uppercase'
+            style={{
+              fontSize: 'clamp(1.4rem, 2vw, 2.1rem)',
+            }}
           >
-            Available now
+            Open to new opportunities
           </p>
-          <p
-            className='m-0 font-mono text-[0.65rem] uppercase tracking-[0.22em]'
-            style={{ color: '#080907', opacity: 0.5 }}
+        </div>
+
+        <div className='flex flex-col gap-1 border-t border-[var(--creative-lime)]/10 pt-4'>
+          <span className='font-mono text-[0.55rem] uppercase tracking-widest text-[var(--creative-lime)]/60'>
+            Direct Connect
+          </span>
+          <a
+            href='mailto:nmhieu04091999@gmail.com'
+            className='font-mono text-[0.72rem] font-bold text-creative-ink no-underline hover:text-[var(--creative-lime)] transition-colors'
           >
             nmhieu04091999@gmail.com
-          </p>
+          </a>
         </div>
       </div>
     </div>
@@ -388,7 +399,7 @@ export function AboutSection({ locale }: { locale: string }) {
         {/* Two-column layout */}
         <div className='grid grid-cols-1 gap-[clamp(2rem,8vw,8rem)] lg:grid-cols-[1.1fr_0.9fr]'>
           {/* Left: scrubbing statement */}
-          <div>
+          <div data-about-col-left>
             <div
               ref={statementRef}
               className='font-display font-extrabold leading-[1.18] tracking-[-0.01em] text-creative-ink'
@@ -411,7 +422,11 @@ export function AboutSection({ locale }: { locale: string }) {
           </div>
 
           {/* Right: description */}
-          <div className='flex flex-col justify-center' data-reveal>
+          <div
+            data-about-col-right
+            className='flex flex-col justify-center'
+            data-reveal
+          >
             <p className='m-0 text-[clamp(1rem,1.3vw,1.18rem)] font-light leading-relaxed text-creative-muted'>
               {t('description1')}
             </p>

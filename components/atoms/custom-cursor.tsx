@@ -116,7 +116,7 @@ export function CustomCursor() {
     <>
       <div
         ref={dotRef}
-        className={`custom-cursor-dot fixed left-0 top-0 z-[70] pointer-events-none [will-change:transform] transition-[opacity,transform,background-color] duration-[220ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] h-2 w-2 rounded-full bg-[rgba(180,220,240,0.86)] mix-blend-screen motion-reduce:hidden ${
+        className={`custom-cursor-dot fixed left-0 top-0 z-[70] pointer-events-none [will-change:transform] transition-[opacity,transform,background-color] duration-[220ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] h-2 w-2 rounded-full bg-creative-lime/90 mix-blend-screen motion-reduce:hidden ${
           isEnabled ? 'opacity-100' : 'opacity-0'
         }`}
         aria-hidden='true'
@@ -129,8 +129,8 @@ export function CustomCursor() {
           cursorText
             ? 'h-[78px] w-[78px] border-transparent bg-white/94 mix-blend-difference'
             : isActive
-              ? 'h-[54px] w-[54px] border-white/34 bg-white/10'
-              : 'h-[34px] w-[34px] border-[rgba(180,220,240,0.42)]'
+              ? 'h-[54px] w-[54px] border-creative-lime/40 bg-creative-lime/5'
+              : 'h-[34px] w-[34px] border-creative-lime/30'
         }`}
         aria-hidden='true'
       >

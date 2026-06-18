@@ -27,7 +27,21 @@ export function CreativePortfolio({
   email,
 }: CreativePortfolioProps) {
   return (
-    <div className='creative-portfolio' data-creative-root>
+    <div className='creative-portfolio relative' data-creative-root>
+      {/* Global Background Spotlight Follower */}
+      <div
+        id='global-spotlight'
+        className='pointer-events-none fixed h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full transition-opacity duration-700 opacity-0 lg:opacity-100 hidden lg:block'
+        style={{
+          background:
+            'radial-gradient(circle, color-mix(in srgb, var(--creative-lime) 16%, transparent) 0%, color-mix(in srgb, var(--creative-lime) 4%, transparent) 45%, transparent 70%)',
+          left: '0px',
+          top: '0px',
+          zIndex: 0,
+          mixBlendMode: 'screen',
+        }}
+      />
+
       <CreativeWaypointsScene />
       <CreativePortfolioEffects />
       <CreativeNav email={email} />

@@ -33,13 +33,17 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
   return (
     <div
       data-exp-row
-      className='relative grid grid-cols-1 gap-6 border-t border-white/8 py-12 lg:grid-cols-[160px_1fr_1fr] lg:gap-10 lg:py-14'
+      className='relative grid grid-cols-1 gap-6 py-12 lg:grid-cols-[160px_1fr_1fr] lg:gap-10 lg:py-14'
       style={{
         borderBottom: isLast ? '1px solid rgba(248,248,245,0.08)' : 'none',
       }}
     >
+      <div className="absolute top-0 left-0 h-[1px] bg-white/8 w-0 exp-row-line" />
       {/* Left: index + period */}
-      <div className='flex flex-row items-start justify-between lg:flex-col lg:justify-start lg:gap-3'>
+      <div
+        data-exp-col-1
+        className='flex flex-row items-start justify-between lg:flex-col lg:justify-start lg:gap-3'
+      >
         <span
           className='select-none font-mono font-black leading-none text-creative-line'
           style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)' }}
@@ -53,7 +57,7 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
       </div>
 
       {/* Middle: company + position + description */}
-      <div className='flex flex-col gap-4'>
+      <div data-exp-col-2 className='flex flex-col gap-4'>
         {/* Lime accent line */}
         <div
           className='h-[2px] w-10'
@@ -105,7 +109,7 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
       </div>
 
       {/* Right: location + skills */}
-      <div className='flex flex-col justify-between gap-6'>
+      <div data-exp-col-3 className='flex flex-col justify-between gap-6'>
         {experience.location && (
           <p className='m-0 font-mono text-[0.6rem] uppercase tracking-widest text-creative-dim lg:text-right'>
             {experience.location}
@@ -178,21 +182,43 @@ export function ExperienceSection({
       const rows = gsap.utils.toArray<HTMLElement>('[data-exp-row]', section)
 
       rows.forEach((row) => {
-        gsap.set(row, { y: 40, opacity: 0 })
-        const st = ScrollTrigger.create({
-          trigger: row,
-          start: 'top 82%',
-          once: true,
-          onEnter: () => {
-            gsap.to(row, {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: 'power3.out',
-            })
+        const cols = row.querySelectorAll('[data-exp-col-1], [data-exp-col-2], [data-exp-col-3]')
+        const line = row.querySelector('.exp-row-line')
+
+        gsap.set(cols, { y: 20, opacity: 0 })
+        if (line) gsap.set(line, { width: '0%' })
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: row,
+            start: 'top 85%',
+            once: true,
           },
         })
-        triggers.push(st)
+
+        if (tl.scrollTrigger) {
+          triggers.push(tl.scrollTrigger)
+        }
+
+        if (line) {
+          tl.to(line, {
+            width: '100%',
+            duration: 0.9,
+            ease: 'power2.out',
+          })
+        }
+
+        tl.to(
+          cols,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: 'power3.out',
+          },
+          line ? '-=0.65' : 0
+        )
       })
 
       ScrollTrigger.refresh()

@@ -28,9 +28,42 @@ export function InteractiveCanvas() {
       radius: 120,
     }
 
+    let activeColor = { r: 200, g: 255, b: 69 }
+
+    const updateActiveColor = () => {
+      if (typeof window === 'undefined') return
+      const computed = getComputedStyle(document.documentElement).getPropertyValue('--creative-lime').trim()
+      if (computed.startsWith('#')) {
+        const hex = computed.substring(1)
+        if (hex.length === 6) {
+          activeColor = {
+            r: parseInt(hex.substring(0, 2), 16),
+            g: parseInt(hex.substring(2, 4), 16),
+            b: parseInt(hex.substring(4, 6), 16),
+          }
+        } else if (hex.length === 3) {
+          activeColor = {
+            r: parseInt(hex.charAt(0) + hex.charAt(0), 16),
+            g: parseInt(hex.charAt(1) + hex.charAt(1), 16),
+            b: parseInt(hex.charAt(2) + hex.charAt(2), 16),
+          }
+        }
+      } else if (computed.startsWith('rgb')) {
+        const matches = computed.match(/\d+/g)
+        if (matches && matches.length >= 3) {
+          activeColor = {
+            r: parseInt(matches[0]),
+            g: parseInt(matches[1]),
+            b: parseInt(matches[2]),
+          }
+        }
+      }
+    }
+
     const checkCanvasSettings = () => {
       const disabled = localStorage.getItem('disable-canvas') === 'true'
       isCanvasDisabled = disabled
+      updateActiveColor()
       if (disabled) {
         canvas.style.display = 'none'
         if (ctx) {
@@ -133,7 +166,7 @@ export function InteractiveCanvas() {
         if (!ctx) return
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(184, 220, 240, ${this.opacity})` // subtle light blue/teal
+        ctx.fillStyle = `rgba(${activeColor.r}, ${activeColor.g}, ${activeColor.b}, ${this.opacity})`
         ctx.fill()
       }
     }
@@ -171,7 +204,7 @@ export function InteractiveCanvas() {
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
             const lineOpacity = (1 - dist / 110) * 0.09 * Math.min(particles[i].opacity, particles[j].opacity)
-            ctx.strokeStyle = `rgba(180, 220, 240, ${lineOpacity})`
+            ctx.strokeStyle = `rgba(${activeColor.r}, ${activeColor.g}, ${activeColor.b}, ${lineOpacity})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -190,7 +223,7 @@ export function InteractiveCanvas() {
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(mouse.x, mouse.y)
             const lineOpacity = (1 - dist / mouse.radius) * 0.13 * particles[i].opacity
-            ctx.strokeStyle = `rgba(180, 220, 240, ${lineOpacity})`
+            ctx.strokeStyle = `rgba(${activeColor.r}, ${activeColor.g}, ${activeColor.b}, ${lineOpacity})`
             ctx.lineWidth = 0.65
             ctx.stroke()
           }
