@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import type { ScrollTrigger as ScrollTriggerType } from 'gsap/ScrollTrigger'
 import { loadGSAP } from '@/lib/gsap-utils'
+import { Copy, Check, Mail, ArrowUpRight } from 'lucide-react'
 
 // ─────────────────────────────────────────────
 // Tech marquee items — hardcoded display strip
@@ -91,6 +92,19 @@ function AboutBento({
   const circleRef = useRef<SVGCircleElement>(null)
   const pillsRef = useRef<HTMLDivElement>(null)
 
+  const [copied, setCopied] = useState(false)
+  const emailAddress = 'nmhieu04091999@gmail.com'
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(emailAddress)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
+  }
+
   useEffect(() => {
     let active = true
 
@@ -161,9 +175,9 @@ function AboutBento({
   }, [])
 
   return (
-    <div className='relative mt-20 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-stretch'>
+    <div className='relative mt-20 grid grid-cols-1 gap-y-12 md:gap-y-16 gap-x-12 md:grid-cols-3 items-stretch'>
       {/* ── Card 1 — Years of Experience ─────── */}
-      <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20 group'>
+      <div className='col-span-1 flex flex-col justify-between py-2 min-h-[220px] md:border-r md:border-white/8 md:pr-10 md:py-4 group'>
         <div className='flex items-center justify-between'>
           <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-creative-dim'>
             {yearsLabel}
@@ -173,11 +187,11 @@ function AboutBento({
           </p>
         </div>
 
-        <div className='my-6 flex items-baseline justify-between gap-4'>
+        <div className='my-4 flex items-baseline justify-start'>
           <p
-            className='m-0 font-display font-black leading-none text-[var(--creative-lime)] group-hover:scale-105 transition-transform duration-300'
+            className='m-0 font-display font-black leading-none bg-gradient-to-br from-creative-ink to-[var(--creative-lime)] bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-500'
             style={{
-              fontSize: 'clamp(5rem, 8vw, 8rem)',
+              fontSize: 'clamp(5.5rem, 8vw, 8rem)',
               lineHeight: 0.82,
               letterSpacing: '-0.04em',
             }}
@@ -186,13 +200,13 @@ function AboutBento({
           </p>
         </div>
 
-        <p className='m-0 font-body text-body-sm font-light leading-relaxed text-creative-muted'>
+        <p className='m-0 font-body text-body-sm font-light leading-relaxed text-creative-muted max-w-[24ch]'>
           {yearsDesc}
         </p>
       </div>
 
       {/* ── Card 2 — Core Stack ──────────────── */}
-      <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20'>
+      <div className='col-span-1 md:col-span-2 flex flex-col justify-between py-2 min-h-[220px] border-t border-white/8 pt-8 md:border-t-0 md:pt-4 md:pl-10 group relative overflow-hidden'>
         <div className='flex items-center justify-between'>
           <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-creative-dim'>
             {stackLabel}
@@ -202,27 +216,99 @@ function AboutBento({
           </p>
         </div>
 
-        <div
-          ref={pillsRef}
-          className='flex flex-wrap items-center gap-1.5 py-6'
-        >
+        <div ref={pillsRef} className='flex flex-wrap items-center gap-2 py-6'>
           {STACK_TAGS.map((tech) => (
             <span
               key={tech}
-              className='tech-pill rounded-full border border-[var(--creative-lime)]/15 bg-[var(--creative-lime)]/[0.03] px-3.5 py-1.5 font-mono text-meta font-bold uppercase tracking-wider text-creative-muted transition-all duration-300 hover:border-[var(--creative-lime)]/50 hover:bg-[var(--creative-lime)]/8 hover:text-creative-ink'
+              className='tech-pill flex items-center gap-2 rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-2 font-mono text-meta font-bold uppercase tracking-wider text-creative-muted transition-all duration-300 hover:border-[var(--creative-lime)]/40 hover:bg-[var(--creative-lime)]/[0.04] hover:text-creative-ink hover:scale-[1.02]'
             >
+              <span className='h-1.5 w-1.5 rounded-full bg-[var(--creative-lime)]/40' />
               {tech}
             </span>
           ))}
         </div>
 
-        <p className='m-0 font-mono text-meta uppercase tracking-[0.16em] text-creative-dim/50'>
-          {STACK_TAGS.length} technologies in active use
-        </p>
+        <div className='flex items-center gap-2 font-mono text-meta uppercase tracking-[0.16em] text-creative-dim/60'>
+          <span className='text-[var(--creative-lime)]'>$</span>
+          <span>{STACK_TAGS.length} technologies in active use</span>
+        </div>
+      </div>
+
+      {/* ── Card 4 — Status & Direct Connect ───── */}
+      <div className='col-span-1 md:col-span-2 flex flex-col justify-between py-2 min-h-[220px] border-t border-white/8 pt-8 md:pt-10 md:border-r md:border-white/8 md:pr-10 group'>
+        <div className='flex items-center justify-between'>
+          <div className='flex items-center gap-2.5'>
+            <span className='relative flex h-2 w-2'>
+              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--creative-lime)] opacity-75'></span>
+              <span className='relative inline-flex rounded-full h-2 w-2 bg-[var(--creative-lime)]'></span>
+            </span>
+            <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-[var(--creative-lime)] font-extrabold'>
+              Status
+            </p>
+          </div>
+          <p className='m-0 font-mono text-meta uppercase tracking-[0.18em] text-[var(--creative-lime)]/40'>
+            04 / 04
+          </p>
+        </div>
+
+        <div className='my-6 md:my-4 md:max-w-[90%]'>
+          <h4
+            className='m-0 font-display font-black leading-[1.05] tracking-[-0.03em] text-creative-ink uppercase'
+            style={{
+              fontSize: 'clamp(1.6rem, 2.5vw, 2.5rem)',
+            }}
+          >
+            Open to new opportunities
+          </h4>
+          <p className='m-0 mt-3 text-body-sm font-light text-creative-muted leading-relaxed max-w-[48ch]'>
+            Let&apos;s build something fast, polished, and animated. Reach out
+            to kickstart a collaboration.
+          </p>
+        </div>
+
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-white/8 pt-6'>
+          <div className='flex flex-col gap-1.5'>
+            <span className='font-mono text-[0.72rem] uppercase tracking-widest text-[var(--creative-lime)]/60 font-black'>
+              Direct Connect
+            </span>
+            <span className='font-mono text-body-md font-bold text-creative-ink selection:bg-[var(--creative-lime)] selection:text-black'>
+              {emailAddress}
+            </span>
+          </div>
+
+          <div className='flex items-center gap-3 shrink-0'>
+            <button
+              onClick={handleCopy}
+              className='flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/20 active:scale-95 text-creative-ink px-4 py-2.5 font-mono text-kicker font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer'
+              aria-label='Copy email address'
+            >
+              {copied ? (
+                <>
+                  <Check className='h-3.5 w-3.5 text-[var(--creative-lime)]' />
+                  <span className='text-[var(--creative-lime)]'>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className='h-3.5 w-3.5' />
+                  <span>Copy</span>
+                </>
+              )}
+            </button>
+
+            <a
+              href={`mailto:${emailAddress}`}
+              className='flex items-center justify-center gap-2 rounded-lg bg-[var(--creative-lime)] hover:bg-[var(--creative-lime)]/90 active:scale-95 text-black px-5 py-2.5 font-mono text-kicker font-bold uppercase tracking-wider transition-all duration-300 group/btn shadow-md'
+            >
+              <Mail className='h-3.5 w-3.5' />
+              <span>Email</span>
+              <ArrowUpRight className='h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5' />
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* ── Card 3 — On-time Delivery ────────── */}
-      <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20 group'>
+      <div className='col-span-1 flex flex-col justify-between py-2 min-h-[220px] border-t border-white/8 pt-8 md:pt-10 md:pl-10 group relative overflow-hidden'>
         <div className='flex items-center justify-between'>
           <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-creative-dim'>
             {deliveryLabel}
@@ -234,16 +320,16 @@ function AboutBento({
 
         <div className='my-6 flex items-center justify-between gap-6'>
           <p
-            className='m-0 font-display font-black leading-none text-creative-ink group-hover:scale-105 transition-transform duration-300'
+            className='m-0 font-display font-black leading-none text-creative-ink group-hover:scale-105 transition-transform duration-500'
             style={{
-              fontSize: 'clamp(3.5rem, 5vw, 5.5rem)',
+              fontSize: 'clamp(3.8rem, 5.5vw, 6rem)',
               lineHeight: 0.82,
               letterSpacing: '-0.04em',
             }}
           >
             95%
           </p>
-          <div className='shrink-0 flex items-center justify-center'>
+          <div className='shrink-0 flex items-center justify-center relative'>
             <svg
               className='w-16 h-16 transform -rotate-90'
               viewBox='0 0 100 100'
@@ -267,55 +353,17 @@ function AboutBento({
                 fill='transparent'
                 strokeDasharray='251.2'
                 strokeDashoffset='251.2'
+                style={{
+                  filter: 'drop-shadow(0 0 2px var(--creative-lime))',
+                }}
               />
             </svg>
           </div>
         </div>
 
-        <p className='m-0 font-body text-body-sm font-light leading-relaxed text-creative-muted'>
+        <p className='m-0 font-body text-body-sm font-light leading-relaxed text-creative-muted max-w-[22ch]'>
           {deliveryDesc}
         </p>
-      </div>
-
-      {/* ── Card 4 — Status ───── */}
-      <div className='flex flex-col justify-between rounded-2xl border border-[var(--creative-lime)]/20 bg-[var(--creative-lime)]/[0.04] p-8 min-h-[300px] transition-all duration-300 hover:bg-[var(--creative-lime)]/[0.06] hover:border-[var(--creative-lime)]/40 group'>
-        <div className='flex items-center justify-between'>
-          <div className='flex items-center gap-2'>
-            <span className='relative flex h-2.5 w-2.5'>
-              <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--creative-lime)] opacity-75'></span>
-              <span className='relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--creative-lime)]'></span>
-            </span>
-            <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-[var(--creative-lime)] font-extrabold'>
-              Status
-            </p>
-          </div>
-          <p className='m-0 font-mono text-meta uppercase tracking-[0.18em] text-[var(--creative-lime)]/40'>
-            04 / 04
-          </p>
-        </div>
-
-        <div className='my-6'>
-          <p
-            className='m-0 font-display font-black leading-[1.05] tracking-[-0.03em] text-creative-ink uppercase'
-            style={{
-              fontSize: 'clamp(1.4rem, 2vw, 2.1rem)',
-            }}
-          >
-            Open to new opportunities
-          </p>
-        </div>
-
-        <div className='flex flex-col gap-1 border-t border-[var(--creative-lime)]/10 pt-4'>
-          <span className='font-mono text-meta uppercase tracking-widest text-[var(--creative-lime)]/60'>
-            Direct Connect
-          </span>
-          <a
-            href='mailto:nmhieu04091999@gmail.com'
-            className='font-mono text-body-sm font-bold text-creative-ink no-underline hover:text-[var(--creative-lime)] transition-colors'
-          >
-            nmhieu04091999@gmail.com
-          </a>
-        </div>
       </div>
     </div>
   )
