@@ -88,10 +88,10 @@
   /* Creative developer portfolio specific colors */
   --creative-bg: #080907;
   --creative-panel: #12140f;
-  --creative-ink: #f3f0df;
-  --creative-muted: rgba(243, 240, 223, 0.64);
-  --creative-dim: rgba(243, 240, 223, 0.38);
-  --creative-line: rgba(243, 240, 223, 0.16);
+  --creative-ink: #f8f8f5;
+  --creative-muted: rgba(248, 248, 245, 0.72);
+  --creative-dim: rgba(248, 248, 245, 0.42);
+  --creative-line: rgba(248, 248, 245, 0.14);
   --creative-lime: #c8ff45;
   --creative-green: #73ff87;
   --creative-orange: #ff8a3d;
@@ -832,12 +832,12 @@ body:has(.creative-portfolio)::after {
   min-height: 100dvh;
   overflow: clip;
   background:
-    linear-gradient(rgba(243, 240, 223, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(243, 240, 223, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(248, 248, 245, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(248, 248, 245, 0.028) 1px, transparent 1px),
     radial-gradient(
       circle at 50% 0%,
-      rgba(115, 255, 135, 0.08),
-      transparent 38rem
+      rgba(200, 255, 69, 0.04),
+      transparent 42rem
     ),
     var(--creative-bg);
   background-size:
@@ -854,10 +854,21 @@ body:has(.creative-portfolio)::after {
   letter-spacing: -0.015em;
 }
 
+/* ─── Marquee animation ─────────────────────────────────────────────── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .experience-row,
   .project-card,
-  .skill-stack__group {
+  .skill-stack__group,
+  .project-stack-card {
     transform: skewY(var(--scroll-skew, 0deg));
     transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;

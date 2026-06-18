@@ -9,7 +9,6 @@ import {
   Group,
   IcosahedronGeometry,
   InstancedMesh,
-  Matrix4,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
@@ -195,7 +194,6 @@ export function CreativeWaypointsScene() {
     let rafId = 0
     let lastTime = performance.now()
     let progressTrigger: { kill: () => void } | undefined
-    let resizeObserver: ResizeObserver | undefined
     let currentProgress = 0
     let targetProgress = 0
 
@@ -217,7 +215,8 @@ export function CreativeWaypointsScene() {
     })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.domElement.className = 'creative-waypoints__canvas w-full h-full block filter drop-shadow-[0_0_42px_rgba(200,255,69,0.14)]'
+    renderer.domElement.className =
+      'creative-waypoints__canvas w-full h-full block filter drop-shadow-[0_0_42px_rgba(200,255,69,0.14)]'
     renderer.domElement.setAttribute('aria-hidden', 'true')
     host.appendChild(renderer.domElement)
 
@@ -446,7 +445,9 @@ export function CreativeWaypointsScene() {
 
       // Dynamic 3D constellations lines builder
       let lineIdx = 0
-      const posAttr = constellations.geometry.getAttribute('position') as BufferAttribute
+      const posAttr = constellations.geometry.getAttribute(
+        'position'
+      ) as BufferAttribute
       const positionsArray = posAttr.array as Float32Array
 
       for (let i = 0; i < particleCount; i++) {
@@ -539,7 +540,7 @@ export function CreativeWaypointsScene() {
       })
     })
 
-    resizeObserver = new ResizeObserver(resize)
+    const resizeObserver = new ResizeObserver(resize)
     resizeObserver.observe(document.documentElement)
     window.addEventListener('resize', resize)
     resize()
@@ -575,5 +576,11 @@ export function CreativeWaypointsScene() {
     }
   }, [])
 
-  return <div className='creative-waypoints fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.98] mix-blend-screen max-lg:mix-blend-normal max-lg:[animation:mobile-gradient-pulse_12s_ease-in-out_infinite]' aria-hidden='true' ref={hostRef} />
+  return (
+    <div
+      className='creative-waypoints fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.98] mix-blend-screen max-lg:mix-blend-normal max-lg:[animation:mobile-gradient-pulse_12s_ease-in-out_infinite]'
+      aria-hidden='true'
+      ref={hostRef}
+    />
+  )
 }

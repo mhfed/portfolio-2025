@@ -30,16 +30,16 @@
     "viewWork": "View Work",
     "contactMe": "Contact Me",
     "headline": "Frontend Developer crafting *animated* web experiences.",
-    "description": "I build fast, responsive interfaces where interaction design, performance, and production code all move together.",
-    "intro": "Building high-end digital experiences with a focus on performance, accessibility, and polished UI systems.",
+    "description": "I build fast, precise interfaces where motion design, performance, and production code work as one system.",
+    "intro": "5 years shipping React and Next.js products. Fast, accessible, and built to last.",
     "contact": {
       "basedIn": "Based in",
       "location": "Ha Noi, Viet Nam",
       "sayHello": "Say hello",
       "email": "nmhieu04091999@gmail.com"
     },
-    "textBlockLeft": "Frontend Engineer with 5+ years of professional experience in building high-performance web applications.",
-    "textBlockRight": "I am passionate about creating seamless, user-centric digital experiences and continuously strive to enhance my technical skills and knowledge to deliver exceptional results.",
+    "textBlockLeft": "Frontend Engineer with 5+ years shipping production web applications.",
+    "textBlockRight": "I care about interfaces that feel intentional — not assembled. Motion, performance, and accessibility are not afterthoughts.",
     "meta": {
       "focus": "Focus",
       "focusValue": "UI systems",
@@ -59,20 +59,15 @@
     "focus": "Focus",
     "approach": "Approach",
     "capabilities": "capabilities",
-    "statement": "I am a Frontend Developer who likes interfaces that feel designed, not assembled. I care about beautiful UI, meaningful motion, product polish, accessibility, and performance that survives real traffic.",
-    "badges": [
-      "Frontend Developer",
-      "Motion",
-      "Product Polish",
-      "Performance"
-    ],
+    "statement": "I build interfaces that feel designed, not generated. Motion with purpose, performance under load, and code someone else can actually maintain.",
+    "badges": ["Frontend Developer", "Motion", "Product Polish", "Performance"],
     "itemsCount": "{count} items",
-    "description1": "Skilled Front-end Developer with 5+ years of experience in developing and maintaining front-end web applications. Proficient in JavaScript, TypeScript, HTML, CSS, ES6, React.js, and Next.js. Experienced in code testing and debugging.",
+    "description1": "Frontend Developer with 5+ years shipping React and Next.js apps in production. Strong on TypeScript, CSS systems, accessibility, and real-time UI. Experience spans e-commerce, fintech, and Web3 product surfaces.",
     "coreSkills": "Core Skills",
     "yearsExperience": "Years of Experience",
-    "yearsDescription": "Building web experiences with modern technologies",
-    "clientSatisfaction": "Client Satisfaction",
-    "satisfactionDescription": "Dedicated to exceeding expectations",
+    "yearsDescription": "React, Next.js, TypeScript — in production",
+    "clientSatisfaction": "On-time delivery rate",
+    "satisfactionDescription": "Across freelance and full-time engagements",
     "skillList": {
       "frontend": {
         "label": "Frontend",
@@ -113,7 +108,7 @@
     }
   },
   "experience": {
-    "title": "WORK <br></br> EXPERIENCE",
+    "title": "Work\nExperiences",
     "headline": "From storefront speed to trading flows and internal product systems.",
     "kicker": "overview",
     "readMore": "Read more...",
@@ -126,12 +121,7 @@
         "period": "2/2021 - 7/2021",
         "location": "Ha Noi",
         "description": "Contributed to multiple web projects, learned best practices in front-end development, and built a strong foundation in web technologies.",
-        "skills": [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React"
-        ]
+        "skills": ["HTML", "CSS", "JavaScript", "React"]
       },
       {
         "id": 2,
@@ -140,14 +130,7 @@
         "period": "7/2021 - 8/2022",
         "location": "Ha Noi",
         "description": "Developed Metacity System and Landing Page. Created interface, effect animation, and customized game interface. Translated designs from Figma to HTML and CSS while ensuring UX and UI design are maintained. Refactored code, investigated and fixed bugs. Ensured cross-browser compatibility and responsiveness across various devices and screen sizes.",
-        "skills": [
-          "NextJS",
-          "ReactJS",
-          "Redux",
-          "Sass",
-          "Ant Design",
-          "PHP"
-        ]
+        "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
       },
       {
         "id": 3,
@@ -177,12 +160,7 @@
         "period": "04/2024 - Present",
         "location": "Ha Noi",
         "description": "Architected and executed the transformation of the entire E-commerce Storefront.<br/>System Migration (Lead): Spearheaded the migration of the storefront from Laravel to Next.js, improving Google PageSpeed Insights score from 29 to 90+ and enhancing SEO performance.<br/>Business Impact: Directly contributed to increasing the Conversion Rate (CR) from 1.5% to 2.5% through performance optimization and UX improvements.<br/>Infrastructure & DevOps: Established a self-hosting environment using PM2 and automated GitLab CI/CD workflows; developed hotfix scripts ensuring 99.9% uptime..<br/>Developer Experience (DX): Modernized the Internal Admin Portal by migrating from legacy React to React + Vite, reducing build times significantly.<br/>Product Growth: Developed a Zalo Mini App for the Loyalty program to expand customer reach. Integrated comprehensive tracking (GA4, Pixel) to enable data-driven marketing strategies.<br/>Leadership: Designed the Base Project architecture and mentored team members on modular development and high-quality coding standards",
-        "skills": [
-          "React.js",
-          "Next.js",
-          "TypeScript",
-          "JavaScript"
-        ]
+        "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
       }
     ]
   },
@@ -213,29 +191,17 @@
       },
       {
         "label": "Backend",
-        "items": [
-          "REST APIs",
-          "SSE",
-          "Supabase",
-          "Auth flows",
-          "Formik/Yup"
-        ]
+        "items": ["REST APIs", "SSE", "Supabase", "Auth flows", "Formik/Yup"]
       },
       {
         "label": "Tooling",
-        "items": [
-          "Vercel",
-          "GitLab CI/CD",
-          "PM2",
-          "Vite",
-          "Performance"
-        ]
+        "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "Performance"]
       }
     ]
   },
   "projects": {
     "title": "PROJECTS",
-    "headline": "Production surfaces with rhythm, clarity, and enough motion to feel alive.",
+    "headline": "Projects",
     "kicker": "overview",
     "projectCase": "Project case",
     "launchApp": "Launch App",
@@ -253,12 +219,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
         "liveUrl": "https://www.duongminhle.site/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "tailwind"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "tailwind"]
       },
       {
         "id": 4,
@@ -269,13 +230,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
         "liveUrl": "https://starlento.vn/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "css",
-          "redux"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
       },
       {
         "id": 3,
@@ -304,13 +259,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
         "liveUrl": "https://www.metacity.com/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "css",
-          "redux"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
       }
     ]
   },
@@ -342,25 +291,25 @@
     }
   },
   "collaborate": {
-    "title": "LET'S COLLABORATE",
+    "title": "GET IN TOUCH",
     "poeticHeadline": "Let's build something that moves.",
-    "kicker": "let's work together",
+    "kicker": "contact",
     "quickLinks": "quick links",
     "directLinks": "direct links",
     "allRightsReserved": "All rights reserved",
-    "description": "Have an exciting project in mind? I'd love to hear about it. Let's create something amazing together.",
+    "description": "Have a project that needs sharp frontend work? I'm open to selected product and freelance engagements.",
     "form": {
-      "yourName": "Your Name",
-      "emailAddress": "Email Address",
+      "yourName": "Your name",
+      "emailAddress": "Email address",
       "message": "Message",
-      "namePlaceholder": "John Doe",
-      "emailPlaceholder": "john@example.com",
-      "messagePlaceholder": "Tell me about your project...",
-      "sendMessage": "Send Message",
-      "messageSent": "Message Sent! 🎉"
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@company.com",
+      "messagePlaceholder": "Briefly describe the project or what you need help with.",
+      "sendMessage": "Send message",
+      "messageSent": "Sent. I'll get back to you."
     },
-    "orConnect": "OR CONNECT ON",
-    "reachDirectly": "Or reach me directly at",
+    "orConnect": "or connect on",
+    "reachDirectly": "Or write directly to",
     "phone": "Phone:"
   },
   "common": {

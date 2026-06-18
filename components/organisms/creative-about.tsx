@@ -1,96 +1,362 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
+import type { ScrollTrigger as ScrollTriggerType } from 'gsap/ScrollTrigger'
 import { loadGSAP } from '@/lib/gsap-utils'
 
-export function AboutSection({ locale }: { locale: string }) {
-  const t = useTranslations('about')
-  const badges = t.raw('badges') as string[]
-  const skillListObj = t.raw('skillList') as Record<
-    string,
-    { label: string; value: string }
-  >
+// ─────────────────────────────────────────────
+// Tech marquee items — hardcoded display strip
+// ─────────────────────────────────────────────
+const MARQUEE_ITEMS = [
+  'React.js',
+  'Next.js',
+  'TypeScript',
+  'Tailwind CSS',
+  'GSAP',
+  'Three.js',
+  'Node.js',
+  'React Native',
+  'Redux',
+  'React Query',
+  'GraphQL',
+  'Vite',
+]
 
-  const [activeIndex, setActiveIndex] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const panelRefs = useRef<(HTMLDivElement | null)[]>([])
-  const isHoveringRef = useRef(false)
-  const scrollTriggerRef = useRef<any>(null)
-  const statementRef = useRef<HTMLDivElement>(null)
+function TechMarquee() {
+  // Duplicate for seamless loop
+  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
+  return (
+    <div className='relative w-full overflow-hidden py-6' aria-hidden='true'>
+      {/* Left fade */}
+      <div className='pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[var(--creative-bg)] to-transparent' />
+      {/* Right fade */}
+      <div className='pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[var(--creative-bg)] to-transparent' />
 
-  // Accordion panels - single accent color (lime only)
-  const skillsData = [
-    {
-      id: 'frontend',
-      label: skillListObj.frontend.label,
-      value: skillListObj.frontend.value,
-    },
-    {
-      id: 'state',
-      label: skillListObj.state.label,
-      value: skillListObj.state.value,
-    },
-    {
-      id: 'performance',
-      label: skillListObj.performance.label,
-      value: skillListObj.performance.value,
-    },
-    {
-      id: 'infrastructure',
-      label: locale === 'vi' ? 'DevOps & Di dong' : 'DevOps & Mobile',
-      value: `${skillListObj.devops.value} / ${skillListObj.mobile.value}`,
-    },
-    {
-      id: 'leadership',
-      label: locale === 'vi' ? 'Lanh dao & Quy trinh' : 'Leadership & Quality',
-      value: `${skillListObj.leadership.value} / ${skillListObj.productMindset.value} / ${skillListObj.codeQuality.value} / ${skillListObj.agile.value}`,
-    },
-  ]
+      <div
+        className='flex items-center gap-8'
+        style={{
+          animation: 'marquee 28s linear infinite',
+          width: 'max-content',
+        }}
+      >
+        {items.map((item, i) => (
+          <span
+            key={`${item}-${i}`}
+            className='whitespace-nowrap font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-creative-dim'
+          >
+            {item}
+            <span className='ml-8 text-creative-lime/30'>·</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
 
-  // Scrubbing Text Reveal for the statement
+// ─────────────────────────────────────────────
+// Sticky scroll-stack stat section
+// 4 full-width cards pin + shrink as next arrives
+// Pattern: Section 5.A canonical skeleton
+// ─────────────────────────────────────────────
+
+const STACK_TAGS = [
+  'React.js',
+  'Next.js',
+  'TypeScript',
+  'Tailwind CSS',
+  'GSAP',
+  'Three.js',
+  'React Native',
+]
+
+interface BentoProps {
+  yearsLabel: string
+  yearsDesc: string
+  deliveryLabel: string
+  deliveryDesc: string
+  stackLabel: string
+}
+
+// ── Option 1 — Full Viewport Cinematic ────────
+// Each card is min-h-[100dvh], pinned, giant stat.
+// Cards shrink+fade as next scrolls into view.
+// Card 4 breaks the dark theme with full lime fill.
+function AboutBento({
+  yearsLabel,
+  yearsDesc,
+  deliveryLabel,
+  deliveryDesc,
+  stackLabel,
+}: BentoProps) {
+  const wrapRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
-    const statementEl = statementRef.current
-    if (!statementEl) return
+    const wrap = wrapRef.current
+    if (!wrap) return
+
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    if (reduced) return
 
     let active = true
 
     loadGSAP().then(({ gsap, ScrollTrigger }) => {
+      if (!active || !wrap) return
+
+      const cards = gsap.utils.toArray<HTMLElement>('.about-stack-card', wrap)
+
+      cards.forEach((card, i) => {
+        if (i === cards.length - 1) return
+
+        // Pin each card at viewport top until the last card arrives
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top top',
+          endTrigger: cards[cards.length - 1],
+          end: 'top top',
+          pin: true,
+          pinSpacing: false,
+        })
+
+        // Shrink + fade as next card scrolls up
+        gsap.to(card, {
+          scale: 0.94,
+          opacity: 0.4,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: cards[i + 1],
+            start: 'top bottom',
+            end: 'top top',
+            scrub: true,
+          },
+        })
+      })
+    })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
+  return (
+    <div ref={wrapRef} className='relative mt-20'>
+      {/* ── Card 1 — Years of Experience ─────── */}
+      {/* Dark near-black. Giant lime "5+" anchored bottom-right. */}
+      <div className='about-stack-card sticky top-0 flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl bg-[#080907] p-[clamp(2rem,5vw,4rem)] will-change-transform'>
+        {/* Top-left kicker */}
+        <div className='flex items-center justify-between'>
+          <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
+            {yearsLabel}
+          </p>
+          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-creative-dim/40'>
+            01 / 04
+          </p>
+        </div>
+
+        {/* Mid description */}
+        <p
+          className='max-w-[22ch] font-display font-extrabold leading-[1.12] tracking-[-0.02em] text-creative-ink/30'
+          style={{ fontSize: 'clamp(1.6rem, 3vw, 2.8rem)' }}
+        >
+          {yearsDesc}
+        </p>
+
+        {/* Giant stat anchored bottom-right */}
+        <div className='flex items-end justify-end'>
+          <p
+            className='m-0 font-display font-black leading-none'
+            style={{
+              fontSize: 'clamp(10rem, 22vw, 20rem)',
+              color: 'var(--creative-lime)',
+              lineHeight: 0.82,
+              letterSpacing: '-0.04em',
+            }}
+          >
+            5+
+          </p>
+        </div>
+      </div>
+
+      {/* ── Card 2 — Core Stack ──────────────── */}
+      {/* Slightly lighter dark. Pills centered with generous spacing. */}
+      <div className='about-stack-card sticky top-0 flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl bg-[#0b0d08] p-[clamp(2rem,5vw,4rem)] will-change-transform'>
+        {/* Top-left kicker */}
+        <div className='flex items-center justify-between'>
+          <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
+            {stackLabel}
+          </p>
+          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-creative-dim/40'>
+            02 / 04
+          </p>
+        </div>
+
+        {/* Pills grid — generous spacing, centered */}
+        <div className='flex flex-wrap items-center justify-center gap-3 py-8'>
+          {STACK_TAGS.map((tech) => (
+            <span
+              key={tech}
+              className='rounded-full border border-[var(--creative-lime)]/20 bg-[var(--creative-lime)]/[0.04] px-5 py-2.5 font-mono text-[0.78rem] font-bold uppercase tracking-[0.14em] text-creative-muted transition-all duration-300 hover:border-[var(--creative-lime)]/60 hover:bg-[var(--creative-lime)]/10 hover:text-creative-ink'
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Bottom: count */}
+        <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-creative-dim/40'>
+          {STACK_TAGS.length} technologies in active use
+        </p>
+      </div>
+
+      {/* ── Card 3 — On-time Delivery ────────── */}
+      {/* Dark. Giant white "95%" bottom-left, kicker top-right. */}
+      <div className='about-stack-card sticky top-0 flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl bg-[#080907] p-[clamp(2rem,5vw,4rem)] will-change-transform'>
+        {/* Top: two-sided kicker */}
+        <div className='flex items-center justify-between'>
+          <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
+            {deliveryLabel}
+          </p>
+          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-creative-dim/40'>
+            03 / 04
+          </p>
+        </div>
+
+        {/* Mid description — right-aligned */}
+        <p
+          className='ml-auto max-w-[24ch] text-right font-display font-extrabold leading-[1.12] tracking-[-0.02em] text-creative-ink/25'
+          style={{ fontSize: 'clamp(1.6rem, 3vw, 2.8rem)' }}
+        >
+          {deliveryDesc}
+        </p>
+
+        {/* Giant stat anchored bottom-left */}
+        <div className='flex items-end justify-start'>
+          <p
+            className='m-0 font-display font-black leading-none text-creative-ink'
+            style={{
+              fontSize: 'clamp(10rem, 22vw, 20rem)',
+              lineHeight: 0.82,
+              letterSpacing: '-0.04em',
+            }}
+          >
+            95%
+          </p>
+        </div>
+      </div>
+
+      {/* ── Card 4 — Status (last, no pin) ───── */}
+      {/* Full lime fill — inverts the palette, strong landing. */}
+      <div
+        className='about-stack-card flex min-h-[100dvh] flex-col justify-between overflow-hidden rounded-2xl p-[clamp(2rem,5vw,4rem)]'
+        style={{ backgroundColor: 'var(--creative-lime)' }}
+      >
+        {/* Top */}
+        <div className='flex items-center justify-between'>
+          <div className='flex items-center gap-2.5'>
+            <span
+              className='h-2 w-2 animate-pulse rounded-full bg-[#080907]'
+              aria-hidden='true'
+            />
+            <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-[#080907]/60'>
+              Status
+            </p>
+          </div>
+          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[#080907]/40'>
+            04 / 04
+          </p>
+        </div>
+
+        {/* Center — big message */}
+        <p
+          className='max-w-[14ch] font-display font-black leading-[1.0] tracking-[-0.04em]'
+          style={{
+            fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+            color: '#080907',
+          }}
+        >
+          Open to new opportunities
+        </p>
+
+        {/* Bottom — CTA row */}
+        <div className='flex items-end justify-between'>
+          <p
+            className='m-0 font-mono text-[0.65rem] uppercase tracking-[0.22em]'
+            style={{ color: '#080907', opacity: 0.5 }}
+          >
+            Available now
+          </p>
+          <p
+            className='m-0 font-mono text-[0.65rem] uppercase tracking-[0.22em]'
+            style={{ color: '#080907', opacity: 0.5 }}
+          >
+            nmhieu04091999@gmail.com
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────
+// AboutSection
+// ─────────────────────────────────────────────
+
+export function AboutSection({ locale }: { locale: string }) {
+  const t = useTranslations('about')
+  const badges = t.raw('badges') as string[]
+
+  const statementRef = useRef<HTMLDivElement>(null)
+
+  // Scrubbing text reveal on statement
+  useEffect(() => {
+    const statementEl = statementRef.current
+    if (!statementEl) return
+
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    if (reduced) return
+
+    let active = true
+
+    loadGSAP().then(({ ScrollTrigger }) => {
       if (!active) return
 
       const text = statementEl.textContent || ''
-      const words = text.split(' ')
+      const words = text.split(' ').filter(Boolean)
       statementEl.innerHTML = ''
 
-      words.forEach((word) => {
+      words.forEach((word, i) => {
         const span = document.createElement('span')
-        span.textContent = word + ' '
+        span.textContent = word + (i < words.length - 1 ? ' ' : '')
         span.className = 'about-scrub-word inline'
-        span.style.opacity = '0.12'
-        span.style.transition = 'none'
+        span.style.opacity = '0.1'
         statementEl.appendChild(span)
       })
 
-      const wordSpans = statementEl.querySelectorAll('.about-scrub-word')
+      const wordSpans = Array.from(
+        statementEl.querySelectorAll('.about-scrub-word')
+      ) as HTMLElement[]
+      const total = wordSpans.length
 
       ScrollTrigger.create({
         trigger: statementEl,
-        start: 'top 80%',
-        end: 'bottom 30%',
-        scrub: 0.8,
-        onUpdate: (self: any) => {
+        start: 'top 78%',
+        end: 'bottom 28%',
+        scrub: 1.2,
+        onUpdate: (self: ScrollTriggerType) => {
           const progress = self.progress
-          const total = wordSpans.length
-          wordSpans.forEach((span: Element, idx: number) => {
+          wordSpans.forEach((span, idx) => {
             const wordProgress = idx / total
-            const el = span as HTMLElement
             if (wordProgress < progress) {
-              el.style.opacity = '1'
-            } else if (wordProgress < progress + 0.08) {
-              const fade = (progress + 0.08 - wordProgress) / 0.08
-              el.style.opacity = `${0.12 + fade * 0.88}`
+              span.style.opacity = '1'
+            } else if (wordProgress < progress + 0.1) {
+              const fade = (progress + 0.1 - wordProgress) / 0.1
+              span.style.opacity = `${0.1 + fade * 0.9}`
             } else {
-              el.style.opacity = '0.12'
+              span.style.opacity = '0.1'
             }
           })
         },
@@ -102,120 +368,6 @@ export function AboutSection({ locale }: { locale: string }) {
     }
   }, [])
 
-  // ScrollTrigger for accordion auto-activation
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    let active = true
-    let triggerInstance: any = null
-
-    loadGSAP().then(({ ScrollTrigger }) => {
-      if (!active) return
-
-      triggerInstance = ScrollTrigger.create({
-        trigger: container,
-        start: 'top 75%',
-        end: 'bottom 25%',
-        onUpdate: (self: any) => {
-          if (isHoveringRef.current) return
-          const progress = self.progress
-          const count = skillsData.length
-          const index = Math.min(
-            count - 1,
-            Math.max(0, Math.floor(progress * count))
-          )
-          setActiveIndex(index)
-        },
-      })
-      scrollTriggerRef.current = triggerInstance
-    })
-
-    return () => {
-      active = false
-      if (triggerInstance) triggerInstance.kill()
-    }
-  }, [])
-
-  // GSAP Horizontal Accordion Animation
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    let active = true
-
-    loadGSAP().then(({ gsap }) => {
-      if (!active) return
-
-      const isMobile = window.matchMedia('(max-width: 767px)').matches
-      const panels = container.querySelectorAll('.accordion-panel')
-
-      panels.forEach((panel, idx) => {
-        const isActive = idx === activeIndex
-
-        if (isMobile) {
-          gsap.set(panel, { flexGrow: 1 })
-          const content = panel.querySelector('.panel-content') as HTMLElement
-          const naturalHeight = content ? content.scrollHeight : 220
-
-          gsap.to(panel, {
-            height: isActive ? naturalHeight : 72,
-            duration: 0.5,
-            ease: 'power3.out',
-            overwrite: 'auto',
-          })
-
-          if (content) {
-            gsap.to(content, {
-              opacity: isActive ? 1 : 0,
-              y: isActive ? 0 : 10,
-              duration: 0.4,
-              ease: 'power2.out',
-              overwrite: 'auto',
-            })
-          }
-        } else {
-          gsap.set(panel, { height: '100%' })
-
-          gsap.to(panel, {
-            flexGrow: isActive ? 5.5 : 1,
-            duration: 0.6,
-            ease: 'power3.out',
-            overwrite: 'auto',
-          })
-
-          const verticalTitle = panel.querySelector('.panel-title--vertical')
-          const content = panel.querySelector('.panel-content')
-
-          if (verticalTitle) {
-            gsap.to(verticalTitle, {
-              opacity: isActive ? 0 : 1,
-              y: isActive ? -20 : 0,
-              duration: 0.4,
-              ease: 'power2.out',
-              overwrite: 'auto',
-            })
-          }
-
-          if (content) {
-            gsap.to(content, {
-              opacity: isActive ? 1 : 0,
-              x: isActive ? 0 : 20,
-              duration: 0.5,
-              delay: isActive ? 0.12 : 0,
-              ease: 'power3.out',
-              overwrite: 'auto',
-            })
-          }
-        }
-      })
-    })
-
-    return () => {
-      active = false
-    }
-  }, [activeIndex])
-
   return (
     <section
       id='about'
@@ -223,34 +375,34 @@ export function AboutSection({ locale }: { locale: string }) {
       data-section
       data-waypoint='about'
     >
-      <div className='max-w-screen-2xl mx-auto px-[clamp(1rem,4vw,4rem)]'>
-        {/* Headline - vertical stack, no split-header */}
-        <h2
-          data-split-line
-          className='m-0 text-creative-ink font-display font-black tracking-tight leading-[1.12] uppercase [text-wrap:balance] max-w-[24ch] mb-16'
-          style={{ fontSize: 'clamp(1.45rem, 2.4vw, 2.8rem)' }}
-        >
-          {t('focus')}
-        </h2>
+      <div className='mx-auto max-w-screen-2xl px-[clamp(1.25rem,4vw,4rem)]'>
+        {/* Section kicker */}
+        <p className='m-0 mb-8 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-creative-dim'>
+          {locale === 'vi'
+            ? 'Giới thiệu'
+            : locale === 'zh-TW'
+              ? '關於我'
+              : 'About'}
+        </p>
 
-        {/* Two-column content - statement left, bio + stats right */}
-        <div className='grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-[clamp(2rem,6vw,6rem)]'>
-          {/* Left: Statement with scrubbing reveal + badges */}
-          <div className='flex flex-col gap-10'>
+        {/* Two-column layout */}
+        <div className='grid grid-cols-1 gap-[clamp(2rem,8vw,8rem)] lg:grid-cols-[1.1fr_0.9fr]'>
+          {/* Left: scrubbing statement */}
+          <div>
             <div
               ref={statementRef}
-              className='max-w-none m-0 text-creative-ink font-display font-extrabold tracking-normal leading-[1.35] [text-wrap:balance]'
-              style={{ fontSize: 'clamp(1.25rem, 1.8vw, 2rem)' }}
-              data-split-line
+              className='font-display font-extrabold leading-[1.18] tracking-[-0.01em] text-creative-ink'
+              style={{ fontSize: 'clamp(1.4rem, 2.4vw, 2.6rem)' }}
             >
               {t('statement')}
             </div>
 
-            <div className='flex flex-wrap gap-2.5 max-w-[54rem]' data-reveal>
+            {/* Badges */}
+            <div className='mt-10 flex flex-wrap gap-2' data-reveal>
               {badges.map((badge) => (
                 <span
                   key={badge}
-                  className='border border-creative-lime/40 text-creative-lime rounded-full px-3 py-1.5 font-mono text-[0.72rem] font-black tracking-wider leading-none uppercase transition-all duration-300 hover:bg-creative-lime/10 hover:border-creative-lime/60'
+                  className='rounded-full border border-[var(--creative-lime)]/30 px-3 py-1.5 font-mono text-[0.7rem] font-black uppercase tracking-wider text-[var(--creative-lime)] transition-all duration-300 hover:border-[var(--creative-lime)]/60 hover:bg-[var(--creative-lime)]/8'
                 >
                   {badge}
                 </span>
@@ -258,161 +410,27 @@ export function AboutSection({ locale }: { locale: string }) {
             </div>
           </div>
 
-          {/* Right: Bio + Stats */}
-          <div className='flex flex-col gap-10'>
-            <p
-              className='text-creative-muted text-body-lg font-light leading-relaxed'
-              data-reveal
-            >
+          {/* Right: description */}
+          <div className='flex flex-col justify-center' data-reveal>
+            <p className='m-0 text-[clamp(1rem,1.3vw,1.18rem)] font-light leading-relaxed text-creative-muted'>
               {t('description1')}
             </p>
-
-            {/* Stats - 2 items only, no fake-precise numbers */}
-            <div
-              className='grid grid-cols-2 gap-0 border border-creative-line rounded-2xl overflow-hidden'
-              data-reveal
-            >
-              <div className='p-6 border-r border-creative-line bg-[#080907]/60 hover:bg-[#080907]/80 transition-colors duration-300'>
-                <span
-                  className='block font-display font-black text-creative-lime leading-none mb-2'
-                  style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)' }}
-                >
-                  5+
-                </span>
-                <strong className='text-[0.82rem] font-extrabold uppercase tracking-wider text-creative-ink block'>
-                  {t('yearsExperience')}
-                </strong>
-                <p className='m-0 text-[0.78rem] text-creative-dim leading-normal mt-1'>
-                  {t('yearsDescription')}
-                </p>
-              </div>
-
-              <div className='p-6 bg-[#080907]/60 hover:bg-[#080907]/80 transition-colors duration-300'>
-                <span
-                  className='block font-display font-black text-creative-lime leading-none mb-2'
-                  style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)' }}
-                >
-                  10+
-                </span>
-                <strong className='text-[0.82rem] font-extrabold uppercase tracking-wider text-creative-ink block'>
-                  {locale === 'vi' ? 'Du an' : 'Projects Delivered'}
-                </strong>
-                <p className='m-0 text-[0.78rem] text-creative-dim leading-normal mt-0.5'>
-                  {locale === 'vi'
-                    ? 'Tu e-commerce den fintech va Web3'
-                    : 'From e-commerce to fintech and Web3'}
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 
-        {/* Horizontal Accordion Skills */}
-        <div className='mt-32 md:mt-48' data-reveal ref={containerRef}>
-          <h3
-            className='font-display font-black uppercase tracking-tight mb-10 text-creative-ink'
-            style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)' }}
-          >
-            {t('coreSkills')}
-          </h3>
-
-          <div
-            className='flex flex-col md:flex-row w-full md:h-[420px] gap-2'
-            onMouseEnter={() => {
-              isHoveringRef.current = true
-            }}
-            onMouseLeave={() => {
-              isHoveringRef.current = false
-              if (scrollTriggerRef.current) {
-                const progress = scrollTriggerRef.current.progress
-                const count = skillsData.length
-                const index = Math.min(
-                  count - 1,
-                  Math.max(0, Math.floor(progress * count))
-                )
-                setActiveIndex(index)
-              }
-            }}
-          >
-            {skillsData.map((skill, index) => {
-              const isCurrent = activeIndex === index
-
-              return (
-                <div
-                  key={skill.id}
-                  ref={(el) => {
-                    panelRefs.current[index] = el
-                  }}
-                  className={`accordion-panel group flex-1 h-full rounded-2xl border bg-[#080907]/50 backdrop-blur-md relative overflow-hidden cursor-pointer flex items-center justify-center transition-all duration-500 max-md:w-full max-md:h-[72px] max-md:flex-none max-md:justify-start max-md:p-0 max-md:items-stretch ${
-                    isCurrent
-                      ? 'is-active border-creative-lime/40 shadow-[0_16px_48px_rgba(0,0,0,0.35)]'
-                      : 'border-creative-line hover:border-creative-lime/30'
-                  }`}
-                  role='button'
-                  tabIndex={0}
-                  aria-expanded={isCurrent}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      setActiveIndex(index)
-                    }
-                  }}
-                  onMouseEnter={() => {
-                    const isMobile =
-                      window.matchMedia('(max-width: 767px)').matches
-                    if (!isMobile) setActiveIndex(index)
-                  }}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  {/* Radial glow on active - single lime color */}
-                  {isCurrent && (
-                    <div
-                      className='absolute inset-0 opacity-60 pointer-events-none'
-                      style={{
-                        background:
-                          'radial-gradient(ellipse at 50% 100%, rgba(200, 255, 69, 0.12), transparent 70%)',
-                      }}
-                    />
-                  )}
-
-                  {/* Vertical Title (Desktop collapsed) */}
-                  <div className='panel-title--vertical absolute whitespace-nowrap -rotate-90 font-display text-[0.9rem] font-black uppercase tracking-[0.12em] text-creative-dim pointer-events-none origin-center transition-colors duration-300 group-hover:text-creative-ink max-md:hidden'>
-                    {skill.label}
-                  </div>
-
-                  {/* Mobile collapsed title */}
-                  <div
-                    className={`panel-header--mobile flex md:hidden items-center gap-4 p-5 w-full h-[72px] absolute top-0 left-0 z-10 pointer-events-none transition-opacity duration-300 ${
-                      isCurrent ? 'opacity-0' : 'opacity-100'
-                    }`}
-                  >
-                    <span className='panel-title--mobile-text font-display text-sm font-black uppercase tracking-wider text-creative-ink'>
-                      {skill.label}
-                    </span>
-                  </div>
-
-                  {/* Expanded content */}
-                  <div className='panel-content p-8 flex flex-col justify-between h-full w-full absolute inset-0 z-[2] opacity-0 pointer-events-none max-md:p-5 max-md:relative max-md:opacity-100 max-md:pointer-events-auto'>
-                    <div className='panel-header flex justify-between items-start w-full'>
-                      <div className='w-2 h-2 rounded-full bg-creative-lime mt-2' />
-                      <h4
-                        className='m-0 font-display font-black uppercase tracking-tight text-creative-ink max-w-[15ch] max-md:max-w-none leading-none max-md:text-left text-right'
-                        style={{ fontSize: 'clamp(1.2rem, 2vw, 1.8rem)' }}
-                      >
-                        {skill.label}
-                      </h4>
-                    </div>
-                    <div className='mt-auto w-full'>
-                      <p className='m-0 text-body-sm max-md:text-[0.85rem] text-creative-muted leading-[1.65] font-light'>
-                        {skill.value}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+        {/* Tech marquee strip */}
+        <div className='mt-20 border-y border-white/8'>
+          <TechMarquee />
         </div>
+
+        {/* Bento grid */}
+        <AboutBento
+          yearsLabel={t('yearsExperience')}
+          yearsDesc={t('yearsDescription')}
+          deliveryLabel={t('clientSatisfaction')}
+          deliveryDesc={t('satisfactionDescription')}
+          stackLabel={t('coreSkills')}
+        />
       </div>
     </section>
   )

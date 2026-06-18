@@ -25,7 +25,9 @@ export function CreativePortfolioEffects() {
     if (reduced) return
 
     let active = true
-    let mm: { add: (...args: any[]) => void; revert: () => void } | undefined
+    let mm:
+      | { add: (query: string, func: () => void) => void; revert: () => void }
+      | undefined
 
     loadGSAP().then(({ gsap, ScrollTrigger }) => {
       if (!active) return

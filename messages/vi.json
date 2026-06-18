@@ -30,16 +30,16 @@
     "viewWork": "Xem dự án",
     "contactMe": "Liên hệ tôi",
     "headline": "Lập trình viên Frontend kiến tạo trải nghiệm web *sống động*.",
-    "description": "Tôi xây dựng các giao diện nhanh, mượt mà và trực quan, nơi thiết kế tương tác, hiệu năng và mã nguồn chạy thực tế luôn đồng hành cùng nhau.",
-    "intro": "Xây dựng các trải nghiệm kỹ thuật số cao cấp, tập trung vào hiệu suất, khả năng tiếp cận và hệ thống giao diện tinh tế.",
+    "description": "Tôi xây dựng giao diện nhanh và chính xác, nơi thiết kế chuyển động, hiệu năng và mã nguồn thực tế vận hành như một hệ thống.",
+    "intro": "5 năm ship sản phẩm React và Next.js. Nhanh, accessible, và bền vững.",
     "contact": {
       "basedIn": "Sống tại",
       "location": "Hà Nội, Việt Nam",
       "sayHello": "Liên hệ",
       "email": "nmhieu04091999@gmail.com"
     },
-    "textBlockLeft": "Liên tục học hỏi và cập nhật những xu hướng công nghệ mới nhất là chìa khóa để tôi đạt được những mục tiêu này.",
-    "textBlockRight": "Về lâu dài, tôi mong muốn chuyên sâu vào việc phát triển các ứng dụng sáng tạo và phổ biến trên các nền tảng web, di động và có thể là cả máy tính để bàn.",
+    "textBlockLeft": "Frontend Engineer với 5+ năm kinh nghiệm ship ứng dụng web thực tế.",
+    "textBlockRight": "Tôi quan tâm đến các giao diện được thiết kế có chủ đích — không phải lắp ghép. Motion, hiệu năng và accessibility không phải là thứ thêm sau.",
     "meta": {
       "focus": "Trọng tâm",
       "focusValue": "Hệ thống UI",
@@ -59,7 +59,7 @@
     "focus": "Trọng tâm",
     "approach": "Phương châm",
     "capabilities": "năng lực",
-    "statement": "Tôi là một Lập trình viên Frontend yêu thích các giao diện được thiết kế chỉn chu thay vì chỉ lắp ghép. Tôi quan tâm đến giao diện đẹp, chuyển động có ý nghĩa, độ hoàn thiện của sản phẩm, khả năng tiếp cận và hiệu suất hoạt động thực tế.",
+    "statement": "Tôi build giao diện cảm giác như được thiết kế, không phải được tạo ra. Chuyển động có mục đích, hiệu năng dưới tải, và code người khác có thể bảo trì được.",
     "badges": [
       "Lập trình viên Frontend",
       "Chuyển động",
@@ -67,12 +67,12 @@
       "Hiệu năng"
     ],
     "itemsCount": "{count} mục",
-    "description1": "Lập trình viên Front-end có kỹ năng với 5+ năm kinh nghiệm trong việc phát triển và duy trì các ứng dụng web front-end. Thành thạo JavaScript, TypeScript, HTML, CSS, ES6, React.js và Next.js. Có kinh nghiệm trong kiểm tra và gỡ lỗi mã.",
+    "description1": "Frontend Developer với 5+ năm ship ứng dụng React và Next.js trong production. Mạnh về TypeScript, CSS systems, accessibility và real-time UI. Kinh nghiệm trải rộng e-commerce, fintech và Web3.",
     "coreSkills": "Kỹ năng cốt lõi",
     "yearsExperience": "Năm kinh nghiệm",
-    "yearsDescription": "Xây dựng trải nghiệm web với công nghệ hiện đại",
-    "clientSatisfaction": "Hài lòng khách hàng",
-    "satisfactionDescription": "Cam kết vượt quá mong đợi",
+    "yearsDescription": "React, Next.js, TypeScript — trong production",
+    "clientSatisfaction": "Tỷ lệ giao đúng hạn",
+    "satisfactionDescription": "Qua các dự án freelance và full-time",
     "skillList": {
       "frontend": {
         "label": "Frontend",
@@ -113,7 +113,7 @@
     }
   },
   "experience": {
-    "title": "KINH NGHIỆM <br></br> LÀM VIỆC",
+    "title": "Kinh Nghiệm\nLàm Việc",
     "headline": "Từ tốc độ storefront đến luồng giao dịch và hệ thống sản phẩm nội bộ.",
     "kicker": "tổng quan",
     "readMore": "Xem thêm...",
@@ -126,12 +126,7 @@
         "period": "2/2021 - 7/2021",
         "location": "Hà Nội",
         "description": "Tham gia đóng góp vào nhiều dự án web, học hỏi các phương pháp phát triển front-end tốt nhất và xây dựng nền tảng vững chắc về công nghệ web.",
-        "skills": [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React"
-        ]
+        "skills": ["HTML", "CSS", "JavaScript", "React"]
       },
       {
         "id": 2,
@@ -140,14 +135,7 @@
         "period": "7/2021 - 8/2022",
         "location": "Hà Nội",
         "description": "Phát triển Hệ thống Metacity và Trang giới thiệu (Landing Page). Tạo giao diện, hiệu ứng chuyển động và tùy chỉnh giao diện trò chơi. Chuyển đổi thiết kế từ Figma sang HTML và CSS trong khi vẫn đảm bảo duy trì thiết kế UX và UI. Tối ưu cấu trúc mã (refactor), tìm hiểu và sửa lỗi. Đảm bảo khả năng tương thích chéo trình duyệt và tính phản hồi linh hoạt trên nhiều thiết bị và kích thước màn hình khác nhau.",
-        "skills": [
-          "NextJS",
-          "ReactJS",
-          "Redux",
-          "Sass",
-          "Ant Design",
-          "PHP"
-        ]
+        "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
       },
       {
         "id": 3,
@@ -177,12 +165,7 @@
         "period": "04/2024 - Hiện tại",
         "location": "Hà Nội",
         "description": "Kiến trúc và thực thi chuyển đổi toàn bộ E-commerce Storefront.<br/>Chuyển đổi Hệ thống (Trưởng nhóm): Dẫn dắt việc di chuyển mã nguồn storefront từ Laravel sang Next.js, nâng điểm Google PageSpeed Insights từ 29 lên 90+ và cải thiện hiệu suất SEO.<br/>Tác động Kinh doanh: Đóng góp trực tiếp vào việc tăng Tỷ lệ chuyển đổi (CR) từ 1.5% lên 2.5% thông qua tối ưu hóa hiệu suất và cải thiện trải nghiệm người dùng (UX).<br/>Hạ tầng & DevOps: Thiết lập môi trường tự vận hành (self-hosting) bằng PM2 và tự động hóa quy trình GitLab CI/CD; phát triển các mã kịch bản hotfix đảm bảo thời gian hoạt động 99.9%.<br/>Trải nghiệm Lập trình viên (DX): Hiện đại hóa Cổng quản trị nội bộ (Admin Portal) bằng cách chuyển từ React kế thừa sang React + Vite, giảm đáng kể thời gian build.<br/>Tăng trưởng Sản phẩm: Phát triển Zalo Mini App cho chương trình Khách hàng thân thiết để mở rộng tệp khách hàng. Tích hợp hệ thống theo dõi toàn diện (GA4, Pixel) phục vụ cho các chiến lược marketing dựa trên dữ liệu.<br/>Năng lực Lãnh đạo: Thiết kế kiến trúc dự án cơ sở (Base Project) và hướng dẫn các thành viên trong nhóm về tiêu chuẩn phát triển dạng mô-đun và chất lượng mã nguồn cao.",
-        "skills": [
-          "React.js",
-          "Next.js",
-          "TypeScript",
-          "JavaScript"
-        ]
+        "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
       }
     ]
   },
@@ -211,7 +194,7 @@
   },
   "projects": {
     "title": "DỰ ÁN",
-    "headline": "Các sản phẩm hoàn thiện với nhịp điệu, sự rõ ràng và chuyển động vừa đủ để mang lại cảm giác sống động.",
+    "headline": "Dự án",
     "kicker": "tổng quan",
     "projectCase": "Chi tiết dự án",
     "launchApp": "Mở ứng dụng",
@@ -229,12 +212,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
         "liveUrl": "https://www.duongminhle.site/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "tailwind"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "tailwind"]
       },
       {
         "id": 4,
@@ -245,13 +223,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
         "liveUrl": "https://starlento.vn/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "css",
-          "redux"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
       },
       {
         "id": 3,
@@ -280,13 +252,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
         "liveUrl": "https://www.metacity.com/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "css",
-          "redux"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
       }
     ]
   },

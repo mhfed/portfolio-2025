@@ -17,7 +17,7 @@ function ScrollVelocityTracker() {
   })
 
   useEffect(() => {
-    let timeout: any
+    let timeout: ReturnType<typeof setTimeout>
     const handleScroll = () => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {

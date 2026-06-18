@@ -171,7 +171,6 @@ export function ImageUploadDropzone({
 
       {uploadedUrl && (
         <div className='mt-2 flex items-center gap-3'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={uploadedUrl}
             alt='Uploaded preview'

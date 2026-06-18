@@ -30,16 +30,16 @@
     "viewWork": "檢視作品",
     "contactMe": "聯絡我",
     "headline": "打造 *生動* 網頁體驗 的 前端開發工程師。",
-    "description": "我打造快速且響應式的網頁介面，將互動設計、效能表現與實際代碼緊密結合。",
-    "intro": "打造高階數位體驗，專注於效能、無障礙設計與精緻的 UI 系統。",
+    "description": "我打造快速、精準的網頁介面，讓動態設計、效能與生產代碼作為單一系統協同運作。",
+    "intro": "5 年 React 與 Next.js 產品交付經驗。快速、無障礙、經得起考驗。",
     "contact": {
       "basedIn": "目前所在地",
       "location": "越南河內",
       "sayHello": "打聲招呼",
       "email": "nmhieu04091999@gmail.com"
     },
-    "textBlockLeft": "持續學習並掌握最新趨勢，將是實現這些目標的關鍵。",
-    "textBlockRight": "長期來看，我志在專精於為網頁、行動裝置，甚至桌面平台打造創新且受歡迎的應用程式。",
+    "textBlockLeft": "前端工程師，擁有 5 年以上實際上線 Web 應用程式的經驗。",
+    "textBlockRight": "我在乎有意圖的介面設計，而非拼湊組合。動態、效能與無障礙性並非事後補充。",
     "meta": {
       "focus": "核心領域",
       "focusValue": "UI 系統",
@@ -59,20 +59,15 @@
     "focus": "核心領域",
     "approach": "工作方法",
     "capabilities": "核心能力",
-    "statement": "我是一名熱愛精緻設計而非僅僅拼湊介面的前端開發工程師。我專注於美觀的 UI、有意義的動態特效、產品細節磨練、無障礙設計，以及能承受真實流量的高效能表現。",
-    "badges": [
-      "前端開發工程師",
-      "動態特效",
-      "產品細節",
-      "效能表現"
-    ],
+    "statement": "我打造讓人感覺是設計出來的介面，而非生成的。有目的的動態效果、承壓下的效能，以及他人能維護的代碼。",
+    "badges": ["前端開發工程師", "動態特效", "產品細節", "效能表現"],
     "itemsCount": "{count} 項",
-    "description1": "擁有 5 年以上經驗的前端開發工程師，專精於開發與維護前端網頁應用程式。熟練掌握 JavaScript、TypeScript、HTML、CSS、ES6、React.js 和 Next.js。具備程式碼測試與除錯經驗。",
+    "description1": "前端開發工程師，擁有 5 年以上在 production 環境交付 React 與 Next.js 應用程式的經驗。擅長 TypeScript、CSS 系統、無障礙設計與即時 UI。橫跨電商、金融科技與 Web3 產品。",
     "coreSkills": "核心技能",
     "yearsExperience": "年經驗",
-    "yearsDescription": "運用現代技術打造網頁體驗",
-    "clientSatisfaction": "客戶滿意度",
-    "satisfactionDescription": "致力於超越期望",
+    "yearsDescription": "React、Next.js、TypeScript — 在 production 環境中",
+    "clientSatisfaction": "準時交付率",
+    "satisfactionDescription": "涵蓋自由接案與全職合作",
     "skillList": {
       "frontend": {
         "label": "Frontend",
@@ -113,7 +108,7 @@
     }
   },
   "experience": {
-    "title": "工作<br />經歷",
+    "title": "工作\n經歷",
     "headline": "從前台速度到交易流程，再到內部產品系統。",
     "kicker": "概述",
     "readMore": "閱讀更多...",
@@ -126,12 +121,7 @@
         "period": "2/2021 - 7/2021",
         "location": "河內",
         "description": "參與多個網頁專案，學習前端開發的最佳實踐，並在網頁技術方面奠定堅實的基礎。",
-        "skills": [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React"
-        ]
+        "skills": ["HTML", "CSS", "JavaScript", "React"]
       },
       {
         "id": 2,
@@ -140,14 +130,7 @@
         "period": "7/2021 - 8/2022",
         "location": "河內",
         "description": "開發 Metacity 系統與登陸頁面。製作介面、動畫特效並客製化遊戲介面。將 Figma 設計稿轉換為 HTML/CSS，同時確保維持良好的 UX/UI 設計。重構程式碼、調查並修復 Bug。確保跨瀏覽器相容性以及在各式裝置與螢幕尺寸上的響應式呈現。",
-        "skills": [
-          "NextJS",
-          "ReactJS",
-          "Redux",
-          "Sass",
-          "Ant Design",
-          "PHP"
-        ]
+        "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
       },
       {
         "id": 3,
@@ -177,12 +160,7 @@
         "period": "04/2024 - 至今",
         "location": "河內",
         "description": "規劃並執行整個電子商務前台的轉型。<br/>系統遷移（主導）：帶領前台從 Laravel 遷移至 Next.js，將 Google PageSpeed Insights 分數從 29 分提升至 90+ 分，並優化 SEO 表現。<br/>業務影響：透過效能優化與 UX 改善，直接促使轉換率（CR）從 1.5% 提升至 2.5%。<br/>基礎設施與 DevOps：使用 PM2 建立自我託管環境並自動化 GitLab CI/CD workflows；開發 Hotfix 腳本以確保 99.9% 的上線率。<br/>開發者體驗（DX）：將內部管理入口網站從舊版 React 遷移至 React + Vite 進行現代化，大幅縮短建置時間。<br/>產品成長：為會員計劃開發 Zalo Mini App 以擴大客戶觸及面。整合全面的追蹤功能（GA4、Pixel）以實現數據驅動的行銷策略。<br/>領導力：設計基礎專案架構，並指導團隊成員模組化開發與高品質的程式碼標準。",
-        "skills": [
-          "React.js",
-          "Next.js",
-          "TypeScript",
-          "JavaScript"
-        ]
+        "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
       }
     ]
   },
@@ -211,7 +189,7 @@
   },
   "projects": {
     "title": "專案作品",
-    "headline": "兼具節奏感、清晰度與適度動態特效的實際產品介面。",
+    "headline": "專案作品",
     "kicker": "概述",
     "projectCase": "專案案例",
     "launchApp": "啟動應用",
@@ -229,12 +207,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
         "liveUrl": "https://www.duongminhle.site/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "tailwind"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "tailwind"]
       },
       {
         "id": 4,
@@ -245,13 +218,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
         "liveUrl": "https://starlento.vn/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "css",
-          "redux"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
       },
       {
         "id": 3,
@@ -280,13 +247,7 @@
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
         "liveUrl": "https://www.metacity.com/",
         "githubUrl": null,
-        "techStack": [
-          "nextjs",
-          "react",
-          "typescript",
-          "css",
-          "redux"
-        ]
+        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
       }
     ]
   },
