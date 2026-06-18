@@ -165,10 +165,10 @@ function AboutBento({
       {/* ── Card 1 — Years of Experience ─────── */}
       <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20 group'>
         <div className='flex items-center justify-between'>
-          <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
+          <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-creative-dim'>
             {yearsLabel}
           </p>
-          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-creative-dim/40'>
+          <p className='m-0 font-mono text-meta uppercase tracking-[0.18em] text-creative-dim/40'>
             01 / 04
           </p>
         </div>
@@ -186,7 +186,7 @@ function AboutBento({
           </p>
         </div>
 
-        <p className='m-0 font-body text-[0.85rem] font-light leading-relaxed text-creative-muted'>
+        <p className='m-0 font-body text-body-sm font-light leading-relaxed text-creative-muted'>
           {yearsDesc}
         </p>
       </div>
@@ -194,26 +194,29 @@ function AboutBento({
       {/* ── Card 2 — Core Stack ──────────────── */}
       <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20'>
         <div className='flex items-center justify-between'>
-          <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
+          <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-creative-dim'>
             {stackLabel}
           </p>
-          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-creative-dim/40'>
+          <p className='m-0 font-mono text-meta uppercase tracking-[0.18em] text-creative-dim/40'>
             02 / 04
           </p>
         </div>
 
-        <div ref={pillsRef} className='flex flex-wrap items-center gap-1.5 py-6'>
+        <div
+          ref={pillsRef}
+          className='flex flex-wrap items-center gap-1.5 py-6'
+        >
           {STACK_TAGS.map((tech) => (
             <span
               key={tech}
-              className='tech-pill rounded-full border border-[var(--creative-lime)]/15 bg-[var(--creative-lime)]/[0.03] px-3.5 py-1.5 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-creative-muted transition-all duration-300 hover:border-[var(--creative-lime)]/50 hover:bg-[var(--creative-lime)]/8 hover:text-creative-ink'
+              className='tech-pill rounded-full border border-[var(--creative-lime)]/15 bg-[var(--creative-lime)]/[0.03] px-3.5 py-1.5 font-mono text-meta font-bold uppercase tracking-wider text-creative-muted transition-all duration-300 hover:border-[var(--creative-lime)]/50 hover:bg-[var(--creative-lime)]/8 hover:text-creative-ink'
             >
               {tech}
             </span>
           ))}
         </div>
 
-        <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-creative-dim/50'>
+        <p className='m-0 font-mono text-meta uppercase tracking-[0.16em] text-creative-dim/50'>
           {STACK_TAGS.length} technologies in active use
         </p>
       </div>
@@ -221,10 +224,10 @@ function AboutBento({
       {/* ── Card 3 — On-time Delivery ────────── */}
       <div className='flex flex-col justify-between rounded-2xl border border-white/5 bg-black/15 backdrop-blur-md p-8 min-h-[300px] transition-all duration-300 hover:border-white/10 hover:bg-black/20 group'>
         <div className='flex items-center justify-between'>
-          <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-creative-dim'>
+          <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-creative-dim'>
             {deliveryLabel}
           </p>
-          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-creative-dim/40'>
+          <p className='m-0 font-mono text-meta uppercase tracking-[0.18em] text-creative-dim/40'>
             03 / 04
           </p>
         </div>
@@ -241,8 +244,18 @@ function AboutBento({
             95%
           </p>
           <div className='shrink-0 flex items-center justify-center'>
-            <svg className='w-16 h-16 transform -rotate-90' viewBox='0 0 100 100'>
-              <circle className='text-white/5 stroke-current' strokeWidth='8' cx='50' cy='50' r='40' fill='transparent' />
+            <svg
+              className='w-16 h-16 transform -rotate-90'
+              viewBox='0 0 100 100'
+            >
+              <circle
+                className='text-white/5 stroke-current'
+                strokeWidth='8'
+                cx='50'
+                cy='50'
+                r='40'
+                fill='transparent'
+              />
               <circle
                 ref={circleRef}
                 className='text-[var(--creative-lime)] stroke-current'
@@ -259,7 +272,7 @@ function AboutBento({
           </div>
         </div>
 
-        <p className='m-0 font-body text-[0.85rem] font-light leading-relaxed text-creative-muted'>
+        <p className='m-0 font-body text-body-sm font-light leading-relaxed text-creative-muted'>
           {deliveryDesc}
         </p>
       </div>
@@ -268,17 +281,15 @@ function AboutBento({
       <div className='flex flex-col justify-between rounded-2xl border border-[var(--creative-lime)]/20 bg-[var(--creative-lime)]/[0.04] p-8 min-h-[300px] transition-all duration-300 hover:bg-[var(--creative-lime)]/[0.06] hover:border-[var(--creative-lime)]/40 group'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
-            <span
-              className='relative flex h-2.5 w-2.5'
-            >
+            <span className='relative flex h-2.5 w-2.5'>
               <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--creative-lime)] opacity-75'></span>
               <span className='relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--creative-lime)]'></span>
             </span>
-            <p className='m-0 font-mono text-[0.62rem] uppercase tracking-[0.26em] text-[var(--creative-lime)] font-extrabold'>
+            <p className='m-0 font-mono text-kicker uppercase tracking-[0.26em] text-[var(--creative-lime)] font-extrabold'>
               Status
             </p>
           </div>
-          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[var(--creative-lime)]/40'>
+          <p className='m-0 font-mono text-meta uppercase tracking-[0.18em] text-[var(--creative-lime)]/40'>
             04 / 04
           </p>
         </div>
@@ -295,12 +306,12 @@ function AboutBento({
         </div>
 
         <div className='flex flex-col gap-1 border-t border-[var(--creative-lime)]/10 pt-4'>
-          <span className='font-mono text-[0.55rem] uppercase tracking-widest text-[var(--creative-lime)]/60'>
+          <span className='font-mono text-meta uppercase tracking-widest text-[var(--creative-lime)]/60'>
             Direct Connect
           </span>
           <a
             href='mailto:nmhieu04091999@gmail.com'
-            className='font-mono text-[0.72rem] font-bold text-creative-ink no-underline hover:text-[var(--creative-lime)] transition-colors'
+            className='font-mono text-body-sm font-bold text-creative-ink no-underline hover:text-[var(--creative-lime)] transition-colors'
           >
             nmhieu04091999@gmail.com
           </a>
@@ -382,13 +393,13 @@ export function AboutSection({ locale }: { locale: string }) {
   return (
     <section
       id='about'
-      className='creative-section creative-about w-full py-32 md:py-48'
+      className='creative-section creative-about w-full py-20 md:py-32'
       data-section
       data-waypoint='about'
     >
-      <div className='mx-auto max-w-screen-2xl px-[clamp(1.25rem,4vw,4rem)]'>
+      <div className='mx-auto w-full px-[clamp(1.25rem,6vw,6rem)]'>
         {/* Section kicker */}
-        <p className='m-0 mb-8 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-creative-dim'>
+        <p className='m-0 mb-8 font-mono text-kicker font-bold uppercase tracking-[0.24em] text-creative-dim'>
           {locale === 'vi'
             ? 'Giới thiệu'
             : locale === 'zh-TW'
@@ -413,7 +424,7 @@ export function AboutSection({ locale }: { locale: string }) {
               {badges.map((badge) => (
                 <span
                   key={badge}
-                  className='rounded-full border border-[var(--creative-lime)]/30 px-3 py-1.5 font-mono text-[0.7rem] font-black uppercase tracking-wider text-[var(--creative-lime)] transition-all duration-300 hover:border-[var(--creative-lime)]/60 hover:bg-[var(--creative-lime)]/8'
+                  className='rounded-full border border-[var(--creative-lime)]/30 px-3 py-1.5 font-mono text-meta font-black uppercase tracking-wider text-[var(--creative-lime)] transition-all duration-300 hover:border-[var(--creative-lime)]/60 hover:bg-[var(--creative-lime)]/8'
                 >
                   {badge}
                 </span>
@@ -427,7 +438,7 @@ export function AboutSection({ locale }: { locale: string }) {
             className='flex flex-col justify-center'
             data-reveal
           >
-            <p className='m-0 text-[clamp(1rem,1.3vw,1.18rem)] font-light leading-relaxed text-creative-muted'>
+            <p className='m-0 text-body-md max-w-prose font-light leading-relaxed text-creative-muted'>
               {t('description1')}
             </p>
           </div>

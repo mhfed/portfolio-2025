@@ -24,7 +24,7 @@ function SkillCard({ label, signal, skills, index }: SkillCardProps) {
       className='skill-card relative flex h-full w-[clamp(260px,28vw,380px)] flex-none flex-col justify-between border-r border-white/8 px-8 py-10'
     >
       {/* Index */}
-      <span className='font-mono text-[0.6rem] font-black uppercase tracking-[0.22em] text-creative-dim'>
+      <span className='font-mono text-meta font-black uppercase tracking-[0.22em] text-creative-dim'>
         0{index + 1}
       </span>
 
@@ -38,7 +38,7 @@ function SkillCard({ label, signal, skills, index }: SkillCardProps) {
         </h3>
 
         {/* Signal */}
-        <p className='m-0 mt-3 text-[0.84rem] font-light leading-relaxed text-creative-muted'>
+        <p className='m-0 mt-3 text-body-sm font-light leading-relaxed text-creative-muted'>
           {signal}
         </p>
 
@@ -47,7 +47,7 @@ function SkillCard({ label, signal, skills, index }: SkillCardProps) {
           {skills.map((skill) => (
             <span
               key={skill}
-              className='rounded-sm border border-[var(--creative-lime)]/20 px-2.5 py-1 font-mono text-[0.62rem] font-semibold uppercase tracking-wider text-[var(--creative-lime)]/70'
+              className='rounded-sm border border-[var(--creative-lime)]/20 px-2.5 py-1 font-mono text-meta font-semibold uppercase tracking-wider text-[var(--creative-lime)]/70'
             >
               {skill}
             </span>
@@ -152,8 +152,8 @@ export function SkillsSection() {
       {/* Inner flex: pinned left title | scrolling right strip */}
       <div ref={pinnedRef} className='flex h-screen w-full items-stretch'>
         {/* Left panel — pinned title */}
-        <div className='flex w-[clamp(180px,22vw,320px)] flex-none flex-col justify-between border-r border-white/8 px-[clamp(1.25rem,4vw,4rem)] py-16'>
-          <p className='m-0 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-creative-dim'>
+        <div className='flex w-[clamp(180px,22vw,320px)] flex-none flex-col justify-between border-r border-white/8 px-[clamp(1.25rem,6vw,6rem)] py-16'>
+          <p className='m-0 font-mono text-kicker font-bold uppercase tracking-[0.24em] text-creative-dim'>
             {t('kicker')}
           </p>
 
@@ -163,14 +163,14 @@ export function SkillsSection() {
               style={{ fontSize: 'clamp(1.6rem, 2.8vw, 3rem)' }}
               dangerouslySetInnerHTML={{ __html: t('title') }}
             />
-            <p className='m-0 mt-4 text-[0.84rem] font-light leading-relaxed text-creative-muted'>
+            <p className='m-0 mt-4 text-body-sm font-light leading-relaxed text-creative-muted'>
               {t('headline')}
             </p>
           </div>
 
           {/* Scroll hint */}
           <div className='flex items-center gap-2'>
-            <span className='font-mono text-[0.6rem] uppercase tracking-wider text-creative-dim'>
+            <span className='font-mono text-meta uppercase tracking-wider text-creative-dim'>
               scroll
             </span>
             <div className='h-px w-8 bg-white/20' />

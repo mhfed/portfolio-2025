@@ -69,7 +69,9 @@ export function InteractiveTerminal() {
 
     timerRef.current = setInterval(() => {
       if (codeIndexRef.current < currentCode.length) {
-        setDisplayedCode((prev) => prev + currentCode.charAt(codeIndexRef.current))
+        setDisplayedCode(
+          (prev) => prev + currentCode.charAt(codeIndexRef.current)
+        )
         codeIndexRef.current++
       } else {
         if (timerRef.current) clearInterval(timerRef.current)
@@ -137,7 +139,10 @@ export function InteractiveTerminal() {
       ctx.clearRect(0, 0, width, height)
 
       // Fetch dynamic active color
-      const computedColor = getComputedStyle(document.documentElement).getPropertyValue('--creative-lime').trim() || '#c8ff45'
+      const computedColor =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue('--creative-lime')
+          .trim() || '#c8ff45'
 
       points.forEach((pt) => {
         const dx = mouse.x - pt.baseX
@@ -158,7 +163,8 @@ export function InteractiveTerminal() {
         // Draw node dot
         ctx.beginPath()
         ctx.arc(pt.x, pt.y, 1, 0, Math.PI * 2)
-        ctx.fillStyle = dist < maxDist ? computedColor : 'rgba(255, 255, 255, 0.05)'
+        ctx.fillStyle =
+          dist < maxDist ? computedColor : 'rgba(255, 255, 255, 0.05)'
         ctx.fill()
 
         // Connect to neighbors if within distance
@@ -167,7 +173,7 @@ export function InteractiveTerminal() {
           ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2)
           ctx.strokeStyle = computedColor
           ctx.lineWidth = 0.5
-          ctx.globalAlpha = (maxDist - dist) / maxDist * 0.2
+          ctx.globalAlpha = ((maxDist - dist) / maxDist) * 0.2
           ctx.stroke()
           ctx.globalAlpha = 1.0
         }
@@ -189,44 +195,42 @@ export function InteractiveTerminal() {
   return (
     <div
       ref={containerRef}
-      className="relative flex flex-col w-full h-full rounded-2xl bg-[#090b07]/90 border border-white/5 overflow-hidden group select-none font-mono"
+      className='relative flex flex-col w-full h-full rounded-2xl bg-creative-bg/90 border border-creative-line/40 overflow-hidden group select-none font-mono'
     >
       {/* Grid Canvas Background */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none z-0"
+        className='absolute inset-0 pointer-events-none z-0'
       />
 
       {/* Terminal Title Bar */}
-      <div className="relative z-10 flex items-center justify-between px-4 py-3 border-b border-white/5 bg-[#0e110c]/80 backdrop-blur-md">
+      <div className='relative z-10 flex items-center justify-between px-4 py-3 border-b border-creative-line/40 bg-creative-panel/95'>
         {/* Windows Dot Controls */}
-        <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-          <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-          <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+        <div className='flex items-center gap-2'>
+          <span className='w-3 h-3 rounded-full bg-[#ff5f56]' />
+          <span className='w-3 h-3 rounded-full bg-[#ffbd2e]' />
+          <span className='w-3 h-3 rounded-full bg-[#27c93f]' />
         </div>
-        
         {/* Terminal Title */}
-        <span className="text-[10px] tracking-wider text-creative-dim/80">
+        <span className='text-[10px] tracking-wider text-creative-dim/80'>
           nmhieu_fe_engine.sh
         </span>
-        
-        <div className="w-12" /> {/* spacer */}
+        <div className='w-12' /> {/* spacer */}
       </div>
 
       {/* File Tabs Bar */}
-      <div className="relative z-10 flex border-b border-white/5 bg-[#0b0d09]/60 backdrop-blur-sm">
+      <div className='relative z-10 flex border-b border-creative-line/40 bg-creative-bg/85'>
         {TABS.map((tab, idx) => (
           <button
             key={tab.name}
             onClick={() => setActiveTab(idx)}
-            className={`flex items-center gap-2 px-4 py-2 text-[10px] border-r border-white/5 cursor-pointer transition-colors duration-200 ${
+            className={`flex items-center gap-2 px-4 py-2 text-[10px] border-r border-creative-line/40 cursor-pointer transition-colors duration-200 ${
               activeTab === idx
-                ? 'bg-[#12160e] text-[var(--creative-lime)] font-bold'
+                ? 'bg-creative-panel text-[var(--creative-lime)] font-bold'
                 : 'text-creative-dim hover:text-creative-ink hover:bg-white/[0.02]'
             }`}
           >
-            <span className="text-[9px] opacity-60">
+            <span className='text-[9px] opacity-60'>
               {idx === 0 ? 'TS' : idx === 1 ? 'CSS' : '{}'}
             </span>
             {tab.name}
@@ -235,17 +239,17 @@ export function InteractiveTerminal() {
       </div>
 
       {/* Terminal Code Workspace */}
-      <div className="relative z-10 flex-1 p-5 overflow-auto custom-scrollbar bg-[#090b07]/45 backdrop-blur-[2px]">
-        <pre className="m-0 text-[11px] leading-relaxed text-creative-muted font-mono whitespace-pre-wrap">
+      <div className='relative z-10 flex-1 p-5 overflow-auto custom-scrollbar bg-creative-bg/70'>
+        <pre className='m-0 text-[11px] leading-relaxed text-creative-muted font-mono whitespace-pre-wrap'>
           {displayedCode}
-          <span className="inline-block w-1.5 h-3.5 ml-0.5 bg-[var(--creative-lime)] animate-pulse vertical-middle" />
+          <span className='inline-block w-1.5 h-3.5 ml-0.5 bg-[var(--creative-lime)] animate-pulse vertical-middle' />
         </pre>
       </div>
 
       {/* Compiler Status Bar */}
-      <div className="relative z-10 flex items-center justify-between px-4 py-2 border-t border-white/5 bg-[#0e110c]/80 text-[9px] text-creative-dim">
-        <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--creative-lime)] animate-pulse" />
+      <div className='relative z-10 flex items-center justify-between px-4 py-2 border-t border-creative-line/40 bg-creative-panel/95 text-[9px] text-creative-dim'>
+        <div className='flex items-center gap-1.5'>
+          <span className='w-1.5 h-1.5 rounded-full bg-[var(--creative-lime)] animate-pulse' />
           <span>compiler: active</span>
         </div>
         <span>lines: {displayedCode.split('\n').length}</span>

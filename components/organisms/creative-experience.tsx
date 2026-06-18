@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import type { ExperienceRecord } from '@/types/experience'
 import { loadGSAP } from '@/lib/gsap-utils'
@@ -27,8 +27,12 @@ interface ExperienceRowProps {
 }
 
 function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
+  const tCommon = useTranslations('common')
+  const [isExpanded, setIsExpanded] = useState(false)
   const lines = splitLines(experience.description)
   const isLast = index === total - 1
+  const hasMore = lines.length > 2
+  const visibleLines = isExpanded ? lines : lines.slice(0, 2)
 
   return (
     <div
@@ -38,7 +42,7 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
         borderBottom: isLast ? '1px solid rgba(248,248,245,0.08)' : 'none',
       }}
     >
-      <div className="absolute top-0 left-0 h-[1px] bg-white/8 w-0 exp-row-line" />
+      <div className='absolute top-0 left-0 h-[1px] bg-white/8 w-0 exp-row-line' />
       {/* Left: index + period */}
       <div
         data-exp-col-1
@@ -51,7 +55,7 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
         >
           {String(index + 1).padStart(2, '0')}
         </span>
-        <span className='font-mono text-[0.62rem] font-bold uppercase tracking-[0.18em] text-creative-dim lg:mt-auto'>
+        <span className='font-mono text-meta font-bold uppercase tracking-[0.18em] text-creative-dim lg:mt-auto'>
           {experience.period}
         </span>
       </div>
@@ -72,13 +76,13 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
           {experience.company}
         </h3>
 
-        <p className='m-0 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-creative-line'>
+        <p className='m-0 font-mono text-meta font-bold uppercase tracking-wider text-creative-line'>
           {experience.position}
         </p>
 
-        {lines.length > 0 && (
+        {visibleLines.length > 0 && (
           <div className='mt-2 flex flex-col gap-2.5'>
-            {lines.slice(0, 5).map((line, i) => {
+            {visibleLines.map((line, i) => {
               const colon = line.indexOf(':')
               if (colon > 0 && colon < 50) {
                 const label = line.substring(0, colon)
@@ -86,9 +90,9 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
                 return (
                   <p
                     key={i}
-                    className='m-0 text-[0.85rem] leading-[1.7] text-creative-muted'
+                    className='m-0 text-body-sm max-w-prose leading-[1.7] text-creative-muted'
                   >
-                    <span className='mr-1.5 font-mono text-[0.6rem] font-bold uppercase tracking-widest text-[var(--creative-lime)]'>
+                    <span className='mr-1.5 font-mono text-kicker font-bold uppercase tracking-widest text-[var(--creative-lime)]'>
                       {label}:
                     </span>
                     {body}
@@ -98,7 +102,7 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
               return (
                 <p
                   key={i}
-                  className='m-0 text-[0.85rem] leading-[1.7] text-creative-muted'
+                  className='m-0 text-body-sm max-w-prose leading-[1.7] text-creative-muted'
                 >
                   {line}
                 </p>
@@ -106,12 +110,21 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
             })}
           </div>
         )}
+
+        {hasMore && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className='mt-2 self-start font-mono text-meta font-bold uppercase tracking-wider text-[var(--creative-lime)] hover:text-creative-ink transition-colors focus:outline-none focus:ring-1 focus:ring-[var(--creative-lime)]/50 rounded px-2.5 py-1 bg-white/[0.02] border border-white/5 hover:border-[var(--creative-lime)]/30'
+          >
+            {isExpanded ? tCommon('showLess') : tCommon('seeMore')}
+          </button>
+        )}
       </div>
 
       {/* Right: location + skills */}
       <div data-exp-col-3 className='flex flex-col justify-between gap-6'>
         {experience.location && (
-          <p className='m-0 font-mono text-[0.6rem] uppercase tracking-widest text-creative-dim lg:text-right'>
+          <p className='m-0 font-mono text-meta uppercase tracking-widest text-creative-dim lg:text-right'>
             {experience.location}
           </p>
         )}
@@ -120,7 +133,7 @@ function ExperienceRow({ experience, index, total }: ExperienceRowProps) {
           {experience.skills.slice(0, 7).map((skill) => (
             <span
               key={skill}
-              className='rounded border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-[0.58rem] font-bold uppercase tracking-wide text-creative-dim'
+              className='rounded border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-meta font-bold uppercase tracking-wide text-creative-dim'
             >
               {skill}
             </span>
@@ -182,7 +195,9 @@ export function ExperienceSection({
       const rows = gsap.utils.toArray<HTMLElement>('[data-exp-row]', section)
 
       rows.forEach((row) => {
-        const cols = row.querySelectorAll('[data-exp-col-1], [data-exp-col-2], [data-exp-col-3]')
+        const cols = row.querySelectorAll(
+          '[data-exp-col-1], [data-exp-col-2], [data-exp-col-3]'
+        )
         const line = row.querySelector('.exp-row-line')
 
         gsap.set(cols, { y: 20, opacity: 0 })
@@ -234,18 +249,18 @@ export function ExperienceSection({
     <section
       id='experience'
       ref={sectionRef}
-      className='creative-section w-full py-32 md:py-48'
+      className='creative-section w-full py-20 md:py-32'
       data-section
       data-waypoint='experience'
     >
-      <div className='mx-auto max-w-screen-2xl px-[clamp(1.25rem,4vw,4rem)]'>
+      <div className='mx-auto w-full px-[clamp(1.25rem,6vw,6rem)]'>
         {/* Section header */}
         <div
           className='mb-16 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'
           data-exp-headline
         >
           <div>
-            <p className='m-0 mb-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-creative-dim'>
+            <p className='m-0 mb-4 font-mono text-kicker font-bold uppercase tracking-[0.24em] text-creative-dim'>
               {t('kicker')}
             </p>
             <h2
@@ -255,7 +270,7 @@ export function ExperienceSection({
               {t('title').replace(/\n/g, ' ')}
             </h2>
           </div>
-          <p className='m-0 max-w-[44ch] text-[clamp(0.9rem,1.2vw,1.05rem)] font-light leading-relaxed text-creative-muted lg:text-right'>
+          <p className='m-0 max-w-[44ch] text-body-sm font-light leading-relaxed text-creative-muted lg:text-right'>
             {t('headline')}
           </p>
         </div>

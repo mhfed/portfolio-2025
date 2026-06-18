@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -18,6 +18,8 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, index, total }: ProjectCardProps) {
+  const tCommon = useTranslations('common')
+  const [isDetailsExpanded, setIsDetailsExpanded] = useState(false)
   const href = project.liveUrl ?? project.githubUrl ?? '#contact'
   const isExternal = !!(project.liveUrl || project.githubUrl)
 
@@ -76,7 +78,7 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
                   {project.title.toLowerCase().replace(/[^a-z0-9]/g, '_')}.conf
                 </span>
               </div>
-              
+
               {/* Fake Code structure representation */}
               <div className='my-auto flex flex-col gap-2 font-mono text-[9px] text-white/40 leading-relaxed pl-2'>
                 <div className='flex items-center gap-1.5'>
@@ -87,23 +89,31 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
                 </div>
                 <div className='pl-4 flex items-center gap-1.5'>
                   <span>title:</span>
-                  <span className='text-[var(--creative-lime)]'>"{project.title}"</span>,
+                  <span className='text-[var(--creative-lime)]'>
+                    "{project.title}"
+                  </span>
+                  ,
                 </div>
                 <div className='pl-4 flex items-center gap-1.5'>
                   <span>year:</span>
-                  <span className='text-[var(--creative-lime)]'>"{project.year}"</span>,
+                  <span className='text-[var(--creative-lime)]'>
+                    "{project.year}"
+                  </span>
+                  ,
                 </div>
                 <div className='pl-4 flex items-center gap-1.5'>
                   <span>stack:</span>
                   <span>[</span>
-                  <span className='text-white/60'>{project.techStack.map(t => `"${t}"`).join(', ')}</span>
+                  <span className='text-white/60'>
+                    {project.techStack.map((t) => `"${t}"`).join(', ')}
+                  </span>
                   <span>]</span>
                 </div>
                 <div className='flex items-center'>
                   <span className='text-white/75'>&#125;;</span>
                 </div>
               </div>
-              
+
               {/* Ambient Glow */}
               <div className='absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-[var(--creative-lime)]/5 blur-2xl group-hover/fallback:bg-[var(--creative-lime)]/10 transition-all duration-500' />
             </div>
@@ -111,7 +121,7 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
 
           {/* Year stamp */}
           <div className='absolute bottom-4 left-4 z-20'>
-            <span className='rounded-full border border-white/20 bg-black/50 px-3 py-1 font-mono text-[0.6rem] font-bold uppercase tracking-[0.18em] text-white/60 backdrop-blur-sm'>
+            <span className='rounded-full border border-white/20 bg-black/50 px-3 py-1 font-mono text-meta font-bold uppercase tracking-[0.18em] text-white/60 backdrop-blur-sm'>
               {project.year}
             </span>
           </div>
@@ -141,7 +151,7 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
                   <span
                     key={tech}
                     data-chip
-                    className='rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[0.6rem] font-bold uppercase tracking-wide text-creative-dim'
+                    className='rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-meta font-bold uppercase tracking-wide text-creative-dim'
                   >
                     {tech}
                   </span>
@@ -159,7 +169,7 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
               {project.title}
             </h3>
             {project.description && (
-              <p className='m-0 max-w-[46ch] text-[0.9rem] font-light leading-relaxed text-creative-muted'>
+              <p className='m-0 max-w-[48ch] text-body-sm font-light leading-relaxed text-creative-muted'>
                 {project.description}
               </p>
             )}
@@ -171,16 +181,41 @@ function ProjectCard({ project, index, total }: ProjectCardProps) {
               className='mb-6 border-l-2 pl-4 transition-colors duration-500'
               style={{ borderColor: 'var(--creative-lime)' }}
             >
-              <p className='m-0 max-w-[46ch] text-[0.85rem] font-medium leading-relaxed text-creative-ink/80'>
+              <p className='m-0 max-w-[48ch] text-body-sm font-medium leading-relaxed text-creative-ink/80'>
                 {project.result}
               </p>
+            </div>
+          )}
+
+          {/* Localized details collapse */}
+          {project.details.length > 0 && (
+            <div className='mb-6 flex flex-col gap-2'>
+              <button
+                onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}
+                className='self-start font-mono text-meta font-bold uppercase tracking-wider text-[var(--creative-lime)] hover:text-creative-ink transition-colors focus:outline-none focus:ring-1 focus:ring-[var(--creative-lime)]/50 rounded px-2.5 py-1 bg-white/[0.02] border border-white/5 hover:border-[var(--creative-lime)]/30'
+              >
+                {isDetailsExpanded ? tCommon('showLess') : tCommon('seeMore')}
+              </button>
+
+              {isDetailsExpanded && (
+                <ul className='mt-2 flex flex-col gap-2.5 pl-4 list-disc text-creative-muted font-body text-body-sm max-w-prose leading-relaxed'>
+                  {project.details.map((detail, idx) => (
+                    <li
+                      key={idx}
+                      className='marker:text-[var(--creative-lime)]'
+                    >
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
 
           {/* Role + CTA */}
           <div className='flex items-end justify-between gap-6 border-t border-white/6 pt-6'>
             {project.role && (
-              <p className='m-0 max-w-[26ch] font-mono text-[0.65rem] font-bold uppercase leading-relaxed tracking-[0.14em] text-creative-dim'>
+              <p className='m-0 max-w-[26ch] font-mono text-kicker font-bold uppercase leading-relaxed tracking-[0.14em] text-creative-dim'>
                 {project.role}
               </p>
             )}
@@ -304,12 +339,12 @@ export function WorkSection({ projects }: { projects: ProjectCaseStudy[] }) {
     return (
       <section
         id='work'
-        className='creative-section creative-work relative w-full py-32 md:py-48'
+        className='creative-section creative-work relative w-full py-20 md:py-32'
         data-section
         data-waypoint='work'
       >
-        <div className='mx-auto max-w-screen-2xl px-[clamp(1.25rem,4vw,4rem)]'>
-          <p className='text-creative-dim font-mono text-sm'>
+        <div className='mx-auto w-full px-[clamp(1.25rem,6vw,6rem)]'>
+          <p className='text-creative-dim font-mono text-body-sm'>
             {t('noProjects')}
           </p>
         </div>
@@ -321,14 +356,14 @@ export function WorkSection({ projects }: { projects: ProjectCaseStudy[] }) {
     <section
       id='work'
       ref={sectionRef}
-      className='creative-section creative-work relative w-full py-32 md:py-48'
+      className='creative-section creative-work relative w-full py-20 md:py-32'
       data-section
       data-waypoint='work'
     >
-      <div className='mx-auto max-w-screen-2xl px-[clamp(1.25rem,4vw,4rem)]'>
+      <div className='mx-auto w-full px-[clamp(1.25rem,6vw,6rem)]'>
         {/* Section header */}
         <div className='mb-20 md:mb-28' data-work-headline>
-          <p className='m-0 mb-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-creative-dim'>
+          <p className='m-0 mb-4 font-mono text-kicker font-bold uppercase tracking-[0.24em] text-creative-dim'>
             {t('kicker')}
           </p>
           <h2

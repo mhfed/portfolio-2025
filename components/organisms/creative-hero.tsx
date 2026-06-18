@@ -111,7 +111,6 @@ export function HeroSection({ email }: { email: string }) {
             card,
             {
               yPercent: -18,
-              opacity: 0.8,
               ease: 'none',
             },
             0
@@ -221,13 +220,10 @@ export function HeroSection({ email }: { email: string }) {
   }, [])
 
   // Helper to split name string into interactive individual hoverable letters
-  const renderHoverableText = (
-    text: string,
-    baseColorClass = ''
-  ) => {
+  const renderHoverableText = (text: string, baseColorClass = '') => {
     const words = text.split(' ')
     return words.map((word, wordIdx) => (
-      <span key={wordIdx} className="inline-block whitespace-nowrap">
+      <span key={wordIdx} className='inline-block whitespace-nowrap'>
         {word.split('').map((char, charIdx) => (
           <span
             key={charIdx}
@@ -243,7 +239,7 @@ export function HeroSection({ email }: { email: string }) {
           </span>
         ))}
         {wordIdx < words.length - 1 && (
-          <span className="inline-block" style={{ width: '0.26em' }}>
+          <span className='inline-block' style={{ width: '0.26em' }}>
             &nbsp;
           </span>
         )}
@@ -272,7 +268,7 @@ export function HeroSection({ email }: { email: string }) {
     <section
       id='top'
       ref={sectionRef}
-      className='creative-hero relative flex min-h-[100dvh] flex-col justify-end overflow-hidden px-[clamp(1.25rem,4vw,4rem)] pb-8 pt-20 md:pt-24 lg:pb-16'
+      className='creative-hero relative flex min-h-[100dvh] flex-col justify-end overflow-hidden px-[clamp(1.25rem,6vw,6rem)] pb-8 pt-20 md:pt-24 lg:pb-16'
       data-section
       data-waypoint='hero'
     >
@@ -294,12 +290,12 @@ export function HeroSection({ email }: { email: string }) {
       </div>
 
       {/* Main stage */}
-      <div className='relative z-20 mx-auto w-full max-w-screen-2xl'>
+      <div className='relative z-20 mx-auto w-full'>
         <div className='grid grid-cols-1 gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20 items-center'>
           {/* Left Column: Typography, description, CTAs */}
           <div className='flex flex-col items-start' data-hero-text>
             {/* Technical Monospace Eyebrow */}
-            <div className='mb-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-creative-dim'>
+            <div className='mb-4 font-mono text-kicker font-bold uppercase tracking-[0.24em] text-creative-dim'>
               [ SYSTEM INIT // FE_MOTION_ENG ]
             </div>
 
@@ -332,10 +328,7 @@ export function HeroSection({ email }: { email: string }) {
                   style={{ fontSize: 'clamp(2.8rem, 8vw, 6.5rem)' }}
                   aria-hidden='true'
                 >
-                  {renderHoverableText(
-                    t('end'),
-                    'text-[var(--creative-lime)]'
-                  )}
+                  {renderHoverableText(t('end'), 'text-[var(--creative-lime)]')}
                 </div>
               </div>
             </div>
@@ -351,7 +344,7 @@ export function HeroSection({ email }: { email: string }) {
 
             {/* Short, precise Subtext (exactly 15 words) */}
             <p
-              className='m-0 mb-6 max-w-[42ch] font-body text-[clamp(0.95rem,1.15vw,1.05rem)] font-light leading-relaxed text-creative-muted'
+              className='m-0 mb-6 max-w-[48ch] font-body text-body-md font-light leading-relaxed text-creative-muted'
               data-hero-copy
             >
               {t('description')}
@@ -375,11 +368,16 @@ export function HeroSection({ email }: { email: string }) {
           {/* Right Column: 3D Holographic glass visual card & tech panel */}
           <div
             ref={visualCardRef}
-            className='relative flex flex-col rounded-3xl border border-white/10 bg-white/[0.015] p-4 backdrop-blur-md transition-all duration-300 group'
-            style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+            className='relative flex flex-col rounded-3xl border border-creative-line bg-creative-panel/60 p-4 transition-all duration-300 group'
+            style={{
+              transformStyle: 'preserve-3d',
+              perspective: '1000px',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+            }}
           >
             {/* Visual Frame containing interactive terminal */}
-            <div className='relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-950 border border-white/5'>
+            <div className='relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-950 border border-creative-line/40'>
               <div
                 ref={visualImageRef}
                 className='w-full h-full transition-transform duration-700'
@@ -402,12 +400,12 @@ export function HeroSection({ email }: { email: string }) {
                     <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--creative-lime)] opacity-75'></span>
                     <span className='relative inline-flex rounded-full h-2 w-2 bg-[var(--creative-lime)]'></span>
                   </span>
-                  <span className='font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-creative-muted'>
+                  <span className='font-mono text-kicker font-bold uppercase tracking-[0.16em] text-creative-muted'>
                     {t('status')}
                   </span>
                 </div>
                 {/* Tech value label */}
-                <span className='font-mono text-[0.62rem] tracking-wider text-creative-dim uppercase'>
+                <span className='font-mono text-kicker tracking-wider text-creative-dim uppercase'>
                   SYS_ACTIVE: TRUE
                 </span>
               </div>
@@ -418,7 +416,7 @@ export function HeroSection({ email }: { email: string }) {
               {/* Readouts Grid */}
               <div className='grid grid-cols-2 gap-4'>
                 <div>
-                  <p className='m-0 font-mono text-[0.55rem] uppercase tracking-widest text-creative-dim'>
+                  <p className='m-0 font-mono text-meta uppercase tracking-widest text-creative-dim'>
                     {t('meta.experience')}
                   </p>
                   <p className='m-0 mt-0.5 font-display font-extrabold text-base text-creative-ink'>
@@ -426,10 +424,10 @@ export function HeroSection({ email }: { email: string }) {
                   </p>
                 </div>
                 <div>
-                  <p className='m-0 font-mono text-[0.55rem] uppercase tracking-widest text-creative-dim'>
+                  <p className='m-0 font-mono text-meta uppercase tracking-widest text-creative-dim'>
                     {t('meta.coreStack')}
                   </p>
-                  <p className='m-0 mt-0.5 font-mono text-[0.62rem] text-creative-muted leading-tight'>
+                  <p className='m-0 mt-0.5 font-mono text-meta text-creative-muted leading-tight'>
                     {t('meta.coreStackValue')}
                   </p>
                 </div>
@@ -444,7 +442,7 @@ export function HeroSection({ email }: { email: string }) {
           className='mt-10 lg:mt-16 flex items-center gap-2 text-creative-dim'
         >
           <MapPin className='h-3 w-3' aria-hidden='true' />
-          <span className='font-mono text-[0.65rem] font-bold uppercase tracking-[0.16em]'>
+          <span className='font-mono text-kicker font-bold uppercase tracking-[0.16em]'>
             {t('contact.location')}
           </span>
         </div>

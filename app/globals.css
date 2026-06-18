@@ -8,9 +8,10 @@
   --text-display-lg: clamp(2.5rem, 6vw, 5rem);
   --text-display-md: clamp(2rem, 4vw, 3.5rem);
   --text-body-lg: clamp(1.125rem, 1.5vw, 1.375rem);
-  --text-body-md: clamp(1rem, 1.25vw, 1.25rem);
-  --text-body-sm: clamp(0.875rem, 1vw, 1rem);
-  --text-kicker: clamp(0.72rem, 1vw, 0.82rem);
+  --text-body-md: clamp(1.05rem, 1.3vw, 1.25rem);
+  --text-body-sm: clamp(0.98rem, 1.2vw, 1.18rem);
+  --text-kicker: clamp(0.78rem, 1.1vw, 0.88rem);
+  --text-meta: clamp(0.84rem, 1.1vw, 0.95rem);
 
   --tracking-tight: -0.03em;
   --tracking-normal: 0em;
@@ -564,13 +565,13 @@
   --text-role-title: clamp(1rem, 1.8vw, 1.55rem);
 
   /* Fluid Body copy & Descriptions */
-  --text-body-lg: clamp(1.05rem, 1.35vw, 1.25rem);
-  --text-body-md: clamp(0.98rem, 1.18vw, 1.15rem);
-  --text-body-sm: clamp(0.92rem, 1.18vw, 1.1rem);
+  --text-body-lg: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-body-md: clamp(1.05rem, 1.3vw, 1.25rem);
+  --text-body-sm: clamp(0.98rem, 1.2vw, 1.18rem);
 
   /* Micro-copy & Metadata Labels */
-  --text-kicker: clamp(0.72rem, 1vw, 0.82rem);
-  --text-meta: clamp(0.78rem, 1vw, 0.9rem);
+  --text-kicker: clamp(0.78rem, 1.1vw, 0.88rem);
+  --text-meta: clamp(0.84rem, 1.1vw, 0.95rem);
 
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;

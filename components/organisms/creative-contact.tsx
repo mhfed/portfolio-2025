@@ -94,7 +94,7 @@ export function ContactSection({
     <section
       id='contact'
       ref={sectionRef}
-      className='creative-section relative w-full overflow-hidden py-32 md:py-48'
+      className='creative-section relative w-full overflow-hidden py-20 md:py-32'
       data-section
       data-waypoint='contact'
     >
@@ -108,9 +108,9 @@ export function ContactSection({
         aria-hidden='true'
       />
 
-      <div className='relative z-10 mx-auto max-w-screen-2xl px-[clamp(1.25rem,4vw,4rem)]'>
+      <div className='relative z-10 mx-auto w-full px-[clamp(1.25rem,6vw,6rem)]'>
         {/* Kicker */}
-        <p className='m-0 mb-8 font-mono text-[0.65rem] font-bold uppercase tracking-[0.24em] text-creative-dim'>
+        <p className='m-0 mb-8 font-mono text-kicker font-bold uppercase tracking-[0.24em] text-creative-dim'>
           {t('header.contact')}
         </p>
 
@@ -179,11 +179,11 @@ export function ContactSection({
                 className='h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--creative-lime)]'
                 aria-hidden='true'
               />
-              <span className='font-mono text-[0.65rem] font-bold uppercase tracking-[0.18em] text-creative-dim'>
+              <span className='font-mono text-kicker font-bold uppercase tracking-[0.18em] text-creative-dim'>
                 {t('hero.contact.basedIn')} {t('hero.contact.location')}
               </span>
             </div>
-            <span className='font-mono text-[0.62rem] uppercase tracking-widest text-creative-line'>
+            <span className='font-mono text-meta uppercase tracking-widest text-creative-line'>
               {t('hero.meta.availabilityValue')}
             </span>
           </div>
@@ -211,7 +211,7 @@ export function ContactSection({
             <a
               href='/CV_Nguyen_Minh_Hieu_Frontend_Developer.pdf'
               download
-              className='inline-flex h-9 items-center gap-2 rounded-full border border-white/8 px-4 font-mono text-[0.65rem] font-bold uppercase tracking-[0.14em] text-creative-dim no-underline transition-all duration-300 hover:border-[var(--creative-lime)]/40 hover:text-[var(--creative-lime)]'
+              className='inline-flex h-9 items-center gap-2 rounded-full border border-white/8 px-4 font-mono text-kicker font-bold uppercase tracking-[0.14em] text-creative-dim no-underline transition-all duration-300 hover:border-[var(--creative-lime)]/40 hover:text-[var(--creative-lime)]'
             >
               <FileText className='h-3.5 w-3.5' aria-hidden='true' />
               {t('header.downloadResume')}
@@ -220,7 +220,7 @@ export function ContactSection({
         </div>
 
         {/* Copyright */}
-        <p className='m-0 mt-8 font-mono text-[0.6rem] uppercase tracking-widest text-creative-line'>
+        <p className='m-0 mt-8 font-mono text-meta uppercase tracking-widest text-creative-line'>
           © {new Date().getFullYear()} Nguyen Minh Hieu
         </p>
       </div>
