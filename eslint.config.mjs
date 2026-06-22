@@ -33,7 +33,6 @@ export default tseslint.config(
       'public/**',
       'next-env.d.ts',
       'postcss.config.mjs',
-      'proxy.ts',
     ],
   }
 )

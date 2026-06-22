@@ -1,8 +1,18 @@
+import { type NextRequest } from 'next/server'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
+}
+
+/**
+ * Extract the base URL from a NextRequest (protocol + host).
+ */
+export function getBaseUrl(request: NextRequest): string {
+  const host = request.headers.get('host') || 'minhhieu.is-a.dev'
+  const protocol = request.nextUrl.protocol || 'https:'
+  return `${protocol}//${host}`
 }
 
 /**
