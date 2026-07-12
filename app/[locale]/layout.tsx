@@ -8,7 +8,6 @@ import { routing } from '@/i18n/routing'
 import { Analytics } from '@vercel/analytics/react'
 import { LenisProvider } from '@/components/providers/lenis-provider'
 import { CustomCursor } from '@/components/atoms/custom-cursor'
-import { InteractiveCanvas } from '@/components/atoms/interactive-canvas'
 import { WebMCPProvider } from '@/components/atoms/webmcp-provider'
 
 type Props = {
@@ -145,7 +144,6 @@ export default async function LocaleLayout({ children, params }: Props) {
       <NextIntlClientProvider messages={messages}>
         <LenisProvider>
           <WebMCPProvider />
-          <InteractiveCanvas />
           <CustomCursor />
           {children}
           <Analytics />

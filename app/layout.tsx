@@ -49,9 +49,6 @@ export default function RootLayout({
             __html: `
               try {
                 document.documentElement.classList.add('dark');
-
-                const savedAccent = localStorage.getItem('accent-theme') || 'cobalt';
-                document.documentElement.dataset.accentTheme = savedAccent;
               } catch (e) {}
             `,
           }}

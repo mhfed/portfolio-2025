@@ -104,7 +104,7 @@ export function MagneticLink({
       className={cn(
         `group relative inline-flex p-[3px] rounded-full border transition-all duration-300 active:scale-[0.98]`,
         isLight
-          ? 'bg-creative-lime/10 border-creative-lime/30 hover:border-creative-lime/60 hover:bg-creative-lime/15'
+          ? 'bg-creative-green/10 border-creative-green/30 hover:border-creative-green/60 hover:bg-creative-green/15'
           : 'bg-white/5 border-white/10 hover:border-white/25 hover:bg-white/10',
         className
       )}
@@ -115,7 +115,7 @@ export function MagneticLink({
           `flex items-center gap-3.5 rounded-full transition-all duration-300`,
           showArrow ? 'pl-6 pr-3.5 py-3' : 'px-6 py-3',
           isLight
-            ? 'bg-creative-lime text-black font-extrabold'
+            ? 'bg-creative-green text-creative-bg font-extrabold'
             : 'bg-[#080907]/90 text-creative-ink font-semibold border border-white/5'
         )}
       >

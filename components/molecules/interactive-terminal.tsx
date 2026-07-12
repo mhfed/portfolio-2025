@@ -141,8 +141,8 @@ export function InteractiveTerminal() {
       // Fetch dynamic active color
       const computedColor =
         getComputedStyle(document.documentElement)
-          .getPropertyValue('--creative-lime')
-          .trim() || '#c8ff45'
+          .getPropertyValue('--creative-green')
+          .trim() || '#73ff87'
 
       points.forEach((pt) => {
         const dx = mouse.x - pt.baseX
@@ -226,7 +226,7 @@ export function InteractiveTerminal() {
             onClick={() => setActiveTab(idx)}
             className={`flex items-center gap-2 px-4 py-2 text-[10px] border-r border-creative-line/40 cursor-pointer transition-colors duration-200 ${
               activeTab === idx
-                ? 'bg-creative-panel text-[var(--creative-lime)] font-bold'
+                ? 'bg-creative-panel text-[var(--creative-green)] font-bold'
                 : 'text-creative-dim hover:text-creative-ink hover:bg-white/[0.02]'
             }`}
           >
@@ -242,14 +242,14 @@ export function InteractiveTerminal() {
       <div className='relative z-10 flex-1 p-5 overflow-auto custom-scrollbar bg-creative-bg/70'>
         <pre className='m-0 text-[11px] leading-relaxed text-creative-muted font-mono whitespace-pre-wrap'>
           {displayedCode}
-          <span className='inline-block w-1.5 h-3.5 ml-0.5 bg-[var(--creative-lime)] animate-pulse vertical-middle' />
+          <span className='inline-block w-1.5 h-3.5 ml-0.5 bg-[var(--creative-green)] animate-pulse vertical-middle' />
         </pre>
       </div>
 
       {/* Compiler Status Bar */}
       <div className='relative z-10 flex items-center justify-between px-4 py-2 border-t border-creative-line/40 bg-creative-panel/95 text-[9px] text-creative-dim'>
         <div className='flex items-center gap-1.5'>
-          <span className='w-1.5 h-1.5 rounded-full bg-[var(--creative-lime)] animate-pulse' />
+          <span className='w-1.5 h-1.5 rounded-full bg-[var(--creative-green)] animate-pulse' />
           <span>compiler: active</span>
         </div>
         <span>lines: {displayedCode.split('\n').length}</span>
