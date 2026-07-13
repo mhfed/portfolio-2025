@@ -26,7 +26,7 @@ export function CreativePortfolio({
 }: CreativePortfolioProps) {
   return (
     <div className='creative-portfolio relative' data-creative-root>
-      <HudBackdrop />
+      <HudBackdrop projects={projects} experiences={experiences} />
       <CreativeNav email={email} />
       <HudHero email={email} />
       <AboutSection />

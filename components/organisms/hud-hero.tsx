@@ -52,11 +52,8 @@ export function HudHero({ email }: { email: string }) {
       data-waypoint='hero'
       className='creative-hero relative flex min-h-[100dvh] flex-col justify-end overflow-hidden px-[clamp(1.25rem,6vw,6rem)] pb-16 pt-24'
     >
-      {/* Scanline + vignette overlay for CRT terminal feel */}
-      <div
-        aria-hidden='true'
-        className='hud-scanlines pointer-events-none absolute inset-0 z-[2] opacity-50 [mask-image:radial-gradient(ellipse_at_center,black,transparent_85%)]'
-      />
+      {/* CRT scanlines now live in the WebGL composer (Scanline effect), so the
+          DOM copy stays crisp and legible. */}
 
       {/* Corner readouts */}
       <div
@@ -74,8 +71,9 @@ export function HudHero({ email }: { email: string }) {
         </span>
       </div>
 
-      {/* Floating terminal panel (desktop) */}
-      <div className='pointer-events-auto absolute right-[clamp(1.25rem,6vw,6rem)] top-1/2 z-10 hidden w-[clamp(20rem,26vw,28rem)] -translate-y-1/2 rounded-2xl border border-creative-line bg-creative-panel/70 p-3 backdrop-blur-md xl:block'>
+      {/* Floating terminal panel (desktop) — kept lighter so the glowing 3D
+          core reads through it instead of being boxed out. */}
+      <div className='pointer-events-auto absolute right-[clamp(1.25rem,6vw,6rem)] top-1/2 z-10 hidden w-[clamp(18rem,22vw,24rem)] -translate-y-1/2 rounded-2xl border border-creative-line bg-creative-panel/45 p-3 backdrop-blur-md xl:block'>
         <div className='mb-2 flex items-center justify-between px-1'>
           <span className='flex items-center gap-2'>
             <span className='relative flex h-2 w-2'>
@@ -107,13 +105,13 @@ export function HudHero({ email }: { email: string }) {
         >
           <span
             className='block text-creative-ink'
-            style={{ fontSize: 'clamp(2.8rem, 9vw, 7.5rem)' }}
+            style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}
           >
             {t('front')} {t('middle')}
           </span>
           <span
             className='block text-creative-green'
-            style={{ fontSize: 'clamp(2.8rem, 9vw, 7.5rem)' }}
+            style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}
           >
             {t('end')}
           </span>

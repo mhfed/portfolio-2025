@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { ArrowUpRight, Github } from 'lucide-react'
 import type { ProjectCaseStudy } from '@/data/projects'
 import { StationHeader } from '@/components/molecules/hud-kit'
+import { hudFocus } from '@/lib/hud-focus'
 import { cn } from '@/lib/utils'
 
 const ACCENT = '#ff5ebc'
@@ -176,6 +177,11 @@ export function WorkSection({ projects }: { projects: ProjectCaseStudy[] }) {
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
   }, [projects.length])
+
+  // Mirror the active record to the 3D scene so its panel label lights up.
+  useEffect(() => {
+    hudFocus.work = active
+  }, [active])
 
   const current = projects[active]
 

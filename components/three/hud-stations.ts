@@ -6,6 +6,8 @@
  * from station to station.
  */
 
+export type WorldQuality = 'high' | 'low'
+
 export type LandmarkKind =
   | 'globe'
   | 'ring'
@@ -69,3 +71,10 @@ export const STATIONS: StationDef[] = [
     look: [0, 0.4, -33],
   },
 ]
+
+/** Look up a station by key. Throws in dev if the key is misspelled. */
+export function station(key: string): StationDef {
+  const found = STATIONS.find((s) => s.key === key)
+  if (!found) throw new Error(`Unknown HUD station: ${key}`)
+  return found
+}

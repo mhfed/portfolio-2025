@@ -1,8 +1,11 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import type { ExperienceRecord } from '@/types/experience'
 import { ScanReveal, StationHeader } from '@/components/molecules/hud-kit'
+import { hudFocus } from '@/lib/hud-focus'
+import { cn } from '@/lib/utils'
 
 const ACCENT = '#73ff87'
 const MAX_SKILLS = 6
@@ -24,6 +27,33 @@ export function ExperienceSection({
 }) {
   const t = useTranslations('experience')
   const log = [...experiences].reverse()
+  const [active, setActive] = useState(0)
+  const blockRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  // Scroll-driven: whichever role crosses the vertical center becomes active —
+  // its 2D card holds full focus while the rest recede, and the matching spine
+  // node lights up in the 3D world (via the shared hudFocus bridge).
+  useEffect(() => {
+    const els = blockRefs.current.filter(Boolean) as HTMLDivElement[]
+    if (els.length === 0) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const i = Number((entry.target as HTMLElement).dataset.index)
+            if (!Number.isNaN(i)) setActive(i)
+          }
+        })
+      },
+      { rootMargin: '-50% 0px -50% 0px', threshold: 0 }
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [log.length])
+
+  useEffect(() => {
+    hudFocus.experience = active
+  }, [active])
 
   return (
     <section
@@ -47,8 +77,18 @@ export function ExperienceSection({
             {log.map((role, i) => {
               const tag = `LOG_${String(log.length - i).padStart(2, '0')}`
               return (
-                <ScanReveal
+                <div
                   key={role.id}
+                  ref={(el) => {
+                    blockRefs.current[i] = el
+                  }}
+                  data-index={i}
+                  className={cn(
+                    'transition-opacity duration-500',
+                    i === active ? 'opacity-100' : 'md:opacity-35'
+                  )}
+                >
+                <ScanReveal
                   delay={i * 80}
                   className='relative pb-14 last:pb-0'
                 >
@@ -105,6 +145,7 @@ export function ExperienceSection({
                     </div>
                   </div>
                 </ScanReveal>
+                </div>
               )
             })}
           </div>
