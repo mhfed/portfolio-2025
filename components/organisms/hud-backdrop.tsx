@@ -1,21 +1,7 @@
 'use client'
 
-import { Suspense, useEffect, useMemo, useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import {
-  EffectComposer,
-  Bloom,
-  Vignette,
-  DepthOfField,
-  ChromaticAberration,
-  Scanline,
-  Noise,
-} from '@react-three/postprocessing'
-import { BlendFunction } from 'postprocessing'
-import { Vector2 } from 'three'
-import { HudWorld, type WorldQuality } from '@/components/three/hud-world'
-import { ScrollCamera } from '@/components/three/scroll-camera'
-import { STATIONS } from '@/components/three/hud-stations'
+import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
 import type { ProjectCaseStudy } from '@/data/projects'
 import type { ExperienceRecord } from '@/types/experience'
 import {
@@ -28,11 +14,27 @@ interface HudBackdropProps {
   experiences: ExperienceRecord[]
 }
 
+const Fallback = () => (
+  <div
+    aria-hidden='true'
+    className='hud-grid-fallback pointer-events-none fixed inset-0 z-0'
+  />
+)
+
 /**
- * Fixed, full-viewport WebGL backdrop for the whole portfolio. A single scene
- * whose camera flies from station to station as the page scrolls. Rendered
- * client-only; falls back to a static grid under reduced-motion or before mount
- * so it never blocks first paint / LCP.
+ * The WebGL scene (three + drei + postprocessing) is code-split into its own
+ * chunk and only fetched on the client, after mount, for users who haven't
+ * asked for reduced motion — so none of that weight lands in the critical
+ * bundle or blocks first paint / LCP. A static grid stands in until it loads.
+ */
+const HudScene = dynamic(() => import('./hud-scene'), {
+  ssr: false,
+  loading: Fallback,
+})
+
+/**
+ * Fixed, full-viewport WebGL backdrop for the whole portfolio. Falls back to a
+ * static grid under reduced-motion or before mount so it never blocks LCP.
  */
 export function HudBackdrop({ projects, experiences }: HudBackdropProps) {
   const reduced = usePrefersReducedMotion()
@@ -41,90 +43,11 @@ export function HudBackdrop({ projects, experiences }: HudBackdropProps) {
 
   useEffect(() => setMounted(true), [])
 
-  if (!mounted || reduced) {
-    return (
-      <div
-        aria-hidden='true'
-        className='hud-grid-fallback pointer-events-none fixed inset-0 z-0'
-      />
-    )
-  }
+  if (!mounted || reduced) return <Fallback />
 
   const quality = isMobile ? 'low' : 'high'
 
   return (
-    <HudCanvas quality={quality} projects={projects} experiences={experiences} />
-  )
-}
-
-function HudCanvas({
-  quality,
-  projects,
-  experiences,
-}: {
-  quality: WorldQuality
-  projects: ProjectCaseStudy[]
-  experiences: ExperienceRecord[]
-}) {
-  // Stable Vector2 for chromatic-aberration offset (the effect mutates in place).
-  const caOffset = useMemo(() => new Vector2(0.0006, 0.0012), [])
-
-  return (
-    <div aria-hidden='true' className='pointer-events-none fixed inset-0 z-0'>
-      <Canvas
-        dpr={quality === 'high' ? [1, 1.7] : [1, 1.2]}
-        camera={{ position: STATIONS[0].camera, fov: 42 }}
-        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
-      >
-        <Suspense fallback={null}>
-          <ScrollCamera stations={STATIONS} />
-          <HudWorld
-            quality={quality}
-            projects={projects}
-            experiences={experiences}
-          />
-          {quality === 'high' ? (
-            <EffectComposer multisampling={0}>
-              <Bloom
-                intensity={1.35}
-                luminanceThreshold={0.12}
-                luminanceSmoothing={0.85}
-                mipmapBlur
-                radius={0.85}
-              />
-              <DepthOfField
-                focusDistance={0.012}
-                focalLength={0.045}
-                bokehScale={3.2}
-                height={480}
-              />
-              <ChromaticAberration
-                blendFunction={BlendFunction.NORMAL}
-                offset={caOffset}
-                radialModulation
-                modulationOffset={0.35}
-              />
-              <Scanline
-                blendFunction={BlendFunction.OVERLAY}
-                density={1.15}
-                opacity={0.055}
-              />
-              <Noise blendFunction={BlendFunction.OVERLAY} opacity={0.14} />
-              <Vignette offset={0.28} darkness={0.95} eskil={false} />
-            </EffectComposer>
-          ) : (
-            <EffectComposer>
-              <Bloom
-                intensity={0.9}
-                luminanceThreshold={0.15}
-                luminanceSmoothing={0.9}
-                mipmapBlur
-              />
-              <Vignette offset={0.32} darkness={0.9} eskil={false} />
-            </EffectComposer>
-          )}
-        </Suspense>
-      </Canvas>
-    </div>
+    <HudScene quality={quality} projects={projects} experiences={experiences} />
   )
 }

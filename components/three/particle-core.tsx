@@ -241,11 +241,17 @@ export function ParticleCore({
     }
     if (groupRotation.current) groupRotation.current.rotation.y += delta * 0.05
 
-    // project the cursor onto the core's plane, convert to local space
-    scratch.ray.setFromCamera(ndc.current, state.camera)
-    const hit = scratch.ray.ray.intersectPlane(scratch.plane, scratch.hit)
-    if (hit) {
-      scratch.targetMouse.copy(hit).sub(scratch.origin)
+    // Once the camera has flown past the hero, stop the per-frame raycast +
+    // cursor projection — it can't be seen, so only ease repulsion back to rest.
+    const far = state.camera.position.distanceTo(scratch.origin) > 9
+    if (!far) {
+      scratch.ray.setFromCamera(ndc.current, state.camera)
+      const hit = scratch.ray.ray.intersectPlane(scratch.plane, scratch.hit)
+      if (hit) {
+        scratch.targetMouse.copy(hit).sub(scratch.origin)
+      } else {
+        scratch.targetMouse.set(999, 999, 999)
+      }
     } else {
       scratch.targetMouse.set(999, 999, 999)
     }
@@ -254,7 +260,7 @@ export function ParticleCore({
       const m = pointsMat.current.uniforms.uMouse.value as Vector3
       m.lerp(scratch.targetMouse, Math.min(1, delta * 8))
       // ramp repulsion strength while the cursor is actually near the core
-      const near = m.length() < 2.2 ? 0.22 : 0
+      const near = !far && m.length() < 2.2 ? 0.22 : 0
       const u = pointsMat.current.uniforms.uRepel
       u.value += (near - u.value) * Math.min(1, delta * 6)
     }

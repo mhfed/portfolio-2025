@@ -66,11 +66,24 @@ function HudLabels({
   landmarkVec: Vector3
 }) {
   const refs = useRef<(HTMLDivElement | null)[]>([])
+  const lastKey = useRef('')
 
   useFrame((state) => {
     const fade = stationFade(state.camera.position, landmarkVec)
+    // Fully faded and already off: nothing to write. Skip the DOM churn.
+    if (fade <= 0.001) {
+      if (lastKey.current !== 'off') {
+        refs.current.forEach((el) => el && (el.style.opacity = '0'))
+        lastKey.current = 'off'
+      }
+      return
+    }
     const raw = hudFocus[section] ?? 0
     const active = Math.max(0, Math.min(items.length - 1, raw))
+    // Parked at a station (fade + active steady): style is already correct.
+    const key = `${fade.toFixed(3)}|${active}`
+    if (key === lastKey.current) return
+    lastKey.current = key
     refs.current.forEach((el, i) => {
       if (!el) return
       const on = i === active
@@ -138,15 +151,28 @@ export function LandmarkShell({
 }) {
   const group = useRef<Group>(null)
   const landmarkVec = useMemo(() => new Vector3(...station.landmark), [station])
+  const lastFade = useRef(-1)
 
   useFrame((state, delta) => {
     const g = group.current
     if (!g) return
-    if (spin) g.rotation.y += delta * spin
 
     const d = state.camera.position.distanceTo(landmarkVec)
     const fade = Math.max(0, Math.min(1, (FAR - d) / (FAR - NEAR)))
-    g.visible = fade > 0.02
+
+    // Far station: hide it and skip the per-frame material traversal entirely.
+    // Only the station the camera is near ever pays the traversal cost.
+    if (fade <= 0.001) {
+      if (g.visible) g.visible = false
+      lastFade.current = 0
+      return
+    }
+    g.visible = true
+    if (spin) g.rotation.y += delta * spin
+
+    // Parked at the station (fade steady): materials are already set — skip.
+    if (Math.abs(fade - lastFade.current) < 0.002) return
+    lastFade.current = fade
 
     g.traverse((obj) => {
       const mat = (obj as unknown as MaterialLike).material
