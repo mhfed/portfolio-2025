@@ -18,7 +18,7 @@ export default async function Home({ params }: Props) {
   ])
 
   const projects = normalizeProjects(
-    ((tProjects.raw('list') || []) as LocalizedProjectRecord[])
+    (tProjects.raw('list') || []) as LocalizedProjectRecord[]
   )
   const experiences = (tExperience.raw('list') || []) as ExperienceRecord[]
 

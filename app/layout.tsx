@@ -57,9 +57,7 @@ export default function RootLayout({
       <body
         className={`${interTight.className} ${interTight.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${manrope.variable} bg-background text-foreground antialiased`}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
         <Toaster />
       </body>
     </html>

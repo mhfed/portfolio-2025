@@ -5,7 +5,7 @@ description: |
   The AI MUST keep running — fixing and retrying — until both lint and typecheck pass with zero errors.
 metadata:
   author: project
-  version: "1.0.0"
+  version: '1.0.0'
   argument-hint: <task-description>
 ---
 
@@ -35,10 +35,10 @@ When invoked, the agent MUST:
 
 ## Quality Gates
 
-| Gate | Command | Pass Condition |
-|------|---------|---------------|
-| Lint | `npm run lint` (or detected equivalent) | Zero errors, zero warnings |
-| TypeScript | `npx tsc --noEmit` | Zero errors |
+| Gate       | Command                                 | Pass Condition             |
+| ---------- | --------------------------------------- | -------------------------- |
+| Lint       | `npm run lint` (or detected equivalent) | Zero errors, zero warnings |
+| TypeScript | `npx tsc --noEmit`                      | Zero errors                |
 
 The agent should detect the project's package manager (`npm`, `pnpm`, `yarn`, `bun`) from `package.json` or lockfile and use the appropriate commands.
 
@@ -49,6 +49,7 @@ The agent should detect the project's package manager (`npm`, `pnpm`, `yarn`, `b
 ```
 
 Examples:
+
 ```
 /persistent-dev-agent Add error boundaries to all async components
 /persistent-dev-agent Fix the navigation flicker on route change

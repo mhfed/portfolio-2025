@@ -20,11 +20,11 @@ function generateMarkdown(messages: MessagesType): string {
   let md = `# ${messages.hero.front} ${messages.hero.middle} ${messages.hero.end}\n`
   md += `**${messages.hero.developer}**\n\n`
   md += `> ${messages.hero.status}\n\n`
-  
+
   md += `## ${messages.header.nav.about}\n`
   md += `${cleanText(messages.about.statement)}\n\n`
   md += `${cleanText(messages.about.description1)}\n\n`
-  
+
   if (messages.about.skillList) {
     md += `### ${messages.about.coreSkills}\n`
     Object.values(messages.about.skillList).forEach((skill) => {
@@ -70,7 +70,7 @@ function generateMarkdown(messages: MessagesType): string {
   md += `${cleanText(messages.collaborate.description)}\n\n`
   md += `- **Email:** [${messages.hero.contact.email}](mailto:${messages.hero.contact.email})\n`
   md += `- **Location:** ${messages.hero.contact.location}\n`
-  
+
   return md
 }
 
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
   const messages = messagesMap[locale] || enMessages
 
   const markdown = generateMarkdown(messages)
-  
+
   // Estimate tokens based on words count (approx 1.3 tokens per word)
   const words = markdown.split(/\s+/).length
   const tokens = Math.ceil(words * 1.3)

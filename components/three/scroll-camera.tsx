@@ -18,8 +18,7 @@ export function ScrollCamera({ stations }: { stations: StationDef[] }) {
   const pointer = useRef(new Vector2(0, 0))
 
   const camPath = useMemo(
-    () =>
-      new CatmullRomCurve3(stations.map((s) => new Vector3(...s.camera))),
+    () => new CatmullRomCurve3(stations.map((s) => new Vector3(...s.camera))),
     [stations]
   )
   const lookPath = useMemo(

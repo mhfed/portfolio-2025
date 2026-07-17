@@ -92,8 +92,12 @@ export function CreativeNav({ email }: { email: string }) {
                   onClick={() => setLocale(code)}
                   className='rounded-[4px] px-2.5 py-1.5 font-mono text-[9.5px] font-black uppercase tracking-[0.12em] transition-colors duration-200'
                   style={{
-                    color: active ? 'var(--creative-bg)' : 'var(--creative-dim)',
-                    background: active ? 'var(--creative-green)' : 'transparent',
+                    color: active
+                      ? 'var(--creative-bg)'
+                      : 'var(--creative-dim)',
+                    background: active
+                      ? 'var(--creative-green)'
+                      : 'transparent',
                   }}
                   aria-pressed={active}
                   aria-label={`Switch language to ${label}`}
@@ -118,7 +122,9 @@ export function CreativeNav({ email }: { email: string }) {
               aria-label='Download resume'
             >
               <FileText className='h-3.5 w-3.5 shrink-0' aria-hidden='true' />
-              <span className='max-sm:hidden'>{t('header.downloadResume')}</span>
+              <span className='max-sm:hidden'>
+                {t('header.downloadResume')}
+              </span>
             </a>
             <a
               href={`mailto:${email}`}

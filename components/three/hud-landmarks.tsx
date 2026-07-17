@@ -369,7 +369,11 @@ export function ProjectPanels({
             {/* glowing top edge bar */}
             <mesh position={[0, h / 2 - 0.03, 0.03]}>
               <boxGeometry args={[0.9, 0.05, 0.02]} />
-              <meshBasicMaterial color={accent} toneMapped={false} transparent />
+              <meshBasicMaterial
+                color={accent}
+                toneMapped={false}
+                transparent
+              />
             </mesh>
             {/* HUD wireframe overlay for the scanned-blueprint identity */}
             <mesh>
@@ -397,7 +401,13 @@ export function ProjectPanels({
 
 /* ── About → ring with one tick per role held ── */
 
-export function RolesRing({ count, accent }: { count: number; accent: string }) {
+export function RolesRing({
+  count,
+  accent,
+}: {
+  count: number
+  accent: string
+}) {
   const n = Math.max(1, count)
   const r = 0.95
   return (

@@ -62,7 +62,11 @@ export default function HudScene({
         frameloop={frameloop}
         dpr={dpr}
         camera={{ position: STATIONS[0].camera, fov: 42 }}
-        gl={{ alpha: true, antialias: false, powerPreference: 'high-performance' }}
+        gl={{
+          alpha: true,
+          antialias: false,
+          powerPreference: 'high-performance',
+        }}
       >
         <PerformanceMonitor
           bounds={() => [48, 60]}
@@ -92,8 +96,8 @@ export default function HudScene({
               {[
                 <Bloom
                   key='bloom'
-                  intensity={1.35}
-                  luminanceThreshold={0.12}
+                  intensity={0.75}
+                  luminanceThreshold={0.26}
                   luminanceSmoothing={0.85}
                   mipmapBlur
                   radius={0.85}
@@ -142,8 +146,8 @@ export default function HudScene({
           ) : (
             <EffectComposer>
               <Bloom
-                intensity={0.9}
-                luminanceThreshold={0.15}
+                intensity={0.55}
+                luminanceThreshold={0.28}
                 luminanceSmoothing={0.9}
                 mipmapBlur
               />

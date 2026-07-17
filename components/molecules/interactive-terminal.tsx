@@ -142,7 +142,7 @@ export function InteractiveTerminal() {
       const computedColor =
         getComputedStyle(document.documentElement)
           .getPropertyValue('--creative-green')
-          .trim() || '#73ff87'
+          .trim() || '#4ec873'
 
       points.forEach((pt) => {
         const dx = mouse.x - pt.baseX

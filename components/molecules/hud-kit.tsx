@@ -84,7 +84,10 @@ export function StationHeader({
       </div>
       <h2 className='mt-6 max-w-[20ch] font-display text-display-md font-black uppercase leading-[0.95] tracking-[-0.02em] text-creative-ink'>
         {title}
-        <span className='hud-caret ml-2 inline-block' style={{ background: accent }} />
+        <span
+          className='hud-caret ml-2 inline-block'
+          style={{ background: accent }}
+        />
       </h2>
     </ScanReveal>
   )
@@ -155,7 +158,8 @@ export function SignalBar({
           key={i}
           className='h-3 flex-1 rounded-[1px] transition-all duration-500'
           style={{
-            background: inView && i < active ? accent : 'rgba(255,255,255,0.08)',
+            background:
+              inView && i < active ? accent : 'rgba(255,255,255,0.08)',
             boxShadow: inView && i < active ? `0 0 6px ${accent}` : 'none',
             transitionDelay: `${i * 35}ms`,
           }}

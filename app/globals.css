@@ -93,10 +93,10 @@
   --creative-muted: rgba(248, 248, 245, 0.72);
   --creative-dim: rgba(248, 248, 245, 0.42);
   --creative-line: rgba(248, 248, 245, 0.14);
-  --creative-lime: #c8ff45;
-  --creative-green: #73ff87;
-  --creative-orange: #ff8a3d;
-  --creative-pink: #ff5ebc;
+  --creative-lime: #aadc39;
+  --creative-green: #4ec873;
+  --creative-orange: #e07b39;
+  --creative-pink: #e05fa7;
 }
 
 .dark {
@@ -474,12 +474,12 @@ body:has(.creative-portfolio) {
   background:
     radial-gradient(
       circle at 80% 5%,
-      rgba(200, 255, 69, 0.1),
+      rgba(170, 220, 57, 0.07),
       transparent 26rem
     ),
     radial-gradient(
       circle at 10% 20%,
-      rgba(255, 138, 61, 0.07),
+      rgba(224, 123, 57, 0.04),
       transparent 22rem
     ),
     var(--creative-bg);
@@ -501,7 +501,7 @@ body:has(.creative-portfolio)::after {
     linear-gradient(90deg, rgba(248, 248, 245, 0.028) 1px, transparent 1px),
     radial-gradient(
       circle at 50% 0%,
-      rgba(200, 255, 69, 0.04),
+      rgba(170, 220, 57, 0.02),
       transparent 42rem
     ),
     var(--creative-bg);
@@ -584,8 +584,8 @@ body:has(.creative-portfolio)::after {
 .hud-scanlines {
   background-image: repeating-linear-gradient(
     to bottom,
-    rgba(115, 255, 135, 0.045) 0px,
-    rgba(115, 255, 135, 0.045) 1px,
+    rgba(78, 200, 115, 0.03) 0px,
+    rgba(78, 200, 115, 0.03) 1px,
     transparent 1px,
     transparent 3px
   );
@@ -595,11 +595,11 @@ body:has(.creative-portfolio)::after {
   background-image:
     radial-gradient(
       ellipse at 72% 42%,
-      rgba(115, 255, 135, 0.1),
+      rgba(78, 200, 115, 0.06),
       transparent 55%
     ),
-    linear-gradient(to right, rgba(115, 255, 135, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(115, 255, 135, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(78, 200, 115, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(78, 200, 115, 0.03) 1px, transparent 1px);
   background-size:
     100% 100%,
     46px 46px,

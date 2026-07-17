@@ -9,7 +9,7 @@ import { StationHeader } from '@/components/molecules/hud-kit'
 import { hudFocus } from '@/lib/hud-focus'
 import { cn } from '@/lib/utils'
 
-const ACCENT = '#ff5ebc'
+const ACCENT = '#e05fa7'
 
 function summarize(text: string): string {
   const clean = text
@@ -95,9 +95,13 @@ function RecordDetail({
     <>
       <div className='flex items-baseline justify-between gap-4'>
         <span className='font-mono text-meta uppercase tracking-[0.2em] text-creative-dim'>
-          REC_{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+          REC_{String(index + 1).padStart(2, '0')} /{' '}
+          {String(total).padStart(2, '0')}
         </span>
-        <span className='font-mono text-meta uppercase' style={{ color: ACCENT }}>
+        <span
+          className='font-mono text-meta uppercase'
+          style={{ color: ACCENT }}
+        >
           {project.liveUrl ? 'DEPLOYED' : 'ARCHIVED'} · {project.year}
         </span>
       </div>

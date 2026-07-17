@@ -31,7 +31,7 @@ export interface StationDef {
 export const STATIONS: StationDef[] = [
   {
     key: 'hero',
-    accent: '#73ff87',
+    accent: '#4ec873',
     landmark: [1.9, 0.5, 0],
     kind: 'globe',
     // camera looks left of the globe so it reads on the right of the frame
@@ -40,7 +40,7 @@ export const STATIONS: StationDef[] = [
   },
   {
     key: 'about',
-    accent: '#ff8a3d',
+    accent: '#e07b39',
     landmark: [-5.0, 1.2, -9],
     kind: 'ring',
     camera: [-2.25, 1.12, -2.5],
@@ -48,7 +48,7 @@ export const STATIONS: StationDef[] = [
   },
   {
     key: 'experience',
-    accent: '#73ff87',
+    accent: '#4ec873',
     landmark: [4.2, -0.8, -15],
     kind: 'spine',
     camera: [1.89, -0.08, -8.5],
@@ -56,7 +56,7 @@ export const STATIONS: StationDef[] = [
   },
   {
     key: 'work',
-    accent: '#ff5ebc',
+    accent: '#e05fa7',
     landmark: [4.4, -0.4, -27],
     kind: 'panels',
     camera: [1.98, 0.16, -20.5],
@@ -64,7 +64,7 @@ export const STATIONS: StationDef[] = [
   },
   {
     key: 'contact',
-    accent: '#73ff87',
+    accent: '#4ec873',
     landmark: [0, 0.4, -33],
     kind: 'beacon',
     camera: [0, 0.64, -26.5],

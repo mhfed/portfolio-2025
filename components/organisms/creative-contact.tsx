@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { ArrowUpRight, FileText, Github, Linkedin } from 'lucide-react'
 import { ScanReveal } from '@/components/molecules/hud-kit'
 
-const ACCENT = '#73ff87'
+const ACCENT = '#4ec873'
 
 export function ContactSection({
   email,

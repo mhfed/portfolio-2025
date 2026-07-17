@@ -2,7 +2,13 @@
 
 import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Grid, Line, Sparkles, Environment, Lightformer } from '@react-three/drei'
+import {
+  Grid,
+  Line,
+  Sparkles,
+  Environment,
+  Lightformer,
+} from '@react-three/drei'
 import { QuadraticBezierCurve3, Color, Vector3 } from 'three'
 import type { Mesh } from 'three'
 import type { ProjectCaseStudy } from '@/data/projects'
@@ -19,8 +25,8 @@ import {
 
 export type { WorldQuality }
 
-const ACCENT = '#73ff87'
-const AMBER = '#ff8a3d'
+const ACCENT = '#4ec873'
+const AMBER = '#e07b39'
 const GRID_CELL = '#163020'
 const FOG = '#04070a'
 
@@ -103,7 +109,10 @@ function Arcs({ radius, count }: { radius: number; count: number }) {
           />
           <mesh ref={(el) => (dots.current[i] = el)}>
             <sphereGeometry args={[0.035, 12, 12]} />
-            <meshBasicMaterial color={arc.amber ? AMBER : ACCENT} toneMapped={false} />
+            <meshBasicMaterial
+              color={arc.amber ? AMBER : ACCENT}
+              toneMapped={false}
+            />
           </mesh>
         </group>
       ))}
@@ -134,7 +143,7 @@ export function HudWorld({
       <ambientLight intensity={0.35} />
       <directionalLight position={[6, 7, 5]} intensity={1.3} color='#d8fff0' />
       <pointLight position={[-7, 2, -12]} intensity={55} color={AMBER} />
-      <pointLight position={[5, -3, -26]} intensity={40} color={'#ff5ebc'} />
+      <pointLight position={[5, -3, -26]} intensity={40} color={'#e05fa7'} />
 
       {/* Built-in HDRI from lightformers — no network fetch, gives physical
           materials something to reflect. */}

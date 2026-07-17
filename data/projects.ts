@@ -25,8 +25,10 @@ export interface ProjectCaseStudy {
 }
 
 const resultByTitle: Record<string, string> = {
-  'Portfolio Designer': 'Delivered a polished portfolio experience with fast navigation and responsive visual storytelling.',
-  Starlento: 'Shipped a campaign-ready talent platform with smooth application flows and production-ready UI.',
+  'Portfolio Designer':
+    'Delivered a polished portfolio experience with fast navigation and responsive visual storytelling.',
+  Starlento:
+    'Shipped a campaign-ready talent platform with smooth application flows and production-ready UI.',
   'CGSI, Iress Wealth, Admin Portal Equix':
     'Built authenticated trading workflows, CMS operations, filtering, and theme tooling for financial products.',
   'Metacity System, Landing Page':
@@ -34,7 +36,8 @@ const resultByTitle: Record<string, string> = {
 }
 
 const roleByTitle: Record<string, string> = {
-  'Portfolio Designer': 'Frontend implementation, interaction design, responsive UI',
+  'Portfolio Designer':
+    'Frontend implementation, interaction design, responsive UI',
   Starlento: 'Frontend development, UI implementation, application flow',
   'CGSI, Iress Wealth, Admin Portal Equix':
     'Frontend development, auth flow, form systems, real-time UI',

@@ -13,7 +13,9 @@ export function CustomCursor() {
     const canUseCustomCursor = window.matchMedia(
       '(hover: hover) and (pointer: fine)'
     ).matches
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
 
     if (!canUseCustomCursor || reduced) return
 
@@ -135,7 +137,7 @@ export function CustomCursor() {
         aria-hidden='true'
       >
         {cursorText && (
-          <span className="max-w-[56px] font-mono text-[9px] font-bold tracking-wider leading-[1.05] text-center uppercase select-none">
+          <span className='max-w-[56px] font-mono text-[9px] font-bold tracking-wider leading-[1.05] text-center uppercase select-none'>
             {cursorText}
           </span>
         )}
@@ -143,4 +145,3 @@ export function CustomCursor() {
     </>
   )
 }
-

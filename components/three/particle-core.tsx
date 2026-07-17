@@ -27,8 +27,8 @@ import type { ShaderMaterial, Points } from 'three'
 import { skillGroups } from '@/data/skills'
 import type { WorldQuality } from './hud-stations'
 
-const GREEN = '#73ff87'
-const AMBER = '#ff8a3d'
+const GREEN = '#4ec873'
+const AMBER = '#e07b39'
 
 /* ── deterministic skill-cluster field with per-point colour + jitter ── */
 function buildField(radius: number, quality: WorldQuality) {
@@ -61,7 +61,8 @@ function buildField(radius: number, quality: WorldQuality) {
   skillGroups.forEach((group, gi) => {
     const center = centers[gi]
     const dir = center.clone().normalize()
-    const up = Math.abs(dir.y) < 0.99 ? new Vector3(0, 1, 0) : new Vector3(1, 0, 0)
+    const up =
+      Math.abs(dir.y) < 0.99 ? new Vector3(0, 1, 0) : new Vector3(1, 0, 0)
     const u = new Vector3().crossVectors(dir, up).normalize()
     const v = new Vector3().crossVectors(dir, u).normalize()
     const count = base + group.skills.length * per
@@ -290,8 +291,14 @@ export function ParticleCore({
             attach='attributes-position'
             args={[field.positions, 3]}
           />
-          <bufferAttribute attach='attributes-aColor' args={[field.colors, 3]} />
-          <bufferAttribute attach='attributes-aScale' args={[field.scales, 1]} />
+          <bufferAttribute
+            attach='attributes-aColor'
+            args={[field.colors, 3]}
+          />
+          <bufferAttribute
+            attach='attributes-aScale'
+            args={[field.scales, 1]}
+          />
           <bufferAttribute attach='attributes-aSeed' args={[field.seeds, 1]} />
         </bufferGeometry>
         <shaderMaterial

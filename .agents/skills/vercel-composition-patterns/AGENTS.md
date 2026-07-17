@@ -667,10 +667,12 @@ function ForwardMessageDialog() {
     <ForwardMessageProvider>
       <Dialog>
         <ForwardMessageComposer />
-        <MessagePreview /> {/* Custom components can access state and actions */}
+        <MessagePreview />{' '}
+        {/* Custom components can access state and actions */}
         <DialogActions>
           <CancelButton />
-          <ForwardButton /> {/* Custom components can access state and actions */}
+          <ForwardButton />{' '}
+          {/* Custom components can access state and actions */}
         </DialogActions>
       </Dialog>
     </ForwardMessageProvider>
@@ -918,7 +920,10 @@ const ComposerInput = forwardRef<TextInput, Props>((props, ref) => {
 **Correct: ref as a regular prop**
 
 ```tsx
-function ComposerInput({ ref, ...props }: Props & { ref?: React.Ref<TextInput> }) {
+function ComposerInput({
+  ref,
+  ...props
+}: Props & { ref?: React.Ref<TextInput> }) {
   return <TextInput ref={ref} {...props} />
 }
 ```
