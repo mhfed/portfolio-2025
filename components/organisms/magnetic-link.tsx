@@ -1,19 +1,24 @@
 'use client'
 
-import {
-  useEffect,
-  useRef,
-  type ReactNode,
-  type AnchorHTMLAttributes,
-} from 'react'
+import type { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  type HTMLMotionProps,
+} from 'motion/react'
 import { cn } from '@/lib/utils'
 
-type MagneticLinkProps = {
+export interface MagneticLinkProps extends Omit<
+  HTMLMotionProps<'a'>,
+  'children'
+> {
   children: ReactNode
   variant?: 'light' | 'dark'
   showArrow?: boolean
-} & AnchorHTMLAttributes<HTMLAnchorElement>
+}
 
 export function MagneticLink({
   href,
@@ -21,118 +26,51 @@ export function MagneticLink({
   variant = 'light',
   showArrow = true,
   className,
+  onPointerMove,
+  onPointerLeave,
   ...props
 }: MagneticLinkProps) {
-  const ref = useRef<HTMLAnchorElement>(null)
-
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-
-    const reduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-    const canHover = window.matchMedia(
-      '(hover: hover) and (pointer: fine)'
-    ).matches
-    if (reduced || !canHover) return
-
-    let active = true
-    let cleanup: (() => void) | undefined
-
-    import('gsap').then(({ gsap }) => {
-      if (!active) return
-
-      let rafPending = false
-      let lastEvent: MouseEvent | null = null
-
-      const onMove = (event: MouseEvent) => {
-        lastEvent = event
-        if (!rafPending) {
-          rafPending = true
-          requestAnimationFrame(() => {
-            if (!lastEvent) return
-            const rect = node.getBoundingClientRect()
-            const x = lastEvent.clientX - (rect.left + rect.width / 2)
-            const y = lastEvent.clientY - (rect.top + rect.height / 2)
-            const distance = Math.hypot(x, y)
-
-            if (distance < 120) {
-              gsap.to(node, {
-                x: x * 0.16,
-                y: y * 0.2,
-                duration: 0.35,
-                ease: 'power3.out',
-              })
-            }
-            rafPending = false
-          })
-        }
-      }
-
-      const reset = () => {
-        lastEvent = null
-        gsap.to(node, {
-          x: 0,
-          y: 0,
-          duration: 0.7,
-          ease: 'elastic.out(1, 0.45)',
-        })
-      }
-
-      window.addEventListener('mousemove', onMove, { passive: true })
-      node.addEventListener('mouseleave', reset)
-
-      cleanup = () => {
-        window.removeEventListener('mousemove', onMove)
-        node.removeEventListener('mouseleave', reset)
-      }
-    })
-
-    return () => {
-      active = false
-      cleanup?.()
-    }
-  }, [])
-
+  const reduceMotion = useReducedMotion()
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const springX = useSpring(x, { stiffness: 260, damping: 18, mass: 0.25 })
+  const springY = useSpring(y, { stiffness: 260, damping: 18, mass: 0.25 })
   const isLight = variant === 'light'
 
   return (
-    <a
-      ref={ref}
+    <motion.a
       href={href}
+      style={reduceMotion ? undefined : { x: springX, y: springY }}
+      onPointerMove={(event) => {
+        if (!reduceMotion) {
+          const rect = event.currentTarget.getBoundingClientRect()
+          x.set((event.clientX - (rect.left + rect.width / 2)) * 0.12)
+          y.set((event.clientY - (rect.top + rect.height / 2)) * 0.12)
+        }
+        onPointerMove?.(event)
+      }}
+      onPointerLeave={(event) => {
+        x.set(0)
+        y.set(0)
+        onPointerLeave?.(event)
+      }}
       className={cn(
-        `group relative inline-flex p-[3px] rounded-full border transition-all duration-300 active:scale-[0.98]`,
+        'group inline-flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold no-underline transition-[background-color,color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02] active:scale-[0.98]',
         isLight
-          ? 'bg-creative-green/10 border-creative-green/30 hover:border-creative-green/60 hover:bg-creative-green/15'
-          : 'bg-white/5 border-white/10 hover:border-white/25 hover:bg-white/10',
+          ? 'bg-portfolio-ink text-portfolio-bg'
+          : 'border border-portfolio-line bg-white/[0.035] text-portfolio-ink hover:bg-white/[0.07]',
         className
       )}
       {...props}
     >
-      <span
-        className={cn(
-          `flex items-center gap-3.5 rounded-full transition-all duration-300`,
-          showArrow ? 'pl-6 pr-3.5 py-3' : 'px-6 py-3',
-          isLight
-            ? 'bg-creative-green text-creative-bg font-extrabold'
-            : 'bg-[#080907]/90 text-creative-ink font-semibold border border-white/5'
-        )}
-      >
-        <span className='text-xs uppercase tracking-[0.14em]'>{children}</span>
-        {showArrow && (
-          <span
-            className={cn(
-              `flex items-center justify-center w-7 h-7 rounded-full transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5`,
-              isLight
-                ? 'bg-black/10 group-hover:bg-black/20 text-black'
-                : 'bg-white/10 group-hover:bg-white/20 text-creative-ink'
-            )}
-          >
-            <ArrowUpRight className='w-3.5 h-3.5' aria-hidden='true' />
-          </span>
-        )}
-      </span>
-    </a>
+      <span>{children}</span>
+      {showArrow ? (
+        <ArrowUpRight
+          size={16}
+          className='transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
+          aria-hidden='true'
+        />
+      ) : null}
+    </motion.a>
   )
 }

@@ -47,36 +47,36 @@ components/
 - **will-change-transform** — chỉ dùng trong animation context, KHÔNG đặt ở base class
 - **cubic-bezier custom** — dùng easing từ design system (0.32,0.72,0,1) hoặc (0.16,1,0.3,1)
 
-## 3D / WebGL (Three.js "Financial HUD")
+## 3D / WebGL (Interactive spatial portfolio)
 
 Stack: `@react-three/fiber` + `@react-three/drei` + `@react-three/postprocessing` (+ `postprocessing` là direct dep, `BlendFunction` import từ đây). Áp dụng khi làm bất kỳ thứ gì trong `components/three/*` hoặc scene R3F.
 
 ### Kiến trúc scene
 
-- **Một Canvas cố định full-viewport** làm backdrop; camera bay station→station theo scroll (Catmull-Rom). Định nghĩa station (landmark + camera + look + accent) tập trung ở `components/three/hud-stations.ts`.
-- **Landmark data-driven**: geometry sinh từ dữ liệu CV thật (số role, project, skill) — không dùng wireframe vô danh.
-- **Cầu nối DOM ↔ WebGL**: `lib/hud-focus.ts` là singleton mutable, DOM ghi index đang đọc, 3D đọc mỗi frame. KHÔNG đẩy qua React state (chỉ tạo re-render vô ích).
-- **Canvas là `pointer-events:none`** → fiber KHÔNG cập nhật `state.pointer`. Muốn lấy chuột phải tự nghe `window` `pointermove` (xem `ScrollCamera`, `ParticleCore`).
+- **Một Canvas tương tác cố định full-viewport** là lớp trình bày chính; camera hold ở từng station và chỉ blend gần ranh giới section. Waypoint desktop/mobile nằm ở `components/three/scene-waypoints.ts`.
+- **Information station data-driven**: Hero, Work, About, Experience, Contact render typography SDF, texture, CTA và geometry từ dữ liệu CV thật. Không dùng `Html` overlay cho nội dung chính.
+- **Cầu nối DOM ↔ WebGL**: `lib/sceneStore.ts` dùng external store + primitive selector cho state rời rạc (station, record, ready). Continuous camera/pointer values vẫn ở ref để không re-render React mỗi frame.
+- **Progressive enhancement**: SSR render section 2D đầy đủ. Khi scene mount xong, section đổi thành semantic scroll rail nhẹ; reduced-motion/WebGL failure giữ nguyên fallback 2D.
+- **Canvas nhận pointer event** để raycast CTA và node. Không gọi `preventDefault` trên wheel/touch; canvas giữ `touch-action: pan-y` để không khóa scroll trang.
 
 ### Chất liệu cinematic (tránh "phèn")
 
-- **CẤM** dùng `wireframe` + `meshBasicMaterial` mờ làm chủ thể. Chủ thể dùng `meshStandardMaterial`/`meshPhysicalMaterial` với `emissive` + `metalness`/`roughness`. Wireframe chỉ làm overlay nhận diện HUD.
-- **Light rig** (ambient + key + rim) + `Environment` dựng bằng `<Lightformer>` — KHÔNG fetch HDRI preset qua mạng.
-- **Emissive phải đủ sáng để bloom "ăn"** (`luminanceThreshold` ~0.12); dùng `toneMapped={false}` cho dot/edge phát sáng.
-- **Hero = particle field shader** (points, `AdditiveBlending`, `depthWrite={false}`) reactive theo con trỏ (repulsion tính trong vertex shader, không CPU). Layout deterministic (không RNG) để SSR/CSR ổn định.
-- **Fat gradient lines**: drei `<Line>` + `vertexColors` thay line mảnh; traveling dot emissive.
-- **Postprocessing** (chỉ quality cao): Bloom + DepthOfField + ChromaticAberration + Scanline + Noise + Vignette. **CRT scanline đặt ở composer, KHÔNG ở DOM.**
-- **2D là lớp readout hỗ trợ** — heading vừa phải để 3D dẫn dắt, không để chữ khổng lồ áp đảo scene.
+- **CẤM** dùng `wireframe` + `meshBasicMaterial` mờ làm chủ thể. Chủ thể dùng `meshStandardMaterial`/`meshPhysicalMaterial` với `emissive` + `metalness`/`roughness`.
+- **Light rig** (ambient + key + rim); `Environment` dựng bằng `<Lightformer>` chỉ bật ở tier high — KHÔNG fetch HDRI preset qua mạng.
+- **Emissive có kiểm soát** để bloom chỉ bắt highlight, không làm bạc màu nền sáng (`luminanceThreshold` khoảng 0.5).
+- **Hero = kinetic glass sculpture + particle field shader** reactive theo con trỏ. Repulsion tính trong vertex shader, layout deterministic (không RNG) để ổn định giữa các lần tải.
+- **Line chỉ là chi tiết dẫn hướng**; chủ thể phải dùng vật liệu PBR có phản xạ từ light rig.
+- **Postprocessing**: Bloom + Vignette rất nhẹ, lazy-load và chỉ bật ở tier high desktop. Không dùng DepthOfField lên scene chứa text, chromatic aberration, scanline hoặc noise kiểu cyber.
+- **Typography 3D** dùng Drei `Text` (Troika SDF); paragraph không dùng extruded TextGeometry. Ảnh project dùng texture plane và Cloudinary transform để giới hạn kích thước tải.
 
 ### Performance (BẮT BUỘC)
 
-- **Lazy-load scene** qua `next/dynamic({ ssr: false })` — three/drei/postprocessing KHÔNG được vào critical bundle. Wrapper nhẹ phải là client component (`dynamic ssr:false` không dùng được trong Server Component). Xem `hud-backdrop.tsx` (wrapper) → `hud-scene.tsx` (chunk nặng).
-- **Adaptive DPR**: `<PerformanceMonitor>` scale DPR theo **bước thô 0.25 + no-op guard** (`setDpr(d => d===next ? d : next)`) — DPR đổi liên tục sẽ realloc GL buffer và chính nó gây jank. Tụt fps kéo dài → `onFallback` bật **lite mode** (bỏ DepthOfField/Scanline/Noise — 3 pass tốn fill-rate nhất).
-- **Pause frameloop** khi `document.hidden` (`frameloop='never'`).
-- **Early-out mỗi frame**: `LandmarkShell` bỏ traverse vật liệu khi station xa (fade≈0) hoặc đang "đậu" (fade không đổi); `HudLabels` bỏ ghi DOM khi (fade|active) không đổi; particle bỏ raycast khi camera đã bay qua hero.
+- **Lazy-load scene** bằng `React.lazy()` chỉ sau capability check + browser idle/user interaction — three/drei/postprocessing KHÔNG được xuất hiện trong `entryJSFiles` của route. Không đổi lại sang `next/dynamic`, vì Next có thể preload chunk nặng dù chưa render.
+- **Ba performance tier** (`high` / `balanced` / `low`) khởi tạo từ viewport, pointer, hardware concurrency, device memory và Save-Data; `<PerformanceMonitor>` chỉ được hạ tier runtime, đồng thời scale DPR theo bước 0.125 + no-op guard. Tier low khóa khoảng DPR 0.72–0.8.
+- **Frame governor**: Canvas dùng `frameloop='demand'`; high/balanced tối đa 60 FPS, low tối đa 30 FPS để tránh render thừa trên màn 90/120 Hz và giảm thermal throttling. `requestAnimationFrame` tự pause khi tab background.
+- **Early-out mỗi frame**: `SpatialStation` cập nhật activity ref; animation con phải kiểm tra `stationIsActive()` để station khuất không chạy math/shader uniform. Pointer dùng `state.pointer` của R3F, không gắn listener toàn cục riêng.
 - **EffectComposer + DepthOfField**: `multisampling={0}` (tránh lỗi `glBlitFramebuffer` depth/stencil blit). Canvas `antialias={false}` (output composer vốn không MSAA).
-- **Gate mobile**: `quality='low'` → composer gọn (chỉ Bloom+Vignette), particle/count ít hơn.
-- **EffectComposer children phải là `Element`** (không nhận `false`) → conditional effect thì truyền **mảng element có `key`**, đừng dùng `{cond && <Effect/>}`.
+- **Gate mobile**: `quality='low'` dùng layout station riêng, DPR thấp, geometry/text atlas gọn, vật liệu standard thay transmission và không mount postprocessing/Environment. Máy cực yếu, reduced-motion, Save-Data hoặc WebGL caveat giữ fallback 2D SSR.
 
 ### Profiling (đo trước/sau, không tối ưu mù)
 

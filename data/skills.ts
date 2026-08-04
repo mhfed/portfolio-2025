@@ -11,31 +11,31 @@ export const skillGroups: SkillGroup[] = [
   {
     id: 'core',
     label: 'Core',
-    signal: 'Product-grade frontend architecture',
+    signal: 'Frontend architecture',
     skills: ['React', 'Next.js', 'TypeScript'],
   },
   {
     id: 'ui',
     label: 'UI',
-    signal: 'Reusable UI systems and polished interfaces',
+    signal: 'UI systems',
     skills: ['Tailwind', 'shadcn/ui', 'Design systems'],
   },
   {
     id: 'motion',
     label: 'Motion',
-    signal: 'Measured interaction and scroll choreography',
+    signal: 'Motion with intent',
     skills: ['Motion', 'GSAP', 'Canvas'],
   },
   {
     id: 'backend',
     label: 'Backend-ish',
-    signal: 'Integration work that keeps products moving',
+    signal: 'APIs and real-time',
     skills: ['Supabase', 'API integration', 'SSE'],
   },
   {
     id: 'tooling',
     label: 'Tooling',
-    signal: 'Delivery, observability, and production workflows',
+    signal: 'Ship and monitor',
     skills: ['Vercel', 'Git', 'CI/CD'],
   },
 ]

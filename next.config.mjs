@@ -2,6 +2,7 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  devIndicators: false,
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [60, 70, 75],

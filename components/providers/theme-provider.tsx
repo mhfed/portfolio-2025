@@ -10,9 +10,10 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => {
-    // This portfolio is a committed dark "Financial HUD" world — force dark
-    // mode and let the fixed palette in globals.css stand (no accent swapping).
-    applyThemeMode('dark')
+    // The 2026 portfolio is a committed luxury-light surface. Keep the global
+    // app theme aligned so browser UI, form controls, and inherited tokens stay
+    // consistent with the cold silver, graphite, and cobalt palette.
+    applyThemeMode('light')
   }, [])
 
   return <>{children}</>

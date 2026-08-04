@@ -126,7 +126,10 @@ export function ImageUploadDropzone({
   return (
     <div className='space-y-3'>
       <div className='flex items-baseline justify-between gap-4'>
-        <label className='block text-sm font-semibold text-foreground'>
+        <label
+          htmlFor='image-upload-input'
+          className='block text-sm font-semibold text-foreground'
+        >
           {label}
         </label>
         {uploadedUrl && (
@@ -151,12 +154,20 @@ export function ImageUploadDropzone({
             input.click()
           }
         }}
+        onKeyDown={(event) => {
+          if ((event.key === 'Enter' || event.key === ' ') && !isUploading) {
+            event.preventDefault()
+            const input = document.getElementById('image-upload-input')
+            if (input instanceof HTMLInputElement) input.click()
+          }
+        }}
         aria-label='Upload project image'
         role='button'
+        tabIndex={isUploading ? -1 : 0}
       >
         <p className='text-foreground text-sm text-center'>{description}</p>
         <p className='text-xs text-muted-foreground'>
-          {isUploading ? 'Uploading...' : 'PNG, JPG, or WebP'}
+          {isUploading ? 'Uploading…' : 'PNG, JPG, or WebP'}
         </p>
       </div>
 
@@ -182,7 +193,11 @@ export function ImageUploadDropzone({
         </div>
       )}
 
-      {error && <p className='text-xs text-destructive mt-1'>{error}</p>}
+      {error && (
+        <p className='text-xs text-destructive mt-1' role='alert'>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

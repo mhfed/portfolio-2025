@@ -1,159 +1,90 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { ScanReveal, SectionHeader } from '@/components/molecules/reveal-kit'
 import type { ExperienceRecord } from '@/types/experience'
-import { ScanReveal, StationHeader } from '@/components/molecules/hud-kit'
-import { hudFocus } from '@/lib/hud-focus'
-import { cn } from '@/lib/utils'
 
-const ACCENT = '#4ec873'
-const MAX_SKILLS = 6
-
-/** Reduce a verbose paragraph to a single concise sentence. */
 function summarize(text: string): string {
   const clean = text
     .replace(/<br\s*\/?>/gi, ' ')
     .replace(/\s+/g, ' ')
     .trim()
-  const idx = clean.search(/[.。!?]\s/)
-  return idx === -1 ? clean : clean.slice(0, idx + 1)
+  const end = clean.search(/[.。!?]\s/)
+  return end === -1 ? clean : clean.slice(0, end + 1)
 }
 
-export function ExperienceSection({
-  experiences,
-}: {
+export interface ExperienceSectionProps {
   experiences: ExperienceRecord[]
-}) {
+}
+
+export function ExperienceSection({ experiences }: ExperienceSectionProps) {
   const t = useTranslations('experience')
-  const log = [...experiences].reverse()
-  const [active, setActive] = useState(0)
-  const blockRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  // Scroll-driven: whichever role crosses the vertical center becomes active —
-  // its 2D card holds full focus while the rest recede, and the matching spine
-  // node lights up in the 3D world (via the shared hudFocus bridge).
-  useEffect(() => {
-    const els = blockRefs.current.filter(Boolean) as HTMLDivElement[]
-    if (els.length === 0) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const i = Number((entry.target as HTMLElement).dataset.index)
-            if (!Number.isNaN(i)) setActive(i)
-          }
-        })
-      },
-      { rootMargin: '-50% 0px -50% 0px', threshold: 0 }
-    )
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [log.length])
-
-  useEffect(() => {
-    hudFocus.experience = active
-  }, [active])
+  const roles = [...experiences].reverse()
 
   return (
     <section
       id='experience'
-      data-section
-      data-waypoint='experience'
-      className='creative-section relative w-full px-[clamp(1.25rem,6vw,6rem)] py-28 md:py-40'
+      className='mx-auto max-w-[90rem] px-5 py-28 sm:px-8 md:py-36 lg:px-12'
     >
-      <div className='mx-auto w-full max-w-[1400px]'>
-        <StationHeader
-          index={2}
-          label='EXPERIENCE'
-          title={<span className='whitespace-pre-line'>{t('title')}</span>}
-          accent={ACCENT}
-        />
+      <SectionHeader
+        title={<span className='whitespace-pre-line'>{t('title')}</span>}
+        description={t('headline')}
+      />
 
-        {log.length === 0 ? (
-          <p className='font-mono text-creative-dim'>{t('noExperience')}</p>
-        ) : (
-          <div className='relative ml-1 border-l border-creative-line pl-8 md:pl-12'>
-            {log.map((role, i) => {
-              const tag = `LOG_${String(log.length - i).padStart(2, '0')}`
-              return (
-                <div
-                  key={role.id}
-                  ref={(el) => {
-                    blockRefs.current[i] = el
-                  }}
-                  data-index={i}
-                  className={cn(
-                    'transition-opacity duration-500',
-                    i === active ? 'opacity-100' : 'md:opacity-35'
-                  )}
-                >
-                  <ScanReveal
-                    delay={i * 80}
-                    className='relative pb-14 last:pb-0'
-                  >
-                    {/* rail node */}
-                    <span
-                      className='absolute -left-[calc(2rem+7px)] top-1.5 h-3 w-3 rounded-full md:-left-[calc(3rem+7px)]'
-                      style={{
-                        background: ACCENT,
-                        boxShadow: `0 0 12px ${ACCENT}`,
-                      }}
-                      aria-hidden='true'
-                    />
-                    <div className='grid gap-4 md:grid-cols-[180px_1fr] md:gap-10'>
-                      <div className='flex flex-col gap-1'>
-                        <span className='font-mono text-meta uppercase tracking-[0.16em] text-creative-dim'>
-                          {tag}
-                        </span>
-                        <span
-                          className='font-mono text-meta tabular-nums'
-                          style={{ color: ACCENT }}
-                        >
-                          {role.period}
-                        </span>
-                        <span className='font-mono text-meta uppercase tracking-wider text-creative-dim'>
-                          {role.location}
-                        </span>
-                      </div>
+      {roles.length === 0 ? (
+        <p className='text-portfolio-muted'>{t('noExperience')}</p>
+      ) : (
+        <div className='grid gap-10 lg:grid-cols-[minmax(15rem,0.36fr)_minmax(0,1fr)] lg:gap-16'>
+          <ScanReveal className='hidden lg:block'>
+            <aside className='sticky top-28 border-l border-portfolio-line pl-6'>
+              <p className='text-lg font-semibold tracking-[-0.035em] text-portfolio-ink'>
+                Product surfaces that need equal parts craft and reliability.
+              </p>
+              <p className='mt-5 text-sm leading-relaxed text-portfolio-muted'>
+                My work moves between customer-facing products, high-trust
+                financial flows, and systems used by teams every day.
+              </p>
+            </aside>
+          </ScanReveal>
 
+          <ol className='relative border-l border-portfolio-line pl-6 sm:pl-9'>
+            {roles.map((role, index) => (
+              <ScanReveal key={role.id} delay={index * 70}>
+                <li className='relative'>
+                  <span
+                    className='absolute -left-[1.85rem] top-7 h-2.5 w-2.5 rounded-full border-2 border-portfolio-bg bg-portfolio-accent sm:-left-[2.6rem]'
+                    aria-hidden='true'
+                  />
+                  <article className='border-t border-portfolio-line py-7 sm:py-9'>
+                    <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between'>
                       <div>
-                        <h3 className='m-0 font-display text-company-title-xs font-black uppercase leading-none tracking-[-0.02em] text-creative-ink md:text-[clamp(1.8rem,3.2vw,3rem)]'>
+                        <p className='font-mono text-xs text-portfolio-accent'>
+                          {role.period}
+                        </p>
+                        <h3 className='mt-3 font-display text-[clamp(2rem,4vw,3.8rem)] font-semibold leading-[0.9] tracking-[-0.065em] text-portfolio-ink'>
                           {role.company}
                         </h3>
-                        <p
-                          className='mt-2 font-mono text-meta font-bold uppercase tracking-[0.12em]'
-                          style={{ color: ACCENT }}
-                        >
+                        <p className='mt-3 text-base font-medium text-portfolio-muted'>
                           {role.position}
                         </p>
-                        <p className='mt-4 line-clamp-2 max-w-[60ch] font-body text-body-sm leading-relaxed text-creative-muted'>
-                          {summarize(role.description)}
-                        </p>
-                        <div className='mt-5 flex flex-wrap items-center gap-2'>
-                          {role.skills.slice(0, MAX_SKILLS).map((skill) => (
-                            <span
-                              key={skill}
-                              className='rounded border border-creative-line bg-white/[0.02] px-2.5 py-1 font-mono text-[0.72rem] font-bold uppercase tracking-wide text-creative-dim'
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                          {role.skills.length > MAX_SKILLS && (
-                            <span className='font-mono text-[0.72rem] font-bold text-creative-dim'>
-                              +{role.skills.length - MAX_SKILLS}
-                            </span>
-                          )}
-                        </div>
                       </div>
+                      <p className='shrink-0 text-sm text-portfolio-dim'>
+                        {role.location}
+                      </p>
                     </div>
-                  </ScanReveal>
-                </div>
-              )
-            })}
-          </div>
-        )}
-      </div>
+                    <p className='mt-6 max-w-[46rem] text-[0.98rem] leading-relaxed text-portfolio-muted'>
+                      {summarize(role.description)}
+                    </p>
+                    <p className='mt-6 font-mono text-[0.7rem] leading-relaxed text-portfolio-dim'>
+                      {role.skills.slice(0, 5).join(' / ')}
+                    </p>
+                  </article>
+                </li>
+              </ScanReveal>
+            ))}
+          </ol>
+        </div>
+      )}
     </section>
   )
 }

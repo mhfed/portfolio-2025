@@ -22,7 +22,7 @@ Every task must pass both before considered done:
 ### i18n Data Flow
 
 - ALL content (projects, experiences) lives in `messages/{locale}.json`, NOT in a database
-- Page fetches data via `getTranslations()` + `tProjects.raw('list')` and passes it to `<CreativePortfolio>`
+- Page fetches data via `getTranslations()` + `tProjects.raw('list')` and passes it to `<EditorialPortfolio>`
 - `data/projects.ts` → [`normalizeProjects()`](data/projects.ts) enriches raw message records with hardcoded `resultByTitle` / `roleByTitle` maps
 - `localeDetection: false` — locale is never auto-detected; users must navigate to `/en`, `/vi`, or `/zh-TW`
 
