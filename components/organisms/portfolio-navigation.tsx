@@ -19,6 +19,9 @@ export interface PortfolioNavigationProps {
   contactLabel: string
   resumeLabel: string
   languageLabel: string
+  skipToContentLabel: string
+  primaryNavigationLabel: string
+  mobileNavigationLabel: string
   themeLabel: string
   openMenuLabel: string
   closeMenuLabel: string
@@ -37,6 +40,9 @@ export function PortfolioNavigation({
   contactLabel,
   resumeLabel,
   languageLabel,
+  skipToContentLabel,
+  primaryNavigationLabel,
+  mobileNavigationLabel,
   themeLabel,
   openMenuLabel,
   closeMenuLabel,
@@ -47,12 +53,15 @@ export function PortfolioNavigation({
 
   return (
     <header className='portfolio-header'>
+      <a className='skip-link' href='#main-content'>
+        {skipToContentLabel}
+      </a>
       <div className='portfolio-shell portfolio-header__inner'>
         <a className='portfolio-wordmark' href='#top' aria-label={name}>
           MH
         </a>
 
-        <nav className='portfolio-nav' aria-label={name}>
+        <nav className='portfolio-nav' aria-label={primaryNavigationLabel}>
           {items.map((item) => (
             <a key={item.href} href={item.href}>
               {item.label}
@@ -61,7 +70,7 @@ export function PortfolioNavigation({
         </nav>
 
         <div className='portfolio-header__actions'>
-          <div className='locale-switcher' aria-label={languageLabel}>
+          <nav className='locale-switcher' aria-label={languageLabel}>
             {routing.locales.map((option) => (
               <Link
                 key={option}
@@ -72,7 +81,7 @@ export function PortfolioNavigation({
                 {localeLabels[option]}
               </Link>
             ))}
-          </div>
+          </nav>
 
           <button
             className='icon-button'
@@ -106,7 +115,7 @@ export function PortfolioNavigation({
 
       {menuOpen ? (
         <div id='mobile-navigation' className='mobile-navigation'>
-          <nav className='portfolio-shell' aria-label={name}>
+          <nav className='portfolio-shell' aria-label={mobileNavigationLabel}>
             {items.map((item) => (
               <a key={item.href} href={item.href} onClick={closeMenu}>
                 {item.label}
@@ -123,7 +132,7 @@ export function PortfolioNavigation({
             <a href='#contact' onClick={closeMenu}>
               {contactLabel}
             </a>
-            <div className='mobile-locale-switcher' aria-label={languageLabel}>
+            <nav className='mobile-locale-switcher' aria-label={languageLabel}>
               {routing.locales.map((option) => (
                 <Link
                   key={option}
@@ -135,7 +144,7 @@ export function PortfolioNavigation({
                   {localeLabels[option]}
                 </Link>
               ))}
-            </div>
+            </nav>
           </nav>
         </div>
       ) : null}

@@ -27,11 +27,14 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
         contactLabel={content.navigation.contactLabel}
         resumeLabel={resumeLabel}
         languageLabel={content.navigation.language.changeLabel}
+        skipToContentLabel={content.navigation.skipToContentLabel}
+        primaryNavigationLabel={content.navigation.primaryNavigationLabel}
+        mobileNavigationLabel={content.navigation.mobileNavigationLabel}
         themeLabel={content.navigation.theme.toggleLabel}
         openMenuLabel={content.navigation.menu.openLabel}
         closeMenuLabel={content.navigation.menu.closeLabel}
       />
-      <main>
+      <main id='main-content' tabIndex={-1}>
         <EditorialHero
           name={content.fullName}
           hero={content.hero}

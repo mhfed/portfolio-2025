@@ -46,6 +46,9 @@ export interface PortfolioContent {
       label: string
       changeLabel: string
     }
+    skipToContentLabel: string
+    primaryNavigationLabel: string
+    mobileNavigationLabel: string
     menu: {
       openLabel: string
       closeLabel: string

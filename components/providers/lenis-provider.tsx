@@ -1,7 +1,8 @@
 'use client'
 
-import { type ReactNode, useRef } from 'react'
+import { type ReactNode, useMemo, useRef } from 'react'
 import { ReactLenis, useLenis } from 'lenis/react'
+import { usePrefersReducedMotion } from '@/hooks/use-client-capabilities'
 
 const LENIS_OPTIONS = {
   autoRaf: true,
@@ -33,8 +34,18 @@ function ScrollVelocityTracker() {
 }
 
 export function LenisProvider({ children }: { children: ReactNode }) {
+  const reducedMotion = usePrefersReducedMotion()
+  const options = useMemo(
+    () => ({
+      ...LENIS_OPTIONS,
+      duration: reducedMotion ? 0 : LENIS_OPTIONS.duration,
+      smoothWheel: !reducedMotion,
+    }),
+    [reducedMotion]
+  )
+
   return (
-    <ReactLenis root options={LENIS_OPTIONS}>
+    <ReactLenis root options={options}>
       <ScrollVelocityTracker />
       {children}
     </ReactLenis>

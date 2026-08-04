@@ -20,7 +20,10 @@
     "developer": "Lập trình viên Frontend",
     "contact": "Liên hệ",
     "openMenu": "Mở menu",
-    "closeMenu": "Đóng menu"
+    "closeMenu": "Đóng menu",
+    "skipToContent": "Bỏ qua đến nội dung chính",
+    "primaryNavigation": "Điều hướng chính",
+    "mobileNavigation": "Điều hướng trên di động"
   },
   "hero": {
     "front": "NGUYEN",
@@ -119,7 +122,7 @@
     "title": "Kinh Nghiệm\nLàm Việc",
     "headline": "Từ tốc độ storefront đến luồng giao dịch và hệ thống sản phẩm nội bộ.",
     "kicker": "tổng quan",
-    "readMore": "Xem thêm...",
+    "readMore": "Xem thêm…",
     "noExperience": "Chưa có kinh nghiệm làm việc.",
     "list": [
       {
@@ -128,7 +131,7 @@
         "position": "Thực tập sinh Lập trình viên Frontend",
         "period": "2/2021 - 7/2021",
         "location": "Hà Nội",
-        "description": "Tham gia đóng góp vào nhiều dự án web, học hỏi các phương pháp phát triển front-end tốt nhất và xây dựng nền tảng vững chắc về công nghệ web.",
+        "description": "Xây dựng các dự án web nhỏ bằng HTML, CSS, JavaScript và React, đồng thời làm quen với quy trình frontend thực tế.",
         "skills": ["HTML", "CSS", "JavaScript", "React"]
       },
       {
@@ -137,7 +140,7 @@
         "position": "Lập trình viên Frontend",
         "period": "7/2021 - 8/2022",
         "location": "Hà Nội",
-        "description": "Phát triển Hệ thống Metacity và Trang giới thiệu (Landing Page). Tạo giao diện, hiệu ứng chuyển động và tùy chỉnh giao diện trò chơi. Chuyển đổi thiết kế từ Figma sang HTML và CSS trong khi vẫn đảm bảo duy trì thiết kế UX và UI. Tối ưu cấu trúc mã (refactor), tìm hiểu và sửa lỗi. Đảm bảo khả năng tương thích chéo trình duyệt và tính phản hồi linh hoạt trên nhiều thiết bị và kích thước màn hình khác nhau.",
+        "description": "Phát triển hệ thống và landing page Metacity, chuyển thiết kế Figma thành giao diện React responsive có chuyển động.",
         "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
       },
       {
@@ -146,7 +149,7 @@
         "position": "Lập trình viên Frontend",
         "period": "08/2022 - 04/2024",
         "location": "Hà Nội",
-        "description": "Phát triển CMS Website (CGSI, Iress Wealth, Admin Portal Equix), triển khai luồng đăng nhập, xác thực người dùng, quản lý biểu mẫu với Formik và xác thực Yup. Tạo tính năng xây dựng giao diện (theme builder) để tùy chỉnh bảng màu của ứng dụng giao dịch. Phát triển Website Giao dịch (EQUIX, MAGPIE, CGSI) với các tính năng đăng ký, đăng nhập, quên mật khẩu sử dụng reCAPTCHA, xác thực hai yếu tố (2FA) bằng mã PIN. Triển khai các tính năng giao dịch với cập nhật thời gian thực bằng Server-Sent Events (SSE). Sử dụng Next.js để tạo Website nhúng phân tích cơ bản nhằm theo dõi thông tin cổ phiếu.",
+        "description": "Phát triển CMS và giao diện giao dịch realtime với xác thực an toàn, biểu mẫu hợp lệ, tuỳ biến theme và dữ liệu SSE.",
         "skills": [
           "TypeScript",
           "ReactJS",
@@ -167,7 +170,7 @@
         "position": "Lập trình viên Frontend",
         "period": "04/2024 - Hiện tại",
         "location": "Hà Nội",
-        "description": "Kiến trúc và thực thi chuyển đổi toàn bộ E-commerce Storefront.<br/>Chuyển đổi Hệ thống (Trưởng nhóm): Dẫn dắt việc di chuyển mã nguồn storefront từ Laravel sang Next.js, nâng điểm Google PageSpeed Insights từ 29 lên 90+ và cải thiện hiệu suất SEO.<br/>Tác động Kinh doanh: Đóng góp trực tiếp vào việc tăng Tỷ lệ chuyển đổi (CR) từ 1.5% lên 2.5% thông qua tối ưu hóa hiệu suất và cải thiện trải nghiệm người dùng (UX).<br/>Hạ tầng & DevOps: Thiết lập môi trường tự vận hành (self-hosting) bằng PM2 và tự động hóa quy trình GitLab CI/CD; phát triển các mã kịch bản hotfix đảm bảo thời gian hoạt động 99.9%.<br/>Trải nghiệm Lập trình viên (DX): Hiện đại hóa Cổng quản trị nội bộ (Admin Portal) bằng cách chuyển từ React kế thừa sang React + Vite, giảm đáng kể thời gian build.<br/>Tăng trưởng Sản phẩm: Phát triển Zalo Mini App cho chương trình Khách hàng thân thiết để mở rộng tệp khách hàng. Tích hợp hệ thống theo dõi toàn diện (GA4, Pixel) phục vụ cho các chiến lược marketing dựa trên dữ liệu.<br/>Năng lực Lãnh đạo: Thiết kế kiến trúc dự án cơ sở (Base Project) và hướng dẫn các thành viên trong nhóm về tiêu chuẩn phát triển dạng mô-đun và chất lượng mã nguồn cao.",
+        "description": "Dẫn dắt chuyển storefront từ Laravel sang Next.js, nâng PageSpeed từ 29 lên 90+ và cải thiện chuyển đổi qua tối ưu hiệu năng, UX.",
         "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
       }
     ]

@@ -8,6 +8,44 @@ export interface ProjectShowcaseProps {
   work: PortfolioContent['work']
 }
 
+interface ProjectMediaProps {
+  project: PortfolioContent['work']['projects'][number]
+  viewLabel: string
+}
+
+function ProjectMedia({ project, viewLabel }: ProjectMediaProps) {
+  const image = (
+    <Image
+      src={project.image}
+      alt={`${project.title} project preview`}
+      fill
+      sizes='(max-width: 767px) 100vw, 90vw'
+      quality={75}
+    />
+  )
+
+  if (!project.liveUrl) {
+    return (
+      <div className='project-media' data-project-id={project.id}>
+        {image}
+      </div>
+    )
+  }
+
+  return (
+    <a
+      className='project-media'
+      data-project-id={project.id}
+      href={project.liveUrl}
+      target='_blank'
+      rel='noreferrer'
+      aria-label={`${viewLabel}: ${project.title}`}
+    >
+      {image}
+    </a>
+  )
+}
+
 export function ProjectShowcase({ work }: ProjectShowcaseProps) {
   return (
     <section id='work' className='project-showcase section-anchor'>
@@ -48,30 +86,30 @@ export function ProjectShowcase({ work }: ProjectShowcaseProps) {
                 ) : null}
               </div>
 
-              <a
-                className='project-media'
-                data-project-id={project.id}
-                href={project.liveUrl || undefined}
-                target={project.liveUrl ? '_blank' : undefined}
-                rel={project.liveUrl ? 'noreferrer' : undefined}
-                aria-label={project.liveUrl ? `${work.viewLabel}: ${project.title}` : undefined}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes='(max-width: 767px) 100vw, 90vw'
-                  quality={75}
-                />
-              </a>
+              <ProjectMedia project={project} viewLabel={work.viewLabel} />
 
               <div className='project-meta'>
-                <p>{project.description}</p>
+                <div className='project-meta__copy'>
+                  <p className='project-role'>{project.role}</p>
+                  <p>{project.result}</p>
+                  <p>{project.description}</p>
+                </div>
                 <ul aria-label={`${project.title} technology stack`}>
                   {project.techStack.map((technology) => (
                     <li key={technology}>{technology}</li>
                   ))}
                 </ul>
+                {project.githubUrl ? (
+                  <a
+                    className='project-source'
+                    href={project.githubUrl}
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    {work.sourceLabel}
+                    <ArrowUpRight aria-hidden='true' size={16} strokeWidth={1.7} />
+                  </a>
+                ) : null}
               </div>
             </div>
           </article>

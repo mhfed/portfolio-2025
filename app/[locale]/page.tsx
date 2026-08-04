@@ -74,6 +74,9 @@ export default async function Home({ params }: Props) {
         label: tHeader('language'),
         changeLabel: tHeader('changeLanguage'),
       },
+      skipToContentLabel: tHeader('skipToContent'),
+      primaryNavigationLabel: tHeader('primaryNavigation'),
+      mobileNavigationLabel: tHeader('mobileNavigation'),
       menu: {
         openLabel: tHeader('openMenu'),
         closeLabel: tHeader('closeMenu'),

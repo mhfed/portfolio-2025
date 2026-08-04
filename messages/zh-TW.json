@@ -20,7 +20,10 @@
     "developer": "前端開發工程師",
     "contact": "聯絡",
     "openMenu": "開啟選單",
-    "closeMenu": "關閉選單"
+    "closeMenu": "關閉選單",
+    "skipToContent": "跳至主要內容",
+    "primaryNavigation": "主要導覽",
+    "mobileNavigation": "行動版導覽"
   },
   "hero": {
     "front": "NGUYEN",
@@ -114,7 +117,7 @@
     "title": "工作\n經歷",
     "headline": "從前台速度到交易流程，再到內部產品系統。",
     "kicker": "概述",
-    "readMore": "閱讀更多...",
+    "readMore": "閱讀更多…",
     "noExperience": "目前尚無工作經歷。",
     "list": [
       {
@@ -123,7 +126,7 @@
         "position": "前端實習開發工程師",
         "period": "2/2021 - 7/2021",
         "location": "河內",
-        "description": "參與多個網頁專案，學習前端開發的最佳實踐，並在網頁技術方面奠定堅實的基礎。",
+        "description": "使用 HTML、CSS、JavaScript 與 React 建立多個網頁專案，累積前端實作經驗。",
         "skills": ["HTML", "CSS", "JavaScript", "React"]
       },
       {
@@ -132,7 +135,7 @@
         "position": "前端開發工程師",
         "period": "7/2021 - 8/2022",
         "location": "河內",
-        "description": "開發 Metacity 系統與登陸頁面。製作介面、動畫特效並客製化遊戲介面。將 Figma 設計稿轉換為 HTML/CSS，同時確保維持良好的 UX/UI 設計。重構程式碼、調查並修復 Bug。確保跨瀏覽器相容性以及在各式裝置與螢幕尺寸上的響應式呈現。",
+        "description": "開發 Metacity 系統與 landing page，將 Figma 設計轉為具動態效果的響應式 React 介面。",
         "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
       },
       {
@@ -141,7 +144,7 @@
         "position": "前端開發工程師",
         "period": "08/2022 - 04/2024",
         "location": "河內",
-        "description": "開發 CMS 網站 (CGSI、Iress Wealth、Admin Portal Equix)，實現登入流程、用戶驗證，以及使用 Formik 與 Yup 驗證進行表單管理。建立主題建构器功能以自訂交易應用程式的色彩配置。開發交易網站 (EQUIX、MAGPIE、CGSI)，具備登入、註冊、忘記密碼等功能，並整合 reCAPTCHA 與 PIN 碼雙重驗證。使用 Server-Sent Events (SSE) 實現即時更新的交易功能。利用 Next.js 建立基本面嵌入式網站以追蹤股票資訊。",
+        "description": "開發 CMS 與即時交易介面，涵蓋安全驗證、表單流程、主題客製化與 SSE 資料更新。",
         "skills": [
           "TypeScript",
           "ReactJS",
@@ -162,7 +165,7 @@
         "position": "前端開發工程師",
         "period": "04/2024 - 至今",
         "location": "河內",
-        "description": "規劃並執行整個電子商務前台的轉型。<br/>系統遷移（主導）：帶領前台從 Laravel 遷移至 Next.js，將 Google PageSpeed Insights 分數從 29 分提升至 90+ 分，並優化 SEO 表現。<br/>業務影響：透過效能優化與 UX 改善，直接促使轉換率（CR）從 1.5% 提升至 2.5%。<br/>基礎設施與 DevOps：使用 PM2 建立自我託管環境並自動化 GitLab CI/CD workflows；開發 Hotfix 腳本以確保 99.9% 的上線率。<br/>開發者體驗（DX）：將內部管理入口網站從舊版 React 遷移至 React + Vite 進行現代化，大幅縮短建置時間。<br/>產品成長：為會員計劃開發 Zalo Mini App 以擴大客戶觸及面。整合全面的追蹤功能（GA4、Pixel）以實現數據驅動的行銷策略。<br/>領導力：設計基礎專案架構，並指導團隊成員模組化開發與高品質的程式碼標準。",
+        "description": "主導 storefront 從 Laravel 遷移至 Next.js，將 PageSpeed 從 29 提升至 90+，並透過效能與 UX 優化改善轉換率。",
         "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
       }
     ]
