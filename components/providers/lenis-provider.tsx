@@ -1,50 +1,40 @@
 'use client'
 
+import { type ReactNode, useRef } from 'react'
 import { ReactLenis, useLenis } from 'lenis/react'
-import { ReactNode, useEffect, useRef } from 'react'
+
+const LENIS_OPTIONS = {
+  autoRaf: true,
+  duration: 1,
+  easing: (time: number) => Math.min(1, 1.001 - Math.pow(2, -10 * time)),
+  smoothWheel: true,
+  touchMultiplier: 1.2,
+}
 
 function ScrollVelocityTracker() {
   const lastSkewRef = useRef(0)
 
   useLenis((lenis) => {
     const velocity = lenis.velocity || 0
-    const skew = Math.min(Math.max(velocity * 0.008, -3.5), 3.5)
+    const rawSkew = Math.min(Math.max(velocity * 0.008, -3.5), 3.5)
+    const skew = Math.abs(rawSkew) < 0.08 ? 0 : rawSkew
+    const delta = Math.abs(skew - lastSkewRef.current)
 
-    if (Math.abs(skew - lastSkewRef.current) >= 0.08) {
+    if (skew === 0 ? lastSkewRef.current !== 0 : delta >= 0.08) {
       lastSkewRef.current = skew
-      document.documentElement.style.setProperty('--scroll-skew', `${skew}deg`)
+      document.documentElement.style.setProperty(
+        '--scroll-skew',
+        `${skew.toFixed(3)}deg`
+      )
     }
   })
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>
-    const handleScroll = () => {
-      clearTimeout(timeout)
-      timeout = setTimeout(() => {
-        document.documentElement.style.setProperty('--scroll-skew', '0deg')
-      }, 120)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(timeout)
-    }
-  }, [])
 
   return null
 }
 
 export function LenisProvider({ children }: { children: ReactNode }) {
   return (
-    <ReactLenis
-      root
-      options={{
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
-        smoothWheel: true,
-        touchMultiplier: 2,
-      }}
-    >
+    <ReactLenis root options={LENIS_OPTIONS}>
       <ScrollVelocityTracker />
       {children}
     </ReactLenis>

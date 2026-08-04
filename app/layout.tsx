@@ -1,37 +1,63 @@
 import type React from 'react'
-import {
-  Inter_Tight,
-  JetBrains_Mono,
-  Space_Grotesk,
-  Manrope,
-} from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
+import { THEME_STORAGE_KEY } from '@/lib/theme'
 import './globals.css'
-import { ThemeProvider } from '@/components/providers/theme-provider'
-import { Toaster } from '@/components/ui/toaster'
 
-const interTight = Inter_Tight({
+const geistSans = Geist({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-inter-tight',
+  variable: '--font-geist-sans',
 })
 
-const jetbrainsMono = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-jetbrains-mono',
+  variable: '--font-geist-mono',
 })
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-space-grotesk',
-})
+const themeInitializer = `
+  (() => {
+    const root = document.documentElement;
+    let mode = 'light';
 
-const manrope = Manrope({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-manrope',
-})
+    try {
+      const savedMode = window.localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});
+      mode = savedMode === 'light' || savedMode === 'dark'
+        ? savedMode
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+    } catch {
+      mode = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    }
+
+    root.classList.toggle('dark', mode === 'dark');
+    root.dataset.theme = mode;
+    root.style.colorScheme = mode;
+  })();
+`
+
+type FontProperties = React.CSSProperties &
+  Record<
+    | '--font-body'
+    | '--font-display'
+    | '--font-mono'
+    | '--font-manrope'
+    | '--font-space-grotesk'
+    | '--font-jetbrains-mono',
+    string
+  >
+
+const fontProperties: FontProperties = {
+  '--font-body': 'var(--font-geist-sans)',
+  '--font-display': 'var(--font-geist-sans)',
+  '--font-mono': 'var(--font-geist-mono)',
+  '--font-manrope': 'var(--font-geist-sans)',
+  '--font-space-grotesk': 'var(--font-geist-sans)',
+  '--font-jetbrains-mono': 'var(--font-geist-mono)',
+}
 
 export default function RootLayout({
   children,
@@ -42,23 +68,25 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <head>
         <link rel='manifest' href='/manifest.json' />
+        <link rel='icon' href='/brand-mark.svg' type='image/svg+xml' />
         <link rel='apple-touch-icon' href='/icon-192x192.png' />
-        <meta name='theme-color' content='#07110c' />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                document.documentElement.classList.add('dark');
-              } catch (e) {}
-            `,
-          }}
+        <meta
+          name='theme-color'
+          media='(prefers-color-scheme: light)'
+          content='#f3f3ef'
         />
+        <meta
+          name='theme-color'
+          media='(prefers-color-scheme: dark)'
+          content='#121210'
+        />
+        <script dangerouslySetInnerHTML={{ __html: themeInitializer }} />
       </head>
       <body
-        className={`${interTight.className} ${interTight.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${manrope.variable} bg-background text-foreground antialiased`}
+        className={`${geistSans.className} ${geistSans.variable} ${geistMono.variable} bg-background text-foreground antialiased`}
+        style={fontProperties}
       >
-        <ThemeProvider>{children}</ThemeProvider>
-        <Toaster />
+        {children}
       </body>
     </html>
   )

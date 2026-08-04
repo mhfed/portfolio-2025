@@ -7,15 +7,26 @@ import { hasLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { Analytics } from '@vercel/analytics/react'
 import { LenisProvider } from '@/components/providers/lenis-provider'
-import { CustomCursor } from '@/components/atoms/custom-cursor'
 import { WebMCPProvider } from '@/components/atoms/webmcp-provider'
 
 type Props = {
   children: React.ReactNode
   params: Promise<{ locale: string }>
 }
+
+type Locale = (typeof routing.locales)[number]
+
+const openGraphLocales: Record<Locale, string> = {
+  en: 'en_US',
+  vi: 'vi_VN',
+  'zh-TW': 'zh_TW',
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
+  const resolvedLocale = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale
 
   const baseUrl =
     process.env.NODE_ENV === 'development'
@@ -33,9 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       '擁有 5 年以上經驗的前端開發工程師，專精於 React.js, Next.js, TypeScript。致力於以乾淨的程式碼打造現代化網頁應用，並提供卓越的使用者體驗。',
   }
 
-  const title = titles[locale as keyof typeof titles] || titles.en
-  const description =
-    descriptions[locale as keyof typeof descriptions] || descriptions.en
+  const title = titles[resolvedLocale]
+  const description = descriptions[resolvedLocale]
 
   return {
     title,
@@ -51,9 +61,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       'JavaScript',
       'Portfolio',
       'Nguyen Minh Hieu',
-      locale === 'vi'
+      resolvedLocale === 'vi'
         ? 'Lập trình viên Frontend'
-        : locale === 'zh-TW'
+        : resolvedLocale === 'zh-TW'
           ? '前端開發工程師'
           : '',
     ].filter(Boolean),
@@ -61,10 +71,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     creator: 'Nguyen Minh Hieu',
     metadataBase: new URL(baseUrl),
     alternates: {
-      canonical: `/${locale}`,
+      canonical: `/${resolvedLocale}`,
       languages: {
         en: '/en',
         vi: '/vi',
+        'zh-TW': '/zh-TW',
         'x-default': '/en',
       },
     },
@@ -73,9 +84,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       siteName: 'Nguyen Minh Hieu Portfolio',
-      locale: locale === 'vi' ? 'vi_VN' : 'en_US',
-      alternateLocale: locale === 'vi' ? 'en_US' : 'vi_VN',
-      url: `${baseUrl}/${locale}`,
+      locale: openGraphLocales[resolvedLocale],
+      alternateLocale: routing.locales
+        .filter((candidate) => candidate !== resolvedLocale)
+        .map((candidate) => openGraphLocales[candidate]),
+      url: `${baseUrl}/${resolvedLocale}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -126,11 +139,16 @@ export default async function LocaleLayout({ children, params }: Props) {
         : locale === 'zh-TW'
           ? '擁有 5 年以上經驗的前端開發工程師'
           : 'Frontend Developer with 5+ years of experience',
-    url:
+    url: `${
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'
-        : 'https://minhhieu.is-a.dev',
-    sameAs: ['https://github.com/mhfed', 'https://linkedin.com/in/mhfed'],
+        : 'https://minhhieu.is-a.dev'
+    }/${locale}`,
+    sameAs: [
+      'https://github.com/mhfed',
+      'https://www.linkedin.com/in/mhfed/',
+    ],
+    inLanguage: locale,
     knowsAbout: [
       'React.js',
       'Next.js',
@@ -139,9 +157,11 @@ export default async function LocaleLayout({ children, params }: Props) {
       'Frontend Development',
     ],
   }
+  const documentLanguageScript = `document.documentElement.lang=${JSON.stringify(locale)};`
 
   return (
     <>
+      <script dangerouslySetInnerHTML={{ __html: documentLanguageScript }} />
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -149,7 +169,6 @@ export default async function LocaleLayout({ children, params }: Props) {
       <NextIntlClientProvider messages={messages}>
         <LenisProvider>
           <WebMCPProvider />
-          <CustomCursor />
           {children}
           <Analytics />
         </LenisProvider>

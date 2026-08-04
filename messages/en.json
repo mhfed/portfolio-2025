@@ -18,7 +18,9 @@
     "openThemeSettings": "Open theme settings",
     "useTheme": "Use {theme} theme",
     "developer": "Frontend Developer",
-    "contact": "Contact"
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "front": "NGUYEN",
@@ -39,7 +41,7 @@
       "email": "nmhieu04091999@gmail.com"
     },
     "textBlockLeft": "Frontend Engineer with 5+ years shipping production web applications.",
-    "textBlockRight": "I care about interfaces that feel intentional — not assembled. Motion, performance, and accessibility are not afterthoughts.",
+    "textBlockRight": "I care about interfaces that feel intentional, not assembled. Motion, performance, and accessibility are not afterthoughts.",
     "meta": {
       "focus": "Focus",
       "focusValue": "UI systems",
@@ -59,31 +61,32 @@
     "focus": "Focus",
     "approach": "Approach",
     "capabilities": "capabilities",
-    "statement": "I build interfaces that feel designed, not generated. Motion with purpose, performance under load, and code someone else can actually maintain.",
+    "statement": "Frontend systems that feel clear, fast, and considered.",
     "badges": ["Frontend Developer", "Motion", "Product Polish", "Performance"],
     "itemsCount": "{count} items",
-    "description1": "Frontend Developer with 5+ years shipping React and Next.js apps in production. Strong on TypeScript, CSS systems, accessibility, and real-time UI. Experience spans e-commerce, fintech, and Web3 product surfaces.",
+    "description1": "5+ years building React and Next.js products across e-commerce, fintech, and Web3.",
     "coreSkills": "Core Skills",
     "yearsExperience": "Years of Experience",
-    "yearsDescription": "React, Next.js, TypeScript — in production",
+    "yearsDescription": "React, Next.js, TypeScript in production",
     "clientSatisfaction": "On-time delivery rate",
     "satisfactionDescription": "Across freelance and full-time engagements",
+    "storefrontResult": "Storefront PageSpeed",
     "skillList": {
       "frontend": {
         "label": "Frontend",
-        "value": "React.js (Reactjs), Next.js, Vue.js, TypeScript, JavaScript (ES6+), Tailwind CSS, HTML5, CSS3, Sass."
+        "value": "React, Next.js, TypeScript, Tailwind."
       },
       "state": {
-        "label": "State & Data",
-        "value": "Redux, React Query, RESTful APIs, WebSockets, SSE, GraphQL."
+        "label": "Data",
+        "value": "React Query, Redux, APIs, real-time."
       },
       "performance": {
-        "label": "Performance & Tracking",
-        "value": "Core Web Vitals, Google Analytics 4 (GA4), Gtag, TikTok/Facebook Pixel, Sentry."
+        "label": "Performance",
+        "value": "Core Web Vitals, accessibility, analytics."
       },
       "devops": {
-        "label": "DevOps & Tools",
-        "value": "Gitlab CI/CD, PM2, Self-hosting (Linux), Vite, Webpack, Babel."
+        "label": "Delivery",
+        "value": "Vite, CI/CD, Git, Linux."
       },
       "mobile": {
         "label": "Mobile & Others",
@@ -167,7 +170,7 @@
   "skills": {
     "title": "Stack as<br />motion language.",
     "kicker": "capabilities",
-    "headline": "Stack, timing, systems, and the glue between them.",
+    "headline": "Tools I use.",
     "groups": [
       {
         "label": "Frontend",
@@ -198,6 +201,23 @@
         "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "Performance"]
       }
     ]
+  },
+  "references": {
+    "title": "References.",
+    "description": "Available on request.",
+    "statement": "Shared when relevant.",
+    "storefront": {
+      "title": "Storefront",
+      "description": "Laravel to Next.js. 90+ PageSpeed."
+    },
+    "fintech": {
+      "title": "Fintech flows",
+      "description": "Auth, validation, real-time UI."
+    },
+    "systems": {
+      "title": "Design systems",
+      "description": "Reusable UI. Clean handoff."
+    }
   },
   "projects": {
     "title": "PROJECTS",

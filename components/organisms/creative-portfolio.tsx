@@ -1,39 +1,30 @@
-import type { ProjectCaseStudy } from '@/data/projects'
-import type { ExperienceRecord } from '@/types/experience'
-import { HudBackdrop } from './hud-backdrop'
-import { CreativeNav } from './creative-nav'
-import { HudHero } from './hud-hero'
-import { WorkSection } from './work-section'
+import type { PortfolioSceneContent } from '@/types/scene-content'
 import { AboutSection } from './creative-about'
-import { ExperienceSection } from './creative-experience'
 import { ContactSection } from './creative-contact'
-import { ScrollToTop } from '@/components/molecules/scroll-to-top'
+import { ExperienceSection } from './creative-experience'
+import { CreativeNav } from './creative-nav'
+import { PortfolioHero } from './portfolio-hero'
+import { TechStackSection } from './tech-stack-section'
+import { TestimonialsSection } from './testimonials-section'
+import { WorkSection } from './work-section'
 
-type CreativePortfolioProps = {
-  locale: string
-  projects: ProjectCaseStudy[]
-  experiences: ExperienceRecord[]
-  email: string
+export interface CreativePortfolioProps {
+  sceneContent: PortfolioSceneContent
 }
 
-export type { ExperienceRecord }
+export function CreativePortfolio({ sceneContent }: CreativePortfolioProps) {
+  const { email, experiences, projects } = sceneContent
 
-export function CreativePortfolio({
-  locale,
-  projects,
-  experiences,
-  email,
-}: CreativePortfolioProps) {
   return (
-    <div className='creative-portfolio relative' data-creative-root>
-      <HudBackdrop projects={projects} experiences={experiences} />
+    <div className='creative-portfolio'>
       <CreativeNav email={email} />
-      <HudHero email={email} />
+      <PortfolioHero email={email} />
       <AboutSection />
-      <ExperienceSection experiences={experiences} />
       <WorkSection projects={projects} />
-      <ContactSection email={email} locale={locale} />
-      <ScrollToTop />
+      <ExperienceSection experiences={experiences} />
+      <TechStackSection />
+      <TestimonialsSection />
+      <ContactSection email={email} />
     </div>
   )
 }

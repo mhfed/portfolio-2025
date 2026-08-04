@@ -18,7 +18,9 @@
     "openThemeSettings": "Mở cài đặt giao diện",
     "useTheme": "Sử dụng chủ đề {theme}",
     "developer": "Lập trình viên Frontend",
-    "contact": "Liên hệ"
+    "contact": "Liên hệ",
+    "openMenu": "Mở menu",
+    "closeMenu": "Đóng menu"
   },
   "hero": {
     "front": "NGUYEN",
@@ -39,7 +41,7 @@
       "email": "nmhieu04091999@gmail.com"
     },
     "textBlockLeft": "Frontend Engineer với 5+ năm kinh nghiệm ship ứng dụng web thực tế.",
-    "textBlockRight": "Tôi quan tâm đến các giao diện được thiết kế có chủ đích — không phải lắp ghép. Motion, hiệu năng và accessibility không phải là thứ thêm sau.",
+    "textBlockRight": "Tôi quan tâm đến các giao diện được thiết kế có chủ đích, không phải lắp ghép. Motion, hiệu năng và accessibility không phải là thứ thêm sau.",
     "meta": {
       "focus": "Trọng tâm",
       "focusValue": "Hệ thống UI",
@@ -59,7 +61,7 @@
     "focus": "Trọng tâm",
     "approach": "Phương châm",
     "capabilities": "năng lực",
-    "statement": "Tôi build giao diện cảm giác như được thiết kế, không phải được tạo ra. Chuyển động có mục đích, hiệu năng dưới tải, và code người khác có thể bảo trì được.",
+    "statement": "Hệ thống frontend rõ ràng, nhanh và có chủ đích.",
     "badges": [
       "Lập trình viên Frontend",
       "Chuyển động",
@@ -67,28 +69,29 @@
       "Hiệu năng"
     ],
     "itemsCount": "{count} mục",
-    "description1": "Frontend Developer với 5+ năm ship ứng dụng React và Next.js trong production. Mạnh về TypeScript, CSS systems, accessibility và real-time UI. Kinh nghiệm trải rộng e-commerce, fintech và Web3.",
+    "description1": "5+ năm xây dựng sản phẩm React và Next.js cho e-commerce, fintech và Web3.",
     "coreSkills": "Kỹ năng cốt lõi",
     "yearsExperience": "Năm kinh nghiệm",
-    "yearsDescription": "React, Next.js, TypeScript — trong production",
+    "yearsDescription": "React, Next.js, TypeScript trong production",
     "clientSatisfaction": "Tỷ lệ giao đúng hạn",
     "satisfactionDescription": "Qua các dự án freelance và full-time",
+    "storefrontResult": "PageSpeed storefront",
     "skillList": {
       "frontend": {
         "label": "Frontend",
-        "value": "React.js (Reactjs), Next.js, Vue.js, TypeScript, JavaScript (ES6+), Tailwind CSS, HTML5, CSS3, Sass."
+        "value": "React, Next.js, TypeScript, Tailwind."
       },
       "state": {
-        "label": "State & Data",
-        "value": "Redux, React Query, RESTful APIs, WebSockets, SSE, GraphQL."
+        "label": "Dữ liệu",
+        "value": "React Query, Redux, API, real-time."
       },
       "performance": {
-        "label": "Performance & Tracking",
-        "value": "Core Web Vitals, Google Analytics 4 (GA4), Gtag, TikTok/Facebook Pixel, Sentry."
+        "label": "Hiệu năng",
+        "value": "Core Web Vitals, accessibility, analytics."
       },
       "devops": {
-        "label": "DevOps & Tools",
-        "value": "Gitlab CI/CD, PM2, Self-hosting (Linux), Vite, Webpack, Babel."
+        "label": "Delivery",
+        "value": "Vite, CI/CD, Git, Linux."
       },
       "mobile": {
         "label": "Mobile & Others",
@@ -172,7 +175,7 @@
   "skills": {
     "title": "Stack as<br />motion language.",
     "kicker": "năng lực",
-    "headline": "Công nghệ, chuyển động, hệ thống và chất kết dính giữa chúng.",
+    "headline": "Công cụ tôi dùng.",
     "groups": [
       {
         "label": "Frontend",
@@ -191,6 +194,23 @@
         "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "Tối ưu hiệu năng"]
       }
     ]
+  },
+  "references": {
+    "title": "Tham chiếu.",
+    "description": "Cung cấp khi phù hợp.",
+    "statement": "Chia sẻ khi cần thiết.",
+    "storefront": {
+      "title": "Storefront",
+      "description": "Laravel sang Next.js. PageSpeed 90+."
+    },
+    "fintech": {
+      "title": "Fintech",
+      "description": "Xác thực, kiểm tra, UI real-time."
+    },
+    "systems": {
+      "title": "Design system",
+      "description": "UI tái sử dụng. Bàn giao gọn."
+    }
   },
   "projects": {
     "title": "DỰ ÁN",
