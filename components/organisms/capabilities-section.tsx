@@ -8,7 +8,7 @@ export interface CapabilitiesSectionProps {
 
 const toolIcons: Record<string, IconName> = {
   React: 'react',
-  'Next.js': 'nextjs',
+  'Next.js': 'nextjs2',
   TypeScript: 'typescript',
   Tailwind: 'tailwindcss',
   'Design systems': 'figma',
@@ -32,6 +32,8 @@ const toolIcons: Record<string, IconName> = {
 const fallbackIcon: IconName = 'html5'
 
 export function CapabilitiesSection({ skills }: CapabilitiesSectionProps) {
+  const tools = skills.groups.flatMap((group) => group.items)
+
   return (
     <section id='skills' className='capabilities-section section-anchor'>
       <div className='portfolio-shell'>
@@ -39,30 +41,41 @@ export function CapabilitiesSection({ skills }: CapabilitiesSectionProps) {
           <h2>{skills.headline}</h2>
         </EditorialReveal>
 
-        <div className='capability-groups'>
-          {skills.groups.map((group, index) => (
-            <EditorialReveal
-              key={group.label}
-              className='capability-group'
-              delay={index * 0.04}
-            >
-              <h3>{group.label}</h3>
-              <ul>
-                {group.items.map((item) => (
-                  <li key={item}>
-                    <span className='capability-icon' aria-hidden='true'>
-                      <StackIcon
-                        name={toolIcons[item] ?? fallbackIcon}
-                        variant='light'
-                      />
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </EditorialReveal>
-          ))}
-        </div>
+        <EditorialReveal className='capability-marquee' delay={0.08}>
+          <div className='capability-marquee__viewport'>
+            <div className='capability-marquee__track'>
+              {[0, 1].map((copy) => (
+                <ul
+                  key={copy}
+                  className='capability-marquee__list'
+                  aria-hidden={copy === 1}
+                >
+                  {tools.map((item) => (
+                    <li
+                      key={`${copy}-${item}`}
+                      className='capability-tool'
+                      tabIndex={copy === 0 ? 0 : -1}
+                      aria-label={item}
+                    >
+                      <span
+                        className={`capability-tool__icon${item === 'Vercel' ? ' capability-tool__icon--tinted' : ''}`}
+                        aria-hidden='true'
+                      >
+                        <StackIcon
+                          name={toolIcons[item] ?? fallbackIcon}
+                          variant='light'
+                        />
+                      </span>
+                      <span className='capability-tool__name' role='tooltip'>
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+          </div>
+        </EditorialReveal>
       </div>
     </section>
   )

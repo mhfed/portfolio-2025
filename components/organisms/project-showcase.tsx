@@ -16,10 +16,11 @@ interface ProjectMediaProps {
 function ProjectMedia({ project, viewLabel }: ProjectMediaProps) {
   const image = (
     <Image
+      className='project-media__image'
       src={project.image}
       alt={`${project.title} project preview`}
       fill
-      sizes='(max-width: 767px) 100vw, 90vw'
+      sizes='(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 45vw'
       quality={75}
     />
   )
@@ -27,7 +28,8 @@ function ProjectMedia({ project, viewLabel }: ProjectMediaProps) {
   if (!project.liveUrl) {
     return (
       <div className='project-media' data-project-id={project.id}>
-        {image}
+        <ProjectWindowChrome />
+        <span className='project-media__screen'>{image}</span>
       </div>
     )
   }
@@ -41,8 +43,22 @@ function ProjectMedia({ project, viewLabel }: ProjectMediaProps) {
       rel='noreferrer'
       aria-label={`${viewLabel}: ${project.title}`}
     >
-      {image}
+      <ProjectWindowChrome />
+      <span className='project-media__screen'>{image}</span>
     </a>
+  )
+}
+
+function ProjectWindowChrome() {
+  return (
+    <span className='project-window-chrome' aria-hidden='true'>
+      <span className='project-window-chrome__dots'>
+        <i />
+        <i />
+        <i />
+      </span>
+      <span className='project-window-chrome__address'>localhost / preview</span>
+    </span>
   )
 }
 
@@ -56,39 +72,39 @@ export function ProjectShowcase({ work }: ProjectShowcaseProps) {
       </div>
 
       <ProjectStack>
-        {work.projects.map((project) => (
+        {work.projects.map((project, index) => (
           <article
             key={project.id}
             id={`project-${project.id}`}
             className='project-panel'
+            data-project-index={index}
             data-project-panel
           >
             <div className='portfolio-shell project-panel__inner'>
-              <div className='project-title-row'>
-                <div>
-                  <p className='project-year'>{project.year}</p>
-                  <h3>{project.title}</h3>
+              <div className='project-content'>
+                <div className='project-title-row'>
+                  <div>
+                    <p className='project-year'>{project.year}</p>
+                    <h3>{project.title}</h3>
+                  </div>
+                  {project.liveUrl ? (
+                    <a
+                      className='project-action'
+                      href={project.liveUrl}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {work.launchLabel}
+                      <ArrowUpRight
+                        aria-hidden='true'
+                        size={18}
+                        strokeWidth={1.7}
+                      />
+                    </a>
+                  ) : null}
                 </div>
-                {project.liveUrl ? (
-                  <a
-                    className='project-action'
-                    href={project.liveUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    {work.launchLabel}
-                    <ArrowUpRight
-                      aria-hidden='true'
-                      size={18}
-                      strokeWidth={1.7}
-                    />
-                  </a>
-                ) : null}
-              </div>
 
-              <ProjectMedia project={project} viewLabel={work.viewLabel} />
-
-              <div className='project-meta'>
+                <div className='project-meta'>
                 <div className='project-meta__copy'>
                   <p className='project-role'>{project.role}</p>
                   <p>{project.result}</p>
@@ -110,7 +126,9 @@ export function ProjectShowcase({ work }: ProjectShowcaseProps) {
                     <ArrowUpRight aria-hidden='true' size={16} strokeWidth={1.7} />
                   </a>
                 ) : null}
+                </div>
               </div>
+              <ProjectMedia project={project} viewLabel={work.viewLabel} />
             </div>
           </article>
         ))}
