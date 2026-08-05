@@ -114,7 +114,10 @@ export function PortfolioNavigation({
       </div>
 
       {menuOpen ? (
-        <div id='mobile-navigation' className='mobile-navigation'>
+        <div
+          id='mobile-navigation'
+          className={`mobile-navigation${menuOpen ? ' is-open' : ''}`}
+        >
           <nav className='portfolio-shell' aria-label={mobileNavigationLabel}>
             {items.map((item) => (
               <a key={item.href} href={item.href} onClick={closeMenu}>

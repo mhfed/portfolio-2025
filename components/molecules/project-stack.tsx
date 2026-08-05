@@ -40,8 +40,30 @@ export function ProjectStack({ children }: ProjectStackProps) {
           const panelContent = panel.querySelector<HTMLElement>(
             '.project-panel__inner'
           )
+          const entranceTargets = gsap.utils.toArray<HTMLElement>(
+            '.project-title-row, .project-meta',
+            panel
+          )
 
           gsap.set(panel, { zIndex: index + 1 })
+
+          gsap.fromTo(
+            entranceTargets,
+            { opacity: 0.35, y: 32 },
+            {
+              opacity: 1,
+              y: 0,
+              stagger: 0.08,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: panel,
+                start: 'top 82%',
+                end: 'top 48%',
+                scrub: 0.45,
+                invalidateOnRefresh: true,
+              },
+            }
+          )
 
           if (!nextPanel) return
 
@@ -52,17 +74,18 @@ export function ProjectStack({ children }: ProjectStackProps) {
             end: 'top top',
             pin: true,
             pinSpacing: false,
+            toggleClass: { targets: panel, className: 'is-active' },
             invalidateOnRefresh: true,
           })
 
           gsap.to(panel, {
-            scale: 0.96,
+            scale: 0.95,
             ease: 'none',
             scrollTrigger: {
               trigger: nextPanel,
               start: 'top bottom',
               end: 'top top',
-              scrub: true,
+              scrub: 0.5,
               invalidateOnRefresh: true,
             },
           })
@@ -75,7 +98,7 @@ export function ProjectStack({ children }: ProjectStackProps) {
                 trigger: nextPanel,
                 start: 'top bottom',
                 end: 'top top',
-                scrub: true,
+                scrub: 0.5,
                 invalidateOnRefresh: true,
               },
             })

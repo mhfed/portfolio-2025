@@ -5,6 +5,34 @@ export interface ImpactSectionProps {
   about: PortfolioContent['about']
 }
 
+function ImpactStatement({ statement }: { statement: string }) {
+  const words = statement.split(/(\s+)/)
+
+  return (
+    <h2
+      className='impact-statement'
+      aria-label={statement}
+      data-impact-statement
+    >
+      <span aria-hidden='true'>
+        {words.map((word, index) =>
+          /^\s+$/.test(word) ? (
+            word
+          ) : (
+            <span
+              key={`${word}-${index}`}
+              className='impact-statement__word'
+              data-impact-word
+            >
+              {word}
+            </span>
+          )
+        )}
+      </span>
+    </h2>
+  )
+}
+
 export function ImpactSection({ about }: ImpactSectionProps) {
   return (
     <section id='about' className='impact-section section-anchor'>
@@ -14,7 +42,7 @@ export function ImpactSection({ about }: ImpactSectionProps) {
         </EditorialReveal>
 
         <EditorialReveal delay={0.04}>
-          <h2 className='impact-statement'>{about.statement}</h2>
+          <ImpactStatement statement={about.statement} />
         </EditorialReveal>
 
         <div className='impact-details'>

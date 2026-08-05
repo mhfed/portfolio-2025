@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
+import { MOTION_DURATION, MOTION_EASE } from '@/lib/motion-presets'
 
 export interface ScanRevealProps {
   children: ReactNode
@@ -25,9 +26,9 @@ export function ScanReveal({
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, amount: 0.18 }}
       transition={{
-        duration: 0.65,
+        duration: MOTION_DURATION.reveal,
         delay: delay / 1000,
-        ease: [0.16, 1, 0.3, 1],
+        ease: MOTION_EASE,
       }}
       className={cn(className)}
     >

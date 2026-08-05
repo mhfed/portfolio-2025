@@ -101,33 +101,33 @@ export function WebMCPProvider() {
       },
     ]
 
-    const provideContextFn = mc.provideContext
-    const registerToolFn = mc.registerTool
+    let contextProvided = false
 
-    // Register tools using provideContext
     try {
-      if (typeof provideContextFn === 'function') {
-        provideContextFn({
+      if (typeof mc.provideContext === 'function') {
+        mc.provideContext.call(mc, {
           tools,
           signal: controller.signal,
         })
+        contextProvided = true
       }
     } catch (e) {
       console.error('Failed to call provideContext:', e)
     }
 
-    // Fallback or double register using registerTool
-    try {
-      if (typeof registerToolFn === 'function') {
-        tools.forEach((tool) => {
-          registerToolFn({
-            ...tool,
-            signal: controller.signal,
+    if (!contextProvided) {
+      try {
+        if (typeof mc.registerTool === 'function') {
+          tools.forEach((tool) => {
+            mc.registerTool?.call(mc, {
+              ...tool,
+              signal: controller.signal,
+            })
           })
-        })
+        }
+      } catch (e) {
+        console.error('Failed to call registerTool:', e)
       }
-    } catch (e) {
-      console.error('Failed to call registerTool:', e)
     }
 
     return () => {
