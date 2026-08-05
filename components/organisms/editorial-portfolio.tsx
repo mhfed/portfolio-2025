@@ -5,6 +5,7 @@ import { ImpactSection } from '@/components/organisms/impact-section'
 import { PortfolioContact } from '@/components/organisms/portfolio-contact'
 import { PortfolioNavigation } from '@/components/organisms/portfolio-navigation'
 import { ProjectShowcase } from '@/components/organisms/project-showcase'
+import { ScrollMotionRuntime } from '@/components/molecules/scroll-motion-runtime'
 import type { PortfolioContent } from '@/types/portfolio-content'
 
 export interface EditorialPortfolioProps {
@@ -34,6 +35,7 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
         openMenuLabel={content.navigation.menu.openLabel}
         closeMenuLabel={content.navigation.menu.closeLabel}
       />
+      <ScrollMotionRuntime />
       <main id='main-content' tabIndex={-1}>
         <EditorialHero
           name={content.fullName}

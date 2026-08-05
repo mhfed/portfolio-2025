@@ -27,9 +27,17 @@ function ProjectMedia({ project, viewLabel }: ProjectMediaProps) {
 
   if (!project.liveUrl) {
     return (
-      <div className='project-media' data-project-id={project.id}>
+      <div
+        className='project-media'
+        data-project-id={project.id}
+        data-spotlight-surface
+      >
         <ProjectWindowChrome />
-        <span className='project-media__screen'>{image}</span>
+        <span className='project-media__screen'>
+          <span className='project-media__parallax' data-project-parallax>
+            {image}
+          </span>
+        </span>
       </div>
     )
   }
@@ -42,9 +50,14 @@ function ProjectMedia({ project, viewLabel }: ProjectMediaProps) {
       target='_blank'
       rel='noreferrer'
       aria-label={`${viewLabel}: ${project.title}`}
+      data-spotlight-surface
     >
       <ProjectWindowChrome />
-      <span className='project-media__screen'>{image}</span>
+      <span className='project-media__screen'>
+        <span className='project-media__parallax' data-project-parallax>
+          {image}
+        </span>
+      </span>
     </a>
   )
 }
@@ -57,7 +70,9 @@ function ProjectWindowChrome() {
         <i />
         <i />
       </span>
-      <span className='project-window-chrome__address'>localhost / preview</span>
+      <span className='project-window-chrome__address'>
+        localhost / preview
+      </span>
     </span>
   )
 }
@@ -66,8 +81,13 @@ export function ProjectShowcase({ work }: ProjectShowcaseProps) {
   return (
     <section id='work' className='project-showcase section-anchor'>
       <div className='portfolio-shell project-showcase__heading'>
-        <EditorialReveal>
+        <EditorialReveal className='project-showcase__title'>
           <h2>{work.title}</h2>
+        </EditorialReveal>
+        <EditorialReveal className='project-showcase__intro' delay={0.08}>
+          <span aria-label={`${work.projects.length} projects`}>
+            01 — {`${work.projects.length}`.padStart(2, '0')}
+          </span>
         </EditorialReveal>
       </div>
 
@@ -105,27 +125,31 @@ export function ProjectShowcase({ work }: ProjectShowcaseProps) {
                 </div>
 
                 <div className='project-meta'>
-                <div className='project-meta__copy'>
-                  <p className='project-role'>{project.role}</p>
-                  <p>{project.result}</p>
-                  <p>{project.description}</p>
-                </div>
-                <ul aria-label={`${project.title} technology stack`}>
-                  {project.techStack.map((technology) => (
-                    <li key={technology}>{technology}</li>
-                  ))}
-                </ul>
-                {project.githubUrl ? (
-                  <a
-                    className='project-source'
-                    href={project.githubUrl}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    {work.sourceLabel}
-                    <ArrowUpRight aria-hidden='true' size={16} strokeWidth={1.7} />
-                  </a>
-                ) : null}
+                  <div className='project-meta__copy'>
+                    <p className='project-role'>{project.role}</p>
+                    <p>{project.result}</p>
+                    <p>{project.description}</p>
+                  </div>
+                  <ul aria-label={`${project.title} technology stack`}>
+                    {project.techStack.map((technology) => (
+                      <li key={technology}>{technology}</li>
+                    ))}
+                  </ul>
+                  {project.githubUrl ? (
+                    <a
+                      className='project-source'
+                      href={project.githubUrl}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {work.sourceLabel}
+                      <ArrowUpRight
+                        aria-hidden='true'
+                        size={16}
+                        strokeWidth={1.7}
+                      />
+                    </a>
+                  ) : null}
                 </div>
               </div>
               <ProjectMedia project={project} viewLabel={work.viewLabel} />

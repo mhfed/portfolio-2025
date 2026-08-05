@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { ArrowDownRight } from 'lucide-react'
-import { EditorialReveal } from '@/components/molecules/editorial-reveal'
+import { KineticHeadline } from '@/components/molecules/kinetic-headline'
 import type { PortfolioContent } from '@/types/portfolio-content'
 
 export interface EditorialHeroProps {
@@ -10,9 +10,36 @@ export interface EditorialHeroProps {
   contactLabel: string
 }
 
-function renderEmphasizedHeadline(headline: string) {
-  return headline.split('*').map((part, index) =>
-    index % 2 === 1 ? <em key={`${part}-${index}`}>{part}</em> : part
+function HeroKineticField() {
+  return (
+    <div className='hero-kinetic-field' aria-hidden='true'>
+      <svg
+        className='hero-kinetic-path'
+        viewBox='0 0 1200 420'
+        fill='none'
+        preserveAspectRatio='none'
+      >
+        <path
+          data-hero-path
+          d='M38 310C196 86 388 56 552 202C704 338 900 344 1162 92'
+        />
+      </svg>
+      <span
+        className='hero-kinetic-shape hero-kinetic-shape--orb'
+        data-hero-shape
+      />
+      <span
+        className='hero-kinetic-shape hero-kinetic-shape--capsule'
+        data-hero-shape
+      />
+      <span
+        className='hero-kinetic-shape hero-kinetic-shape--cross'
+        data-hero-shape
+      >
+        <i />
+        <i />
+      </span>
+    </div>
   )
 }
 
@@ -25,33 +52,35 @@ export function EditorialHero({
   return (
     <section id='top' className='editorial-hero' aria-labelledby='hero-title'>
       <div className='portfolio-shell editorial-hero__inner'>
-        <EditorialReveal className='hero-identity'>
+        <HeroKineticField />
+        <div className='hero-identity' data-hero-intro>
           <span>{name}</span>
           <span>{hero.role}</span>
-        </EditorialReveal>
+        </div>
 
-        <EditorialReveal delay={0.06}>
-          <h1 id='hero-title' className='hero-title'>
-            {renderEmphasizedHeadline(hero.headline)}
-          </h1>
-        </EditorialReveal>
+        <KineticHeadline text={hero.headline} />
 
         <div className='hero-footer'>
-          <EditorialReveal className='hero-copy' delay={0.12}>
+          <div className='hero-copy' data-hero-intro>
             <p>{hero.description}</p>
             <div className='hero-actions'>
               <a className='button button--primary' href='#work'>
                 {workLabel}
-                <ArrowDownRight aria-hidden='true' size={17} strokeWidth={1.7} />
+                <ArrowDownRight
+                  aria-hidden='true'
+                  size={17}
+                  strokeWidth={1.7}
+                />
               </a>
               <a className='button button--secondary' href='#contact'>
                 {contactLabel}
               </a>
             </div>
-          </EditorialReveal>
+          </div>
 
-          <EditorialReveal className='hero-media' delay={0.16}>
+          <div className='hero-media' data-hero-intro data-spotlight-surface>
             <Image
+              data-hero-image
               src='/images/editorial-workspace.jpg'
               alt=''
               width={1122}
@@ -59,7 +88,7 @@ export function EditorialHero({
               sizes='(max-width: 767px) 100vw, 35vw'
               priority
             />
-          </EditorialReveal>
+          </div>
         </div>
       </div>
     </section>
