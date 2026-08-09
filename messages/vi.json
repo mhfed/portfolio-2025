@@ -328,6 +328,53 @@
     "reachDirectly": "Hoặc liên hệ trực tiếp tại",
     "phone": "Số điện thoại:"
   },
+  "editorialUi": {
+    "hello": "Xin chào, mình là",
+    "years": "5+ năm",
+    "shipping": "ship sản phẩm",
+    "builder": "frontend builder",
+    "journey": "Hành trình của mình",
+    "curious": "tò mò mỗi ngày",
+    "caseStudies": "case study",
+    "madeWithCare": "làm bằng sự tận tâm",
+    "portfolioJourney": "Hành trình portfolio"
+  },
+  "storytelling": {
+    "ariaLabel": "Hiếu, người dẫn chuyện portfolio",
+    "progressLabel": "Tiến trình câu chuyện",
+    "beats": {
+      "top": {
+        "label": "Xin chào",
+        "dialogue": "Mình xây những trải nghiệm web vừa rõ ràng, vừa có chuyển động đúng lúc.",
+        "bridge": "Nhưng cách mình làm còn quan trọng hơn hiệu ứng."
+      },
+      "about": {
+        "label": "Nguyên tắc",
+        "dialogue": "Mình bắt đầu từ vấn đề của người dùng, rồi mới chọn giao diện và công nghệ.",
+        "bridge": "Nguyên tắc đó chỉ có ý nghĩa khi đi vào sản phẩm thật."
+      },
+      "work": {
+        "label": "Thực thi",
+        "dialogue": "Trong từng dự án, mình biến ràng buộc thành một luồng sử dụng nhanh và dễ hiểu.",
+        "bridge": "Lặp lại quá trình ấy đã thay đổi cách mình làm nghề."
+      },
+      "experience": {
+        "label": "Trưởng thành",
+        "dialogue": "Mỗi chặng giúp mình cân bằng tốt hơn giữa tốc độ giao hàng và chất lượng dài hạn.",
+        "bridge": "Để giữ nhịp đó, mình chọn công cụ rất có chủ đích."
+      },
+      "skills": {
+        "label": "Công cụ",
+        "dialogue": "React, TypeScript và motion chỉ là công cụ. Trải nghiệm mà chúng phục vụ mới là điểm chính.",
+        "bridge": "Nếu bạn đang có một bài toán thật, mình muốn nghe về nó."
+      },
+      "contact": {
+        "label": "Tiếp theo",
+        "dialogue": "Mình sẵn sàng cùng bạn biến ý tưởng đó thành một sản phẩm chạy tốt và có cá tính.",
+        "bridge": "Bắt đầu bằng một lời chào."
+      }
+    }
+  },
   "common": {
     "seeMore": "Xem thêm",
     "showLess": "Thu gọn",

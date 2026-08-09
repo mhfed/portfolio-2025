@@ -323,6 +323,53 @@
     "reachDirectly": "或直接聯繫我",
     "phone": "電話："
   },
+  "editorialUi": {
+    "hello": "你好，我是",
+    "years": "5+ 年經驗",
+    "shipping": "持續交付產品",
+    "builder": "前端開發者",
+    "journey": "我的旅程",
+    "curious": "每天保持好奇",
+    "caseStudies": "個案研究",
+    "madeWithCare": "用心製作",
+    "portfolioJourney": "作品集旅程"
+  },
+  "storytelling": {
+    "ariaLabel": "Hiếu，你的作品集向導",
+    "progressLabel": "故事進度",
+    "beats": {
+      "top": {
+        "label": "你好",
+        "dialogue": "我打造清楚的網頁體驗，並在適當的時機加入動態。",
+        "bridge": "但我如何工作，比效果本身更重要。"
+      },
+      "about": {
+        "label": "原則",
+        "dialogue": "我先理解使用者問題，再選擇介面與技術。",
+        "bridge": "這個原則必須落在真實產品上才有意義。"
+      },
+      "work": {
+        "label": "實踐",
+        "dialogue": "在每個專案中，我將限制轉化為快速且易懂的使用流程。",
+        "bridge": "重複這個過程，也改變了我對專業的理解。"
+      },
+      "experience": {
+        "label": "成長",
+        "dialogue": "每段經歷都讓我更懂得平衡交付速度與長期品質。",
+        "bridge": "為了維持這份平衡，我會有意識地選擇工具。"
+      },
+      "skills": {
+        "label": "工具",
+        "dialogue": "React、TypeScript 與動態只是工具，重點是它們所支撐的體驗。",
+        "bridge": "如果你有真實問題想解決，我想聽聽看。"
+      },
+      "contact": {
+        "label": "下一步",
+        "dialogue": "我準備好把這個想法變成運作穩定、同時具有個性的產品。",
+        "bridge": "從一聲你好開始。"
+      }
+    }
+  },
   "common": {
     "seeMore": "閱讀更多",
     "showLess": "收起",
