@@ -8,7 +8,8 @@ capable desktop devices.
 **Architecture:** The server route builds typed story content from locale JSON.
 A single client `ScrollStoryRuntime` owns journey progress and GSAP triggers,
 then coordinates one mounted traveler, registered pose blending, a visible story
-trail, the progress rail, mobile checkpoints, and optional atmosphere. The
+trail, the progress rail, compact mobile companion, tablet checkpoints, and
+optional atmosphere. The
 semantic portfolio remains the complete SSR fallback.
 
 **Tech stack:** Next.js 16, React 19, TypeScript 5, next-intl 4, GSAP via
@@ -487,10 +488,10 @@ File: `app/globals.css`.
 - [ ] Style the dotted story trail as one continuous visual thread. Its active
   stroke reveals through `stroke-dashoffset` from normalized journey progress;
   it must never render as six disconnected decorative lines.
-- [ ] Tablet: reduce guide/bubble scale and collapse progress rail labels before
-  any overlap occurs.
-- [ ] Mobile below 64rem: hide the fixed guide, show in-flow checkpoints, and
-  ensure no checkpoint causes horizontal overflow at 320px.
+- [ ] Tablet from 801px to 1180px: hide the fixed guide and show in-flow
+  checkpoints without horizontal overflow.
+- [ ] Mobile below 800px: keep a compact fixed guide at the lower-right, clamp
+  dialogue to two lines, remove the trail, and move scroll-to-top left.
 - [ ] Reduced motion: remove all story transitions, transforms, keyframes, and
   scroll-behavior animation. Show static checkpoint/guide state with full
   opacity.
@@ -574,7 +575,8 @@ Files: all touched story components and `app/globals.css`.
 
   - 1440×900: `/en`, `/vi`, `/zh-TW` at all six beats;
   - 1024×768: experience and skills overlap checks;
-  - 768×1024 and 390×844: all mobile checkpoints;
+  - 768×1024 and 390×844: compact companion, pose changes, and collision-free
+    scroll-to-top;
   - 320×568: horizontal overflow and contact CTA;
   - reduced motion: intro, work, contact;
   - `/vi#work`: correct initial guide/rail state.

@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import {
   ArrowRight,
-  Check,
   Code2,
   Download,
   ExternalLink,
@@ -300,22 +299,32 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
               <h2>{skills.headline}</h2>
             </div>
             <StoryCheckpoint beat={storyBeat('skills')} />
-            <div className='duo-skill-grid'>
-              {skills.groups.map((group, index) => (
-                <div
-                  className={`duo-skill-group duo-skill-group--${index + 1}`}
-                  key={group.label}
-                >
-                  <h3>{group.label}</h3>
-                  <ul>
-                    {group.items.map((item) => (
-                      <li key={item}>
-                        <Check size={15} /> {item}
-                      </li>
+            <div
+              className='duo-tools-marquee'
+              aria-label={skills.title}
+              role='region'
+              tabIndex={0}
+            >
+              <div className='duo-tools-marquee__track'>
+                {[false, true].map((duplicate) => (
+                  <div
+                    className='duo-tools-marquee__run'
+                    aria-hidden={duplicate || undefined}
+                    key={duplicate ? 'duplicate' : 'primary'}
+                  >
+                    {skills.groups.map((group) => (
+                      <div className='duo-tool-group' key={group.label}>
+                        <h3>{group.label}</h3>
+                        <ul>
+                          {group.items.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
                     ))}
-                  </ul>
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

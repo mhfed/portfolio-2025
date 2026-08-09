@@ -47,8 +47,8 @@ in one guided pass.
    Vietnamese, and Traditional Chinese.
 5. The chapter progress rail and mascot always agree about the active chapter,
    including after direct hash navigation and viewport resize.
-6. On mobile, the mascot becomes an in-flow chapter checkpoint so it never
-   obscures project, timeline, navigation, or contact controls.
+6. On mobile, the mascot remains a compact fixed companion in the lower-right
+   corner, with a two-line bubble and no decorative trail.
 7. Reduced-motion users receive static poses and dialogue with no scrubbed or
    looping animation. Content remains complete if JavaScript or WebGL fails.
 8. A decorative Three.js atmosphere may add depth on capable desktop devices,
@@ -152,12 +152,12 @@ for reduced motion.
 
 ### D6 — Responsive and reduced-motion behavior
 
-- Desktop (`min-width: 64rem`): fixed traveler following a continuous waypoint
+- Desktop (`min-width: 1181px`): fixed traveler following a continuous waypoint
   trajectory with one persistent speech bubble.
-- Tablet: smaller fixed guide, shorter travel, hidden text labels in the chapter
-  rail when horizontal room is insufficient.
-- Mobile: guide is rendered in-flow at each chapter checkpoint; no fixed layer
-  covers content. Only the active checkpoint receives a short entrance.
+- Tablet: guide is rendered in-flow at each chapter checkpoint.
+- Mobile: guide remains fixed in the lower-right corner at a compact scale. The
+  dialogue is clamped to two lines, the trail is removed, and scroll-to-top moves
+  to the lower-left corner to avoid collisions.
 - Reduced motion: no GSAP scrub, loops, floating keyframes, or Three.js layer.
   The first valid static state for each viewport is rendered immediately.
 
