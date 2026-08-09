@@ -1,5 +1,6 @@
 import type { ProjectCaseStudy } from '@/data/projects'
 import type { ExperienceRecord } from '@/types/experience'
+import type { PortfolioStoryContent } from '@/types/storytelling'
 
 export type PortfolioLocale = 'en' | 'vi' | 'zh-TW'
 
@@ -33,6 +34,18 @@ export interface PortfolioContactPoint {
 export interface PortfolioContent {
   locale: PortfolioLocale
   fullName: string
+  editorialUi: {
+    builder: string
+    caseStudies: string
+    curious: string
+    hello: string
+    journey: string
+    madeWithCare: string
+    portfolioJourney: string
+    shipping: string
+    years: string
+  }
+  story: PortfolioStoryContent
   navigation: {
     items: PortfolioNavigationItem[]
     contactLabel: string

@@ -1,18 +1,12 @@
 import type React from 'react'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Nunito_Sans } from 'next/font/google'
 import { THEME_STORAGE_KEY } from '@/lib/theme'
 import './globals.css'
 
-const geistSans = Geist({
+const nunitoSans = Nunito_Sans({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  variable: '--font-geist-sans',
-})
-
-const geistMono = Geist_Mono({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-geist-mono',
+  variable: '--font-nunito-sans',
 })
 
 const themeInitializer = `
@@ -51,12 +45,12 @@ type FontProperties = React.CSSProperties &
   >
 
 const fontProperties: FontProperties = {
-  '--font-body': 'var(--font-geist-sans)',
-  '--font-display': 'var(--font-geist-sans)',
-  '--font-mono': 'var(--font-geist-mono)',
-  '--font-manrope': 'var(--font-geist-sans)',
-  '--font-space-grotesk': 'var(--font-geist-sans)',
-  '--font-jetbrains-mono': 'var(--font-geist-mono)',
+  '--font-body': 'var(--font-nunito-sans)',
+  '--font-display': 'var(--font-nunito-sans)',
+  '--font-mono': 'var(--font-nunito-sans)',
+  '--font-manrope': 'var(--font-nunito-sans)',
+  '--font-space-grotesk': 'var(--font-fredoka)',
+  '--font-jetbrains-mono': 'var(--font-nunito-sans)',
 }
 
 export default function RootLayout({
@@ -83,7 +77,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitializer }} />
       </head>
       <body
-        className={`${geistSans.className} ${geistSans.variable} ${geistMono.variable} bg-background text-foreground antialiased`}
+        className={`${nunitoSans.className} ${nunitoSans.variable} bg-background text-foreground antialiased`}
         style={fontProperties}
       >
         {children}

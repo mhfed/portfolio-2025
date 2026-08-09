@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { EditorialPortfolio } from '@/components/organisms/editorial-portfolio'
 import { normalizeProjects, type LocalizedProjectRecord } from '@/data/projects'
+import { STORY_BEAT_IDS } from '@/lib/storytelling'
 import type { ExperienceRecord } from '@/types/experience'
 import type {
   PortfolioContent,
@@ -23,6 +24,8 @@ export default async function Home({ params }: Props) {
     tCollaborate,
     tHeader,
     tSkills,
+    tEditorialUi,
+    tStory,
   ] = await Promise.all([
     getTranslations({ locale, namespace: 'projects' }),
     getTranslations({ locale, namespace: 'experience' }),
@@ -31,6 +34,8 @@ export default async function Home({ params }: Props) {
     getTranslations({ locale, namespace: 'collaborate' }),
     getTranslations({ locale, namespace: 'header' }),
     getTranslations({ locale, namespace: 'skills' }),
+    getTranslations({ locale, namespace: 'editorialUi' }),
+    getTranslations({ locale, namespace: 'storytelling' }),
   ])
 
   const projects = normalizeProjects(
@@ -47,6 +52,27 @@ export default async function Home({ params }: Props) {
   const content: PortfolioContent = {
     locale: locale as PortfolioLocale,
     fullName,
+    editorialUi: {
+      builder: tEditorialUi('builder'),
+      caseStudies: tEditorialUi('caseStudies'),
+      curious: tEditorialUi('curious'),
+      hello: tEditorialUi('hello'),
+      journey: tEditorialUi('journey'),
+      madeWithCare: tEditorialUi('madeWithCare'),
+      portfolioJourney: tEditorialUi('portfolioJourney'),
+      shipping: tEditorialUi('shipping'),
+      years: tEditorialUi('years'),
+    },
+    story: {
+      ariaLabel: tStory('ariaLabel'),
+      progressLabel: tStory('progressLabel'),
+      beats: STORY_BEAT_IDS.map((id) => ({
+        id,
+        label: tStory(`beats.${id}.label`),
+        dialogue: tStory(`beats.${id}.dialogue`),
+        bridge: tStory(`beats.${id}.bridge`),
+      })),
+    },
     navigation: {
       items: [
         { id: 'about', label: tHeader('nav.about'), href: '#about' },

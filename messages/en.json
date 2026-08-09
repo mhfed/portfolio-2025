@@ -335,6 +335,53 @@
     "reachDirectly": "Or write directly to",
     "phone": "Phone:"
   },
+  "editorialUi": {
+    "hello": "Hi, I am",
+    "years": "5+ years",
+    "shipping": "shipping products",
+    "builder": "frontend builder",
+    "journey": "My journey",
+    "curious": "curious every day",
+    "caseStudies": "case studies",
+    "madeWithCare": "made with care",
+    "portfolioJourney": "Portfolio journey"
+  },
+  "storytelling": {
+    "ariaLabel": "Hiếu, your portfolio guide",
+    "progressLabel": "Story progress",
+    "beats": {
+      "top": {
+        "label": "Hello",
+        "dialogue": "I build clear web experiences with motion where it earns attention.",
+        "bridge": "The way I work matters more than the effect."
+      },
+      "about": {
+        "label": "Principle",
+        "dialogue": "I start with the user's problem, then choose the interface and technology.",
+        "bridge": "That principle matters when it reaches a real product."
+      },
+      "work": {
+        "label": "Application",
+        "dialogue": "In each project, I turn constraints into a fast and understandable flow.",
+        "bridge": "Repeating that process changed how I practice the craft."
+      },
+      "experience": {
+        "label": "Growth",
+        "dialogue": "Each role taught me to balance delivery speed with long-term quality.",
+        "bridge": "I choose tools deliberately to keep that balance."
+      },
+      "skills": {
+        "label": "Toolkit",
+        "dialogue": "React, TypeScript, and motion are tools. The experience they support is the point.",
+        "bridge": "If you have a real problem to solve, I would like to hear it."
+      },
+      "contact": {
+        "label": "Next",
+        "dialogue": "I am ready to turn that idea into a product that works well and feels distinct.",
+        "bridge": "Start with a hello."
+      }
+    }
+  },
   "common": {
     "seeMore": "See more",
     "showLess": "Show less",
