@@ -44,6 +44,6 @@ the chapter; identity, rendering, camera angle, and emotional warmth stay fixed.
 - The character travels only during the closing portion of a chapter.
 - Dialogue changes at the midpoint of the pose blend so movement and speech feel
   like a single transition.
-- Tablet, mobile, reduced-motion, and constrained devices use in-flow story
-  checkpoints instead of the fixed traveler.
-
+- Mobile keeps a compact fixed traveler in the lower-right corner. Its bubble is
+  clamped to two lines so it remains present without taking over the content.
+- Tablet, reduced-motion, and constrained devices use in-flow story checkpoints.
