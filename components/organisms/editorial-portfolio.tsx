@@ -12,11 +12,46 @@ import {
   Star,
   Zap,
 } from 'lucide-react'
+import StackIcon, { type IconName } from 'tech-stack-icons'
 import { ScrollToTop } from '@/components/molecules/scroll-to-top'
 import { StoryCheckpoint } from '@/components/molecules/story-checkpoint'
 import { ScrollStoryRuntime } from '@/components/organisms/scroll-story-runtime'
 import type { PortfolioContent } from '@/types/portfolio-content'
 import type { StoryBeatId } from '@/types/storytelling'
+
+const technologyIcons: Record<string, IconName> = {
+  React: 'react',
+  'Next.js': 'nextjs2',
+  TypeScript: 'typescript',
+  Tailwind: 'tailwindcss',
+  'Design systems': 'figma',
+  'Hệ thống UI': 'figma',
+  '設計系統': 'figma',
+  GSAP: 'gsap',
+  ScrollTrigger: 'gsap',
+  Motion: 'framer',
+  Canvas: 'threejs',
+  'Micro-interactions': 'framer',
+  'Tương tác nhỏ': 'framer',
+  '微交互': 'framer',
+  'REST APIs': 'postman',
+  'REST API': 'postman',
+  SSE: 'postman',
+  Supabase: 'supabase',
+  'Auth flows': 'auth0',
+  'Xác thực': 'auth0',
+  '身分驗證': 'auth0',
+  'Formik/Yup': 'react',
+  Vercel: 'vercel',
+  'GitLab CI/CD': 'gitlab',
+  PM2: 'npm2',
+  Vite: 'vitejs',
+  Performance: 'vercel',
+  'Tối ưu hiệu năng': 'vercel',
+  '效能優化': 'vercel',
+}
+
+const fallbackTechnologyIcon: IconName = 'html5'
 
 export interface EditorialPortfolioProps {
   content: PortfolioContent
@@ -299,32 +334,33 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
               <h2>{skills.headline}</h2>
             </div>
             <StoryCheckpoint beat={storyBeat('skills')} />
-            <div
-              className='duo-tools-marquee'
-              aria-label={skills.title}
-              role='region'
-              tabIndex={0}
-            >
-              <div className='duo-tools-marquee__track'>
-                {[false, true].map((duplicate) => (
-                  <div
-                    className='duo-tools-marquee__run'
-                    aria-hidden={duplicate || undefined}
-                    key={duplicate ? 'duplicate' : 'primary'}
-                  >
-                    {skills.groups.map((group) => (
-                      <div className='duo-tool-group' key={group.label}>
-                        <h3>{group.label}</h3>
-                        <ul>
-                          {group.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+            <div className='duo-tech-grid' aria-label={skills.title}>
+              {skills.groups.map((group, groupIndex) => (
+                <article
+                  className={`duo-tech-group duo-tech-group--${groupIndex + 1}`}
+                  key={group.label}
+                >
+                  <div className='duo-tech-group__heading'>
+                    <span className='duo-tech-group__index'>
+                      {String(groupIndex + 1).padStart(2, '0')}
+                    </span>
+                    <h3>{group.label}</h3>
                   </div>
-                ))}
-              </div>
+                  <ul className='duo-tech-list'>
+                    {group.items.map((item) => (
+                      <li className='duo-tech-card' key={item}>
+                        <span className='duo-tech-card__icon' aria-hidden='true'>
+                          <StackIcon
+                            name={technologyIcons[item] ?? fallbackTechnologyIcon}
+                            variant='light'
+                          />
+                        </span>
+                        <span className='duo-tech-card__name'>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
             </div>
           </div>
         </section>

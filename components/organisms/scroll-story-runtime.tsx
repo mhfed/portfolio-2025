@@ -94,7 +94,7 @@ export function ScrollStoryRuntime({ story }: ScrollStoryRuntimeProps) {
           const journeyProgress =
             (index + transition.travelProgress) /
             Math.max(story.beats.length - 1, 1)
-          const compactTraveler = window.innerWidth <= 800
+          const compactTraveler = window.innerWidth <= 1180
 
           gsap.set(traveler, {
             x: compactTraveler

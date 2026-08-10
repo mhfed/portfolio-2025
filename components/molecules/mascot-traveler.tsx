@@ -76,7 +76,7 @@ export function MascotTraveler({
                 src={presentation.imageSrc}
                 alt=''
                 fill
-                sizes='(max-width: 800px) 7rem, (min-width: 1181px) 19rem, 1px'
+                sizes='(max-width: 1180px) 7rem, (min-width: 1181px) 19rem, 1px'
                 className='story-traveler__image'
               />
             </div>
