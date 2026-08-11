@@ -135,6 +135,7 @@ export function DuoHeader({ content }: DuoHeaderProps) {
       <div
         id='duo-mobile-navigation'
         className={`duo-mobile-navigation${menuOpen ? ' is-open' : ''}`}
+        data-lenis-prevent
       >
         <nav aria-label={content.navigation.mobileNavigationLabel}>
           {content.navigation.items.map((item, index) => (
@@ -149,6 +150,30 @@ export function DuoHeader({ content }: DuoHeaderProps) {
               {resume.label}
             </a>
           ) : null}
+          <div
+            className='duo-mobile-navigation__locale'
+            role='group'
+            aria-label={content.navigation.language.label}
+          >
+            <span className='duo-mobile-navigation__locale-label'>
+              <Globe2 aria-hidden='true' size={15} />
+              {content.navigation.language.label}
+            </span>
+            <div className='duo-mobile-locale'>
+              {routing.locales.map((locale) => (
+                <Link
+                  key={locale}
+                  href='/'
+                  locale={locale}
+                  aria-current={locale === content.locale ? 'page' : undefined}
+                  onClick={closeMenu}
+                >
+                  <span translate='no'>{localeLabels[locale]}</span>
+                  {localeNames[locale]}
+                </Link>
+              ))}
+            </div>
+          </div>
         </nav>
       </div>
     </header>

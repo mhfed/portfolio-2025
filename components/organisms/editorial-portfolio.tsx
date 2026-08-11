@@ -285,7 +285,8 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
                   </div>
                   <div className='duo-timeline__card'>
                     <div className='duo-timeline__period'>
-                      {record.period} / {record.location}
+                      <span>{record.period}</span>
+                      <span>{record.location}</span>
                     </div>
                     <h3>{record.company}</h3>
                     <strong>{record.position}</strong>

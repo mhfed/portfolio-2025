@@ -46,6 +46,10 @@
   border-radius: 999px;
 }
 
+.story-traveler__compact-avatar {
+  display: none;
+}
+
 .story-traveler[data-tooltip-open='false'] .story-traveler__bubble {
   opacity: 0;
   visibility: hidden;
@@ -688,7 +692,17 @@
 }
 
 .duo-timeline__period {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.7rem;
   color: var(--experience-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.duo-timeline__period span + span::before {
+  margin-right: 0.7rem;
+  color: var(--experience-subtle);
+  content: '/';
 }
 
 .duo-timeline__card h3,
@@ -802,6 +816,67 @@
 }
 
 @media (max-width: 64rem) {
+  .duo-mobile-navigation {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+
+  .duo-mobile-navigation__locale {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .duo-mobile-navigation__locale-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+  }
+
+  .duo-mobile-locale {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .duo-mobile-navigation .duo-mobile-locale a {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-width: 0;
+    min-height: 3.4rem;
+    gap: 0.2rem;
+    padding: 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: var(--brilio-radius);
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.2;
+    opacity: 1;
+    transform: none;
+  }
+
+  .duo-mobile-navigation .duo-mobile-locale a span {
+    padding: 0;
+    color: var(--accent);
+    font-size: 0.62rem;
+  }
+
+  .duo-mobile-navigation .duo-mobile-locale a[aria-current='page'] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+
   .duo-mobile-navigation a {
     font-weight: 500;
   }
@@ -832,6 +907,50 @@
     --brilio-section-space: clamp(6rem, 21vw, 9rem);
   }
 
+  .story-traveler {
+    --story-stage-size: clamp(8.5rem, 38vw, 11rem);
+    width: clamp(12rem, 53vw, 15rem);
+    height: clamp(13rem, 60vw, 16rem);
+  }
+
+  .story-traveler__stage {
+    right: 0;
+    left: auto;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    filter: drop-shadow(0 0.65rem 0.9rem rgb(56 111 38 / 18%));
+  }
+
+  .story-traveler__pose {
+    display: block;
+  }
+
+  .story-traveler__compact-avatar {
+    display: none;
+  }
+
+  .story-traveler__bubble {
+    top: 0;
+    right: 0;
+    left: auto;
+    width: min(11.75rem, 48vw);
+  }
+
+  .story-traveler[data-active-beat='top'] .story-traveler__bubble {
+    display: block;
+  }
+
+  .story-traveler__bubble::after {
+    right: 2.25rem;
+    bottom: -0.45rem;
+    left: auto;
+    top: auto;
+    transform: rotate(45deg);
+  }
+
   .duo-shell,
   .duo-portfolio .duo-shell {
     width: min(calc(100% - 2rem), var(--brilio-shell));
@@ -839,6 +958,8 @@
 
   .duo-header {
     height: 4.5rem;
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-left: max(1rem, env(safe-area-inset-left));
   }
 
   .duo-brand__mark {
@@ -931,7 +1052,7 @@
 
   .duo-project,
   .duo-project:nth-child(even) {
-    margin-bottom: 7rem;
+    margin-bottom: clamp(4.5rem, 16vw, 6rem);
   }
 
   .duo-project__image {
@@ -939,9 +1060,35 @@
   }
 
   .duo-project__body,
+  .duo-project--yellow .duo-project__body,
   .duo-timeline__card {
     grid-template-columns: 1fr;
     padding-right: 0;
+  }
+
+  .duo-project__body,
+  .duo-project--yellow .duo-project__body {
+    min-width: 0;
+    padding-top: 1.25rem;
+  }
+
+  .duo-project__top {
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .duo-project__top span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .duo-project h3 {
+    max-width: 12ch;
+    margin-top: 1.25rem;
+    font-size: clamp(2.25rem, 12vw, 3.5rem);
+    line-height: 0.96;
+    overflow-wrap: normal;
+    text-wrap: balance;
   }
 
   .duo-project p,
@@ -953,25 +1100,130 @@
     grid-row: auto;
   }
 
-  .duo-project__link {
+  .duo-project p {
+    max-width: 34rem;
     margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .duo-project .duo-tags {
+    gap: 0.45rem;
+    margin: 1.25rem 0 0;
+  }
+
+  .duo-project__link {
+    justify-content: space-between;
+    width: 100%;
+    min-height: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    white-space: nowrap;
   }
 
   .duo-experience-heading {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
   }
 
   .duo-experience-heading h2 {
-    font-size: clamp(3.2rem, 14vw, 5rem);
+    max-width: 100%;
+    font-size: clamp(3rem, 13vw, 4.75rem);
+    line-height: 0.94;
+    overflow-wrap: anywhere;
+  }
+
+  .duo-experience-heading p,
+  .duo-section--blue .duo-experience-heading p {
+    max-width: 31ch;
+    font-size: 1rem;
+    line-height: 1.55;
   }
 
   .duo-timeline__item {
-    grid-template-columns: 2rem minmax(0, 1fr);
-    gap: 0.75rem;
+    grid-template-columns: 0.75rem minmax(0, 1fr);
+    gap: 1rem;
   }
 
-  .duo-timeline__card p {
-    margin-top: 1.5rem;
+  .duo-timeline__rail::before {
+    position: absolute;
+    top: 0.22rem;
+    left: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 2px solid var(--experience-background);
+    border-radius: 50%;
+    background: var(--experience-accent);
+    content: '';
+    transform: translateX(-50%);
+  }
+
+  .duo-timeline__rail i {
+    height: calc(100% - 0.4rem);
+    margin-top: 0.4rem;
+  }
+
+  .duo-timeline__card {
+    min-width: 0;
+    padding-bottom: clamp(4rem, 17vw, 5.5rem);
+  }
+
+  .duo-timeline__period {
+    gap: 0.25rem 0.6rem;
+    font-size: 0.67rem;
+    line-height: 1.45;
+  }
+
+  .duo-timeline__period span + span::before {
+    margin-right: 0.6rem;
+  }
+
+  .duo-timeline__card h3,
+  .duo-section--blue .duo-timeline__card h3 {
+    margin-top: 1rem;
+    font-size: clamp(2.2rem, 11vw, 3.4rem);
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+
+  .duo-timeline__card > strong,
+  .duo-section--blue .duo-timeline__card > strong {
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .duo-timeline__card p,
+  .duo-section--blue .duo-timeline__card p {
+    grid-column: 1;
+    grid-row: auto;
+    max-width: 38rem;
+    margin-top: 1.35rem;
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .duo-timeline__card .duo-tags {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 1.15rem;
+    margin-bottom: 0;
+  }
+
+  .duo-scroll-top {
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: auto;
+  }
+
+  .duo-scroll-top,
+  .duo-menu,
+  .duo-icon-button,
+  .duo-mobile-navigation .duo-mobile-locale a {
+    touch-action: manipulation;
   }
 
   .duo-tech-grid {
@@ -1014,17 +1266,31 @@
     margin-bottom: 3.5rem;
   }
 
+  .duo-experience-heading {
+    margin-bottom: 2.75rem;
+  }
+
+  .duo-experience-heading h2 {
+    font-size: clamp(2.7rem, 12.5vw, 3.75rem);
+  }
+
   .duo-section-heading h2,
   .duo-skills h2 {
     font-size: 2.5rem;
   }
 
   .duo-tech-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .duo-contact h2 {
     font-size: clamp(3.3rem, 15vw, 4.5rem);
+  }
+}
+
+@media (max-width: 22rem) {
+  .duo-tech-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

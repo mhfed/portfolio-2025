@@ -79,6 +79,14 @@ export function MascotTraveler({
         }
         onClick={() => setIsTooltipOpen((isOpen) => !isOpen)}
       >
+        <Image
+          src='/images/mascot-skills.png'
+          alt=''
+          width={900}
+          height={900}
+          sizes='3rem'
+          className='story-traveler__compact-avatar'
+        />
         {story.beats.map((beat) => {
           const presentation = getStoryBeatPresentation(beat.id)
 
