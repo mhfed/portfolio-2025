@@ -95,15 +95,18 @@ export function ScrollStoryRuntime({ story }: ScrollStoryRuntimeProps) {
             (index + transition.travelProgress) /
             Math.max(story.beats.length - 1, 1)
           const compactTraveler = window.innerWidth <= 1180
+          const mobileTraveler = window.innerWidth <= 800
 
           gsap.set(traveler, {
             x: compactTraveler
-              ? window.innerWidth - 12
+              ? mobileTraveler
+                ? 12
+                : window.innerWidth - 12
               : (window.innerWidth * waypoint.xVw) / 100,
             y: compactTraveler
               ? window.innerHeight - 12
               : (window.innerHeight * waypoint.yVh) / 100,
-            xPercent: compactTraveler ? -100 : -50,
+            xPercent: compactTraveler ? (mobileTraveler ? 0 : -100) : -50,
             yPercent: compactTraveler ? -100 : -50,
             rotation: compactTraveler
               ? waypoint.rotation * 0.35

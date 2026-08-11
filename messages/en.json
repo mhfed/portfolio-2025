@@ -349,6 +349,8 @@
   "storytelling": {
     "ariaLabel": "Hiếu, your portfolio guide",
     "progressLabel": "Story progress",
+    "showTooltipLabel": "Show portfolio guide message",
+    "hideTooltipLabel": "Hide portfolio guide message",
     "beats": {
       "top": {
         "label": "Hello",

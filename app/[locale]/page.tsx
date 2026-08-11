@@ -65,7 +65,9 @@ export default async function Home({ params }: Props) {
     },
     story: {
       ariaLabel: tStory('ariaLabel'),
+      hideTooltipLabel: tStory('hideTooltipLabel'),
       progressLabel: tStory('progressLabel'),
+      showTooltipLabel: tStory('showTooltipLabel'),
       beats: STORY_BEAT_IDS.map((id) => ({
         id,
         label: tStory(`beats.${id}.label`),

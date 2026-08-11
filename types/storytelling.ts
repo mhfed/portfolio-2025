@@ -21,7 +21,9 @@ export interface StoryBeatContent {
 export interface PortfolioStoryContent {
   ariaLabel: string
   beats: StoryBeatContent[]
+  hideTooltipLabel: string
   progressLabel: string
+  showTooltipLabel: string
 }
 
 export interface StoryWaypoint {

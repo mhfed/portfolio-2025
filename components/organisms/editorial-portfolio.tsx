@@ -2,10 +2,8 @@ import Image from 'next/image'
 import {
   ArrowRight,
   Code2,
-  Download,
   ExternalLink,
   Github,
-  Globe2,
   Heart,
   Linkedin,
   MapPin,
@@ -13,8 +11,11 @@ import {
   Zap,
 } from 'lucide-react'
 import StackIcon, { type IconName } from 'tech-stack-icons'
+import { ScrollFillHeading } from '@/components/molecules/scroll-fill-heading'
 import { ScrollToTop } from '@/components/molecules/scroll-to-top'
 import { StoryCheckpoint } from '@/components/molecules/story-checkpoint'
+import { BrilioMotionRuntime } from '@/components/organisms/brilio-motion-runtime'
+import { DuoHeader } from '@/components/organisms/duo-header'
 import { ScrollStoryRuntime } from '@/components/organisms/scroll-story-runtime'
 import type { PortfolioContent } from '@/types/portfolio-content'
 import type { StoryBeatId } from '@/types/storytelling'
@@ -64,70 +65,21 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
     editorialUi: ui,
     experience,
     hero,
-    navigation,
     skills,
     story,
     work,
   } = content
-  const resume = contact.links.find((link) => link.download)
   const storyBeat = (id: StoryBeatId) =>
     story.beats.find((beat) => beat.id === id) ?? story.beats[0]
   const storyChapters = story.beats.filter((beat) => beat.id !== 'top')
-  const alternateLocale = content.locale === 'vi' ? 'en' : 'vi'
+  const heroHeadlineParts = hero.headline.split('*')
 
   return (
     <div className='duo-portfolio'>
-      <a className='duo-skip' href='#main-content'>
-        {navigation.skipToContentLabel}
-      </a>
-
-      <header className='duo-header'>
-        <a className='duo-brand' href='#top' aria-label={content.fullName}>
-          <span className='duo-brand__mark' aria-hidden='true'>
-            <Image
-              src='/images/story/mascot-top.png'
-              alt=''
-              width={52}
-              height={49}
-              className='duo-brand__mascot'
-            />
-          </span>
-          <span>
-            HIEU<span className='duo-brand__dot'>.</span>
-          </span>
-        </a>
-
-        <nav className='duo-nav' aria-label={navigation.primaryNavigationLabel}>
-          {navigation.items
-            .filter((item) => item.id !== 'contact')
-            .map((item) => (
-              <a key={item.id} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-        </nav>
-
-        <div className='duo-header__actions'>
-          <a
-            className='duo-language'
-            href={`/${alternateLocale}`}
-            aria-label={navigation.language.changeLabel}
-          >
-            <Globe2 size={16} /> {alternateLocale.toUpperCase()}
-          </a>
-          {resume && (
-            <a
-              className='duo-button duo-button--nav'
-              href={resume.href}
-              download
-            >
-              <Download size={15} /> {resume.label}
-            </a>
-          )}
-        </div>
-      </header>
+      <DuoHeader content={content} />
 
       <ScrollToTop />
+      <BrilioMotionRuntime />
       <ScrollStoryRuntime story={story} />
 
       <nav
@@ -158,7 +110,15 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
               <p className='duo-hero__hello'>
                 {ui.hello} <strong>Hiếu</strong>
               </p>
-              <h1>{hero.headline.replace(/\*/g, '')}</h1>
+              <h1>
+                {heroHeadlineParts.map((part, index) =>
+                  index % 2 === 1 ? (
+                    <span key={`${part}-${index}`}>{part}</span>
+                  ) : (
+                    part
+                  )
+                )}
+              </h1>
               <p className='duo-hero__description'>{hero.description}</p>
               <div className='duo-actions'>
                 <a className='duo-button duo-button--green' href='#work'>
@@ -189,6 +149,16 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
                 {ui.shipping}
               </div>
               <div className='duo-hero__ground' />
+              <div className='duo-hero__avatar'>
+                <Image
+                  src='/images/hero-mascot-programmer.png'
+                  alt=''
+                  width={900}
+                  height={850}
+                  priority
+                  className='duo-hero__mascot'
+                />
+              </div>
               <div className='duo-hero__badge'>
                 <Code2 size={17} /> <strong>{ui.builder}</strong>
               </div>
@@ -202,19 +172,22 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
           data-story-beat='about'
         >
           <div className='duo-shell'>
-            <div className='duo-section-heading duo-about__heading'>
+            <div
+              className='duo-section-heading duo-about__heading'
+              data-brilio-reveal
+            >
               <h2>{about.title}</h2>
             </div>
             <StoryCheckpoint beat={storyBeat('about')} />
             <div className='duo-about'>
               <div className='duo-about__content'>
-                <h3>{about.statement}</h3>
+                <ScrollFillHeading text={about.statement} />
                 <p>{about.description}</p>
                 <a className='duo-text-link' href='#experience'>
                   {ui.journey} <ArrowRight size={16} />
                 </a>
               </div>
-              <div className='duo-stats'>
+              <div className='duo-stats' data-brilio-reveal>
                 {about.metrics.map((metric) => (
                   <div className='duo-stat' key={metric.label}>
                     <strong>{metric.value}</strong>
@@ -236,7 +209,7 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
           data-story-beat='work'
         >
           <div className='duo-shell'>
-            <div className='duo-section-heading'>
+            <div className='duo-section-heading' data-brilio-reveal>
               <h2>{work.headline}</h2>
               <span className='duo-section-count'>
                 {work.projects.length} {ui.caseStudies}
@@ -248,6 +221,7 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
                 <article
                   className={`duo-project duo-project--${index % 2 ? 'yellow' : 'green'}`}
                   key={project.id}
+                  data-brilio-reveal
                 >
                   <div className='duo-project__image'>
                     <Image
@@ -294,14 +268,18 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
           data-story-beat='experience'
         >
           <div className='duo-shell'>
-            <div className='duo-experience-heading'>
+            <div className='duo-experience-heading' data-brilio-reveal>
               <h2>{experience.title.replace(/\n/g, ' ')}</h2>
               <p>{experience.headline}</p>
             </div>
             <StoryCheckpoint beat={storyBeat('experience')} />
             <div className='duo-timeline'>
               {experience.records.map((record) => (
-                <article className='duo-timeline__item' key={record.id}>
+                <article
+                  className='duo-timeline__item'
+                  key={record.id}
+                  data-brilio-reveal
+                >
                   <div className='duo-timeline__rail' aria-hidden='true'>
                     <i />
                   </div>
@@ -330,7 +308,7 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
           data-story-beat='skills'
         >
           <div className='duo-shell'>
-            <div className='duo-skills__heading'>
+            <div className='duo-skills__heading' data-brilio-reveal>
               <h2>{skills.headline}</h2>
             </div>
             <StoryCheckpoint beat={storyBeat('skills')} />
@@ -339,6 +317,7 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
                 <article
                   className={`duo-tech-group duo-tech-group--${groupIndex + 1}`}
                   key={group.label}
+                  data-brilio-reveal
                 >
                   <div className='duo-tech-group__heading'>
                     <span className='duo-tech-group__index'>
@@ -372,7 +351,14 @@ export function EditorialPortfolio({ content }: EditorialPortfolioProps) {
         >
           <div className='duo-shell duo-contact__inner'>
             <StoryCheckpoint beat={storyBeat('contact')} />
-            <div>
+            <Image
+              src='/images/mascot-contact.png'
+              alt=''
+              width={900}
+              height={900}
+              className='duo-contact__mascot'
+            />
+            <div data-brilio-reveal>
               <h2>{contact.headline}</h2>
               <p>{contact.description}</p>
               <a

@@ -337,6 +337,8 @@
   "storytelling": {
     "ariaLabel": "Hiếu，你的作品集向導",
     "progressLabel": "故事進度",
+    "showTooltipLabel": "顯示作品集向導訊息",
+    "hideTooltipLabel": "隱藏作品集向導訊息",
     "beats": {
       "top": {
         "label": "你好",

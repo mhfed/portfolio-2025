@@ -342,6 +342,8 @@
   "storytelling": {
     "ariaLabel": "Hiếu, người dẫn chuyện portfolio",
     "progressLabel": "Tiến trình câu chuyện",
+    "showTooltipLabel": "Hiện lời nhắn của người dẫn chuyện",
+    "hideTooltipLabel": "Ẩn lời nhắn của người dẫn chuyện",
     "beats": {
       "top": {
         "label": "Xin chào",

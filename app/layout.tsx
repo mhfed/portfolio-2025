@@ -1,12 +1,14 @@
+import localFont from 'next/font/local'
 import type React from 'react'
-import { Nunito_Sans } from 'next/font/google'
 import { THEME_STORAGE_KEY } from '@/lib/theme'
 import './globals.css'
+import '@/styles/brilio-refresh.css'
 
-const nunitoSans = Nunito_Sans({
-  subsets: ['latin', 'latin-ext'],
+const urbanist = localFont({
+  src: '../public/fonts/urbanist-variable.ttf',
   display: 'swap',
-  variable: '--font-nunito-sans',
+  variable: '--font-urbanist',
+  weight: '100 900',
 })
 
 const themeInitializer = `
@@ -45,12 +47,12 @@ type FontProperties = React.CSSProperties &
   >
 
 const fontProperties: FontProperties = {
-  '--font-body': 'var(--font-nunito-sans)',
-  '--font-display': 'var(--font-nunito-sans)',
-  '--font-mono': 'var(--font-nunito-sans)',
-  '--font-manrope': 'var(--font-nunito-sans)',
-  '--font-space-grotesk': 'var(--font-fredoka)',
-  '--font-jetbrains-mono': 'var(--font-nunito-sans)',
+  '--font-body': 'var(--font-urbanist), "Avenir Next", sans-serif',
+  '--font-display': 'var(--font-urbanist), "Avenir Next", sans-serif',
+  '--font-mono': '"SFMono-Regular", Consolas, monospace',
+  '--font-manrope': 'var(--font-urbanist), "Avenir Next", sans-serif',
+  '--font-space-grotesk': 'var(--font-urbanist), "Avenir Next", sans-serif',
+  '--font-jetbrains-mono': '"SFMono-Regular", Consolas, monospace',
 }
 
 export default function RootLayout({
@@ -77,7 +79,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitializer }} />
       </head>
       <body
-        className={`${nunitoSans.className} ${nunitoSans.variable} bg-background text-foreground antialiased`}
+        className={`${urbanist.variable} bg-background text-foreground antialiased`}
         style={fontProperties}
       >
         {children}

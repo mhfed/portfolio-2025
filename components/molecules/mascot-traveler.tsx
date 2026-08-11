@@ -1,4 +1,7 @@
+'use client'
+
 import Image from 'next/image'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { getStoryBeatPresentation } from '@/lib/storytelling'
 import type {
@@ -15,6 +18,7 @@ export function MascotTraveler({
   activeBeatId,
   story,
 }: MascotTravelerProps) {
+  const [isTooltipOpen, setIsTooltipOpen] = useState(true)
   const activeBeat =
     story.beats.find((beat) => beat.id === activeBeatId) ?? story.beats[0]
   const activeIndex = story.beats.findIndex((beat) => beat.id === activeBeatId)
@@ -25,6 +29,7 @@ export function MascotTraveler({
       data-active-beat={activeBeatId}
       data-story-guide
       data-story-traveler
+      data-tooltip-open={isTooltipOpen}
       aria-label={story.ariaLabel}
     >
       <svg
@@ -47,7 +52,12 @@ export function MascotTraveler({
         />
       </svg>
 
-      <div className='story-traveler__bubble' data-story-bubble>
+      <div
+        id='story-traveler-dialogue'
+        className='story-traveler__bubble'
+        data-story-bubble
+        aria-hidden={!isTooltipOpen}
+      >
         <div className='story-traveler__bubble-meta'>
           <span>{activeBeat.label}</span>
           <span>
@@ -59,7 +69,16 @@ export function MascotTraveler({
         <strong data-story-bridge>{activeBeat.bridge}</strong>
       </div>
 
-      <div className='story-traveler__stage' aria-hidden='true'>
+      <button
+        type='button'
+        className='story-traveler__stage story-traveler__toggle'
+        aria-controls='story-traveler-dialogue'
+        aria-expanded={isTooltipOpen}
+        aria-label={
+          isTooltipOpen ? story.hideTooltipLabel : story.showTooltipLabel
+        }
+        onClick={() => setIsTooltipOpen((isOpen) => !isOpen)}
+      >
         {story.beats.map((beat) => {
           const presentation = getStoryBeatPresentation(beat.id)
 
@@ -75,14 +94,15 @@ export function MascotTraveler({
               <Image
                 src={presentation.imageSrc}
                 alt=''
-                fill
+                width={1254}
+                height={1254}
                 sizes='(max-width: 1180px) 7rem, (min-width: 1181px) 19rem, 1px'
                 className='story-traveler__image'
               />
             </div>
           )
         })}
-      </div>
+      </button>
     </aside>
   )
 }
