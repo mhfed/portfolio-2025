@@ -8,6 +8,7 @@ interface CameraWaypoint {
   lookAt: THREE.Vector3
   moonIntensity: number
   lanternIntensity: number
+  jadeIntensity: number
   fov: number
 }
 
@@ -42,7 +43,7 @@ export function KageSanctuaryCanvas() {
     renderer.toneMappingExposure = 1.2
 
     const scene = new THREE.Scene()
-    scene.fog = new THREE.FogExp2(0x05070a, 0.038)
+    scene.fog = new THREE.FogExp2(0x05070a, 0.036)
 
     const camera = new THREE.PerspectiveCamera(
       48,
@@ -52,9 +53,9 @@ export function KageSanctuaryCanvas() {
     )
 
     // =========================================================================
-    // 1. LIGHTING
+    // 1. LIGHTING (DUAL ACCENT: VERMILION + MASCOT JADE/CYAN)
     // =========================================================================
-    const ambientLight = new THREE.AmbientLight(0x0a1017, 1.8)
+    const ambientLight = new THREE.AmbientLight(0x0a1218, 1.8)
     scene.add(ambientLight)
 
     // Vermilion moon primary light
@@ -71,8 +72,18 @@ export function KageSanctuaryCanvas() {
     lanternLight2.position.set(2.8, 2.2, -6)
     scene.add(lanternLight2)
 
-    // Secondary subtle fill
-    const groundFill = new THREE.PointLight(0x1a2634, 2.0, 30)
+    // Mascot Lime Jade Accent Light (ground & moss glow)
+    const jadeGlowLight = new THREE.PointLight(0x8ce019, 3.2, 18, 1.7)
+    jadeGlowLight.position.set(-2.6, 1.0, -1)
+    scene.add(jadeGlowLight)
+
+    // Mascot Cyan Accent Light (water reflection & air lân tinh)
+    const cyanWaterLight = new THREE.PointLight(0x0fe3c5, 2.8, 26, 1.9)
+    cyanWaterLight.position.set(3.0, 0.6, -10)
+    scene.add(cyanWaterLight)
+
+    // Ground fill
+    const groundFill = new THREE.PointLight(0x11221b, 1.8, 30)
     groundFill.position.set(0, -1, 5)
     scene.add(groundFill)
 
@@ -82,13 +93,11 @@ export function KageSanctuaryCanvas() {
     const moonGroup = new THREE.Group()
     moonGroup.position.set(9, 14, -38)
 
-    // Moon sphere
     const moonGeo = new THREE.SphereGeometry(4.8, 36, 36)
     const moonMat = new THREE.MeshBasicMaterial({ color: 0xe0231c })
     const moonMesh = new THREE.Mesh(moonGeo, moonMat)
     moonGroup.add(moonMesh)
 
-    // Multi-layered ethereal moon glow rings
     const createGlowRing = (innerR: number, outerR: number, opacity: number) => {
       const ringGeo = new THREE.RingGeometry(innerR, outerR, 48)
       const ringMat = new THREE.ShaderMaterial({
@@ -132,35 +141,33 @@ export function KageSanctuaryCanvas() {
     scene.add(moonGroup)
 
     // =========================================================================
-    // 3. PROCEDURAL SANMON / TORII TEMPLE GATE
+    // 3. SANMON / TORII GATE & JADE MOSS PLINTHS
     // =========================================================================
     const sanctuaryGroup = new THREE.Group()
 
-    // Charred cedar wood material (dark charred yakisugi style)
     const charredWoodMat = new THREE.MeshStandardMaterial({
       color: 0x0a0c0e,
       roughness: 0.88,
       metalness: 0.12,
     })
 
-    // Vermilion lacquered accent material
     const lacqueredVermilionMat = new THREE.MeshStandardMaterial({
       color: 0xaa1812,
       roughness: 0.45,
       metalness: 0.25,
     })
 
-    // Stone material
-    const mossStoneMat = new THREE.MeshStandardMaterial({
-      color: 0x141a1e,
-      roughness: 0.95,
+    // Moss-kissed ancient stone material with jade undertone
+    const jadeMossStoneMat = new THREE.MeshStandardMaterial({
+      color: 0x112117,
+      roughness: 0.85,
+      metalness: 0.08,
     })
 
-    // Torii Gate Construction
     const toriiGroup = new THREE.Group()
     toriiGroup.position.set(0, 0, -2)
 
-    // Pillars (Hashira) with slight inward incline
+    // Pillars (Hashira)
     const pillarGeo = new THREE.CylinderGeometry(0.32, 0.38, 7.5, 20)
     const leftPillar = new THREE.Mesh(pillarGeo, charredWoodMat)
     leftPillar.position.set(-3.2, 3.5, 0)
@@ -172,35 +179,33 @@ export function KageSanctuaryCanvas() {
     rightPillar.rotation.z = -0.02
     toriiGroup.add(rightPillar)
 
-    // Stone pillar plinths
+    // Jade moss-covered plinths
     const plinthGeo = new THREE.CylinderGeometry(0.55, 0.65, 0.6, 16)
-    const leftPlinth = new THREE.Mesh(plinthGeo, mossStoneMat)
+    const leftPlinth = new THREE.Mesh(plinthGeo, jadeMossStoneMat)
     leftPlinth.position.set(-3.2, 0.2, 0)
     toriiGroup.add(leftPlinth)
 
-    const rightPlinth = new THREE.Mesh(plinthGeo, mossStoneMat)
+    const rightPlinth = new THREE.Mesh(plinthGeo, jadeMossStoneMat)
     rightPlinth.position.set(3.2, 0.2, 0)
     toriiGroup.add(rightPlinth)
 
-    // Top beam (Kasagi & Shimaki) with graceful upturned ends
+    // Top beam (Kasagi)
     const topBeamGeo = new THREE.BoxGeometry(9.4, 0.55, 0.85)
     const topBeam = new THREE.Mesh(topBeamGeo, lacqueredVermilionMat)
     topBeam.position.set(0, 7.2, 0)
     toriiGroup.add(topBeam)
 
-    // Roof cap over Kasagi
     const capBeamGeo = new THREE.BoxGeometry(9.8, 0.25, 1.05)
     const capBeam = new THREE.Mesh(capBeamGeo, charredWoodMat)
     capBeam.position.set(0, 7.55, 0)
     toriiGroup.add(capBeam)
 
-    // Cross tie beam (Nuki)
+    // Tie beam (Nuki)
     const tieBeamGeo = new THREE.BoxGeometry(8.2, 0.38, 0.45)
     const tieBeam = new THREE.Mesh(tieBeamGeo, charredWoodMat)
     tieBeam.position.set(0, 5.8, 0)
     toriiGroup.add(tieBeam)
 
-    // Center vertical strut (Gakuzuka)
     const strutGeo = new THREE.BoxGeometry(0.42, 1.1, 0.35)
     const strut = new THREE.Mesh(strutGeo, lacqueredVermilionMat)
     strut.position.set(0, 6.5, 0)
@@ -209,38 +214,81 @@ export function KageSanctuaryCanvas() {
     sanctuaryGroup.add(toriiGroup)
 
     // =========================================================================
-    // 4. PROCEDURAL STONE LANTERNS (TŌRŌ) & HANGING PAPER LANTERNS
+    // 4. BAMBOO GROVE (CHIKURIN) FLANKS
+    // =========================================================================
+    const bambooMat = new THREE.MeshStandardMaterial({
+      color: 0x16301d,
+      roughness: 0.6,
+      metalness: 0.15,
+    })
+
+    const createBambooStalk = (x: number, z: number, height: number) => {
+      const g = new THREE.Group()
+      g.position.set(x, 0, z)
+
+      const segments = 5
+      const segH = height / segments
+      for (let s = 0; s < segments; s++) {
+        const stalkMesh = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.11, 0.13, segH * 0.95, 12),
+          bambooMat
+        )
+        stalkMesh.position.y = s * segH + segH / 2
+        g.add(stalkMesh)
+
+        // Joint ring
+        const ringMesh = new THREE.Mesh(
+          new THREE.TorusGeometry(0.13, 0.025, 8, 16),
+          lacqueredVermilionMat
+        )
+        ringMesh.rotation.x = Math.PI / 2
+        ringMesh.position.y = (s + 1) * segH
+        g.add(ringMesh)
+      }
+      return g
+    }
+
+    // Left bamboo grove
+    sanctuaryGroup.add(createBambooStalk(-6.5, 2.0, 11))
+    sanctuaryGroup.add(createBambooStalk(-7.8, -1.0, 12.5))
+    sanctuaryGroup.add(createBambooStalk(-5.8, -5.5, 10))
+    sanctuaryGroup.add(createBambooStalk(-8.2, -8.0, 13))
+
+    // Right bamboo grove
+    sanctuaryGroup.add(createBambooStalk(6.2, 1.5, 10.5))
+    sanctuaryGroup.add(createBambooStalk(7.6, -2.0, 13))
+    sanctuaryGroup.add(createBambooStalk(5.6, -6.5, 11))
+    sanctuaryGroup.add(createBambooStalk(8.0, -9.5, 12))
+
+    // =========================================================================
+    // 5. STONE LANTERNS & HANGING LANTERNS
     // =========================================================================
     const createStoneLantern = (x: number, z: number, yRot: number) => {
       const g = new THREE.Group()
       g.position.set(x, 0, z)
       g.rotation.y = yRot
 
-      // Base stone (kiso)
       const baseMesh = new THREE.Mesh(
         new THREE.CylinderGeometry(0.7, 0.85, 0.4, 6),
-        mossStoneMat
+        jadeMossStoneMat
       )
       baseMesh.position.y = 0.2
       g.add(baseMesh)
 
-      // Post (sao)
       const postMesh = new THREE.Mesh(
         new THREE.CylinderGeometry(0.3, 0.35, 1.4, 6),
-        mossStoneMat
+        jadeMossStoneMat
       )
       postMesh.position.y = 1.0
       g.add(postMesh)
 
-      // Middle platform (chūdai)
       const midMesh = new THREE.Mesh(
         new THREE.CylinderGeometry(0.75, 0.6, 0.3, 6),
-        mossStoneMat
+        jadeMossStoneMat
       )
       midMesh.position.y = 1.8
       g.add(midMesh)
 
-      // Light chamber (hibukuro) - glowing warm paper
       const lightMesh = new THREE.Mesh(
         new THREE.CylinderGeometry(0.45, 0.45, 0.65, 6),
         new THREE.MeshStandardMaterial({
@@ -253,7 +301,6 @@ export function KageSanctuaryCanvas() {
       lightMesh.position.y = 2.25
       g.add(lightMesh)
 
-      // Umbrella roof (kasa)
       const roofMesh = new THREE.Mesh(
         new THREE.ConeGeometry(1.0, 0.5, 6),
         charredWoodMat
@@ -261,10 +308,9 @@ export function KageSanctuaryCanvas() {
       roofMesh.position.y = 2.8
       g.add(roofMesh)
 
-      // Jewel top (hōju)
       const topJewel = new THREE.Mesh(
         new THREE.SphereGeometry(0.2, 12, 12),
-        mossStoneMat
+        jadeMossStoneMat
       )
       topJewel.position.y = 3.15
       g.add(topJewel)
@@ -272,13 +318,11 @@ export function KageSanctuaryCanvas() {
       return g
     }
 
-    // Place stone lanterns along sanctuary path
     sanctuaryGroup.add(createStoneLantern(-2.8, 0, 0.4))
     sanctuaryGroup.add(createStoneLantern(2.9, -4.5, -0.3))
     sanctuaryGroup.add(createStoneLantern(-3.4, -9, 0.6))
     sanctuaryGroup.add(createStoneLantern(3.2, -14, -0.5))
 
-    // Hanging paper lanterns suspended from Torii tie beam
     const paperLanternGeo = new THREE.CylinderGeometry(0.24, 0.28, 0.7, 16)
     const paperLanternMat = new THREE.MeshStandardMaterial({
       color: 0xffaa44,
@@ -295,23 +339,21 @@ export function KageSanctuaryCanvas() {
     toriiGroup.add(hangLantern2)
 
     // =========================================================================
-    // 5. STONE STEPS & REFLECTIVE MOONWATER BASIN
+    // 6. STEPS & MOONWATER BASIN (REFLECTING JADE & VERMILION)
     // =========================================================================
-    // Ancient stone steps climbing through the Torii gate
     for (let i = 0; i < 14; i++) {
       const stepWidth = 6.8 - i * 0.12
       const stepGeo = new THREE.BoxGeometry(stepWidth, 0.28, 1.4)
-      const stepMesh = new THREE.Mesh(stepGeo, mossStoneMat)
+      const stepMesh = new THREE.Mesh(stepGeo, jadeMossStoneMat)
       stepMesh.position.set(0, i * 0.24, -i * 1.3 + 4)
       sanctuaryGroup.add(stepMesh)
     }
 
-    // Reflective Water Mirror Plane (Moonwater Court)
     const waterGeo = new THREE.PlaneGeometry(65, 85, 48, 48)
     const waterMat = new THREE.MeshStandardMaterial({
-      color: 0x05080c,
+      color: 0x050a0f,
       roughness: 0.12,
-      metalness: 0.88,
+      metalness: 0.9,
     })
     const waterMesh = new THREE.Mesh(waterGeo, waterMat)
     waterMesh.rotation.x = -Math.PI / 2
@@ -321,9 +363,9 @@ export function KageSanctuaryCanvas() {
     scene.add(sanctuaryGroup)
 
     // =========================================================================
-    // 6. SWIRLING EMBER PARTICLES & NOCTURNAL MIST
+    // 7. SWIRLING EMBER PARTICLES (VERMILION & GOLD)
     // =========================================================================
-    const emberCount = prefersReducedMotion ? 60 : 280
+    const emberCount = prefersReducedMotion ? 40 : 200
     const emberPositions = new Float32Array(emberCount * 3)
     const emberVelocities: { x: number; y: number; z: number; freq: number }[] =
       []
@@ -360,7 +402,6 @@ export function KageSanctuaryCanvas() {
     )
     emberGeo.setAttribute('color', new THREE.BufferAttribute(emberColors, 3))
 
-    // Radial gradient particle canvas
     const pCanvas = document.createElement('canvas')
     pCanvas.width = 64
     pCanvas.height = 64
@@ -377,11 +418,11 @@ export function KageSanctuaryCanvas() {
 
     const pTex = new THREE.CanvasTexture(pCanvas)
     const emberMat = new THREE.PointsMaterial({
-      size: 0.48,
+      size: 0.46,
       map: pTex,
       vertexColors: true,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.82,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     })
@@ -390,21 +431,99 @@ export function KageSanctuaryCanvas() {
     scene.add(embers)
 
     // =========================================================================
-    // 7. CINEMATIC 6-CHAPTER CAMERA WAYPOINTS (SCROLL-DRIVEN)
+    // 8. MASCOT JADE FIREFLIES (LUMINOUS HOTARU)
     // =========================================================================
-    // Each waypoint corresponds to a chapter in the portfolio:
-    // 0: Hero (The Threshold) - Wide low shot gazing up to Torii & Moon
-    // 1: About (The Sanmon Gate) - Dolly in close under the charred rafters
-    // 2: Projects (Still Gardens) - Sweeping low reflection angle over Moonwater
-    // 3: Experience (Sacred Craft) - High architectural vantage looking down at raked sanctuary
-    // 4: Skills (Disciplines) - Tunnel vision drifting past lanterns into constellations
-    // 5: Contact (Afterlight) - Majestic celestial ascent facing the giant vermilion moon
+    const fireflyCount = prefersReducedMotion ? 25 : 110
+    const fireflyPositions = new Float32Array(fireflyCount * 3)
+    const fireflyOrigins: THREE.Vector3[] = []
+    const fireflySpeeds: {
+      speedX: number
+      speedY: number
+      speedZ: number
+      phase: number
+      radius: number
+    }[] = []
+    const fireflyColors = new Float32Array(fireflyCount * 3)
+
+    const colJade = new THREE.Color(0x8ce019)
+    const colCyan = new THREE.Color(0x0fe3c5)
+    const colLimeLight = new THREE.Color(0xbefc52)
+
+    for (let i = 0; i < fireflyCount; i++) {
+      const idx = i * 3
+      const origX = (Math.random() - 0.5) * 26
+      const origY = 0.5 + Math.random() * 6.5
+      const origZ = (Math.random() - 0.5) * 32 - 4
+
+      fireflyPositions[idx] = origX
+      fireflyPositions[idx + 1] = origY
+      fireflyPositions[idx + 2] = origZ
+
+      fireflyOrigins.push(new THREE.Vector3(origX, origY, origZ))
+      fireflySpeeds.push({
+        speedX: 0.6 + Math.random() * 1.4,
+        speedY: 0.8 + Math.random() * 1.2,
+        speedZ: 0.5 + Math.random() * 1.1,
+        phase: Math.random() * Math.PI * 2,
+        radius: 0.8 + Math.random() * 1.6,
+      })
+
+      const rand = Math.random()
+      const c = rand < 0.6 ? colJade : rand < 0.85 ? colCyan : colLimeLight
+      fireflyColors[idx] = c.r
+      fireflyColors[idx + 1] = c.g
+      fireflyColors[idx + 2] = c.b
+    }
+
+    const fireflyGeo = new THREE.BufferGeometry()
+    fireflyGeo.setAttribute(
+      'position',
+      new THREE.BufferAttribute(fireflyPositions, 3)
+    )
+    fireflyGeo.setAttribute(
+      'color',
+      new THREE.BufferAttribute(fireflyColors, 3)
+    )
+
+    // Jade glow particle canvas
+    const fCanvas = document.createElement('canvas')
+    fCanvas.width = 64
+    fCanvas.height = 64
+    const fCtx = fCanvas.getContext('2d')
+    if (fCtx) {
+      const grad = fCtx.createRadialGradient(32, 32, 0, 32, 32, 32)
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
+      grad.addColorStop(0.3, 'rgba(140, 224, 25, 0.95)')
+      grad.addColorStop(0.65, 'rgba(15, 227, 197, 0.4)')
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
+      fCtx.fillStyle = grad
+      fCtx.fillRect(0, 0, 64, 64)
+    }
+
+    const fTex = new THREE.CanvasTexture(fCanvas)
+    const fireflyMat = new THREE.PointsMaterial({
+      size: 0.55,
+      map: fTex,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.92,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    })
+
+    const fireflies = new THREE.Points(fireflyGeo, fireflyMat)
+    scene.add(fireflies)
+
+    // =========================================================================
+    // 9. CAMERA WAYPOINTS RIG (6 CHAPTERS)
+    // =========================================================================
     const WAYPOINTS: CameraWaypoint[] = [
       {
         pos: new THREE.Vector3(0, 2.8, 14.5),
         lookAt: new THREE.Vector3(0.5, 3.8, -4),
         moonIntensity: 2.2,
         lanternIntensity: 4.5,
+        jadeIntensity: 2.5,
         fov: 48,
       },
       {
@@ -412,6 +531,7 @@ export function KageSanctuaryCanvas() {
         lookAt: new THREE.Vector3(0.8, 4.2, -3.5),
         moonIntensity: 2.6,
         lanternIntensity: 5.8,
+        jadeIntensity: 3.8,
         fov: 44,
       },
       {
@@ -419,6 +539,7 @@ export function KageSanctuaryCanvas() {
         lookAt: new THREE.Vector3(-1.8, 2.2, -8.0),
         moonIntensity: 3.4,
         lanternIntensity: 6.2,
+        jadeIntensity: 4.6,
         fov: 46,
       },
       {
@@ -426,6 +547,7 @@ export function KageSanctuaryCanvas() {
         lookAt: new THREE.Vector3(0.2, 1.6, -6.5),
         moonIntensity: 2.8,
         lanternIntensity: 4.0,
+        jadeIntensity: 3.0,
         fov: 52,
       },
       {
@@ -433,6 +555,7 @@ export function KageSanctuaryCanvas() {
         lookAt: new THREE.Vector3(0, 4.8, -22),
         moonIntensity: 3.8,
         lanternIntensity: 3.5,
+        jadeIntensity: 4.2,
         fov: 50,
       },
       {
@@ -440,12 +563,13 @@ export function KageSanctuaryCanvas() {
         lookAt: new THREE.Vector3(6.5, 12.0, -32),
         moonIntensity: 5.5,
         lanternIntensity: 2.0,
+        jadeIntensity: 2.0,
         fov: 56,
       },
     ]
 
     // =========================================================================
-    // 8. SCROLL & MOUSE TRACKING ENGINE
+    // 10. SCROLL & MOUSE TRACKING ENGINE
     // =========================================================================
     let targetScrollProgress = 0
     let currentScrollProgress = 0
@@ -481,20 +605,17 @@ export function KageSanctuaryCanvas() {
     }
     window.addEventListener('resize', handleResize)
 
-    // Initial sync
     onScroll()
 
-    // Working vectors
     const currentCamPos = new THREE.Vector3()
     const currentLookAt = new THREE.Vector3()
 
-    // Animation Loop
     let clock = 0
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate)
       clock += 0.016
 
-      // Smooth scroll interpolation (smooth dampening for steady cinematic camera)
+      // Smooth scroll dampening
       currentScrollProgress +=
         (targetScrollProgress - currentScrollProgress) * 0.065
 
@@ -502,7 +623,7 @@ export function KageSanctuaryCanvas() {
       curMouseX += (mouseX - curMouseX) * 0.04
       curMouseY += (mouseY - curMouseY) * 0.04
 
-      // Map progress (0..1) along the 5 waypoints segments
+      // Map progress along the waypoints
       const segmentCount = WAYPOINTS.length - 1
       const scaledProgress = currentScrollProgress * segmentCount
       const segmentIndex = Math.min(
@@ -510,18 +631,15 @@ export function KageSanctuaryCanvas() {
         segmentCount - 1
       )
       const segmentAlpha = scaledProgress - segmentIndex
-
-      // Smooth step easing
       const t = segmentAlpha * segmentAlpha * (3 - 2 * segmentAlpha)
 
       const wpStart = WAYPOINTS[segmentIndex]
       const wpEnd = WAYPOINTS[segmentIndex + 1]
 
-      // Interpolate camera position and target
       currentCamPos.lerpVectors(wpStart.pos, wpEnd.pos, t)
       currentLookAt.lerpVectors(wpStart.lookAt, wpEnd.lookAt, t)
 
-      // Add gentle cinematic mouse sway
+      // Parallax mouse sway
       currentCamPos.x += curMouseX * 0.8
       currentCamPos.y += -curMouseY * 0.5
       currentLookAt.x += curMouseX * 0.4
@@ -530,14 +648,14 @@ export function KageSanctuaryCanvas() {
       camera.position.copy(currentCamPos)
       camera.lookAt(currentLookAt)
 
-      // Interpolate FOV
+      // FOV transition
       const targetFov = THREE.MathUtils.lerp(wpStart.fov, wpEnd.fov, t)
       if (Math.abs(camera.fov - targetFov) > 0.01) {
         camera.fov = targetFov
         camera.updateProjectionMatrix()
       }
 
-      // Dynamic lighting response
+      // Lights interpolation
       const moonPower = THREE.MathUtils.lerp(
         wpStart.moonIntensity,
         wpEnd.moonIntensity,
@@ -550,7 +668,6 @@ export function KageSanctuaryCanvas() {
         wpEnd.lanternIntensity,
         t
       )
-      // Realistic irregular flame guttering/flicker
       const flicker1 =
         lanternPower * (0.92 + Math.sin(clock * 9.2) * 0.08 + Math.cos(clock * 17.5) * 0.05)
       const flicker2 =
@@ -558,6 +675,18 @@ export function KageSanctuaryCanvas() {
 
       lanternLight1.intensity = flicker1
       lanternLight2.intensity = flicker2
+
+      // Mascot Jade & Cyan lights animation
+      const jadePower = THREE.MathUtils.lerp(
+        wpStart.jadeIntensity,
+        wpEnd.jadeIntensity,
+        t
+      )
+      const jadeBreath = jadePower * (0.85 + Math.sin(clock * 2.4) * 0.18)
+      jadeGlowLight.intensity = jadeBreath
+
+      const cyanBreath = 2.4 + Math.sin(clock * 1.8 + 1) * 0.6
+      cyanWaterLight.intensity = cyanBreath
 
       // Water gentle wave ripples
       const waterPos = waterGeo.attributes.position.array as Float32Array
@@ -570,8 +699,24 @@ export function KageSanctuaryCanvas() {
       }
       waterGeo.attributes.position.needsUpdate = true
 
-      // Embers drifting upwards and swirling
+      // Animate Green Fireflies (Hotaru)
       if (!prefersReducedMotion) {
+        const ffArray = fireflyGeo.attributes.position.array as Float32Array
+        for (let i = 0; i < fireflyCount; i++) {
+          const idx = i * 3
+          const orig = fireflyOrigins[i]
+          const sp = fireflySpeeds[i]
+
+          ffArray[idx] =
+            orig.x + Math.sin(clock * sp.speedX + sp.phase) * sp.radius
+          ffArray[idx + 1] =
+            orig.y + Math.cos(clock * sp.speedY + sp.phase) * (sp.radius * 0.6)
+          ffArray[idx + 2] =
+            orig.z + Math.sin(clock * sp.speedZ + sp.phase) * sp.radius
+        }
+        fireflyGeo.attributes.position.needsUpdate = true
+
+        // Animate Embers
         const pArray = emberGeo.attributes.position.array as Float32Array
         for (let i = 0; i < emberCount; i++) {
           const idx = i * 3
@@ -581,7 +726,6 @@ export function KageSanctuaryCanvas() {
           pArray[idx] += Math.sin(clock * vel.freq + i) * 0.008 + vel.x
           pArray[idx + 2] += Math.cos(clock * vel.freq * 0.8 + i) * 0.006
 
-          // Wrap around bounding box
           if (pArray[idx + 1] > 20) {
             pArray[idx + 1] = -2
             pArray[idx] = (Math.random() - 0.5) * 36
@@ -590,7 +734,6 @@ export function KageSanctuaryCanvas() {
         }
         emberGeo.attributes.position.needsUpdate = true
 
-        // Moon subtle pulse
         const moonScale = 1 + Math.sin(clock * 0.7) * 0.035
         moonGroup.scale.set(moonScale, moonScale, moonScale)
       }
@@ -609,14 +752,18 @@ export function KageSanctuaryCanvas() {
       moonGeo.dispose()
       moonMat.dispose()
       pillarGeo.dispose()
+      bambooMat.dispose()
       charredWoodMat.dispose()
       lacqueredVermilionMat.dispose()
-      mossStoneMat.dispose()
+      jadeMossStoneMat.dispose()
       waterGeo.dispose()
       waterMat.dispose()
       emberGeo.dispose()
       emberMat.dispose()
+      fireflyGeo.dispose()
+      fireflyMat.dispose()
       pTex.dispose()
+      fTex.dispose()
       renderer.dispose()
     }
   }, [])
