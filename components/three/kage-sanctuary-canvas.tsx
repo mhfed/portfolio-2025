@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { createInkRoninGroup } from './kage-ink-ronin'
 
 interface CameraWaypoint {
   pos: THREE.Vector3
@@ -624,89 +625,10 @@ export function KageSanctuaryCanvas() {
     scene.add(sanctuaryGroup)
 
     // =========================================================================
-    // 9. HIGH-QUALITY GLTF 3D CHARACTER PIPELINE
+    // 9. CINEMATIC INK RONIN SILHOUETTE (THỦY MẶC LÃNG KHÁCH)
     // =========================================================================
-    // Root group for the loaded high-poly character
-    const characterGroup = new THREE.Group()
-    characterGroup.position.set(1.2, 0.35, 2.5)
-    characterGroup.rotation.y = -0.32
-    scene.add(characterGroup)
-
-    let mixer: THREE.AnimationMixer | null = null
-    let hasCharacterModel = false
-
-    // Dynamically load real GLTF/GLB character model if present in /models/
-    const candidateUrls = [
-      '/models/character.glb',
-      '/models/ninja.glb',
-      '/models/samurai.glb',
-      '/models/scene.glb',
-      '/models/scene.gltf',
-      '/models/ninja_ai_metin_2.glb',
-      '/models/character.gltf',
-      '/models/ninja.gltf',
-    ]
-
-    import('three/examples/jsm/loaders/GLTFLoader.js').then(({ GLTFLoader }) => {
-      const loader = new GLTFLoader()
-
-      const tryLoad = (idx: number) => {
-        if (idx >= candidateUrls.length) return
-        const url = candidateUrls[idx]
-
-        loader.load(
-          url,
-          (gltf) => {
-            hasCharacterModel = true
-
-            // Calculate bounding box and scale to standard heroic 1.85m height
-            const bbox = new THREE.Box3().setFromObject(gltf.scene)
-            const size = bbox.getSize(new THREE.Vector3())
-            const scale = 1.85 / Math.max(size.y, 0.01)
-            gltf.scene.scale.set(scale, scale, scale)
-
-            // Center base onto ground
-            const center = bbox.getCenter(new THREE.Vector3())
-            gltf.scene.position.x = -center.x * scale
-            gltf.scene.position.y = -bbox.min.y * scale
-            gltf.scene.position.z = -center.z * scale
-
-            // Traverse meshes to enable soft shadows and enhance PBR materials
-            gltf.scene.traverse((child) => {
-              if ((child as THREE.Mesh).isMesh) {
-                child.castShadow = true
-                child.receiveShadow = true
-                const mesh = child as THREE.Mesh
-                if (mesh.material) {
-                  const mat = mesh.material as THREE.MeshStandardMaterial
-                  if (mat.isMeshStandardMaterial) {
-                    mat.roughness = Math.max(0.25, mat.roughness ?? 0.6)
-                    mat.metalness = Math.min(0.9, mat.metalness ?? 0.2)
-                    mat.envMapIntensity = 1.2
-                  }
-                }
-              }
-            })
-
-            // Setup animation mixer if the model includes animations
-            if (gltf.animations && gltf.animations.length > 0) {
-              mixer = new THREE.AnimationMixer(gltf.scene)
-              const action = mixer.clipAction(gltf.animations[0])
-              action.play()
-            }
-
-            characterGroup.add(gltf.scene)
-          },
-          undefined,
-          () => {
-            // Try next candidate
-            tryLoad(idx + 1)
-          }
-        )
-      }
-
-      tryLoad(0)
-    })
+    const inkRonin = createInkRoninGroup()
+    scene.add(inkRonin.group)
 
     // =========================================================================
     // 10. SUBTLE ATMOSPHERIC EMBERS (MINIMALIST & CRISP)
@@ -973,11 +895,6 @@ export function KageSanctuaryCanvas() {
       animationFrameId = requestAnimationFrame(animate)
       clock += 0.016
 
-      // Update animation mixer for real GLTF model if loaded
-      if (mixer) {
-        mixer.update(0.016)
-      }
-
       // Smooth scroll dampening
       currentScrollProgress +=
         (targetScrollProgress - currentScrollProgress) * 0.065
@@ -1050,29 +967,27 @@ export function KageSanctuaryCanvas() {
       cyanWaterLight.intensity = cyanBreath
 
       // =========================================================================
-      // DYNAMIC ASCENT & LIGHTING ON THE STONE STAIRS
+      // DYNAMIC ASCENT & LIGHTING ON THE STONE STAIRS (CINEMATIC INK RONIN)
       // =========================================================================
-      if (hasCharacterModel) {
-        const maxSteps = 10
-        const scrollStepProgress = currentScrollProgress * maxSteps
-        const baseStep = Math.min(Math.floor(scrollStepProgress), maxSteps - 1)
-        const stepFraction = scrollStepProgress - baseStep
+      inkRonin.update(
+        0.016,
+        clock,
+        currentScrollProgress,
+        curMouseX,
+        curMouseY
+      )
 
-        const stepHop = Math.sin(stepFraction * Math.PI) * 0.28
-        const currentStepI = baseStep + stepFraction
-        const targetZ = 3.2 - currentStepI * 1.22
-        const targetY = currentStepI * 0.22 + 0.24 + stepHop
-        const targetX = 1.3 - (currentStepI / maxSteps) * 1.1 + Math.sin(clock * 1.4) * 0.06
-
-        characterGroup.position.set(targetX, targetY, targetZ)
-
-        characterKeyLight.position.set(targetX + 1.2, targetY + 2.4, targetZ + 1.6)
-        characterRimLight.position.set(targetX - 1.4, targetY + 1.6, targetZ - 1.2)
-      } else {
-        // Keep lights parked gracefully near the Sanmon gate
-        characterKeyLight.position.set(0, 3.5, 0)
-        characterRimLight.position.set(0, 2.0, -4)
-      }
+      const roninPos = inkRonin.group.position
+      characterKeyLight.position.set(
+        roninPos.x + 0.8,
+        roninPos.y + 1.8,
+        roninPos.z + 1.2
+      )
+      characterRimLight.position.set(
+        roninPos.x - 1.2,
+        roninPos.y + 1.4,
+        roninPos.z - 0.8
+      )
 
       // Water gentle wave ripples
       const waterPos = waterGeo.attributes.position.array as Float32Array
@@ -1155,6 +1070,7 @@ export function KageSanctuaryCanvas() {
       fireflyMat.dispose()
       pTex.dispose()
       fTex.dispose()
+      inkRonin.dispose()
       renderer.dispose()
     }
   }, [])
