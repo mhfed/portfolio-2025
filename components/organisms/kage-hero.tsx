@@ -70,9 +70,21 @@ export function KageHero({ content }: KageHeroProps) {
           </span>
         </h1>
 
-        <p className='kage-body text-[clamp(14px,1.1vw,17px)] max-w-[440px] mb-8 text-[#9aa5a0]'>
+        <p className='kage-body text-[clamp(14px,1.1vw,17px)] max-w-[440px] mb-6 text-[#9aa5a0]'>
           {hero.description}
         </p>
+
+        {/* Core Keyword Tags */}
+        <div className='flex flex-wrap gap-2 mb-8'>
+          {['Next.js 16', 'React 19', 'TypeScript', 'Three.js / WebGL', 'GSAP Motion', 'Tailwind'].map((tech) => (
+            <span
+              key={tech}
+              className='px-2.5 py-1 text-[10px] tracking-[0.14em] uppercase border border-[var(--line-soft)] rounded-full text-[var(--bone-dim)] bg-[#05070a]/60'
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
 
         <div className='flex items-center gap-6'>
           <a href='#work' className='arrowlink mt-0' data-cursor>

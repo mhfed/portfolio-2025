@@ -29,32 +29,32 @@
     "front": "NGUYEN",
     "middle": "MINH",
     "end": "HIEU",
-    "developer": "前端開發工程師",
-    "status": "接受精選產品與前端專案",
+    "developer": "Frontend Architect",
+    "status": "Available for selected architecture & creative frontend work",
     "profile": "個人資料",
     "viewWork": "檢視作品",
-    "contactMe": "聯絡我",
-    "headline": "打造 *生動* 網頁體驗 的 前端開發工程師。",
-    "description": "我打造快速、精準的網頁介面，讓動態設計、效能與生產代碼作為整體系統協同運作。",
-    "intro": "5 年 React 與 Next.js 產品交付經驗。快速、無障礙、經得起考驗。",
+    "contactMe": "聯絡方式",
+    "headline": "Frontend Architect & Creative Developer.",
+    "description": "High-performance web architecture, design systems & creative motion. 專注於 Next.js, React 與 WebGL。",
+    "intro": "高敏捷網頁架構、60fps 互動動畫與標準生產級程式碼。",
     "contact": {
       "basedIn": "目前所在地",
       "location": "越南河內",
       "sayHello": "打聲招呼",
       "email": "nmhieu04091999@gmail.com"
     },
-    "textBlockLeft": "前端工程師，擁有 5 年以上實際上線 Web 應用程式的經驗。",
-    "textBlockRight": "我在乎有意圖的介面設計，而非拼湊組合。動態、效能與無障礙性並非事後補充。",
+    "textBlockLeft": "Frontend Architect • 5 年以上現代 Web 系統架構經驗。",
+    "textBlockRight": "專注於 60fps 動態體驗、Core Web Vitals < 1.2s 與高擴展性模組架構。",
     "meta": {
       "focus": "核心領域",
-      "focusValue": "UI 系統",
+      "focusValue": "Architecture & Motion",
       "experience": "工作年資",
       "experienceValue": "5 年以上",
       "contact": "聯絡方式",
       "coreStack": "核心技術棧",
-      "coreStackValue": "React, Next.js, TS, Tailwind",
+      "coreStackValue": "Next.js, React, TypeScript, Three.js",
       "workingStyle": "工作風格",
-      "workingStyleValue": "產品思維與精緻 UI",
+      "workingStyleValue": "Product Mindset & High Precision",
       "availability": "求職狀態",
       "availabilityValue": "開放尋求新機會"
     }
@@ -64,132 +64,125 @@
     "focus": "核心領域",
     "approach": "工作方法",
     "capabilities": "核心能力",
-    "statement": "清晰、快速且經過思考的前端系統。",
-    "badges": ["前端開發工程師", "動態特效", "產品細節", "效能表現"],
+    "statement": "清晰架構、極致效能與意圖明確的動態設計。",
+    "badges": [
+      "Frontend Architect",
+      "Creative Motion",
+      "Performance",
+      "Design Systems"
+    ],
     "itemsCount": "{count} 項",
-    "description1": "5 年以上 React 與 Next.js 產品交付經驗，涵蓋電商、金融科技與 Web3。",
-    "coreSkills": "核心技能",
+    "description1": "三大工程支柱：可擴展的 Next.js App Router 架構、硬體加速 60fps 動態，以及 Core Web Vitals 效能優化。",
+    "coreSkills": "工程支柱",
     "yearsExperience": "年經驗",
-    "yearsDescription": "React、Next.js、TypeScript，應用於 production 環境",
+    "yearsDescription": "大規模建構生產環境產品生態",
     "clientSatisfaction": "準時交付率",
-    "satisfactionDescription": "涵蓋自由接案與全職合作",
+    "satisfactionDescription": "涵蓋大型企業與高併發消費產品",
     "storefrontResult": "Storefront PageSpeed",
     "skillList": {
       "frontend": {
-        "label": "Frontend",
-        "value": "React、Next.js、TypeScript、Tailwind。"
+        "label": "Architecture",
+        "value": "Next.js App Router, React 19, TypeScript, Design Systems."
       },
       "state": {
-        "label": "資料",
-        "value": "React Query、Redux、API、即時資料。"
+        "label": "Realtime & Data",
+        "value": "Server-Sent Events (SSE), React Query, Redux Toolkit."
       },
       "performance": {
-        "label": "效能",
-        "value": "Core Web Vitals、無障礙、分析。"
+        "label": "Performance",
+        "value": "Core Web Vitals (LCP < 1.2s), Bundle Splitting, SEO."
       },
       "devops": {
-        "label": "交付",
-        "value": "Vite、CI/CD、Git、Linux。"
+        "label": "Motion & Creative",
+        "value": "Three.js, WebGL, GSAP ScrollTrigger, Lenis Smooth Scroll."
       },
       "mobile": {
-        "label": "Mobile & Others",
-        "value": "React Native, Zalo Mini App, Canvas API, i18n."
+        "label": "Delivery",
+        "value": "CI/CD, Turbopack, Docker, Linux, Performance Auditing."
       },
       "agile": {
-        "label": "Agile/Scrum",
-        "value": "精通軟體開發生命週期 (SDLC)、衝刺規劃與回顧。"
+        "label": "Engineering Standard",
+        "value": "Clean Architecture, Type Safety, Code Reviews & Testing."
       },
       "codeQuality": {
         "label": "Code Quality",
-        "value": "重視 Clean Code、程式碼審查與單元測試。"
+        "value": "Modular Code, Zero Tech Debt, Production Rigor."
       },
       "productMindset": {
         "label": "Product Mindset",
-        "value": "將複雜的商業需求轉化為可擴展的技術解決方案。"
+        "value": "將複雜商業需求轉化為高擴展性技術解決方案。"
       },
       "leadership": {
-        "label": "Leadership",
-        "value": "架構基礎專案並指導團隊程式碼標準。"
+        "label": "Technical Leadership",
+        "value": "制定程式碼規範、基礎架構與團隊流程優化。"
       }
     }
   },
   "experience": {
     "title": "工作\n經歷",
-    "headline": "從前台速度到交易流程，再到內部產品系統。",
+    "headline": "工程軌跡：從百萬級電商速度優化到高頻即時金融交易系統。",
     "kicker": "概述",
     "readMore": "閱讀更多…",
     "noExperience": "目前尚無工作經歷。",
     "list": [
       {
-        "id": 1,
-        "company": "IT Lab FPOLY",
-        "position": "前端實習開發工程師",
-        "period": "2/2021 - 7/2021",
+        "id": 4,
+        "company": "COOLMATE",
+        "position": "Headless Storefront Migration • Frontend Engineer",
+        "period": "04/2024 - 至今",
         "location": "河內",
-        "description": "使用 HTML、CSS、JavaScript 與 React 建立多個網頁專案，累積前端實作經驗。",
-        "skills": ["HTML", "CSS", "JavaScript", "React"]
-      },
-      {
-        "id": 2,
-        "company": "METACITY",
-        "position": "前端開發工程師",
-        "period": "7/2021 - 8/2022",
-        "location": "河內",
-        "description": "開發 Metacity 系統與 landing page，將 Figma 設計轉為具動態效果的響應式 React 介面。",
-        "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
+        "description": "架構 Next.js App Router Headless Storefront。PageSpeed 由 29 提升至 94，達成次秒級頁面載入並提升轉換率。",
+        "skills": ["Next.js App Router", "TypeScript", "Performance Tuning", "Core Web Vitals", "Tailwind CSS"]
       },
       {
         "id": 3,
         "company": "NOVUS FINTECH",
-        "position": "前端開發工程師",
+        "position": "Real-time Trading & Financial CMS • Frontend Engineer",
         "period": "08/2022 - 04/2024",
         "location": "河內",
-        "description": "開發 CMS 與即時交易介面，涵蓋安全驗證、表單流程、主題客製化與 SSE 資料更新。",
-        "skills": [
-          "TypeScript",
-          "ReactJS",
-          "Redux",
-          "RestAPI",
-          "Formik",
-          "Yup",
-          "Material",
-          "UI",
-          "SSE",
-          "Next.js",
-          "Chart.js"
-        ]
+        "description": "透過 Server-Sent Events (SSE) 建構即時股票交易系統。開發 White-label 主題配置器與高安全金融表單驗證機制。",
+        "skills": ["React", "TypeScript", "Realtime SSE", "Theme Engine", "Redux Toolkit", "Formik/Yup"]
       },
       {
-        "id": 4,
-        "company": "COOLMATE",
-        "position": "前端開發工程師",
-        "period": "04/2024 - 至今",
+        "id": 2,
+        "company": "METACITY",
+        "position": "Interactive Web3 & Design Systems • Frontend Developer",
+        "period": "07/2021 - 08/2022",
         "location": "河內",
-        "description": "主導 storefront 從 Laravel 遷移至 Next.js，將 PageSpeed 從 29 提升至 90+，並透過效能與 UX 優化改善轉換率。",
-        "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
+        "description": "開發互動式 Web3 頁面與設計系統。精準轉譯 Figma 高保真設計圖，達成流暢的響應式動態元件。",
+        "skills": ["Next.js", "React", "Sass", "Responsive UI", "Figma-to-Code"]
+      },
+      {
+        "id": 1,
+        "company": "IT Lab FPOLY",
+        "position": "Web Foundations & Component Lifecycle • Frontend Intern",
+        "period": "2/2021 - 7/2021",
+        "location": "河內",
+        "description": "建立 React 元件生命週期架構基礎，規範標準 Git Flow 工作流程與 Clean Code 實踐。",
+        "skills": ["React", "JavaScript ES6+", "HTML5/CSS3", "Git Workflow"]
       }
     ]
   },
   "skills": {
     "title": "Stack as<br />motion language.",
     "kicker": "核心能力",
-    "headline": "我使用的技術。",
+    "headline": "核心技術領域。",
     "groups": [
       {
-        "label": "前端開發",
-        "items": ["React", "Next.js", "TypeScript", "Tailwind", "設計系統"]
+        "label": "Core Frontend",
+        "items": ["React 19", "Next.js 16", "TypeScript", "Tailwind CSS", "Design Systems"]
       },
       {
-        "label": "動態特效",
-        "items": ["GSAP", "ScrollTrigger", "Motion", "Canvas", "微交互"]
+        "label": "Motion & 3D",
+        "items": ["Three.js", "WebGL", "GSAP ScrollTrigger", "Lenis Scroll", "Framer Motion"]
       },
       {
-        "label": "後端與驗證",
-        "items": ["REST API", "SSE", "Supabase", "身分驗證", "Formik/Yup"]
+        "label": "Realtime & State",
+        "items": ["Server-Sent Events (SSE)", "REST API", "Redux Toolkit", "Auth Flows", "Formik/Yup"]
       },
       {
-        "label": "開發工具",
-        "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "效能優化"]
+        "label": "Performance & Ops",
+        "items": ["Core Web Vitals", "Lighthouse 90+", "Vite / Turbopack", "CI/CD", "Docker / Linux"]
       }
     ]
   },
@@ -212,7 +205,7 @@
   },
   "projects": {
     "title": "專案作品",
-    "headline": "專案作品",
+    "headline": "精選專案",
     "kicker": "概述",
     "projectCase": "專案案例",
     "launchApp": "啟動應用",
@@ -223,54 +216,47 @@
     "list": [
       {
         "id": 5,
-        "title": "Portfolio Designer",
+        "title": "Duong Minhle Portfolio",
         "year": "2026",
-        "description": "使用者體驗設計師、藝術家與故事講述者。",
-        "details": "",
+        "description": "Creative Portfolio & Motion Experience",
+        "details": "基於 Lenis 與 GSAP ScrollTrigger 的流暢平滑捲動\n電影級響應式排版設計\nGPU 加速 60fps 流暢動畫體驗",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
         "liveUrl": "https://www.duongminhle.site/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "tailwind"]
+        "techStack": ["Next.js", "React", "TypeScript", "GSAP", "Tailwind CSS"]
       },
       {
         "id": 4,
-        "title": "Starlento",
+        "title": "Starlento Platform",
         "year": "2024",
-        "description": "Starlento",
-        "details": "加入 Starlento 達人團隊\n\n立即申請最新的海選面試機會",
+        "description": "Talent Media & Entertainment Platform",
+        "details": "影視娛樂與演藝人才海選平台\n自動化響應式圖片優化與動態投遞流程\n基於 Next.js 與 Redux Toolkit 的 SSR 串流渲染",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
         "liveUrl": "https://starlento.vn/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
+        "techStack": ["Next.js", "React", "TypeScript", "Redux Toolkit", "CSS Modules"]
       },
       {
         "id": 3,
-        "title": "CGSI, Iress Wealth, Admin Portal Equix",
+        "title": "Equix Trading Portal",
         "year": "2023",
-        "description": "交易平台",
-        "details": "實現第三方登入流程與用戶驗證。\n使用 Formik 處理表單資料驗證（搭配 Yup），實作報告、通知、使用者和文章畫面的資料新增、修改、刪除與更新功能。\n為列表畫面建立進階篩選功能。更新表單與驗證欄位。\n在 CMS 上開發主題建构器功能，以自訂行動裝置上交易應用程式的色彩配置。",
+        "description": "Real-time Trading & Financial CMS",
+        "details": "透過 Server-Sent Events (SSE) 實現高頻即時股票交易\nWhite-label 視覺化主題生成器\n多層級金融權限驗證與表單嚴密校驗",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764925609/portfolio/yd0imbldaoctara4lwxn.png",
         "liveUrl": "https://www.equix.com.au/",
         "githubUrl": null,
-        "techStack": [
-          "react",
-          "canvas",
-          "javascript",
-          "sse",
-          "realtime",
-          "streaming"
-        ]
+        "techStack": ["React", "TypeScript", "SSE", "Redux", "Formik/Yup", "Material UI"]
       },
       {
         "id": 2,
-        "title": "Metacity System, Landing Page",
+        "title": "Metacity Ecosystem",
         "year": "2022",
-        "description": "Web 3 區塊鏈",
-        "details": "製作介面、動畫特效、客製化遊戲介面。\n將 Figma 設計圖轉換為 HTML 和 CSS，同時確保維持 UX 和 UI 設計。\n重構程式碼、排查程式碼並修復 Bug。\n確保跨瀏覽器相容性以及在不同裝置與螢幕尺寸上的響應式呈現。",
+        "description": "Web3 Blockchain & Game Hub",
+        "details": "高互動 Web3 錢包連線介面與鏈上狀態監聽\n優化 CSS 動畫與高幀率 DOM 更新機制\n跨不同螢幕斷點的高可重用模組元件庫",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
         "liveUrl": "https://www.metacity.com/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
+        "techStack": ["Next.js", "React", "TypeScript", "Sass", "Redux"]
       }
     ]
   },

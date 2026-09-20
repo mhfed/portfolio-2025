@@ -40,30 +40,36 @@ export function KageAbout({ content }: KageAboutProps) {
 
       {/* Ruled Stats Band */}
       <div className='grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 mt-16 sm:mt-24 pt-8 border-t border-[var(--line-soft)]'>
-        {about.metrics.map((metric) => (
-          <div key={metric.label}>
-            <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
-              {metric.value}
-            </b>
-            <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
-              {metric.label}
-            </span>
-          </div>
-        ))}
+        <div>
+          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
+            5+
+          </b>
+          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
+            Years Experience
+          </span>
+        </div>
+        <div>
+          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
+            94
+          </b>
+          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
+            PageSpeed Benchmark
+          </span>
+        </div>
+        <div>
+          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
+            60 FPS
+          </b>
+          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
+            Hardware Motion
+          </span>
+        </div>
         <div>
           <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
             100%
           </b>
           <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
-            Production Grade
-          </span>
-        </div>
-        <div>
-          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
-            ∞
-          </b>
-          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
-            {editorialUi.curious}
+            Type-Safe & Clean
           </span>
         </div>
       </div>

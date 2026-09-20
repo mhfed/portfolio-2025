@@ -29,33 +29,33 @@
     "front": "NGUYEN",
     "middle": "MINH",
     "end": "HIEU",
-    "developer": "Lập trình viên Frontend",
-    "status": "Sẵn sàng cho các dự án sản phẩm & frontend chọn lọc",
+    "developer": "Frontend Architect",
+    "status": "Available for selected architecture & creative frontend work",
     "profile": "Hồ sơ",
     "viewWork": "Xem dự án",
-    "contactMe": "Liên hệ tôi",
-    "headline": "Lập trình viên Frontend kiến tạo trải nghiệm web *sống động*.",
-    "description": "Tôi xây dựng giao diện nhanh và chính xác, nơi thiết kế chuyển động, hiệu năng và mã nguồn thực tế vận hành như một hệ thống.",
-    "intro": "5 năm ship sản phẩm React và Next.js. Nhanh, accessible, và bền vững.",
+    "contactMe": "Liên hệ",
+    "headline": "Frontend Architect & Creative Developer.",
+    "description": "High-performance web architecture, design systems & creative motion. Chuyên sâu Next.js, React và WebGL.",
+    "intro": "Kiến trúc web tốc độ cao, chuyển động 60fps và mã nguồn chuẩn production.",
     "contact": {
       "basedIn": "Sống tại",
       "location": "Hà Nội, Việt Nam",
       "sayHello": "Liên hệ",
       "email": "nmhieu04091999@gmail.com"
     },
-    "textBlockLeft": "Frontend Engineer với 5+ năm kinh nghiệm ship ứng dụng web thực tế.",
-    "textBlockRight": "Tôi quan tâm đến các giao diện được thiết kế có chủ đích, không phải lắp ghép. Motion, hiệu năng và accessibility không phải là thứ thêm sau.",
+    "textBlockLeft": "Frontend Architect • 5+ năm tối ưu hệ thống web quy mô lớn.",
+    "textBlockRight": "Tập trung vào trải nghiệm mượt mà, Core Web Vitals tối ưu và kiến trúc module mở rộng.",
     "meta": {
       "focus": "Trọng tâm",
-      "focusValue": "Hệ thống UI",
+      "focusValue": "Architecture & Motion",
       "experience": "Kinh nghiệm",
       "experienceValue": "5+ năm",
       "contact": "Liên hệ",
       "coreStack": "Công nghệ cốt lõi",
-      "coreStackValue": "React, Next.js, TS, Tailwind",
+      "coreStackValue": "Next.js, React, TypeScript, Three.js",
       "workingStyle": "Phong cách làm việc",
-      "workingStyleValue": "Tư duy sản phẩm & UI tinh tế",
-      "availability": "Trạng thái công việc",
+      "workingStyleValue": "Product Mindset & High Precision",
+      "availability": "Trạng thái",
       "availabilityValue": "Sẵn sàng đón nhận cơ hội mới"
     }
   },
@@ -64,137 +64,125 @@
     "focus": "Trọng tâm",
     "approach": "Phương châm",
     "capabilities": "năng lực",
-    "statement": "Hệ thống frontend rõ ràng, nhanh và có chủ đích.",
+    "statement": "Kiến trúc rõ ràng, hiệu năng vượt trội, chuyển động có chủ đích.",
     "badges": [
-      "Lập trình viên Frontend",
-      "Chuyển động",
-      "Độ hoàn thiện",
-      "Hiệu năng"
+      "Frontend Architect",
+      "Creative Motion",
+      "Performance",
+      "Design Systems"
     ],
     "itemsCount": "{count} mục",
-    "description1": "5+ năm xây dựng sản phẩm React và Next.js cho e-commerce, fintech và Web3.",
+    "description1": "3 cột trụ cốt lõi: Kiến trúc Next.js mở rộng, Chuyển động tương tác 60fps phần cứng, và Tối ưu hóa hiệu năng Core Web Vitals.",
     "coreSkills": "Kỹ năng cốt lõi",
     "yearsExperience": "Năm kinh nghiệm",
-    "yearsDescription": "React, Next.js, TypeScript trong production",
-    "clientSatisfaction": "Tỷ lệ giao đúng hạn",
-    "satisfactionDescription": "Qua các dự án freelance và full-time",
+    "yearsDescription": "Xây dựng hệ sinh thái sản phẩm thực tế",
+    "clientSatisfaction": "Tỷ lệ đúng hạn",
+    "satisfactionDescription": "Dự án enterprise & sản phẩm quy mô lớn",
     "storefrontResult": "PageSpeed storefront",
     "skillList": {
       "frontend": {
-        "label": "Frontend",
-        "value": "React, Next.js, TypeScript, Tailwind."
+        "label": "Architecture",
+        "value": "Next.js App Router, React 19, TypeScript, Design Systems."
       },
       "state": {
-        "label": "Dữ liệu",
-        "value": "React Query, Redux, API, real-time."
+        "label": "Realtime & Data",
+        "value": "Server-Sent Events (SSE), React Query, Redux Toolkit."
       },
       "performance": {
-        "label": "Hiệu năng",
-        "value": "Core Web Vitals, accessibility, analytics."
+        "label": "Performance",
+        "value": "Core Web Vitals (LCP < 1.2s), Bundle Optimization, SEO."
       },
       "devops": {
-        "label": "Delivery",
-        "value": "Vite, CI/CD, Git, Linux."
+        "label": "Motion & Creative",
+        "value": "Three.js, WebGL, GSAP ScrollTrigger, Lenis Smooth Scroll."
       },
       "mobile": {
-        "label": "Mobile & Others",
-        "value": "React Native, Zalo Mini App, Canvas API, i18n."
+        "label": "Delivery",
+        "value": "CI/CD, Turbopack, Docker, Linux, Performance Auditing."
       },
       "agile": {
-        "label": "Agile/Scrum",
-        "value": "Thành thạo quy trình phát triển phần mềm (SDLC), sprint planning và retrospectives."
+        "label": "Engineering Standard",
+        "value": "Clean Architecture, Type Safety, Code Reviews & Testing."
       },
       "codeQuality": {
         "label": "Code Quality",
-        "value": "Chú trọng vào Clean Code, Code Reviews và Unit Testing."
+        "value": "Modular Code, Zero Tech Debt, Production Rigor."
       },
       "productMindset": {
         "label": "Product Mindset",
-        "value": "Chuyển đổi yêu cầu kinh doanh phức tạp thành giải pháp kỹ thuật mở rộng."
+        "value": "Chuyển hóa bài toán kinh doanh thành giải pháp kỹ thuật mở rộng."
       },
       "leadership": {
-        "label": "Leadership",
-        "value": "Kiến trúc dự án nền tảng và hướng dẫn team về tiêu chuẩn coding."
+        "label": "Technical Leadership",
+        "value": "Thiết lập tiêu chuẩn coding, kiến trúc nền tảng và tối ưu team flow."
       }
     }
   },
   "experience": {
     "title": "Kinh Nghiệm\nLàm Việc",
-    "headline": "Từ tốc độ storefront đến luồng giao dịch và hệ thống sản phẩm nội bộ.",
+    "headline": "Hành trình kỹ thuật: từ tối ưu hóa storefront triệu người dùng đến sàn giao dịch tài chính realtime.",
     "kicker": "tổng quan",
     "readMore": "Xem thêm…",
     "noExperience": "Chưa có kinh nghiệm làm việc.",
     "list": [
       {
-        "id": 1,
-        "company": "IT Lab FPOLY",
-        "position": "Thực tập sinh Lập trình viên Frontend",
-        "period": "2/2021 - 7/2021",
+        "id": 4,
+        "company": "COOLMATE",
+        "position": "Headless Storefront Migration • Frontend Engineer",
+        "period": "04/2024 - Hiện tại",
         "location": "Hà Nội",
-        "description": "Xây dựng các dự án web nhỏ bằng HTML, CSS, JavaScript và React, đồng thời làm quen với quy trình frontend thực tế.",
-        "skills": ["HTML", "CSS", "JavaScript", "React"]
-      },
-      {
-        "id": 2,
-        "company": "METACITY",
-        "position": "Lập trình viên Frontend",
-        "period": "7/2021 - 8/2022",
-        "location": "Hà Nội",
-        "description": "Phát triển hệ thống và landing page Metacity, chuyển thiết kế Figma thành giao diện React responsive có chuyển động.",
-        "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
+        "description": "Kiến trúc Headless Storefront với Next.js App Router. Nâng PageSpeed từ 29 lên 94, tối ưu hóa CVR và thời gian tải trang dưới 1 giây.",
+        "skills": ["Next.js App Router", "TypeScript", "Performance Tuning", "Core Web Vitals", "Tailwind CSS"]
       },
       {
         "id": 3,
         "company": "NOVUS FINTECH",
-        "position": "Lập trình viên Frontend",
+        "position": "Real-time Trading & Financial CMS • Frontend Engineer",
         "period": "08/2022 - 04/2024",
         "location": "Hà Nội",
-        "description": "Phát triển CMS và giao diện giao dịch realtime với xác thực an toàn, biểu mẫu hợp lệ, tuỳ biến theme và dữ liệu SSE.",
-        "skills": [
-          "TypeScript",
-          "ReactJS",
-          "Redux",
-          "RestAPI",
-          "Formik",
-          "Yup",
-          "Material",
-          "UI",
-          "SSE",
-          "Next.js",
-          "Chart.js"
-        ]
+        "description": "Phát triển sàn giao dịch tài chính realtime qua Server-Sent Events (SSE). Xây dựng White-label Theme Builder và quy trình xác thực đa lớp an toàn.",
+        "skills": ["React", "TypeScript", "Realtime SSE", "Theme Engine", "Redux Toolkit", "Formik/Yup"]
       },
       {
-        "id": 4,
-        "company": "COOLMATE",
-        "position": "Lập trình viên Frontend",
-        "period": "04/2024 - Hiện tại",
+        "id": 2,
+        "company": "METACITY",
+        "position": "Interactive Web3 & Design Systems • Frontend Developer",
+        "period": "07/2021 - 08/2022",
         "location": "Hà Nội",
-        "description": "Dẫn dắt chuyển storefront từ Laravel sang Next.js, nâng PageSpeed từ 29 lên 90+ và cải thiện chuyển đổi qua tối ưu hiệu năng, UX.",
-        "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
+        "description": "Xây dựng landing page Web3 và hệ thống design system tương tác. Chuyển đổi thiết kế Figma độ chính xác cao với animation mượt mà.",
+        "skills": ["Next.js", "React", "Sass", "Responsive UI", "Figma-to-Code"]
+      },
+      {
+        "id": 1,
+        "company": "IT Lab FPOLY",
+        "position": "Web Foundations & Component Lifecycle • Frontend Intern",
+        "period": "02/2021 - 07/2021",
+        "location": "Hà Nội",
+        "description": "Xây dựng nền tảng Component Lifecycle, kiến trúc module React, chuẩn hóa Git flow và Clean Code.",
+        "skills": ["React", "JavaScript ES6+", "HTML5/CSS3", "Git Workflow"]
       }
     ]
   },
   "skills": {
     "title": "Stack as<br />motion language.",
     "kicker": "năng lực",
-    "headline": "Công nghệ tôi sử dụng.",
+    "headline": "Công nghệ & Kỹ năng cốt lõi.",
     "groups": [
       {
-        "label": "Frontend",
-        "items": ["React", "Next.js", "TypeScript", "Tailwind", "Hệ thống UI"]
+        "label": "Core Frontend",
+        "items": ["React 19", "Next.js 16", "TypeScript", "Tailwind CSS", "Design Systems"]
       },
       {
-        "label": "Chuyển động",
-        "items": ["GSAP", "ScrollTrigger", "Motion", "Canvas", "Tương tác nhỏ"]
+        "label": "Motion & 3D",
+        "items": ["Three.js", "WebGL", "GSAP ScrollTrigger", "Lenis Scroll", "Framer Motion"]
       },
       {
-        "label": "Backend/Xác thực",
-        "items": ["REST API", "SSE", "Supabase", "Xác thực", "Formik/Yup"]
+        "label": "Realtime & State",
+        "items": ["Server-Sent Events (SSE)", "REST API", "Redux Toolkit", "Auth Flows", "Formik/Yup"]
       },
       {
-        "label": "Công cụ",
-        "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "Tối ưu hiệu năng"]
+        "label": "Performance & Ops",
+        "items": ["Core Web Vitals", "Lighthouse 90+", "Vite / Turbopack", "CI/CD", "Docker / Linux"]
       }
     ]
   },
@@ -217,7 +205,7 @@
   },
   "projects": {
     "title": "DỰ ÁN",
-    "headline": "Dự án",
+    "headline": "Dự án chọn lọc",
     "kicker": "tổng quan",
     "projectCase": "Chi tiết dự án",
     "launchApp": "Mở ứng dụng",
@@ -228,54 +216,47 @@
     "list": [
       {
         "id": 5,
-        "title": "Portfolio Designer",
+        "title": "Duong Minhle Portfolio",
         "year": "2026",
-        "description": "Nhà thiết kế trải nghiệm người dùng, nghệ sĩ và người kể chuyện.",
-        "details": "",
+        "description": "Creative Portfolio & Motion Experience",
+        "details": "Thiết kế tương tác cuộn mượt mà (Lenis + GSAP)\nGiao diện responsive chuẩn điện ảnh\nAnimation 60fps tối ưu GPU",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
         "liveUrl": "https://www.duongminhle.site/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "tailwind"]
+        "techStack": ["Next.js", "React", "TypeScript", "GSAP", "Tailwind CSS"]
       },
       {
         "id": 4,
-        "title": "Starlento",
+        "title": "Starlento Platform",
         "year": "2024",
-        "description": "Starlento",
-        "details": "Gia nhập biệt đội Talent Starlento\n\nỨng tuyển ngay Cơ hội Casting Call mới nhất",
+        "description": "Talent Media & Entertainment Platform",
+        "details": "Nền tảng truyền thông và casting tài năng giải trí\nTối ưu hóa hình ảnh và luồng ứng tuyển động\nSSR Streaming với Next.js & Redux Toolkit",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
         "liveUrl": "https://starlento.vn/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
+        "techStack": ["Next.js", "React", "TypeScript", "Redux Toolkit", "CSS Modules"]
       },
       {
         "id": 3,
-        "title": "CGSI, Iress Wealth, Admin Portal Equix",
+        "title": "Equix Trading Portal",
         "year": "2023",
-        "description": "Nền tảng Giao dịch",
-        "details": "Triển khai luồng đăng nhập và xác thực người dùng với bên thứ ba.\nThực hiện các chức năng như: thêm, sửa, xóa và cập nhật dữ liệu sử dụng Formik để xử lý xác thực dữ liệu biểu mẫu với Yup cho các màn hình báo cáo, thông báo, người dùng và bài viết.\nTạo chức năng lọc nâng cao cho các màn hình danh sách. Cập nhật biểu mẫu và trường xác thực.\nPhát triển tính năng xây dựng giao diện (theme builder) trên CMS để tùy chỉnh bảng màu của ứng dụng giao dịch trên thiết bị di động.",
+        "description": "Real-time Trading & Financial CMS",
+        "details": "Giao diện giao dịch chứng khoán realtime qua SSE (Server-Sent Events)\nWhite-label Theme Engine tùy biến bảng màu trực quan\nLuồng xác thực tài chính đa tầng và kiểm soát biểu mẫu an toàn",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764925609/portfolio/yd0imbldaoctara4lwxn.png",
         "liveUrl": "https://www.equix.com.au/",
         "githubUrl": null,
-        "techStack": [
-          "react",
-          "canvas",
-          "javascript",
-          "sse",
-          "realtime",
-          "streaming"
-        ]
+        "techStack": ["React", "TypeScript", "SSE", "Redux", "Formik/Yup", "Material UI"]
       },
       {
         "id": 2,
-        "title": "Metacity System, Landing Page",
+        "title": "Metacity Ecosystem",
         "year": "2022",
-        "description": "Web 3 blockchain",
-        "details": "Thiết kế giao diện, hiệu ứng chuyển động, tùy chỉnh giao diện game.\nChuyển đổi các bản thiết kế từ Figma sang HTML và CSS trong khi vẫn đảm bảo duy trì thiết kế UX/UI.\nTối ưu hóa mã nguồn, khảo sát lỗi và sửa lỗi.\nĐảm bảo khả năng hiển thị tương thích trên nhiều trình duyệt và tính phản hồi (responsive) trên nhiều kích thước màn hình và thiết bị khác nhau.",
+        "description": "Web3 Blockchain & Game Hub",
+        "details": "Giao diện Web3 tương tác cao kết nối ví và hiển thị trạng thái blockchain\nTối ưu hóa CSS Animation và rendering hiệu năng cao\nHệ thống component tái sử dụng đa kích thước màn hình",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
         "liveUrl": "https://www.metacity.com/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
+        "techStack": ["Next.js", "React", "TypeScript", "Sass", "Redux"]
       }
     ]
   },

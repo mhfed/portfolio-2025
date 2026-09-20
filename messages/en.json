@@ -29,32 +29,32 @@
     "front": "NGUYEN",
     "middle": "MINH",
     "end": "HIEU",
-    "developer": "Frontend Developer",
-    "status": "Available for selected product & frontend work",
+    "developer": "Frontend Architect",
+    "status": "Available for selected architecture & creative frontend work",
     "profile": "Profile",
     "viewWork": "View Work",
-    "contactMe": "Contact Me",
-    "headline": "Frontend Developer crafting *animated* web experiences.",
-    "description": "I build fast, precise interfaces where motion design, performance, and production code work as one system.",
-    "intro": "5 years shipping React and Next.js products. Fast, accessible, and built to last.",
+    "contactMe": "Contact",
+    "headline": "Frontend Architect & Creative Developer.",
+    "description": "High-performance web architecture, design systems & creative motion. Specialized in Next.js, React, and WebGL.",
+    "intro": "Sub-second web performance, 60fps interaction design, and production-grade code.",
     "contact": {
       "basedIn": "Based in",
       "location": "Ha Noi, Viet Nam",
       "sayHello": "Say hello",
       "email": "nmhieu04091999@gmail.com"
     },
-    "textBlockLeft": "Frontend Engineer with 5+ years shipping production web applications.",
-    "textBlockRight": "I care about interfaces that feel intentional, not assembled. Motion, performance, and accessibility are not afterthoughts.",
+    "textBlockLeft": "Frontend Architect • 5+ years scaling modern web systems.",
+    "textBlockRight": "Intentional interfaces: 60fps hardware motion, Core Web Vitals < 1.2s, and scalable module design.",
     "meta": {
       "focus": "Focus",
-      "focusValue": "UI systems",
+      "focusValue": "Architecture & Motion",
       "experience": "Experience",
       "experienceValue": "5+ years",
       "contact": "Contact",
-      "coreStack": "Core stack",
-      "coreStackValue": "React, Next.js, TS, Tailwind",
-      "workingStyle": "Working style",
-      "workingStyleValue": "Product thinking & polished UI",
+      "coreStack": "Core Stack",
+      "coreStackValue": "Next.js, React, TypeScript, Three.js",
+      "workingStyle": "Working Style",
+      "workingStyleValue": "Product Mindset & High Precision",
       "availability": "Availability",
       "availabilityValue": "Open to new opportunities"
     }
@@ -64,144 +64,125 @@
     "focus": "Focus",
     "approach": "Approach",
     "capabilities": "capabilities",
-    "statement": "Frontend systems that feel clear, fast, and considered.",
-    "badges": ["Frontend Developer", "Motion", "Product Polish", "Performance"],
+    "statement": "Clear architecture, exceptional speed, and purposeful motion.",
+    "badges": [
+      "Frontend Architect",
+      "Creative Motion",
+      "Performance",
+      "Design Systems"
+    ],
     "itemsCount": "{count} items",
-    "description1": "5+ years building React and Next.js products across e-commerce, fintech, and Web3.",
-    "coreSkills": "Core Skills",
+    "description1": "Three engineering pillars: Scalable Next.js App Router architecture, 60fps hardware-accelerated motion, and Core Web Vitals optimization.",
+    "coreSkills": "Core Pillars",
     "yearsExperience": "Years of Experience",
-    "yearsDescription": "React, Next.js, TypeScript in production",
-    "clientSatisfaction": "On-time delivery rate",
-    "satisfactionDescription": "Across freelance and full-time engagements",
+    "yearsDescription": "Building production ecosystems at scale",
+    "clientSatisfaction": "Delivery Rate",
+    "satisfactionDescription": "Enterprise and high-scale consumer products",
     "storefrontResult": "Storefront PageSpeed",
     "skillList": {
       "frontend": {
-        "label": "Frontend",
-        "value": "React, Next.js, TypeScript, Tailwind."
+        "label": "Architecture",
+        "value": "Next.js App Router, React 19, TypeScript, Design Systems."
       },
       "state": {
-        "label": "Data",
-        "value": "React Query, Redux, APIs, real-time."
+        "label": "Realtime & Data",
+        "value": "Server-Sent Events (SSE), React Query, Redux Toolkit."
       },
       "performance": {
         "label": "Performance",
-        "value": "Core Web Vitals, accessibility, analytics."
+        "value": "Core Web Vitals (LCP < 1.2s), Bundle Splitting, SEO."
       },
       "devops": {
-        "label": "Delivery",
-        "value": "Vite, CI/CD, Git, Linux."
+        "label": "Motion & Creative",
+        "value": "Three.js, WebGL, GSAP ScrollTrigger, Lenis Smooth Scroll."
       },
       "mobile": {
-        "label": "Mobile & Others",
-        "value": "React Native, Zalo Mini App, Canvas API, i18n."
+        "label": "Delivery",
+        "value": "CI/CD, Turbopack, Docker, Linux, Performance Auditing."
       },
       "agile": {
-        "label": "Agile/Scrum",
-        "value": "Proficient in full SDLC(Software Development Life Cycle), sprint planning, and retrospectives."
+        "label": "Engineering Standard",
+        "value": "Clean Architecture, Type Safety, Code Reviews & Testing."
       },
       "codeQuality": {
         "label": "Code Quality",
-        "value": "Strong focus on Clean Code, Code Reviews, and Unit Testing."
+        "value": "Modular Code, Zero Tech Debt, Production Rigor."
       },
       "productMindset": {
         "label": "Product Mindset",
         "value": "Translating complex business requirements into scalable technical solutions."
       },
       "leadership": {
-        "label": "Leadership",
-        "value": "Architecting base projects and mentoring teams on coding standards."
+        "label": "Technical Leadership",
+        "value": "Setting coding standards, foundational architecture, and team workflows."
       }
     }
   },
   "experience": {
     "title": "Work\nExperiences",
-    "headline": "From storefront speed to trading flows and internal product systems.",
+    "headline": "Engineering trajectory: from storefront optimization to high-frequency real-time financial trading.",
     "kicker": "overview",
     "readMore": "Read more...",
     "noExperience": "No work experience yet.",
     "list": [
       {
-        "id": 1,
-        "company": "IT Lab FPOLY",
-        "position": "Intern Frontend Developer",
-        "period": "2/2021 - 7/2021",
+        "id": 4,
+        "company": "COOLMATE",
+        "position": "Headless Storefront Migration • Frontend Engineer",
+        "period": "04/2024 - Present",
         "location": "Ha Noi",
-        "description": "Built small web projects with HTML, CSS, JavaScript, and React while learning production frontend practices.",
-        "skills": ["HTML", "CSS", "JavaScript", "React"]
-      },
-      {
-        "id": 2,
-        "company": "METACITY",
-        "position": "Frontend Developer",
-        "period": "7/2021 - 8/2022",
-        "location": "Ha Noi",
-        "description": "Built the Metacity system and landing page, translating Figma designs into responsive React interfaces with motion.",
-        "skills": ["NextJS", "ReactJS", "Redux", "Sass", "Ant Design", "PHP"]
+        "description": "Architected Headless Storefront with Next.js App Router. Elevated PageSpeed from 29 to 94, improved conversion rate, and achieved sub-second loads.",
+        "skills": ["Next.js App Router", "TypeScript", "Performance Tuning", "Core Web Vitals", "Tailwind CSS"]
       },
       {
         "id": 3,
         "company": "NOVUS FINTECH",
-        "position": "Frontend Developer",
+        "position": "Real-time Trading & Financial CMS • Frontend Engineer",
         "period": "08/2022 - 04/2024",
         "location": "Ha Noi",
-        "description": "Built CMS and real-time trading interfaces with secure authentication, validated workflows, theme customization, and SSE data.",
-        "skills": [
-          "TypeScript",
-          "ReactJS",
-          "Redux",
-          "RestAPI",
-          "Formik",
-          "Yup",
-          "Material",
-          "UI",
-          "SSE",
-          "Next.js",
-          "Chart.js"
-        ]
+        "description": "Engineered real-time stock trading interfaces with Server-Sent Events (SSE). Built a white-label theme engine and secure multi-tier financial forms.",
+        "skills": ["React", "TypeScript", "Realtime SSE", "Theme Engine", "Redux Toolkit", "Formik/Yup"]
       },
       {
-        "id": 4,
-        "company": "COOLMATE",
-        "position": "Frontend Developer",
-        "period": "04/2024 - Present",
+        "id": 2,
+        "company": "METACITY",
+        "position": "Interactive Web3 & Design Systems • Frontend Developer",
+        "period": "07/2021 - 08/2022",
         "location": "Ha Noi",
-        "description": "Led the Laravel-to-Next.js storefront migration, raising PageSpeed from 29 to 90+ and improving conversion through performance and UX work.",
-        "skills": ["React.js", "Next.js", "TypeScript", "JavaScript"]
+        "description": "Built interactive Web3 landing surfaces and design systems. Translated high-fidelity Figma specifications into fluid, responsive motion components.",
+        "skills": ["Next.js", "React", "Sass", "Responsive UI", "Figma-to-Code"]
+      },
+      {
+        "id": 1,
+        "company": "IT Lab FPOLY",
+        "position": "Web Foundations & Component Lifecycle • Frontend Intern",
+        "period": "2/2021 - 7/2021",
+        "location": "Ha Noi",
+        "description": "Built fundamental React component architectures, standardized Git workflows, and practiced clean code discipline.",
+        "skills": ["React", "JavaScript ES6+", "HTML5/CSS3", "Git Workflow"]
       }
     ]
   },
   "skills": {
     "title": "Stack as<br />motion language.",
     "kicker": "capabilities",
-    "headline": "Technologies I use.",
+    "headline": "Core Disciplines & Technologies.",
     "groups": [
       {
-        "label": "Frontend",
-        "items": [
-          "React",
-          "Next.js",
-          "TypeScript",
-          "Tailwind",
-          "Design systems"
-        ]
+        "label": "Core Frontend",
+        "items": ["React 19", "Next.js 16", "TypeScript", "Tailwind CSS", "Design Systems"]
       },
       {
-        "label": "Animation",
-        "items": [
-          "GSAP",
-          "ScrollTrigger",
-          "Motion",
-          "Canvas",
-          "Micro-interactions"
-        ]
+        "label": "Motion & 3D",
+        "items": ["Three.js", "WebGL", "GSAP ScrollTrigger", "Lenis Scroll", "Framer Motion"]
       },
       {
-        "label": "Backend",
-        "items": ["REST APIs", "SSE", "Supabase", "Auth flows", "Formik/Yup"]
+        "label": "Realtime & State",
+        "items": ["Server-Sent Events (SSE)", "REST API", "Redux Toolkit", "Auth Flows", "Formik/Yup"]
       },
       {
-        "label": "Tooling",
-        "items": ["Vercel", "GitLab CI/CD", "PM2", "Vite", "Performance"]
+        "label": "Performance & Ops",
+        "items": ["Core Web Vitals", "Lighthouse 90+", "Vite / Turbopack", "CI/CD", "Docker / Linux"]
       }
     ]
   },
@@ -224,7 +205,7 @@
   },
   "projects": {
     "title": "PROJECTS",
-    "headline": "Projects",
+    "headline": "Selected Projects",
     "kicker": "overview",
     "projectCase": "Project case",
     "launchApp": "Launch App",
@@ -235,54 +216,47 @@
     "list": [
       {
         "id": 5,
-        "title": "Portfolio Designer",
+        "title": "Duong Minhle Portfolio",
         "year": "2026",
-        "description": "User Experience Designer, artist and storyteller.",
-        "details": "",
+        "description": "Creative Portfolio & Motion Experience",
+        "details": "Fluid scroll dynamics powered by Lenis and GSAP ScrollTrigger\nCinematic responsive editorial layout\n60fps GPU-accelerated interaction",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1772006946/portfolio/njtxacmg244muso0ydoz.png",
         "liveUrl": "https://www.duongminhle.site/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "tailwind"]
+        "techStack": ["Next.js", "React", "TypeScript", "GSAP", "Tailwind CSS"]
       },
       {
         "id": 4,
-        "title": "Starlento",
+        "title": "Starlento Platform",
         "year": "2024",
-        "description": "Starlento",
-        "details": "Join the Talent Starlento squad\n\nApply now for the latest Casting Call opportunity",
+        "description": "Talent Media & Entertainment Platform",
+        "details": "Media entertainment and talent casting portal\nAutomated responsive image optimization and dynamic applicant flow\nSSR streaming with Next.js and Redux Toolkit",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1765170070/portfolio/cb2airtckyds7lkrrf8o.png",
         "liveUrl": "https://starlento.vn/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
+        "techStack": ["Next.js", "React", "TypeScript", "Redux Toolkit", "CSS Modules"]
       },
       {
         "id": 3,
-        "title": "CGSI, Iress Wealth, Admin Portal Equix",
+        "title": "Equix Trading Portal",
         "year": "2023",
-        "description": "Trading Platform",
-        "details": "Implementing the login flow and user authentication with a third party.\nPerforming functions such as: adding, editing, deleting, and updating data using Formik to handle form data validation with Yup for the reports, notification, users, and article screens.\nCreating advanced filtering functionalities for the list screens. Update form and validation field.\nDeveloping a theme builder feature on the CMS to customize the color scheme of the trading application on mobile devices.",
+        "description": "Real-time Trading & Financial CMS",
+        "details": "High-frequency stock trading interface via Server-Sent Events (SSE)\nWhite-label visual theme builder with dynamic color palettes\nMulti-tier financial authentication and strict form validation",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764925609/portfolio/yd0imbldaoctara4lwxn.png",
         "liveUrl": "https://www.equix.com.au/",
         "githubUrl": null,
-        "techStack": [
-          "react",
-          "canvas",
-          "javascript",
-          "sse",
-          "realtime",
-          "streaming"
-        ]
+        "techStack": ["React", "TypeScript", "SSE", "Redux", "Formik/Yup", "Material UI"]
       },
       {
         "id": 2,
-        "title": "Metacity System, Landing Page",
+        "title": "Metacity Ecosystem",
         "year": "2022",
-        "description": "Web 3 blockchain",
-        "details": "Make interface, effect animation, customize game interface.\nTranslated designs from Figma to HTML and CSS while ensuring that the UX and UI design are maintained\nRefactor code, investigate code and fix-bugs.\nEnsuring cross-browser compatibility and responsiveness across various devices and screen sizes",
+        "description": "Web3 Blockchain & Game Hub",
+        "details": "Interactive Web3 interface with wallet connection and blockchain status\nOptimized CSS animation and high-performance DOM updates\nModular component design system across viewport breakpoints",
         "imageUrl": "https://res.cloudinary.com/dt3epooyc/image/upload/v1764923076/portfolio/c2xucish08ytaaamzhqp.jpg",
         "liveUrl": "https://www.metacity.com/",
         "githubUrl": null,
-        "techStack": ["nextjs", "react", "typescript", "css", "redux"]
+        "techStack": ["Next.js", "React", "TypeScript", "Sass", "Redux"]
       }
     ]
   },

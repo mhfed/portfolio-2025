@@ -25,17 +25,17 @@ export interface ProjectCaseStudy {
 }
 
 const resultById: Record<number, string> = {
-  5: 'Responsive portfolio with motion-led UI.',
-  4: 'Campaign site and talent application flow.',
-  3: 'Trading UI with auth, forms, and live data.',
-  2: 'Responsive product UI with motion and game surfaces.',
+  5: 'Creative Motion & 60fps Fluid Scroll',
+  4: 'Talent & Media Platform • SSR Streaming',
+  3: 'Real-time Trading & Financial CMS • SSE',
+  2: 'Web3 & Game Ecosystem • 60fps Responsive UI',
 }
 
 const roleById: Record<number, string> = {
-  5: 'Frontend / interaction',
-  4: 'Frontend / UX',
-  3: 'Frontend / real-time UI',
-  2: 'Frontend / motion',
+  5: 'Creative Frontend / GSAP Motion',
+  4: 'Lead Frontend / SSR Architecture',
+  3: 'Frontend Engineer / Real-time UI',
+  2: 'Frontend Developer / Interactive UI',
 }
 
 export function normalizeProjects(
