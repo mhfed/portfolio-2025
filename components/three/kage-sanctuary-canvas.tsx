@@ -106,7 +106,6 @@ export function KageSanctuaryCanvas() {
     const moonGroup = new THREE.Group()
     moonGroup.position.set(9.5, 14.5, -42)
 
-    // Moon sphere with subtle limb darkening
     const moonGeo = new THREE.SphereGeometry(4.8, 36, 36)
     const moonMat = new THREE.MeshStandardMaterial({
       color: 0xee2820,
@@ -118,7 +117,6 @@ export function KageSanctuaryCanvas() {
     const moonMesh = new THREE.Mesh(moonGeo, moonMat)
     moonGroup.add(moonMesh)
 
-    // Soft feathered corona glow rings
     const createGlowRing = (innerR: number, outerR: number, opacity: number, colorHex: number) => {
       const ringGeo = new THREE.RingGeometry(innerR, outerR, 48)
       const ringMat = new THREE.ShaderMaterial({
@@ -181,7 +179,6 @@ export function KageSanctuaryCanvas() {
 
       for (let i = 0; i <= segments; i++) {
         const x = -halfW + (i / segments) * width
-        // Organic multi-harmonic mountain silhouette
         const h =
           Math.sin(i * 0.45) * (peakHeight * 0.45) +
           Math.cos(i * 0.9 + 1.2) * (peakHeight * 0.3) +
@@ -203,7 +200,6 @@ export function KageSanctuaryCanvas() {
       return mesh
     }
 
-    // Distant dark ridges fading into night fog
     mountainsGroup.add(createMountainRidge(-68, -4, 18, 36, 0x050a0d, 0.88))
     mountainsGroup.add(createMountainRidge(-56, -6, 14, 28, 0x071116, 0.94))
     scene.add(mountainsGroup)
@@ -226,12 +222,10 @@ export function KageSanctuaryCanvas() {
       metalness: 0.2,
     })
 
-    // Pagoda base & 5 tiers
     const tierHeights = [2.4, 2.1, 1.8, 1.6, 1.4]
     const tierWidths = [2.8, 2.4, 2.0, 1.7, 1.4]
     let currentY = 0
 
-    // Stone podium
     const pagodaBase = new THREE.Mesh(
       new THREE.BoxGeometry(3.6, 0.8, 3.6),
       pagodaMat
@@ -244,7 +238,6 @@ export function KageSanctuaryCanvas() {
       const tw = tierWidths[t]
       const th = tierHeights[t]
 
-      // Tier body
       const bodyMesh = new THREE.Mesh(
         new THREE.BoxGeometry(tw, th, tw),
         pagodaMat
@@ -253,7 +246,6 @@ export function KageSanctuaryCanvas() {
       pagodaGroup.add(bodyMesh)
       currentY += th
 
-      // Overhanging flared roof eave
       const roofOverhang = tw * 1.5
       const roofMesh = new THREE.Mesh(
         new THREE.ConeGeometry(roofOverhang, 0.65, 4),
@@ -265,7 +257,6 @@ export function KageSanctuaryCanvas() {
       currentY += 0.45
     }
 
-    // Central bronze spire (Sōrin) with sacred rings
     const spireMesh = new THREE.Mesh(
       new THREE.CylinderGeometry(0.06, 0.12, 3.8, 8),
       new THREE.MeshStandardMaterial({
@@ -311,7 +302,7 @@ export function KageSanctuaryCanvas() {
     const toriiGroup = new THREE.Group()
     toriiGroup.position.set(0, 0, -2)
 
-    // Main Pillars (Hashira) with subtle inward taper
+    // Main Pillars (Hashira)
     const pillarGeo = new THREE.CylinderGeometry(0.32, 0.4, 7.6, 24)
     const leftPillar = new THREE.Mesh(pillarGeo, charredWoodMat)
     leftPillar.position.set(-3.2, 3.5, 0)
@@ -325,7 +316,7 @@ export function KageSanctuaryCanvas() {
     rightPillar.castShadow = true
     toriiGroup.add(rightPillar)
 
-    // Gold collar rings (Daiwa) atop the pillars
+    // Gold collar rings (Daiwa)
     const collarGeo = new THREE.CylinderGeometry(0.38, 0.38, 0.18, 24)
     const leftCollar = new THREE.Mesh(collarGeo, goldOrnamentMat)
     leftCollar.position.set(-3.2, 6.9, 0)
@@ -335,7 +326,7 @@ export function KageSanctuaryCanvas() {
     rightCollar.position.set(3.2, 6.9, 0)
     toriiGroup.add(rightCollar)
 
-    // Jade moss-kissed stone plinths (Kamebara)
+    // Plinths (Kamebara)
     const plinthGeo = new THREE.CylinderGeometry(0.55, 0.72, 0.65, 16)
     const leftPlinth = new THREE.Mesh(plinthGeo, jadeMossStoneMat)
     leftPlinth.position.set(-3.2, 0.22, 0)
@@ -347,7 +338,7 @@ export function KageSanctuaryCanvas() {
     rightPlinth.receiveShadow = true
     toriiGroup.add(rightPlinth)
 
-    // Upper Curved Kasagi Beam with elegant upward sweep (Sori)
+    // Upper Curved Kasagi Beam
     const createCurvedKasagi = () => {
       const group = new THREE.Group()
       const segments = 18
@@ -357,12 +348,10 @@ export function KageSanctuaryCanvas() {
 
       for (let i = 0; i < segments; i++) {
         const x = -halfW + i * stepW + stepW / 2
-        const norm = Math.abs(x) / halfW // 0 at center, 1 at tips
-        // Upward quadratic curvature
+        const norm = Math.abs(x) / halfW
         const yOffset = Math.pow(norm, 2.2) * 0.36
         const rotZ = (x / halfW) * -0.07
 
-        // Kasagi vermilion body
         const segMesh = new THREE.Mesh(
           new THREE.BoxGeometry(stepW * 1.02, 0.54, 0.88),
           lacqueredVermilionMat
@@ -372,7 +361,6 @@ export function KageSanctuaryCanvas() {
         segMesh.castShadow = true
         group.add(segMesh)
 
-        // Charred wood top cap (Shimaki roof ridge)
         const capMesh = new THREE.Mesh(
           new THREE.BoxGeometry(stepW * 1.02, 0.18, 1.08),
           charredWoodMat
@@ -382,7 +370,6 @@ export function KageSanctuaryCanvas() {
         group.add(capMesh)
       }
 
-      // Polished gold caps (Kanagu) on both ends of Kasagi
       const goldCapGeo = new THREE.BoxGeometry(0.3, 0.58, 0.92)
       const leftGoldCap = new THREE.Mesh(goldCapGeo, goldOrnamentMat)
       leftGoldCap.position.set(-halfW - 0.12, 7.68, 0)
@@ -398,14 +385,13 @@ export function KageSanctuaryCanvas() {
     }
     toriiGroup.add(createCurvedKasagi())
 
-    // Straight Tie-beam (Nuki)
+    // Tie-beam (Nuki)
     const tieBeamGeo = new THREE.BoxGeometry(8.6, 0.38, 0.48)
     const tieBeam = new THREE.Mesh(tieBeamGeo, charredWoodMat)
     tieBeam.position.set(0, 5.75, 0)
     tieBeam.castShadow = true
     toriiGroup.add(tieBeam)
 
-    // Gold end caps on tie-beam
     const nukiCapGeo = new THREE.BoxGeometry(0.18, 0.42, 0.52)
     const leftNukiCap = new THREE.Mesh(nukiCapGeo, goldOrnamentMat)
     leftNukiCap.position.set(-4.35, 5.75, 0)
@@ -415,36 +401,31 @@ export function KageSanctuaryCanvas() {
     rightNukiCap.position.set(4.35, 5.75, 0)
     toriiGroup.add(rightNukiCap)
 
-    // Central strut (Gakuzuka)
     const strutGeo = new THREE.BoxGeometry(0.44, 1.25, 0.36)
     const strut = new THREE.Mesh(strutGeo, lacqueredVermilionMat)
     strut.position.set(0, 6.5, 0)
     toriiGroup.add(strut)
 
-    // Tokyō / Dougong architectural bracket arms under Kasagi
     const createBracket = (x: number) => {
       const g = new THREE.Group()
       g.position.set(x, 7.0, 0)
-
       const arm = new THREE.Mesh(
         new THREE.BoxGeometry(0.9, 0.16, 0.4),
         charredWoodMat
       )
       g.add(arm)
-
       const bearingBlock = new THREE.Mesh(
         new THREE.BoxGeometry(0.24, 0.18, 0.42),
         goldOrnamentMat
       )
       bearingBlock.position.y = 0.14
       g.add(bearingBlock)
-
       return g
     }
     toriiGroup.add(createBracket(-3.2))
     toriiGroup.add(createBracket(3.2))
 
-    // Sacred Shimenawa rope with hanging Shide paper streamers
+    // Shimenawa rope
     const ropeCurve = new THREE.QuadraticBezierCurve3(
       new THREE.Vector3(-3.1, 5.5, 0.2),
       new THREE.Vector3(0, 5.1, 0.25),
@@ -459,7 +440,6 @@ export function KageSanctuaryCanvas() {
     const ropeMesh = new THREE.Mesh(ropeGeo, ropeMat)
     toriiGroup.add(ropeMesh)
 
-    // Zigzag white paper streamers (Shide)
     const shideMat = new THREE.MeshStandardMaterial({
       color: 0xf5f8f5,
       roughness: 0.7,
@@ -500,7 +480,6 @@ export function KageSanctuaryCanvas() {
         stalkMesh.castShadow = true
         g.add(stalkMesh)
 
-        // Joint ring
         const ringMesh = new THREE.Mesh(
           new THREE.TorusGeometry(0.12, 0.02, 8, 16),
           lacqueredVermilionMat
@@ -512,13 +491,11 @@ export function KageSanctuaryCanvas() {
       return g
     }
 
-    // Left bamboo grove
     sanctuaryGroup.add(createBambooStalk(-6.8, 1.5, 11))
     sanctuaryGroup.add(createBambooStalk(-8.2, -1.5, 12.5))
     sanctuaryGroup.add(createBambooStalk(-6.0, -6.0, 10))
     sanctuaryGroup.add(createBambooStalk(-8.6, -9.0, 13))
 
-    // Right bamboo grove
     sanctuaryGroup.add(createBambooStalk(6.5, 1.0, 10.5))
     sanctuaryGroup.add(createBambooStalk(8.0, -2.5, 13))
     sanctuaryGroup.add(createBambooStalk(5.8, -7.0, 11))
@@ -532,7 +509,6 @@ export function KageSanctuaryCanvas() {
       g.position.set(x, 0, z)
       g.rotation.y = yRot
 
-      // Hexagonal stone base (Kiso)
       const baseMesh = new THREE.Mesh(
         new THREE.CylinderGeometry(0.65, 0.8, 0.35, 6),
         jadeMossStoneMat
@@ -541,7 +517,6 @@ export function KageSanctuaryCanvas() {
       baseMesh.receiveShadow = true
       g.add(baseMesh)
 
-      // Slender post (Sao)
       const postMesh = new THREE.Mesh(
         new THREE.CylinderGeometry(0.28, 0.32, 1.45, 6),
         jadeMossStoneMat
@@ -550,7 +525,6 @@ export function KageSanctuaryCanvas() {
       postMesh.castShadow = true
       g.add(postMesh)
 
-      // Middle platform (Chūdai)
       const midMesh = new THREE.Mesh(
         new THREE.CylinderGeometry(0.72, 0.55, 0.28, 6),
         jadeMossStoneMat
@@ -558,7 +532,6 @@ export function KageSanctuaryCanvas() {
       midMesh.position.y = 1.85
       g.add(midMesh)
 
-      // Firebox (Hibukuro) with carved latticed frame
       const fireboxFrame = new THREE.Mesh(
         new THREE.CylinderGeometry(0.48, 0.48, 0.68, 6),
         charredWoodMat
@@ -566,7 +539,6 @@ export function KageSanctuaryCanvas() {
       fireboxFrame.position.y = 2.3
       g.add(fireboxFrame)
 
-      // Glowing flame core inside
       const flameCore = new THREE.Mesh(
         new THREE.CylinderGeometry(0.32, 0.32, 0.58, 6),
         new THREE.MeshStandardMaterial({
@@ -579,7 +551,6 @@ export function KageSanctuaryCanvas() {
       flameCore.position.y = 2.3
       g.add(flameCore)
 
-      // Flared umbrella roof (Kasa) with upturned corners
       const roofMesh = new THREE.Mesh(
         new THREE.ConeGeometry(0.98, 0.46, 6),
         charredWoodMat
@@ -588,7 +559,6 @@ export function KageSanctuaryCanvas() {
       roofMesh.castShadow = true
       g.add(roofMesh)
 
-      // Sacred lotus finial jewel (Hōju)
       const topJewel = new THREE.Mesh(
         new THREE.SphereGeometry(0.18, 12, 12),
         jadeMossStoneMat
@@ -604,7 +574,6 @@ export function KageSanctuaryCanvas() {
     sanctuaryGroup.add(createStoneLantern(-3.4, -9, 0.6))
     sanctuaryGroup.add(createStoneLantern(3.2, -14, -0.5))
 
-    // Hanging paper lanterns (Chōchin) suspended from Torii
     const paperLanternGeo = new THREE.CylinderGeometry(0.22, 0.26, 0.68, 16)
     const paperLanternMat = new THREE.MeshStandardMaterial({
       color: 0xffaa44,
@@ -632,7 +601,6 @@ export function KageSanctuaryCanvas() {
       sanctuaryGroup.add(stepMesh)
     }
 
-    // Reflective Mirror Pond surface
     const waterGeo = new THREE.PlaneGeometry(70, 90, 48, 48)
     const waterMat = new THREE.MeshStandardMaterial({
       color: 0x04080d,
@@ -645,12 +613,355 @@ export function KageSanctuaryCanvas() {
     waterMesh.receiveShadow = true
     sanctuaryGroup.add(waterMesh)
 
+    // =========================================================================
+    // 9. THE RONIN / SHADOW SWORDSMAN CHARACTER (POOSED ON SANCTUARY STEPS)
+    // =========================================================================
+    const roninGroup = new THREE.Group()
+    // Firmly placed on the stone steps leading into the Torii
+    roninGroup.position.set(1.5, 0.44, 1.4)
+    roninGroup.rotation.y = -0.38 // Diagonally poised facing viewer & court
+
+    // Materials for the Ronin
+    const roninCharcoalMat = new THREE.MeshStandardMaterial({
+      color: 0x0a0d10,
+      roughness: 0.88,
+      metalness: 0.08,
+    })
+
+    const roninKimonoMat = new THREE.MeshStandardMaterial({
+      color: 0x12171d,
+      roughness: 0.82,
+      metalness: 0.12,
+    })
+
+    const roninStrawMat = new THREE.MeshStandardMaterial({
+      color: 0x6a563b,
+      roughness: 0.92,
+      metalness: 0.05,
+    })
+
+    const roninSteelMat = new THREE.MeshStandardMaterial({
+      color: 0xeef2f7,
+      metalness: 0.96,
+      roughness: 0.14,
+    })
+
+    const roninSayaMat = new THREE.MeshStandardMaterial({
+      color: 0x060709,
+      roughness: 0.35,
+      metalness: 0.35,
+    })
+
+    // --- LEGS & HAKAMA TROUSERS (WIDE COMBAT STANCE) ---
+    const leftLegMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.18, 0.22, 0.9, 12),
+      roninCharcoalMat
+    )
+    leftLegMesh.position.set(-0.24, 0.45, -0.05)
+    leftLegMesh.rotation.z = 0.08
+    leftLegMesh.castShadow = true
+    roninGroup.add(leftLegMesh)
+
+    const rightLegMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.18, 0.22, 0.9, 12),
+      roninCharcoalMat
+    )
+    rightLegMesh.position.set(0.24, 0.45, 0.08)
+    rightLegMesh.rotation.z = -0.08
+    rightLegMesh.castShadow = true
+    roninGroup.add(rightLegMesh)
+
+    // Feet with straw Waraji sandals
+    const footGeo = new THREE.BoxGeometry(0.16, 0.1, 0.32)
+    const leftFoot = new THREE.Mesh(footGeo, roninStrawMat)
+    leftFoot.position.set(-0.26, 0.05, 0.02)
+    leftFoot.receiveShadow = true
+    roninGroup.add(leftFoot)
+
+    const rightFoot = new THREE.Mesh(footGeo, roninStrawMat)
+    rightFoot.position.set(0.26, 0.05, 0.15)
+    rightFoot.receiveShadow = true
+    roninGroup.add(rightFoot)
+
+    // --- TORSO GROUP (BREATHING ROOT) ---
+    const roninTorsoGroup = new THREE.Group()
+    roninTorsoGroup.position.set(0, 0.9, 0)
+
+    // Hakama pleated waist
+    const hakamaWaist = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.34, 0.42, 0.45, 12),
+      roninCharcoalMat
+    )
+    hakamaWaist.position.y = 0.18
+    hakamaWaist.castShadow = true
+    roninTorsoGroup.add(hakamaWaist)
+
+    // Kimono upper torso (crossed chest)
+    const torsoMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.56, 0.65, 0.34),
+      roninKimonoMat
+    )
+    torsoMesh.position.y = 0.6
+    torsoMesh.castShadow = true
+    roninTorsoGroup.add(torsoMesh)
+
+    // Obi sash belt with tied vermilion cord
+    const obiMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.6, 0.18, 0.38),
+      lacqueredVermilionMat
+    )
+    obiMesh.position.y = 0.34
+    roninTorsoGroup.add(obiMesh)
+
+    // Gold buckle ornament on Obi
+    const obiBuckle = new THREE.Mesh(
+      new THREE.BoxGeometry(0.12, 0.12, 0.04),
+      goldOrnamentMat
+    )
+    obiBuckle.position.set(0, 0.34, 0.2)
+    roninTorsoGroup.add(obiBuckle)
+
+    // Shoulders & Haori Cloak
+    const shouldersMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.72, 0.22, 0.4),
+      roninCharcoalMat
+    )
+    shouldersMesh.position.y = 0.88
+    shouldersMesh.castShadow = true
+    roninTorsoGroup.add(shouldersMesh)
+
+    // Flowing Haori Cloak Tails (wind flutter)
+    const haoriTailLeft = new THREE.Mesh(
+      new THREE.BoxGeometry(0.3, 0.85, 0.05),
+      roninCharcoalMat
+    )
+    haoriTailLeft.position.set(-0.18, 0.35, -0.2)
+    haoriTailLeft.castShadow = true
+    roninTorsoGroup.add(haoriTailLeft)
+
+    const haoriTailRight = new THREE.Mesh(
+      new THREE.BoxGeometry(0.3, 0.85, 0.05),
+      roninCharcoalMat
+    )
+    haoriTailRight.position.set(0.18, 0.35, -0.2)
+    haoriTailRight.castShadow = true
+    roninTorsoGroup.add(haoriTailRight)
+
+    // --- SAYA (SCABBARD) AT HIP ---
+    const sayaMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.045, 0.04, 1.15, 8),
+      roninSayaMat
+    )
+    sayaMesh.position.set(-0.35, 0.35, 0.05)
+    sayaMesh.rotation.x = 0.3
+    sayaMesh.rotation.z = 0.45
+    sayaMesh.castShadow = true
+    roninTorsoGroup.add(sayaMesh)
+
+    // Vermilion sageo knot cord on Saya
+    const sageoMesh = new THREE.Mesh(
+      new THREE.TorusGeometry(0.06, 0.02, 8, 16),
+      lacqueredVermilionMat
+    )
+    sageoMesh.position.set(-0.32, 0.48, 0.1)
+    roninTorsoGroup.add(sageoMesh)
+
+    // Left Arm resting on hip/Saya
+    const leftArm = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.09, 0.08, 0.55, 8),
+      roninKimonoMat
+    )
+    leftArm.position.set(-0.38, 0.65, 0.05)
+    leftArm.rotation.z = -0.35
+    leftArm.rotation.x = 0.2
+    roninTorsoGroup.add(leftArm)
+
+    // --- RIGHT ARM & THE DRAWN KATANA SWORD ---
+    const rightArmUpper = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.09, 0.08, 0.45, 8),
+      roninKimonoMat
+    )
+    rightArmUpper.position.set(0.38, 0.72, 0.08)
+    rightArmUpper.rotation.z = 0.4
+    rightArmUpper.rotation.x = -0.15
+    roninTorsoGroup.add(rightArmUpper)
+
+    const rightArmForearm = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.08, 0.07, 0.42, 8),
+      roninKimonoMat
+    )
+    rightArmForearm.position.set(0.55, 0.45, 0.2)
+    rightArmForearm.rotation.x = 0.6
+    rightArmForearm.rotation.z = -0.2
+    roninTorsoGroup.add(rightArmForearm)
+
+    // Right Hand (Fist)
+    const rightHand = new THREE.Mesh(
+      new THREE.SphereGeometry(0.065, 8, 8),
+      roninCharcoalMat
+    )
+    rightHand.position.set(0.62, 0.32, 0.38)
+    roninTorsoGroup.add(rightHand)
+
+    // --- THE LEGENDARY KATANA ---
+    const katanaGroup = new THREE.Group()
+    katanaGroup.position.set(0.62, 0.32, 0.38)
+    // Poised in ready stance angled diagonally forward & downward
+    katanaGroup.rotation.x = 0.75
+    katanaGroup.rotation.y = -0.3
+    katanaGroup.rotation.z = -0.5
+
+    // Tsuka (Hilt wrapped in cord)
+    const tsukaMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.035, 0.035, 0.32, 8),
+      roninCharcoalMat
+    )
+    tsukaMesh.position.y = -0.16
+    katanaGroup.add(tsukaMesh)
+
+    // Gold Kashira (Pommel cap)
+    const kashiraMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.038, 0.035, 0.04, 8),
+      goldOrnamentMat
+    )
+    kashiraMesh.position.y = -0.33
+    katanaGroup.add(kashiraMesh)
+
+    // Tsuba (Handguard with gold edge)
+    const tsubaMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.12, 0.12, 0.02, 16),
+      goldOrnamentMat
+    )
+    tsubaMesh.position.y = 0.01
+    katanaGroup.add(tsubaMesh)
+
+    // Habaki (Blade collar)
+    const habakiMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.045, 0.06, 0.025),
+      goldOrnamentMat
+    )
+    habakiMesh.position.y = 0.04
+    katanaGroup.add(habakiMesh)
+
+    // Curved Steel Blade (Tōshin) - Segmented parabolic curve (Sori)
+    const bladeGroup = new THREE.Group()
+    bladeGroup.position.y = 0.07
+    const bladeSegments = 10
+    const bladeLength = 1.15
+    const bSegH = bladeLength / bladeSegments
+
+    for (let b = 0; b < bladeSegments; b++) {
+      const bY = b * bSegH + bSegH / 2
+      const curveOffset = Math.pow(b / bladeSegments, 2) * 0.08
+      const bladeSeg = new THREE.Mesh(
+        new THREE.BoxGeometry(0.036 - b * 0.0018, bSegH * 1.02, 0.012),
+        roninSteelMat
+      )
+      bladeSeg.position.set(-curveOffset, bY, 0)
+      bladeSeg.castShadow = true
+      bladeGroup.add(bladeSeg)
+    }
+
+    // Razor-sharp Kissaki (Sword tip)
+    const tipMesh = new THREE.Mesh(
+      new THREE.ConeGeometry(0.024, 0.1, 4),
+      roninSteelMat
+    )
+    tipMesh.position.set(-0.08, bladeLength + 0.04, 0)
+    tipMesh.rotation.z = 0.25
+    bladeGroup.add(tipMesh)
+
+    katanaGroup.add(bladeGroup)
+    roninTorsoGroup.add(katanaGroup)
+
+    // --- HEAD GROUP & SUGEGASA HAT (MOUSE TRACKING) ---
+    const roninHeadGroup = new THREE.Group()
+    roninHeadGroup.position.set(0, 1.05, 0.02)
+
+    // Neck & ninja cowl / fabric mask
+    const neckMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.14, 0.16, 0.22, 12),
+      roninCharcoalMat
+    )
+    neckMesh.position.y = 0.08
+    roninHeadGroup.add(neckMesh)
+
+    // Head base (Masked face in deep shadow)
+    const headMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 16, 16),
+      roninCharcoalMat
+    )
+    headMesh.position.y = 0.24
+    roninHeadGroup.add(headMesh)
+
+    // Iconic Sugegasa Straw Hat
+    const kasaHatGroup = new THREE.Group()
+    kasaHatGroup.position.set(0, 0.32, 0.04)
+    // Tilted forward casting deep mysterious shadow over eyes
+    kasaHatGroup.rotation.x = 0.16
+    kasaHatGroup.rotation.z = -0.05
+
+    // Wide conical woven brim
+    const hatBrim = new THREE.Mesh(
+      new THREE.ConeGeometry(0.74, 0.28, 24),
+      roninStrawMat
+    )
+    hatBrim.castShadow = true
+    kasaHatGroup.add(hatBrim)
+
+    // Top knot peak
+    const hatPeak = new THREE.Mesh(
+      new THREE.SphereGeometry(0.12, 12, 12),
+      charredWoodMat
+    )
+    hatPeak.position.y = 0.14
+    kasaHatGroup.add(hatPeak)
+
+    // Red silk cord ties (Hario) hanging under chin
+    const tieCord1 = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.012, 0.012, 0.35, 6),
+      lacqueredVermilionMat
+    )
+    tieCord1.position.set(-0.16, -0.14, 0.02)
+    tieCord1.rotation.z = -0.2
+    kasaHatGroup.add(tieCord1)
+
+    const tieCord2 = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.012, 0.012, 0.35, 6),
+      lacqueredVermilionMat
+    )
+    tieCord2.position.set(0.16, -0.14, 0.02)
+    tieCord2.rotation.z = 0.2
+    kasaHatGroup.add(tieCord2)
+
+    // Tenugui fabric scarf ribbons trailing behind hat
+    const scarfRibbonLeft = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.12, 0.65),
+      lacqueredVermilionMat
+    )
+    scarfRibbonLeft.position.set(-0.1, -0.22, -0.42)
+    scarfRibbonLeft.rotation.y = Math.PI
+    kasaHatGroup.add(scarfRibbonLeft)
+
+    const scarfRibbonRight = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.1, 0.72),
+      lacqueredVermilionMat
+    )
+    scarfRibbonRight.position.set(0.08, -0.26, -0.42)
+    scarfRibbonRight.rotation.y = Math.PI
+    kasaHatGroup.add(scarfRibbonRight)
+
+    roninHeadGroup.add(kasaHatGroup)
+    roninTorsoGroup.add(roninHeadGroup)
+
+    roninGroup.add(roninTorsoGroup)
+    sanctuaryGroup.add(roninGroup)
+
     scene.add(sanctuaryGroup)
 
     // =========================================================================
-    // 9. SUBTLE ATMOSPHERIC EMBERS (MINIMALIST & CRISP)
+    // 10. SUBTLE ATMOSPHERIC EMBERS (MINIMALIST & CRISP)
     // =========================================================================
-    // Reduced count: faint micro-embers, strictly background accent
     const emberCount = prefersReducedMotion ? 12 : 36
     const emberPositions = new Float32Array(emberCount * 3)
     const emberVelocities: { x: number; y: number; z: number; freq: number }[] =
@@ -688,7 +999,6 @@ export function KageSanctuaryCanvas() {
     )
     emberGeo.setAttribute('color', new THREE.BufferAttribute(emberColors, 3))
 
-    // Feathered soft star/point texture
     const pCanvas = document.createElement('canvas')
     pCanvas.width = 32
     pCanvas.height = 32
@@ -718,9 +1028,8 @@ export function KageSanctuaryCanvas() {
     scene.add(embers)
 
     // =========================================================================
-    // 10. REFINED ORGANIC HOTARU (DISCREET & BREATHING JADE FIREFLIES)
+    // 11. REFINED ORGANIC HOTARU (DISCREET & BREATHING JADE FIREFLIES)
     // =========================================================================
-    // Strictly 18 delicate points, restricted near ground/water/bamboo
     const fireflyCount = prefersReducedMotion ? 6 : 18
     const fireflyPositions = new Float32Array(fireflyCount * 3)
     const fireflyOrigins: THREE.Vector3[] = []
@@ -739,10 +1048,9 @@ export function KageSanctuaryCanvas() {
 
     for (let i = 0; i < fireflyCount; i++) {
       const idx = i * 3
-      // Distributed low near mossy stones and bamboo flanks
       const side = i % 2 === 0 ? -1 : 1
       const origX = side * (2.8 + Math.random() * 4.5)
-      const origY = 0.3 + Math.random() * 2.2 // Low above ground/pond
+      const origY = 0.3 + Math.random() * 2.2
       const origZ = -1 - Math.random() * 14
 
       fireflyPositions[idx] = origX
@@ -775,13 +1083,11 @@ export function KageSanctuaryCanvas() {
       new THREE.BufferAttribute(fireflyColors, 3)
     )
 
-    // Soft feathered 4-point lens glow instead of hard circle
     const fCanvas = document.createElement('canvas')
     fCanvas.width = 64
     fCanvas.height = 64
     const fCtx = fCanvas.getContext('2d')
     if (fCtx) {
-      // Soft Gaussian core
       const grad = fCtx.createRadialGradient(32, 32, 0, 32, 32, 32)
       grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)')
       grad.addColorStop(0.18, 'rgba(180, 245, 60, 0.7)')
@@ -791,7 +1097,6 @@ export function KageSanctuaryCanvas() {
       fCtx.fillStyle = grad
       fCtx.fillRect(0, 0, 64, 64)
 
-      // Delicate cross-flare light rays
       fCtx.strokeStyle = 'rgba(255, 255, 255, 0.25)'
       fCtx.lineWidth = 1
       fCtx.beginPath()
@@ -817,7 +1122,7 @@ export function KageSanctuaryCanvas() {
     scene.add(fireflies)
 
     // =========================================================================
-    // 11. CAMERA WAYPOINTS RIG (6 CHAPTERS)
+    // 12. CAMERA WAYPOINTS RIG (6 CHAPTERS)
     // =========================================================================
     const WAYPOINTS: CameraWaypoint[] = [
       {
@@ -871,7 +1176,7 @@ export function KageSanctuaryCanvas() {
     ]
 
     // =========================================================================
-    // 12. SCROLL & MOUSE TRACKING ENGINE
+    // 13. SCROLL & MOUSE TRACKING ENGINE
     // =========================================================================
     let targetScrollProgress = 0
     let currentScrollProgress = 0
@@ -1001,7 +1306,26 @@ export function KageSanctuaryCanvas() {
       }
       waterGeo.attributes.position.needsUpdate = true
 
-      // Animate Green Fireflies (Hotaru) with natural organic pulse
+      // --- ANIMATE THE RONIN CHARACTER ---
+      if (!prefersReducedMotion) {
+        // Idle breathing (subtle chest rise and fall)
+        const breath = Math.sin(clock * 1.8) * 0.012
+        roninTorsoGroup.position.y = 0.9 + breath
+
+        // Wind flutter on Haori cloak tails
+        haoriTailLeft.rotation.x = 0.12 + Math.sin(clock * 2.8) * 0.08
+        haoriTailRight.rotation.x = 0.14 + Math.sin(clock * 2.8 + 0.6) * 0.08
+
+        // Scarf ribbons flutter behind hat
+        scarfRibbonLeft.rotation.z = Math.sin(clock * 3.2) * 0.12
+        scarfRibbonRight.rotation.z = Math.sin(clock * 3.2 + 0.8) * 0.14
+
+        // Mouse gaze tracking (Ronin subtly turns his head & gaze toward user)
+        roninHeadGroup.rotation.y = curMouseX * 0.14
+        roninHeadGroup.rotation.x = curMouseY * 0.08
+      }
+
+      // Animate Green Fireflies (Hotaru)
       if (!prefersReducedMotion) {
         const ffArray = fireflyGeo.attributes.position.array as Float32Array
         for (let i = 0; i < fireflyCount; i++) {
@@ -1018,7 +1342,6 @@ export function KageSanctuaryCanvas() {
         }
         fireflyGeo.attributes.position.needsUpdate = true
 
-        // Firefly gentle collective breathing opacity
         fireflyMat.opacity = 0.55 + Math.sin(clock * 1.8) * 0.25
 
         // Animate Embers
@@ -1067,6 +1390,11 @@ export function KageSanctuaryCanvas() {
       ropeMat.dispose()
       waterGeo.dispose()
       waterMat.dispose()
+      roninCharcoalMat.dispose()
+      roninKimonoMat.dispose()
+      roninStrawMat.dispose()
+      roninSteelMat.dispose()
+      roninSayaMat.dispose()
       emberGeo.dispose()
       emberMat.dispose()
       fireflyGeo.dispose()
