@@ -171,5 +171,9 @@ export async function POST(request: NextRequest) {
       break
   }
 
-  return NextResponse.json(response)
+  return NextResponse.json(response, {
+    headers: {
+      'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
+    },
+  })
 }

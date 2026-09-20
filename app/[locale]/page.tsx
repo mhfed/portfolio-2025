@@ -38,10 +38,14 @@ export default async function Home({ params }: Props) {
     getTranslations({ locale, namespace: 'storytelling' }),
   ])
 
+  const rawProjects = tProjects.raw('list')
   const projects = normalizeProjects(
-    (tProjects.raw('list') || []) as LocalizedProjectRecord[]
+    Array.isArray(rawProjects) ? (rawProjects as LocalizedProjectRecord[]) : []
   )
-  const experiences = (tExperience.raw('list') || []) as ExperienceRecord[]
+  const rawExperiences = tExperience.raw('list')
+  const experiences = Array.isArray(rawExperiences)
+    ? (rawExperiences as ExperienceRecord[])
+    : []
   const fullName = `${tHero('front')} ${tHero('middle')} ${tHero('end')}`
   const emailAddress = tHero('contact.email')
   const email: PortfolioContactPoint = {
@@ -152,7 +156,9 @@ export default async function Home({ params }: Props) {
     skills: {
       title: tSkills('title'),
       headline: tSkills('headline'),
-      groups: (tSkills.raw('groups') || []) as PortfolioSkillGroup[],
+      groups: Array.isArray(tSkills.raw('groups'))
+        ? (tSkills.raw('groups') as PortfolioSkillGroup[])
+        : [],
     },
     contact: {
       title: tCollaborate('title'),

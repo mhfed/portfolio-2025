@@ -781,6 +781,10 @@
 
 .duo-contact {
   padding-top: clamp(8rem, 13vw, 13rem);
+  background:
+    radial-gradient(circle at 86% 12%, var(--accent-soft), transparent 22rem),
+    color-mix(in srgb, var(--accent) 12%, var(--canvas));
+  color: var(--ink);
 }
 
 .duo-contact__inner,
@@ -812,7 +816,13 @@
 
 .duo-footer {
   padding-top: 2rem;
+  border-top-color: color-mix(in srgb, var(--ink) 18%, transparent);
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
   font-size: 0.78rem;
+}
+
+.duo-contact p {
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
 }
 
 @media (max-width: 64rem) {

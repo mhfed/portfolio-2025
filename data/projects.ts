@@ -39,20 +39,22 @@ const roleById: Record<number, string> = {
 }
 
 export function normalizeProjects(
-  records: LocalizedProjectRecord[]
+  records: LocalizedProjectRecord[] | null | undefined
 ): ProjectCaseStudy[] {
+  if (!Array.isArray(records)) return []
+
   return records.map((project) => ({
-    id: project.id,
-    title: project.title,
-    year: project.year,
-    description: project.description,
-    result: resultById[project.id] ?? project.description,
-    role: roleById[project.id] ?? 'Frontend',
-    image: project.imageUrl,
-    liveUrl: project.liveUrl ?? undefined,
-    githubUrl: project.githubUrl ?? undefined,
-    techStack: project.techStack,
-    details: project.details
+    id: project?.id ?? 0,
+    title: project?.title ?? '',
+    year: project?.year ?? '',
+    description: project?.description ?? '',
+    result: (project?.id && resultById[project.id]) ? resultById[project.id] : (project?.description ?? ''),
+    role: (project?.id && roleById[project.id]) ? roleById[project.id] : 'Frontend',
+    image: project?.imageUrl ?? '',
+    liveUrl: project?.liveUrl ?? undefined,
+    githubUrl: project?.githubUrl ?? undefined,
+    techStack: Array.isArray(project?.techStack) ? project.techStack : [],
+    details: project?.details
       ? project.details
           .split(/\r?\n/)
           .map((line) => line.trim())

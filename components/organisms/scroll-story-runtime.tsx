@@ -1,9 +1,10 @@
 'use client'
 
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { MascotTraveler } from '@/components/molecules/mascot-traveler'
 import { StoryAtmosphere } from '@/components/organisms/story-atmosphere'
 import { loadGSAP } from '@/lib/gsap-utils'
+import { useIsomorphicLayoutEffect } from '@/lib/hooks'
 import {
   getStoryBeatPresentation,
   getStoryTransitionState,
@@ -23,7 +24,7 @@ export function ScrollStoryRuntime({ story }: ScrollStoryRuntimeProps) {
   const [activeBeatId, setActiveBeatId] = useState<StoryBeatId>('top')
   const activeBeatRef = useRef<StoryBeatId>('top')
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>('.duo-portfolio')
     if (!root) return
 
@@ -152,7 +153,9 @@ export function ScrollStoryRuntime({ story }: ScrollStoryRuntimeProps) {
         })
 
         root.dataset.storyReady = 'true'
-        ScrollTrigger.refresh()
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh()
+        })
       }, root)
 
       cleanUp = () => {

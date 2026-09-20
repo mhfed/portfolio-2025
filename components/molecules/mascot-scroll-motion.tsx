@@ -1,14 +1,14 @@
 'use client'
 
-import { useLayoutEffect } from 'react'
 import { loadGSAP } from '@/lib/gsap-utils'
+import { useIsomorphicLayoutEffect } from '@/lib/hooks'
 
 /**
  * Scroll choreography for the three mascot beats: work, skills, and contact.
  * It is intentionally isolated from the page's server-rendered content.
  */
 export function MascotScrollMotion() {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const root = document.querySelector<HTMLElement>('.duo-portfolio')

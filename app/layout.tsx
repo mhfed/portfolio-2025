@@ -3,6 +3,7 @@ import type React from 'react'
 import { THEME_STORAGE_KEY } from '@/lib/theme'
 import './globals.css'
 import '@/styles/brilio-refresh.css'
+import '@/styles/kage-theme.css'
 
 const urbanist = localFont({
   src: '../public/fonts/urbanist-variable.ttf',

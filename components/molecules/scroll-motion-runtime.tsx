@@ -1,7 +1,7 @@
 'use client'
 
-import { useLayoutEffect } from 'react'
 import { loadGSAP } from '@/lib/gsap-utils'
+import { useIsomorphicLayoutEffect } from '@/lib/hooks'
 
 const REDUCED_MOTION_SAFE = '(prefers-reduced-motion: no-preference)'
 const DESKTOP_MOTION =
@@ -15,7 +15,7 @@ function getRevealDelay(element: HTMLElement) {
 }
 
 export function ScrollMotionRuntime() {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>('.editorial-portfolio')
 
     if (!root) return

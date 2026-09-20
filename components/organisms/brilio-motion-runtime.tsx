@@ -1,7 +1,7 @@
 'use client'
 
-import { useLayoutEffect } from 'react'
 import { loadGSAP } from '@/lib/gsap-utils'
+import { useIsomorphicLayoutEffect } from '@/lib/hooks'
 
 const MOTION_QUERY = '(prefers-reduced-motion: no-preference)'
 const DESKTOP_MOTION_QUERY =
@@ -10,7 +10,7 @@ const POINTER_QUERY =
   '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
 
 export function BrilioMotionRuntime() {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>('.duo-portfolio')
     if (!root) return
 
@@ -196,7 +196,9 @@ export function BrilioMotionRuntime() {
         })
 
         root.dataset.brilioMotionReady = 'true'
-        ScrollTrigger.refresh()
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh()
+        })
       }, root)
 
       cleanUp = () => {
