@@ -56,9 +56,9 @@ export function KageSanctuaryCanvas() {
     )
 
     // =========================================================================
-    // 1. LIGHTING (DUAL ACCENT: VERMILION + MASCOT JADE/CYAN)
+    // 1. LIGHTING (DUAL ACCENT + DEDICATED SWORDSMAN SPOTLIGHT)
     // =========================================================================
-    const ambientLight = new THREE.AmbientLight(0x0a1218, 1.6)
+    const ambientLight = new THREE.AmbientLight(0x0c141d, 1.8)
     scene.add(ambientLight)
 
     // Vermilion moon primary directional light
@@ -76,7 +76,7 @@ export function KageSanctuaryCanvas() {
     moonLight.shadow.bias = -0.001
     scene.add(moonLight)
 
-    // Warm stone lantern lights (flickering candle flame inside)
+    // Warm stone lantern lights
     const lanternLight1 = new THREE.PointLight(0xff6a28, 3.8, 18, 1.8)
     lanternLight1.position.set(-2.6, 2.5, 0)
     scene.add(lanternLight1)
@@ -85,15 +85,23 @@ export function KageSanctuaryCanvas() {
     lanternLight2.position.set(2.8, 2.2, -6)
     scene.add(lanternLight2)
 
-    // Mascot Lime Jade Accent Light (ground, moss & sanctuary plinth)
+    // Mascot Lime Jade Accent Light (ground & moss)
     const jadeGlowLight = new THREE.PointLight(0x8ce019, 2.4, 16, 1.9)
     jadeGlowLight.position.set(-2.6, 1.0, -1)
     scene.add(jadeGlowLight)
 
-    // Mascot Cyan Accent Light (reflective pool lân tinh)
+    // Mascot Cyan Accent Light (reflective pool)
     const cyanWaterLight = new THREE.PointLight(0x0fe3c5, 2.2, 22, 2.0)
     cyanWaterLight.position.set(3.0, 0.4, -10)
     scene.add(cyanWaterLight)
+
+    // Dedicated Key Spotlight on the Swordsman (makes him POP crisply against dark background)
+    const roninKeyLight = new THREE.PointLight(0xffeed6, 3.2, 7.5, 1.8)
+    scene.add(roninKeyLight)
+
+    // Dedicated Cyan/Jade Rim Light for the Swordsman's edge silhouette
+    const roninRimLight = new THREE.PointLight(0x0fe3c5, 2.6, 6.0, 2.0)
+    scene.add(roninRimLight)
 
     // Ground fill
     const groundFill = new THREE.PointLight(0x0c1a14, 1.4, 28)
@@ -614,222 +622,270 @@ export function KageSanctuaryCanvas() {
     sanctuaryGroup.add(waterMesh)
 
     // =========================================================================
-    // 9. THE RONIN / SHADOW SWORDSMAN CHARACTER (POOSED ON SANCTUARY STEPS)
+    // 9. HIGH-CONTRAST SWORDSMAN (WHITE SILK HAORI & FLOWING SAMURAI ATTRIBUTES)
     // =========================================================================
     const roninGroup = new THREE.Group()
-    // Firmly placed on the stone steps leading into the Torii
-    roninGroup.position.set(1.5, 0.44, 1.4)
-    roninGroup.rotation.y = -0.38 // Diagonally poised facing viewer & court
+    // Initial start at lower stairs
+    roninGroup.position.set(1.2, 0.35, 2.5)
+    roninGroup.rotation.y = -0.32
 
-    // Materials for the Ronin
-    const roninCharcoalMat = new THREE.MeshStandardMaterial({
-      color: 0x0a0d10,
-      roughness: 0.88,
-      metalness: 0.08,
+    // HIGH CONTRAST PALETTE:
+    // Pure moon-white silk haori robe that pops intensely against the dark night
+    const roninWhiteSilkMat = new THREE.MeshStandardMaterial({
+      color: 0xf6f9fb,
+      roughness: 0.55,
+      metalness: 0.15,
+      emissive: 0x11161d,
+      emissiveIntensity: 0.25,
     })
 
-    const roninKimonoMat = new THREE.MeshStandardMaterial({
-      color: 0x12171d,
-      roughness: 0.82,
+    // Royal midnight indigo kimono & hakama pants
+    const roninIndigoMat = new THREE.MeshStandardMaterial({
+      color: 0x1b283d,
+      roughness: 0.78,
       metalness: 0.12,
     })
 
-    const roninStrawMat = new THREE.MeshStandardMaterial({
-      color: 0x6a563b,
-      roughness: 0.92,
-      metalness: 0.05,
+    // Golden woven straw Sugegasa hat
+    const roninGoldStrawMat = new THREE.MeshStandardMaterial({
+      color: 0xd6aa58,
+      roughness: 0.85,
+      metalness: 0.15,
+      emissive: 0x3d2c12,
+      emissiveIntensity: 0.2,
     })
 
-    const roninSteelMat = new THREE.MeshStandardMaterial({
-      color: 0xeef2f7,
-      metalness: 0.96,
-      roughness: 0.14,
+    // Chrome razor-sharp steel blade
+    const roninGleamSteelMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      metalness: 0.98,
+      roughness: 0.08,
+      emissive: 0xdff6ff,
+      emissiveIntensity: 0.35,
     })
 
+    // Black lacquer scabbard with gold accents
     const roninSayaMat = new THREE.MeshStandardMaterial({
-      color: 0x060709,
-      roughness: 0.35,
-      metalness: 0.35,
+      color: 0x0a0c10,
+      roughness: 0.25,
+      metalness: 0.45,
     })
 
-    // --- LEGS & HAKAMA TROUSERS (WIDE COMBAT STANCE) ---
+    // Left & Right Leg Groups for walking/jumping strides
+    const leftLegGroup = new THREE.Group()
+    leftLegGroup.position.set(-0.24, 0.85, 0)
     const leftLegMesh = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.18, 0.22, 0.9, 12),
-      roninCharcoalMat
+      new THREE.CylinderGeometry(0.18, 0.22, 0.85, 12),
+      roninIndigoMat
     )
-    leftLegMesh.position.set(-0.24, 0.45, -0.05)
-    leftLegMesh.rotation.z = 0.08
+    leftLegMesh.position.y = -0.42
     leftLegMesh.castShadow = true
-    roninGroup.add(leftLegMesh)
+    leftLegGroup.add(leftLegMesh)
 
-    const rightLegMesh = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.18, 0.22, 0.9, 12),
-      roninCharcoalMat
+    // White Tabi socks & straw sandals
+    const leftTabiMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.16, 0.12, 0.32),
+      roninWhiteSilkMat
     )
-    rightLegMesh.position.set(0.24, 0.45, 0.08)
-    rightLegMesh.rotation.z = -0.08
+    leftTabiMesh.position.set(0, -0.82, 0.04)
+    leftTabiMesh.castShadow = true
+    leftLegGroup.add(leftTabiMesh)
+    roninGroup.add(leftLegGroup)
+
+    const rightLegGroup = new THREE.Group()
+    rightLegGroup.position.set(0.24, 0.85, 0)
+    const rightLegMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.18, 0.22, 0.85, 12),
+      roninIndigoMat
+    )
+    rightLegMesh.position.y = -0.42
     rightLegMesh.castShadow = true
-    roninGroup.add(rightLegMesh)
+    rightLegGroup.add(rightLegMesh)
 
-    // Feet with straw Waraji sandals
-    const footGeo = new THREE.BoxGeometry(0.16, 0.1, 0.32)
-    const leftFoot = new THREE.Mesh(footGeo, roninStrawMat)
-    leftFoot.position.set(-0.26, 0.05, 0.02)
-    leftFoot.receiveShadow = true
-    roninGroup.add(leftFoot)
+    const rightTabiMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.16, 0.12, 0.32),
+      roninWhiteSilkMat
+    )
+    rightTabiMesh.position.set(0, -0.82, 0.04)
+    rightTabiMesh.castShadow = true
+    rightLegGroup.add(rightTabiMesh)
+    roninGroup.add(rightLegGroup)
 
-    const rightFoot = new THREE.Mesh(footGeo, roninStrawMat)
-    rightFoot.position.set(0.26, 0.05, 0.15)
-    rightFoot.receiveShadow = true
-    roninGroup.add(rightFoot)
-
-    // --- TORSO GROUP (BREATHING ROOT) ---
+    // --- TORSO GROUP ---
     const roninTorsoGroup = new THREE.Group()
-    roninTorsoGroup.position.set(0, 0.9, 0)
+    roninTorsoGroup.position.set(0, 0.88, 0)
 
-    // Hakama pleated waist
+    // Pleated Hakama waist
     const hakamaWaist = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.34, 0.42, 0.45, 12),
-      roninCharcoalMat
+      new THREE.CylinderGeometry(0.35, 0.42, 0.45, 12),
+      roninIndigoMat
     )
     hakamaWaist.position.y = 0.18
     hakamaWaist.castShadow = true
     roninTorsoGroup.add(hakamaWaist)
 
-    // Kimono upper torso (crossed chest)
+    // Kimono undergarment (deep indigo crossed collar)
     const torsoMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(0.56, 0.65, 0.34),
-      roninKimonoMat
+      new THREE.BoxGeometry(0.56, 0.65, 0.36),
+      roninIndigoMat
     )
     torsoMesh.position.y = 0.6
     torsoMesh.castShadow = true
     roninTorsoGroup.add(torsoMesh)
 
-    // Obi sash belt with tied vermilion cord
+    // Vermilion sash belt (Obi)
     const obiMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(0.6, 0.18, 0.38),
+      new THREE.BoxGeometry(0.62, 0.2, 0.4),
       lacqueredVermilionMat
     )
-    obiMesh.position.y = 0.34
+    obiMesh.position.y = 0.35
     roninTorsoGroup.add(obiMesh)
 
-    // Gold buckle ornament on Obi
+    // Polished gold buckle on Obi
     const obiBuckle = new THREE.Mesh(
-      new THREE.BoxGeometry(0.12, 0.12, 0.04),
+      new THREE.BoxGeometry(0.14, 0.14, 0.06),
       goldOrnamentMat
     )
-    obiBuckle.position.set(0, 0.34, 0.2)
+    obiBuckle.position.set(0, 0.35, 0.21)
     roninTorsoGroup.add(obiBuckle)
 
-    // Shoulders & Haori Cloak
-    const shouldersMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(0.72, 0.22, 0.4),
-      roninCharcoalMat
+    // --- WHITE SILK HAORI OVERCOAT (HIGH VISIBILITY NOBLE CAPE) ---
+    const haoriChest = new THREE.Mesh(
+      new THREE.BoxGeometry(0.74, 0.68, 0.42),
+      roninWhiteSilkMat
     )
-    shouldersMesh.position.y = 0.88
-    shouldersMesh.castShadow = true
-    roninTorsoGroup.add(shouldersMesh)
+    haoriChest.position.set(0, 0.62, -0.02)
+    haoriChest.castShadow = true
+    roninTorsoGroup.add(haoriChest)
 
-    // Flowing Haori Cloak Tails (wind flutter)
+    // Flowing Haori Cape Tails (billowing backwards in wind)
     const haoriTailLeft = new THREE.Mesh(
-      new THREE.BoxGeometry(0.3, 0.85, 0.05),
-      roninCharcoalMat
+      new THREE.BoxGeometry(0.34, 0.95, 0.06),
+      roninWhiteSilkMat
     )
-    haoriTailLeft.position.set(-0.18, 0.35, -0.2)
+    haoriTailLeft.position.set(-0.2, 0.32, -0.22)
     haoriTailLeft.castShadow = true
     roninTorsoGroup.add(haoriTailLeft)
 
     const haoriTailRight = new THREE.Mesh(
-      new THREE.BoxGeometry(0.3, 0.85, 0.05),
-      roninCharcoalMat
+      new THREE.BoxGeometry(0.34, 0.95, 0.06),
+      roninWhiteSilkMat
     )
-    haoriTailRight.position.set(0.18, 0.35, -0.2)
+    haoriTailRight.position.set(0.2, 0.32, -0.22)
     haoriTailRight.castShadow = true
     roninTorsoGroup.add(haoriTailRight)
 
-    // --- SAYA (SCABBARD) AT HIP ---
+    // Authentic Wide Kimono Sleeves (Sode) draping down from shoulders
+    const sodeLeft = new THREE.Mesh(
+      new THREE.BoxGeometry(0.26, 0.62, 0.32),
+      roninWhiteSilkMat
+    )
+    sodeLeft.position.set(-0.46, 0.58, 0)
+    sodeLeft.rotation.z = -0.15
+    sodeLeft.castShadow = true
+    roninTorsoGroup.add(sodeLeft)
+
+    const sodeRight = new THREE.Mesh(
+      new THREE.BoxGeometry(0.26, 0.62, 0.32),
+      roninWhiteSilkMat
+    )
+    sodeRight.position.set(0.46, 0.58, 0)
+    sodeRight.rotation.z = 0.15
+    sodeRight.castShadow = true
+    roninTorsoGroup.add(sodeRight)
+
+    // --- SAYA (SCABBARD) SLUNG AT HIP ---
     const sayaMesh = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.045, 0.04, 1.15, 8),
+      new THREE.CylinderGeometry(0.045, 0.04, 1.18, 8),
       roninSayaMat
     )
-    sayaMesh.position.set(-0.35, 0.35, 0.05)
-    sayaMesh.rotation.x = 0.3
-    sayaMesh.rotation.z = 0.45
+    sayaMesh.position.set(-0.36, 0.36, 0.08)
+    sayaMesh.rotation.x = 0.32
+    sayaMesh.rotation.z = 0.48
     sayaMesh.castShadow = true
     roninTorsoGroup.add(sayaMesh)
 
-    // Vermilion sageo knot cord on Saya
+    // Gold throat & chape fittings on Saya
+    const sayaKojiri = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.048, 0.042, 0.1, 8),
+      goldOrnamentMat
+    )
+    sayaKojiri.position.set(-0.58, 0.08, -0.14)
+    sayaKojiri.rotation.x = 0.32
+    sayaKojiri.rotation.z = 0.48
+    roninTorsoGroup.add(sayaKojiri)
+
+    // Vermilion sageo knot cord
     const sageoMesh = new THREE.Mesh(
-      new THREE.TorusGeometry(0.06, 0.02, 8, 16),
+      new THREE.TorusGeometry(0.065, 0.02, 8, 16),
       lacqueredVermilionMat
     )
-    sageoMesh.position.set(-0.32, 0.48, 0.1)
+    sageoMesh.position.set(-0.32, 0.48, 0.12)
     roninTorsoGroup.add(sageoMesh)
 
-    // Left Arm resting on hip/Saya
+    // Left hand resting poised on the scabbard
     const leftArm = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.09, 0.08, 0.55, 8),
-      roninKimonoMat
+      new THREE.CylinderGeometry(0.085, 0.075, 0.48, 8),
+      roninIndigoMat
     )
-    leftArm.position.set(-0.38, 0.65, 0.05)
-    leftArm.rotation.z = -0.35
-    leftArm.rotation.x = 0.2
+    leftArm.position.set(-0.4, 0.62, 0.08)
+    leftArm.rotation.z = -0.38
+    leftArm.rotation.x = 0.22
     roninTorsoGroup.add(leftArm)
 
-    // --- RIGHT ARM & THE DRAWN KATANA SWORD ---
+    // --- RIGHT SWORD ARM & THE GLEAMING KATANA (SWORD DANCE / FLOURISH ROOT) ---
+    const swordArmRoot = new THREE.Group()
+    swordArmRoot.position.set(0.42, 0.78, 0.08)
+
     const rightArmUpper = new THREE.Mesh(
       new THREE.CylinderGeometry(0.09, 0.08, 0.45, 8),
-      roninKimonoMat
+      roninIndigoMat
     )
-    rightArmUpper.position.set(0.38, 0.72, 0.08)
-    rightArmUpper.rotation.z = 0.4
-    rightArmUpper.rotation.x = -0.15
-    roninTorsoGroup.add(rightArmUpper)
+    rightArmUpper.position.y = -0.22
+    swordArmRoot.add(rightArmUpper)
 
     const rightArmForearm = new THREE.Mesh(
       new THREE.CylinderGeometry(0.08, 0.07, 0.42, 8),
-      roninKimonoMat
+      roninIndigoMat
     )
-    rightArmForearm.position.set(0.55, 0.45, 0.2)
-    rightArmForearm.rotation.x = 0.6
-    rightArmForearm.rotation.z = -0.2
-    roninTorsoGroup.add(rightArmForearm)
+    rightArmForearm.position.set(0.15, -0.45, 0.18)
+    rightArmForearm.rotation.x = 0.55
+    swordArmRoot.add(rightArmForearm)
 
     // Right Hand (Fist)
     const rightHand = new THREE.Mesh(
       new THREE.SphereGeometry(0.065, 8, 8),
-      roninCharcoalMat
+      roninIndigoMat
     )
-    rightHand.position.set(0.62, 0.32, 0.38)
-    roninTorsoGroup.add(rightHand)
+    rightHand.position.set(0.24, -0.58, 0.38)
+    swordArmRoot.add(rightHand)
 
     // --- THE LEGENDARY KATANA ---
     const katanaGroup = new THREE.Group()
-    katanaGroup.position.set(0.62, 0.32, 0.38)
-    // Poised in ready stance angled diagonally forward & downward
-    katanaGroup.rotation.x = 0.75
-    katanaGroup.rotation.y = -0.3
-    katanaGroup.rotation.z = -0.5
+    katanaGroup.position.set(0.24, -0.58, 0.38)
+    katanaGroup.rotation.x = 0.72
+    katanaGroup.rotation.y = -0.32
+    katanaGroup.rotation.z = -0.48
 
     // Tsuka (Hilt wrapped in cord)
     const tsukaMesh = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.035, 0.035, 0.32, 8),
-      roninCharcoalMat
+      new THREE.CylinderGeometry(0.035, 0.035, 0.34, 8),
+      roninIndigoMat
     )
-    tsukaMesh.position.y = -0.16
+    tsukaMesh.position.y = -0.17
     katanaGroup.add(tsukaMesh)
 
     // Gold Kashira (Pommel cap)
     const kashiraMesh = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.038, 0.035, 0.04, 8),
+      new THREE.CylinderGeometry(0.038, 0.035, 0.045, 8),
       goldOrnamentMat
     )
-    kashiraMesh.position.y = -0.33
+    kashiraMesh.position.y = -0.34
     katanaGroup.add(kashiraMesh)
 
-    // Tsuba (Handguard with gold edge)
+    // Tsuba (Gold-rimmed round handguard)
     const tsubaMesh = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.12, 0.12, 0.02, 16),
+      new THREE.CylinderGeometry(0.13, 0.13, 0.022, 16),
       goldOrnamentMat
     )
     tsubaMesh.position.y = 0.01
@@ -837,25 +893,25 @@ export function KageSanctuaryCanvas() {
 
     // Habaki (Blade collar)
     const habakiMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(0.045, 0.06, 0.025),
+      new THREE.BoxGeometry(0.048, 0.065, 0.026),
       goldOrnamentMat
     )
     habakiMesh.position.y = 0.04
     katanaGroup.add(habakiMesh)
 
-    // Curved Steel Blade (Tōshin) - Segmented parabolic curve (Sori)
+    // Curved Steel Blade (Tōshin) - Gleaming razor edge
     const bladeGroup = new THREE.Group()
     bladeGroup.position.y = 0.07
     const bladeSegments = 10
-    const bladeLength = 1.15
+    const bladeLength = 1.25
     const bSegH = bladeLength / bladeSegments
 
     for (let b = 0; b < bladeSegments; b++) {
       const bY = b * bSegH + bSegH / 2
-      const curveOffset = Math.pow(b / bladeSegments, 2) * 0.08
+      const curveOffset = Math.pow(b / bladeSegments, 2) * 0.09
       const bladeSeg = new THREE.Mesh(
-        new THREE.BoxGeometry(0.036 - b * 0.0018, bSegH * 1.02, 0.012),
-        roninSteelMat
+        new THREE.BoxGeometry(0.038 - b * 0.0018, bSegH * 1.02, 0.014),
+        roninGleamSteelMat
       )
       bladeSeg.position.set(-curveOffset, bY, 0)
       bladeSeg.castShadow = true
@@ -864,99 +920,106 @@ export function KageSanctuaryCanvas() {
 
     // Razor-sharp Kissaki (Sword tip)
     const tipMesh = new THREE.Mesh(
-      new THREE.ConeGeometry(0.024, 0.1, 4),
-      roninSteelMat
+      new THREE.ConeGeometry(0.024, 0.12, 4),
+      roninGleamSteelMat
     )
-    tipMesh.position.set(-0.08, bladeLength + 0.04, 0)
-    tipMesh.rotation.z = 0.25
+    tipMesh.position.set(-0.09, bladeLength + 0.05, 0)
+    tipMesh.rotation.z = 0.28
     bladeGroup.add(tipMesh)
 
     katanaGroup.add(bladeGroup)
-    roninTorsoGroup.add(katanaGroup)
+    swordArmRoot.add(katanaGroup)
+    roninTorsoGroup.add(swordArmRoot)
 
-    // --- HEAD GROUP & SUGEGASA HAT (MOUSE TRACKING) ---
+    // --- HEAD GROUP & GOLDEN SUGEGASA HAT ---
     const roninHeadGroup = new THREE.Group()
-    roninHeadGroup.position.set(0, 1.05, 0.02)
+    roninHeadGroup.position.set(0, 1.08, 0.02)
 
     // Neck & ninja cowl / fabric mask
     const neckMesh = new THREE.Mesh(
       new THREE.CylinderGeometry(0.14, 0.16, 0.22, 12),
-      roninCharcoalMat
+      roninIndigoMat
     )
     neckMesh.position.y = 0.08
     roninHeadGroup.add(neckMesh)
 
-    // Head base (Masked face in deep shadow)
+    // Head base (Masked face)
     const headMesh = new THREE.Mesh(
       new THREE.SphereGeometry(0.18, 16, 16),
-      roninCharcoalMat
+      roninIndigoMat
     )
     headMesh.position.y = 0.24
     roninHeadGroup.add(headMesh)
 
-    // Iconic Sugegasa Straw Hat
+    // Glowing intense samurai eye slit (subtle cyan gaze)
+    const eyeGleam = new THREE.Mesh(
+      new THREE.BoxGeometry(0.14, 0.02, 0.02),
+      new THREE.MeshBasicMaterial({ color: 0x0fe3c5 })
+    )
+    eyeGleam.position.set(0, 0.24, 0.17)
+    roninHeadGroup.add(eyeGleam)
+
+    // Iconic Sugegasa Straw Hat (warm gold straw)
     const kasaHatGroup = new THREE.Group()
-    kasaHatGroup.position.set(0, 0.32, 0.04)
-    // Tilted forward casting deep mysterious shadow over eyes
-    kasaHatGroup.rotation.x = 0.16
+    kasaHatGroup.position.set(0, 0.33, 0.04)
+    kasaHatGroup.rotation.x = 0.18
     kasaHatGroup.rotation.z = -0.05
 
     // Wide conical woven brim
     const hatBrim = new THREE.Mesh(
-      new THREE.ConeGeometry(0.74, 0.28, 24),
-      roninStrawMat
+      new THREE.ConeGeometry(0.78, 0.28, 24),
+      roninGoldStrawMat
     )
     hatBrim.castShadow = true
     kasaHatGroup.add(hatBrim)
 
-    // Top knot peak
+    // Hat peak
     const hatPeak = new THREE.Mesh(
-      new THREE.SphereGeometry(0.12, 12, 12),
-      charredWoodMat
+      new THREE.SphereGeometry(0.13, 12, 12),
+      goldOrnamentMat
     )
     hatPeak.position.y = 0.14
     kasaHatGroup.add(hatPeak)
 
-    // Red silk cord ties (Hario) hanging under chin
+    // Vermilion chin tie cords (Hario)
     const tieCord1 = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.012, 0.012, 0.35, 6),
+      new THREE.CylinderGeometry(0.012, 0.012, 0.36, 6),
       lacqueredVermilionMat
     )
-    tieCord1.position.set(-0.16, -0.14, 0.02)
+    tieCord1.position.set(-0.16, -0.15, 0.02)
     tieCord1.rotation.z = -0.2
     kasaHatGroup.add(tieCord1)
 
     const tieCord2 = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.012, 0.012, 0.35, 6),
+      new THREE.CylinderGeometry(0.012, 0.012, 0.36, 6),
       lacqueredVermilionMat
     )
-    tieCord2.position.set(0.16, -0.14, 0.02)
+    tieCord2.position.set(0.16, -0.15, 0.02)
     tieCord2.rotation.z = 0.2
     kasaHatGroup.add(tieCord2)
 
     // Tenugui fabric scarf ribbons trailing behind hat
     const scarfRibbonLeft = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.12, 0.65),
+      new THREE.PlaneGeometry(0.13, 0.72),
       lacqueredVermilionMat
     )
-    scarfRibbonLeft.position.set(-0.1, -0.22, -0.42)
+    scarfRibbonLeft.position.set(-0.1, -0.24, -0.44)
     scarfRibbonLeft.rotation.y = Math.PI
     kasaHatGroup.add(scarfRibbonLeft)
 
     const scarfRibbonRight = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.1, 0.72),
+      new THREE.PlaneGeometry(0.11, 0.78),
       lacqueredVermilionMat
     )
-    scarfRibbonRight.position.set(0.08, -0.26, -0.42)
+    scarfRibbonRight.position.set(0.08, -0.28, -0.44)
     scarfRibbonRight.rotation.y = Math.PI
     kasaHatGroup.add(scarfRibbonRight)
 
     roninHeadGroup.add(kasaHatGroup)
     roninTorsoGroup.add(roninHeadGroup)
-
     roninGroup.add(roninTorsoGroup)
-    sanctuaryGroup.add(roninGroup)
 
+    sanctuaryGroup.add(roninGroup)
     scene.add(sanctuaryGroup)
 
     // =========================================================================
@@ -1232,7 +1295,7 @@ export function KageSanctuaryCanvas() {
       curMouseX += (mouseX - curMouseX) * 0.04
       curMouseY += (mouseY - curMouseY) * 0.04
 
-      // Map progress along the waypoints
+      // Map progress along the camera waypoints
       const segmentCount = WAYPOINTS.length - 1
       const scaledProgress = currentScrollProgress * segmentCount
       const segmentIndex = Math.min(
@@ -1295,6 +1358,72 @@ export function KageSanctuaryCanvas() {
       const cyanBreath = 2.0 + Math.sin(clock * 1.6 + 1) * 0.4
       cyanWaterLight.intensity = cyanBreath
 
+      // =========================================================================
+      // DYNAMIC ASCENT & KENJUTSU SWORD DANCE (RONIN ON THE STAIRS)
+      // =========================================================================
+      // Map scroll progress (0..1) to progress along the 12 steps
+      // Step position math: step i has z = 4.0 - i * 1.25, y = i * 0.22 + 0.26
+      const maxSteps = 10
+      const scrollStepProgress = currentScrollProgress * maxSteps
+      const baseStep = Math.min(Math.floor(scrollStepProgress), maxSteps - 1)
+      const stepFraction = scrollStepProgress - baseStep
+
+      // Smooth step hop interpolation
+      const stepHop = Math.sin(stepFraction * Math.PI) * 0.32
+
+      // Current positions along the stone flight
+      const currentStepI = baseStep + stepFraction
+      const targetZ = 3.2 - currentStepI * 1.22
+      const targetY = currentStepI * 0.22 + 0.24 + stepHop
+      // Swordsman paths from right flank (x = 1.3) inward toward center (x = 0.2)
+      const targetX = 1.3 - (currentStepI / maxSteps) * 1.1 + Math.sin(clock * 1.4) * 0.08
+
+      roninGroup.position.set(targetX, targetY, targetZ)
+
+      // Move dedicated spotlights with the swordsman so he is always crisply illuminated!
+      roninKeyLight.position.set(targetX + 1.2, targetY + 2.4, targetZ + 1.6)
+      roninRimLight.position.set(targetX - 1.4, targetY + 1.6, targetZ - 1.2)
+
+      if (!prefersReducedMotion) {
+        // --- STEPPING & HOPPING STRIDE ANIMATION ---
+        const walkCycle = currentStepI * Math.PI * 2 + clock * 2.5
+        leftLegGroup.rotation.x = Math.sin(walkCycle) * 0.45
+        rightLegGroup.rotation.x = -Math.sin(walkCycle) * 0.45
+
+        leftLegGroup.position.y = 0.85 + Math.max(0, Math.sin(walkCycle)) * 0.14
+        rightLegGroup.position.y = 0.85 + Math.max(0, -Math.sin(walkCycle)) * 0.14
+
+        // Martial body weight shifting (Tai-sabaki)
+        const taiSabaki = Math.sin(clock * 2.0) * 0.05
+        roninTorsoGroup.rotation.y = taiSabaki
+        roninTorsoGroup.position.y = 0.88 + Math.sin(clock * 1.8) * 0.015
+
+        // --- KENJUTSU SWORD DANCE (CONTINUOUS FLUID CIRCULAR SWORD FLOURISH) ---
+        // Slicing through the air in a hypnotic infinity figure-eight / engetsu kata
+        const swordKata = clock * 1.6
+        swordArmRoot.rotation.x = -0.2 + Math.sin(swordKata) * 0.35
+        swordArmRoot.rotation.y = Math.cos(swordKata * 0.8) * 0.4
+        swordArmRoot.rotation.z = Math.sin(swordKata * 0.5) * 0.25
+
+        katanaGroup.rotation.x = 0.65 + Math.sin(swordKata) * 0.4
+        katanaGroup.rotation.y = -0.3 + Math.cos(swordKata * 1.2) * 0.45
+        katanaGroup.rotation.z = -0.45 + Math.sin(swordKata * 0.9) * 0.3
+
+        // Wind flutter on White Haori cloak & sleeves
+        haoriTailLeft.rotation.x = 0.18 + Math.sin(clock * 3.2) * 0.15 + (stepHop * 0.4)
+        haoriTailRight.rotation.x = 0.22 + Math.sin(clock * 3.2 + 0.6) * 0.15 + (stepHop * 0.4)
+        sodeLeft.rotation.x = Math.sin(clock * 2.8) * 0.12
+        sodeRight.rotation.x = -Math.sin(clock * 2.8 + 0.4) * 0.12
+
+        // Scarf ribbons flutter behind golden hat
+        scarfRibbonLeft.rotation.z = Math.sin(clock * 3.6) * 0.18
+        scarfRibbonRight.rotation.z = Math.sin(clock * 3.6 + 0.8) * 0.2
+
+        // Interactive mouse gaze tracking
+        roninHeadGroup.rotation.y = curMouseX * 0.18
+        roninHeadGroup.rotation.x = curMouseY * 0.09
+      }
+
       // Water gentle wave ripples
       const waterPos = waterGeo.attributes.position.array as Float32Array
       for (let i = 0; i < waterPos.length; i += 3) {
@@ -1305,25 +1434,6 @@ export function KageSanctuaryCanvas() {
           Math.cos(v * 0.22 + clock * 0.9) * 0.04
       }
       waterGeo.attributes.position.needsUpdate = true
-
-      // --- ANIMATE THE RONIN CHARACTER ---
-      if (!prefersReducedMotion) {
-        // Idle breathing (subtle chest rise and fall)
-        const breath = Math.sin(clock * 1.8) * 0.012
-        roninTorsoGroup.position.y = 0.9 + breath
-
-        // Wind flutter on Haori cloak tails
-        haoriTailLeft.rotation.x = 0.12 + Math.sin(clock * 2.8) * 0.08
-        haoriTailRight.rotation.x = 0.14 + Math.sin(clock * 2.8 + 0.6) * 0.08
-
-        // Scarf ribbons flutter behind hat
-        scarfRibbonLeft.rotation.z = Math.sin(clock * 3.2) * 0.12
-        scarfRibbonRight.rotation.z = Math.sin(clock * 3.2 + 0.8) * 0.14
-
-        // Mouse gaze tracking (Ronin subtly turns his head & gaze toward user)
-        roninHeadGroup.rotation.y = curMouseX * 0.14
-        roninHeadGroup.rotation.x = curMouseY * 0.08
-      }
 
       // Animate Green Fireflies (Hotaru)
       if (!prefersReducedMotion) {
@@ -1341,7 +1451,6 @@ export function KageSanctuaryCanvas() {
             orig.z + Math.sin(clock * dyn.speedZ + dyn.phase) * dyn.radius
         }
         fireflyGeo.attributes.position.needsUpdate = true
-
         fireflyMat.opacity = 0.55 + Math.sin(clock * 1.8) * 0.25
 
         // Animate Embers
@@ -1390,10 +1499,10 @@ export function KageSanctuaryCanvas() {
       ropeMat.dispose()
       waterGeo.dispose()
       waterMat.dispose()
-      roninCharcoalMat.dispose()
-      roninKimonoMat.dispose()
-      roninStrawMat.dispose()
-      roninSteelMat.dispose()
+      roninWhiteSilkMat.dispose()
+      roninIndigoMat.dispose()
+      roninGoldStrawMat.dispose()
+      roninGleamSteelMat.dispose()
       roninSayaMat.dispose()
       emberGeo.dispose()
       emberMat.dispose()
