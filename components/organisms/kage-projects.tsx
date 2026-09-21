@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import type { PortfolioContent } from '@/types/portfolio-content'
 
 export interface KageProjectsProps {
@@ -22,50 +22,60 @@ export function KageProjects({ content }: KageProjectsProps) {
         <span className='k jp'>庭園</span>
       </div>
 
-      <div className='mb-12 flex flex-wrap items-baseline justify-between gap-4 border-b border-[var(--line-soft)] pb-4'>
-        <h2 className='kage-display text-[clamp(28px,3.8vw,52px)] text-[var(--bone)]'>
-          {work.headline}
-        </h2>
-        <span className='text-[11px] tracking-[0.2em] uppercase text-[var(--muted)] font-mono'>
-          (2020 — 2025)
-        </span>
+      <div className='grid grid-cols-1 lg:grid-cols-[1.1fr_0.8fr] gap-6 lg:gap-16 items-end mb-14 lg:mb-20 pb-6 border-b border-[var(--line-soft)]'>
+        <div>
+          <h2 className='kage-display text-[clamp(28px,3.8vw,52px)] text-[var(--bone)]'>
+            {work.headline}
+          </h2>
+        </div>
+        <div className='flex items-center justify-between lg:justify-end gap-6 text-[11px] tracking-[0.2em] uppercase text-[var(--muted)] font-mono'>
+          <span>Selected Works</span>
+          <span>(2020 — 2026)</span>
+        </div>
       </div>
 
-      {/* Asymmetric Staggered Cards Grid */}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start'>
+      {/* Spacious 2-Column Editorial Grid */}
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-x-20 lg:gap-y-28 items-start'>
         {work.projects.map((project, index) => {
           const kanji = PROJECT_KANJI[index % PROJECT_KANJI.length]
           const isFlame = index % 2 === 1
-          const staggerClass =
-            index === 1
-              ? 'lg:translate-y-8'
-              : index === 2
-                ? 'lg:translate-y-16'
-                : ''
+          const num = String(index + 1).padStart(2, '0')
 
           return (
             <article
               key={project.id}
-              className={`relative group cursor-pointer transition-transform duration-700 ${staggerClass}`}
+              className='relative group flex flex-col'
               data-cursor
             >
-              {/* Card Frame */}
-              <div className='card-fr relative aspect-[4/5] rounded-sm overflow-hidden outline outline-1 outline-[var(--line-soft)] -outline-offset-1 group-hover:outline-[rgba(223,231,224,0.35)] transition-all duration-500 bg-[#0a0e12]'>
+              {/* Meta Header bar above visual frame */}
+              <div className='flex items-center justify-between mb-3 text-[11px] font-mono tracking-[0.18em] uppercase text-[var(--muted)]'>
+                <div className='flex items-center gap-3'>
+                  <span className='text-[var(--vermilion)] font-medium'>{num}</span>
+                  <span className='text-[var(--line-soft)]'>/</span>
+                  <span className='jp text-[12px] tracking-[0.2em] text-[var(--bone-dim)] font-normal'>
+                    {kanji}
+                  </span>
+                </div>
+                <span>{project.year}</span>
+              </div>
+
+              {/* Cinematic Visual Frame */}
+              <div className='card-fr relative aspect-[16/10] rounded-sm overflow-hidden outline outline-1 outline-[var(--line-soft)] -outline-offset-1 group-hover:outline-[rgba(223,231,224,0.35)] transition-all duration-500 bg-[#080b0e]'>
                 {/* Project Image */}
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className='object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-700'
-                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                  className='object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700'
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
                 />
 
-                {/* Dark gradient overlay */}
+                {/* Ambient vignette overlay */}
                 <div
                   className='absolute inset-0 pointer-events-none'
                   style={{
                     background:
-                      'linear-gradient(180deg, rgba(3,6,9,0.08) 20%, rgba(3,6,9,0.78) 90%, rgba(3,6,9,0.95) 100%)',
+                      'linear-gradient(180deg, rgba(3,6,9,0.04) 0%, rgba(3,6,9,0.18) 60%, rgba(3,6,9,0.65) 100%)',
                   }}
                 />
 
@@ -79,56 +89,67 @@ export function KageProjects({ content }: KageProjectsProps) {
                   aria-hidden='true'
                 />
 
-                {/* Corner Arrow */}
-                <div className='absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-[#05070a]/70 backdrop-blur-md border border-[var(--line)] flex items-center justify-center opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-400'>
-                  <ArrowUpRight size={14} className='text-[var(--bone)]' />
-                </div>
-
-                {/* Bottom Label inside frame */}
-                <div className='absolute left-5 right-5 bottom-4 z-10 flex items-end justify-between gap-3'>
-                  <div>
-                    <b className='block text-[clamp(15px,1.2vw,19px)] font-normal tracking-[0.02em] uppercase text-[var(--bone)]'>
-                      {project.title}
-                    </b>
-                    <p className='text-[11px] text-[var(--bone-dim)] line-clamp-1 mt-0.5'>
-                      {project.role}
-                    </p>
-                  </div>
-                  <span className='jp text-[13px] tracking-[0.3em] text-[var(--vermilion)] font-normal'>
-                    {kanji}
-                  </span>
-                </div>
+                {/* Corner Action Arrow */}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target='_blank'
+                    rel='noreferrer'
+                    aria-label={`${work.launchLabel} - ${project.title}`}
+                    className='absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-[#05070a]/80 backdrop-blur-md border border-[var(--line)] flex items-center justify-center text-[var(--bone-dim)] opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:text-[var(--bone)] group-hover:border-[var(--vermilion)] transition-all duration-400'
+                  >
+                    <ArrowUpRight size={15} />
+                  </a>
+                )}
               </div>
 
-              {/* Card Meta below frame */}
-              <div className='flex justify-between items-center mt-3 text-[10px] tracking-[0.16em] uppercase text-[var(--muted)]'>
-                <div className='flex items-center gap-2'>
-                  <span>{project.year}</span>
+              {/* Content & Typography below frame */}
+              <div className='mt-5 flex flex-col gap-2'>
+                {/* Title & Live Action Link */}
+                <div className='flex items-baseline justify-between gap-4'>
+                  <h3 className='kage-display text-[clamp(20px,1.6vw,26px)] tracking-[0.02em] text-[var(--bone)] group-hover:text-[var(--vermilion)] transition-colors duration-300'>
+                    {project.liveUrl ? (
+                      <a
+                        href={project.liveUrl}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='hover:underline decoration-[var(--vermilion)] decoration-1 underline-offset-4'
+                      >
+                        {project.title}
+                      </a>
+                    ) : (
+                      project.title
+                    )}
+                  </h3>
+
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
                       target='_blank'
                       rel='noreferrer'
-                      className='inline-flex items-center gap-1 text-[var(--bone-dim)] hover:text-[var(--bone)] transition-colors'
+                      className='inline-flex items-center gap-1.5 text-[11px] font-mono tracking-[0.14em] uppercase text-[var(--bone-dim)] hover:text-[var(--bone)] transition-colors flex-shrink-0'
                     >
-                      <ExternalLink size={10} />
                       <span>{work.launchLabel}</span>
+                      <ArrowUpRight size={12} className='text-[var(--vermilion)]' />
                     </a>
                   )}
                 </div>
-                <span>{`0${index + 1} / 0${work.projects.length}`}</span>
-              </div>
 
-              {/* Tech Stack Pills */}
-              <div className='flex flex-wrap gap-1.5 mt-2.5'>
-                {project.techStack.slice(0, 4).map((tech) => (
-                  <span
-                    key={tech}
-                    className='px-2 py-0.5 text-[9px] tracking-[0.12em] uppercase border border-[var(--line-soft)] rounded-full text-[var(--bone-dim)] bg-[#05070a]/60'
-                  >
-                    {tech}
-                  </span>
-                ))}
+                {/* Role / Highlight line */}
+                <p className='text-[13px] text-[#b4bfb7] font-light leading-relaxed'>
+                  <span className='text-[var(--bone)] font-normal'>{project.role}</span>
+                  {project.result && (
+                    <>
+                      <span className='mx-2 text-[var(--muted)]'>—</span>
+                      <span className='text-[var(--bone-dim)]'>{project.result}</span>
+                    </>
+                  )}
+                </p>
+
+                {/* Tech Stack - Clean Monospace Dot-Separated */}
+                <p className='text-[11px] font-mono text-[var(--muted)] tracking-[0.06em] mt-1'>
+                  {project.techStack.join('  ·  ')}
+                </p>
               </div>
             </article>
           )
@@ -137,3 +158,4 @@ export function KageProjects({ content }: KageProjectsProps) {
     </section>
   )
 }
+
