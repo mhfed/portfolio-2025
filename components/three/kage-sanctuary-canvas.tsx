@@ -978,6 +978,8 @@ export function KageSanctuaryCanvas() {
       )
 
       const roninPos = inkRonin.group.position
+      const slashBoost = inkRonin.slashIntensity
+
       characterKeyLight.position.set(
         roninPos.x + 0.8,
         roninPos.y + 1.8,
@@ -988,6 +990,8 @@ export function KageSanctuaryCanvas() {
         roninPos.y + 1.4,
         roninPos.z - 0.8
       )
+      characterKeyLight.intensity = 3.2 + slashBoost * 4.8
+      characterRimLight.intensity = 2.8 + slashBoost * 4.2
 
       // Water gentle wave ripples
       const waterPos = waterGeo.attributes.position.array as Float32Array

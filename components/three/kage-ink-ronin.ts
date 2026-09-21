@@ -5,6 +5,7 @@ import * as THREE from 'three'
  */
 export interface InkRoninController {
   group: THREE.Group
+  slashIntensity: number
   update: (
     delta: number,
     clock: number,
@@ -330,7 +331,34 @@ function createMistDiscTexture(): THREE.CanvasTexture {
 }
 
 /**
- * Constructs the Complete Cinematic Ink Ronin Group with Custom Shader Material
+ * Creates a glowing circular spark texture for sword ki sparks
+ */
+function createSparkTexture(): THREE.CanvasTexture {
+  const size = 64
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')
+  if (!ctx) {
+    return new THREE.CanvasTexture(canvas)
+  }
+
+  const grad = ctx.createRadialGradient(32, 32, 2, 32, 32, 32)
+  grad.addColorStop(0, 'rgba(255, 255, 255, 1.0)')
+  grad.addColorStop(0.25, 'rgba(255, 220, 160, 0.95)')
+  grad.addColorStop(0.6, 'rgba(255, 70, 30, 0.45)')
+  grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
+
+  ctx.fillStyle = grad
+  ctx.fillRect(0, 0, size, size)
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.needsUpdate = true
+  return texture
+}
+
+/**
+ * Constructs the Complete Cinematic Ink Ronin with Acrobatic Leaping & Brilliant Sword Dance
  */
 export function createInkRoninGroup(): InkRoninController {
   const group = new THREE.Group()
@@ -342,6 +370,7 @@ export function createInkRoninGroup(): InkRoninController {
 
   const texture = createSumiETexture()
   const mistTexture = createMistDiscTexture()
+  const sparkTexture = createSparkTexture()
 
   // Plane geometry with fine subdivisions for silky wind cloth deformation
   const planeWidth = 1.95
@@ -373,12 +402,11 @@ export function createInkRoninGroup(): InkRoninController {
         vec3 pos = position;
 
         // Realistic cloth wind fluttering (strongest at bottom hem & scarf)
-        // uv.y: 0.0 at bottom, 1.0 at top
         float windWeight = smoothstep(0.75, 0.05, uv.y);
-        float wave1 = sin(uv.y * 7.5 + uTime * 2.6) * 0.038 * windWeight;
-        float wave2 = cos(uv.y * 5.0 + uTime * 1.9) * 0.022 * windWeight;
+        float wave1 = sin(uv.y * 7.5 + uTime * 3.2) * 0.045 * windWeight;
+        float wave2 = cos(uv.y * 5.0 + uTime * 2.4) * 0.026 * windWeight;
         pos.x += (wave1 + wave2) * uWindStrength;
-        pos.z += sin(uv.y * 9.0 + uTime * 3.1) * 0.018 * windWeight * uWindStrength;
+        pos.z += sin(uv.y * 9.0 + uTime * 3.8) * 0.022 * windWeight * uWindStrength;
 
         // Martial breathing rhythm (calm subtle chest lift)
         float breath = sin(uTime * 1.4) * 0.014;
@@ -424,15 +452,14 @@ export function createInkRoninGroup(): InkRoninController {
         vec3 finalColor = mix(inkBase, rimTint * 1.5, edge * 0.72 * rimPulse);
 
         // Katana Steel Glint: moonlight flashing on the sword guard / blade
-        // Guard coordinates in UV space: approx (0.448, 0.612)
         vec2 glintUv = vec2(0.448, 0.612);
         float d = distance(vUv, glintUv);
-        if (d < 0.075 && uGlint > 0.02) {
+        if (d < 0.085 && uGlint > 0.01) {
           vec2 delta = abs(vUv - glintUv);
           // 4-point star anime gleam
-          float star = (1.0 / (delta.x * 90.0 + 1.0)) * (1.0 / (delta.y * 90.0 + 1.0));
-          float core = smoothstep(0.016, 0.001, d) * 1.6;
-          float flash = (star * 0.9 + core) * uGlint;
+          float star = (1.0 / (delta.x * 80.0 + 1.0)) * (1.0 / (delta.y * 80.0 + 1.0));
+          float core = smoothstep(0.02, 0.001, d) * 1.8;
+          float flash = (star * 1.1 + core) * uGlint;
           finalColor += vec3(1.0, 0.96, 0.92) * flash;
         }
 
@@ -463,59 +490,325 @@ export function createInkRoninGroup(): InkRoninController {
   mistMesh.position.set(0, 0.02, 0)
   group.add(mistMesh)
 
-  // Update loop
-  const update = (
-    delta: number,
-    clock: number,
-    scrollProgress: number,
-    mouseX?: number,
-    mouseY?: number
-  ) => {
-    material.uniforms.uTime.value = clock
+  // =========================================================================
+  // DYNAMIC BRILLIANT SWORD SLASH VFX (MÚA KIẾM SÁNG QUẮC KHI SCROLL)
+  // =========================================================================
 
-    // Katana glint periodicity: flashes every 3.8 seconds for 0.35 seconds
-    const cycle = (clock * 0.26) % 1.0
-    let glintVal = 0
-    if (cycle < 0.09) {
-      glintVal = Math.sin((cycle / 0.09) * Math.PI)
-    }
-    material.uniforms.uGlint.value = glintVal
+  // Helper shader factory for glowing slash energy ribbons
+  const createSlashShader = (curl: number) => {
+    return new THREE.ShaderMaterial({
+      transparent: true,
+      side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      uniforms: {
+        uTime: { value: 0 },
+        uIntensity: { value: 0 },
+        uCurl: { value: curl },
+        uColorCore: { value: new THREE.Color(0xffffff) },
+        uColorFlame: { value: new THREE.Color(0xff3b20) },
+        uColorCyan: { value: new THREE.Color(0x0df0d0) },
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        uniform float uCurl;
 
-    // Ground mist gentle rotation
-    mistMesh.rotation.z += delta * 0.08
-    mistMat.opacity = 0.65 + Math.sin(clock * 1.5) * 0.15
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+          pos.z += sin(uv.x * 3.14159265) * uCurl;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uIntensity;
+        uniform vec3 uColorCore;
+        uniform vec3 uColorFlame;
+        uniform vec3 uColorCyan;
 
-    // Scroll-driven progression: Ronin ascends the stairs towards the Torii gate!
-    const maxSteps = 10
-    const scrollStepProgress = scrollProgress * maxSteps
-    const baseStep = Math.min(Math.floor(scrollStepProgress), maxSteps - 1)
-    const stepFraction = scrollStepProgress - baseStep
+        void main() {
+          // Razor-sharp leading cut edge, trailing ghost dissolve
+          float head = smoothstep(0.0, 0.16, vUv.x);
+          float tail = smoothstep(1.0, 0.30, vUv.x);
+          float sweep = head * tail;
 
-    const stepHop = Math.sin(stepFraction * Math.PI) * 0.22
-    const currentStepI = baseStep + stepFraction
+          // Razor blade core in the center of the arc
+          float coreDist = abs(vUv.y - 0.48);
+          float razorCore = smoothstep(0.13, 0.006, coreDist);
+          float softHalo = smoothstep(0.5, 0.04, coreDist);
 
-    // Ascent coordinates along the sanctuary stairway
-    const targetZ = 2.7 - currentStepI * 1.15
-    const targetY = currentStepI * 0.22 + 0.38 + stepHop
-    const targetX = 1.15 - (currentStepI / maxSteps) * 1.05 + Math.sin(clock * 1.2) * 0.04
+          // Kinetic plasma striations
+          float plasma = 0.82 + sin(vUv.x * 26.0 - uTime * 24.0) * 0.18;
 
-    group.position.set(targetX, targetY, targetZ)
+          // Multi-tone electric vermilion-cyan chromatic plasma
+          vec3 aura = mix(uColorFlame, uColorCyan, vUv.x);
+          vec3 col = mix(aura, uColorCore, razorCore * 0.96);
 
-    // Interactive mouse gaze
-    if (mouseX !== undefined && mouseY !== undefined) {
-      group.rotation.y = -0.28 + mouseX * 0.12
-      group.rotation.x = -mouseY * 0.05
-    }
+          float alpha = (razorCore * 2.4 + softHalo * 0.8) * sweep * plasma * uIntensity;
+          if (alpha < 0.003) discard;
+
+          gl_FragColor = vec4(col * (2.0 + uIntensity * 2.6), alpha);
+        }
+      `,
+    })
   }
 
-  const dispose = () => {
-    geometry.dispose()
-    material.dispose()
-    texture.dispose()
-    mistGeo.dispose()
-    mistMat.dispose()
-    mistTexture.dispose()
+  // 1. Primary Crescent Slash Arc (Wide Iaijutsu Horizontal/Diagonal Cut)
+  const slashGeo1 = new THREE.RingGeometry(0.72, 1.92, 48, 1, 0, Math.PI * 1.35)
+  const slashMat1 = createSlashShader(0.32)
+  const slashMesh1 = new THREE.Mesh(slashGeo1, slashMat1)
+  slashMesh1.position.set(0.42, 1.45, 0.15)
+  group.add(slashMesh1)
+
+  // 2. Secondary Cross-Slash Arc (Vertical Rising Uppercut / Dragon Slash)
+  const slashGeo2 = new THREE.RingGeometry(0.58, 1.68, 40, 1, 0, Math.PI * 1.2)
+  const slashMat2 = createSlashShader(-0.28)
+  const slashMesh2 = new THREE.Mesh(slashGeo2, slashMat2)
+  slashMesh2.position.set(0.36, 1.55, 0.22)
+  group.add(slashMesh2)
+
+  // 3. Mid-air Whirlwind Slash Halo (Senpūken)
+  const slashGeo3 = new THREE.RingGeometry(1.15, 2.25, 48, 1, 0, Math.PI * 1.55)
+  const slashMat3 = createSlashShader(0.18)
+  const slashMesh3 = new THREE.Mesh(slashGeo3, slashMat3)
+  slashMesh3.position.set(0.1, 1.35, 0.0)
+  slashMesh3.rotation.x = Math.PI / 2
+  group.add(slashMesh3)
+
+  // Dedicated flashing sword gleam point light
+  const swordGleamLight = new THREE.PointLight(0xff3b20, 0.2, 7.5, 1.8)
+  swordGleamLight.position.set(0.45, 1.5, 0.25)
+  group.add(swordGleamLight)
+
+  // =========================================================================
+  // SWORD KI SPARKS PARTICLE SYSTEM (HỎA HOA KIẾM KHÍ)
+  // =========================================================================
+  const sparkCount = 36
+  const sparkGeo = new THREE.BufferGeometry()
+  const sparkPositions = new Float32Array(sparkCount * 3)
+  const sparkColors = new Float32Array(sparkCount * 3)
+  const sparkData: {
+    angle: number
+    radius: number
+    speed: number
+    elev: number
+    phase: number
+  }[] = []
+
+  const colWhite = new THREE.Color(0xffffff)
+  const colCyan = new THREE.Color(0x0df0d0)
+  const colGold = new THREE.Color(0xffaa22)
+
+  for (let i = 0; i < sparkCount; i++) {
+    const idx = i * 3
+    sparkPositions[idx] = 0.45
+    sparkPositions[idx + 1] = 1.45
+    sparkPositions[idx + 2] = 0.2
+
+    const tint = i % 3 === 0 ? colWhite : i % 3 === 1 ? colCyan : colGold
+    sparkColors[idx] = tint.r
+    sparkColors[idx + 1] = tint.g
+    sparkColors[idx + 2] = tint.b
+
+    sparkData.push({
+      angle: Math.random() * Math.PI * 2,
+      radius: 0.4 + Math.random() * 1.3,
+      speed: 4.5 + Math.random() * 6.0,
+      elev: (Math.random() - 0.5) * 0.9,
+      phase: Math.random() * Math.PI * 2,
+    })
   }
 
-  return { group, update, dispose }
+  sparkGeo.setAttribute(
+    'position',
+    new THREE.BufferAttribute(sparkPositions, 3)
+  )
+  sparkGeo.setAttribute('color', new THREE.BufferAttribute(sparkColors, 3))
+
+  const sparkMat = new THREE.PointsMaterial({
+    size: 0.22,
+    map: sparkTexture,
+    transparent: true,
+    opacity: 0.85,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    vertexColors: true,
+  })
+  const sparksMesh = new THREE.Points(sparkGeo, sparkMat)
+  group.add(sparksMesh)
+
+  // Dynamic state tracking for acrobatic leaps & sword dance
+  let prevScrollProgress = 0
+  let slashEnergy = 0
+
+  const controller: InkRoninController = {
+    group,
+    slashIntensity: 0,
+    update: (
+      delta: number,
+      clock: number,
+      scrollProgress: number,
+      mouseX?: number,
+      mouseY?: number
+    ) => {
+      material.uniforms.uTime.value = clock
+      slashMat1.uniforms.uTime.value = clock
+      slashMat2.uniforms.uTime.value = clock
+      slashMat3.uniforms.uTime.value = clock
+
+      // Calculate instantaneous scroll velocity
+      const instantVelocity = Math.abs(scrollProgress - prevScrollProgress)
+      prevScrollProgress = scrollProgress
+
+      // Smoothly charge up slash energy during scrolling with rapid attack and silky decay
+      const targetEnergy = Math.min(instantVelocity * 65.0, 1.0)
+      const chargeRate = targetEnergy > slashEnergy ? 0.35 : 0.07
+      slashEnergy += (targetEnergy - slashEnergy) * chargeRate
+      controller.slashIntensity = slashEnergy
+
+      // Katana glint periodicity: flashes continuously when active, or periodically when idle
+      const cycle = (clock * 0.26) % 1.0
+      let idleGlint = 0
+      if (cycle < 0.09) {
+        idleGlint = Math.sin((cycle / 0.09) * Math.PI)
+      }
+      material.uniforms.uGlint.value = Math.max(idleGlint, slashEnergy * 0.95)
+
+      // Boost cloth wind flutter dramatically when in motion
+      material.uniforms.uWindStrength.value = 1.0 + slashEnergy * 3.2
+
+      // Ground mist gentle rotation
+      mistMesh.rotation.z += delta * (0.08 + slashEnergy * 0.25)
+      mistMat.opacity = (0.65 + Math.sin(clock * 1.5) * 0.15) * (1.0 + slashEnergy * 0.4)
+
+      // =======================================================================
+      // SPECTACULAR ACROBATIC LEAPING & FLIGHT (BAY NHẢY KHINH CÔNG)
+      // =======================================================================
+      const maxSteps = 10
+      const scrollStepProgress = scrollProgress * maxSteps
+      const baseStep = Math.min(Math.floor(scrollStepProgress), maxSteps - 1)
+      const stepFraction = scrollStepProgress - baseStep
+
+      // Dynamic parabolic flight height (launches up to 1.85m into the air!)
+      const flightApex = Math.sin(stepFraction * Math.PI)
+      const highLeap = Math.pow(flightApex, 0.75) * (0.32 + slashEnergy * 1.55)
+
+      const currentStepI = baseStep + stepFraction
+
+      // Lateral martial arts weave & evasive dash across the stairway
+      const lateralDash =
+        Math.sin(currentStepI * Math.PI * 1.6 + clock * 2.2) *
+        (0.48 * slashEnergy)
+
+      const targetZ = 2.7 - currentStepI * 1.15
+      const targetY = currentStepI * 0.22 + 0.38 + highLeap
+      const targetX = 1.15 - (currentStepI / maxSteps) * 1.05 + lateralDash
+
+      group.position.set(targetX, targetY, targetZ)
+
+      // Aerobatic pitch & banking during leaps
+      const forwardPitch = -0.32 * slashEnergy * flightApex
+      const bankRoll = Math.cos(currentStepI * Math.PI * 1.8) * (0.2 * slashEnergy)
+
+      group.rotation.y =
+        -0.28 +
+        (mouseX ?? 0) * 0.12 +
+        Math.sin(clock * 3.2) * (0.1 * slashEnergy)
+      group.rotation.x = -(mouseY ?? 0) * 0.05 + forwardPitch
+      group.rotation.z = bankRoll
+
+      // Squash and stretch during take-off, apex flight, and landing
+      if (flightApex > 0.45 && slashEnergy > 0.1) {
+        // Airborne stretch
+        roninMesh.scale.set(0.94, 1.10, 1.0)
+      } else if (flightApex < 0.15 && slashEnergy > 0.1) {
+        // Landing impact squash
+        roninMesh.scale.set(1.06, 0.92, 1.0)
+      } else {
+        roninMesh.scale.set(1.0, 1.0, 1.0)
+      }
+
+      // =======================================================================
+      // BRILLIANT SWORD DANCE ANIMATION & SLASH VISIBILITY
+      // =======================================================================
+      const slashCombo = clock * 5.5 + scrollProgress * 32.0
+
+      // Arc 1: Rapid horizontal / diagonal crescent slash
+      slashMesh1.rotation.z = slashCombo * 1.25
+      slashMesh1.rotation.x = Math.sin(slashCombo * 0.8) * 0.6 + 0.35
+      slashMesh1.rotation.y = Math.cos(slashCombo * 0.6) * 0.45
+      slashMat1.uniforms.uIntensity.value = Math.max(0.02, slashEnergy * 1.0)
+
+      // Arc 2: Vertical rising counter-slash
+      slashMesh2.rotation.z = -slashCombo * 1.4 + 2.1
+      slashMesh2.rotation.x = Math.cos(slashCombo * 0.9) * 0.7 - 0.25
+      slashMesh2.rotation.y = Math.sin(slashCombo * 0.7) * 0.55
+      slashMat2.uniforms.uIntensity.value = Math.max(0.015, slashEnergy * 0.9)
+
+      // Arc 3: Whirlwind Ki Aura (explodes during high speed acrobatics)
+      slashMesh3.rotation.z = slashCombo * 2.2
+      slashMesh3.rotation.y = Math.sin(clock * 4.0) * 0.3
+      slashMat3.uniforms.uIntensity.value = Math.max(
+        0.0,
+        (slashEnergy - 0.15) * 1.3
+      )
+
+      // Dynamic flashing sword gleam light
+      const gleamPulse =
+        slashEnergy * (4.8 + Math.sin(clock * 16.0) * 1.4)
+      swordGleamLight.intensity = 0.2 + gleamPulse
+
+      // Shift light color dynamically between Vermilion fire and Cyan electric ki
+      if (Math.sin(clock * 8.0) > 0.2) {
+        swordGleamLight.color.setHex(0x0df0d0)
+      } else {
+        swordGleamLight.color.setHex(0xff3b20)
+      }
+
+      // =======================================================================
+      // SWORD SPARKS ORBITAL KINETICS
+      // =======================================================================
+      const sPos = sparkGeo.attributes.position.array as Float32Array
+      for (let i = 0; i < sparkCount; i++) {
+        const idx = i * 3
+        const dat = sparkData[i]
+
+        dat.angle += delta * dat.speed * (1.0 + slashEnergy * 3.0)
+        const curR = dat.radius * (0.8 + slashEnergy * 0.7)
+
+        sPos[idx] = 0.45 + Math.cos(dat.angle + dat.phase) * curR
+        sPos[idx + 1] =
+          1.45 +
+          Math.sin(dat.angle * 1.5 + dat.phase) * (curR * 0.6) +
+          dat.elev
+        sPos[idx + 2] = 0.2 + Math.sin(dat.angle) * (curR * 0.8)
+      }
+      sparkGeo.attributes.position.needsUpdate = true
+      sparkMat.opacity = 0.35 + slashEnergy * 0.65
+      sparkMat.size = 0.18 + slashEnergy * 0.16
+    },
+    dispose: () => {
+      geometry.dispose()
+      material.dispose()
+      texture.dispose()
+      mistGeo.dispose()
+      mistMat.dispose()
+      mistTexture.dispose()
+      sparkTexture.dispose()
+
+      slashGeo1.dispose()
+      slashMat1.dispose()
+      slashGeo2.dispose()
+      slashMat2.dispose()
+      slashGeo3.dispose()
+      slashMat3.dispose()
+
+      sparkGeo.dispose()
+      sparkMat.dispose()
+    },
+  }
+
+  return controller
 }
