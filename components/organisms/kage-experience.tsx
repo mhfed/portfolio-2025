@@ -53,16 +53,9 @@ export function KageExperience({ content }: KageExperienceProps) {
 
               <div>
                 <p>{record.description}</p>
-                <div className='flex flex-wrap gap-1.5 mt-2'>
-                  {record.skills.slice(0, 4).map((skill) => (
-                    <span
-                      key={skill}
-                      className='text-[10px] tracking-[0.1em] text-[var(--muted)]'
-                    >
-                      #{skill}
-                    </span>
-                  ))}
-                </div>
+                <p className='text-[11px] font-mono text-[var(--muted)] mt-2.5 tracking-[0.08em]'>
+                  {record.skills.slice(0, 4).join('  ·  ')}
+                </p>
               </div>
 
               <span className='t'>{record.period}</span>

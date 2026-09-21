@@ -22,15 +22,13 @@ export function KageProjects({ content }: KageProjectsProps) {
         <span className='k jp'>庭園</span>
       </div>
 
-      <div className='mb-12 max-w-xl'>
-        <h2 className='kage-display text-[clamp(28px,3.8vw,52px)] text-[var(--bone)] mb-3'>
+      <div className='mb-12 flex flex-wrap items-baseline justify-between gap-4 border-b border-[var(--line-soft)] pb-4'>
+        <h2 className='kage-display text-[clamp(28px,3.8vw,52px)] text-[var(--bone)]'>
           {work.headline}
         </h2>
-        <p className='kage-body text-[#9aa5a0]'>
-          Selected production storefronts, fintech engines, and Web3
-          applications built with meticulous attention to performance, motion,
-          and architectural restraint.
-        </p>
+        <span className='text-[11px] tracking-[0.2em] uppercase text-[var(--muted)] font-mono'>
+          (2020 — 2025)
+        </span>
       </div>
 
       {/* Asymmetric Staggered Cards Grid */}

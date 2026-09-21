@@ -12,33 +12,6 @@ export function KageHero({ content }: KageHeroProps) {
   const { hero, work } = content
   const featuredProject = work.projects[0]
 
-  const chapters = [
-    {
-      num: '01',
-      title: 'Thresholds',
-      desc: 'Principles, metrics, and software architecture foundation.',
-      href: '#about',
-    },
-    {
-      num: '02',
-      title: 'Still Gardens',
-      desc: 'Selected production systems and interactive applications.',
-      href: '#work',
-    },
-    {
-      num: '03',
-      title: 'Sacred Craft',
-      desc: 'Career trajectory, leadership, and production milestones.',
-      href: '#experience',
-    },
-    {
-      num: '04',
-      title: 'Disciplines',
-      desc: 'Technical ecosystem, tools, and creative engineering.',
-      href: '#skills',
-    },
-  ]
-
   return (
     <section
       id='hero'
@@ -74,19 +47,7 @@ export function KageHero({ content }: KageHeroProps) {
           {hero.description}
         </p>
 
-        {/* Core Keyword Tags */}
-        <div className='flex flex-wrap gap-2 mb-8'>
-          {['Next.js 16', 'React 19', 'TypeScript', 'Three.js / WebGL', 'GSAP Motion', 'Tailwind'].map((tech) => (
-            <span
-              key={tech}
-              className='px-2.5 py-1 text-[10px] tracking-[0.14em] uppercase border border-[var(--line-soft)] rounded-full text-[var(--bone-dim)] bg-[#05070a]/60'
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className='flex items-center gap-6'>
+        <div className='flex items-center gap-6 mt-8'>
           <a href='#work' className='arrowlink mt-0' data-cursor>
             <span>{hero.actions.viewWork.label}</span>
             <span className='ar'>
@@ -140,37 +101,19 @@ export function KageHero({ content }: KageHeroProps) {
         <span className='v jp'>影の道</span>
       </div>
 
-      {/* Hero Foot (Scroll Cue + Chapter Chips) */}
-      <div className='relative z-10 w-full mt-16 pt-6 border-t border-[var(--line-soft)]'>
-        <div className='flex items-center justify-end gap-3 mb-4 text-[9px] tracking-[0.3em] uppercase text-[var(--muted)]'>
-          <span>Scroll to enter</span>
-          <div className='w-14 h-[1px] bg-[var(--line)] relative overflow-hidden'>
-            <i className='absolute inset-0 bg-[var(--bone)] origin-left animate-[cue_2.8s_var(--ease-io)_infinite]' />
-          </div>
+      {/* Hero Foot (Minimalist Editorial Alignment) */}
+      <div className='relative z-10 w-full mt-12 pt-5 border-t border-[var(--line-soft)] flex items-center justify-between text-[9px] tracking-[0.26em] uppercase text-[var(--muted)]'>
+        <div className='flex items-center gap-3'>
+          <span className='w-1.5 h-1.5 rounded-full bg-[var(--vermilion)]' />
+          <span>Hanoi, VN ──── 2020 // 2025</span>
         </div>
 
-        {/* 4 Chapter Chips */}
-        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6'>
-          {chapters.map((ch) => (
-            <a
-              key={ch.num}
-              href={ch.href}
-              className='flex items-start gap-3.5 group text-inherit cursor-pointer'
-              data-cursor
-            >
-              <span className='text-[clamp(24px,2.2vw,34px)] font-light leading-none tabular-nums text-[var(--bone)] group-hover:text-[var(--ember)] group-hover:-translate-y-0.5 transition-all duration-300'>
-                {ch.num}
-              </span>
-              <div className='min-w-0 pt-0.5'>
-                <b className='block text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--bone-dim)] group-hover:text-[var(--bone)] transition-colors mb-1'>
-                  {ch.title}
-                </b>
-                <p className='text-[11px] leading-snug text-[#7d8781] group-hover:text-[var(--bone-dim)] transition-colors line-clamp-2'>
-                  {ch.desc}
-                </p>
-              </div>
-            </a>
-          ))}
+        <div className='flex items-center gap-3'>
+          <span>Scroll to enter</span>
+          <div className='w-12 h-[1px] bg-[var(--line)] relative overflow-hidden'>
+            <i className='absolute inset-0 bg-[var(--bone)] origin-left animate-[cue_2.8s_var(--ease-io)_infinite]' />
+          </div>
+          <span className='tabular-nums text-[var(--bone-dim)]'>00 // 04</span>
         </div>
       </div>
     </section>

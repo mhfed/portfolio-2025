@@ -38,39 +38,17 @@ export function KageAbout({ content }: KageAboutProps) {
         </div>
       </div>
 
-      {/* Ruled Stats Band */}
-      <div className='grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 mt-16 sm:mt-24 pt-8 border-t border-[var(--line-soft)]'>
-        <div>
-          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
-            5+
-          </b>
-          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
-            Years Experience
-          </span>
+      {/* Elegant Editorial Colophon */}
+      <div className='mt-16 sm:mt-24 pt-6 border-t border-[var(--line-soft)] flex flex-wrap items-center justify-between gap-4 text-[10px] tracking-[0.22em] uppercase text-[var(--muted)]'>
+        <div className='flex items-center gap-3'>
+          <span className='w-1.5 h-1.5 rounded-full bg-[var(--vermilion)]' />
+          <span className='text-[var(--bone-dim)]'>Hanoi, Vietnam</span>
+          <span>•</span>
+          <span>5+ Years Production Systems</span>
         </div>
-        <div>
-          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
-            94
-          </b>
-          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
-            PageSpeed Benchmark
-          </span>
-        </div>
-        <div>
-          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
-            60 FPS
-          </b>
-          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
-            Hardware Motion
-          </span>
-        </div>
-        <div>
-          <b className='block text-[clamp(24px,2.4vw,36px)] font-light tracking-[-0.02em] text-[var(--bone)] tabular-nums mb-1'>
-            100%
-          </b>
-          <span className='text-[10px] tracking-[0.2em] uppercase text-[var(--muted)]'>
-            Type-Safe & Clean
-          </span>
+        <div className='flex items-center gap-3'>
+          <span className='jp text-[var(--bone-dim)]'>山門</span>
+          <span>Quiet Architecture</span>
         </div>
       </div>
     </section>
