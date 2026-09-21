@@ -38,10 +38,16 @@ export function KageSkills({ content }: KageSkillsProps) {
           return (
             <article
               key={group.label}
-              className='p-6 rounded-sm bg-[#0a0e12]/80 border border-[var(--line-soft)] hover:border-[var(--line)] transition-all duration-400 group relative'
+              className='kage-glass-card group relative p-6 sm:p-7 rounded-xl flex flex-col overflow-hidden'
               data-cursor
             >
-              <div className='flex items-baseline justify-between mb-6 pb-3 border-b border-[var(--line-soft)]'>
+              {/* Optical Glass Diagonal Sheen Highlight */}
+              <div
+                className='pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.06] via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500'
+                aria-hidden='true'
+              />
+
+              <div className='relative z-10 flex items-baseline justify-between mb-6 pb-3 border-b border-[var(--line-soft)]'>
                 <div className='flex items-baseline gap-2.5'>
                   <span className='text-[11px] font-medium tracking-[0.2em] text-[var(--vermilion)] tabular-nums'>
                     {num}
@@ -55,11 +61,11 @@ export function KageSkills({ content }: KageSkillsProps) {
                 </span>
               </div>
 
-              <ul className='flex flex-wrap gap-2'>
+              <ul className='relative z-10 flex flex-wrap gap-2'>
                 {group.items.map((item) => (
                   <li
                     key={item}
-                    className='px-3 py-1.5 rounded-sm border border-[var(--line-soft)] bg-[#05070a] text-[11px] tracking-[0.12em] uppercase text-[var(--bone-dim)] group-hover:text-[var(--bone)] group-hover:border-[rgba(223,231,224,0.22)] transition-colors'
+                    className='px-3 py-1.5 rounded-md border border-[rgba(223,231,224,0.1)] bg-[rgba(6,10,14,0.35)] backdrop-blur-sm text-[11px] tracking-[0.12em] uppercase text-[var(--bone-dim)] group-hover:text-[var(--bone)] group-hover:border-[rgba(223,231,224,0.22)] transition-colors'
                   >
                     {item}
                   </li>

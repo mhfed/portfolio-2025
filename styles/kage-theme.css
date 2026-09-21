@@ -186,9 +186,26 @@
   inset: -22% -4%;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(110% 62% at 30% 50%, rgba(4, 7, 10, 0.88), rgba(4, 7, 10, 0.62) 42%, rgba(4, 7, 10, 0.18) 74%, rgba(4, 7, 10, 0));
+  background: radial-gradient(110% 62% at 30% 50%, rgba(4, 7, 10, 0.42), rgba(4, 7, 10, 0.18) 48%, transparent 76%);
   -webkit-mask-image: linear-gradient(transparent, #000 44%);
   mask-image: linear-gradient(transparent, #000 44%);
+}
+
+/* Frosted Translucent Glass Card (Optical Lens) */
+.kage-glass-card {
+  position: relative;
+  background: rgba(6, 10, 14, 0.42);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(223, 231, 224, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.09);
+  transition: background 0.5s var(--ease-out), border-color 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+
+.kage-glass-card:hover {
+  background: rgba(8, 14, 20, 0.56);
+  border-color: rgba(224, 35, 28, 0.42);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.16), 0 0 32px rgba(224, 35, 28, 0.12);
 }
 
 /* Custom interactive cursor dot */
@@ -291,12 +308,15 @@
   position: relative;
   display: block;
   aspect-ratio: 16 / 10;
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 10, 14, 0.42);
   outline: 1px solid rgba(223, 231, 224, 0.16);
   outline-offset: -1px;
-  box-shadow: 0 34px 70px -30px rgba(0, 0, 0, 0.9);
-  transition: outline-color 0.5s;
+  box-shadow: 0 34px 70px -30px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: outline-color 0.5s, box-shadow 0.5s;
 }
 
 .kage-peek:hover .kage-peek-fr {

@@ -44,11 +44,17 @@ export function KageProjects({ content }: KageProjectsProps) {
           return (
             <article
               key={project.id}
-              className='relative group flex flex-col'
+              className='kage-glass-card group relative flex flex-col rounded-xl p-5 sm:p-6 lg:p-7 overflow-hidden'
               data-cursor
             >
+              {/* Optical Glass Diagonal Sheen Highlight */}
+              <div
+                className='pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.07] via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500'
+                aria-hidden='true'
+              />
+
               {/* Meta Header bar above visual frame */}
-              <div className='flex items-center justify-between mb-3 text-[11px] font-mono tracking-[0.18em] uppercase text-[var(--muted)]'>
+              <div className='relative z-10 flex items-center justify-between mb-4 text-[11px] font-mono tracking-[0.18em] uppercase text-[var(--muted)]'>
                 <div className='flex items-center gap-3'>
                   <span className='text-[var(--vermilion)] font-medium'>{num}</span>
                   <span className='text-[var(--line-soft)]'>/</span>
@@ -59,23 +65,23 @@ export function KageProjects({ content }: KageProjectsProps) {
                 <span>{project.year}</span>
               </div>
 
-              {/* Cinematic Visual Frame */}
-              <div className='card-fr relative aspect-[16/10] rounded-sm overflow-hidden outline outline-1 outline-[var(--line-soft)] -outline-offset-1 group-hover:outline-[rgba(223,231,224,0.35)] transition-all duration-500 bg-[#080b0e]'>
-                {/* Project Image */}
+              {/* Cinematic Translucent Visual Frame */}
+              <div className='card-fr relative aspect-[16/10] rounded-lg overflow-hidden border border-[rgba(223,231,224,0.1)] group-hover:border-[rgba(223,231,224,0.25)] transition-all duration-500 bg-black/20'>
+                {/* Project Image with subtle transparency so 3D background subtly shines through */}
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className='object-cover opacity-85 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700'
+                  className='object-cover opacity-70 group-hover:opacity-95 group-hover:scale-[1.03] transition-all duration-700'
                   sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw'
                 />
 
-                {/* Ambient vignette overlay */}
+                {/* Ambient subtle vignette overlay */}
                 <div
                   className='absolute inset-0 pointer-events-none'
                   style={{
                     background:
-                      'linear-gradient(180deg, rgba(3,6,9,0.04) 0%, rgba(3,6,9,0.18) 60%, rgba(3,6,9,0.65) 100%)',
+                      'linear-gradient(180deg, rgba(3,6,9,0.02) 0%, rgba(3,6,9,0.12) 60%, rgba(3,6,9,0.55) 100%)',
                   }}
                 />
 
@@ -96,7 +102,7 @@ export function KageProjects({ content }: KageProjectsProps) {
                     target='_blank'
                     rel='noreferrer'
                     aria-label={`${work.launchLabel} - ${project.title}`}
-                    className='absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-[#05070a]/80 backdrop-blur-md border border-[var(--line)] flex items-center justify-center text-[var(--bone-dim)] opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:text-[var(--bone)] group-hover:border-[var(--vermilion)] transition-all duration-400'
+                    className='absolute top-3.5 right-3.5 z-10 w-9 h-9 rounded-full bg-[#05070a]/65 backdrop-blur-md border border-[rgba(223,231,224,0.18)] flex items-center justify-center text-[var(--bone-dim)] opacity-80 group-hover:opacity-100 group-hover:text-[var(--bone)] group-hover:border-[var(--vermilion)] transition-all duration-300 shadow-md'
                   >
                     <ArrowUpRight size={15} />
                   </a>
@@ -104,7 +110,7 @@ export function KageProjects({ content }: KageProjectsProps) {
               </div>
 
               {/* Content & Typography below frame */}
-              <div className='mt-5 flex flex-col gap-2'>
+              <div className='relative z-10 mt-5 flex flex-col gap-2'>
                 {/* Title & Live Action Link */}
                 <div className='flex items-baseline justify-between gap-4'>
                   <h3 className='kage-display text-[clamp(20px,1.6vw,26px)] tracking-[0.02em] text-[var(--bone)] group-hover:text-[var(--vermilion)] transition-colors duration-300'>
