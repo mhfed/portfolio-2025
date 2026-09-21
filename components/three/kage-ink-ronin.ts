@@ -18,7 +18,7 @@ export interface InkRoninController {
 
 /**
  * Generates an ultra-high resolution Sumi-e (Thủy mặc) ink-wash silhouette texture
- * of a wandering Ronin / Swordsman with authentic Japanese brushstroke aesthetics.
+ * of a wandering Ronin in dynamic martial iaido readiness.
  */
 function createSumiETexture(): THREE.CanvasTexture {
   const width = 1024
@@ -79,28 +79,28 @@ function createSumiETexture(): THREE.CanvasTexture {
   ctx.fill()
 
   // =========================================================================
-  // 2. KATANA SHEATH (SAYA) & SAGEO FLUTTERING CORDS
+  // 2. KATANA SCABBARD (SAYA) AT HIP & SAGEO CORDS
   // =========================================================================
-  // Long curved Katana scabbard extending backwards to the left
+  // Curved lacquer scabbard mounted at waist ready for Iai draw
   ctx.beginPath()
-  ctx.moveTo(445, 605)
-  ctx.bezierCurveTo(370, 720, 280, 890, 185, 1110)
-  ctx.lineTo(195, 1125)
-  ctx.bezierCurveTo(295, 905, 385, 735, 460, 615)
+  ctx.moveTo(435, 605)
+  ctx.bezierCurveTo(360, 720, 270, 890, 180, 1115)
+  ctx.lineTo(190, 1128)
+  ctx.bezierCurveTo(285, 905, 375, 735, 450, 615)
   ctx.closePath()
   ctx.fill()
 
   // Kojiri (scabbard tip)
   ctx.beginPath()
-  ctx.arc(190, 1118, 7, 0, Math.PI * 2)
+  ctx.arc(185, 1122, 6.5, 0, Math.PI * 2)
   ctx.fill()
 
   // Sageo cords floating from the scabbard kurigata
   ctx.beginPath()
-  ctx.moveTo(410, 660)
-  ctx.bezierCurveTo(370, 720, 340, 790, 310, 870)
-  ctx.quadraticCurveTo(320, 880, 335, 850)
-  ctx.bezierCurveTo(365, 780, 390, 715, 425, 670)
+  ctx.moveTo(405, 660)
+  ctx.bezierCurveTo(365, 720, 335, 790, 305, 870)
+  ctx.quadraticCurveTo(315, 880, 330, 850)
+  ctx.bezierCurveTo(360, 780, 385, 715, 420, 670)
   ctx.closePath()
   ctx.fill()
 
@@ -109,47 +109,46 @@ function createSumiETexture(): THREE.CanvasTexture {
   // =========================================================================
   // Wide martial silhouette with sweeping folds
   ctx.beginPath()
-  ctx.moveTo(420, 620) // Waist left
-  // Left drape billowing
-  ctx.bezierCurveTo(380, 750, 330, 940, 290, 1180)
-  ctx.bezierCurveTo(270, 1280, 280, 1370, 330, 1420)
+  ctx.moveTo(410, 620) // Waist left
+  ctx.bezierCurveTo(375, 750, 325, 940, 285, 1180)
+  ctx.bezierCurveTo(265, 1280, 275, 1370, 325, 1420)
   // Robe hem with organic tears & folds
-  ctx.lineTo(390, 1410)
-  ctx.lineTo(440, 1435)
-  ctx.lineTo(510, 1420)
-  ctx.lineTo(570, 1445)
-  ctx.lineTo(640, 1425)
-  ctx.lineTo(710, 1440)
-  ctx.bezierCurveTo(760, 1420, 780, 1350, 770, 1240)
+  ctx.lineTo(385, 1410)
+  ctx.lineTo(435, 1435)
+  ctx.lineTo(505, 1420)
+  ctx.lineTo(565, 1445)
+  ctx.lineTo(635, 1425)
+  ctx.lineTo(705, 1440)
+  ctx.bezierCurveTo(755, 1420, 775, 1350, 765, 1240)
   // Right side flowing back into waist
-  ctx.bezierCurveTo(760, 1020, 720, 820, 640, 630)
+  ctx.bezierCurveTo(755, 1020, 715, 820, 635, 630)
   ctx.closePath()
   ctx.fill()
 
   // Hakama pleats (Hida) shadow depth
   ctx.fillStyle = inkDark
   ctx.beginPath()
-  ctx.moveTo(505, 660)
-  ctx.bezierCurveTo(510, 850, 515, 1100, 520, 1425)
-  ctx.lineTo(528, 1425)
-  ctx.bezierCurveTo(523, 1100, 518, 850, 513, 660)
+  ctx.moveTo(500, 660)
+  ctx.bezierCurveTo(505, 850, 510, 1100, 515, 1425)
+  ctx.lineTo(523, 1425)
+  ctx.bezierCurveTo(518, 1100, 513, 850, 508, 660)
   ctx.closePath()
   ctx.fill()
 
   // Secondary fold lines
   ctx.beginPath()
-  ctx.moveTo(455, 680)
-  ctx.bezierCurveTo(450, 880, 440, 1120, 430, 1420)
-  ctx.lineTo(437, 1420)
-  ctx.bezierCurveTo(447, 1120, 457, 880, 462, 680)
+  ctx.moveTo(450, 680)
+  ctx.bezierCurveTo(445, 880, 435, 1120, 425, 1420)
+  ctx.lineTo(432, 1420)
+  ctx.bezierCurveTo(442, 1120, 452, 880, 457, 680)
   ctx.closePath()
   ctx.fill()
 
   ctx.beginPath()
-  ctx.moveTo(585, 680)
-  ctx.bezierCurveTo(595, 880, 615, 1120, 635, 1425)
-  ctx.lineTo(642, 1425)
-  ctx.bezierCurveTo(622, 1120, 602, 880, 592, 680)
+  ctx.moveTo(580, 680)
+  ctx.bezierCurveTo(590, 880, 610, 1120, 630, 1425)
+  ctx.lineTo(637, 1425)
+  ctx.bezierCurveTo(617, 1120, 597, 880, 587, 680)
   ctx.closePath()
   ctx.fill()
 
@@ -191,29 +190,15 @@ function createSumiETexture(): THREE.CanvasTexture {
   ctx.rect(430, 590, 180, 38)
   ctx.fill()
 
-  // Hand resting on the Katana guard (Tsuba)
+  // Left hand resting poised on the scabbard mouth (Koiguchi)
   ctx.fillStyle = inkDark
   ctx.beginPath()
-  ctx.ellipse(452, 598, 16, 11, -0.35, 0, Math.PI * 2)
+  ctx.ellipse(442, 598, 15, 10, -0.35, 0, Math.PI * 2)
   ctx.fill()
 
-  // Katana Tsuba (Guard) disc
+  // Right hand poised in ready martial stance near chest
   ctx.beginPath()
-  ctx.ellipse(458, 595, 14, 22, -0.4, 0, Math.PI * 2)
-  ctx.fill()
-
-  // Katana Hilt (Tsuka) pointing up-forward
-  ctx.beginPath()
-  ctx.moveTo(462, 585)
-  ctx.lineTo(518, 528)
-  ctx.lineTo(528, 538)
-  ctx.lineTo(472, 595)
-  ctx.closePath()
-  ctx.fill()
-
-  // Pommel (Kashira)
-  ctx.beginPath()
-  ctx.arc(523, 533, 7, 0, Math.PI * 2)
+  ctx.ellipse(540, 530, 14, 9, 0.25, 0, Math.PI * 2)
   ctx.fill()
 
   // =========================================================================
@@ -230,15 +215,15 @@ function createSumiETexture(): THREE.CanvasTexture {
 
   // Iconic Wide Sedge Hat (Tilted stoically downward to the left)
   ctx.beginPath()
-  ctx.moveTo(250, 325) // Left rim tip
-  ctx.bezierCurveTo(360, 280, 460, 225, 510, 205) // Cone apex
-  ctx.bezierCurveTo(565, 230, 675, 285, 770, 305) // Right rim tip
-  ctx.bezierCurveTo(680, 345, 530, 360, 400, 355) // Bottom brim curve
+  ctx.moveTo(250, 325)
+  ctx.bezierCurveTo(360, 280, 460, 225, 510, 205)
+  ctx.bezierCurveTo(565, 230, 675, 285, 770, 305)
+  ctx.bezierCurveTo(680, 345, 530, 360, 400, 355)
   ctx.bezierCurveTo(330, 350, 280, 338, 250, 325)
   ctx.closePath()
   ctx.fill()
 
-  // Fine straw weave radial lines (subtle calligraphy relief)
+  // Fine straw weave radial lines
   ctx.strokeStyle = 'rgba(20, 28, 38, 0.4)'
   ctx.lineWidth = 1.8
   for (let angle = 0; angle < 12; angle++) {
@@ -255,13 +240,10 @@ function createSumiETexture(): THREE.CanvasTexture {
   // 6. FEET IN STRAW SANDALS (WARAJI) EMERGING ON STEPS
   // =========================================================================
   ctx.fillStyle = inkDark
-
-  // Front right foot
   ctx.beginPath()
   ctx.ellipse(480, 1435, 20, 9, 0.1, 0, Math.PI * 2)
   ctx.fill()
 
-  // Back left foot
   ctx.beginPath()
   ctx.ellipse(585, 1415, 18, 8, -0.15, 0, Math.PI * 2)
   ctx.fill()
@@ -269,13 +251,11 @@ function createSumiETexture(): THREE.CanvasTexture {
   // =========================================================================
   // 7. SUMI-E INK WASH FEATHERING & DRY-BRUSH BASE FADE
   // =========================================================================
-  // Gentle ink wash bleed along edges
   ctx.fillStyle = inkWash
   ctx.beginPath()
   ctx.ellipse(512, 1445, 240, 28, 0, 0, Math.PI * 2)
   ctx.fill()
 
-  // Vertical mask gradient to seamlessly fade the lower hem into sanctuary fog
   ctx.save()
   ctx.globalCompositeOperation = 'destination-out'
   const fadeGrad = ctx.createLinearGradient(0, 1320, 0, 1536)
@@ -286,7 +266,6 @@ function createSumiETexture(): THREE.CanvasTexture {
   ctx.fillRect(0, 1300, width, 236)
   ctx.restore()
 
-  // Generate Three.js texture
   const texture = new THREE.CanvasTexture(canvas)
   texture.generateMipmaps = true
   texture.minFilter = THREE.LinearMipmapLinearFilter
@@ -358,7 +337,244 @@ function createSparkTexture(): THREE.CanvasTexture {
 }
 
 /**
- * Constructs the Complete Cinematic Ink Ronin with Acrobatic Leaping & Brilliant Sword Dance
+ * Constructs a physically accurate, curved 3D Katana blade with hamon steel,
+ * golden tsuba, and braided tsuka.
+ */
+function create3DKatanaMesh(): {
+  katanaGroup: THREE.Group
+  bladeMaterial: THREE.MeshStandardMaterial
+} {
+  const katanaGroup = new THREE.Group()
+
+  // 1. Curved Katana Blade (Steel geometry with subtle curvature)
+  const bladeShape = new THREE.Shape()
+  bladeShape.moveTo(0, 0)
+  bladeShape.lineTo(0.03, 0)
+  bladeShape.lineTo(0.024, 0.88)
+  bladeShape.lineTo(0.004, 0.95) // Kissaki sharp tip
+  bladeShape.lineTo(-0.002, 0.94)
+  bladeShape.lineTo(0, 0)
+
+  const extrudeSettings: THREE.ExtrudeGeometryOptions = {
+    depth: 0.006,
+    bevelEnabled: true,
+    bevelSegments: 2,
+    steps: 1,
+    bevelSize: 0.002,
+    bevelThickness: 0.002,
+  }
+
+  const bladeGeo = new THREE.ExtrudeGeometry(bladeShape, extrudeSettings)
+  // Apply authentic Japanese katana curve (sori)
+  const posAttr = bladeGeo.attributes.position as THREE.BufferAttribute
+  for (let i = 0; i < posAttr.count; i++) {
+    const y = posAttr.getY(i)
+    const curve = Math.pow(y / 0.95, 1.8) * 0.052
+    posAttr.setZ(i, posAttr.getZ(i) - curve)
+  }
+  bladeGeo.computeVertexNormals()
+
+  const bladeMaterial = new THREE.MeshStandardMaterial({
+    color: 0xf5f8fb,
+    emissive: 0xffffff,
+    emissiveIntensity: 0.25,
+    metalness: 0.96,
+    roughness: 0.12,
+  })
+  const bladeMesh = new THREE.Mesh(bladeGeo, bladeMaterial)
+  bladeMesh.castShadow = true
+  katanaGroup.add(bladeMesh)
+
+  // 2. Gold Blade Collar (Habaki)
+  const habakiGeo = new THREE.BoxGeometry(0.036, 0.045, 0.016)
+  const goldMaterial = new THREE.MeshStandardMaterial({
+    color: 0xe8b84b,
+    metalness: 0.85,
+    roughness: 0.25,
+  })
+  const habakiMesh = new THREE.Mesh(habakiGeo, goldMaterial)
+  habakiMesh.position.set(0.015, 0.022, 0)
+  katanaGroup.add(habakiMesh)
+
+  // 3. Antique Oval Sword Guard (Tsuba)
+  const tsubaGeo = new THREE.CylinderGeometry(0.062, 0.062, 0.008, 20)
+  tsubaGeo.scale(1, 1, 0.78)
+  const tsubaMesh = new THREE.Mesh(tsubaGeo, goldMaterial)
+  tsubaMesh.rotation.z = Math.PI / 2
+  tsubaMesh.position.set(0.015, -0.004, 0)
+  katanaGroup.add(tsubaMesh)
+
+  // 4. Braided Ray-skin Hilt (Tsuka)
+  const tsukaGeo = new THREE.CylinderGeometry(0.015, 0.018, 0.28, 12)
+  const tsukaMat = new THREE.MeshStandardMaterial({
+    color: 0x070b10,
+    metalness: 0.3,
+    roughness: 0.8,
+  })
+  const tsukaMesh = new THREE.Mesh(tsukaGeo, tsukaMat)
+  tsukaMesh.position.set(0.015, -0.145, 0)
+  katanaGroup.add(tsukaMesh)
+
+  // 5. Pommel Cap (Kashira)
+  const kashiraGeo = new THREE.SphereGeometry(0.019, 12, 12)
+  const kashiraMesh = new THREE.Mesh(kashiraGeo, goldMaterial)
+  kashiraMesh.position.set(0.015, -0.285, 0)
+  katanaGroup.add(kashiraMesh)
+
+  return { katanaGroup, bladeMaterial }
+}
+
+/**
+ * Builds a dynamic swept crescent sword slash geometry matching an authentic
+ * directional martial strike trajectory (NOT a spinning ring).
+ */
+function createCrescentSlashGeometry(
+  radius: number = 1.45,
+  maxWidth: number = 0.58,
+  arcAngle: number = Math.PI * 0.98,
+  tiltY: number = -0.38,
+  tiltZ: number = 0.32
+): THREE.BufferGeometry {
+  const segments = 64
+  const vertexCount = (segments + 1) * 2
+  const positions = new Float32Array(vertexCount * 3)
+  const uvs = new Float32Array(vertexCount * 2)
+  const indices: number[] = []
+
+  const startAngle = -arcAngle * 0.55
+  const endAngle = arcAngle * 0.45
+
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments
+    const angle = startAngle + t * (endAngle - startAngle)
+
+    // Dynamic blade crescent envelope: sharp start, swelling belly, razor tip
+    const envelope = Math.sin(t * Math.PI)
+    const currentWidth = maxWidth * Math.pow(envelope, 0.75)
+
+    const rInner = radius - currentWidth * 0.45
+    const rOuter = radius + currentWidth * 0.55
+
+    // Realistic volumetric arc swoop in 3D
+    const yOffset = (t - 0.5) * tiltY
+    const zOffset = Math.sin(t * Math.PI) * tiltZ
+
+    const cosA = Math.cos(angle)
+    const sinA = Math.sin(angle)
+
+    // Inner vertex
+    const iIdx = i * 2
+    positions[iIdx * 3] = rInner * cosA
+    positions[iIdx * 3 + 1] = yOffset
+    positions[iIdx * 3 + 2] = rInner * sinA + zOffset
+
+    uvs[iIdx * 2] = t
+    uvs[iIdx * 2 + 1] = 0.0
+
+    // Outer vertex (razor cutting edge)
+    const oIdx = i * 2 + 1
+    positions[oIdx * 3] = rOuter * cosA
+    positions[oIdx * 3 + 1] = yOffset
+    positions[oIdx * 3 + 2] = rOuter * sinA + zOffset
+
+    uvs[oIdx * 2] = t
+    uvs[oIdx * 2 + 1] = 1.0
+
+    if (i < segments) {
+      const v0 = iIdx
+      const v1 = oIdx
+      const v2 = (i + 1) * 2
+      const v3 = (i + 1) * 2 + 1
+
+      indices.push(v0, v1, v2)
+      indices.push(v1, v3, v2)
+    }
+  }
+
+  const geo = new THREE.BufferGeometry()
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  geo.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
+  geo.setIndex(indices)
+  geo.computeVertexNormals()
+  return geo
+}
+
+/**
+ * Creates an authentic directional calligraphy slash shader material.
+ */
+function createSlashShaderMaterial(
+  colorCore: THREE.Color,
+  colorFlame: THREE.Color,
+  colorCyan: THREE.Color
+): THREE.ShaderMaterial {
+  return new THREE.ShaderMaterial({
+    transparent: true,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    uniforms: {
+      uTime: { value: 0 },
+      uSlashHead: { value: 0 },
+      uSlashTail: { value: 0 },
+      uIntensity: { value: 0 },
+      uColorCore: { value: colorCore },
+      uColorFlame: { value: colorFlame },
+      uColorCyan: { value: colorCyan },
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec2 vUv;
+      uniform float uTime;
+      uniform float uSlashHead;
+      uniform float uSlashTail;
+      uniform float uIntensity;
+      uniform vec3 uColorCore;
+      uniform vec3 uColorFlame;
+      uniform vec3 uColorCyan;
+
+      void main() {
+        // Discard fragments outside active cutting stroke interval
+        if (vUv.x > uSlashHead || vUv.x < uSlashTail || uIntensity < 0.01) discard;
+
+        float strokeLen = max(uSlashHead - uSlashTail, 0.001);
+        float localU = (vUv.x - uSlashTail) / strokeLen; // 1.0 at blade edge, 0.0 at oldest tail
+
+        // Tapered razor cutting tip and fading ink tail
+        float tipEdge = smoothstep(0.0, 0.12, localU);
+        float tailFade = smoothstep(0.0, 0.45, localU);
+
+        // Razor cutting line along the outer rim (vUv.y -> 1.0)
+        float razorLine = smoothstep(0.70, 0.98, vUv.y);
+        float coreBand = smoothstep(0.16, 0.01, abs(vUv.y - 0.84));
+        float innerGlow = smoothstep(0.0, 0.85, vUv.y);
+
+        // Sumi-e dry-brush striations (Feihaku brush stroke texture)
+        float brushTexture = 0.84 + sin(vUv.x * 48.0 + vUv.y * 14.0) * 0.16;
+        brushTexture *= 0.88 + sin(vUv.y * 70.0 - uTime * 18.0) * 0.12;
+
+        // Dynamic electric gradient: white steel core, vermilion aura, and cyan spirit edge
+        vec3 aura = mix(uColorCyan, uColorFlame, localU * 0.85 + 0.15);
+        vec3 color = mix(aura, uColorCore, razorLine * 0.85 + coreBand * 1.25);
+
+        float alpha = (razorLine * 2.2 + coreBand * 2.6 + innerGlow * 0.7)
+                      * tailFade * tipEdge * brushTexture * uIntensity;
+        if (alpha < 0.004) discard;
+
+        gl_FragColor = vec4(color * (2.4 + uIntensity * 2.8), alpha);
+      }
+    `,
+  })
+}
+
+/**
+ * Constructs the Complete Cinematic Ink Ronin with Articulated 3D Katana,
+ * Directional Calligraphy Sword Strikes, and Acrobatic Martial Flight.
  */
 export function createInkRoninGroup(): InkRoninController {
   const group = new THREE.Group()
@@ -372,12 +588,11 @@ export function createInkRoninGroup(): InkRoninController {
   const mistTexture = createMistDiscTexture()
   const sparkTexture = createSparkTexture()
 
-  // Plane geometry with fine subdivisions for silky wind cloth deformation
+  // 1. Plane geometry for the Sumi-e Ronin body silhouette
   const planeWidth = 1.95
   const planeHeight = 2.92
   const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 32, 48)
 
-  // Custom Shader Material: Wind flutter + Ethereal Moon Rim + Katana Glint
   const material = new THREE.ShaderMaterial({
     transparent: true,
     side: THREE.DoubleSide,
@@ -408,7 +623,7 @@ export function createInkRoninGroup(): InkRoninController {
         pos.x += (wave1 + wave2) * uWindStrength;
         pos.z += sin(uv.y * 9.0 + uTime * 3.8) * 0.022 * windWeight * uWindStrength;
 
-        // Martial breathing rhythm (calm subtle chest lift)
+        // Martial breathing rhythm
         float breath = sin(uTime * 1.4) * 0.014;
         pos.y += breath;
 
@@ -443,20 +658,18 @@ export function createInkRoninGroup(): InkRoninController {
         // Deep pure Sumi ink body
         vec3 inkBase = vec3(0.025, 0.035, 0.05);
 
-        // Top/Right edge catches the crimson red moon light; lower edge catches cool cyan mist
+        // Edge catches crimson red moon light and cool cyan mist
         float moonFactor = smoothstep(0.25, 0.95, vUv.y);
         vec3 rimTint = mix(uRimColor, uMoonColor, moonFactor);
 
-        // Subtle pulsing of rim light
         float rimPulse = 0.82 + sin(uTime * 1.6) * 0.18;
         vec3 finalColor = mix(inkBase, rimTint * 1.5, edge * 0.72 * rimPulse);
 
-        // Katana Steel Glint: moonlight flashing on the sword guard / blade
+        // Katana Steel Glint flash on the sword guard
         vec2 glintUv = vec2(0.448, 0.612);
         float d = distance(vUv, glintUv);
         if (d < 0.085 && uGlint > 0.01) {
           vec2 delta = abs(vUv - glintUv);
-          // 4-point star anime gleam
           float star = (1.0 / (delta.x * 80.0 + 1.0)) * (1.0 / (delta.y * 80.0 + 1.0));
           float core = smoothstep(0.02, 0.001, d) * 1.8;
           float flash = (star * 1.1 + core) * uGlint;
@@ -473,10 +686,10 @@ export function createInkRoninGroup(): InkRoninController {
   })
 
   const roninMesh = new THREE.Mesh(geometry, material)
-  roninMesh.position.y = planeHeight / 2 - 0.15 // Align feet with ground plane
+  roninMesh.position.y = planeHeight / 2 - 0.15
   group.add(roninMesh)
 
-  // Ground mist disc underneath feet to blend into the stone steps
+  // 2. Ground mist disc underneath feet
   const mistGeo = new THREE.PlaneGeometry(2.4, 2.4)
   const mistMat = new THREE.MeshBasicMaterial({
     map: mistTexture,
@@ -491,121 +704,84 @@ export function createInkRoninGroup(): InkRoninController {
   group.add(mistMesh)
 
   // =========================================================================
-  // DYNAMIC BRILLIANT SWORD SLASH VFX (MÚA KIẾM SÁNG QUẮC KHI SCROLL)
+  // 3. ARTICULATED 3D KATANA BLADE WITH PHYSICAL MOTION RIG
   // =========================================================================
+  const { katanaGroup, bladeMaterial } = create3DKatanaMesh()
+  // Parent inside a pivot group anchored at the sword-drawing hip/shoulder
+  const swordPivot = new THREE.Group()
+  swordPivot.position.set(0.12, 1.45, 0.12)
+  swordPivot.add(katanaGroup)
+  group.add(swordPivot)
 
-  // Helper shader factory for glowing slash energy ribbons
-  const createSlashShader = (curl: number) => {
-    return new THREE.ShaderMaterial({
-      transparent: true,
-      side: THREE.DoubleSide,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      uniforms: {
-        uTime: { value: 0 },
-        uIntensity: { value: 0 },
-        uCurl: { value: curl },
-        uColorCore: { value: new THREE.Color(0xffffff) },
-        uColorFlame: { value: new THREE.Color(0xff3b20) },
-        uColorCyan: { value: new THREE.Color(0x0df0d0) },
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        uniform float uCurl;
+  // Initial rest pose: katana sheathed at hip
+  katanaGroup.position.set(0, 0, 0)
+  katanaGroup.rotation.set(-0.35, 0.25, -1.95)
 
-        void main() {
-          vUv = uv;
-          vec3 pos = position;
-          pos.z += sin(uv.x * 3.14159265) * uCurl;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec2 vUv;
-        uniform float uTime;
-        uniform float uIntensity;
-        uniform vec3 uColorCore;
-        uniform vec3 uColorFlame;
-        uniform vec3 uColorCyan;
+  // =========================================================================
+  // 4. AUTHENTIC DIRECTIONAL CALLIGRAPHY SWORD SLASH ARCS (NOT RINGS)
+  // =========================================================================
+  const colCore = new THREE.Color(0xffffff)
+  const colFlame = new THREE.Color(0xff3b20)
+  const colCyan = new THREE.Color(0x0df0d0)
 
-        void main() {
-          // Razor-sharp leading cut edge, trailing ghost dissolve
-          float head = smoothstep(0.0, 0.16, vUv.x);
-          float tail = smoothstep(1.0, 0.30, vUv.x);
-          float sweep = head * tail;
-
-          // Razor blade core in the center of the arc
-          float coreDist = abs(vUv.y - 0.48);
-          float razorCore = smoothstep(0.13, 0.006, coreDist);
-          float softHalo = smoothstep(0.5, 0.04, coreDist);
-
-          // Kinetic plasma striations
-          float plasma = 0.82 + sin(vUv.x * 26.0 - uTime * 24.0) * 0.18;
-
-          // Multi-tone electric vermilion-cyan chromatic plasma
-          vec3 aura = mix(uColorFlame, uColorCyan, vUv.x);
-          vec3 col = mix(aura, uColorCore, razorCore * 0.96);
-
-          float alpha = (razorCore * 2.4 + softHalo * 0.8) * sweep * plasma * uIntensity;
-          if (alpha < 0.003) discard;
-
-          gl_FragColor = vec4(col * (2.0 + uIntensity * 2.6), alpha);
-        }
-      `,
-    })
-  }
-
-  // 1. Primary Crescent Slash Arc (Wide Iaijutsu Horizontal/Diagonal Cut)
-  const slashGeo1 = new THREE.RingGeometry(0.72, 1.92, 48, 1, 0, Math.PI * 1.35)
-  const slashMat1 = createSlashShader(0.32)
+  // Kata 1: Horizontal/Diagonal Iaijutsu Flash Slash (Trảm ngang)
+  const slashGeo1 = createCrescentSlashGeometry(1.48, 0.62, Math.PI * 1.05, -0.42, 0.35)
+  const slashMat1 = createSlashShaderMaterial(colCore, colFlame, colCyan)
   const slashMesh1 = new THREE.Mesh(slashGeo1, slashMat1)
-  slashMesh1.position.set(0.42, 1.45, 0.15)
+  slashMesh1.position.set(0.25, 1.48, 0.22)
+  slashMesh1.rotation.set(0.28, 0.15, -0.32)
   group.add(slashMesh1)
 
-  // 2. Secondary Cross-Slash Arc (Vertical Rising Uppercut / Dragon Slash)
-  const slashGeo2 = new THREE.RingGeometry(0.58, 1.68, 40, 1, 0, Math.PI * 1.2)
-  const slashMat2 = createSlashShader(-0.28)
+  // Kata 2: Upward Dragon Rising Cross-Slash (Phi thiên nghịch trảm)
+  const slashGeo2 = createCrescentSlashGeometry(1.35, 0.52, Math.PI * 0.95, 0.48, -0.28)
+  const slashMat2 = createSlashShaderMaterial(colCore, colCyan, colFlame)
   const slashMesh2 = new THREE.Mesh(slashGeo2, slashMat2)
-  slashMesh2.position.set(0.36, 1.55, 0.22)
+  slashMesh2.position.set(0.18, 1.55, 0.18)
+  slashMesh2.rotation.set(-0.45, -0.22, 0.85)
   group.add(slashMesh2)
 
-  // 3. Mid-air Whirlwind Slash Halo (Senpūken)
-  const slashGeo3 = new THREE.RingGeometry(1.15, 2.25, 48, 1, 0, Math.PI * 1.55)
-  const slashMat3 = createSlashShader(0.18)
-  const slashMesh3 = new THREE.Mesh(slashGeo3, slashMat3)
-  slashMesh3.position.set(0.1, 1.35, 0.0)
-  slashMesh3.rotation.x = Math.PI / 2
-  group.add(slashMesh3)
+  // Shockwave Ring: Expands from sword impact center
+  const shockwaveGeo = new THREE.RingGeometry(0.2, 0.38, 36)
+  const shockwaveMat = new THREE.MeshBasicMaterial({
+    color: 0xff4422,
+    transparent: true,
+    opacity: 0,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  })
+  const shockwaveMesh = new THREE.Mesh(shockwaveGeo, shockwaveMat)
+  shockwaveMesh.position.set(0.25, 1.45, 0.35)
+  group.add(shockwaveMesh)
 
-  // Dedicated flashing sword gleam point light
-  const swordGleamLight = new THREE.PointLight(0xff3b20, 0.2, 7.5, 1.8)
-  swordGleamLight.position.set(0.45, 1.5, 0.25)
+  // Dynamic sword gleam point light
+  const swordGleamLight = new THREE.PointLight(0xff3b20, 0.2, 8.5, 1.8)
+  swordGleamLight.position.set(0.45, 1.5, 0.35)
   group.add(swordGleamLight)
 
   // =========================================================================
-  // SWORD KI SPARKS PARTICLE SYSTEM (HỎA HOA KIẾM KHÍ)
+  // 5. SWORD KI SPARKS PARTICLE SYSTEM (HỎA HOA KIẾM KHÍ)
   // =========================================================================
-  const sparkCount = 36
+  const sparkCount = 42
   const sparkGeo = new THREE.BufferGeometry()
   const sparkPositions = new Float32Array(sparkCount * 3)
   const sparkColors = new Float32Array(sparkCount * 3)
   const sparkData: {
-    angle: number
-    radius: number
-    speed: number
-    elev: number
-    phase: number
+    vx: number
+    vy: number
+    vz: number
+    life: number
+    maxLife: number
   }[] = []
 
   const colWhite = new THREE.Color(0xffffff)
-  const colCyan = new THREE.Color(0x0df0d0)
   const colGold = new THREE.Color(0xffaa22)
 
   for (let i = 0; i < sparkCount; i++) {
     const idx = i * 3
-    sparkPositions[idx] = 0.45
+    sparkPositions[idx] = 0.25
     sparkPositions[idx + 1] = 1.45
-    sparkPositions[idx + 2] = 0.2
+    sparkPositions[idx + 2] = 0.25
 
     const tint = i % 3 === 0 ? colWhite : i % 3 === 1 ? colCyan : colGold
     sparkColors[idx] = tint.r
@@ -613,22 +789,19 @@ export function createInkRoninGroup(): InkRoninController {
     sparkColors[idx + 2] = tint.b
 
     sparkData.push({
-      angle: Math.random() * Math.PI * 2,
-      radius: 0.4 + Math.random() * 1.3,
-      speed: 4.5 + Math.random() * 6.0,
-      elev: (Math.random() - 0.5) * 0.9,
-      phase: Math.random() * Math.PI * 2,
+      vx: (Math.random() - 0.5) * 4.5,
+      vy: Math.random() * 3.5 - 0.5,
+      vz: (Math.random() - 0.5) * 4.5,
+      life: Math.random(),
+      maxLife: 0.6 + Math.random() * 0.6,
     })
   }
 
-  sparkGeo.setAttribute(
-    'position',
-    new THREE.BufferAttribute(sparkPositions, 3)
-  )
+  sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPositions, 3))
   sparkGeo.setAttribute('color', new THREE.BufferAttribute(sparkColors, 3))
 
   const sparkMat = new THREE.PointsMaterial({
-    size: 0.22,
+    size: 0.24,
     map: sparkTexture,
     transparent: true,
     opacity: 0.85,
@@ -639,9 +812,14 @@ export function createInkRoninGroup(): InkRoninController {
   const sparksMesh = new THREE.Points(sparkGeo, sparkMat)
   group.add(sparksMesh)
 
-  // Dynamic state tracking for acrobatic leaps & sword dance
+  // =========================================================================
+  // MARTIAL KATA STATE MACHINE & ANIMATION RIG
+  // =========================================================================
   let prevScrollProgress = 0
   let slashEnergy = 0
+  let activeKata = 0 // 0: Horizontal Iai, 1: Rising Dragon
+  let kataTimer = 0
+  let shockwaveProgress = 1.0
 
   const controller: InkRoninController = {
     group,
@@ -656,42 +834,179 @@ export function createInkRoninGroup(): InkRoninController {
       material.uniforms.uTime.value = clock
       slashMat1.uniforms.uTime.value = clock
       slashMat2.uniforms.uTime.value = clock
-      slashMat3.uniforms.uTime.value = clock
 
       // Calculate instantaneous scroll velocity
       const instantVelocity = Math.abs(scrollProgress - prevScrollProgress)
       prevScrollProgress = scrollProgress
 
       // Smoothly charge up slash energy during scrolling with rapid attack and silky decay
-      const targetEnergy = Math.min(instantVelocity * 65.0, 1.0)
-      const chargeRate = targetEnergy > slashEnergy ? 0.35 : 0.07
+      const isActivelyScrolling = instantVelocity > 0.0004
+      const targetEnergy = isActivelyScrolling
+        ? Math.min(instantVelocity * 75.0, 1.0)
+        : 0.0
+
+      const chargeRate = targetEnergy > slashEnergy ? 0.38 : 0.06
       slashEnergy += (targetEnergy - slashEnergy) * chargeRate
       controller.slashIntensity = slashEnergy
 
-      // Katana glint periodicity: flashes continuously when active, or periodically when idle
-      const cycle = (clock * 0.26) % 1.0
-      let idleGlint = 0
-      if (cycle < 0.09) {
-        idleGlint = Math.sin((cycle / 0.09) * Math.PI)
+      // Advance kata cycle when active
+      if (slashEnergy > 0.08) {
+        kataTimer += delta * (4.2 + slashEnergy * 6.5)
+        // Switch between horizontal and rising strikes as the user continues scrolling
+        const currentCycle = Math.floor(kataTimer / Math.PI)
+        activeKata = currentCycle % 2
+      } else {
+        // Smoothly settle kata timer to completion (Zanshin & Noto)
+        kataTimer += delta * 1.5
       }
-      material.uniforms.uGlint.value = Math.max(idleGlint, slashEnergy * 0.95)
 
-      // Boost cloth wind flutter dramatically when in motion
-      material.uniforms.uWindStrength.value = 1.0 + slashEnergy * 3.2
+      const strikePhase = kataTimer % Math.PI // 0 to PI
+      const strikeNorm = strikePhase / Math.PI // 0.0 to 1.0
 
-      // Ground mist gentle rotation
-      mistMesh.rotation.z += delta * (0.08 + slashEnergy * 0.25)
-      mistMat.opacity = (0.65 + Math.sin(clock * 1.5) * 0.15) * (1.0 + slashEnergy * 0.4)
+      // Trigger shockwave at strike impact apex
+      if (strikeNorm > 0.45 && strikeNorm < 0.55 && slashEnergy > 0.25 && shockwaveProgress >= 1.0) {
+        shockwaveProgress = 0.0
+      }
 
       // =======================================================================
-      // SPECTACULAR ACROBATIC LEAPING & FLIGHT (BAY NHẢY KHINH CÔNG)
+      // 1. DIRECTIONAL SWORD SLASH RIBBON CHOREOGRAPHY
+      // =======================================================================
+      // Head and tail of the slash arc move physically with the blade
+      // Rapid extension (0 -> 1) during swing, then trailing tail catches up
+      let slashHead: number
+      let slashTail: number
+      if (strikeNorm < 0.65) {
+        // Cutting phase: leading edge sweeps forward rapidly
+        slashHead = Math.min(strikeNorm * 1.6, 1.0)
+        slashTail = Math.max(0.0, slashHead - 0.52)
+      } else {
+        // Dissolving phase: tail catches up, arc fades into ink mist
+        const diss = (strikeNorm - 0.65) / 0.35
+        slashHead = 1.0
+        slashTail = Math.min(0.48 + diss * 0.52, 1.0)
+      }
+
+      const strikeIntensity = Math.pow(Math.sin(strikeNorm * Math.PI), 0.7) * slashEnergy
+
+      if (activeKata === 0) {
+        // Kata 1: Horizontal / Diagonal Iaijutsu Slash Active
+        slashMat1.uniforms.uSlashHead.value = slashHead
+        slashMat1.uniforms.uSlashTail.value = slashTail
+        slashMat1.uniforms.uIntensity.value = strikeIntensity * 1.4
+
+        slashMat2.uniforms.uIntensity.value = 0.0
+      } else {
+        // Kata 2: Rising Dragon Slash Active
+        slashMat2.uniforms.uSlashHead.value = slashHead
+        slashMat2.uniforms.uSlashTail.value = slashTail
+        slashMat2.uniforms.uIntensity.value = strikeIntensity * 1.4
+
+        slashMat1.uniforms.uIntensity.value = 0.0
+      }
+
+      // =======================================================================
+      // 2. ARTICULATED 3D KATANA MOTION RIG (PHYSICAL DRAW, STRIKE & SHEATHE)
+      // =======================================================================
+      if (slashEnergy > 0.05) {
+        // Unsheathe and swing blade in 3D
+        bladeMaterial.emissiveIntensity = 0.35 + strikeIntensity * 2.5
+
+        if (activeKata === 0) {
+          // Horizontal draw & cut across chest
+          const swingAngle = -1.2 + strikeNorm * 2.8
+          katanaGroup.position.set(
+            0.15 + Math.cos(swingAngle) * 0.35,
+            0.05 + Math.sin(strikeNorm * Math.PI) * 0.18,
+            0.25 + Math.sin(swingAngle) * 0.35
+          )
+          katanaGroup.rotation.set(
+            0.45 + Math.sin(strikeNorm * Math.PI) * 0.35,
+            swingAngle - 0.35,
+            -0.65 + Math.cos(strikeNorm * Math.PI) * 0.85
+          )
+        } else {
+          // Rising diagonal dragon uppercut
+          const riseAngle = -0.8 + strikeNorm * 2.5
+          katanaGroup.position.set(
+            0.18 - Math.sin(strikeNorm * Math.PI) * 0.25,
+            0.15 + strikeNorm * 0.45,
+            0.28 + Math.cos(riseAngle) * 0.28
+          )
+          katanaGroup.rotation.set(
+            -0.85 + strikeNorm * 1.6,
+            0.35 + Math.sin(riseAngle) * 0.45,
+            0.75 - strikeNorm * 1.4
+          )
+        }
+      } else {
+        // Settle smoothly into sheathed position at hip (Noto)
+        katanaGroup.position.lerp(new THREE.Vector3(0, 0, 0), 0.1)
+        katanaGroup.rotation.x = THREE.MathUtils.lerp(katanaGroup.rotation.x, -0.35, 0.1)
+        katanaGroup.rotation.y = THREE.MathUtils.lerp(katanaGroup.rotation.y, 0.25, 0.1)
+        katanaGroup.rotation.z = THREE.MathUtils.lerp(katanaGroup.rotation.z, -1.95, 0.1)
+        bladeMaterial.emissiveIntensity = 0.25
+      }
+
+      // =======================================================================
+      // 3. SHOCKWAVE EXPANSION & BLADE GLEAM LIGHT
+      // =======================================================================
+      if (shockwaveProgress < 1.0) {
+        shockwaveProgress += delta * 2.8
+        const sScale = 0.4 + shockwaveProgress * 3.2
+        shockwaveMesh.scale.set(sScale, sScale, sScale)
+        shockwaveMat.opacity = (1.0 - shockwaveProgress) * 0.75 * slashEnergy
+      } else {
+        shockwaveMat.opacity = 0.0
+      }
+
+      // Blade flash light illuminates the surroundings during cuts
+      const gleamPulse = strikeIntensity * (5.5 + Math.sin(clock * 18.0) * 1.5)
+      swordGleamLight.intensity = 0.2 + gleamPulse
+
+      if (activeKata === 0) {
+        swordGleamLight.color.setHex(0xff3b20) // Vermilion fire
+      } else {
+        swordGleamLight.color.setHex(0x0df0d0) // Cyan ki
+      }
+
+      // =======================================================================
+      // 4. SWORD SPARKS ORBITAL DYNAMICS (BURSTING ON STRIKES)
+      // =======================================================================
+      const sPos = sparkGeo.attributes.position.array as Float32Array
+      for (let i = 0; i < sparkCount; i++) {
+        const idx = i * 3
+        const dat = sparkData[i]
+
+        dat.life += delta * (1.2 + slashEnergy * 2.8)
+        if (dat.life > dat.maxLife) {
+          dat.life = 0
+          // Respawn at current sword blade position
+          sPos[idx] = katanaGroup.position.x + 0.1 + (Math.random() - 0.5) * 0.2
+          sPos[idx + 1] = katanaGroup.position.y + 1.45 + (Math.random() - 0.5) * 0.25
+          sPos[idx + 2] = katanaGroup.position.z + 0.25 + (Math.random() - 0.5) * 0.2
+
+          const burstSpeed = 2.5 + slashEnergy * 5.5
+          dat.vx = (Math.random() - 0.5) * burstSpeed
+          dat.vy = (Math.random() - 0.2) * burstSpeed
+          dat.vz = (Math.random() - 0.5) * burstSpeed
+        } else {
+          sPos[idx] += dat.vx * delta
+          sPos[idx + 1] += dat.vy * delta - 1.8 * delta // Gravity
+          sPos[idx + 2] += dat.vz * delta
+        }
+      }
+      sparkGeo.attributes.position.needsUpdate = true
+      sparkMat.opacity = 0.3 + slashEnergy * 0.7
+
+      // =======================================================================
+      // 5. ACROBATIC LEAPING & MARTIAL ASCENT (BAY NHẢY KHINH CÔNG)
       // =======================================================================
       const maxSteps = 10
       const scrollStepProgress = scrollProgress * maxSteps
       const baseStep = Math.min(Math.floor(scrollStepProgress), maxSteps - 1)
       const stepFraction = scrollStepProgress - baseStep
 
-      // Dynamic parabolic flight height (launches up to 1.85m into the air!)
+      // Parabolic leaping flight trajectory (high agile jumps up to 1.85m)
       const flightApex = Math.sin(stepFraction * Math.PI)
       const highLeap = Math.pow(flightApex, 0.75) * (0.32 + slashEnergy * 1.55)
 
@@ -721,73 +1036,17 @@ export function createInkRoninGroup(): InkRoninController {
 
       // Squash and stretch during take-off, apex flight, and landing
       if (flightApex > 0.45 && slashEnergy > 0.1) {
-        // Airborne stretch
         roninMesh.scale.set(0.94, 1.10, 1.0)
       } else if (flightApex < 0.15 && slashEnergy > 0.1) {
-        // Landing impact squash
         roninMesh.scale.set(1.06, 0.92, 1.0)
       } else {
         roninMesh.scale.set(1.0, 1.0, 1.0)
       }
 
-      // =======================================================================
-      // BRILLIANT SWORD DANCE ANIMATION & SLASH VISIBILITY
-      // =======================================================================
-      const slashCombo = clock * 5.5 + scrollProgress * 32.0
-
-      // Arc 1: Rapid horizontal / diagonal crescent slash
-      slashMesh1.rotation.z = slashCombo * 1.25
-      slashMesh1.rotation.x = Math.sin(slashCombo * 0.8) * 0.6 + 0.35
-      slashMesh1.rotation.y = Math.cos(slashCombo * 0.6) * 0.45
-      slashMat1.uniforms.uIntensity.value = Math.max(0.02, slashEnergy * 1.0)
-
-      // Arc 2: Vertical rising counter-slash
-      slashMesh2.rotation.z = -slashCombo * 1.4 + 2.1
-      slashMesh2.rotation.x = Math.cos(slashCombo * 0.9) * 0.7 - 0.25
-      slashMesh2.rotation.y = Math.sin(slashCombo * 0.7) * 0.55
-      slashMat2.uniforms.uIntensity.value = Math.max(0.015, slashEnergy * 0.9)
-
-      // Arc 3: Whirlwind Ki Aura (explodes during high speed acrobatics)
-      slashMesh3.rotation.z = slashCombo * 2.2
-      slashMesh3.rotation.y = Math.sin(clock * 4.0) * 0.3
-      slashMat3.uniforms.uIntensity.value = Math.max(
-        0.0,
-        (slashEnergy - 0.15) * 1.3
-      )
-
-      // Dynamic flashing sword gleam light
-      const gleamPulse =
-        slashEnergy * (4.8 + Math.sin(clock * 16.0) * 1.4)
-      swordGleamLight.intensity = 0.2 + gleamPulse
-
-      // Shift light color dynamically between Vermilion fire and Cyan electric ki
-      if (Math.sin(clock * 8.0) > 0.2) {
-        swordGleamLight.color.setHex(0x0df0d0)
-      } else {
-        swordGleamLight.color.setHex(0xff3b20)
-      }
-
-      // =======================================================================
-      // SWORD SPARKS ORBITAL KINETICS
-      // =======================================================================
-      const sPos = sparkGeo.attributes.position.array as Float32Array
-      for (let i = 0; i < sparkCount; i++) {
-        const idx = i * 3
-        const dat = sparkData[i]
-
-        dat.angle += delta * dat.speed * (1.0 + slashEnergy * 3.0)
-        const curR = dat.radius * (0.8 + slashEnergy * 0.7)
-
-        sPos[idx] = 0.45 + Math.cos(dat.angle + dat.phase) * curR
-        sPos[idx + 1] =
-          1.45 +
-          Math.sin(dat.angle * 1.5 + dat.phase) * (curR * 0.6) +
-          dat.elev
-        sPos[idx + 2] = 0.2 + Math.sin(dat.angle) * (curR * 0.8)
-      }
-      sparkGeo.attributes.position.needsUpdate = true
-      sparkMat.opacity = 0.35 + slashEnergy * 0.65
-      sparkMat.size = 0.18 + slashEnergy * 0.16
+      // Wind fluttering & ground mist dynamics
+      material.uniforms.uWindStrength.value = 1.0 + slashEnergy * 3.2
+      mistMesh.rotation.z += delta * (0.08 + slashEnergy * 0.25)
+      mistMat.opacity = (0.65 + Math.sin(clock * 1.5) * 0.15) * (1.0 + slashEnergy * 0.4)
     },
     dispose: () => {
       geometry.dispose()
@@ -802,8 +1061,8 @@ export function createInkRoninGroup(): InkRoninController {
       slashMat1.dispose()
       slashGeo2.dispose()
       slashMat2.dispose()
-      slashGeo3.dispose()
-      slashMat3.dispose()
+      shockwaveGeo.dispose()
+      shockwaveMat.dispose()
 
       sparkGeo.dispose()
       sparkMat.dispose()
